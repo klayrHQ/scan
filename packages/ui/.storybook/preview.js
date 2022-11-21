@@ -13,6 +13,7 @@ export const parameters = {
       order: [
         "Docs",
         [
+          "Liskscan",
           "Atomic Design Methodology",
           "Atoms",
           "Molecules",
