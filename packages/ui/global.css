@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'inter';
+  src: url('assets/fonts/Inter-Regular.ttf');
+}
+@font-face {
+  font-family: 'verdana';
+  src: url('assets/fonts/Verdana.ttf');
+}
+@font-face {
+  font-family: 'monaco';
+  src: url('assets/fonts/Monaco.ttf');
+}
