@@ -43,4 +43,4 @@ jobs:
           SCW_ORGANIZATION_ID: ${{ secrets.SCW_ORGANIZATION_ID }}
           SCW_ZONE: nl-ams-1
         with:
-          args: container container update 3baf0fcb-f431-45d4-8b19-f789ee7e1a89 region=nl-ams redeploy=true
+          args: container container update ${{ secrets.CONTAINER_ID }} region=nl-ams redeploy=true
