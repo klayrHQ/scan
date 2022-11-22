@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button } from "./button";
+import { TextField } from "./textField";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Button",
-  component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  title: "Atoms/TextField",
+  component: TextField,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
+    className: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },
   parameters: {
@@ -23,30 +23,23 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof TextField> = (args) => <TextField {...args} />;
 
-export const Primary: ComponentMeta<typeof Button> = Template.bind({});
+export const Primary: ComponentMeta<typeof TextField> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   primary: true,
-  label: "Button",
+  placeholder: "Text Input",
 };
 
-export const Secondary: ComponentMeta<typeof Button> = Template.bind({});
-Secondary.args = {
-  label: "Button",
-};
-
-export const Large: ComponentMeta<typeof Button> = Template.bind({});
+export const Large: ComponentMeta<typeof TextField> = Template.bind({});
 Large.args = {
-  primary: true,
   size: "large",
-  label: "Button",
+  placeholder: "Text Input",
 };
 
-export const Small: ComponentMeta<typeof Button> = Template.bind({});
+export const Small: ComponentMeta<typeof TextField> = Template.bind({});
 Small.args = {
-  primary: true,
   size: "small",
-  label: "Button",
+  placeholder: "Text Input",
 };

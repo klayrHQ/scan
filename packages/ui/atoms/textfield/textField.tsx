@@ -1,45 +1,46 @@
 import React from 'react';
 
-interface ButtonProps {
+interface TextFieldProps {
   primary?: boolean;
   className?: string;
   backgroundColor?: string;
   color?: string;
-  label: string;
+  placeholder: string;
+  name: string;
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
-  onClick?: () => void;
+  onChange?: () => void;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
+export const TextField = ({
                          primary = false,
                          className,
                          backgroundColor,
                          color,
-                         label,
+                         placeholder,
+                         name,
                          size,
                          fullWidth,
                          ...props
-                       }: ButtonProps) => {
-  const mode = primary ? '' : 'storybook-button--secondary';
+                       }: TextFieldProps) => {
+  const mode = primary ? '' : 'storybook-textField--secondary';
   return (
-    <button
-      type="button"
+    <input
+      type="text"
       className={[
-        'cursor-pointer rounded border-none',
+        'rounded border-none block mt-2',
         className,
         fullWidth ? "w-full" : "",
         size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
-        primary ? "bg-primary text-onPrimary" : "",
+        primary ? "bg-background text-onBackground" : "",
         mode
       ].join(' ')}
       style={{ backgroundColor, color }}
+      placeholder={placeholder}
       {...props}
-    >
-      {label}
-    </button>
+    />
   );
 };
