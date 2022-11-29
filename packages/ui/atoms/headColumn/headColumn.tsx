@@ -25,7 +25,6 @@ export const HeadColumn = ({
                          value,
                          onClick,
                          sort,
-                         ...props
                        }: TableHeadColProps) => {
   return (
     <th

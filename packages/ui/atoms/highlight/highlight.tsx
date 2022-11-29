@@ -25,7 +25,7 @@ export const Highlight = ({
   return (
     <div
       className={[
-        'rounded border-none p-2 w-max bg-blue-700 text-white',
+        'rounded border-none p-2 w-max',
         className,
         size === "large" ? "text-lg" : size === "small" ? "text-sm p-1" : "",
         primary ? "bg-primary text-onPrimary" : "",

@@ -30,16 +30,22 @@ export const Primary: ComponentMeta<typeof Highlight> = Template.bind({});
 Primary.args = {
   primary: true,
   children: "highlight",
+  backgroundColor: "rgb(29 78 216)",
+  color: "white",
 };
 
 export const Large: ComponentMeta<typeof Highlight> = Template.bind({});
 Large.args = {
   size: "large",
   children: "highlight",
+  backgroundColor: "rgb(29 78 216)",
+  color: "white",
 };
 
 export const Small: ComponentMeta<typeof Highlight> = Template.bind({});
 Small.args = {
   size: "small",
   children: "highlight",
+  backgroundColor: "rgb(29 78 216)",
+  color: "white",
 };

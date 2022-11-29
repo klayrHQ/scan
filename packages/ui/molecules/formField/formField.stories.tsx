@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { TextField } from "./textField";
+import { FormField } from "./formField";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/TextField",
-  component: TextField,
+  title: "Molecules/FormField",
+  component: FormField,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
@@ -23,23 +23,23 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TextField> = (args) => <TextField {...args} />;
+const Template: ComponentStory<typeof FormField> = (args) => <FormField {...args} >{args.children}</FormField>;
 
-export const Primary: ComponentMeta<typeof TextField> = Template.bind({});
+export const Primary: ComponentMeta<typeof FormField> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   primary: true,
-  placeholder: "Text Input",
+  label: "Text Input",
 };
 
-export const Large: ComponentMeta<typeof TextField> = Template.bind({});
+export const Large: ComponentMeta<typeof FormField> = Template.bind({});
 Large.args = {
   size: "large",
-  placeholder: "Text Input",
+  label: "Text Input",
 };
 
-export const Small: ComponentMeta<typeof TextField> = Template.bind({});
+export const Small: ComponentMeta<typeof FormField> = Template.bind({});
 Small.args = {
   size: "small",
-  placeholder: "Text Input",
+  label: "Text Input",
 };

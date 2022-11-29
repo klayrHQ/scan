@@ -3,7 +3,7 @@ import React from 'react';
 export interface TableColProps {
   style?: object
   align?: "left" | "center" | "right" | string
-  value?: string | any
+  value: string | any
   bg?: string
   text?: string
   weight?: string

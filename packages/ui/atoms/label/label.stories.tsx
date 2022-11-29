@@ -29,16 +29,19 @@ export const Primary: ComponentMeta<typeof Label> = Template.bind({});
 Primary.args = {
   primary: true,
   label: "Text Input",
+  color: "white",
 };
 
 export const Large: ComponentMeta<typeof Label> = Template.bind({});
 Large.args = {
   size: "large",
   label: "Text Input",
+  color: "white",
 };
 
 export const Small: ComponentMeta<typeof Label> = Template.bind({});
 Small.args = {
   size: "small",
   label: "Text Input",
+  color: "white",
 };
