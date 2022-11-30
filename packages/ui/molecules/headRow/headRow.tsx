@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface TableRowProps {
+export interface HeadRowProps {
   style?: object
   bg?: string
   text?: string
@@ -12,14 +12,14 @@ export interface TableRowProps {
 /**
  * Primary UI component for user interaction
  */
-export const Row = ({
-                         style = {},
-                         bg = "surface",
-                         text = "onSurface",
-                         weight = "normal",
-                         children,
-                         ...props
-                       }: TableRowProps) => {
+export const HeadRow = ({
+                      style = {},
+                      bg = "surface",
+                      text = "onSurface",
+                      weight = "normal",
+                      children,
+                      ...props
+                    }: HeadRowProps) => {
   return (
     <tr
       style={style}

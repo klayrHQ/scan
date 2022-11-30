@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface TextFieldProps {
+interface InputProps {
   primary?: boolean;
   className?: string;
   backgroundColor?: string;
@@ -10,33 +10,33 @@ interface TextFieldProps {
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
   onChange?: () => void;
+  type?: "text" | "number" | "email" | "password";
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const TextField = ({
-                         primary = false,
-                         className,
-                         backgroundColor,
-                         color,
-                         placeholder,
-                         name,
-                         size,
-                         fullWidth,
-                         ...props
-                       }: TextFieldProps) => {
-  const mode = primary ? '' : 'storybook-textField--secondary';
+export const Input = ({
+  primary = false,
+  className,
+  backgroundColor,
+  color,
+  placeholder,
+  name,
+  size,
+  fullWidth,
+  type = "text",
+  ...props
+ }: InputProps) => {
   return (
     <input
-      type="text"
+      type={type}
       className={[
         'rounded border-none block mt-2',
         className,
         fullWidth ? "w-full" : "",
         size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
         primary ? "bg-background text-onBackground" : "",
-        mode
       ].join(' ')}
       style={{ backgroundColor, color }}
       placeholder={placeholder}

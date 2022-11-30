@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Row } from "./row";
-import {Column as Col, TableColProps} from "../../atoms/column/column";
-import Column from "../../atoms/column/column.stories";
+import { HeadRow } from "./headRow";
+import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
+import HeadColumn from "../../atoms/headColumn/headColumn.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/Row",
-  component: Row,
+  title: "Molecules/HeadRow",
+  component: HeadRow,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
   parameters: {
@@ -21,31 +21,31 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Row> = (args) => {
+const Template: ComponentStory<typeof HeadRow> = (args) => {
   const {cols} = args;
   return (
-    <Row>
-      {cols.map((col: JSX.IntrinsicAttributes & TableColProps) =>  (
-        <Col {...col} />
+    <HeadRow>
+      {cols.map((col: JSX.IntrinsicAttributes & TableHeadColProps) =>  (
+        <HeadCol {...col} />
       ))}
-    </Row>
+    </HeadRow>
   )
 };
 
-export const Primary: ComponentMeta<typeof Row> = Template.bind({});
+export const Primary: ComponentMeta<typeof HeadRow> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   cols: [
     {
-      ...Column.args,
+      ...HeadColumn.args,
       value: "column 1",
     },
     {
-      ...Column.args,
+      ...HeadColumn.args,
       value: "column 2",
     },
     {
-      ...Column.args,
+      ...HeadColumn.args,
       value: "column 3",
     },
   ],

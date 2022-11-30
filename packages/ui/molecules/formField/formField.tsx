@@ -1,8 +1,8 @@
 import React from 'react';
 import {Label} from "../../atoms/label/label";
-import {TextField} from "../../atoms/textfield/textField";
+import {Input} from "../../atoms/input/input";
 
-interface TextInputProps {
+interface FormFieldProps {
   primary?: boolean;
   className?: string;
   labelClassName?: string;
@@ -21,7 +21,7 @@ interface TextInputProps {
 /**
  * Primary UI component for user interaction
  */
-export const TextInput = ({
+export const FormField = ({
   primary = false,
   className,
   fieldClassName,
@@ -36,14 +36,12 @@ export const TextInput = ({
   fullWidth,
   onChange,
   ...props
-}: TextInputProps) => {
-  const mode = primary ? '' : 'storybook-textInput--secondary';
+}: FormFieldProps) => {
   return (
     <div className={[
         className,
         fullWidth ? "w-full" : "",
         size === "large" ? "text-lg" : size === "small" ? "text-sm" : "",
-        mode
       ].join(' ')}
       {...props}
     >
@@ -55,7 +53,7 @@ export const TextInput = ({
         size={size}
         className={labelClassName}
       >
-        <TextField
+        <Input
           placeholder={label}
           name={name}
           color={color}

@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { TextInput } from "./input";
+import { Input } from "./input";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/TextInput",
-  component: TextInput,
+  title: "Atoms/Input",
+  component: Input,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
@@ -23,23 +23,23 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TextInput> = (args) => <TextInput {...args} >{args.children}</TextInput>;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const Primary: ComponentMeta<typeof TextInput> = Template.bind({});
+export const Primary: ComponentMeta<typeof Input> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   primary: true,
-  label: "Text Input",
+  placeholder: "Text Input",
 };
 
-export const Large: ComponentMeta<typeof TextInput> = Template.bind({});
+export const Large: ComponentMeta<typeof Input> = Template.bind({});
 Large.args = {
   size: "large",
-  label: "Text Input",
+  placeholder: "Text Input",
 };
 
-export const Small: ComponentMeta<typeof TextInput> = Template.bind({});
+export const Small: ComponentMeta<typeof Input> = Template.bind({});
 Small.args = {
   size: "small",
-  label: "Text Input",
+  placeholder: "Text Input",
 };
