@@ -3,7 +3,7 @@ import React from 'react';
 export interface TableColProps {
   style?: object
   align?: "left" | "center" | "right" | string
-  value: string | any
+  value?: string | any
   bg?: string
   text?: string
   weight?: string
@@ -13,14 +13,14 @@ export interface TableColProps {
  * Primary UI component for user interaction
  */
 export const Column = ({
-                         style = {},
-                         align = "left",
-                         bg = "surface",
-                         text = "onSurface",
-                         weight = "normal",
-                         value,
-                         ...props
-                       }: TableColProps) => {
+ style = {},
+ align = "left",
+ bg = "surface",
+ text = "onSurface",
+ weight = "normal",
+ value,
+ ...props
+}: TableColProps) => {
   return (
     <td
       style={style}
