@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { MenuItem } from "./menuItem";
+import { Logo } from "./logo";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/MenuItem",
-  component: MenuItem,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  title: "Molecules/Logo",
+  component: Logo,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
+    className: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },
   parameters: {
@@ -23,11 +23,21 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof MenuItem> = (args) => <MenuItem {...args}>{args.label}</MenuItem>;
+const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />;
 
-export const Primary: ComponentMeta<typeof MenuItem> = Template.bind({});
+export const Primary: ComponentMeta<typeof Logo> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  label: "MenuItem"
+  title: "Logo",
 };
 
+export const Large: ComponentMeta<typeof Logo> = Template.bind({});
+Large.args = {
+  size: "large",
+  title: "Logo",
+};
+
+export const Small: ComponentMeta<typeof Logo> = Template.bind({});
+Small.args = {
+  size: "small",
+};

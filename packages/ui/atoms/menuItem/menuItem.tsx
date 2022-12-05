@@ -3,11 +3,20 @@ import {Link} from "../link/link";
 export interface MenuItemProps  {
   link: string
   label: string
+  backgroundColor?: string
+  color?: string
+  style?: {}
+  className?: string
 }
 
-const MenuItem = ({
+export const MenuItem = ({
   link,
-  label
+  label,
+  backgroundColor,
+  color,
+  style,
+  className,
+  ...props
 }: MenuItemProps) => {
   return (
     <Link
@@ -19,6 +28,7 @@ const MenuItem = ({
         "rounded-md",
         "text-base",
         "font-medium pointer",
+        className,
       ].join(" ")}
       activeClassName={[
         "bg-menuButton",
@@ -26,12 +36,14 @@ const MenuItem = ({
         "cursor-pointer",
         "px-3 py-2 mr-1",
         "rounded-md",
-        "text-base",
+        "text-base no-underline",
         "font-medium pointer",
       ].join(" ")}
       link={link}
       href={link}
       color={"onTopbar"}
+      {...props}
+      style={style}
     >
       {label}
     </Link>

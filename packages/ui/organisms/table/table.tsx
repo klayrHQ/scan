@@ -1,6 +1,9 @@
 import React from 'react';
 import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
 import {TableHead} from "../../molecules/tableHead/tableHead";
+import {Row as TableRow} from "../../molecules/row/row";
+import {Column as TableCol} from "../../atoms/column/column";
+import {TableBody} from "../../molecules/tableBody/tableBody";
 
 export interface TableProps {
   style?: object
@@ -9,7 +12,6 @@ export interface TableProps {
   weight?: string
   rounded?: string
   className?: string
-  children: any
   rows?: Array<{cols: Array<{}>}>
   headCols?: Array<{}>
 }
@@ -24,8 +26,8 @@ export const Table = ({
   bg = "surface",
   text = "onSurface",
   weight = "normal",
+  headCols,
   rows,
-  children,
   ...props
 }: TableProps) => {
   return (
@@ -47,7 +49,22 @@ export const Table = ({
               ].join(" ")}
               {...props}
             >
-              {children}
+              {headCols &&
+                  <TableHead>
+                    {headCols.map((col) => (
+                      <HeadCol {...col} />
+                    ))}
+                  </TableHead>
+              }
+              <TableBody>
+                {rows && rows.map((row) =>  (
+                  <TableRow {...row}>
+                    {row.cols.map((col) => (
+                      <TableCol {...col} />
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
             </table>
           </div>
         </div>

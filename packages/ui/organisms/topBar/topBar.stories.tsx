@@ -1,17 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { MenuItem } from "./menuItem";
+import { TopBar } from "./topBar";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/MenuItem",
-  component: MenuItem,
+  title: "Organisms/TopBar",
+  component: TopBar,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
-    fullWidth: { control: "boolean", defaultValue: false }
+    menu: {control: "object"},
   },
   parameters: {
     status: {
@@ -23,11 +21,13 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof MenuItem> = (args) => <MenuItem {...args}>{args.label}</MenuItem>;
+const Template: ComponentStory<typeof TopBar> = (args) => <TopBar {...args}>{args.children}</TopBar>;
 
-export const Primary: ComponentMeta<typeof MenuItem> = Template.bind({});
+export const Primary: ComponentMeta<typeof TopBar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  label: "MenuItem"
+  backgroundColor: "rgb(29, 78, 216)",
+  color: "white",
+  className: "h-20"
 };
 

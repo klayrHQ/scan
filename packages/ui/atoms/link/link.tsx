@@ -11,16 +11,18 @@ export interface LinkProps {
   activeClassName?: string
   href: string
   onClick?: () => void
+  style?: {}
 }
 
 export const Link = ({
   color = "info",
   children,
-  link,
+  link = "/",
   className,
   activeClassName,
   onClick,
-  href,
+  href = "/",
+  style,
   ...props
 }: LinkProps) => {
 
@@ -36,6 +38,7 @@ export const Link = ({
             isActive && activeClassName ? activeClassName : className
           }`,
         ].join(" ")}
+        style={style}
       >
         {children}
       </a>

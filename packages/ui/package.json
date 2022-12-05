@@ -38,5 +38,7 @@
     "tsconfig": "*",
     "typescript": "^4.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "storybook-addon-next-router": "^4.0.1"
+  }
 }

@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { MenuItem } from "./menuItem";
+import { Favourites } from "./favourites";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/MenuItem",
-  component: MenuItem,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  title: "Organisms/Favourite",
+  component: Favourites,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
+    className: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },
   parameters: {
@@ -23,11 +23,24 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof MenuItem> = (args) => <MenuItem {...args}>{args.label}</MenuItem>;
+const Template: ComponentStory<typeof Favourites> = (args) => <Favourites {...args} />;
 
-export const Primary: ComponentMeta<typeof MenuItem> = Template.bind({});
+export const Primary: ComponentMeta<typeof Favourites> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  label: "MenuItem"
-};
+  favourites: [
+    {
+      address: "lsk00000000111111222222",
+      username: "test 1",
+    },
+    {
+      address: "lsk11111122222223333333",
+      username: "test 2",
+    },
+    {
+      address: "lsk22222223333334444444",
+      username: "test 3",
+    },
+  ]
 
+};

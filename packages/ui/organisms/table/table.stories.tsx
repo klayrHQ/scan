@@ -31,24 +31,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Table> = (args) => {
   return (
-    <Table>
-      {args.headCols &&
-        <TableHead>
-          {args.headCols.map((col) => (
-            <HeadCol {...col} />
-          ))}
-        </TableHead>
-      }
-      <TableBody>
-        {args.rows && args.rows.map((row) =>  (
-          <TableRow {...row}>
-            {row.cols.map((col) => (
-              <TableCol {...col} />
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Table {...args}/>
   )
 };
 

@@ -47,6 +47,9 @@ module.exports = {
     "w-10",
     "w-max",
     "w-full",
+    "text-sm",
+    "text-lg",
+    "text-xl",
   ],
   darkMode: "media", // or 'class'
   theme: {
