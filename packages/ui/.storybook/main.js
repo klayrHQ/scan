@@ -18,6 +18,7 @@ module.exports = {
     "@storybook/addon-backgrounds",
     "@storybook/addon-measure",
     "@etchteam/storybook-addon-status",
+    "storybook-addon-next-router",
     {
       name: "@storybook/addon-postcss",
       options: {

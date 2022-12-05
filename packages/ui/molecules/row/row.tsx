@@ -13,21 +13,19 @@ export interface TableRowProps {
  * Primary UI component for user interaction
  */
 export const Row = ({
-                         style = {},
-                         bg = "surface",
-                         text = "onSurface",
-                         weight = "normal",
-                         children,
-                         ...props
-                       }: TableRowProps) => {
+   style = {},
+   bg = "surface",
+   text = "onSurface",
+   weight = "normal",
+   children,
+   ...props
+ }: TableRowProps) => {
   return (
     <tr
       style={style}
       className={[
         "relative",
         "border-surfaceDark",
-        "table-cell",
-        "tableColumn",
         "p-4",
         bg ? `bg-${bg}` : "",
         text ? `text-${text}` : "",
