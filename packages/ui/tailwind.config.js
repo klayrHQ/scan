@@ -50,6 +50,7 @@ module.exports = {
     "text-sm",
     "text-lg",
     "text-xl",
+    "bg-blue-500",
   ],
   darkMode: "media", // or 'class'
   theme: {

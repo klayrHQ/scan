@@ -1,15 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Favourite } from "./favourite";
+import { FilterButtons } from "./filterButtons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/Favourite",
-  component: Favourite,
+  title: "Molecules/FilterButtons",
+  component: FilterButtons,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     className: { control: "text" },
   },
   parameters: {
@@ -22,11 +20,23 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Favourite> = (args) => <Favourite {...args} />;
+const Template: ComponentStory<typeof FilterButtons> = (args) => <FilterButtons {...args} />;
 
-export const Primary: ComponentMeta<typeof Favourite> = Template.bind({});
+export const Primary: ComponentMeta<typeof FilterButtons> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  className: "bg-blue-700 ",
-  address: "lsk00000000111111222222"
+  buttons: [
+    {
+      label: "All Txs",
+      state: "all",
+    },
+    {
+      label: "Example Txs",
+      state: "ex1",
+    },
+    {
+      label: "Example 2 Txs",
+      state: "ex2",
+    }
+  ]
 };

@@ -13,13 +13,13 @@ export interface TableColProps {
  * Primary UI component for user interaction
  */
 export const Column = ({
- style = {},
- align = "left",
- bg = "surface",
- text = "onSurface",
- weight = "normal",
- value,
- ...props
+  style = {},
+  align = "left",
+  bg = "surface",
+  text = "onSurface",
+  weight = "normal",
+  value,
+  ...props
 }: TableColProps) => {
   return (
     <td

@@ -38,6 +38,8 @@ const Template: ComponentStory<typeof Table> = (args) => {
 export const Primary: ComponentMeta<typeof Table> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  oddClassName: "bg-blue-500",
+  headClassName: "bg-blue-700",
   headCols: [
     {
       ...Column.args,
@@ -54,6 +56,7 @@ Primary.args = {
   ],
   rows: [
     {
+      id: "0",
       cols: [
         {
           ...Column.args,
@@ -70,6 +73,7 @@ Primary.args = {
       ]
     },
     {
+      id: "1",
       cols: [
         {
           ...Column.args,

@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface TableRowProps {
   style?: object
+  className?: string
   bg?: string
   text?: string
   weight?: string
@@ -13,12 +14,13 @@ export interface TableRowProps {
  * Primary UI component for user interaction
  */
 export const Row = ({
-   style = {},
-   bg = "surface",
-   text = "onSurface",
-   weight = "normal",
-   children,
-   ...props
+  style = {},
+  className,
+  bg = "surface",
+  text = "onSurface",
+  weight = "normal",
+  children,
+  ...props
  }: TableRowProps) => {
   return (
     <tr
@@ -30,6 +32,7 @@ export const Row = ({
         bg ? `bg-${bg}` : "",
         text ? `text-${text}` : "",
         `font-${weight}`,
+        className
       ].join(" ")}
       {...props}
     >

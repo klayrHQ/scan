@@ -1,19 +1,20 @@
 import React from 'react';
 import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
 import {TableHead} from "../../molecules/tableHead/tableHead";
-import {Row as TableRow} from "../../molecules/row/row";
-import {Column as TableCol} from "../../atoms/column/column";
+import {Row as TableRow, TableRowProps} from "../../molecules/row/row";
+import {Column as TableCol, TableColProps} from "../../atoms/column/column";
 import {TableBody} from "../../molecules/tableBody/tableBody";
 
 export interface TableProps {
   style?: object
-  bg?: string
-  text?: string
-  weight?: string
   rounded?: string
   className?: string
-  rows?: Array<{cols: Array<{}>}>
-  headCols?: Array<{}>
+  oddClassName: string
+  evenClassName: string
+  hoverClassName: string
+  headClassName: string
+  rows?: Array<{id: string, cols: Array<{value: string, className: string}>}>
+  headCols?: Array<{value: string, className: string}>
 }
 
 /**
@@ -22,10 +23,11 @@ export interface TableProps {
 export const Table = ({
   style = {},
   className,
+  oddClassName = `bg-background text-onSurface`,
+  evenClassName = `bg-surfaceLight text-onSurface`,
+  hoverClassName = `hover:bg-surfaceDark hover:text-onSurface`,
+  headClassName = `bg-surfaceDark text-onSurfaceDark`,
   rounded,
-  bg = "surface",
-  text = "onSurface",
-  weight = "normal",
   headCols,
   rows,
   ...props
@@ -37,30 +39,45 @@ export const Table = ({
           <div className={` overflow-hidden ${rounded && "sm:rounded"}`}>
             <table
               style={style}
-              className={[
-                "relative",
-                "border-surfaceDark",
-                "table-cell",
-                "tableColumn",
-                "p-4",
-                bg ? `bg-${bg}` : "",
-                text ? `text-${text}` : "",
-                `font-${weight}`,
-              ].join(" ")}
+              className={`min-w-full border-collapse rounded ${rounded && "rounded"}`}
               {...props}
             >
               {headCols &&
                   <TableHead>
-                    {headCols.map((col) => (
-                      <HeadCol {...col} />
+                    {headCols.map((col, i) => (
+                      <HeadCol
+                        text="text-primary text-sm font-medium"
+                        key={`head-${col.value}-${i}`}
+                        {...col}
+                        className={[
+                          "",
+                          "tableHeadColumn",
+                          col.className,
+                          headClassName,
+                        ].join(" ")}
+                      />
                     ))}
                   </TableHead>
               }
               <TableBody>
-                {rows && rows.map((row) =>  (
-                  <TableRow {...row}>
-                    {row.cols.map((col) => (
-                      <TableCol {...col} />
+                {rows && rows.map((row, y) =>  (
+                  <TableRow
+                    className={[
+                      "tableRow simple-animation",
+                      hoverClassName,
+                      y % 2 === 1 ? oddClassName : evenClassName,
+                      y % 2 === 1 ? "tableRowOdd" : "tableRowEven",
+                    ].join(" ")}
+                    key={`${row.id ? row.id : `uni-${y}`}`}
+                    {...row}
+                  >
+                    {row.cols.map((col, i) => (
+                      <TableCol
+                        key={`${row.id ? `${row.id}-${i}` : `uni-${y}-${i}`}`}
+                        {...col}
+                        bg={""}
+                        text={""}
+                      />
                     ))}
                   </TableRow>
                 ))}

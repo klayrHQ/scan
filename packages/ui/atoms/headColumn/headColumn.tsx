@@ -16,16 +16,16 @@ export interface TableHeadColProps {
  * Primary UI component for user interaction
  */
 export const HeadColumn = ({
-                         style = {},
-                         align = "left",
-                         bg = "bg-surface-1",
-                         text = "text-onSurfaceHigh",
-                         bold = false,
-                         className,
-                         value,
-                         onClick,
-                         sort,
-                       }: TableHeadColProps) => {
+  style = {},
+  align = "left",
+  bg = "bg-surface-1",
+  text = "text-onSurfaceHigh",
+  bold = false,
+  className,
+  value,
+  onClick,
+  sort,
+}: TableHeadColProps) => {
   return (
     <th
       onClick={() => onClick && onClick(value)}

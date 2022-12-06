@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Favourite } from "./favourite";
+import { Tooltip } from "./tooltip";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/Favourite",
-  component: Favourite,
+  title: "Molecules/Tooltip",
+  component: Tooltip,
   argTypes: {
+    className: { control: "text" },
     backgroundColor: { control: "color" },
     color: { control: "color" },
-    className: { control: "text" },
   },
   parameters: {
     status: {
@@ -22,11 +22,15 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Favourite> = (args) => <Favourite {...args} />;
+const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args}>{args.children}</Tooltip>;
 
-export const Primary: ComponentMeta<typeof Favourite> = Template.bind({});
+export const Primary: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  className: "bg-blue-700 ",
-  address: "lsk00000000111111222222"
+  children: "test",
+  label: "test tooltip",
+  positionBottom: true,
+  wrapperClassName: "w-max m-auto text-white",
+  backgroundColor: "white",
+  color: "black",
 };

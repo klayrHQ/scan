@@ -6,6 +6,7 @@ interface FavouritesProps {
   xOnClick?: void
   favourites?: Array<{username?: string, address: string}>
   className?: string
+  favClassName?: string
   color?: string
 }
 
@@ -14,6 +15,7 @@ interface FavouritesProps {
  */
 export const Favourites = ({
   className,
+  favClassName,
   color,
   onClick,
   xOnClick,
@@ -28,7 +30,11 @@ export const Favourites = ({
                 {favourites.map((fav, index) => {
                   return (
                     fav &&
-                    <Favourite address={fav.address} username={fav.username} />
+                    <Favourite
+                        address={fav.address}
+                        username={fav.username}
+                        className={favClassName}
+                    />
                   )
                 })}
               </div>
