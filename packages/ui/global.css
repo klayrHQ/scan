@@ -14,3 +14,7 @@
   font-family: 'monaco';
   src: url('assets/fonts/Monaco.ttf');
 }
+
+* {
+  box-sizing: border-box;
+}

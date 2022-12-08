@@ -5,7 +5,7 @@ import { Favourites } from "./favourites";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Organisms/Favourite",
+  title: "Organisms/Favourites",
   component: Favourites,
   argTypes: {
     backgroundColor: { control: "color" },

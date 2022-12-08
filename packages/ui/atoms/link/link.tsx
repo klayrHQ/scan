@@ -30,8 +30,8 @@ export const Link = ({
   const isActive = router.pathname.split("/")[1] === link.split("/")[1]
 
   return (
-    <NextLink prefetch={false} href={href} as={link}>
-      <a
+    <NextLink className="no-underline" prefetch={false} href={href} as={link}>
+      <span
         onClick={() => onClick && onClick()}
         className={[
           `cursor-pointer text-${color} ${
@@ -41,7 +41,7 @@ export const Link = ({
         style={style}
       >
         {children}
-      </a>
+      </span>
     </NextLink>
   )
 }

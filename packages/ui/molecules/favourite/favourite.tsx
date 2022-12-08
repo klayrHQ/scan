@@ -25,7 +25,7 @@ export const Favourite = ({
 }: FavouriteProps) => {
   return (
     <div
-      className="relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition"
+      className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className}`}
       onClick={onClick}
     >
 
