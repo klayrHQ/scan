@@ -11,7 +11,10 @@ export default {
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
-    fullWidth: { control: "boolean", defaultValue: false }
+    primary: { control: "boolean", defaultValue: false },
+    fullWidth: { control: "boolean", defaultValue: false },
+    active: { control: "boolean", defaultValue: false },
+    hover: { control: "boolean", defaultValue: false },
   },
   parameters: {
     status: {
@@ -35,6 +38,14 @@ Primary.args = {
 export const Secondary: ComponentMeta<typeof Button> = Template.bind({});
 Secondary.args = {
   label: "Button",
+};
+
+export const Hover: ComponentMeta<typeof Button> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Hover.args = {
+  primary: true,
+  label: "Button",
+  hover: true,
 };
 
 export const Large: ComponentMeta<typeof Button> = Template.bind({});

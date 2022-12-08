@@ -11,13 +11,9 @@ export interface TooltipProps {
   positionLeft?: boolean
   positionRight?: boolean
   children: any
-  color?: string
-  backgroundColor?: string
 }
 
 export const Tooltip = ({
-  color,
-  backgroundColor,
   positionTop,
   className,
   children,
@@ -65,12 +61,11 @@ export const Tooltip = ({
                 : "left-[-50%]",
             className,
           ].join(" ")}
-          style={{color,backgroundColor}}
         >
           {label}
           <div
             className={[
-              "w-0 h-0 border-background border-l-[10px] border-r-[10px] border-t-[13px] border-b-[0px] border-l-transparent border-r-transparent",
+              "w-0 h-0 border-solid border-background border-l-[10px] border-r-[10px] border-t-[13px] border-b-[0px] border-l-transparent border-r-transparent",
               "absolute z-[-1] mx-auto",
               positionBottom
                 ? "-top-[13px] rotate-180"
@@ -81,7 +76,6 @@ export const Tooltip = ({
                   ? "right-6"
                   : "left-0 right-0",
             ].join(" ")}
-            style={{ borderTopColor: backgroundColor || "", zIndex: "-1", borderLeft: "10px", borderRight: "10px", borderTop: "13px", borderBottom: "0px", borderLeftColor: "transparent", borderRightColor: "transparent", top: "-13px", borderStyle: "solid"}}
           >
 
           </div>

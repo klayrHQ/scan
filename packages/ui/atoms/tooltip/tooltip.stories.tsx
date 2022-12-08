@@ -24,13 +24,58 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args}>{args.children}</Tooltip>;
 
-export const Primary: ComponentMeta<typeof Tooltip> = Template.bind({});
+export const PositionBottom: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+PositionBottom.args = {
   children: "test",
   label: "test tooltip",
   positionBottom: true,
   wrapperClassName: "w-max m-auto text-white",
-  backgroundColor: "white",
-  color: "black",
+};
+
+export const PositionTop: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionTop.args = {
+  children: "test",
+  label: "test tooltip",
+  positionTop: true,
+  wrapperClassName: "w-max m-auto text-white",
+};
+
+export const PositionRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionRight.args = {
+  children: "test",
+  label: "test tooltip",
+  positionRight: true,
+  wrapperClassName: "w-max m-auto text-white",
+};
+
+export const PositionBottomRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionBottomRight.args = {
+  children: "test",
+  label: "test tooltip",
+  positionBottom: true,
+  positionRight: true,
+  wrapperClassName: "w-max m-auto text-white",
+};
+
+export const PositionLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionLeft.args = {
+  children: "test",
+  label: "test tooltip",
+  positionLeft: true,
+  wrapperClassName: "w-max m-auto text-white",
+};
+
+export const PositionBottomLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionBottomLeft.args = {
+  children: "test",
+  label: "test tooltip",
+  positionBottom: true,
+  positionLeft: true,
+  wrapperClassName: "w-max m-auto text-white",
 };

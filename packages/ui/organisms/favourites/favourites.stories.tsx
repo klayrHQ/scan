@@ -28,6 +28,7 @@ const Template: ComponentStory<typeof Favourites> = (args) => <Favourites {...ar
 export const Primary: ComponentMeta<typeof Favourites> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  favClassName: "bg-blue-500",
   favourites: [
     {
       address: "lsk00000000111111222222",

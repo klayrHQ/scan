@@ -8,6 +8,7 @@ import {Row as TableRow} from "../../molecules/row/row";
 import {Column as TableCol} from "../../atoms/column/column";
 import {TableHead} from "../../molecules/tableHead/tableHead";
 import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
+import HeadColumn from "../../atoms/headColumn/headColumn.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -23,9 +24,6 @@ export default {
       ],
     },
   },
-  args: {
-    style: {color: "white"},
-  }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -38,8 +36,9 @@ const Template: ComponentStory<typeof Table> = (args) => {
 export const Primary: ComponentMeta<typeof Table> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  oddClassName: "bg-blue-500",
-  headClassName: "bg-blue-700",
+  oddClassName: "bg-surface-2",
+  evenClassName: "bg-surface-1",
+  headClassName: "bg-surface-2",
   headCols: [
     {
       ...Column.args,
@@ -52,6 +51,7 @@ Primary.args = {
     {
       ...Column.args,
       value: "head column 3",
+      align: "right",
     },
   ],
   rows: [
@@ -59,16 +59,17 @@ Primary.args = {
       id: "0",
       cols: [
         {
-          ...Column.args,
+          ...HeadColumn.args,
           value: "column 1",
         },
         {
-          ...Column.args,
+          ...HeadColumn.args,
           value: "column 2",
         },
         {
-          ...Column.args,
+          ...HeadColumn.args,
           value: "column 3",
+          align: "right",
         },
       ]
     },
@@ -86,6 +87,7 @@ Primary.args = {
         {
           ...Column.args,
           value: "column 3",
+          align: "right",
         },
       ]
     }
