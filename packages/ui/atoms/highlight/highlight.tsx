@@ -28,7 +28,7 @@ export const Highlight = ({
         'rounded border-none p-2 w-max',
         className,
         size === "large" ? "text-lg" : size === "small" ? "text-sm p-1" : "",
-        primary ? "bg-primary text-onPrimary" : "",
+        primary ? "bg-primary text-onPrimaryHigh" : "",
         mode
       ].join(' ')}
       style={{ backgroundColor, color }}

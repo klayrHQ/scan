@@ -38,6 +38,13 @@ Primary.args = {
   primary: true,
 };
 
+export const Active: ComponentMeta<typeof SwitchButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Active.args = {
+  primary: true,
+  activeButton: "Button 1",
+};
+
 export const Large: ComponentMeta<typeof SwitchButtons> = Template.bind({});
 Large.args = {
   primary: true,

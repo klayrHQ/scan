@@ -28,7 +28,20 @@ const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 export const Primary: ComponentMeta<typeof Input> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
+  placeholder: "Text Input",
+};
+
+export const Error: ComponentMeta<typeof Input> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Error.args = {
+  error: true,
+  placeholder: "Text Input",
+};
+
+export const Disabled: ComponentMeta<typeof Input> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Disabled.args = {
+  disabled: true,
   placeholder: "Text Input",
 };
 

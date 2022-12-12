@@ -5,6 +5,7 @@ interface ButtonProps {
   className?: string
   hover?: boolean
   active?: boolean
+  disabled?: boolean
   backgroundColor?: string
   color?: string
   label: string
@@ -21,6 +22,7 @@ export const Button = ({
   className,
   hover,
   active,
+  disabled,
   backgroundColor,
   color,
   label,
@@ -29,22 +31,31 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
 
+  let styling = "bg-primary text-onPrimary border-primary hover:border-surface-1 hover:bg-surface-1 hover:text-onSurfaceHigh"
+
+  if(primary) {
+    if(hover) styling = "bg-surface-1 border-surface-1  text-onSurfaceHigh"
+    if(active) styling = "bg-surface-1 border-surface-1 text-onSurfaceHigh"
+  } else {
+    styling = "bg-transparent text-onBackground border-primary hover:bg-primary hover:text-onPrimary"
+    if(hover) styling = "bg-primary text-onPrimary border-primary"
+    if(active) styling = "bg-primary text-onPrimary border-primary"
+  }
+  if(disabled) styling = "bg-surface-3 border-surface-3 text-surface-8"
+
   return (
     <button
       type="button"
       className={[
-        'cursor-pointer rounded',
+        'cursor-pointer rounded border-2 border-solid',
         className,
         fullWidth ? "w-full" : "",
         size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
-        hover ? "bg-surface-1 text-onSurfaceHigh border-none" : "",
-        primary ?
-          active ? "bg-surface-1 text-onSurfaceHigh border-none" : "bg-primary text-onPrimary hover:bg-surface-1 hover:text-onSurfaceHigh border-none"
-        :
-          active ? "bg-primary text-onPrimary border-none" : !hover ? "bg-transparent text-onBackground border-primary border-2 border-solid hover:bg-primary hover:text-onPrimary" : "",
+        styling,
       ].join(' ')}
       style={{ backgroundColor, color }}
       {...props}
+      disabled={disabled}
     >
       {label}
     </button>

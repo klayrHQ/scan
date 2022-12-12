@@ -15,6 +15,7 @@ export default {
     fullWidth: { control: "boolean", defaultValue: false },
     active: { control: "boolean", defaultValue: false },
     hover: { control: "boolean", defaultValue: false },
+    disabled: { control: "boolean", defaultValue: false},
   },
   parameters: {
     status: {
@@ -46,6 +47,14 @@ Hover.args = {
   primary: true,
   label: "Button",
   hover: true,
+};
+
+export const Disabled: ComponentMeta<typeof Button> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Disabled.args = {
+  primary: true,
+  label: "Button",
+  disabled: true,
 };
 
 export const Large: ComponentMeta<typeof Button> = Template.bind({});
