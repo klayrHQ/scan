@@ -17,9 +17,6 @@ export default {
       ],
     },
   },
-  args: {
-    style: {color: "white"},
-  }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

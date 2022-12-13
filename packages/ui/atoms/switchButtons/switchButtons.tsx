@@ -1,12 +1,13 @@
 import React from 'react';
 
 interface SwitchButtonsProps {
-  primary?: boolean;
-  className?: string;
-  buttons: Array<{label: string, onClick: () => void}>;
-  backgroundColor?: string;
-  color?: string;
-  size?: 'small' | 'medium' | 'large';
+  primary?: boolean
+  className?: string
+  buttons: Array<{label: string, onClick: () => void}>
+  activeButton?: string
+  backgroundColor?: string
+  color?: string
+  size?: 'small' | 'medium' | 'large'
 }
 
 /**
@@ -23,9 +24,11 @@ export const SwitchButtons = ({
     {label: "Button 2", onClick: () => console.log("button 2 clicked")},
     {label: "Button 3", onClick: () => console.log("button 3 clicked")}
   ],
+  activeButton,
   ...props
 }: SwitchButtonsProps) => {
   const mode = primary ? '' : 'storybook-button--secondary';
+
   return (
     <div
       className={className}
@@ -39,7 +42,9 @@ export const SwitchButtons = ({
               'cursor-pointer border-none',
               i === 0 ? "rounded-l" : i === buttons.length - 1 ? "rounded-r" : "",
               size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
-              primary ? "bg-primary text-onPrimary" : "",
+              primary ?
+                (activeButton === button.label ? "bg-primary text-onPrimary" : "bg-surface-8 text-onSurfaceHigh")
+              : (activeButton === button.label ? "bg-surface-8 text-onSurfaceHigh" : "bg-surface-4 text-onSurfaceHigh"),
               mode
             ].join(' ')}
             style={{backgroundColor, color}}

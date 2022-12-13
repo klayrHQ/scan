@@ -12,6 +12,8 @@
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@etchteam/storybook-addon-status": "^4.2.2",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
     "@storybook/addon-a11y": "^6.5.13",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-backgrounds": "^6.5.13",

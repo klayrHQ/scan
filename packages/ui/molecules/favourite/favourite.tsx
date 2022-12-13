@@ -1,4 +1,5 @@
 import React from 'react';
+import {XCircleIcon} from "@heroicons/react/24/outline";
 
 interface FavouriteProps {
   onClick?: () => void
@@ -49,13 +50,13 @@ export const Favourite = ({
         decimals: "text-onBackground font-medium",
       }} beddows={balance} />*/}</span>
       <button
-        className="absolute right-0 h-10 w-10 mr-1 ml-3 text-onSurfaceLow hover:text-onSurfaceHigh"
+        className="absolute bg-transparent border-transparent cursor-pointer right-0 h-10 w-10 mr-1 ml-3 text-onSurfaceLow hover:text-onSurfaceHigh"
         onClick={(e) => {
           e.stopPropagation()
           xOnClick
         }}
       >
-        {/*<XCircleIcon className="w-5 h-5 m-auto flex-end"/>*/}
+        <XCircleIcon className="w-5 h-5 m-auto hover:opacity-50 flex-end"/>
       </button>
     </div>
   );

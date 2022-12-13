@@ -21,7 +21,6 @@ export interface TableProps {
  * Primary UI component for user interaction
  */
 export const Table = ({
-  style = {},
   className,
   oddClassName = `bg-background text-onSurface`,
   evenClassName = `bg-surfaceLight text-onSurface`,
@@ -38,7 +37,6 @@ export const Table = ({
         <div className="py-1 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className={` overflow-hidden ${rounded && "sm:rounded"}`}>
             <table
-              style={style}
               className={`min-w-full border-collapse rounded ${rounded && "rounded"}`}
               {...props}
             >
