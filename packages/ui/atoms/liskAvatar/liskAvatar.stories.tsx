@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Favourite } from "./favourite";
+import {LiskAvatar} from "./liskAvatar";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/Favourite",
-  component: Favourite,
+  title: "Atoms/LiskAvatar",
+  component: LiskAvatar,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
@@ -20,24 +20,22 @@ export default {
     },
   },
   args: {
-    balance: {number: "1000", decimals: "123"}
+
   }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Favourite> = (args) => <Favourite {...args} />;
+const Template: ComponentStory<typeof LiskAvatar> = (args) => <LiskAvatar {...args} />;
 
-export const Primary: ComponentMeta<typeof Favourite> = Template.bind({});
+export const Primary: ComponentMeta<typeof LiskAvatar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  className: "bg-blue-700 ",
   address: "lsk00000000111111222222",
-  username: "Test"
+  username: true
 };
 
-export const NoUsername: ComponentMeta<typeof Favourite> = Template.bind({});
+export const NoUsername: ComponentMeta<typeof LiskAvatar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NoUsername.args = {
-  className: "bg-blue-700 ",
   address: "lsk00000000111111222222",
 };

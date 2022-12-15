@@ -58,6 +58,9 @@ module.exports = {
       "border-background",
       "border-solid",
       "border-primary",
+      "divider",
+      "divide-x-1",
+      "divide-surface-6",
   ],
   darkMode: "media", // or 'class'
   theme: {
