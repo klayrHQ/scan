@@ -6,8 +6,8 @@ import {Column as TableCol, TableColProps} from "../../atoms/column/column";
 import {TableBody} from "../../molecules/tableBody/tableBody";
 
 export interface TableProps {
-  style?: object
-  rounded?: string
+  fullWidth?: boolean
+  rounded?: boolean
   className?: string
   oddClassName: string
   evenClassName: string
@@ -26,6 +26,7 @@ export const Table = ({
   evenClassName = `bg-surfaceLight text-onSurface`,
   hoverClassName = `hover:bg-surfaceDark hover:text-onSurface`,
   headClassName = `bg-surfaceDark text-onSurfaceDark`,
+  fullWidth,
   rounded,
   headCols,
   rows,
@@ -37,7 +38,11 @@ export const Table = ({
         <div className="py-1 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className={` overflow-hidden ${rounded && "sm:rounded"}`}>
             <table
-              className={`min-w-full border-collapse rounded ${rounded && "rounded"}`}
+              className={[
+                "border-collapse rounded",
+                rounded ? "rounded" : "",
+                fullWidth ? "min-w-full" : "w-max",
+              ].join(" ")}
               {...props}
             >
               {headCols &&

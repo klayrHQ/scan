@@ -9,8 +9,6 @@ export default {
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     primary: { control: "boolean", defaultValue: false },
     fullWidth: { control: "boolean", defaultValue: false },
     active: { control: "boolean", defaultValue: false },
@@ -45,6 +43,12 @@ export const Hover: ComponentMeta<typeof Button> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Hover.args = {
   primary: true,
+  label: "Button",
+  hover: true,
+};
+
+export const SecondaryHover: ComponentMeta<typeof Button> = Template.bind({});
+SecondaryHover.args = {
   label: "Button",
   hover: true,
 };

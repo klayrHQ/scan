@@ -1,12 +1,12 @@
 import React from 'react';
+import {Typography} from "../../atoms/typograhpy/typography";
+import {Button} from "../../atoms/button/button";
 
 interface SwitchButtonsProps {
   primary?: boolean
   className?: string
   buttons: Array<{label: string, onClick: () => void}>
   activeButton?: string
-  backgroundColor?: string
-  color?: string
   size?: 'small' | 'medium' | 'large'
 }
 
@@ -16,8 +16,6 @@ interface SwitchButtonsProps {
 export const SwitchButtons = ({
   primary = false,
   className,
-  backgroundColor,
-  color,
   size,
   buttons = [
     {label: "Button 1", onClick: () => console.log("button 1 clicked")},
@@ -31,27 +29,30 @@ export const SwitchButtons = ({
 
   return (
     <div
-      className={className}
+      className={[
+        "divider divide-x-[1px] divide-surface-6",
+        className
+      ].join(" ")}
       {...props}
     >
       {buttons && buttons[0] && buttons.map((button, i) => {
         return (
-          <button
+          <Button
             key={"switchButton-" + i}
             className={[
               'cursor-pointer border-none',
               i === 0 ? "rounded-l" : i === buttons.length - 1 ? "rounded-r" : "",
-              size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
               primary ?
-                (activeButton === button.label ? "bg-primary text-onPrimary" : "bg-surface-8 text-onSurfaceHigh")
-              : (activeButton === button.label ? "bg-surface-8 text-onSurfaceHigh" : "bg-surface-4 text-onSurfaceHigh"),
+                (activeButton === button.label ? "bg-primary text-onPrimary" : "bg-surface-8 text-onSurfaceHigh hover:bg-primary hover:text-onPrimary")
+              : (activeButton === button.label ? "bg-surface-5 text-onSurfaceHigh" : "bg-surface-3 text-onSurfaceHigh hover:bg-surface-5"),
               mode
             ].join(' ')}
-            style={{backgroundColor, color}}
+            primary={activeButton === button.label}
+            size={size}
             onClick={button.onClick}
-          >
-            {button.label}
-          </button>
+            label={button.label}
+            rounded={false}
+          />
         )
       })}
     </div>

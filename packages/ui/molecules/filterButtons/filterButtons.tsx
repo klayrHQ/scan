@@ -2,6 +2,7 @@ import React from 'react'
 import {Button} from "../../atoms";
 
 export interface FilterButtonsProps {
+  primary?: boolean
   buttons: {
     label: string
     state: string
@@ -14,6 +15,7 @@ export interface FilterButtonsProps {
 }
 
 export const FilterButtons = ({
+  primary = true,
   buttons,
   onChange,
   resetFilters,
@@ -31,17 +33,17 @@ export const FilterButtons = ({
               " md:mr-2 px-3 py-2",
               "w-1/2 md:max-w-max rounded",
               "text-sm font-medium",
-
               "cursor-pointer",
               selection === button.state
-                ? "bg-menuButton text-white"
-                : "text-onSurfaceHigh hover:bg-surface-1 hover:text-onSurfaceHigh",
+                ? ""
+                : "text-onSurfaceHigh hover:bg-surface-1 hover:text-onSurfaceHigh border-none",
             ].join(" ")}
             onClick={() => {
               onChange(button.state)
               resetFilters && resetFilters()
             }}
             label={button.label}
+            primary={primary && selection === button.state}
           />
         ))}
       </div>

@@ -38,5 +38,66 @@ Primary.args = {
       label: "Example 2 Txs",
       state: "ex2",
     }
-  ]
+  ],
+};
+
+export const Active: ComponentMeta<typeof FilterButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Active.args = {
+  buttons: [
+    {
+      label: "All Txs",
+      state: "all",
+    },
+    {
+      label: "Example Txs",
+      state: "ex1",
+    },
+    {
+      label: "Example 2 Txs",
+      state: "ex2",
+    }
+  ],
+  selection: "all",
+};
+
+export const Secondary: ComponentMeta<typeof FilterButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Secondary.args = {
+  buttons: [
+    {
+      label: "All Txs",
+      state: "all",
+    },
+    {
+      label: "Example Txs",
+      state: "ex1",
+    },
+    {
+      label: "Example 2 Txs",
+      state: "ex2",
+    }
+  ],
+  primary: false,
+};
+
+export const SecondaryActive: ComponentMeta<typeof FilterButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+SecondaryActive.args = {
+  buttons: [
+    {
+      label: "All Txs",
+      state: "all",
+    },
+    {
+      label: "Example Txs",
+      state: "ex1",
+    },
+    {
+      label: "Example 2 Txs",
+      state: "ex2",
+    }
+  ],
+  primary: false,
+  selection: "all",
 };

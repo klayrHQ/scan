@@ -1,7 +1,7 @@
 import React from 'react';
+import {Typography} from "../typograhpy/typography";
 
 export interface TableHeadColProps {
-  style?: object
   align?: "left" | "center" | "right" | string
   value?: string | any
   bg?: string
@@ -16,7 +16,6 @@ export interface TableHeadColProps {
  * Primary UI component for user interaction
  */
 export const HeadColumn = ({
-  style = {},
   align = "left",
   bg = "bg-surface-1",
   text = "text-onSurfaceHigh",
@@ -29,7 +28,6 @@ export const HeadColumn = ({
   return (
     <th
       onClick={() => onClick && onClick(value)}
-      style={style}
       className={[
         "sticky top-0 px-6 py-3 ",
         "p-4",
@@ -42,7 +40,9 @@ export const HeadColumn = ({
         onClick ? `cursor-pointer` : "",
       ].join(" ")}
     >
-      {sort ? sort.toLowerCase() === "asc" ? "^" : "v" : ""} {value}
+      <Typography tag={"span"}>
+        {sort ? sort.toLowerCase() === "asc" ? "^" : "v" : ""} {value}
+      </Typography>
     </th>
   );
 };

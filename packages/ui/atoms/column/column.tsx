@@ -1,7 +1,7 @@
 import React from 'react';
+import {Typography} from "../typograhpy/typography";
 
 export interface TableColProps {
-  style?: object
   align?: "left" | "center" | "right" | string
   value?: string | any
   bg?: string
@@ -13,7 +13,6 @@ export interface TableColProps {
  * Primary UI component for user interaction
  */
 export const Column = ({
-  style = {},
   align = "left",
   bg = "surface",
   text = "onSurface",
@@ -23,7 +22,6 @@ export const Column = ({
 }: TableColProps) => {
   return (
     <td
-      style={style}
       className={[
         "relative",
         "border-surfaceDark",
@@ -37,7 +35,9 @@ export const Column = ({
       ].join(" ")}
       {...props}
     >
-      {value}
+      <Typography tag={"span"}>
+        {value}
+      </Typography>
     </td>
   );
 };

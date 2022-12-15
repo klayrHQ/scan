@@ -5,7 +5,7 @@ import { SwitchButtons } from "./switchButtons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/SwitchButtons",
+  title: "Molecules/SwitchButtons",
   component: SwitchButtons,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
@@ -38,6 +38,12 @@ Primary.args = {
   primary: true,
 };
 
+export const Secondary: ComponentMeta<typeof SwitchButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Secondary.args = {
+  size: "medium",
+};
+
 export const Active: ComponentMeta<typeof SwitchButtons> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Active.args = {
@@ -45,14 +51,18 @@ Active.args = {
   activeButton: "Button 1",
 };
 
+export const ActiveSecondary: ComponentMeta<typeof SwitchButtons> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+ActiveSecondary.args = {
+  activeButton: "Button 1",
+};
+
 export const Large: ComponentMeta<typeof SwitchButtons> = Template.bind({});
 Large.args = {
-  primary: true,
   size: "large",
 };
 
 export const Small: ComponentMeta<typeof SwitchButtons> = Template.bind({});
 Small.args = {
-  primary: true,
   size: "small",
 };
