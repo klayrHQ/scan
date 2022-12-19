@@ -31,7 +31,7 @@ export const Primary: ComponentMeta<typeof Favourite> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   className: "bg-blue-700 ",
-  address: "lsk00000000111111222222",
+  address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
   username: "Test"
 };
 
@@ -39,5 +39,5 @@ export const NoUsername: ComponentMeta<typeof Favourite> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NoUsername.args = {
   className: "bg-blue-700 ",
-  address: "lsk00000000111111222222",
+  address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
 };

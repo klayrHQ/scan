@@ -20,7 +20,7 @@ export default {
     },
   },
   args: {
-
+    size: 25,
   }
 } as any;
 
@@ -30,12 +30,12 @@ const Template: ComponentStory<typeof LiskAvatar> = (args) => <LiskAvatar {...ar
 export const Primary: ComponentMeta<typeof LiskAvatar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  address: "lsk00000000111111222222",
+  address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
   username: true
 };
 
 export const NoUsername: ComponentMeta<typeof LiskAvatar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 NoUsername.args = {
-  address: "lsk00000000111111222222",
+  address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
 };

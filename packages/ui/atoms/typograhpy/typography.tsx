@@ -41,7 +41,7 @@ const factory = () => {
     ...others
   }) => {
     const headingTags = tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "button";
-    const size = headingTags ? `text-${sizes[tag]}` : "text-body" || "text-inherit";
+    const size = headingTags ? `text-${sizes[tag]}` : "text-base" || "text-inherit";
     const _className = [
       headingTags ? "font-heading" : "font-body",
       headingTags && bold ? "font-headingBold" : "",

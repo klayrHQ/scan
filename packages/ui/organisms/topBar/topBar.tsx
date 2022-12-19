@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface MenuProps{
   backgroundColor?: string
   className?: string
@@ -21,7 +23,7 @@ export const TopBar = ({
     <nav
       className={[
         "bg-topbar text-onTopbar ",
-        "z-40 w-full md:mb-4 items-center",
+        "z-40 w-full flex md:mb-4 items-center",
         className,
       ].join(" ")}
       style={{backgroundColor, color}}

@@ -2,6 +2,7 @@ import React from 'react';
 import {XCircleIcon} from "@heroicons/react/24/outline";
 import {Currency} from "../../atoms/currency/currency";
 import {Avatar} from "../../atoms/avatar/avatar";
+import {Typography} from "../../atoms/typograhpy/typography";
 
 interface FavouriteProps {
   onClick?: () => void
@@ -10,7 +11,6 @@ interface FavouriteProps {
   address: string
   balance?: { number: string, decimals?: string }
   className?: string
-  color?: string
   parsedSettings: any
 }
 
@@ -19,7 +19,6 @@ interface FavouriteProps {
  */
 export const Favourite = ({
   className,
-  color,
   onClick,
   xOnClick,
   username,
@@ -33,8 +32,8 @@ export const Favourite = ({
       className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className}`}
       onClick={onClick}
     >
-      {/*<Avatar className="mx-3" address={address} size={25} />*/}
-      <div className="flex flex-col grow-[2]">
+      <Avatar className="mx-3" address={address} size={25} />
+      <Typography tag={"span"} className="flex flex-col grow-[2]">
         {username && <span className="font-semibold capitalize">{username}</span>}
         <span className="">{address}</span>
         {balance &&
@@ -53,7 +52,7 @@ export const Favourite = ({
             />
           </span>
         }
-      </div>
+      </Typography>
       {balance &&
         <span className="mr-10 hidden md:inline">
           <Currency

@@ -8,6 +8,7 @@ interface FavouritesProps {
   className?: string
   favClassName?: string
   color?: string
+  parsedSettings: any
 }
 
 /**
@@ -20,6 +21,7 @@ export const Favourites = ({
   onClick,
   xOnClick,
   favourites,
+  parsedSettings,
   ...props
 }: FavouritesProps) => {
   return (
@@ -34,6 +36,7 @@ export const Favourites = ({
                         address={fav.address}
                         username={fav.username}
                         className={favClassName}
+                        parsedSettings={parsedSettings}
                     />
                   )
                 })}

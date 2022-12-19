@@ -104,7 +104,7 @@ export const LiskAvatar = ({
 const round = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100
 
 /*
- * Account Visual
+ * Index Visual
  *
  * The account visual is an svg image generated based on account address.
  *
