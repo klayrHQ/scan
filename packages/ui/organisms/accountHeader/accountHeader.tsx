@@ -2,16 +2,29 @@ import React from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid"
 import {Avatar} from "../../atoms/avatar/avatar";
+import {compactString, calculateTotalBalance, calculateVotes} from "../../assets/utils";
+import { AccountDataType} from "@moosty/lisk-service-provider";
+import {Typography} from "../../atoms/typograhpy/typography";
+import {FavouriteButton} from "../../atoms/favouriteButton/favouriteButton";
+import {BalanceBlock} from "../../atoms/balanceBlock/balanceBlock";
 
 interface AccountHeaderProps {
-  account: any
-  favourites: any
+  account: AccountDataType
+  favourites: {address: string, balance: string, username?: string}[] | null
+  saveFavourite: (address: string, balance: string, username?: string) => void
+  unFavourite: (address: string) => void
 }
 
 export const AccountHeader = ({
   account,
   favourites,
+  saveFavourite,
+  unFavourite,
 }: AccountHeaderProps) => {
+  const totalBalance =
+    BigInt(calculateTotalBalance(account)) +
+    BigInt(calculateVotes(account?.dpos?.unlocking))
+
   return (
     <div
       className={
@@ -29,7 +42,7 @@ export const AccountHeader = ({
           />
           <div className="flex flex-col">
             {account?.dpos?.delegate?.username || account?.knowledge?.owner ? (
-              <span className={"flex flex-col"}>
+              <Typography tag={"span"} className={"flex flex-col"}>
                 <span className="flex-row text-base md:text-xl text-onBackgroundHigh font-medium capitalize">
                   {account?.dpos?.delegate?.rank && (
                     <span className="">{account?.dpos?.delegate?.rank}. </span>
@@ -37,41 +50,32 @@ export const AccountHeader = ({
                   {account?.dpos?.delegate?.username ||
                     account?.knowledge?.owner}
                 </span>
-              </span>
+              </Typography>
             ) : (
               <>
-                <span className="text-base font-medium block text-onBackground ">
+                <Typography tag={"span"} className="text-base font-medium block text-onBackground ">
                   {compactString(account?.summary?.address, 30)}
-                </span>
+                </Typography>
               </>
             )}
+
             <div className={"flex flex-row space-x-2"}>
               {account?.summary?.username ? (
-                <span className="flex flex-row space-x-2 items-center"> <span
-                  className={
-                    "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-4 text-onSurfaceHigh font-medium"
-                  }
-                >
-                  {account?.dpos?.delegate?.status} delegate
-                </span>
-                  {favourites && favourites?.findIndex(i => i.address === account?.summary.address) !== -1 ?
-                    <StarIconSolid
-                      className="w-5 h-5 cursor-pointer"
-                      onClick={() => {
-                        unFavourite(account?.summary?.address)
-                        //setFavourites(favouritesStorage)
-                      }}
-                    />
-                    :
-                    <StarIcon
-                      className="w-5 h-5 cursor-pointer"
-                      onClick={() => {
-                        saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)
-                        //setFavourites(favouritesStorage)
-                      }}
-                    />
-                  }
-               </span>
+                <Typography tag={"span"} className="flex flex-row space-x-2 items-center">
+                  <span
+                    className={
+                      "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-4 text-onSurfaceHigh font-medium"
+                    }
+                  >
+                    {account?.dpos?.delegate?.status} delegate
+                  </span>
+                  <FavouriteButton
+                    favourites={favourites}
+                    unFavourite={() => unFavourite(account?.summary?.address)}
+                    saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
+                    address={account?.summary?.address}
+                  />
+               </Typography>
               ) : (
                 <span className="flex flex-row space-x-2 items-center">
                   <span
@@ -81,23 +85,12 @@ export const AccountHeader = ({
                   >
                     Regular Account
                   </span>
-                  {favourites?.findIndex(i => i.address === account?.summary.address) !== -1 ?
-                    <StarIconSolid
-                      className="w-5 h-5 cursor-pointer"
-                      onClick={() => {
-                        unFavourite(account?.summary?.address)
-                        //setFavourites(favouritesStorage)
-                      }}
-                    />
-                    :
-                    <StarIcon
-                      className="w-5 h-5 cursor-pointer"
-                      onClick={() => {
-                        saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)
-                        //setFavourites(favouritesStorage)
-                      }}
-                    />
-                  }
+                  <FavouriteButton
+                    favourites={favourites}
+                    unFavourite={() => unFavourite(account?.summary?.address)}
+                    saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
+                    address={account?.summary?.address}
+                  />
                 </span>
               )}
               {account?.knowledge?.description && (
@@ -113,31 +106,8 @@ export const AccountHeader = ({
           </div>
         </div>
       </div>
-
-      {/*mobile*/}
-      {/*<>*/}
-      {/*<div className="flex block bg-primary md:hidden items-center flex-row w-full rounded ">*/}
-
-      {/*    <div className="flex flex-row items-center rounded px-2 py-1">*/}
-      {/*      <Avatar*/}
-      {/*        className={"m-2"}*/}
-      {/*        address={account?.summary?.address || ""}*/}
-      {/*        size={30}*/}
-      {/*      />*/}
-      {/*      <span className={"flex flex-col"}>*/}
-
-      {/*        {account?.dpos?.delegate?.username &&*/}
-      {/*          <span className="text-xl text-onPrimaryHigh font-medium">{account?.dpos?.delegate?.rank}.<span className="capitalize"> {account?.dpos?.delegate?.username || account?.knowledge?.owner}</span></span>}*/}
-      {/*          <span className="font-medium text-onSurfaceMedium text-sm">{compactString(account?.summary?.address, 30)}</span>*/}
-      {/*          </span>*/}
-
-      {/*   */}
-      {/*    </div>*/}
-      {/*  </div>*/}
-
-      {/*</>*/}
       <div className="flex flex-col md:flex-row md:space-x-2"></div>
-      {/*<BalanceBlock
+      <BalanceBlock
         title={"Total Balance"}
         amount={(
           BigInt(calculateTotalBalance(account)) +
@@ -176,7 +146,7 @@ export const AccountHeader = ({
           colorBg={"bg-error"}
           colorText={"text-onError"}
         />
-      )}*/}
+      )}
     </div>
   )
 }

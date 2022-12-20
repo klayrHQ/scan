@@ -4,14 +4,18 @@ import {Menu} from "../../molecules/menu/menu";
 import {Logo} from "../../molecules/logo/logo";
 import {LiskScanIcon} from "../../assets/icons/liskscanlogo";
 import {Table} from "../../organisms/table/table";
+import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
+import {AccountDataType} from "@moosty/lisk-service-provider";
 
 interface AccountProps {
-  account: any,
+  account: AccountDataType,
   transactions: any,
   tsxHeadCols: any,
   menu: {label: string, link: string}[],
   favourites: any,
   tableFullWidth: boolean,
+  saveFavourite: (address: string, balance: string, username?: string) => void
+  unFavourite: (address: string) => void
 }
 
 export const Account = ({
@@ -21,6 +25,8 @@ export const Account = ({
   menu,
   favourites,
   tableFullWidth,
+  saveFavourite,
+  unFavourite,
 }: AccountProps) => {
   return (
     <>
@@ -35,7 +41,12 @@ export const Account = ({
         <Menu menu={menu} />
       </TopBar>
       <div>
-
+        <AccountHeader
+          account={account}
+          favourites={favourites}
+          saveFavourite={saveFavourite}
+          unFavourite={unFavourite}
+        />
       </div>
       <div>
         <Table

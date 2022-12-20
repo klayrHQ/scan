@@ -227,6 +227,20 @@ export default {
 
     ],
     tableFullWidth: true,
+    account: {
+      summary: {
+        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        balance: 6996629,
+        username: "test",
+      },
+      dpos: {
+        delegate: {
+          status: "non-eligible",
+          username: "test",
+          rank: "1977",
+        }
+      }
+    }
   }
 } as any;
 

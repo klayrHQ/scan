@@ -15,8 +15,6 @@ interface HighlightProps {
 export const Highlight = ({
   primary = false,
   className,
-  backgroundColor,
-  color,
   size,
   children,
   ...props
@@ -31,7 +29,6 @@ export const Highlight = ({
         primary ? "bg-primary text-onPrimaryHigh" : "",
         mode
       ].join(' ')}
-      style={{ backgroundColor, color }}
       {...props}
     >
       {children}
