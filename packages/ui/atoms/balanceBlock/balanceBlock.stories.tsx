@@ -1,26 +1,32 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Organism } from "./example";
+import { BalanceBlock } from "./balanceBlock";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Organisms/Example",
-  component: Organism,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  title: "atoms/BalanceBlock",
+  component: BalanceBlock,
   argTypes: {
-    backgroundColor: { control: "color" },
+    className: { control: "text" },
   },
+  parameters: {
+    status: {
+      type: [
+        "building",
+      ],
+    },
+  },
+  args: {
+
+  }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Organism> = (args) => (
-  <Organism {...args} />
-);
+const Template: ComponentStory<typeof BalanceBlock> = (args) => <BalanceBlock {...args} />;
 
-export const Primary: ComponentMeta<typeof Organism> = Template.bind({});
+export const Primary: ComponentMeta<typeof BalanceBlock> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: "Button",
+
 };

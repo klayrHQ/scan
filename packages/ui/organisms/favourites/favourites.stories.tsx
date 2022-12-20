@@ -8,10 +8,7 @@ export default {
   title: "Organisms/Favourites",
   component: Favourites,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     className: { control: "text" },
-    fullWidth: { control: "boolean", defaultValue: false }
   },
   parameters: {
     status: {
@@ -31,16 +28,15 @@ Primary.args = {
   favClassName: "bg-blue-500",
   favourites: [
     {
-      address: "lsk00000000111111222222",
-      username: "test 1",
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test",
     },
     {
-      address: "lsk11111122222223333333",
-      username: "test 2",
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty",
     },
     {
-      address: "lsk22222223333334444444",
-      username: "test 3",
+      address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
     },
   ]
 

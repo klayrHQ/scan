@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "../../atoms/link/link";
+import {Typography} from "../../atoms/typograhpy/typography";
 
 interface LogoProps {
   className?: string
@@ -37,9 +38,13 @@ export const Logo = ({
         ].join(" ")}
       >
         {image}
-        <div>
+        <Typography
+          tag={"span"}
+          bold={true}
+          className={color}
+        >
           {title}
-        </div>
+        </Typography>
       </Link>
     </div>
   );

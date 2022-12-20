@@ -1,7 +1,8 @@
-import { FC } from "react"
+import React, { FC } from "react"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import {TableProps} from "../../organisms/table/table";
+import {Typography} from "../typograhpy/typography";
 
 export interface LinkProps {
   link: string
@@ -31,17 +32,19 @@ export const Link = ({
 
   return (
     <NextLink className="no-underline" prefetch={false} href={href} as={link}>
-      <span
-        onClick={() => onClick && onClick()}
-        className={[
-          `cursor-pointer text-${color} ${
-            isActive && activeClassName ? activeClassName : className
-          }`,
-        ].join(" ")}
-        style={style}
-      >
-        {children}
-      </span>
+      <Typography tag={"span"}>
+        <span
+          onClick={() => onClick && onClick()}
+          className={[
+            `cursor-pointer text-${color} ${
+              isActive && activeClassName ? activeClassName : className
+            }`,
+          ].join(" ")}
+          style={style}
+        >
+          {children}
+        </span>
+      </Typography>
     </NextLink>
   )
 }

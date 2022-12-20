@@ -1,3 +1,4 @@
+import React from "react";
 import {Link} from "../link/link";
 
 export interface MenuItemProps  {

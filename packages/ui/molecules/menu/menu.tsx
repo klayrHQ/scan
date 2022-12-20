@@ -1,3 +1,4 @@
+import React from "react";
 import {MenuItem} from "../../atoms/menuItem/menuItem";
 
 export interface MenuProps{
@@ -5,7 +6,7 @@ export interface MenuProps{
     label: string
     link: string
   }[]
-  subMenu: {
+  subMenu?: {
     title: string
     items: {
       label: string
