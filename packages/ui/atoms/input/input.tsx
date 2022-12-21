@@ -4,8 +4,6 @@ interface InputProps {
   disabled?: boolean
   error?: boolean
   className?: string
-  backgroundColor?: string
-  color?: string
   placeholder: string
   name: string
   size?: 'small' | 'medium' | 'large'
@@ -21,8 +19,6 @@ export const Input = ({
   disabled,
   error,
   className,
-  backgroundColor,
-  color,
   placeholder,
   name,
   size,
@@ -41,7 +37,6 @@ export const Input = ({
         error ? "outline-error outline-2 outline" : "",
         disabled ? "bg-background text-surface-8" : "",
       ].join(' ')}
-      style={{ backgroundColor, color }}
       placeholder={placeholder}
       disabled={disabled}
       {...props}

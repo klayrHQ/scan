@@ -44,8 +44,6 @@ Primary.args = {
       link: "/",
     }
   ],
-  backgroundColor: "rgb(29, 78, 216)",
-  color: "white",
   className: "hover:bg-blue-700"
 };
 

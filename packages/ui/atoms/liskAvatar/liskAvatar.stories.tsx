@@ -8,8 +8,6 @@ export default {
   title: "Atoms/LiskAvatar",
   component: LiskAvatar,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     className: { control: "text" },
   },
   parameters: {

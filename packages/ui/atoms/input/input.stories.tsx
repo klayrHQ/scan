@@ -8,8 +8,6 @@ export default {
   title: "Atoms/Input",
   component: Input,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     className: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },

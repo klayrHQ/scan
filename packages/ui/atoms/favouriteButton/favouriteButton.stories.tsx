@@ -8,7 +8,20 @@ export default {
   title: "atoms/FavouriteButton",
   component: FavouriteButton,
   argTypes: {
-    className: { control: "text" },
+    iconColor: { control: "text" },
+    favourited: { control: "boolean", default: false },
+    saveFavourite: {
+      table: {
+        category: "Events",
+        action: "saveFavourite",
+      },
+    },
+    unFavourite: {
+      table: {
+        category: "Events",
+        action: "unFavourite",
+      },
+    },
   },
   parameters: {
     status: {
@@ -18,30 +31,21 @@ export default {
     },
   },
   args: {
-    favourites: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test",
-        balance: {number: "1000", decimals: "123"}
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty",
-        balance: {number: "1000", decimals: "123"}
-      },
-      {
-        address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
-        balance: {number: "1000", decimals: "123"}
-      },
-    ],
+    iconColor: "primary",
   }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof FavouriteButton> = (args) => <FavouriteButton {...args} />;
 
-export const Primary: ComponentMeta<typeof FavouriteButton> = Template.bind({});
+export const NotFavourited: ComponentMeta<typeof FavouriteButton> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+NotFavourited.args = {
 
+};
+
+export const Favourited: ComponentMeta<typeof FavouriteButton> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Favourited.args = {
+  favourited: true,
 };

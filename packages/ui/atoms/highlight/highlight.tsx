@@ -3,8 +3,6 @@ import React from 'react';
 interface HighlightProps {
   primary?: boolean;
   className?: string;
-  backgroundColor?: string;
-  color?: string;
   children: any;
   size?: 'small' | 'medium' | 'large';
 }

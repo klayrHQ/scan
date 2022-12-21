@@ -9,8 +9,7 @@ export default {
   component: Link,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
+    color: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },
   parameters: {
