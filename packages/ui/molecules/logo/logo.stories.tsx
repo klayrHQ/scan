@@ -8,8 +8,7 @@ export default {
   title: "Molecules/Logo",
   component: Logo,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
+    color: { control: "text" },
     className: { control: "text" },
     fullWidth: { control: "boolean", defaultValue: false }
   },

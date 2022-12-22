@@ -9,8 +9,6 @@ export default {
   component: Tooltip,
   argTypes: {
     className: { control: "text" },
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
   },
   parameters: {
     status: {

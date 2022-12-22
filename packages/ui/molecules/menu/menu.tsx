@@ -17,9 +17,7 @@ export interface MenuProps{
       badge?: string
     }[]
   }
-  backgroundColor?: string
   className?: string
-  color?: string
   actions?: {
     title: string
     action: any
@@ -29,15 +27,13 @@ export interface MenuProps{
 export const Menu = ({
  menu,
  subMenu,
- backgroundColor,
  className,
- color,
  ...props
 }: MenuProps) => (
   <div className="hidden lg:block lg:ml-6">
     <div className="flex space-x-4">
       <div className="flex flex-row justify-end hidden md:inline-flex" {...props}>
-        {menu && menu.map((mi) => <MenuItem key={mi.label} className={className} style={{color, backgroundColor}} {...mi} />)}
+        {menu && menu.map((mi) => <MenuItem key={mi.label} className={className} {...mi} />)}
         {/*{subMenu && <SubMenu {...subMenu} />}*/}
       </div>
     </div>

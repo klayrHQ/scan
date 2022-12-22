@@ -8,8 +8,6 @@ export default {
   title: "Molecules/Favourite",
   component: Favourite,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
     className: { control: "text" },
   },
   parameters: {

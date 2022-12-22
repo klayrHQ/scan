@@ -78,3 +78,5 @@ export const selectKey = (key: string, object: any) => {
   const arr = key.split(".")
   while (arr.length && (object = object[arr.shift()!])) return object
 }
+
+const isBrowser = typeof window !== "undefined"

@@ -1,14 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Avatar } from "./avatar";
+import { Paper } from "./paper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Avatar",
-  component: Avatar,
+  title: "Atoms/Paper",
+  component: Paper,
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    className: { control: "text" },
+    rounded: {control: "boolean", default: false},
   },
   parameters: {
     status: {
@@ -23,17 +24,10 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
+const Template: ComponentStory<typeof Paper> = (args) => <Paper {...args} />;
 
-export const Primary: ComponentMeta<typeof Avatar> = Template.bind({});
+export const Primary: ComponentMeta<typeof Paper> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  address: "lsk00000000111111222222",
-  username: true
-};
 
-export const NoUsername: ComponentMeta<typeof Avatar> = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-NoUsername.args = {
-  address: "lsk00000000111111222222",
 };

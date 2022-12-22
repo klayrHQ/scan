@@ -3,7 +3,6 @@ import React from 'react';
 interface LabelProps {
   primary?: boolean;
   className?: string;
-  color?: string;
   label: string;
   name: string;
   children: any;
@@ -14,15 +13,14 @@ interface LabelProps {
  * Primary UI component for user interaction
  */
 export const Label = ({
-                            primary = false,
-                            className,
-                            color,
-                            label,
-                            name,
-                            size,
-                            children,
-                            ...props
-                          }: LabelProps) => {
+  primary = false,
+  className,
+  label,
+  name,
+  size,
+  children,
+  ...props
+}: LabelProps) => {
   const mode = primary ? '' : 'storybook-label--secondary';
   return (
     <label
@@ -33,7 +31,6 @@ export const Label = ({
         primary ? "text-primary" : "",
         mode
       ].join(' ')}
-      style={{ color }}
       htmlFor={name}
       {...props}
     >

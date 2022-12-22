@@ -70,10 +70,9 @@ export const AccountHeader = ({
                     {account?.dpos?.delegate?.status} delegate
                   </span>
                   <FavouriteButton
-                    favourites={favourites}
+                    favourited={favourites?.findIndex(i => i.address === account?.summary?.address) !== -1}
                     unFavourite={() => unFavourite(account?.summary?.address)}
                     saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
-                    address={account?.summary?.address}
                   />
                </Typography>
               ) : (
@@ -86,10 +85,9 @@ export const AccountHeader = ({
                     Regular Account
                   </span>
                   <FavouriteButton
-                    favourites={favourites}
+                    favourited={favourites?.findIndex(i => i.address === account?.summary?.address) !== -1}
                     unFavourite={() => unFavourite(account?.summary?.address)}
                     saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
-                    address={account?.summary?.address}
                   />
                 </span>
               )}

@@ -4,18 +4,14 @@ import {Link} from "../link/link";
 export interface MenuItemProps  {
   link: string
   label: string
-  backgroundColor?: string
   color?: string
-  style?: {}
   className?: string
 }
 
 export const MenuItem = ({
   link,
   label,
-  backgroundColor,
   color,
-  style,
   className,
   ...props
 }: MenuItemProps) => {
@@ -42,9 +38,8 @@ export const MenuItem = ({
       ].join(" ")}
       link={link}
       href={link}
-      color={"onTopbar"}
+      color={"onTopbar" || color}
       {...props}
-      style={style}
     >
       {label}
     </Link>
