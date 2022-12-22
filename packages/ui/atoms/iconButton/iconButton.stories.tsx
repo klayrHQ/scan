@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CopyHotKey } from "./copyHotKey";
+import { IconButton } from "./iconButton";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/CopyHotKey",
-  component: CopyHotKey,
+  title: "Atoms/IconButton",
+  component: IconButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
   },
@@ -23,11 +23,10 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CopyHotKey> = (args) => <CopyHotKey {...args} />;
+const Template: ComponentStory<typeof IconButton> = (args) => <IconButton {...args} />;
 
-export const Primary: ComponentMeta<typeof CopyHotKey> = Template.bind({});
+export const Primary: ComponentMeta<typeof IconButton> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  message: "CopyHotKey Notification",
-  hotkey: "c+n",
+
 };

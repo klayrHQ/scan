@@ -28,5 +28,5 @@ const Template: ComponentStory<typeof Snackbar> = (args) => <Snackbar {...args} 
 export const Primary: ComponentMeta<typeof Snackbar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  message: "Notification"
+  message: "Snackbar Notification"
 };

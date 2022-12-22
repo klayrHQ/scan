@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react"
+import React, { useState } from "react"
 import { Dialog } from "@headlessui/react"
 import { InformationCircleIcon } from "@heroicons/react/24/solid"
+import {Typography} from "../typograhpy/typography";
 
 interface SnackbarProps {
   message: string
@@ -11,7 +12,7 @@ export const Snackbar = ({
   message,
   toggleState,
 }: SnackbarProps) => {
-  let [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <Dialog
@@ -27,14 +28,14 @@ export const Snackbar = ({
       <Dialog.Description>
         <div className="rounded-md bg-surface-4 max-w-app p-4 m-2">
           <div className="flex">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex items-center">
               <InformationCircleIcon
                 className="h-5 w-5 text-onSurfacePrimaryMedium"
                 aria-hidden="true"
               />
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
-              <p className="text-base text-onSurfaceHigh">{message}</p>
+              <Typography tag={"p"} className="text-base text-onSurfaceHigh">{message}</Typography>
             </div>
           </div>
         </div>
