@@ -1,5 +1,6 @@
-import { useState } from "react"
+import {useRef, useState} from "react"
 import React from 'react'
+import {usePopper} from "react-popper"
 
 export interface TooltipProps {
   label: string
@@ -25,23 +26,35 @@ export const Tooltip = ({
   wrapperClassName
 }: TooltipProps) => {
   const [visibility, setVisibility] = useState(false)
+  const boxRef = useRef()
+  const tooltipRef = useRef()
+  const {styles, attributes} = usePopper(
+    boxRef.current,
+    tooltipRef.current,
+    {
+      placement: "top",
+    }
+  )
 
   return (
     <div
       onMouseEnter={() => setVisibility(true)}
       onMouseLeave={() => setVisibility(false)}
       className={["relative " ,wrapperClassName].join(" ")}
+      ref={boxRef.current}
     >
       {children}
-      <div className={[
-        "absolute",
-        positionRight
-          ? "left-0"
-          : positionLeft
-            ? "right-0"
-            : "left-[50%]",
-        outerClassName
-      ].join(" ")}
+      <div
+        ref={tooltipRef.current}
+        className={[
+          "absolute",
+          positionRight
+            ? "left-0"
+            : positionLeft
+              ? "right-0"
+              : "left-[50%]",
+          outerClassName
+        ].join(" ")}
       >
         <div
           className={[
