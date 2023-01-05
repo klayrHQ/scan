@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "../../atoms/link/link";
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 
 interface LogoProps {
   className?: string

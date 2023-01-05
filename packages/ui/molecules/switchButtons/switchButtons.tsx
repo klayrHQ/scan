@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 import {Button} from "../../atoms/button/button";
 
 interface SwitchButtonsProps {

@@ -4,7 +4,7 @@ import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid"
 import {Avatar} from "../../atoms/avatar/avatar";
 import {compactString, calculateTotalBalance, calculateVotes} from "../../assets/utils";
 import { AccountDataType} from "@moosty/lisk-service-provider";
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 import {FavouriteButton} from "../../atoms/favouriteButton/favouriteButton";
 import {BalanceBlock} from "../../atoms/balanceBlock/balanceBlock";
 

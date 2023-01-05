@@ -2,7 +2,7 @@ import React from 'react';
 import {XCircleIcon} from "@heroicons/react/24/outline";
 import {Currency} from "../../atoms/currency/currency";
 import {Avatar} from "../../atoms/avatar/avatar";
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 
 interface FavouriteProps {
   onClick?: () => void

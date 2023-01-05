@@ -1,6 +1,6 @@
 import React from "react"
 import { Paper} from "../../atoms/paper/paper";
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 
 interface KeyValueRowProps {
   label?: any | string

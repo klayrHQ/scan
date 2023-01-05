@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Dialog } from "@headlessui/react"
 import { InformationCircleIcon } from "@heroicons/react/24/solid"
 import { useHotkeys } from "react-hotkeys-hook"
-import {Typography} from "../typograhpy/typography";
+import {Typography} from "../typography/typography";
 
 interface CopyHotKeyProps {
   message: string

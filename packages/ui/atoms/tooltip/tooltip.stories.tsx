@@ -8,7 +8,7 @@ export default {
   title: "Molecules/Tooltip",
   component: Tooltip,
   argTypes: {
-    className: { control: "text" },
+    placement: { control: "select" },
   },
   parameters: {
     status: {
@@ -17,6 +17,9 @@ export default {
       ],
     },
   },
+  args: {
+    children: <div className="mx-auto mt-20 w-max text-onSurfaceHigh">Test</div>
+  }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -25,55 +28,56 @@ const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args}>{a
 export const PositionBottom: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionBottom.args = {
-  children: "test",
   label: "test tooltip",
-  positionBottom: true,
-  wrapperClassName: "w-max m-auto text-white",
-};
-
-export const PositionTop: ComponentMeta<typeof Tooltip> = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-PositionTop.args = {
-  children: "test",
-  label: "test tooltip",
-  positionTop: true,
-  wrapperClassName: "w-max m-auto text-white",
-};
-
-export const PositionRight: ComponentMeta<typeof Tooltip> = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-PositionRight.args = {
-  children: "test",
-  label: "test tooltip",
-  positionRight: true,
-  wrapperClassName: "w-max m-auto text-white",
-};
-
-export const PositionBottomRight: ComponentMeta<typeof Tooltip> = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-PositionBottomRight.args = {
-  children: "test",
-  label: "test tooltip",
-  positionBottom: true,
-  positionRight: true,
-  wrapperClassName: "w-max m-auto text-white",
-};
-
-export const PositionLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-PositionLeft.args = {
-  children: "test",
-  label: "test tooltip",
-  positionLeft: true,
-  wrapperClassName: "w-max m-auto text-white",
+  placement: "bottom",
 };
 
 export const PositionBottomLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionBottomLeft.args = {
-  children: "test",
   label: "test tooltip",
-  positionBottom: true,
-  positionLeft: true,
-  wrapperClassName: "w-max m-auto text-white",
+  placement: "bottom-end"
 };
+
+export const PositionBottomRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionBottomRight.args = {
+  label: "test tooltip",
+  placement: "bottom-start"
+};
+
+export const PositionTop: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionTop.args = {
+  label: "test tooltip",
+  placement: "top",
+};
+
+export const PositionTopLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionTopLeft.args = {
+  label: "test tooltip",
+  placement: "top-end"
+};
+
+export const PositionTopRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionTopRight.args = {
+  label: "test tooltip",
+  placement: "top-start"
+};
+
+export const PositionRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionRight.args = {
+  label: "test tooltip",
+  placement: "right",
+};
+
+export const PositionLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+PositionLeft.args = {
+  label: "test tooltip",
+  placement: "left"
+};
+
