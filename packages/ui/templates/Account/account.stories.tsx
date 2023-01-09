@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Account } from "./account";
 import {Currency} from "../../atoms/currency/currency";
 import {Avatar} from "../../atoms/avatar/avatar";
+import {compactString} from "../../assets/utils";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,6 +23,7 @@ export default {
     },
   },
   args: {
+    compactString: compactString,
     favourites: [
       {
         address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",

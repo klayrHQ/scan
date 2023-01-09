@@ -6,6 +6,7 @@ import {LiskScanIcon} from "../../assets/icons/liskscanlogo";
 import {Table} from "../../organisms/table/table";
 import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
 import {AccountDataType} from "@moosty/lisk-service-provider";
+import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 
 interface AccountProps {
   account: AccountDataType,
@@ -16,6 +17,13 @@ interface AccountProps {
   tableFullWidth: boolean,
   saveFavourite: (address: string, balance: string, username?: string) => void
   unFavourite: (address: string) => void
+  getAddressFromLisk32Address: any
+  compactString: Function
+  clean: Function
+  setInput: Function
+  legacy: any
+  copyNoteText: string
+  setCopyNoteText: Function
 }
 
 export const Account = ({
@@ -27,6 +35,13 @@ export const Account = ({
   tableFullWidth,
   saveFavourite,
   unFavourite,
+  getAddressFromLisk32Address,
+  compactString,
+  clean,
+  setInput,
+  legacy,
+  copyNoteText,
+  setCopyNoteText,
 }: AccountProps) => {
   return (
     <>
@@ -46,6 +61,18 @@ export const Account = ({
           favourites={favourites}
           saveFavourite={saveFavourite}
           unFavourite={unFavourite}
+        />
+      </div>
+      <div>
+        <AccountDetails
+          account={account}
+          getAddressFromLisk32Address={getAddressFromLisk32Address}
+          compactString={compactString}
+          clean={clean}
+          setInput={setInput}
+          legacy={legacy}
+          copyNoteText={copyNoteText}
+          setCopyNoteText={setCopyNoteText}
         />
       </div>
       <div>

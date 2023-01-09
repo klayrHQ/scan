@@ -19,7 +19,7 @@ export default {
     },
   },
   args: {
-    compactString: compactString()
+    compactString: compactString
   }
 } as any;
 
@@ -30,5 +30,5 @@ export const Primary: ComponentMeta<typeof KeyValueRow> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   label: "label",
-  value: "value",
+  value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
 };

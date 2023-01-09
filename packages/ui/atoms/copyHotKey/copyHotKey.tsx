@@ -6,8 +6,6 @@ import {Typography} from "../typography/typography";
 
 interface CopyHotKeyProps {
   message: string
-  copied: boolean
-  setCopied: (copied: boolean) => void
   hotkey: string
   action(): void
   deps?: any[]
@@ -16,14 +14,22 @@ interface CopyHotKeyProps {
 
 export const CopyHotKey = ({
   message,
-  copied = false,
-  setCopied,
   hotkey,
   action,
   deps,
   isBrowser,
 }: CopyHotKeyProps) => {
   const storedTheme = (isBrowser && window.localStorage.getItem("theme")) || "dark"
+  const [copied, setCopied] = useState<boolean>(false)
+  useHotkeys(
+    hotkey,
+    () => {
+      action()
+      setCopied(true)
+      setTimeout(() => setCopied(false), 5000)
+    },
+    deps,
+  )
 
   return (
     <Dialog
