@@ -1,90 +1,49 @@
 import React, { FC, useEffect, useState } from "react"
-/*import { IconButton, KeyValueRow, Paper } from "components/ui"*/
 import {
+  ArrowSmallUpIcon as ArrowSmUpIcon,
   ArrowDownIcon,
   ExclamationCircleIcon,
+  DocumentDuplicateIcon as DuplicateIcon,
 } from "@heroicons/react/24/solid"
-/*import { clean, compactString } from "utils"*/
 import {
   AccountDataType,
   BlockDataType,
   Envelope,
   useLiskService,
 } from "@moosty/lisk-service-provider"
-/*import { CopyToClipboard as Copy } from "react-copy-to-clipboard"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 import copy from "copy-to-clipboard"
-import { getAddressFromLisk32Address } from "../../lisk-client"
-import { useAddressConverter } from "hooks/AddressConverter"
-import { useNotification } from "hooks/Notification"*/
 import {CopyHotKey} from "../../atoms/copyHotKey/copyHotKey";
 import {Snackbar} from "../../atoms/snackbar/snackbar";
 import {Paper} from "../../atoms/paper/paper";
 import {KeyValueRow} from "../../molecules/keyValueRow/keyValueRow";
 import {IconButton} from "../../atoms/iconButton/iconButton";
 
-/*const CopyToClipboard =  Copy as any*/
-
-/*interface AccountDetailsProps {
+interface AccountDetailsProps {
   account: AccountDataType
+  getAddressFromLisk32Address: any
+  compactString: Function
   received?: number | null
   send?: number | null
-  lastBlockSSR?: BlockDataType | null
+  lastBlock?: BlockDataType | null
+  legacy: any
+  copyNoteText: any
+  setCopyNoteText: any
+  transactionsCount: {in: number, out: number}
 }
 
 export const AccountDetails = ({
   account,
+  getAddressFromLisk32Address,
+  compactString,
   send,
   received,
-  lastBlockSSR
+  lastBlock,
+  legacy,
+  copyNoteText,
+  setCopyNoteText,
+  transactionsCount,
 }: AccountDetailsProps) => {
-  const { serviceClient } = useLiskService()
-  const [transactionsCount, setTransactionsCount] =
-    useState<{ in: number; out: number }>()
-  const [lastBlock, setLastBlock] = useState<BlockDataType>(
-    lastBlockSSR || ({} as BlockDataType),
-  )
-  const { setInput, legacy } = useAddressConverter()
-  const [copyNoteText, setCopyNoteText] = useNotification("", 5000)
-
-  useEffect(() => {
-    if (serviceClient && account) {
-      const getTransactionsInAndOut = async () => {
-        const transactionsIn = (await serviceClient.get(
-          "get.transactions",
-          clean({
-            recipientPublicKey: account?.summary?.publicKey,
-            recipientAddress: account?.summary?.address,
-            limit: 1,
-          }),
-        )) as Envelope
-        const transactionsOut = (await serviceClient.get(
-          "get.transactions",
-          clean({
-            senderPublicKey: account?.summary?.publicKey,
-            senderAddress: account?.summary?.address,
-            limit: 1,
-          }),
-        )) as Envelope
-        setTransactionsCount({
-          in: transactionsIn?.meta?.total || 0,
-          out: transactionsOut?.meta?.total || 0,
-        })
-        if (account?.summary?.address) {
-          setInput(account?.summary?.address)
-        }
-        if (account?.summary?.isDelegate) {
-          const lastBlock = (await serviceClient.get("get.blocks", {
-            generatorPublicKey: account?.summary?.publicKey || "",
-            limit: 1,
-          })) as { data?: BlockDataType[] }
-          if (lastBlock?.data?.[0]) {
-            setLastBlock(lastBlock.data[0])
-          }
-        }
-      }
-      getTransactionsInAndOut()
-    }
-  }, [serviceClient, account])
 
   return (
     <Paper
@@ -98,6 +57,7 @@ export const AccountDetails = ({
           account?.summary?.username && copy(account?.summary?.username)
         }
         deps={[account]}
+
       />
       <CopyHotKey
         message={"Address copied"}
@@ -136,6 +96,7 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
+          compactString={compactString}
         />
       )}
       {account?.summary?.address && (
@@ -162,6 +123,7 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
+          compactString={compactString}
         />
       )}
       <KeyValueRow
@@ -182,8 +144,9 @@ export const AccountDetails = ({
             <div />
           )
         }
+        compactString={compactString}
       />
-      <KeyValueRow
+      {/*<KeyValueRow
         label="Hex Address (Binary Address)"
         value={
           <div>
@@ -225,7 +188,8 @@ export const AccountDetails = ({
             </IconButton>
           </CopyToClipboard>
         }
-      />
+        compactString={compactString}
+      />*/}
       {account?.summary?.isDelegate && (
         <KeyValueRow
           label="Status"
@@ -235,6 +199,7 @@ export const AccountDetails = ({
               : "no status"
           }
           className={"lg:col-start-1"}
+          compactString={compactString}
         />
       )}
       {legacy && (
@@ -260,6 +225,7 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
+          compactString={compactString}
         />
       )}
 
@@ -277,6 +243,7 @@ export const AccountDetails = ({
             )
           }
           className={" lg:col-start-1 "}
+          compactString={compactString}
         />
       )}
 
@@ -291,11 +258,13 @@ export const AccountDetails = ({
           </div>
         }
         className={" lg:col-start-2 "}
+        compactString={compactString}
       />
       <KeyValueRow
         label="Nonce:"
         value={account?.sequence?.nonce}
         className={" lg:col-start-1 "}
+        compactString={compactString}
       />
 
       {account?.summary?.isDelegate && (
@@ -303,6 +272,7 @@ export const AccountDetails = ({
           label="Last seed reveal"
           value={lastBlock?.seedReveal || "0"}
           className={" lg:col-start-2 "}
+          compactString={compactString}
         />
       )}
       {copyNoteText !== "" && (
@@ -310,4 +280,4 @@ export const AccountDetails = ({
       )}
     </Paper>
   )
-}*/
+}

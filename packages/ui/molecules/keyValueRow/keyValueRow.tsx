@@ -1,6 +1,6 @@
 import React from "react"
 import { Paper} from "../../atoms/paper/paper";
-import {Typography} from "../../atoms/typograhpy/typography";
+import {Typography} from "../../atoms/typography/typography";
 
 interface KeyValueRowProps {
   label?: any | string
@@ -11,7 +11,7 @@ interface KeyValueRowProps {
   color?: "light" | "dark"
   compactOnMobile?: boolean
   surface?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-  compactString: any
+  compactString: Function
 }
 
 export const KeyValueRow = ({

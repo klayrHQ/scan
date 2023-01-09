@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import {TableProps} from "../../organisms/table/table";
-import {Typography} from "../typograhpy/typography";
+import {Typography} from "../typography/typography";
 
 export interface LinkProps {
   link: string

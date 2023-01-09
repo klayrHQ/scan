@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography} from "../typograhpy/typography";
+import {Typography} from "../typography/typography";
 
 export interface TableHeadColProps {
   align?: "left" | "center" | "right" | string

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Dialog } from "@headlessui/react"
 import { InformationCircleIcon } from "@heroicons/react/24/solid"
-import {Typography} from "../typograhpy/typography";
+import {Typography} from "../typography/typography";
 
 interface SnackbarProps {
   message: string

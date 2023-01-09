@@ -1,7 +1,7 @@
 import React from "react";
 import {Highlight} from "../highlight/highlight";
 import {Currency} from "../currency/currency";
-import {Typography} from "../typograhpy/typography";
+import {Typography} from "../typography/typography";
 
 interface BalanceBlockProps {
   className?: string
