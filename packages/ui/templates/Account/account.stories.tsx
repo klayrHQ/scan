@@ -5,6 +5,7 @@ import { Account } from "./account";
 import {Currency} from "../../atoms/currency/currency";
 import {Avatar} from "../../atoms/avatar/avatar";
 import {compactString} from "../../assets/utils";
+import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,6 +25,7 @@ export default {
   },
   args: {
     compactString: compactString,
+    copyNoteText: "",
     favourites: [
       {
         address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
@@ -253,4 +255,10 @@ export const Primary: ComponentMeta<typeof Account> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
 
+};
+
+export const CopiedItem: ComponentMeta<typeof Account> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+CopiedItem.args = {
+  copyNoteText: "You have copied some text",
 };

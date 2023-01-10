@@ -11,6 +11,7 @@ import {
   Envelope,
   useLiskService,
 } from "@moosty/lisk-service-provider"
+// @ts-ignore
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import copy from "copy-to-clipboard"
 import {CopyHotKey} from "../../atoms/copyHotKey/copyHotKey";

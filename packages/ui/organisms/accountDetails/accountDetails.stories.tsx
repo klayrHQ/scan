@@ -19,7 +19,29 @@ export default {
     },
   },
   args: {
-    compactString: compactString
+    account: {
+      summary: {
+        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        balance: "6996629",
+        username: "test",
+      },
+      dpos: {
+        delegate: {
+          status: "non-eligible",
+          username: "test",
+          rank: 1977,
+          registrationHeight: 123,
+        }
+      },
+      token: {
+        balance: "6996629"
+      },
+      sequence: {
+        nonce: "adsfg"
+      },
+    },
+    compactString: compactString,
+    copyNoteText: "",
   }
 } as any;
 
@@ -29,25 +51,11 @@ const Template: ComponentStory<typeof AccountDetails> = (args) => <AccountDetail
 export const Primary: ComponentMeta<typeof AccountDetails> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  account: {
-    summary: {
-      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-      balance: "6996629",
-      username: "test",
-    },
-    dpos: {
-      delegate: {
-        status: "non-eligible",
-        username: "test",
-        rank: 1977,
-        registrationHeight: 123,
-      }
-    },
-    token: {
-      balance: "6996629"
-    },
-    sequence: {
-      nonce: "adsfg"
-    },
-  }
+
+};
+
+export const CopiedItem: ComponentMeta<typeof AccountDetails> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+CopiedItem.args = {
+  copyNoteText: "You have copied some text",
 };
