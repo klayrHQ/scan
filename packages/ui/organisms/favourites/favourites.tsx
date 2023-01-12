@@ -2,9 +2,9 @@ import React from 'react';
 import {Favourite} from "../../molecules/favourite/favourite";
 
 interface FavouritesProps {
-  onClick?: () => void
-  xOnClick?: void
-  favourites?: Array<{username?: string, address: string}>
+  onClick: () => void
+  xOnClick: void
+  favourites: Array<{username?: string, address: string}>
   className?: string
   favClassName?: string
   color?: string
@@ -17,15 +17,13 @@ interface FavouritesProps {
 export const Favourites = ({
   className,
   favClassName,
-  color,
   onClick,
   xOnClick,
   favourites,
   parsedSettings,
-  ...props
 }: FavouritesProps) => {
   return (
-    <div className="flex flex-col px-4 divider-vertical ">
+    <div className={`flex flex-col px-4 divider-vertical ${className ? className : ""}`}>
       {favourites &&
           <div className="text-onBackgroundHigh p-2 font-medium mt-1">
               <div className="flex flex-col py-2 gap-4">
@@ -37,6 +35,8 @@ export const Favourites = ({
                         username={fav.username}
                         className={favClassName}
                         parsedSettings={parsedSettings}
+                        onClick={onClick}
+                        xOnClick={xOnClick}
                     />
                   )
                 })}

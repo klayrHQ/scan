@@ -42,24 +42,26 @@ export default {
         balance: {number: "1000", decimals: "123"}
       },
     ],
-    menu: [
-      {
-        label: "Transactions",
-        link: "#",
-      },
-      {
-        label: "Delegates",
-        link: "#",
-      },
-      {
-        label: "Votes",
-        link: "#",
-      },
-      {
-        label: "Tools",
-        link: "#",
-      }
-    ],
+    topBarData: {
+      menu: [
+        {
+          label: "Transactions",
+          link: "#",
+        },
+        {
+          label: "Delegates",
+          link: "#",
+        },
+        {
+          label: "Votes",
+          link: "#",
+        },
+        {
+          label: "Tools",
+          link: "#",
+        }
+      ]
+    },
     tsxHeadCols: [
       {
         value: "status",

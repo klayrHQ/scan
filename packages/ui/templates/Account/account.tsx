@@ -6,6 +6,7 @@ import {AccountDataType} from "@moosty/lisk-service-provider";
 import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 import {Footer} from "../../organisms/footer/footer";
 import {TopBarProps} from "../../organisms/topBar/topBar";
+import {Container} from "../../atoms/container/container";
 
 interface AccountProps {
   account: AccountDataType,
@@ -100,17 +101,17 @@ export const Account = ({
   ]
 
   return (
-    <>
-     {/* <Header topBarData={topBarData}/>*/}
-      <div>
+    <div className={"bg-background"}>
+      <Header topBarData={topBarData} />
+      <Container className={"m-auto max-w-app"}>
         <AccountHeader
           account={account}
           favourites={favourites}
           saveFavourite={saveFavourite}
           unFavourite={unFavourite}
         />
-      </div>
-      <div>
+      </Container>
+      <Container className={"m-auto max-w-app"}>
         <AccountDetails
           account={account}
           getAddressFromLisk32Address={getAddressFromLisk32Address}
@@ -120,8 +121,8 @@ export const Account = ({
           setCopyNoteText={setCopyNoteText}
           transactionsCount={transactions}
         />
-      </div>
-      <div>
+      </Container>
+      <Container className={"m-auto max-w-app"}>
         <Table
           oddClassName={"bg-surface-1"}
           evenClassName={"bg-surface-0"}
@@ -131,8 +132,8 @@ export const Account = ({
           headCols={tsxHeadCols}
           fullWidth={tableFullWidth}
         />
-      </div>
+      </Container>
       <Footer footerData={footerData} />
-    </>
+    </div>
   )
 }

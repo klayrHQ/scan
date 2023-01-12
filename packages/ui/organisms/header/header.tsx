@@ -8,6 +8,7 @@ interface HeaderProps {
   title?: string
   topBarData: TopBarProps
   children?: any
+  openSettingsModal?: any
 }
 
 export const Header = ({
@@ -15,11 +16,12 @@ export const Header = ({
   title,
   topBarData,
   children,
+  openSettingsModal
 }: HeaderProps) => {
 
   return (
     <div className={["z-50", "w-full", "mb-8", className].join(" ")}>
-      <InfoBar />
+      <InfoBar openSettingsModal={openSettingsModal} />
       <TopBar {...topBarData} />
       <GotoTop />
       {children}

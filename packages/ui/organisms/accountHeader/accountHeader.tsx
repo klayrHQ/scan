@@ -28,7 +28,7 @@ export const AccountHeader = ({
   return (
     <div
       className={
-        "w-app mx-auto md:max-w-app bg-transparent rounded md:grid grid-flow-col grid-cols-2 gap-2 text-sm"
+        "bg-transparent rounded md:grid grid-flow-col grid-cols-2 gap-2 text-sm"
       }
     >
       <div

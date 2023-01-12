@@ -5,8 +5,8 @@ import {Avatar} from "../../atoms/avatar/avatar";
 import {Typography} from "../../atoms/typography/typography";
 
 interface FavouriteProps {
-  onClick?: () => void
-  xOnClick?: void
+  onClick: (routingAddress: string) => void
+  xOnClick: void
   username?: string
   address: string
   balance?: { number: string, decimals?: string }
@@ -25,12 +25,13 @@ export const Favourite = ({
   address,
   balance,
   parsedSettings,
-  ...props
 }: FavouriteProps) => {
   return (
     <div
       className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className}`}
-      onClick={onClick}
+      onClick={() => {
+        onClick(address)
+      }}
     >
       <Avatar className="mx-3" address={address} size={25} />
       <Typography tag={"span"} className="flex flex-col grow-[2]">

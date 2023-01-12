@@ -33,11 +33,6 @@ export const TopBar = ({
    actions,
 }: TopBarProps) => (
   <>
-    {/*<CopyHotKey*/}
-    {/*  message={`Switch theme to: ${themes[nextThemeIndex].handle}`}*/}
-    {/*  hotkey={"t"}*/}
-    {/*  action={changeTheme}*/}
-    {/*/>*/}
     <nav
       className={[
         "bg-topbar text-onTopbar ",
@@ -45,25 +40,23 @@ export const TopBar = ({
         className,
       ].join(" ")}
     >
-      <div className="w-app max-w-app mx-auto">
-        <div className="relative flex items-center justify-between h-16 ">
-          <div className="flex items-center px-2 lg:px-0">
-            <Logo
-              link={"#"}
-              href={"#"}
-              title={"Liskscan"}
-              color={"text-onTopbar"}
-              image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar" />}
-            />
-            <Menu menu={menu} />
-          </div>
-          <div className="hidden relative lg:flex flex-row items-center space-x-4 lg:ml-4">
-            <FavoritesWindow  menuCloseFunction={() => console.log("close menu")}/>
-            <SearchExtendedContainer />
-          </div>
+      <div className="flex w-app max-w-app m-auto justify-between items-center h-16 px-4 w-full">
+        <div>
+          <Logo
+            link={"#"}
+            href={"#"}
+            title={"Liskscan"}
+            color={"text-onTopbar"}
+            image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar"/>}
+          />
+          <Menu menu={menu}/>
+        </div>
+        <div className="hidden relative lg:flex flex-row items-center space-x-4 lg:ml-4">
+          {/*<FavouritesWindow  menuCloseFunction={() => console.log("close menu")}/>*/}
+          {/*<SearchExtendedContainer />*/}
         </div>
       </div>
-      <MobileMenu menu={menu} subMenu={subMenu} />
+      {/*<MobileMenu menu={menu} subMenu={subMenu} />*/}
     </nav>
   </>
 )

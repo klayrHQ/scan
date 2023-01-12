@@ -26,7 +26,7 @@ export const Logo = ({
   ...props
 }: LogoProps) => {
   return (
-    <div className="flex-shrink-0 items-center">
+    <div className={`flex-shrink-0 items-center ${className}`}>
       <Link
         color={color}
         link={link}

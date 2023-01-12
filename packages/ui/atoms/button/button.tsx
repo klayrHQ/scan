@@ -8,7 +8,7 @@ interface ButtonProps {
   active?: boolean
   disabled?: boolean
   rounded?: boolean
-  label: string
+  label: string | any
   size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
   onClick?: () => void
