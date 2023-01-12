@@ -34,8 +34,8 @@ export const Table = ({
 }: TableProps) => {
   return (
     <div className={["flex flex-col my-4 ", className].join(" ")}>
-      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="py-1 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div className="overflow-x-auto">
+        <div className="align-middle inline-block min-w-full">
           <div className={` overflow-hidden ${rounded && "sm:rounded"}`}>
             <table
               className={[

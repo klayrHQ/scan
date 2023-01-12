@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { TopBar } from "./topBar";
+import { GotoTop } from "./gotoTop";
+import {compactString} from "../../assets/utils";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Organisms/TopBar",
-  component: TopBar,
+  title: "atoms/GotoTop",
+  component: GotoTop,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    menu: {control: "object"},
   },
   parameters: {
     status: {
@@ -18,14 +18,16 @@ export default {
       ],
     },
   },
+  args: {
+
+  }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TopBar> = (args) => <TopBar {...args} />;
+const Template: ComponentStory<typeof GotoTop> = (args) => <GotoTop {...args} />;
 
-export const Primary: ComponentMeta<typeof TopBar> = Template.bind({});
+export const Primary: ComponentMeta<typeof GotoTop> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  className: "h-20"
-};
 
+};

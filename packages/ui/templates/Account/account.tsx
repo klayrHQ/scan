@@ -1,12 +1,12 @@
 import React from "react";
-import {TopBar} from "../../organisms/topBar/topBar";
-import {Menu} from "../../molecules/menu/menu";
-import {Logo} from "../../molecules/logo/logo";
-import {LiskScanIcon} from "../../assets/icons/liskscanlogo";
+import {Header} from "../../organisms/header/header";
 import {Table} from "../../organisms/table/table";
 import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
 import {AccountDataType} from "@moosty/lisk-service-provider";
 import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
+import {Footer} from "../../organisms/footer/footer";
+import {TopBarProps} from "../../organisms/topBar/topBar";
+import {Container} from "../../atoms/container/container";
 
 interface AccountProps {
   account: AccountDataType,
@@ -24,6 +24,7 @@ interface AccountProps {
   legacy: any
   copyNoteText: string
   setCopyNoteText: Function
+  topBarData: TopBarProps
 }
 
 export const Account = ({
@@ -42,40 +43,86 @@ export const Account = ({
   legacy,
   copyNoteText,
   setCopyNoteText,
+  topBarData,
 }: AccountProps) => {
+
+  const footerData = [
+    {
+      category: "Liskscan",
+      items: [
+        {
+          label: "Read the blog",
+          link: "https://lisk.com/blog/announcement/replacing-lisk-explorer",
+        },
+        {
+          label: "About the project team",
+          link: "https://moosty.com",
+        },
+      ],
+    },
+    {
+      category: "Lisk",
+      items: [
+        {
+          label: "What is Lisk?",
+          link: "https://lisk.com/what-is-lisk",
+        },
+        {
+          label: "What is blockchain?",
+          link: "https://lisk.com/what-is-blockchain",
+        },
+        {
+          label: "Lisk SDK documentation",
+          link: "https://lisk.com/documentation/lisk-sdk/index.html",
+        },
+        {
+          label: "Join Lisk chat",
+          link: "https://lisk.chat",
+        },
+      ],
+    },
+    {
+      category: "Moosty",
+      items: [
+        {
+          label: "About the team",
+          link: "https://moosty.com/",
+        },
+        {
+          label: "See projects",
+          link: "https://moosty.com/lisk-ecosystem/",
+        },
+        {
+          label: "Get in touch",
+          link: "https://moosty.com/contact/",
+        },
+      ],
+    },
+  ]
+
   return (
-    <>
-      <TopBar className={"h-16 px-4"}>
-        <Logo
-          link={"#"}
-          href={"#"}
-          title={"Liskscan"}
-          color={"text-onTopbar"}
-          image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar" />}
-        />
-        <Menu menu={menu} />
-      </TopBar>
-      <div>
+    <div className={"bg-background"}>
+      <Header topBarData={topBarData} />
+      <Container className={"m-auto max-w-app"}>
         <AccountHeader
           account={account}
           favourites={favourites}
           saveFavourite={saveFavourite}
           unFavourite={unFavourite}
         />
-      </div>
-      <div>
+      </Container>
+      <Container className={"m-auto max-w-app"}>
         <AccountDetails
           account={account}
           getAddressFromLisk32Address={getAddressFromLisk32Address}
           compactString={compactString}
-          clean={clean}
-          setInput={setInput}
           legacy={legacy}
           copyNoteText={copyNoteText}
           setCopyNoteText={setCopyNoteText}
+          transactionsCount={transactions}
         />
-      </div>
-      <div>
+      </Container>
+      <Container className={"m-auto max-w-app"}>
         <Table
           oddClassName={"bg-surface-1"}
           evenClassName={"bg-surface-0"}
@@ -85,7 +132,8 @@ export const Account = ({
           headCols={tsxHeadCols}
           fullWidth={tableFullWidth}
         />
-      </div>
-    </>
+      </Container>
+      <Footer footerData={footerData} />
+    </div>
   )
 }

@@ -62,10 +62,11 @@ export const Container = ({
     section,
   ...props
 }: Props) => {
-  // @ts-ignore
+
   return (
     <div
       className={container({
+        // @ts-ignore
         className: `${className} space-y-${gap} w-${width} bg-${bgColor}`,
         rounded,
         gap,

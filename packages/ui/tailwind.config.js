@@ -47,6 +47,7 @@ module.exports = {
     "w-10",
     "w-max",
     "w-full",
+    "w-app",
     "text-sm",
     "text-lg",
     "text-xl",
@@ -505,9 +506,6 @@ module.exports = {
     flexShrink: {
       0: "0",
       DEFAULT: "1",
-    },
-    fontFamily: {
-      body: ["Inter", "Monaco", "Verdana"],
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],
