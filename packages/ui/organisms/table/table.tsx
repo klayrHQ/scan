@@ -9,17 +9,14 @@ export interface TableProps {
   fullWidth?: boolean
   rounded?: boolean
   className?: string
-  oddClassName: string
-  evenClassName: string
-  hoverClassName: string
-  headClassName: string
-  rows?: Array<{id: string, cols: Array<{value: string, className: string}>}>
-  headCols?: Array<{value: string, className: string}>
+  oddClassName?: string
+  evenClassName?: string
+  hoverClassName?: string
+  headClassName?: string
+  rows?: Array<{id?: string, cols: Array<{value: string | any, className?: string}>}>
+  headCols?: Array<{value?: string, className?: string}>
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Table = ({
   className,
   oddClassName = `bg-background text-onSurface`,

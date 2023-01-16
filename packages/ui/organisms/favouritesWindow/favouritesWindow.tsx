@@ -1,20 +1,17 @@
-import React, { FC, Fragment, useEffect } from "react"
+import React, { Fragment, useEffect } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import { StarIcon } from "@heroicons/react/24/solid"
 import { Tooltip } from "../../atoms/tooltip/tooltip";
-import { Currency } from "../../atoms/currency/currency";
 import { useRouter } from "next/router"
-import { Avatar} from "../../atoms/avatar/avatar";
-import { XCircleIcon } from "@heroicons/react/24/outline"
 import {Favourites} from "../favourites/favourites";
 
-interface FavouritesWindowProps {
+export interface FavouritesWindowProps {
   menuCloseFunction: any
-  favourites: []
+  favourites: Array<{username?: string, address: string}>
   unFavourite: void
   updateFavourites: void
   hasFavourites: boolean
-  compactString: void
+  compactString: Function
   parsedSettings: any
 }
 
@@ -40,12 +37,12 @@ export const FavouritesWindow = ({
         <>
           <Popover.Button
             disabled={!hasFavourites}
-            className="group text-onSurfaceHigh lg:text-onTopbar rounded inline-flex items-center text-base font-medium focus:outline-none w-full overflow-visible"
+            className="group text-onSurfaceHigh lg:text-onTopbar rounded inline-flex items-center text-base font-medium focus:outline-none w-full overflow-visible bg-transparent border-none"
             onClick={() => updateFavourites}
           >
             {hasFavourites ? (
               <div
-                className={`cursor-pointer hover:bg-menuButton flex flex-row font-medium text-lg rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+                className={`cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
               >
                 <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
                 <span className="">Favourites</span>
@@ -85,12 +82,11 @@ export const FavouritesWindow = ({
                 <Favourites
                   favourites={favourites}
                   parsedSettings={parsedSettings}
-                  onClick={() => {
-                    route
-                    close()
-                    typeof menuCloseFunction === "function" &&
-                    menuCloseFunction()
-                  }} xOnClick={unFavourite}
+                  routingFunction={route}
+                  menuCloseFunction={() => typeof menuCloseFunction === "function" &&
+                    menuCloseFunction()}
+                  popupCloseFunction={close}
+                  xOnClick={unFavourite}
                 />
               </div>
             </Popover.Panel>

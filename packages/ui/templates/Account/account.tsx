@@ -111,7 +111,7 @@ export const Account = ({
           unFavourite={unFavourite}
         />
       </Container>
-      <Container className={"m-auto max-w-app"}>
+      <Container className={"m-auto max-w-app mt-6"}>
         <AccountDetails
           account={account}
           getAddressFromLisk32Address={getAddressFromLisk32Address}

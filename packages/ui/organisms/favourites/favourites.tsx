@@ -2,7 +2,9 @@ import React from 'react';
 import {Favourite} from "../../molecules/favourite/favourite";
 
 interface FavouritesProps {
-  onClick: () => void
+  routingFunction: (routingAddress: string) => void
+  menuCloseFunction: () => void
+  popupCloseFunction: () => void
   xOnClick: void
   favourites: Array<{username?: string, address: string}>
   className?: string
@@ -17,7 +19,9 @@ interface FavouritesProps {
 export const Favourites = ({
   className,
   favClassName,
-  onClick,
+  routingFunction,
+  menuCloseFunction,
+  popupCloseFunction,
   xOnClick,
   favourites,
   parsedSettings,
@@ -35,8 +39,10 @@ export const Favourites = ({
                         username={fav.username}
                         className={favClassName}
                         parsedSettings={parsedSettings}
-                        onClick={onClick}
                         xOnClick={xOnClick}
+                        routingFunction={routingFunction}
+                        menuCloseFunction={menuCloseFunction}
+                        popupCloseFunction={popupCloseFunction}
                     />
                   )
                 })}
