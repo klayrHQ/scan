@@ -2,13 +2,15 @@ import React from "react";
 import {Logo} from "../../molecules/logo/logo";
 import {LiskScanIcon} from "../../assets/icons";
 import {Menu} from "../../molecules/menu/menu";
+import {FavouritesWindow, FavouritesWindowProps} from "../favouritesWindow/favouritesWindow";
+import {SearchContainer} from "../searchContainer/searchContainer";
 
 export interface TopBarProps {
   menu: {
     label: string
     link: string
   }[]
-  subMenu: {
+  subMenu?: {
     title: string
     items: {
       label: string
@@ -23,14 +25,49 @@ export interface TopBarProps {
     title: string
     action: any
   }[]
-  className: string
+  className?: string
+  favouritesWindowData: FavouritesWindowProps
+  ads: [{
+    content: any
+    className: string
+  }]
+  compactString: any
+  saveSearch?: {
+    saveSearch: (address: string, username: string) => void
+    recentSearchesStorage: {}
+    recentSearches: [{address: string, username: string}]
+  }
+  search: {
+    results?: {
+      results: any[]
+      quickResult: {
+        error?: boolean
+        type?: string
+        id?: string
+        data?: any
+      }
+    }
+    setSearch: (searchInput: string) => void
+    searching: boolean
+    quickResult?: {
+      error?: boolean
+      type?: string
+      id?: string
+      data?: any
+    }
+  }
 }
 
 export const TopBar = ({
   className,
-   menu,
-   subMenu,
-   actions,
+  menu,
+  subMenu,
+  actions,
+  favouritesWindowData,
+  ads,
+  compactString,
+  saveSearch,
+  search,
 }: TopBarProps) => (
   <>
     <nav
@@ -41,7 +78,7 @@ export const TopBar = ({
       ].join(" ")}
     >
       <div className="flex w-app max-w-app m-auto justify-between items-center h-16 px-4 w-full">
-        <div>
+        <div className="flex gap-1">
           <Logo
             link={"#"}
             href={"#"}
@@ -52,8 +89,13 @@ export const TopBar = ({
           <Menu menu={menu}/>
         </div>
         <div className="hidden relative lg:flex flex-row items-center space-x-4 lg:ml-4">
-          {/*<FavouritesWindow  menuCloseFunction={() => console.log("close menu")}/>*/}
-          {/*<SearchExtendedContainer />*/}
+          <FavouritesWindow {...favouritesWindowData} />
+          <SearchContainer
+            ads={ads}
+            compactString={compactString}
+            saveSearch={saveSearch}
+            search={search}
+          />
         </div>
       </div>
       {/*<MobileMenu menu={menu} subMenu={subMenu} />*/}

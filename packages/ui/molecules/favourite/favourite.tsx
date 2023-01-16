@@ -5,7 +5,9 @@ import {Avatar} from "../../atoms/avatar/avatar";
 import {Typography} from "../../atoms/typography/typography";
 
 interface FavouriteProps {
-  onClick: (routingAddress: string) => void
+  routingFunction: (routingAddress: string) => void
+  menuCloseFunction: () => void
+  popupCloseFunction: () => void
   xOnClick: void
   username?: string
   address: string
@@ -19,19 +21,25 @@ interface FavouriteProps {
  */
 export const Favourite = ({
   className,
-  onClick,
+  routingFunction,
+  menuCloseFunction,
+  popupCloseFunction,
   xOnClick,
   username,
   address,
   balance,
   parsedSettings,
 }: FavouriteProps) => {
+  const onClick = () => {
+    routingFunction(address)
+    menuCloseFunction()
+    popupCloseFunction()
+  }
+
   return (
     <div
       className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className}`}
-      onClick={() => {
-        onClick(address)
-      }}
+      onClick={onClick}
     >
       <Avatar className="mx-3" address={address} size={25} />
       <Typography tag={"span"} className="flex flex-col grow-[2]">

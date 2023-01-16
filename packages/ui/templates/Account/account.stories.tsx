@@ -60,7 +60,28 @@ export default {
           label: "Tools",
           link: "#",
         }
-      ]
+      ],
+      favouritesWindowData: {
+        favourites: [
+          {
+            address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+            username: "test",
+          },
+          {
+            address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+            username: "moosty",
+          },
+          {
+            address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
+          },
+        ],
+        menuCloseFunction: () => console.log("menu close function"),
+        unFavourite: console.log("unfavourite"),
+        hasFavourites: true,
+        updateFavourites: console.log("update favourites"),
+        compactString: compactString,
+        parsedSettings: {}
+      }
     },
     tsxHeadCols: [
       {
