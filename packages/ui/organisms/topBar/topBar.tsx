@@ -4,6 +4,7 @@ import {LiskScanIcon} from "../../assets/icons";
 import {Menu} from "../../molecules/menu/menu";
 import {FavouritesWindow, FavouritesWindowProps} from "../favouritesWindow/favouritesWindow";
 import {SearchContainer} from "../searchContainer/searchContainer";
+import {MobileMenu} from "../mobileMenu/mobileMenu";
 
 export interface TopBarProps {
   menu: {
@@ -33,9 +34,9 @@ export interface TopBarProps {
   }]
   compactString: any
   saveSearch?: {
-    saveSearch: (address: string, username: string) => void
-    recentSearchesStorage: {}
-    recentSearches: [{address: string, username: string}]
+    saveSearch: (address: string, username?: string) => void
+    recentSearchesStorage: {address: string, username?: string}[]
+    recentSearches: {address: string, username?: string}[]
   }
   search: {
     results?: {
@@ -98,7 +99,7 @@ export const TopBar = ({
           />
         </div>
       </div>
-      {/*<MobileMenu menu={menu} subMenu={subMenu} />*/}
+      <MobileMenu menu={menu} subMenu={subMenu} />
     </nav>
   </>
 )

@@ -6,8 +6,8 @@ interface RecentSearchesProps {
   menuCloseFunction?: any
   className?: string
   saveSearch: {
-    saveSearch: (address: string, username: string) => void
-    recentSearches: [{address: string, username: string}]
+    saveSearch: (address: string, username?: string) => void
+    recentSearches: {address: string, username?: string}[]
   }
   compactString: any
 }

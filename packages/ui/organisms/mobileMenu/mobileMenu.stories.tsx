@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Search } from "./search";
+import { MobileMenu } from "./mobileMenu";
 import {compactString} from "../../assets/utils";
 
 export default {
-  title: "Organisms/Search",
-  component: Search,
+  title: "Organisms/MobileMenu",
+  component: MobileMenu,
   argTypes: {
 
   },
@@ -47,9 +47,9 @@ export default {
   }
 } as any;
 
-const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;
+const Template: ComponentStory<typeof MobileMenu> = (args) => <MobileMenu {...args} />;
 
-export const Primary: ComponentMeta<typeof Search> = Template.bind({});
+export const Primary: ComponentMeta<typeof MobileMenu> = Template.bind({});
 Primary.args = {
 
 };
