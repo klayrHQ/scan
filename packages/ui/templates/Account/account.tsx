@@ -25,6 +25,7 @@ interface AccountProps {
   copyNoteText: string
   setCopyNoteText: Function
   topBarData: TopBarProps
+  status: "connected" | "warning" | "error"
 }
 
 export const Account = ({
@@ -44,6 +45,7 @@ export const Account = ({
   copyNoteText,
   setCopyNoteText,
   topBarData,
+  status,
 }: AccountProps) => {
 
   const footerData = [
@@ -102,7 +104,7 @@ export const Account = ({
 
   return (
     <div className={"bg-background"}>
-      <Header topBarData={topBarData} />
+      <Header status={status} topBarData={topBarData} />
       <Container className={"m-auto max-w-app"}>
         <AccountHeader
           account={account}

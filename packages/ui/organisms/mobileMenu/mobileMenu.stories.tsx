@@ -51,5 +51,5 @@ const Template: ComponentStory<typeof MobileMenu> = (args) => <MobileMenu {...ar
 
 export const Primary: ComponentMeta<typeof MobileMenu> = Template.bind({});
 Primary.args = {
-
+  hideOnLarge: false
 };

@@ -26,6 +26,18 @@ const Template: ComponentStory<typeof InfoBar> = (args) => <InfoBar {...args}/>;
 export const Primary: ComponentMeta<typeof InfoBar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  status: "connected"
+};
 
+export const StatusWarning: ComponentMeta<typeof InfoBar> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+StatusWarning.args = {
+  status: "warning"
+};
+
+export const StatusError: ComponentMeta<typeof InfoBar> = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+StatusError.args = {
+  status: "error"
 };
 

@@ -6,11 +6,13 @@ import { Bars3Icon as MenuIcon, XMarkIcon as XIcon } from "@heroicons/react/24/s
 import { Logo } from "../../molecules/logo/logo";
 import {FavouritesWindow, FavouritesWindowProps} from "../favouritesWindow/favouritesWindow";
 import {SearchContainer, SearchContainerProps} from "../searchContainer/searchContainer";
+import {Button} from "../../atoms";
 
 interface MobileMenuProps {
   settings: {
     openSettingsModal: (view: string ,arg: any) => void
   }
+  status: "connected" | "warning" | "error"
   searchContainerData: SearchContainerProps
   menu: {
     label: string
@@ -33,6 +35,7 @@ interface MobileMenuProps {
     action: any
   }[],
   favouritesWindowData: FavouritesWindowProps
+  hideOnLarge?: boolean
 }
 
 export const MobileMenu = ({
@@ -41,46 +44,52 @@ export const MobileMenu = ({
   settings,
   favouritesWindowData,
   searchContainerData,
+  hideOnLarge = true,
+  status
 }: MobileMenuProps) => {
   const router = useRouter()
   const [open, setOpen] = useState<boolean>(false)
 
   return (
     <div>
-      <div className="lg:hidden absolute right-4 top-12 pt-0.5">
+      <div className={[hideOnLarge ? "lg:hidden" : "" ,"absolute right-4 top-[0.8rem] pt-0.5"].join(" ")}>
         {!open && (
-          <button
+          <Button
             onClick={() => setOpen(!open)}
-            type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            className="inline-flex items-center justify-center px-2 rounded-md text-gray-400 bg-transparent border-none hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-            <MenuIcon className="h-5 w-5" />
-          </button>
+            label={
+              <>
+                <span className="sr-only">Open main menu</span>
+                <MenuIcon className="h-5 w-5"/>
+              </>
+            }
+          />
         )}
         {open && (
-          <button
+          <Button
             onClick={() => setOpen(!open)}
-            type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            className="inline-flex items-center justify-center px-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-            <XIcon className="h-5 w-5" />
-          </button>
+            label={
+             <>
+               <span className="sr-only">Open main menu</span>
+               <XIcon className="h-5 w-5" />
+             </>
+            }
+          />
         )}
       </div>
       {open && (
         <>
           <div
-            className="lg:hidden fixed inset-0 bg-background w-full overflow-auto z-50 "
+            className={[hideOnLarge ? "lg:hidden" : "" ,"fixed inset-0 bg-background w-full overflow-auto z-50 "].join(" ")}
             id="mobile-menu"
           >
-            <InfoBar />
-            <div className="w-full bg-background lg:hidden flex flex-row justify-between mb-2 px-4 py-4 mx-auto">
+            <InfoBar status={status}/>
+            <div className={[hideOnLarge ? "lg:hidden" : "" ,"w-full bg-background flex flex-row justify-between mb-2 px-4 py-4 mx-auto"].join(" ")}>
               <Logo
                 link={"#"}
                 href={"#"}

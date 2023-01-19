@@ -3,7 +3,7 @@ import {Logo} from "../../molecules/logo/logo";
 import {LiskScanIcon} from "../../assets/icons";
 import {Menu} from "../../molecules/menu/menu";
 import {FavouritesWindow, FavouritesWindowProps} from "../favouritesWindow/favouritesWindow";
-import {SearchContainer} from "../searchContainer/searchContainer";
+import {SearchContainer, SearchContainerProps} from "../searchContainer/searchContainer";
 import {MobileMenu} from "../mobileMenu/mobileMenu";
 
 export interface TopBarProps {
@@ -57,6 +57,11 @@ export interface TopBarProps {
       data?: any
     }
   }
+  searchContainerData: SearchContainerProps
+  settings: {
+    openSettingsModal: (view: string ,arg: any) => void
+  }
+  status: "connected" | "warning" | "error"
 }
 
 export const TopBar = ({
@@ -69,12 +74,15 @@ export const TopBar = ({
   compactString,
   saveSearch,
   search,
+  searchContainerData,
+  settings,
+  status,
 }: TopBarProps) => (
   <>
     <nav
       className={[
         "bg-topbar text-onTopbar ",
-        "z-40 w-full flex md:mb-4 items-center",
+        "z-40 relative w-full flex md:mb-4 items-center",
         className,
       ].join(" ")}
     >
@@ -99,7 +107,14 @@ export const TopBar = ({
           />
         </div>
       </div>
-      <MobileMenu menu={menu} subMenu={subMenu} />
+      <MobileMenu
+        menu={menu}
+        subMenu={subMenu}
+        favouritesWindowData={favouritesWindowData}
+        searchContainerData={searchContainerData}
+        settings={settings}
+        status={status}
+      />
     </nav>
   </>
 )
