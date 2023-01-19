@@ -5,18 +5,19 @@ import { useHotkeys } from "react-hotkeys-hook"
 import { AdSection } from "../../molecules/adSection/adSection";
 import { RecentSearches } from "../../molecules/recentSearches/recentSearches";
 
-interface SearchContainerProps {
+export interface SearchContainerProps {
+  className?: string
   menuCloseFunction?: any
   compactString: any
   saveSearch?: {
-    saveSearch: (address: string, username: string) => void
-    recentSearchesStorage: {}
-    recentSearches: [{address: string, username: string}]
+    saveSearch: (address: string, username?: string) => void
+    recentSearchesStorage: {address: string, username?: string}[]
+    recentSearches: {address: string, username?: string}[]
   }
   search: {
     results?: {
       results: any[]
-      quickResult: {
+      quickResult?: {
         error?: boolean
         type?: string
         id?: string
@@ -32,13 +33,14 @@ interface SearchContainerProps {
       data?: any
     }
   }
-  ads: [{
+  ads?: {
     content: any
     className: string
-  }]
+  }[]
 }
 
 export const SearchContainer = ({
+  className = "",
   menuCloseFunction,
   compactString,
   saveSearch,
@@ -53,7 +55,7 @@ export const SearchContainer = ({
   })
 
   return (
-    <Popover className="relative w-full lg:w-auto flex">
+    <Popover className={["relative w-full lg:w-auto flex", className].join(" ")}>
       {({ open}) => (
         <>
           <button

@@ -53,7 +53,7 @@ export const FavouritesWindow = ({
                 placement={"bottom"}
               >
                 <div
-                  className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium text-lg rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+                  className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
                 >
                   <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
                   <span className="">Favourites</span>

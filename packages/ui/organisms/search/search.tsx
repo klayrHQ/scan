@@ -9,7 +9,7 @@ interface SearchProps {
   search: {
     results?: {
       results: any[]
-      quickResult: {
+      quickResult?: {
         error?: boolean
         type?: string
         id?: string

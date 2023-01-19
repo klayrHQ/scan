@@ -4,7 +4,7 @@ import React, { useState } from "react"
   CollectibleModalOptions,
 } from "components/modals/collectibles/CollectiblesModal"*/
 /*import dynamic from "next/dynamic";*/
-import { CogIcon} from "@heroicons/react/24/outline";
+import { Cog6ToothIcon as CogIcon} from "@heroicons/react/24/solid";
 import { Tooltip } from "../../atoms/tooltip/tooltip";
 import {Button} from "../../atoms";
 

@@ -1,10 +1,10 @@
 import React from "react"
 
 interface AdSectionProps {
-  ads: [{
+  ads: {
     content: any
     className: string
-  }]
+  }[]
 }
 
 export const AdSection = ({
@@ -12,16 +12,16 @@ export const AdSection = ({
 }: AdSectionProps) => {
 
   return (
-    <div className="flex text-onSurfaceHigh px-4 py-8 bg-surface-2">
-      <span className="flex-row">
+    <div className="w-full text-onSurfaceHigh p-4 bg-surface-2">
+      <div className="flex w-full flex-row gap-4 flex-wrap justify-between">
         {ads && ads.map((ad) => {
           return (
-            <span className={ad.className}>
+            <div className={[ad.className].join(" ")}>
               {ad.content}
-            </span>
+            </div>
           )
         })}
-      </span>
+      </div>
     </div>
   )
 }
