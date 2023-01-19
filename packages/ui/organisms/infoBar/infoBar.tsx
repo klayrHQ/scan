@@ -7,6 +7,7 @@ import React, { useState } from "react"
 import { Cog6ToothIcon as CogIcon} from "@heroicons/react/24/solid";
 import { Tooltip } from "../../atoms/tooltip/tooltip";
 import {Button} from "../../atoms";
+import Status from "../../atoms/status/status";
 
 /*const Price = dynamic(() => import("./Price"))  as any
 const Network = dynamic(() => import("./Network")) as any
@@ -15,10 +16,12 @@ const Status = dynamic(() => import("./Status")) as any*/
 
 interface InfoBarProps {
   openSettingsModal?: any
+  status: "connected" | "warning" | "error"
 }
 
 export const InfoBar = ({
   openSettingsModal,
+  status,
 }: InfoBarProps) => {
   /*const [packsLeft, setPacksLeft] = useState<any>([])*/
   /*const change = (ns: CollectibleModalOptions) => changeModal(ns)*/
@@ -33,7 +36,7 @@ export const InfoBar = ({
 
         <div className=" flex flex-row space-x-2 md:space-x-4 items-center">
 
-          {/*<Status />*/}
+          <Status status={status} />
           <div className="flex flex-col md:flex-row md:space-x-4 text-xs md:text-sm">
             {/*<CommunityId />*/}
             {/*<Network />*/}
