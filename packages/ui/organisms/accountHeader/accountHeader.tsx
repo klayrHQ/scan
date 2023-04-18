@@ -32,9 +32,9 @@ export const AccountHeader = ({
       }
     >
       <div
-        className={"flex flex-row text-onBackgroundHigh items-center sm:block"}
+        className={"flex flex-tableRow text-onBackgroundHigh items-center sm:block"}
       >
-        <div className={"flex flex-row items-center"}>
+        <div className={"flex flex-tableRow items-center"}>
           <Avatar
             className={"m-3"}
             address={account?.summary?.address || ""}
@@ -59,7 +59,7 @@ export const AccountHeader = ({
               </>
             )}
 
-            <div className={"flex flex-row space-x-2"}>
+            <div className={"flex flex-tableRow space-x-2"}>
               {account?.summary?.username ? (
                 <Typography tag={"span"} className="flex flex-row space-x-2 items-center">
                   <span

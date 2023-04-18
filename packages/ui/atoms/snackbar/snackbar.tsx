@@ -21,7 +21,7 @@ export const Snackbar = ({
         toggleState !== null ? () => toggleState("") : () => setIsOpen(false)
       }
       className={[
-        "fixed z-50 overflow-y-auto lg:w-2/12 top-4 right-4 flex flex-row justify-end w-max",
+        "fixed z-50 overflow-y-auto lg:w-2/12 top-4 right-4 flex flex-tableRow justify-end w-max",
       ].join(" ")}
     >
       <Dialog.Overlay />

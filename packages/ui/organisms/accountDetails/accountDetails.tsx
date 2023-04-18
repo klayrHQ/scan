@@ -251,7 +251,7 @@ export const AccountDetails = ({
       <KeyValueRow
         label="Transactions"
         value={
-          <div className={"flex flex-row"}>
+          <div className={"flex flex-tableRow"}>
             <ArrowSmUpIcon className="text-error h-5 w-5 float-left" />
             <span>{transactionsCount?.out || send}</span>
             <ArrowDownIcon className="text-success h-5 w-5 float-left" />

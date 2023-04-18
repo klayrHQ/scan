@@ -89,7 +89,7 @@ export const MobileMenu = ({
             id="mobile-menu"
           >
             <InfoBar status={status}/>
-            <div className={[hideOnLarge ? "lg:hidden" : "" ,"w-full bg-background flex flex-row justify-between mb-2 px-4 py-4 mx-auto"].join(" ")}>
+            <div className={[hideOnLarge ? "lg:hidden" : "" ,"w-full bg-background flex flex-tableRow justify-between mb-2 px-4 py-4 mx-auto"].join(" ")}>
               <Logo
                 link={"#"}
                 href={"#"}

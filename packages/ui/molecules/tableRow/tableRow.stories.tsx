@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Row } from "./row";
-import {Column as Col, TableColProps} from "../../atoms/column/column";
-import Column from "../../atoms/column/column.stories";
+import { TableRow } from "./tableRow";
+import {TableColumn as Col, TableColProps} from "../../atoms/tableColumn/tableColumn";
+import Column from "../../atoms/tableColumn/tableColumn.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/Row",
-  component: Row,
+  title: "Molecules/TableRow",
+  component: TableRow,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
   parameters: {
@@ -21,32 +21,32 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Row> = (args) => {
+const Template: ComponentStory<typeof TableRow> = (args) => {
   const {cols} = args;
   return (
-    <Row>
+    <TableRow>
       {cols.map((col: JSX.IntrinsicAttributes & TableColProps) =>  (
         <Col {...col} />
       ))}
-    </Row>
+    </TableRow>
   )
 };
 
-export const Primary: ComponentMeta<typeof Row> = Template.bind({});
+export const Primary: ComponentMeta<typeof TableRow> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   cols: [
     {
       ...Column.args,
-      value: "column 1",
+      value: "tableColumn 1",
     },
     {
       ...Column.args,
-      value: "column 2",
+      value: "tableColumn 2",
     },
     {
       ...Column.args,
-      value: "column 3",
+      value: "tableColumn 3",
     },
   ],
 };

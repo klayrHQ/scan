@@ -1,9 +1,8 @@
-import React from 'react';
-import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
+import React, {ReactElement} from 'react';
+import {TableHeadColumn as HeadCol} from "../../atoms/tableHeadColumn/tableHeadColumn";
 import {TableHead} from "../../molecules/tableHead/tableHead";
-import {Row as TableRow, TableRowProps} from "../../molecules/row/row";
-import {Column as TableCol, TableColProps} from "../../atoms/column/column";
 import {TableBody} from "../../molecules/tableBody/tableBody";
+import {tableHeadColsType, tableRowsType} from "../../types";
 
 export interface TableProps {
   fullWidth?: boolean
@@ -13,8 +12,12 @@ export interface TableProps {
   evenClassName?: string
   hoverClassName?: string
   headClassName?: string
-  rows?: Array<{id?: string, cols: Array<{value: string | any, className?: string}>}>
-  headCols?: Array<{value?: string, className?: string}>
+  rows: tableRowsType
+  mobileRows?: tableRowsType
+  tabletRows?: tableRowsType
+  headCols?: tableHeadColsType
+  mobileHeadCols?: tableHeadColsType
+  tabletHeadCols?: tableHeadColsType
 }
 
 export const Table = ({
@@ -26,7 +29,11 @@ export const Table = ({
   fullWidth,
   rounded,
   headCols,
+  mobileHeadCols,
+  tabletHeadCols,
   rows,
+  mobileRows,
+  tabletRows,
   ...props
 }: TableProps) => {
   return (
@@ -43,45 +50,21 @@ export const Table = ({
               {...props}
             >
               {headCols &&
-                  <TableHead>
-                    {headCols.map((col, i) => (
-                      <HeadCol
-                        text="text-primary text-sm font-medium"
-                        key={`head-${col.value}-${i}`}
-                        {...col}
-                        className={[
-                          "",
-                          "tableHeadColumn",
-                          col.className,
-                          headClassName,
-                        ].join(" ")}
-                      />
-                    ))}
-                  </TableHead>
+                <TableHead
+                  cols={headCols}
+                  mobileCols={mobileHeadCols}
+                  tabletCols={tabletHeadCols}
+                  headClassName={headClassName}
+                />
               }
-              <TableBody>
-                {rows && rows.map((row, y) =>  (
-                  <TableRow
-                    className={[
-                      "tableRow simple-animation",
-                      hoverClassName,
-                      y % 2 === 1 ? oddClassName : evenClassName,
-                      y % 2 === 1 ? "tableRowOdd" : "tableRowEven",
-                    ].join(" ")}
-                    key={`${row.id ? row.id : `uni-${y}`}`}
-                    {...row}
-                  >
-                    {row.cols.map((col, i) => (
-                      <TableCol
-                        key={`${row.id ? `${row.id}-${i}` : `uni-${y}-${i}`}`}
-                        {...col}
-                        bg={""}
-                        text={""}
-                      />
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
+              <TableBody
+                rows={rows}
+                mobileRows={mobileRows}
+                tabletRows={tabletRows}
+                oddClassName={oddClassName}
+                hoverClassName={hoverClassName}
+                evenClassName={evenClassName}
+              />
             </table>
           </div>
         </div>
