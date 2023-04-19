@@ -142,9 +142,6 @@ export default {
         parsedSettings: {}
       }
     },
-    tsxHeadCols: headcols,
-    transactions: rows,
-    tableFullWidth: true,
     account: {
       summary: {
         address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",

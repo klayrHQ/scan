@@ -30,7 +30,7 @@ export const Currency = ({
 }: CurrencyProps) => {
 
   return (
-    <Typography tag={"span"} className={"whitespace-nowrap "}>
+    <span className={"whitespace-nowrap"}>
       {(parsedSettings?.signEnabled || sign) && (
         <span
           className={[
@@ -85,6 +85,6 @@ export const Currency = ({
           {parsedSettings?.convertCurrency}
         </span>
       )}
-    </Typography>
+    </span>
   )
 }

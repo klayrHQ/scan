@@ -1,10 +1,9 @@
 import React, { FC } from "react";
-import { Colors } from "../../types";
 
 interface TypographyProps {
   align?: "left" | "right" | "center";
-  color?: Colors;
-  bgColor?: Colors;
+  color?: string;
+  bgColor?: string;
   className?: string;
   italic?: boolean;
   noMargin?: boolean;
@@ -14,6 +13,7 @@ interface TypographyProps {
   bold?: boolean;
   disabled?: boolean;
   tag: "h1" | "h2" | "h3" | "h4" | "span" | "p" | "small" | "em" | "strong" | "button";
+  size?: string;
 }
 
 const sizes = {
@@ -38,14 +38,14 @@ const factory = () => {
     underLineSpacing = 0,
     bold,
     tag,
+    size,
     ...others
   }) => {
     const headingTags = tag === "h1" || tag === "h2" || tag === "h3" || tag === "h4" || tag === "button";
-    const size = headingTags ? `text-${sizes[tag]}` : "text-base" || "text-inherit";
     const _className = [
       headingTags ? "font-heading" : "font-body",
       headingTags && bold ? "font-headingBold" : "",
-      size,
+      size ? `text-${size}` : "",
       color ? `text-${color}` : "",
       bgColor ? `bg-${bgColor}` : "",
       bold ? "font-bold" : "font-normal",

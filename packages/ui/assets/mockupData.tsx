@@ -3,6 +3,8 @@ import {compactString} from "./utils";
 import {Avatar} from "../atoms/avatar/avatar";
 import {Currency} from "../atoms/currency/currency";
 import React from "react";
+import {Typography} from "../atoms/typography/typography";
+import Status from "../atoms/status/status";
 
 export interface transactionType {
   id: string,
@@ -67,7 +69,9 @@ export const rows:tableRowsType = transactions.map((tsx, index) => {
     id: index.toString(),
     cols: [
       {
-        value: tsx.status,
+        // @ts-ignore
+        value: <span className={"inline-flex"}><Status status={tsx.status} /></span>,
+        className: "text-center",
       },
       {
         value: compactString(tsx.id, 16, "middle"),
@@ -113,46 +117,89 @@ export const tabletRows:tableRowsType = transactions.map((tsx, index) => {
     id: index.toString(),
     cols: [
       {
-        value: tsx.status,
-      },
-      {
-        value: compactString(tsx.id, 16, "middle"),
-      },
-      {
-        value: tsx.date,
-      },
-      {
-        value: tsx.transactionType,
-      },
-      {
-        value:
-          <span className={"flex gap-2"}>
-            <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
-            {compactString(tsx.sender, 20, "middle")}
-          </span>,
-      },
-      {
-        value:
-          <span className={"flex gap-2"}>
-            <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
-            {compactString(tsx.recipient, 20, "middle")}
-          </span>,
-      },
-      {
-        value: tsx.description,
+        // @ts-ignore
+        value: <span className={"inline-flex"}><Status status={tsx.status} /></span>,
         className: "text-center",
+      },
+      {
+        value:
+          <span className={"flex flex-col"}>
+            <Typography tag={"span"} color={"primary"}>{compactString(tsx.id, 16, "middle")}</Typography>
+            <span>{tsx.date}</span>
+            <Typography tag={"span"} size={"sm"}>{tsx.transactionType}</Typography>
+          </span>,
+      },
+      {
+        value:
+          <>
+            <span className={"flex gap-2"}>
+              <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
+              {compactString(tsx.sender, 16, "middle")}
+              <span className={"ml-auto"}>{"->"}</span>
+            </span>
+            <span className={"flex gap-2"}>
+              <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
+              {compactString(tsx.recipient, 16, "middle")}
+              <span className={"ml-auto"}>{"<-"}</span>
+            </span>
+            <Typography tag={"span"} size={"sm"}>
+              {tsx.description}
+            </Typography>
+          </>,
       },
       {
         value:
           <span>
             <Currency number={tsx.amount.toString()} symbol={true}/>
             <br />
-            <span className={"inline-flex gap-2"}>
+            <Typography tag={"span"} size={"sm"} className={"inline-flex gap-2"}>
               <Currency number={tsx.fee.toString()} symbol={true}/>
               {"Fee"}
-            </span>
+            </Typography>
           </span>,
         className: "text-right",
+      },
+    ]
+  }
+})
+
+export const mobileRows:tableRowsType = transactions.map((tsx, index) => {
+  return {
+    id: index.toString(),
+    cols: [
+      {
+        value:
+          <span className={"flex flex-col"}>
+            <Typography className={"inline-flex gap-2 items-center"} tag={"span"} color={"primary"}>
+              {/* @ts-ignore */}
+              <Status status={tsx.status} />
+              {compactString(tsx.id, 16, "middle")}
+            </Typography>
+            <span>{tsx.date}</span>
+            <Typography tag={"span"} size={"sm"}>{tsx.transactionType}</Typography>
+          </span>,
+      },
+      {
+        value:
+          <span className={"flex flex-col"}>
+            <span className={"flex gap-2"}>
+              <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
+              {compactString(tsx.sender, 10, "middle")}
+              <span className={"ml-auto"}>{"->"}</span>
+            </span>
+            <span className={"flex gap-2"}>
+              <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
+              {compactString(tsx.recipient, 10, "middle")}
+              <span className={"ml-auto"}>{"<-"}</span>
+            </span>
+            <span className={"inline-flex flex-col text-right"}>
+              <Currency number={tsx.amount.toString()} symbol={true}/>
+              <Typography tag={"span"} size={"sm"} className={"inline-flex gap-2 justify-end"}>
+                <Currency number={tsx.fee.toString()} symbol={true}/>
+                  {"Fee"}
+              </Typography>
+            </span>
+          </span>,
       },
     ]
   }
@@ -195,25 +242,22 @@ export const tabletHeadcols = [
     value: "Status",
   },
   {
-    value: "ID",
+    value: "Details",
   },
   {
-    value: "Date",
-  },
-  {
-    value: "Transaction",
-  },
-  {
-    value: "Sender",
-  },
-  {
-    value: "Recipient",
-  },
-  {
-    value: "Description",
+    value: "From - To",
   },
   {
     value: "Amount",
     className: "text-right",
+  },
+]
+
+export const mobileHeadcols = [
+  {
+    value: "Details",
+  },
+  {
+    value: "From - To",
   },
 ]

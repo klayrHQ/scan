@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Table } from "./table";
 import Column from "../../atoms/tableColumn/tableColumn.stories";
 import HeadColumn from "../../atoms/tableHeadColumn/tableHeadColumn.stories";
-import {headcols, rows, tabletHeadcols, tabletRows} from "../../assets/mockupData";
+import {headcols, mobileHeadcols, mobileRows, rows, tabletHeadcols, tabletRows} from "../../assets/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,8 +28,10 @@ export default {
     headClassName: "bg-surface-3",
     headCols: headcols,
     tabletHeadCols: tabletHeadcols,
+    mobileHeadCols: mobileHeadcols,
     rows: rows,
     tabletRows: tabletRows,
+    mobileRows: mobileRows,
   }
 } as any;
 

@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { TableBody } from "./tableBody";
-import {rows} from "../../assets/mockupData";
+import {mobileRows, rows, tabletRows} from "../../assets/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -28,4 +28,6 @@ export const Primary: ComponentMeta<typeof TableBody> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   rows: rows,
+  tabletRows: tabletRows,
+  mobileRows: mobileRows,
 };

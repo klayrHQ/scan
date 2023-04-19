@@ -7,14 +7,12 @@ import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 import {Footer} from "../../organisms/footer/footer";
 import {TopBarProps} from "../../organisms/topBar/topBar";
 import {Container} from "../../atoms/container/container";
+import {headcols, mobileHeadcols, mobileRows, rows, tabletHeadcols, tabletRows} from "../../assets/mockupData";
 
 interface AccountProps {
   account: AccountDataType,
-  transactions: any,
-  tsxHeadCols: any,
   menu: {label: string, link: string}[],
   favourites: any,
-  tableFullWidth: boolean,
   saveFavourite: (address: string, balance: string, username?: string) => void
   unFavourite: (address: string) => void
   getAddressFromLisk32Address: any
@@ -26,15 +24,13 @@ interface AccountProps {
   setCopyNoteText: Function
   topBarData: TopBarProps
   status: "connected" | "warning" | "error"
+  transactionsCount: {in: number, out: number}
 }
 
 export const Account = ({
   account,
-  transactions,
-  tsxHeadCols,
   menu,
   favourites,
-  tableFullWidth,
   saveFavourite,
   unFavourite,
   getAddressFromLisk32Address,
@@ -46,6 +42,7 @@ export const Account = ({
   setCopyNoteText,
   topBarData,
   status,
+  transactionsCount,
 }: AccountProps) => {
 
   const footerData = [
@@ -121,7 +118,7 @@ export const Account = ({
           legacy={legacy}
           copyNoteText={copyNoteText}
           setCopyNoteText={setCopyNoteText}
-          transactionsCount={transactions}
+          transactionsCount={transactionsCount}
         />
       </Container>
       <Container className={"m-auto max-w-app"}>
@@ -130,9 +127,13 @@ export const Account = ({
           evenClassName={"bg-surface-0"}
           hoverClassName={"bg-surface-3"}
           headClassName={"bg-surface-4"}
-          rows={transactions}
-          headCols={tsxHeadCols}
-          fullWidth={tableFullWidth}
+          rows={rows}
+          tabletRows={tabletRows}
+          mobileRows={mobileRows}
+          headCols={headcols}
+          tabletHeadCols={tabletHeadcols}
+          mobileHeadCols={mobileHeadcols}
+          fullWidth
         />
       </Container>
       <Footer footerData={footerData} />
