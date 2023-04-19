@@ -28,7 +28,7 @@ export const KeyValueRow = ({
   <Paper
     surface={surface}
     className={[
-      "flex flex-col md:flex-row w-full mb-2 md:mb-1",
+      "flex flex-col md:flex-tableRow w-full mb-2 md:mb-1",
       "items-center rounded text-lg",
       className ? className : "",
     ].join(" ")}

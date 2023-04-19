@@ -2,8 +2,8 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { TableHead } from "./tableHead";
-import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
-import HeadColumn from "../../atoms/headColumn/headColumn.stories";
+import {TableHeadColumn as HeadCol, TableHeadColProps} from "../../atoms/tableHeadColumn/tableHeadColumn";
+import HeadColumn from "../../atoms/tableHeadColumn/tableHeadColumn.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -38,15 +38,15 @@ Primary.args = {
   cols: [
     {
       ...HeadColumn.args,
-      value: "column 1",
+      value: "tableColumn 1",
     },
     {
       ...HeadColumn.args,
-      value: "column 2",
+      value: "tableColumn 2",
     },
     {
       ...HeadColumn.args,
-      value: "column 3",
+      value: "tableColumn 3",
     },
   ],
 };

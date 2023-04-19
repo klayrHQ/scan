@@ -2,13 +2,9 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Table } from "./table";
-import Column from "../../atoms/column/column.stories";
-import {TableBody} from "../../molecules/tableBody/tableBody";
-import {Row as TableRow} from "../../molecules/row/row";
-import {Column as TableCol} from "../../atoms/column/column";
-import {TableHead} from "../../molecules/tableHead/tableHead";
-import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
-import HeadColumn from "../../atoms/headColumn/headColumn.stories";
+import Column from "../../atoms/tableColumn/tableColumn.stories";
+import HeadColumn from "../../atoms/tableHeadColumn/tableHeadColumn.stories";
+import {headcols, mobileHeadcols, mobileRows, rows, tabletHeadcols, tabletRows} from "../../assets/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -30,56 +26,12 @@ export default {
     oddClassName: "bg-surface-2",
     evenClassName: "bg-surface-1",
     headClassName: "bg-surface-3",
-    headCols: [
-      {
-        ...Column.args,
-        value: "head column 1",
-      },
-      {
-        ...Column.args,
-        value: "head column 2",
-      },
-      {
-        ...Column.args,
-        value: "head column 3",
-      },
-    ],
-    rows: [
-      {
-        id: "0",
-        cols: [
-          {
-            ...HeadColumn.args,
-            value: "column 1",
-          },
-          {
-            ...HeadColumn.args,
-            value: "column 2",
-          },
-          {
-            ...HeadColumn.args,
-            value: "column 3",
-          },
-        ]
-      },
-      {
-        id: "1",
-        cols: [
-          {
-            ...Column.args,
-            value: "column 1",
-          },
-          {
-            ...Column.args,
-            value: "column 2",
-          },
-          {
-            ...Column.args,
-            value: "column 3",
-          },
-        ]
-      }
-    ],
+    headCols: headcols,
+    tabletHeadCols: tabletHeadcols,
+    mobileHeadCols: mobileHeadcols,
+    rows: rows,
+    tabletRows: tabletRows,
+    mobileRows: mobileRows,
   }
 } as any;
 
@@ -114,17 +66,17 @@ AlignRight.args = {
   headCols: [
     {
       ...Column.args,
-      value: "head column 1",
+      value: "head tableColumn 1",
       align: "right",
     },
     {
       ...Column.args,
-      value: "head column 2",
+      value: "head tableColumn 2",
       align: "right",
     },
     {
       ...Column.args,
-      value: "head column 3",
+      value: "head tableColumn 3",
       align: "right",
     },
   ],
@@ -134,17 +86,17 @@ AlignRight.args = {
       cols: [
         {
           ...HeadColumn.args,
-          value: "column 1",
+          value: "tableColumn 1",
           align: "right",
         },
         {
           ...HeadColumn.args,
-          value: "column 2",
+          value: "tableColumn 2",
           align: "right",
         },
         {
           ...HeadColumn.args,
-          value: "column 3",
+          value: "tableColumn 3",
           align: "right",
         },
       ]
@@ -154,17 +106,17 @@ AlignRight.args = {
       cols: [
         {
           ...Column.args,
-          value: "column 1",
+          value: "tableColumn 1",
           align: "right",
         },
         {
           ...Column.args,
-          value: "column 2",
+          value: "tableColumn 2",
           align: "right",
         },
         {
           ...Column.args,
-          value: "column 3",
+          value: "tableColumn 3",
           align: "right",
         },
       ]
@@ -178,17 +130,17 @@ AlignCenter.args = {
   headCols: [
     {
       ...Column.args,
-      value: "head column 1",
+      value: "head tableColumn 1",
       align: "center",
     },
     {
       ...Column.args,
-      value: "head column 2",
+      value: "head tableColumn 2",
       align: "center",
     },
     {
       ...Column.args,
-      value: "head column 3",
+      value: "head tableColumn 3",
       align: "center",
     },
   ],
@@ -198,17 +150,17 @@ AlignCenter.args = {
       cols: [
         {
           ...HeadColumn.args,
-          value: "column 1",
+          value: "tableColumn 1",
           align: "center",
         },
         {
           ...HeadColumn.args,
-          value: "column 2",
+          value: "tableColumn 2",
           align: "center",
         },
         {
           ...HeadColumn.args,
-          value: "column 3",
+          value: "tableColumn 3",
           align: "center",
         },
       ]
@@ -218,17 +170,17 @@ AlignCenter.args = {
       cols: [
         {
           ...Column.args,
-          value: "column 1",
+          value: "tableColumn 1",
           align: "center",
         },
         {
           ...Column.args,
-          value: "column 2",
+          value: "tableColumn 2",
           align: "center",
         },
         {
           ...Column.args,
-          value: "column 3",
+          value: "tableColumn 3",
           align: "center",
         },
       ]

@@ -24,7 +24,7 @@ export const Grid: React.FC<Props> = ({
       className={[
         `${className}`,
         justifyBetween && "justify-between",
-        flex ? `flex space-x-${gap} ${columns || mobile > 1 ? "flex-row" : "flex-col"}`
+        flex ? `flex space-x-${gap} ${columns || mobile > 1 ? "flex-tableRow" : "flex-col"}`
             : `grid gap-${gap} grid-cols-${mobile} desktop:grid-cols-${columns}`,
 
       ].join(" ")}

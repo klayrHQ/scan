@@ -2,21 +2,15 @@ import React from 'react';
 import {Typography} from "../typography/typography";
 
 export interface TableColProps {
-  align?: "left" | "center" | "right" | string
+  className?: string
   value?: string | any
-  bg?: string
-  text?: string
-  weight?: string
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Column = ({
-  align = "left",
-  bg = "surface",
-  text = "onSurface",
-  weight = "normal",
+export const TableColumn = ({
+  className,
   value,
   ...props
 }: TableColProps) => {
@@ -28,10 +22,7 @@ export const Column = ({
         "table-cell",
         "tableColumn",
         "p-4",
-        bg ? `bg-${bg}` : "",
-        text ? `text-${text}` : "",
-        `font-${weight}`,
-        `text-${align}`,
+        className ? className : "",
       ].join(" ")}
       {...props}
     >

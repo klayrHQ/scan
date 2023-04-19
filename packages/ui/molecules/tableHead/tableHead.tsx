@@ -1,43 +1,79 @@
 import React from 'react';
-import {HeadColumn as HeadCol, TableHeadColProps} from "../../atoms/headColumn/headColumn";
+import {TableHeadColumn} from "../../atoms/tableHeadColumn/tableHeadColumn";
+import {tableHeadColsType} from "../../types";
 
 export interface TableHeadProps {
-  style?: object
-  bg?: string
-  text?: string
-  weight?: string
-  children: any
-  cols?: any
+  headClassName?: string
+  cols: tableHeadColsType
+  mobileCols?: tableHeadColsType
+  tabletCols?: tableHeadColsType
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const TableHead = ({
-  style = {},
-  bg = "surface",
-  text = "onSurface",
-  weight = "normal",
+  headClassName,
   cols,
-  children,
+  mobileCols,
+  tabletCols,
   ...props
 }: TableHeadProps) => {
   return (
     <thead>
       <tr
-        style={style}
         className={[
-          "relative",
-          "border-surfaceDark",
-          "p-4",
-          bg ? `bg-${bg}` : "",
-          text ? `text-${text}` : "",
-          `font-${weight}`,
+          "relative border-surfaceDark p-4",
+          mobileCols && !tabletCols && "hidden md:table-row",
+          tabletCols && !mobileCols && "md:hidden lg:table-row",
+          tabletCols && mobileCols && "hidden lg:table-row",
+          headClassName,
         ].join(" ")}
         {...props}
       >
-        {children}
+        {cols.map((col, i) => (
+          <TableHeadColumn
+            key={`head-${col.value}-${i}`}
+            {...col}
+            className={col.className}
+          />
+        ))}
       </tr>
+      {
+        mobileCols &&
+        <tr
+          className={[
+            "relative border-surfaceDark p-4",
+            "md:hidden",
+            headClassName,
+          ].join(" ")}
+          {...props}
+        >
+          {mobileCols.map((col, i) => (
+            <TableHeadColumn
+              key={`head-${col.value}-${i}`}
+              {...col}
+              className={col.className}
+            />
+          ))}
+        </tr>
+      }
+      {
+        tabletCols &&
+        <tr
+            className={[
+              "relative border-surfaceDark p-4",
+              "hidden md:table-row lg:hidden",
+              headClassName,
+            ].join(" ")}
+            {...props}
+        >
+          {tabletCols.map((col, i) => (
+            <TableHeadColumn
+              key={`head-${col.value}-${i}`}
+              {...col}
+              className={col.className}
+            />
+          ))}
+        </tr>
+      }
     </thead>
   );
 };

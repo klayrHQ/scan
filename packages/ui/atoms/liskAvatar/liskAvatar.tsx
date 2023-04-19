@@ -76,7 +76,7 @@ export const LiskAvatar = ({
 
   return (
     <>
-      <div className={"flex flex-row "}>
+      <div className={"flex flex-tableRow "}>
         <div
           style={{
             height: collectible ? "100%" : size,
