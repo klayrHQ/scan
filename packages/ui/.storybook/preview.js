@@ -39,7 +39,7 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: "athensWhite",
+    default: "none",
     values: [
       {
         name: "Zodiac Blue",
