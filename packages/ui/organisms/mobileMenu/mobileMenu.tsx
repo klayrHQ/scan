@@ -13,7 +13,6 @@ interface MobileMenuProps {
     openSettingsModal: (view: string ,arg: any) => void
   }
   status: "connected" | "warning" | "error"
-  searchContainerData: SearchContainerProps
   menu: {
     label: string
     link: string
@@ -29,21 +28,49 @@ interface MobileMenuProps {
       badge?: string
     }[]
   }
-
+  ads: Array<{ content: any, className: string }>
   actions?: {
     title: string
     action: any
   }[],
   favouritesWindowData: FavouritesWindowProps
   hideOnLarge?: boolean
+  compactString: any
+  saveSearch?: {
+    saveSearch: (address: string, username?: string) => void
+    recentSearchesStorage: {address: string, username?: string}[]
+    recentSearches: {address: string, username?: string}[]
+  }
+  search: {
+    results?: {
+      results: any[]
+      quickResult: {
+        error?: boolean
+        type?: string
+        id?: string
+        data?: any
+      }
+    }
+    setSearch: (searchInput: string) => void
+    searching: boolean
+    quickResult?: {
+      error?: boolean
+      type?: string
+      id?: string
+      data?: any
+    }
+  }
 }
 
 export const MobileMenu = ({
+  ads,
+  compactString,
+  saveSearch,
+  search,
   menu,
   subMenu,
   settings,
   favouritesWindowData,
-  searchContainerData,
   hideOnLarge = true,
   status
 }: MobileMenuProps) => {
@@ -103,7 +130,7 @@ export const MobileMenu = ({
               </div>
             </div>
             <div className="w-app mx-auto flex justify-end mb-3">
-              <SearchContainer {...searchContainerData} />
+              <SearchContainer ads={ads} compactString={compactString} saveSearch={saveSearch} search={search} />
             </div>
             <div className="w-app mx-auto flex justify-end mb-3">
               <FavouritesWindow {...favouritesWindowData} />

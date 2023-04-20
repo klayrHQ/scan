@@ -1,0 +1,271 @@
+import React, {
+  cloneElement,
+  FC,
+  Fragment,
+  HTMLAttributes,
+  ReactElement,
+  ReactNode, useEffect,
+  useState,
+} from "react";
+import { Popover as HuiPopover, Dialog, Transition } from "@headlessui/react";
+import { cva } from "class-variance-authority";
+import {cls} from "../../assets/utils";
+
+interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
+  containerClassName?: string;
+  button: ReactNode;
+  buttonOnClick?: () => void;
+  type?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "quaternary"
+    | "search"
+    | "light";
+  padding?: string;
+  style?: any;
+  mobileSlideIn?: false | "right" | "top" | "bottom" | "left" | "belowTopBar";
+  width?: string;
+  mobileWidth?: string;
+  closeIcon?: ReactElement;
+  mobileChildren?: ReactNode | ReactNode[] | ReactElement;
+  roundedMobile?: boolean;
+  hideMobileBackdrop?: boolean;
+  placement?: "left" | "right" | "center"
+}
+
+const popover = cva(
+  ["border-none", "rounded", "absolute", "z-20", "flex", "box-border"],
+  {
+    variants: {
+      type: {
+        primary: "text-body bg-primary",
+        secondary: "text-primary bg-surface-4",
+        tertiary: "text-primary bg-quinaryAlt bg-opacity-high",
+        quaternary: "text-white bg-surface-4",
+        search: "text-eerie bg-surface-2 bg-opacity-high ",
+        light: "text-primaryText bg-secondaryText",
+      },
+      roundedMobile: {
+        true: "rounded",
+        false: "tablet:rounded",
+      },
+      placement: {
+        left: "left-0",
+        right: "right-0",
+        center: "left-0 right-0 mx-auto",
+      },
+    },
+  },
+);
+
+const slideIn = cva(
+  ["border-none", "z-20", "flex", "box-border"],
+  {
+    variants: {
+      type: {
+        primary: "text-body bg-primary",
+        secondary: "text-primary bg-surface-4",
+        tertiary: "text-primary bg-quinaryAlt bg-opacity-high",
+        quaternary: "text-white bg-surface-4",
+        search: "text-eerie bg-surface-2 bg-opacity-high ",
+        light: "text-primaryText bg-secondaryText",
+      },
+      mobileSlideIn: {
+        right: "right-0",
+        top: "right-0 left-0",
+        bottom: "right-0 left-0",
+        left: "left-0",
+        belowTopBar: "right-0 left-0",
+        false: "",
+      },
+      roundedMobile: {
+        true: "rounded",
+        false: "tablet:rounded",
+      },
+    },
+  },
+);
+
+export const Popover: FC<PopoverProps> = ({
+  className,
+  containerClassName,
+  children,
+  button,
+  buttonOnClick,
+  type = "primary",
+  padding,
+  style,
+  mobileSlideIn,
+  width,
+  mobileWidth,
+  mobileChildren,
+  closeIcon,
+  roundedMobile = true,
+  hideMobileBackdrop,
+  placement= "left",
+  ...props
+}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <HuiPopover
+        className={cls([
+          "text-center w-max relative",
+          containerClassName,
+          mobileSlideIn && "hidden tablet:block",
+        ])}
+      >
+        <HuiPopover.Button
+          className={
+            "p-0 border-none outline-none bg-transparent rounded-small"
+          }
+          onClick={buttonOnClick}
+        >
+          {button}
+        </HuiPopover.Button>
+        <HuiPopover.Panel
+          className={popover({
+            className: cls([
+              className,
+              "tablet:w-auto",
+              width && mobileWidth
+                ? `tablet:w-${width}`
+                : width && !mobileWidth && `w-${width}`,
+              mobileWidth && `w-${mobileWidth}`,
+              "box-border z-50",
+              "absolute",
+              "popper-box",
+            ]),
+            type,
+            roundedMobile,
+            placement,
+          })}
+          {...props}
+        >
+          {children}
+        </HuiPopover.Panel>
+      </HuiPopover>
+      {mobileSlideIn && (
+        <div className={"tablet:hidden"}>
+          <div
+            onClick={() => {
+              setIsOpen(!isOpen);
+              buttonOnClick;
+            }}
+          >
+            {button}
+          </div>
+          <div className={"absolute top-0"}>
+            <Transition show={isOpen}>
+              <Dialog
+                as="div"
+                onClose={() => {
+                  setIsOpen(false);
+                }}
+              >
+                {
+                  !hideMobileBackdrop &&
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-in duration-300"
+                        enterFrom="bg-opacity-full"
+                        enterTo="bg-surface-4 bg-opacity-high "
+                        leave="ease-in duration-300"
+                        leaveFrom="bg-surface-4 bg-opacity-high "
+                        leaveTo="bg-opacity-full"
+                    >
+                        <Dialog.Overlay
+                            className="fixed inset-0 transition duration-300 z-40"
+                            onClick={() => setIsOpen(false)}
+                        />
+                    </Transition.Child>
+                }
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-in duration-300"
+                  enterFrom={
+                    mobileSlideIn === "right" ? "translate-x-full" :
+                      mobileSlideIn === "left" ? "-translate-x-full" :
+                        mobileSlideIn === "bottom" || mobileSlideIn === "belowTopBar" ? "translate-y-full" :
+                          "-translate-y-full"
+                  }
+                  enterTo=""
+                  leave="ease-in duration-300"
+                  leaveFrom=""
+                  leaveTo={
+                    mobileSlideIn === "right" ? "translate-x-full" :
+                      mobileSlideIn === "left" ? "-translate-x-full" :
+                        mobileSlideIn === "bottom" || mobileSlideIn === "belowTopBar" ? "translate-y-full" :
+                          "-translate-y-full"
+                  }
+                >
+                  <Dialog.Panel
+                    className={slideIn({
+                      type,
+                      roundedMobile,
+                      mobileSlideIn,
+                      className: cls([
+                        mobileWidth ? `w-${mobileWidth}` : "w-10/12",
+                        "min-h-5/6 h-screen box-border",
+                        "fixed top-0 z-50",
+                        "bg-surface",
+                        "text-left align-middle shadow-xl",
+                        "rounded-r-none",
+                        closeIcon && "pt-12",
+                      ]),
+                    })}
+                    style={{
+                      height: mobileSlideIn === "belowTopBar" ?
+                        !isScrolled ? "calc(100vh - 5rem)"
+                          : "calc(100vh - 3.5rem)"
+                        : "",
+                      top: mobileSlideIn === "belowTopBar" ?
+                        !isScrolled ? "5rem"
+                          : "3.5rem"
+                        : "",
+                      ...style,
+                    }}
+                    {...props}
+                  >
+                    {closeIcon && (
+                      <div
+                        className={
+                          "absolute right-3 top-3 text-white cursor-pointer"
+                        }
+                      >
+                        {cloneElement(closeIcon, {
+                          onClick: () => setIsOpen(false),
+                        })}
+                      </div>
+                    )}
+                    {mobileChildren || children}
+                  </Dialog.Panel>
+                </Transition.Child>
+              </Dialog>
+            </Transition>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};

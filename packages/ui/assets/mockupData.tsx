@@ -5,6 +5,7 @@ import {Currency} from "../atoms/currency/currency";
 import React from "react";
 import {Typography} from "../atoms/typography/typography";
 import Status from "../atoms/status/status";
+import {TopBarProps} from "../organisms/topBar/topBar";
 
 export interface transactionType {
   id: string,
@@ -126,7 +127,7 @@ export const tabletRows:tableRowsType = transactions.map((tsx, index) => {
           <span className={"flex flex-col"}>
             <Typography tag={"span"} color={"primary"}>{compactString(tsx.id, 16, "middle")}</Typography>
             <span>{tsx.date}</span>
-            <Typography tag={"span"} size={"sm"}>{tsx.transactionType}</Typography>
+            <Typography tag={"span"} size={"subBody"}>{tsx.transactionType}</Typography>
           </span>,
       },
       {
@@ -142,7 +143,7 @@ export const tabletRows:tableRowsType = transactions.map((tsx, index) => {
               {compactString(tsx.recipient, 16, "middle")}
               <span className={"ml-auto"}>{"<-"}</span>
             </span>
-            <Typography tag={"span"} size={"sm"}>
+            <Typography tag={"span"} size={"subBody"}>
               {tsx.description}
             </Typography>
           </>,
@@ -152,7 +153,7 @@ export const tabletRows:tableRowsType = transactions.map((tsx, index) => {
           <span>
             <Currency number={tsx.amount.toString()} symbol={true}/>
             <br />
-            <Typography tag={"span"} size={"sm"} className={"inline-flex gap-2"}>
+            <Typography tag={"span"} size={"subBody"} className={"inline-flex gap-2"}>
               <Currency number={tsx.fee.toString()} symbol={true}/>
               {"Fee"}
             </Typography>
@@ -176,7 +177,7 @@ export const mobileRows:tableRowsType = transactions.map((tsx, index) => {
               {compactString(tsx.id, 16, "middle")}
             </Typography>
             <span>{tsx.date}</span>
-            <Typography tag={"span"} size={"sm"}>{tsx.transactionType}</Typography>
+            <Typography tag={"span"} size={"subBody"}>{tsx.transactionType}</Typography>
           </span>,
       },
       {
@@ -194,7 +195,7 @@ export const mobileRows:tableRowsType = transactions.map((tsx, index) => {
             </span>
             <span className={"inline-flex flex-col text-right"}>
               <Currency number={tsx.amount.toString()} symbol={true}/>
-              <Typography tag={"span"} size={"sm"} className={"inline-flex gap-2 justify-end"}>
+              <Typography tag={"span"} size={"subBody"} className={"inline-flex gap-2 justify-end"}>
                 <Currency number={tsx.fee.toString()} symbol={true}/>
                   {"Fee"}
               </Typography>
@@ -261,3 +262,169 @@ export const mobileHeadcols = [
     value: "From - To",
   },
 ]
+
+export const footerData = [
+  {
+    category: "Liskscan",
+    items: [
+      {
+        label: "Read the blog",
+        link: "https://lisk.com/blog/announcement/replacing-lisk-explorer",
+      },
+      {
+        label: "About the project team",
+        link: "https://moosty.com",
+      },
+    ],
+  },
+  {
+    category: "Lisk",
+    items: [
+      {
+        label: "What is Lisk?",
+        link: "https://lisk.com/what-is-lisk",
+      },
+      {
+        label: "What is blockchain?",
+        link: "https://lisk.com/what-is-blockchain",
+      },
+      {
+        label: "Lisk SDK documentation",
+        link: "https://lisk.com/documentation/lisk-sdk/index.html",
+      },
+      {
+        label: "Join Lisk chat",
+        link: "https://lisk.chat",
+      },
+    ],
+  },
+  {
+    category: "Moosty",
+    items: [
+      {
+        label: "About the team",
+        link: "https://moosty.com/",
+      },
+      {
+        label: "See projects",
+        link: "https://moosty.com/lisk-ecosystem/",
+      },
+      {
+        label: "Get in touch",
+        link: "https://moosty.com/contact/",
+      },
+    ],
+  },
+]
+
+export const topBarData: TopBarProps = {
+  menu: [
+    {
+      label: "Transactions",
+      link: "#",
+    },
+    {
+      label: "Delegates",
+      link: "#",
+    },
+    {
+      label: "Votes",
+      link: "#",
+    },
+    {
+      label: "Tools",
+      link: "#",
+    }
+  ],
+  search: {
+    setSearch: (searchInput: string) => console.log(searchInput),
+    searching: false,
+    results: {
+      results: [
+        {
+          cols: [{value: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}],
+          type: "account",
+          id: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+          username: "test",
+        },
+        {
+          cols: [{value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}],
+          type: "account",
+          id: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+          username: "moosty",
+        },
+        {
+          cols: [{value: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"}],
+          type: "account",
+          id: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
+        },
+      ],
+      quickResult: {
+
+      }
+    }
+  },
+  saveSearch: {
+    saveSearch: () => console.log("saved search"),
+    recentSearches: [
+      {
+        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        username: "test"
+      },
+      {
+        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+        username: "moosty"
+      },
+    ],
+    recentSearchesStorage: [
+      {
+        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        username: "test"
+      },
+      {
+        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+        username: "moosty"
+      },
+    ]
+  },
+  ads: [
+    {
+      className: "bg-primary",
+      content: <a href="#"><img className="block" src="https://picsum.photos/seed/a/150/100"/></a>,
+    },
+    {
+      className: "bg-primary",
+      content: <a href="#"><img className="block" src="https://picsum.photos/seed/b/150/100"/></a>,
+    },
+    {
+      className: "bg-primary",
+      content: <a href="#"><img className="block" src="https://picsum.photos/seed/c/150/100"/></a>,
+    },
+  ],
+  favouritesWindowData: {
+    favourites: [
+      {
+        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        username: "test",
+      },
+      {
+        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+        username: "moosty",
+      },
+      {
+        address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
+      },
+    ],
+    menuCloseFunction: () => console.log("menu close function"),
+    unFavourite: console.log("unfavourite"),
+    hasFavourites: true,
+    updateFavourites: console.log("update favourites"),
+    compactString: compactString,
+    parsedSettings: {}
+  },
+  compactString: compactString,
+  status: "connected",
+  settings: {
+    openSettingsModal: () => console.log("open settings modal")
+  },
+}

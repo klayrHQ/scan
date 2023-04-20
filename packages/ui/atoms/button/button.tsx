@@ -12,6 +12,7 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
   onClick?: () => void
+  children?: any
 }
 
 /**
@@ -27,6 +28,7 @@ export const Button = ({
   label,
   size,
   fullWidth,
+  children,
   ...props
 }: ButtonProps) => {
 
@@ -54,9 +56,9 @@ export const Button = ({
         styling,
       ].join(' ')}
       {...props}
-      disabled={disabled}
     >
       {label}
+      {children}
     </Typography>
   );
 };

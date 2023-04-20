@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { InfoBar } from "../infoBar/infoBar";
 import { TopBar, TopBarProps } from "../topBar/topBar";
 import { GotoTop } from "../../atoms/gotoTop/gotoTop";
+import {statusType} from "../../types";
 
 interface HeaderProps {
   className?: string
@@ -9,7 +10,7 @@ interface HeaderProps {
   topBarData: TopBarProps
   children?: any
   openSettingsModal?: any
-  status: "connected" | "warning" | "error"
+  status: statusType
 }
 
 export const Header = ({

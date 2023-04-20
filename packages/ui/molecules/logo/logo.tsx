@@ -41,7 +41,7 @@ export const Logo = ({
         <Typography
           tag={"span"}
           bold={true}
-          className={color}
+          color={color}
         >
           {title}
         </Typography>

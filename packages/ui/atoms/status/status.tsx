@@ -1,7 +1,8 @@
 import React from "react";
+import {statusType} from "../../types";
 
 interface StatusProps {
-  status: "connected" | "warning" | "error" | "finalized"
+  status: statusType
 }
 
 export const Status = ({

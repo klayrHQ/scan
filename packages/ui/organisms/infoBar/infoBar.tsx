@@ -8,6 +8,7 @@ import { Cog6ToothIcon as CogIcon} from "@heroicons/react/24/solid";
 import { Tooltip } from "../../atoms/tooltip/tooltip";
 import {Button} from "../../atoms";
 import Status from "../../atoms/status/status";
+import {statusType} from "../../types";
 
 /*const Price = dynamic(() => import("./Price"))  as any
 const Network = dynamic(() => import("./Network")) as any
@@ -16,7 +17,7 @@ const Status = dynamic(() => import("./Status")) as any*/
 
 interface InfoBarProps {
   openSettingsModal?: any
-  status: "connected" | "warning" | "error"
+  status: statusType
 }
 
 export const InfoBar = ({

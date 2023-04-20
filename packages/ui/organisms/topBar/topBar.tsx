@@ -28,10 +28,7 @@ export interface TopBarProps {
   }[]
   className?: string
   favouritesWindowData: FavouritesWindowProps
-  ads: [{
-    content: any
-    className: string
-  }]
+  ads: Array<{ content: any, className: string }>
   compactString: any
   saveSearch?: {
     saveSearch: (address: string, username?: string) => void
@@ -57,7 +54,6 @@ export interface TopBarProps {
       data?: any
     }
   }
-  searchContainerData: SearchContainerProps
   settings: {
     openSettingsModal: (view: string ,arg: any) => void
   }
@@ -74,7 +70,6 @@ export const TopBar = ({
   compactString,
   saveSearch,
   search,
-  searchContainerData,
   settings,
   status,
 }: TopBarProps) => (
@@ -92,7 +87,7 @@ export const TopBar = ({
             link={"#"}
             href={"#"}
             title={"Liskscan"}
-            color={"text-onTopbar"}
+            color={"onTopbar"}
             image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar"/>}
           />
           <Menu menu={menu}/>
@@ -111,7 +106,10 @@ export const TopBar = ({
         menu={menu}
         subMenu={subMenu}
         favouritesWindowData={favouritesWindowData}
-        searchContainerData={searchContainerData}
+        ads={ads}
+        compactString={compactString}
+        saveSearch={saveSearch}
+        search={search}
         settings={settings}
         status={status}
       />
