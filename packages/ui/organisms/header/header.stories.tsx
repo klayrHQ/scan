@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Header } from "./header";
 import {compactString} from "../../assets/utils";
+import {TopBarMockup} from "../topBar/topBar.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -26,45 +27,14 @@ const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 export const Primary: ComponentMeta<typeof Header> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  topBarData: {
-    menu: [
-      {
-        label: "Transactions",
-        link: "#",
-      },
-      {
-        label: "Delegates",
-        link: "#",
-      },
-      {
-        label: "Votes",
-        link: "#",
-      },
-      {
-        label: "Tools",
-        link: "#",
-      }
-    ],
-    favouritesWindowData: {
-      favourites: [
-        {
-          address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-          username: "test",
-        },
-        {
-          address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-          username: "moosty",
-        },
-        {
-          address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
-        },
-      ],
-      menuCloseFunction: () => console.log("menu close function"),
-      unFavourite: console.log("unfavourite"),
-      hasFavourites: true,
-      updateFavourites: console.log("update favourites"),
-      compactString: compactString,
-      parsedSettings: {}
-    },
-  },
+
+};
+
+export const HeaderMockup: ComponentStory<typeof Header> = () => {
+  return (
+    <Header
+      status={"connected"}
+      topBar={TopBarMockup}
+    />
+  )
 };

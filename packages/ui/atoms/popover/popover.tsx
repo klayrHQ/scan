@@ -25,6 +25,7 @@ interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   padding?: string;
   style?: any;
   mobileSlideIn?: false | "right" | "top" | "bottom" | "left" | "belowTopBar";
+  containerWidth?: string
   width?: string;
   mobileWidth?: string;
   closeIcon?: ReactElement;
@@ -97,6 +98,7 @@ export const Popover: FC<PopoverProps> = ({
   padding,
   style,
   mobileSlideIn,
+  containerWidth,
   width,
   mobileWidth,
   mobileChildren,
@@ -130,14 +132,15 @@ export const Popover: FC<PopoverProps> = ({
     <>
       <HuiPopover
         className={cls([
-          "text-center w-max relative",
+          "text-center relative",
           containerClassName,
           mobileSlideIn && "hidden tablet:block",
+          containerWidth ? `w-${containerWidth}` : "w-max",
         ])}
       >
         <HuiPopover.Button
           className={
-            "p-0 border-none outline-none bg-transparent rounded-small"
+            "p-0 w-full border-none outline-none bg-transparent rounded-small"
           }
           onClick={buttonOnClick}
         >

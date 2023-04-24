@@ -317,114 +317,106 @@ export const footerData = [
   },
 ]
 
-export const topBarData: TopBarProps = {
-  menu: [
-    {
-      label: "Transactions",
-      link: "#",
-    },
-    {
-      label: "Delegates",
-      link: "#",
-    },
-    {
-      label: "Votes",
-      link: "#",
-    },
-    {
-      label: "Tools",
-      link: "#",
-    }
-  ],
-  search: {
-    setSearch: (searchInput: string) => console.log(searchInput),
-    searching: false,
-    results: {
-      results: [
-        {
-          cols: [{value: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}],
-          type: "account",
-          id: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-          username: "test",
-        },
-        {
-          cols: [{value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}],
-          type: "account",
-          id: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-          username: "moosty",
-        },
-        {
-          cols: [{value: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"}],
-          type: "account",
-          id: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
-        },
-      ],
-      quickResult: {
+export const favourites = [
+  {
+    address: compactString("lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke", 15),
+    username: "test",
+    balance: <Currency number={"1000"} decimals={"123"} />
+  },
+  {
+    address: compactString("lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294", 15),
+    username: "moosty",
+    balance: <Currency number={"1000"} decimals={"123"} />
+  },
+  {
+    address: compactString("lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g", 15),
+    balance: <Currency number={"1000"} decimals={"123"} />
+  },
+]
 
-      }
-    }
+export const menuItems = [
+  {
+    label: "Transactions",
+    link: "#",
   },
-  saveSearch: {
-    saveSearch: () => console.log("saved search"),
-    recentSearches: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ],
-    recentSearchesStorage: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ]
+  {
+    label: "Delegates",
+    link: "#",
   },
-  ads: [
-    {
-      className: "bg-primary",
-      content: <a href="#"><img className="block" src="https://picsum.photos/seed/a/150/100"/></a>,
-    },
-    {
-      className: "bg-primary",
-      content: <a href="#"><img className="block" src="https://picsum.photos/seed/b/150/100"/></a>,
-    },
-    {
-      className: "bg-primary",
-      content: <a href="#"><img className="block" src="https://picsum.photos/seed/c/150/100"/></a>,
-    },
-  ],
-  favouritesWindowData: {
-    favourites: [
+  {
+    label: "Votes",
+    link: "#",
+  },
+  {
+    label: "Tools",
+    link: "#",
+  }
+]
+
+export const search = {
+  setSearch: (searchInput: string) => console.log(searchInput),
+  searching: false,
+  results: {
+    results: [
       {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+        cols: [{value: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}],
+        type: "account",
+        id: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
         username: "test",
       },
       {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+        cols: [{value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}],
+        type: "account",
+        id: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
         username: "moosty",
       },
       {
-        address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
+        cols: [{value: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"}],
+        type: "account",
+        id: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
       },
     ],
-    menuCloseFunction: () => console.log("menu close function"),
-    unFavourite: console.log("unfavourite"),
-    hasFavourites: true,
-    updateFavourites: console.log("update favourites"),
-    compactString: compactString,
-    parsedSettings: {}
+    quickResult: {
+
+    }
+  }
+}
+
+export const ads = [
+  {
+    className: "bg-primary",
+    content: <a href="#"><img className="block" src="https://picsum.photos/seed/a/150/100"/></a>,
   },
-  compactString: compactString,
-  status: "connected",
-  settings: {
-    openSettingsModal: () => console.log("open settings modal")
+  {
+    className: "bg-primary",
+    content: <a href="#"><img className="block" src="https://picsum.photos/seed/b/150/100"/></a>,
   },
+  {
+    className: "bg-primary",
+      content: <a href="#"><img className="block" src="https://picsum.photos/seed/c/150/100"/></a>,
+  },
+]
+
+export const saveSearch = {
+  saveSearch: () => console.log("saved search"),
+  recentSearches: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ],
+  recentSearchesStorage: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ]
 }

@@ -14,9 +14,10 @@ import {
   mobileRows,
   rows,
   tabletHeadcols,
-  tabletRows, topBarData
+  tabletRows,
 } from "../../assets/mockupData";
 import {Grid} from "../../atoms/grid/grid";
+import {HeaderMockup} from "../../organisms/header/header.stories";
 
 interface AccountProps {
   account: AccountDataType,
@@ -49,7 +50,7 @@ export const Account = ({
 
   return (
     <Container className={"bg-background"}>
-      <Header status={topBarData.status} topBarData={topBarData} />
+      <HeaderMockup />
       <Grid className={"m-auto max-w-app"}>
         <AccountHeader
           account={account}

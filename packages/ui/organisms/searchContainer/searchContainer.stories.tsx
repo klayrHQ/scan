@@ -83,29 +83,16 @@ Primary.args = {
 
 export const RecentSearch: ComponentMeta<typeof SearchContainer> = Template.bind({});
 RecentSearch.args = {
-  saveSearch: {
-    saveSearch: () => console.log("saved search"),
-    recentSearches: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ],
-    recentSearchesStorage: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ]
-  }
+  recentSearches: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ],
 };
 
 export const Ads: ComponentMeta<typeof SearchContainer> = Template.bind({});
@@ -128,29 +115,16 @@ Ads.args = {
 
 export const Complete: ComponentMeta<typeof SearchContainer> = Template.bind({});
 Complete.args = {
-  saveSearch: {
-    saveSearch: () => console.log("saved search"),
-    recentSearches: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ],
-    recentSearchesStorage: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ]
-  },
+  recentSearches: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ],
   ads: [
     {
       className: "bg-primary",

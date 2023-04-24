@@ -17,12 +17,12 @@ const Status = dynamic(() => import("./Status")) as any*/
 
 interface InfoBarProps {
   openSettingsModal?: any
-  status: statusType
+  status?: statusType
 }
 
 export const InfoBar = ({
   openSettingsModal,
-  status,
+  status = "error",
 }: InfoBarProps) => {
   /*const [packsLeft, setPacksLeft] = useState<any>([])*/
   /*const change = (ns: CollectibleModalOptions) => changeModal(ns)*/

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {ReactNode, useState} from "react"
 import { InfoBar } from "../infoBar/infoBar"
 import { Link } from "../../atoms/link/link"
 import { useRouter } from "next/router"
@@ -13,65 +13,34 @@ interface MobileMenuProps {
     openSettingsModal: (view: string ,arg: any) => void
   }
   status: "connected" | "warning" | "error"
-  menu: {
-    label: string
-    link: string
-  }[]
+  menuItems: Array<{ label: string, link: string }>
   subMenu?: {
     title: string
-    items: {
+    items: Array<{
       label: string
       subLabel: string
       link: string
       icon: any
       disabled?: boolean
       badge?: string
-    }[]
+    }>
   }
+  menuItemsTop?: Array<ReactNode>
   ads: Array<{ content: any, className: string }>
   actions?: {
     title: string
     action: any
   }[],
   favouritesWindowData: FavouritesWindowProps
-  hideOnLarge?: boolean
-  compactString: any
-  saveSearch?: {
-    saveSearch: (address: string, username?: string) => void
-    recentSearchesStorage: {address: string, username?: string}[]
-    recentSearches: {address: string, username?: string}[]
-  }
-  search: {
-    results?: {
-      results: any[]
-      quickResult: {
-        error?: boolean
-        type?: string
-        id?: string
-        data?: any
-      }
-    }
-    setSearch: (searchInput: string) => void
-    searching: boolean
-    quickResult?: {
-      error?: boolean
-      type?: string
-      id?: string
-      data?: any
-    }
-  }
 }
 
 export const MobileMenu = ({
   ads,
-  compactString,
-  saveSearch,
-  search,
-  menu,
+  menuItems,
   subMenu,
+  menuItemsTop,
   settings,
   favouritesWindowData,
-  hideOnLarge = true,
   status
 }: MobileMenuProps) => {
   const router = useRouter()
@@ -79,7 +48,7 @@ export const MobileMenu = ({
 
   return (
     <div>
-      <div className={[hideOnLarge ? "lg:hidden" : "" ,"absolute right-4 top-[0.8rem] pt-0.5"].join(" ")}>
+      <div className={"lg:hidden absolute right-4 top-[0.8rem] pt-0.5"}>
         {!open && (
           <Button
             onClick={() => setOpen(!open)}
@@ -112,11 +81,11 @@ export const MobileMenu = ({
       {open && (
         <>
           <div
-            className={[hideOnLarge ? "lg:hidden" : "" ,"fixed inset-0 bg-background w-full overflow-auto z-50 "].join(" ")}
+            className={"lg:hidden fixed inset-0 bg-background w-full overflow-auto z-50 "}
             id="mobile-menu"
           >
             <InfoBar status={status}/>
-            <div className={[hideOnLarge ? "lg:hidden" : "" ,"w-full bg-background flex flex-tableRow justify-between mb-2 px-4 py-4 mx-auto"].join(" ")}>
+            <div className={"lg:hidden w-full bg-background flex flex-tableRow justify-between mb-2 px-4 py-4 mx-auto"}>
               <Logo
                 link={"#"}
                 href={"#"}
@@ -129,15 +98,10 @@ export const MobileMenu = ({
                 <XIcon className="w-5 h-5 text-onSurfaceHigh" />
               </div>
             </div>
-            <div className="w-app mx-auto flex justify-end mb-3">
-              <SearchContainer ads={ads} compactString={compactString} saveSearch={saveSearch} search={search} />
-            </div>
-            <div className="w-app mx-auto flex justify-end mb-3">
-              <FavouritesWindow {...favouritesWindowData} />
-            </div>
+            {menuItemsTop}
             <div className="px-2 pt-2 pb-3 space-y-1 bg-surface-1 mx-4 rounded">
-              {menu &&
-                menu?.map((mi) => (
+              {menuItems &&
+                menuItems?.map((mi) => (
                   <Link
                     href={mi.link}
                     key={`mm-${mi.label}`}

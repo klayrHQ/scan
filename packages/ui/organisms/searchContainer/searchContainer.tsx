@@ -1,50 +1,31 @@
-import React, { Fragment, useState } from "react"
-import { Popover, Transition } from "@headlessui/react"
+import React, {FC, ReactNode} from "react"
 import { Search } from "../search/search";
-import { useHotkeys } from "react-hotkeys-hook"
 import { AdSection } from "../../molecules/adSection/adSection";
 import { RecentSearches } from "../../molecules/recentSearches/recentSearches";
 import {cls} from "../../assets/utils";
+import {tableRowsType} from "../../types";
 
 export interface SearchContainerProps {
   className?: string
-  menuCloseFunction?: any
-  compactString: any
-  saveSearch?: {
-    saveSearch: (address: string, username?: string) => void
-    recentSearchesStorage: {address: string, username?: string}[]
-    recentSearches: {address: string, username?: string}[]
-  }
-  search: {
-    results?: {
-      results: any[]
-      quickResult?: {
-        error?: boolean
-        type?: string
-        id?: string
-        data?: any
-      }
-    }
-    setSearch: (searchInput: string) => void
-    searching: boolean
-    quickResult?: {
-      error?: boolean
-      type?: string
-      id?: string
-      data?: any
-    }
-  }
+  recentSearches: {address: string | ReactNode, username?: string | ReactNode, avatar?: ReactNode}[]
+  searching?: boolean
+  searchFunction: () => void
+  searchValue?: string
+  setSearchValue: (value: string) => void
+  searchResults?: tableRowsType
   ads?: Array<{ content: any, className: string }>
 }
 
-export const SearchContainer = ({
+export const SearchContainer: FC<SearchContainerProps> = ({
   className = "",
-  menuCloseFunction,
-  compactString,
-  saveSearch,
-  search,
+  recentSearches,
+  searching,
+  searchFunction,
+  searchValue,
+  setSearchValue,
+  searchResults,
   ads,
-}: SearchContainerProps) => {
+}) => {
 
   return (
     <div className={cls([
@@ -52,17 +33,17 @@ export const SearchContainer = ({
       className,
     ])}>
       <Search
-        menuCloseFunction={menuCloseFunction}
-        compactString={compactString}
-        saveSearch={saveSearch}
-        search={search}
+        searching={searching}
+        searchFunction={searchFunction}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        searchResults={searchResults}
       />
-      {saveSearch && saveSearch.recentSearchesStorage &&
+      {recentSearches &&
         <div className="px-2">
           <RecentSearches
-            menuCloseFunction={menuCloseFunction}
-            compactString={compactString}
-            saveSearch={saveSearch}
+            recentSearches={recentSearches}
+            onClick={searchFunction}
           />
         </div>
       }

@@ -1,19 +1,17 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {XCircleIcon} from "@heroicons/react/24/outline";
 import {Currency} from "../../atoms/currency/currency";
 import {Avatar} from "../../atoms/avatar/avatar";
 import {Typography} from "../../atoms/typography/typography";
 
 interface FavouriteProps {
-  routingFunction: (routingAddress: string) => void
-  menuCloseFunction: () => void
-  popupCloseFunction: () => void
-  xOnClick: void
-  username?: string
-  address: string
-  balance?: { number: string, decimals?: string }
+  onClick: () => void
+  xOnClick: () => void
+  username?: string | ReactNode
+  address: string | ReactNode
+  balance?: string | ReactNode
+  avatar?: ReactNode
   className?: string
-  parsedSettings: any
 }
 
 /**
@@ -21,61 +19,32 @@ interface FavouriteProps {
  */
 export const Favourite = ({
   className,
-  routingFunction,
-  menuCloseFunction,
-  popupCloseFunction,
+  onClick,
   xOnClick,
   username,
   address,
   balance,
-  parsedSettings,
+  avatar,
 }: FavouriteProps) => {
-  const onClick = () => {
-    routingFunction(address)
-    menuCloseFunction()
-    popupCloseFunction()
-  }
 
   return (
     <div
-      className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className}`}
+      className={`relative cursor-pointer text-onSurfaceHigh w-full items-center flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-4 rounded transition ${className ? className : ""}`}
       onClick={onClick}
     >
-      <Avatar className="mx-3" address={address} size={25} />
+      {avatar}
       <Typography tag={"span"} className="flex flex-col grow-[2]">
         {username && <span className="font-semibold capitalize">{username}</span>}
         <span className="">{address}</span>
         {balance &&
           <span className="mr-10 inline md:hidden">
-            <Currency
-              parsedSettings={parsedSettings}
-              classes={{
-                sign: "text-onBackground font-medium",
-                symbol: "text-onBackground font-medium",
-                separator: "text-onBackground font-medium",
-                number: "text-onBackground font-medium",
-                decimals: "text-onBackground font-medium",
-              }}
-              number={balance.number}
-              decimals={balance.decimals}
-            />
+            {balance}
           </span>
         }
       </Typography>
       {balance &&
         <span className="mr-10 hidden md:inline">
-          <Currency
-            parsedSettings={parsedSettings}
-            classes={{
-              sign: "text-onBackground font-medium",
-              symbol: "text-onBackground font-medium",
-              separator: "text-onBackground font-medium",
-              number: "text-onBackground font-medium",
-              decimals: "text-onBackground font-medium",
-            }}
-            number={balance.number}
-            decimals={balance.decimals}
-          />
+          {balance}
         </span>
       }
       <button

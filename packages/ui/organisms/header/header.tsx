@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {ReactNode, useState} from "react"
 import { InfoBar } from "../infoBar/infoBar";
 import { TopBar, TopBarProps } from "../topBar/topBar";
 import { GotoTop } from "../../atoms/gotoTop/gotoTop";
@@ -6,17 +6,15 @@ import {statusType} from "../../types";
 
 interface HeaderProps {
   className?: string
-  title?: string
-  topBarData: TopBarProps
   children?: any
   openSettingsModal?: any
-  status: statusType
+  status?: statusType
+  topBar?: ReactNode
 }
 
 export const Header = ({
   className,
-  title,
-  topBarData,
+  topBar,
   children,
   openSettingsModal,
   status,
@@ -25,7 +23,7 @@ export const Header = ({
   return (
     <div className={["z-50", "w-full", "mb-8", className].join(" ")}>
       <InfoBar status={status} openSettingsModal={openSettingsModal} />
-      <TopBar {...topBarData} />
+      {topBar}
       <GotoTop />
       {children}
     </div>
