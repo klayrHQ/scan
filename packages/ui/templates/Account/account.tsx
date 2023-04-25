@@ -1,11 +1,9 @@
 import React from "react";
-import {Header} from "../../organisms/header/header";
 import {Table} from "../../organisms/table/table";
 import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
 import {AccountDataType} from "@moosty/lisk-service-provider";
 import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 import {Footer} from "../../organisms/footer/footer";
-import {TopBarProps} from "../../organisms/topBar/topBar";
 import {Container} from "../../atoms/container/container";
 import {
   footerData,
@@ -51,7 +49,7 @@ export const Account = ({
   return (
     <Container className={"bg-background"}>
       <HeaderMockup />
-      <Grid className={"m-auto max-w-app"}>
+      <Grid className={"m-auto w-full max-w-app"}>
         <AccountHeader
           account={account}
           favourites={favourites}
@@ -59,10 +57,9 @@ export const Account = ({
           unFavourite={unFavourite}
         />
       </Grid>
-      <Grid className={"m-auto max-w-app mt-6"}>
+      <Grid className={"m-auto w-full max-w-app mt-6"}>
         <AccountDetails
           account={account}
-          getAddressFromLisk32Address={getAddressFromLisk32Address}
           compactString={compactString}
           legacy={legacy}
           copyNoteText={copyNoteText}
@@ -70,7 +67,7 @@ export const Account = ({
           transactionsCount={transactionsCount}
         />
       </Grid>
-      <Grid className={"m-auto max-w-app"}>
+      <Grid className={"m-auto w-full max-w-app"}>
         <Table
           oddClassName={"bg-surface-1"}
           evenClassName={"bg-surface-0"}

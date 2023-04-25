@@ -5,12 +5,14 @@ import { TopBar } from "./topBar";
 import {LiskScanIcon} from "../../assets/icons";
 import {Logo} from "../../molecules/logo/logo";
 import {FavouritesWindow} from "../favouritesWindow/favouritesWindow";
-import {favourites, menuItems} from "../../assets/mockupData";
+import {ads, favourites, menuItems} from "../../assets/mockupData";
 import {compactString} from "../../assets/utils";
 import {Popover} from "../../atoms/popover/popover";
 import {SearchContainer} from "../searchContainer/searchContainer";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import {MagnifyingGlassIcon, StarIcon} from "@heroicons/react/24/solid";
 import {MobileMenu} from "../mobileMenu/mobileMenu";
+import {Tooltip} from "../../atoms/tooltip/tooltip";
+import {Link} from "../../atoms/link/link";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -54,16 +56,46 @@ export const TopBarMockup: ComponentStory<typeof TopBar> = () => {
       }
       menuItems={menuItems}
       menuItemsRight={[
-        <FavouritesWindow
-          favourites={favourites}
-          unFavourite={() => console.log("unfavourite")}
-          onClick={() => console.log("route to favourite")}
-        />,
         <Popover
-          className={"md:hidden"}
+          containerClassName={"hidden md:block"}
+          className={"top-0 w-screen max-w-full lg:max-w-xl"}
+          placement={"right"}
           button={
-            <button className={"group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full"}>
-              <div className="relative w-full cursor-pointer" >
+            favourites.length > 0 ? (
+              <div
+                className={`cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+              >
+                <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
+                <span className="">Favourites</span>
+              </div>
+            ) : (
+              <Tooltip
+                label="No favorites set"
+                placement={"bottom"}
+              >
+                <div
+                  className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+                >
+                  <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
+                  <span className="">Favourites</span>
+                </div>
+              </Tooltip>
+            )
+          }
+        >
+          <FavouritesWindow
+            favourites={favourites}
+            unFavourite={() => console.log("unfavourited")}
+            onClick={() => console.log("route to favourite account")}
+          />
+        </Popover>,
+        <Popover
+          containerClassName={"hidden md:block"}
+          containerWidth={"full"}
+          className={"top-0 w-screen max-w-full lg:max-w-xl"}
+          placement={"right"}
+          button={
+              <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative cursor-pointer">
                 <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
                   <MagnifyingGlassIcon />
                 </div>
@@ -80,7 +112,6 @@ export const TopBarMockup: ComponentStory<typeof TopBar> = () => {
                   placeholder="Search"
                 />
               </div>
-            </button>
           }
         >
           <SearchContainer
@@ -91,15 +122,92 @@ export const TopBarMockup: ComponentStory<typeof TopBar> = () => {
             searching={false}
           />
         </Popover>,
-        /*<MobileMenu
-          settings={{}}
-          status={}
-          menu={}
-          ads={}
-          favouritesWindowData={}
-          compactString={}
-          search={}
-        />*/
+        <MobileMenu
+          status={"connected"}
+          menuItems={Array.from(Array(5).keys()).map(
+            (index) => (
+              <>
+                <Link key={`menu-item-${index + 1}`} color={"inherit"} href={"#"} link={"#"}>{`Menu Item ${index + 1}`}</Link>
+              </>
+            )
+          )}
+          subMenu={Array.from(Array(8).keys()).map(
+            (index) => (
+              <>
+                <Link key={`menu-item-${index + 1}`} color={"inherit"} href={"#"} link={"#"}>{`Submenu Item ${index + 1}`}</Link>
+              </>
+            )
+          )}
+          menuItemsTop={[
+            <div className="w-app mx-auto flex justify-end mb-3">
+              <Popover
+                className={"max-w-full w-full"}
+                containerWidth={"full"}
+                button={
+                  <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative w-full cursor-pointer" >
+                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                      <MagnifyingGlassIcon />
+                    </div>
+                    <input
+                      id="search"
+                      name="search"
+                      className={[
+                        "block w-full pl-8 pr-3 py-2 border border-transparent rounded text-base cursor-pointer",
+                        "leading-5 bg-background text-onBackground placeholder-onSurfaceLow",
+                      ].join(" ")}
+                      type="search"
+                      readOnly={true}
+                      autoComplete="off"
+                      placeholder="Search"
+                    />
+                  </div>
+                }
+              >
+                <SearchContainer
+                  ads={ads}
+                  searching={false}
+                  recentSearches={favourites}
+                  searchFunction={() => console.log("searching")}
+                  setSearchValue={() => console.log("search value")}
+                />
+              </Popover>
+            </div>,
+            <div className="w-app mx-auto flex justify-end mb-3">
+              <Popover
+                className={"max-w-full w-full"}
+                containerWidth={"full"}
+                button={
+                  favourites.length > 0 ? (
+                    <div
+                      className={`cursor-pointer w-full flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+                    >
+                      <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
+                      <span className="">Favourites</span>
+                    </div>
+                  ) : (
+                    <Tooltip
+                      label="No favorites set"
+                      placement={"bottom"}
+                    >
+                      <div
+                        className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+                      >
+                        <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
+                        <span className="">Favourites</span>
+                      </div>
+                    </Tooltip>
+                  )
+                }
+              >
+                <FavouritesWindow
+                  favourites={favourites}
+                  unFavourite={() => console.log("unfavourited")}
+                  onClick={() => console.log("route to favourite account")}
+                />
+              </Popover>
+            </div>
+          ]}
+        />
       ]}
     />
   );

@@ -1,29 +1,30 @@
-import React from "react"
+import React, {ReactNode} from "react"
 import { Paper} from "../../atoms/paper/paper";
 import {Typography} from "../../atoms/typography/typography";
+import {cls} from "../../assets/utils";
 
 interface KeyValueRowProps {
-  label?: any | string
-  value?: any | string
+  label?: ReactNode | string
+  value?: ReactNode | string
   className?: string
   classNameValue?: string
-  icon?: any | string
-  color?: "light" | "dark"
-  compactOnMobile?: boolean
+  icon?: ReactNode | string
   surface?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-  compactString: Function
+  inline?: boolean
+  color?: string
+  valueBold?: boolean
 }
 
 export const KeyValueRow = ({
-  compactOnMobile,
   label,
   value,
   className,
   classNameValue,
   icon,
-  color,
   surface = 0,
-  compactString,
+  inline,
+  color,
+  valueBold,
 }: KeyValueRowProps) => (
   <Paper
     surface={surface}
@@ -33,23 +34,36 @@ export const KeyValueRow = ({
       className ? className : "",
     ].join(" ")}
   >
-    <div className="flex md:flex-grow flex-col md:flex-row justify-between w-full">
-      <Typography tag={"span"} className="capitalize font-medium  text-onSurfaceMedium md:mr-2 md:capitalize ">
+    <div
+      className={cls([
+        inline ? "inline-flex w-max gap-1" : "flex md:flex-grow flex-col md:flex-row justify-between w-full gap-2",
+      ])}
+    >
+      <Typography
+        tag={"span"}
+        className={cls([
+          "capitalize font-medium",
+          inline ? "text-sm" : "",
+        ])}
+        color={color ? color : "onSurfaceMedium"}
+        size={inline ? "subBody" : "body"}
+      >
         {label}
       </Typography>
-      {/*Normal Value Version*/}
-      <div className={`hidden md:block font-medium text-onSurfaceHigh ${classNameValue}`}>
-        <Typography tag={"span"}>{value}</Typography>
-      </div>
-      {/*Compact Value Version*/}
-      <div className={`md:hidden flex-row flex justify-between `}>
-        <Typography tag={"span"} className={` ${classNameValue} `}>
-          {compactOnMobile ? compactString(value, 35) : value}
-        </Typography>
-        <div style={{ width: 40 }}>{icon}</div>
-      </div>
+      <Typography
+        tag={"span"}
+        className={cls([
+          classNameValue,
+          inline ? "text-sm" : "",
+          valueBold ? "font-bold" : "font-medium",
+        ])}
+        color={color ? color : "onSurfaceHigh"}
+        size={inline ? "subBody" : "body"}
+      >
+        {value}
+      </Typography>
     </div>
-    <div className="hidden md:block" style={{ width: 30 }}>
+    <div className="hidden md:block">
       {icon}
     </div>
   </Paper>

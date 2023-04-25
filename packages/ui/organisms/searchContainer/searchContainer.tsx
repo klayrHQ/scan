@@ -29,7 +29,7 @@ export const SearchContainer: FC<SearchContainerProps> = ({
 
   return (
     <div className={cls([
-      "rounded shadow-1 overflow-hidden flex flex-col divider divide-y-2 bg-background",
+      "rounded shadow-1 overflow-hidden flex flex-col divider divide-y-2 bg-background w-full",
       className,
     ])}>
       <Search

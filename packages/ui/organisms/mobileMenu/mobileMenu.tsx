@@ -7,40 +7,19 @@ import { Logo } from "../../molecules/logo/logo";
 import {FavouritesWindow, FavouritesWindowProps} from "../favouritesWindow/favouritesWindow";
 import {SearchContainer, SearchContainerProps} from "../searchContainer/searchContainer";
 import {Button} from "../../atoms";
+import {Grid} from "../../atoms/grid/grid";
 
 interface MobileMenuProps {
-  settings: {
-    openSettingsModal: (view: string ,arg: any) => void
-  }
   status: "connected" | "warning" | "error"
-  menuItems: Array<{ label: string, link: string }>
-  subMenu?: {
-    title: string
-    items: Array<{
-      label: string
-      subLabel: string
-      link: string
-      icon: any
-      disabled?: boolean
-      badge?: string
-    }>
-  }
+  menuItems: Array<ReactNode>
+  subMenu?: Array<ReactNode>
   menuItemsTop?: Array<ReactNode>
-  ads: Array<{ content: any, className: string }>
-  actions?: {
-    title: string
-    action: any
-  }[],
-  favouritesWindowData: FavouritesWindowProps
 }
 
 export const MobileMenu = ({
-  ads,
   menuItems,
   subMenu,
   menuItemsTop,
-  settings,
-  favouritesWindowData,
   status
 }: MobileMenuProps) => {
   const router = useRouter()
@@ -81,10 +60,9 @@ export const MobileMenu = ({
       {open && (
         <>
           <div
-            className={"lg:hidden fixed inset-0 bg-background w-full overflow-auto z-50 "}
+            className={"lg:hidden fixed inset-0 top-10 bg-background w-full overflow-auto z-50 "}
             id="mobile-menu"
           >
-            <InfoBar status={status}/>
             <div className={"lg:hidden w-full bg-background flex flex-tableRow justify-between mb-2 px-4 py-4 mx-auto"}>
               <Logo
                 link={"#"}
@@ -99,57 +77,18 @@ export const MobileMenu = ({
               </div>
             </div>
             {menuItemsTop}
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-surface-1 mx-4 rounded">
-              {menuItems &&
-                menuItems?.map((mi) => (
-                  <Link
-                    href={mi.link}
-                    key={`mm-${mi.label}`}
-                    link={mi.link}
-                    onClick={() => {
-                      if (setOpen) setOpen(false)
-                    }}
-                    color={"onBackground"}
-                    className={[
-                      "bg-primaryVariant",
-                      "text-onBackground block px-3 py-2 rounded-md",
-                      "text-base font-medium text-onSurfaceHigh cursor-pointer",
-                    ].join(" ")}
-                  >
-                    {mi.label}
-                  </Link>
-                ))}
-            </div>
-            <div className="pt-4 pb-3 ">
-              <div className="px-2 space-y-1 pt-2 rounded mx-4 bg-surface-1 text-onSurfaceMedium">
-                {subMenu &&
-                  subMenu?.items?.map((mi) => (
-                    <span
-                      key={`msm-${mi.label}`}
-                      onClick={() => {
-                        if (setOpen) setOpen(false)
-                        router.push(mi.link)
-                      }}
-                      className={
-                        [mi.disabled ? "hidden" : "bg-surface-0 text-base  hover:bg-primaryVariant  block px-3 py-2 rounded-md text-base font-medium cursor-pointer"].join(" ")}
-                    >
-                        {mi.label}
-
-                    </span>
-                  ))}
-                <span
-                  key={`msm-settings`}
-                  onClick={() =>
-                    settings.openSettingsModal("themes", {
-                      onClick: () => setOpen(false),
-                    })
-                  }
-                  className="pb-4 bg-surface-0 text-base  hover:bg-primaryVariant block px-3 py-2 rounded-md text-base font-medium  cursor-pointer"
-                >
-                  Settings
-                </span>
-              </div>
-            </div>
+            <Grid
+              className="px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col gap-4"
+              flex
+            >
+              {menuItems}
+            </Grid>
+            <Grid
+              className="mt-4 px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col text-onSurfaceMedium gap-4"
+              flex
+            >
+              {subMenu}
+            </Grid>
           </div>
         </>
       )}

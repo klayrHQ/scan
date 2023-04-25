@@ -17,11 +17,7 @@ interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   buttonOnClick?: () => void;
   type?:
     | "primary"
-    | "secondary"
-    | "tertiary"
-    | "quaternary"
-    | "search"
-    | "light";
+    | "secondary";
   padding?: string;
   style?: any;
   mobileSlideIn?: false | "right" | "top" | "bottom" | "left" | "belowTopBar";
@@ -41,11 +37,7 @@ const popover = cva(
     variants: {
       type: {
         primary: "text-body bg-primary",
-        secondary: "text-primary bg-surface-4",
-        tertiary: "text-primary bg-quinaryAlt bg-opacity-high",
-        quaternary: "text-white bg-surface-4",
-        search: "text-eerie bg-surface-2 bg-opacity-high ",
-        light: "text-primaryText bg-secondaryText",
+        secondary: "text-body bg-background",
       },
       roundedMobile: {
         true: "rounded",
@@ -66,11 +58,7 @@ const slideIn = cva(
     variants: {
       type: {
         primary: "text-body bg-primary",
-        secondary: "text-primary bg-surface-4",
-        tertiary: "text-primary bg-quinaryAlt bg-opacity-high",
-        quaternary: "text-white bg-surface-4",
-        search: "text-eerie bg-surface-2 bg-opacity-high ",
-        light: "text-primaryText bg-secondaryText",
+        secondary: "text-body bg-background",
       },
       mobileSlideIn: {
         right: "right-0",
@@ -94,7 +82,7 @@ export const Popover: FC<PopoverProps> = ({
   children,
   button,
   buttonOnClick,
-  type = "primary",
+  type = "secondary",
   padding,
   style,
   mobileSlideIn,

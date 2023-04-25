@@ -12,7 +12,6 @@ export interface LinkProps {
   activeClassName?: string
   href: string
   onClick?: () => void
-  style?: {}
 }
 
 export const Link = ({
@@ -23,27 +22,23 @@ export const Link = ({
   activeClassName,
   onClick,
   href = "/",
-  style,
-  ...props
 }: LinkProps) => {
 
   const router = useRouter()
   const isActive = router.pathname.split("/")[1] === link.split("/")[1]
 
   return (
-    <NextLink className="no-underline" prefetch={false} href={href} as={link}>
-      <Typography tag={"span"}>
-        <span
-          onClick={() => onClick && onClick()}
-          className={[
-            `cursor-pointer text-${color} ${
-              isActive && activeClassName ? activeClassName : className
-            }`,
-          ].join(" ")}
-          style={style}
-        >
-          {children}
-        </span>
+    <NextLink className="no-underline block" prefetch={false} href={href} as={link}>
+      <Typography
+        tag={"span"}
+        onClick={() => onClick && onClick()}
+        className={[
+          `cursor-pointer text-${color} ${
+            isActive && activeClassName ? activeClassName : className
+          }`,
+        ].join(" ")}
+      >
+        {children}
       </Typography>
     </NextLink>
   )

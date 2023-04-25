@@ -1,6 +1,4 @@
 import React from "react";
-import { StarIcon } from "@heroicons/react/24/solid";
-import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid"
 import {Avatar} from "../../atoms/avatar/avatar";
 import {compactString, calculateTotalBalance, calculateVotes} from "../../assets/utils";
 import { AccountDataType} from "@moosty/lisk-service-provider";

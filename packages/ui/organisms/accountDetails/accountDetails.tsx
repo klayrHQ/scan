@@ -22,7 +22,6 @@ import {IconButton} from "../../atoms/iconButton/iconButton";
 
 interface AccountDetailsProps {
   account: AccountDataType
-  getAddressFromLisk32Address: any
   compactString: Function
   received?: number | null
   send?: number | null
@@ -35,7 +34,6 @@ interface AccountDetailsProps {
 
 export const AccountDetails = ({
   account,
-  getAddressFromLisk32Address,
   compactString,
   send,
   received,

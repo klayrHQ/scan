@@ -7,23 +7,27 @@ import {statusType} from "../../types";
 interface HeaderProps {
   className?: string
   children?: any
-  openSettingsModal?: any
-  status?: statusType
-  topBar?: ReactNode
+  infoItemsLeft?: Array<ReactNode>
+  infoItemsRight?: Array<ReactNode>
+  menuItems: Array<{ label: string, link: string }>
+  logo: ReactNode
+  menuItemsRight?: Array<ReactNode>
 }
 
 export const Header = ({
   className,
-  topBar,
   children,
-  openSettingsModal,
-  status,
+  infoItemsLeft,
+  infoItemsRight,
+  menuItems,
+  menuItemsRight,
+  logo,
 }: HeaderProps) => {
 
   return (
     <div className={["z-50", "w-full", "mb-8", className].join(" ")}>
-      <InfoBar status={status} openSettingsModal={openSettingsModal} />
-      {topBar}
+      <InfoBar infoItemsLeft={infoItemsLeft} infoItemsRight={infoItemsRight} />
+      <TopBar menuItems={menuItems} menuItemsRight={menuItemsRight} logo={logo} />
       <GotoTop />
       {children}
     </div>

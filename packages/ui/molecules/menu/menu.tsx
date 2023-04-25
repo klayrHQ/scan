@@ -23,12 +23,10 @@ export const Menu = ({
  className,
  ...props
 }: MenuProps) => (
-  <div className="hidden lg:block lg:ml-6">
-    <div className="flex space-x-4">
+  <div className="hidden lg:flex lg:ml-6 space-x-4">
       <div className="flex flex-row justify-end hidden md:inline-flex" {...props}>
         {menuItems && menuItems.map((mi) => <MenuItem key={mi.label} className={className} {...mi} />)}
         {/*{subMenu && <SubMenu {...subMenu} />}*/}
       </div>
-    </div>
   </div>
 )
