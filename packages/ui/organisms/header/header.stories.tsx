@@ -6,7 +6,7 @@ import {compactString} from "../../assets/utils";
 import {TopBarMockup} from "../topBar/topBar.stories";
 import {Logo} from "../../molecules/logo/logo";
 import {LiskScanIcon} from "../../assets/icons";
-import {ads, favourites, menuItems} from "../../assets/mockupData";
+import {ads, favourites, menuItems} from "../../assets/mockupData/mockupData";
 import {Popover} from "../../atoms/popover/popover";
 import {Cog6ToothIcon as CogIcon, MagnifyingGlassIcon, StarIcon} from "@heroicons/react/24/solid";
 import {Tooltip} from "../../atoms/tooltip/tooltip";
@@ -53,7 +53,7 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
     <Header
       infoItemsLeft={[
         <Status status={"connected"} />,
-        <Grid flex columns={2} mobileColumns={1}>
+        <Grid className={"gap-2"} flex columns={2} mobileColumns={1}>
           <KeyValueRow inline color={"onTopbar"} label={"chain:"} value={"Lisk"} valueBold/>
           <KeyValueRow inline color={"onTopbar"} label={"Network:"} value={"mainnet"} valueBold/>
           <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"Block height:"} value={"21,473,821"} valueBold/>

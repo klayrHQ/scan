@@ -5,7 +5,7 @@ import { TopBar } from "./topBar";
 import {LiskScanIcon} from "../../assets/icons";
 import {Logo} from "../../molecules/logo/logo";
 import {FavouritesWindow} from "../favouritesWindow/favouritesWindow";
-import {ads, favourites, menuItems} from "../../assets/mockupData";
+import {ads, favourites, menuItems} from "../../assets/mockupData/mockupData";
 import {compactString} from "../../assets/utils";
 import {Popover} from "../../atoms/popover/popover";
 import {SearchContainer} from "../searchContainer/searchContainer";

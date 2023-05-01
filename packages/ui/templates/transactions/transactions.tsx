@@ -10,7 +10,7 @@ import {
   rows,
   tabletHeadcols,
   tabletRows
-} from "../../assets/mockupData";
+} from "../../assets/mockupData/mockupData";
 import {Footer} from "../../organisms/footer/footer";
 import {Container} from "../../atoms/container/container";
 import {statusType} from "../../types";

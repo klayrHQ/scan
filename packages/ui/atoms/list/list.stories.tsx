@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { TableBody } from "./tableBody";
-import {mobileRows, rows, tabletRows} from "../../assets/mockupData/mockupData";
+import { List } from "./list";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/TableBody",
-  component: TableBody,
+  title: "atoms/List",
+  component: List,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
+  argTypes: {
+  },
   parameters: {
     status: {
       type: [
@@ -20,14 +20,24 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TableBody> = (args) => (
-    <TableBody {...args} />
-);
+const Template: ComponentStory<typeof List> = (args) => <List {...args} />;
 
-export const Primary: ComponentMeta<typeof TableBody> = Template.bind({});
+export const Primary: ComponentMeta<typeof List> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  rows: rows,
-  tabletRows: tabletRows,
-  mobileRows: mobileRows,
+  color: "white",
+  listItems: [
+    {
+      label: "test 1",
+    },
+    {
+      label: "test 2",
+    },
+    {
+      label: "test 3",
+    },
+    {
+      label: "test 4",
+    },
+  ]
 };

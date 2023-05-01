@@ -131,7 +131,7 @@ const factory = () => {
           italic,
           noMargin,
           className: [
-            color ? `text-${color}` : "text-current",
+            color ? `text-${color}` : "text-body",
             bgColor ? `bg-${bgColor}` : "transparent",
             underLine ? `underline underline-offset-${underLineSpacing}` : "",
             className,

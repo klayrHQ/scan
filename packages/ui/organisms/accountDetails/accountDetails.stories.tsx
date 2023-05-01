@@ -19,26 +19,16 @@ export default {
     },
   },
   args: {
-    account: {
-      summary: {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        balance: "6996629",
-        username: "test",
-      },
-      dpos: {
-        delegate: {
-          status: "non-eligible",
-          username: "test",
-          rank: 1977,
-          registrationHeight: 123,
-        }
-      },
-      token: {
-        balance: "6996629"
-      },
-      sequence: {
-        nonce: "adsfg"
-      },
+    accountDetails: {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      hexAddress: "fb6147017c624135733f0d203781d4a83ce193e6",
+      balance: "6996629",
+      username: "test",
+      status: "non-eligible",
+      isBanned: false,
+      nonce: "adsfg",
+      sent: 12,
+      received: 12,
     },
     compactString: compactString,
     copyNoteText: "",

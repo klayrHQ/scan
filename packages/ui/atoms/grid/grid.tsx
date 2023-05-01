@@ -29,12 +29,12 @@ export const Grid = ({
         flex
           ? `flex ${
               columns > 1
-                ? `tablet:flex-row tablet:space-x-${gap}`
+                ? `sm:flex-row sm:space-x-${gap}`
                 : gap > 0
-                ? `tablet:flex-col tablet:space-y-${gap}`
+                ? `sm:flex-col sm:space-y-${gap}`
                 : `flex-col`
             } ${mobileColumns > 1 ? `flex-row space-x-${gap}` : `flex-col`}`
-          : `grid gap-${gap} grid-cols-${mobileColumns} desktop:grid-cols-${columns}`,
+          : `grid gap-${gap} grid-cols-${mobileColumns} lg:grid-cols-${columns}`,
       ].join(" ")}
       {...props}
     >

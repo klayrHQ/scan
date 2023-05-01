@@ -1,11 +1,10 @@
-import {tableRowsType} from "../types";
-import {compactString} from "./utils";
-import {Avatar} from "../atoms/avatar/avatar";
-import {Currency} from "../atoms/currency/currency";
+import {tableRowsType} from "../../types";
+import {compactString} from "../utils";
+import {Avatar} from "../../atoms/avatar/avatar";
+import {Currency} from "../../atoms/currency/currency";
 import React from "react";
-import {Typography} from "../atoms/typography/typography";
-import Status from "../atoms/status/status";
-import {TopBarProps} from "../organisms/topBar/topBar";
+import {Typography} from "../../atoms/typography/typography";
+import Status from "../../atoms/status/status";
 
 export interface transactionType {
   id: string,

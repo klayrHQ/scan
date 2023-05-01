@@ -1,7 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Account } from "./account";
-import {compactString} from "../../assets/utils";
+import { compactString } from "../../assets/utils";
+import { accountDetails, accountHeader } from "../../assets/mockupData/accountData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -39,19 +40,9 @@ export default {
       },
     ],
     account: {
-      summary: {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        balance: 6996629,
-        username: "test",
-      },
-      dpos: {
-        delegate: {
-          status: "non-eligible",
-          username: "test",
-          rank: "1977",
-        }
-      }
-    }
+      accountDetails: accountDetails,
+      accountHeader: accountHeader,
+    },
   }
 } as any;
 

@@ -38,16 +38,17 @@ export const BalanceBlock = ({
           }}
           number={amount || "0"}
         />
-        {/*{!noPercentage && (
-          <span>
+        {!noPercentage && (
+          <Typography className={colorText} tag={"span"}>
             {amount && parseInt(amount) > 0
               ? parseInt(
+                // @ts-ignore
               ((BigInt(amount) * 10000n) / BigInt(total)).toString(),
             ) / 100
               : 0}
             %
-          </span>
-        )}*/}
+          </Typography>
+        )}
       </div>
     </Highlight>
   )

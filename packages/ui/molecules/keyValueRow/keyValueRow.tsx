@@ -29,7 +29,7 @@ export const KeyValueRow = ({
   <Paper
     surface={surface}
     className={[
-      "flex flex-col md:flex-tableRow",
+      "flex flex-col md:flex-row",
       "rounded text-lg",
       className ? className : "",
     ].join(" ")}
@@ -61,8 +61,10 @@ export const KeyValueRow = ({
         {value}
       </Typography>
     </div>
-    <div className="hidden md:block">
-      {icon}
-    </div>
+    { icon &&
+      <div className="hidden md:block w-8">
+        {icon}
+      </div>
+    }
   </Paper>
 )

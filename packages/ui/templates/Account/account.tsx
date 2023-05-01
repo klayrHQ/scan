@@ -1,7 +1,6 @@
 import React from "react";
 import {Table} from "../../organisms/table/table";
 import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
-import {AccountDataType} from "@moosty/lisk-service-provider";
 import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
 import {Footer} from "../../organisms/footer/footer";
 import {Container} from "../../atoms/container/container";
@@ -13,12 +12,12 @@ import {
   rows,
   tabletHeadcols,
   tabletRows,
-} from "../../assets/mockupData";
+} from "../../assets/mockupData/mockupData";
 import {Grid} from "../../atoms/grid/grid";
 import {HeaderMockup} from "../../organisms/header/header.stories";
 
 interface AccountProps {
-  account: AccountDataType,
+  account: any,
   menu: {label: string, link: string}[],
   favourites: any,
   saveFavourite: (address: string, balance: string, username?: string) => void
@@ -38,20 +37,18 @@ export const Account = ({
   favourites,
   saveFavourite,
   unFavourite,
-  getAddressFromLisk32Address,
   compactString,
-  legacy,
   copyNoteText,
   setCopyNoteText,
-  transactionsCount,
 }: AccountProps) => {
 
   return (
     <Container className={"bg-background"}>
+      {/* @ts-ignore*/}
       <HeaderMockup />
       <Grid className={"m-auto w-full max-w-app"}>
         <AccountHeader
-          account={account}
+          account={account.accountHeader}
           favourites={favourites}
           saveFavourite={saveFavourite}
           unFavourite={unFavourite}
@@ -59,12 +56,10 @@ export const Account = ({
       </Grid>
       <Grid className={"m-auto w-full max-w-app mt-6"}>
         <AccountDetails
-          account={account}
+          accountDetails={account.accountDetails}
           compactString={compactString}
-          legacy={legacy}
           copyNoteText={copyNoteText}
           setCopyNoteText={setCopyNoteText}
-          transactionsCount={transactionsCount}
         />
       </Grid>
       <Grid className={"m-auto w-full max-w-app"}>

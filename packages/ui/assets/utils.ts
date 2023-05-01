@@ -68,10 +68,10 @@ export const calculateVotes = (votes: any): string =>
       ?.toString()) ||
   "0"
 
-export const calculateTotalBalance = (account: AccountDataType): string => {
-  const availableBalance = BigInt(account?.summary?.balance || 0)
+export const calculateTotalBalance = (balance: number, sentVotes: number): string => {
+  const availableBalance = BigInt(balance || 0)
   return (
-    availableBalance + BigInt(calculateVotes(account?.dpos?.sentVotes))
+    availableBalance + BigInt(calculateVotes(sentVotes))
   ).toString()
 }
 

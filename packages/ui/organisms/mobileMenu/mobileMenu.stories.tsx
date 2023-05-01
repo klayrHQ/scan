@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { MobileMenu } from "./mobileMenu";
 import {SearchContainer} from "../searchContainer/searchContainer";
 import {FavouritesWindow} from "../favouritesWindow/favouritesWindow";
-import {ads, favourites} from "../../assets/mockupData";
+import {ads, favourites} from "../../assets/mockupData/mockupData";
 import {Popover} from "../../atoms/popover/popover";
 import {Bars3Icon as MenuIcon, MagnifyingGlassIcon, StarIcon, XMarkIcon as XIcon} from "@heroicons/react/24/solid";
 import {Tooltip} from "../../atoms/tooltip/tooltip";
