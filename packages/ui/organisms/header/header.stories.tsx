@@ -18,6 +18,8 @@ import Status from "../../atoms/status/status";
 import {Button} from "../../atoms";
 import {Typography} from "../../atoms/typography/typography";
 import {KeyValueRow} from "../../molecules/keyValueRow/keyValueRow";
+import {MobileMenuMockup} from "../mobileMenu/mobileMenu.stories";
+import {Grid} from "../../atoms/grid/grid";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -51,12 +53,14 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
     <Header
       infoItemsLeft={[
         <Status status={"connected"} />,
-        <KeyValueRow inline color={"onTopbar"} label={"chain:"} value={"Lisk"} valueBold />,
-        <KeyValueRow inline color={"onTopbar"} label={"Network:"} value={"mainnet"} valueBold />,
-        <KeyValueRow inline color={"onTopbar"} label={"Block height:"} value={"21,473,821"} valueBold />,
+        <Grid flex columns={2} mobileColumns={1}>
+          <KeyValueRow inline color={"onTopbar"} label={"chain:"} value={"Lisk"} valueBold/>
+          <KeyValueRow inline color={"onTopbar"} label={"Network:"} value={"mainnet"} valueBold/>
+          <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"Block height:"} value={"21,473,821"} valueBold/>
+        </Grid>
       ]}
       infoItemsRight={[
-        <KeyValueRow inline color={"onTopbar"} label={"MC:"} value={"141,141,816LSK"} valueBold />,
+        <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"MC:"} value={"141,141,816LSK"} valueBold />,
         <Tooltip
           label="Settings"
           placement={"bottom"}
@@ -147,93 +151,7 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
             searching={false}
           />
         </Popover>,
-        <MobileMenu
-          status={"connected"}
-          menuItems={Array.from(Array(5).keys()).map(
-            (index) => (
-              <>
-                <Link key={`menu-item-${index + 1}`} color={"inherit"} href={"#"} link={"#"}>{`Menu Item ${index + 1}`}</Link>
-              </>
-            )
-          )}
-          subMenu={Array.from(Array(8).keys()).map(
-            (index) => (
-              <>
-                <Link key={`menu-item-${index + 1}`} color={"inherit"} href={"#"} link={"#"}>{`Submenu Item ${index + 1}`}</Link>
-              </>
-            )
-          )}
-          menuItemsTop={[
-            <div className="w-app mx-auto flex justify-end mb-3">
-              <Popover
-                className={"max-w-full w-full"}
-                containerWidth={"full"}
-                button={
-                  <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative w-full cursor-pointer" >
-                    <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                      <MagnifyingGlassIcon />
-                    </div>
-                    <input
-                      id="search"
-                      name="search"
-                      className={[
-                        "block w-full pl-8 pr-3 py-2 border border-transparent rounded text-base cursor-pointer",
-                        "leading-5 bg-background text-onBackground placeholder-onSurfaceLow",
-                      ].join(" ")}
-                      type="search"
-                      readOnly={true}
-                      autoComplete="off"
-                      placeholder="Search"
-                    />
-                  </div>
-                }
-              >
-                <SearchContainer
-                  ads={ads}
-                  searching={false}
-                  recentSearches={favourites}
-                  searchFunction={() => console.log("searching")}
-                  setSearchValue={setSearchValue}
-                  searchValue={searchValue}
-                />
-              </Popover>
-            </div>,
-            <div className="w-app mx-auto flex justify-end mb-3">
-              <Popover
-                className={"max-w-full w-full"}
-                containerWidth={"full"}
-                button={
-                  favourites.length > 0 ? (
-                    <div
-                      className={`cursor-pointer w-full flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
-                    >
-                      <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-                      <span className="">Favourites</span>
-                    </div>
-                  ) : (
-                    <Tooltip
-                      label="No favorites set"
-                      placement={"bottom"}
-                    >
-                      <div
-                        className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
-                      >
-                        <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-                        <span className="">Favourites</span>
-                      </div>
-                    </Tooltip>
-                  )
-                }
-              >
-                <FavouritesWindow
-                  favourites={favourites}
-                  unFavourite={() => console.log("unfavourited")}
-                  onClick={() => console.log("route to favourite account")}
-                />
-              </Popover>
-            </div>
-          ]}
-        />
+        <MobileMenuMockup />,
       ]
     }
     />

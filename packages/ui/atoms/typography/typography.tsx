@@ -47,27 +47,27 @@ export const typography = cva(["border-none"], {
   variants: {
     size: {
       Heading1:
-        "text-40 tablet:text-60 desktop:text-80 font-heading text-header ",
+        "text-40 sm:text-60 md:text-80 font-heading text-header ",
       Heading2:
-        "text-16 tablet:text-20 desktop:text-40 font-heading text-header",
+        "text-16 sm:text-20 md:text-40 font-heading text-header",
       Heading3:
-        "text-14 tablet:text-20 desktop:text-32 font-heading text-header",
+        "text-14 sm:text-20 md:text-32 font-heading text-header",
       Heading4:
-        "text-12 tablet:text-18 desktop:text-24 font-heading text-header",
+        "text-12 sm:text-18 md:text-24 font-heading text-header",
       Heading5:
-        "text-12 tablet:text-12 desktop:text-16 font-heading text-header",
+        "text-12 sm:text-12 md:text-16 font-heading text-header",
       Heading6:
-        "text-10 tablet:text-10 desktop:text-12 font-heading text-header",
+        "text-10 sm:text-10 md:text-12 font-heading text-header",
       Button:
-        "text-12 tablet:text-12 desktop:text-16 font-heading align-middle",
-      ParagraphLarge: "text-16 tablet:text-20 desktop:text-32",
-      ParagraphSmall: "text-12 tablet:text-15 desktop:text-15",
-      Paragraph6: "text-10 tablet:text-10 desktop:text-12 font-body",
-      menu: "text-9 tablet:text-9 desktop:text-16 font-body text-header",
-      blurbTitle: "text-9 tablet:text-9 desktop:text-10 font-body",
-      body: "text-9 tablet:text-14 desktop:text-16 font-body ",
-      subBody: "text-8 tablet:text-10 desktop:text-10 font-body",
-      label: "text-9 tablet:text-9 desktop:text-9 font-heading",
+        "text-12 sm:text-12 md:text-16 font-heading align-middle",
+      ParagraphLarge: "text-16 sm:text-20 md:text-32",
+      ParagraphSmall: "text-12 sm:text-15 md:text-15",
+      Paragraph6: "text-10 sm:text-10 md:text-12 font-body",
+      menu: "text-9 sm:text-9 md:text-16 font-body text-header",
+      blurbTitle: "text-9 sm:text-9 md:text-10 font-body",
+      body: "text-12 sm:text-13 md:text-14 font-body ",
+      subBody: "text-10 sm:text-11 md:text-12 font-body",
+      label: "text-9 sm:text-9 md:text-9 font-heading",
     },
     noMargin: {
       true: "m-0",
