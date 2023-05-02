@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { TableBody } from "./tableBody";
-import {mobileRows, rows, tabletRows} from "../../assets/mockupData";
+import {mobileRows, rows, tabletRows} from "../../assets/mockupData/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

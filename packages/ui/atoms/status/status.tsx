@@ -1,7 +1,8 @@
 import React from "react";
+import {statusType} from "../../types";
 
 interface StatusProps {
-  status: "connected" | "warning" | "error" | "finalized"
+  status: statusType
 }
 
 export const Status = ({
@@ -16,7 +17,7 @@ export const Status = ({
           : status === "warning"
             ? "bg-warning"
             : "bg-error",
-        "rounded-full w-4 h-4 flex ",
+        "rounded-full w-4 h-4 flex aspect-square",
       ].join(" ")}
     />
   )

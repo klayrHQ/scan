@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React from "react"
 import {
   ArrowSmallUpIcon as ArrowSmUpIcon,
   ArrowDownIcon,
@@ -6,10 +6,7 @@ import {
   DocumentDuplicateIcon as DuplicateIcon,
 } from "@heroicons/react/24/solid"
 import {
-  AccountDataType,
   BlockDataType,
-  Envelope,
-  useLiskService,
 } from "@moosty/lisk-service-provider"
 // @ts-ignore
 import { CopyToClipboard } from "react-copy-to-clipboard"
@@ -21,29 +18,31 @@ import {KeyValueRow} from "../../molecules/keyValueRow/keyValueRow";
 import {IconButton} from "../../atoms/iconButton/iconButton";
 
 interface AccountDetailsProps {
-  account: AccountDataType
-  getAddressFromLisk32Address: any
+  accountDetails: {
+    username?: string
+    address: string
+    legacyAddress?: string
+    publicKey: string
+    hexAddress: string
+    isDelegate?: boolean
+    status?: string
+    isBanned?: boolean
+    nonce?: string
+    received?: number | null
+    sent?: number | null
+  }
   compactString: Function
-  received?: number | null
-  send?: number | null
   lastBlock?: BlockDataType | null
-  legacy: any
   copyNoteText: any
   setCopyNoteText: any
-  transactionsCount: {in: number, out: number}
 }
 
 export const AccountDetails = ({
-  account,
-  getAddressFromLisk32Address,
+  accountDetails,
   compactString,
-  send,
-  received,
   lastBlock,
-  legacy,
   copyNoteText,
   setCopyNoteText,
-  transactionsCount,
 }: AccountDetailsProps) => {
 
   return (
@@ -55,39 +54,39 @@ export const AccountDetails = ({
         message={"Username copied"}
         hotkey={"c+u"}
         action={() =>
-          account?.summary?.username && copy(account?.summary?.username)
+          accountDetails.username && copy(accountDetails.username)
         }
-        deps={[account]}
+        deps={[accountDetails]}
 
       />
       <CopyHotKey
         message={"Address copied"}
         hotkey={"c+a"}
         action={() =>
-          account?.summary?.address && copy(account?.summary?.address)
+          accountDetails.address && copy(accountDetails.address)
         }
-        deps={[account]}
+        deps={[accountDetails]}
       />
       <CopyHotKey
         message={"Public key copied"}
         hotkey={"c+p"}
         action={() =>
-          account?.summary?.publicKey && copy(account?.summary?.publicKey)
+          accountDetails.publicKey && copy(accountDetails.publicKey)
         }
-        deps={[account]}
+        deps={[accountDetails]}
       />
-      {account?.summary?.username && (
+      {accountDetails.username && (
         <KeyValueRow
           label="Owner"
           value={
             <span className=" text-onSurfaceLight ">
-              {account?.summary?.username || account?.summary?.address}
+              {accountDetails.username || accountDetails.address}
             </span>
           }
           className={" whitespace-nowrap lg:col-start-1 "}
           icon={
             <CopyToClipboard
-              text={account?.summary?.username || account?.summary?.address}
+              text={accountDetails.username || accountDetails.address}
             >
               <IconButton
                 onClick={() => setCopyNoteText("Username copied")}
@@ -97,25 +96,24 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
-          compactString={compactString}
         />
       )}
-      {account?.summary?.address && (
+      {accountDetails.address && (
         <KeyValueRow
           label="Address"
           value={
             <div>
               <span className="hidden md:block">
-                {account?.summary?.address}
+                {accountDetails.address}
               </span>
               <span className="text-onSurfaceLight md:hidden block">
-                {compactString(account?.summary?.address, 30)}
+                {compactString(accountDetails.address, 30)}
               </span>
             </div>
           }
           className={" whitespace-nowrap lg:col-start-2 "}
           icon={
-            <CopyToClipboard text={account?.summary?.address || ""}>
+            <CopyToClipboard text={accountDetails.address || ""}>
               <IconButton
                 onClick={() => setCopyNoteText("Address copied")}
                 className=" focus:text-accentPrimary text-surfacePrimaryDark "
@@ -124,16 +122,15 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
-          compactString={compactString}
         />
       )}
       <KeyValueRow
         label="PublicKey"
-        value={compactString(account?.summary?.publicKey, 25) || "unknown"}
+        value={compactString(accountDetails.publicKey, 25) || "unknown"}
         className={"lg:col-start-1"}
         icon={
-          account?.summary?.publicKey ? (
-            <CopyToClipboard text={account?.summary?.publicKey || ""}>
+          accountDetails.publicKey ? (
+            <CopyToClipboard text={accountDetails.publicKey || ""}>
               <IconButton
                 onClick={() => setCopyNoteText("Public key copied")}
                 className=" focus:text-accentPrimary text-surfacePrimaryDark "
@@ -142,44 +139,26 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           ) : (
-            <div />
+            " "
           )
         }
-        compactString={compactString}
       />
-      {/*<KeyValueRow
+      <KeyValueRow
         label="Hex Address (Binary Address)"
         value={
           <div>
             <span className="hidden md:block">
-              {account?.summary?.address &&
-                Buffer.from(
-                  getAddressFromLisk32Address(account?.summary?.address, "lsk"),
-                ).toString("hex")}
+              {accountDetails.hexAddress}
             </span>
             <span className="block md:hidden">
-              {account?.summary?.address &&
-                compactString(
-                  Buffer.from(
-                    getAddressFromLisk32Address(
-                      account?.summary?.address,
-                      "lsk",
-                    ),
-                  ).toString("hex"),
-                  30,
-                )}
+              {compactString(accountDetails.hexAddress, 25)}
             </span>
           </div>
         }
         className={" whitespace-nowrap lg:col-start-2 "}
         icon={
           <CopyToClipboard
-            text={
-              account?.summary?.address &&
-              Buffer.from(
-                getAddressFromLisk32Address(account?.summary?.address, "lsk"),
-              ).toString("hex")
-            }
+            text={accountDetails.hexAddress}
           >
             <IconButton
               onClick={() => setCopyNoteText("Hex address copied")}
@@ -189,35 +168,34 @@ export const AccountDetails = ({
             </IconButton>
           </CopyToClipboard>
         }
-        compactString={compactString}
-      />*/}
-      {account?.summary?.isDelegate && (
+      />
+      {accountDetails.isDelegate && (
         <KeyValueRow
           label="Status"
           value={
-            account?.dpos?.delegate?.status
-              ? account?.dpos?.delegate?.status
+            accountDetails.status
+              ? accountDetails.status
               : "no status"
           }
           className={"lg:col-start-1"}
-          compactString={compactString}
+          icon={" "}
         />
       )}
-      {legacy && (
+      {accountDetails.legacyAddress && (
         <KeyValueRow
           label="Legacy Address"
           value={
             <a
-              href={`https://legacy-explorer.lisk.com/address/${legacy}`}
+              href={`https://legacy-explorer.lisk.com/address/${accountDetails.legacyAddress}`}
               target={"_blank"}
               rel={"noopener nofollow noreferrer"}
             >
-              {legacy}
+              {accountDetails.legacyAddress}
             </a>
           }
           className={"text-center whitespace-nowrap lg:col-start-2"}
           icon={
-            <CopyToClipboard text={legacy}>
+            <CopyToClipboard text={accountDetails.legacyAddress}>
               <IconButton
                 onClick={() => setCopyNoteText("Legacy address copied")}
                 className=" focus:text-accentPrimary text-surfacePrimaryDark "
@@ -226,15 +204,14 @@ export const AccountDetails = ({
               </IconButton>
             </CopyToClipboard>
           }
-          compactString={compactString}
         />
       )}
 
-      {account?.summary?.isDelegate && (
+      {accountDetails.isDelegate && (
         <KeyValueRow
           label="is Banned"
           value={
-            account?.dpos?.delegate?.isBanned ? (
+            accountDetails.isBanned ? (
               <div className="flex flex-row-reverse">
                 <ExclamationCircleIcon className="w-5 h-5 text-error" />
                 <span>Banned</span>
@@ -244,7 +221,7 @@ export const AccountDetails = ({
             )
           }
           className={" lg:col-start-1 "}
-          compactString={compactString}
+          icon={" "}
         />
       )}
 
@@ -253,27 +230,27 @@ export const AccountDetails = ({
         value={
           <div className={"flex flex-tableRow"}>
             <ArrowSmUpIcon className="text-error h-5 w-5 float-left" />
-            <span>{transactionsCount?.out || send}</span>
+            <span>{accountDetails.sent}</span>
             <ArrowDownIcon className="text-success h-5 w-5 float-left" />
-            <span>{transactionsCount?.in || received}</span>
+            <span>{accountDetails.received}</span>
           </div>
         }
         className={" lg:col-start-2 "}
-        compactString={compactString}
+        icon={" "}
       />
       <KeyValueRow
         label="Nonce:"
-        value={account?.sequence?.nonce}
+        value={accountDetails.nonce}
         className={" lg:col-start-1 "}
-        compactString={compactString}
+        icon={" "}
       />
 
-      {account?.summary?.isDelegate && (
+      {accountDetails.isDelegate && (
         <KeyValueRow
           label="Last seed reveal"
           value={lastBlock?.seedReveal || "0"}
           className={" lg:col-start-2 "}
-          compactString={compactString}
+          icon={" "}
         />
       )}
       {copyNoteText !== "" && (

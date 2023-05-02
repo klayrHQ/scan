@@ -32,7 +32,8 @@ export const Currency = ({
   return (
     <span className={"whitespace-nowrap"}>
       {(parsedSettings?.signEnabled || sign) && (
-        <span
+        <Typography
+          tag={"span"}
           className={[
             "mr-0.5",
             classes?.sign ? classes?.sign : "text-onSurfaceLow font-medium",
@@ -43,37 +44,41 @@ export const Currency = ({
             : parsedSettings?.signEnabled
               ? currencies[0].sign
               : ""}
-        </span>
+        </Typography>
       )}
       {number && (
-        <span
+        <Typography
+          tag={"span"}
           className={[
             classes?.number ? classes?.number : "text-onSurfacePrimaryHigh font-medium",
           ].join(" ")}
         >
           {number}
-        </span>
+        </Typography>
       )}
       {decimals && (
-        <span
+        <Typography
+          tag={"span"}
           className={[
             classes?.separator ? classes?.separator : "text-onSurfacePrimaryMedium",
           ].join(" ")}
         >
           {parsedSettings?.decimalSeparatorDot ? "." : ","}
-        </span>
+        </Typography>
       )}
       {decimals && (
-        <span
+        <Typography
+          tag={"span"}
           className={[
             classes?.decimals ? classes?.decimals : "text-onSurfacePrimaryMedium",
           ].join(" ")}
         >
           {decimals}
-        </span>
+        </Typography>
       )}
       {(parsedSettings?.symbolEnabled || symbol) && (
-        <span
+        <Typography
+          tag={"span"}
           className={[
             "ml-0.5",
             classes?.symbol ? classes?.symbol : "text-onSurfaceLow font-medium",
@@ -83,7 +88,7 @@ export const Currency = ({
             ? parsedSettings?.selectedCurrency?.symbol
             : currencies[0].symbol}
           {parsedSettings?.convertCurrency}
-        </span>
+        </Typography>
       )}
     </span>
   )

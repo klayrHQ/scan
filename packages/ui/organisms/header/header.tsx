@@ -1,30 +1,33 @@
-import React, { useState } from "react"
+import React, {ReactNode, useState} from "react"
 import { InfoBar } from "../infoBar/infoBar";
 import { TopBar, TopBarProps } from "../topBar/topBar";
 import { GotoTop } from "../../atoms/gotoTop/gotoTop";
+import {statusType} from "../../types";
 
 interface HeaderProps {
   className?: string
-  title?: string
-  topBarData: TopBarProps
   children?: any
-  openSettingsModal?: any
-  status: "connected" | "warning" | "error"
+  infoItemsLeft?: Array<ReactNode>
+  infoItemsRight?: Array<ReactNode>
+  menuItems: Array<{ label: string, link: string }>
+  logo: ReactNode
+  menuItemsRight?: Array<ReactNode>
 }
 
 export const Header = ({
   className,
-  title,
-  topBarData,
   children,
-  openSettingsModal,
-  status,
+  infoItemsLeft,
+  infoItemsRight,
+  menuItems,
+  menuItemsRight,
+  logo,
 }: HeaderProps) => {
 
   return (
     <div className={["z-50", "w-full", "mb-8", className].join(" ")}>
-      <InfoBar status={status} openSettingsModal={openSettingsModal} />
-      <TopBar {...topBarData} />
+      <InfoBar infoItemsLeft={infoItemsLeft} infoItemsRight={infoItemsRight} />
+      <TopBar menuItems={menuItems} menuItemsRight={menuItemsRight} logo={logo} />
       <GotoTop />
       {children}
     </div>

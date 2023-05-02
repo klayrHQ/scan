@@ -1,6 +1,4 @@
 import React from "react";
-import { StarIcon } from "@heroicons/react/24/solid";
-import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid"
 import {Avatar} from "../../atoms/avatar/avatar";
 import {compactString, calculateTotalBalance, calculateVotes} from "../../assets/utils";
 import { AccountDataType} from "@moosty/lisk-service-provider";
@@ -9,7 +7,18 @@ import {FavouriteButton} from "../../atoms/favouriteButton/favouriteButton";
 import {BalanceBlock} from "../../atoms/balanceBlock/balanceBlock";
 
 interface AccountHeaderProps {
-  account: AccountDataType
+  account: {
+    address: string
+    owner: string
+    username: string
+    balance: string
+    totalBalance: string
+    unlocking: string
+    sentVotes: string
+    rank: number
+    status: string
+    description: string
+  }
   favourites: {address: string, balance: string, username?: string}[] | null
   saveFavourite: (address: string, balance: string, username?: string) => void
   unFavourite: (address: string) => void
@@ -21,9 +30,6 @@ export const AccountHeader = ({
   saveFavourite,
   unFavourite,
 }: AccountHeaderProps) => {
-  const totalBalance =
-    BigInt(calculateTotalBalance(account)) +
-    BigInt(calculateVotes(account?.dpos?.unlocking))
 
   return (
     <div
@@ -37,42 +43,51 @@ export const AccountHeader = ({
         <div className={"flex flex-tableRow items-center"}>
           <Avatar
             className={"m-3"}
-            address={account?.summary?.address || ""}
+            address={account?.address || ""}
             size={43}
           />
           <div className="flex flex-col">
-            {account?.dpos?.delegate?.username || account?.knowledge?.owner ? (
+            {account.username || account.owner ? (
               <Typography tag={"span"} className={"flex flex-col"}>
                 <span className="flex-row text-base md:text-xl text-onBackgroundHigh font-medium capitalize">
-                  {account?.dpos?.delegate?.rank && (
-                    <span className="">{account?.dpos?.delegate?.rank}. </span>
+                  {account.rank && (
+                    <span className="">{account.rank}. </span>
                   )}
-                  {account?.dpos?.delegate?.username ||
-                    account?.knowledge?.owner}
+                  {account.username ||
+                    account.owner}
                 </span>
               </Typography>
             ) : (
               <>
                 <Typography tag={"span"} className="text-base font-medium block text-onBackground ">
-                  {compactString(account?.summary?.address, 30)}
+                  {compactString(account.address, 30)}
                 </Typography>
               </>
             )}
 
             <div className={"flex flex-tableRow space-x-2"}>
-              {account?.summary?.username ? (
+              {account.username ? (
                 <Typography tag={"span"} className="flex flex-row space-x-2 items-center">
                   <span
                     className={
                       "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-4 text-onSurfaceHigh font-medium"
                     }
                   >
-                    {account?.dpos?.delegate?.status} delegate
+                    {account.status} delegate
                   </span>
+                  {account.description && (
+                    <span
+                      className={
+                        "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-2 text-onSurfaceHigh font-medium"
+                      }
+                    >
+                      {account.description}
+                    </span>
+                  )}
                   <FavouriteButton
-                    favourited={favourites?.findIndex(i => i.address === account?.summary?.address) !== -1}
-                    unFavourite={() => unFavourite(account?.summary?.address)}
-                    saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
+                    favourited={favourites?.findIndex(i => i.address === account.address) !== -1}
+                    unFavourite={() => unFavourite(account.address)}
+                    saveFavourite={() => saveFavourite(account.address, account.totalBalance, account.username)}
                   />
                </Typography>
               ) : (
@@ -84,20 +99,20 @@ export const AccountHeader = ({
                   >
                     Regular Account
                   </span>
+                  {account.description && (
+                    <span
+                      className={
+                        "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-2 text-onSurfaceHigh font-medium"
+                      }
+                    >
+                      {account.description}
+                    </span>
+                  )}
                   <FavouriteButton
-                    favourited={favourites?.findIndex(i => i.address === account?.summary?.address) !== -1}
-                    unFavourite={() => unFavourite(account?.summary?.address)}
-                    saveFavourite={() => saveFavourite(account?.summary?.address, totalBalance.toString(), account?.summary?.username)}
+                    favourited={favourites?.findIndex(i => i.address === account.address) !== -1}
+                    unFavourite={() => unFavourite(account.address)}
+                    saveFavourite={() => saveFavourite(account.address, account.totalBalance, account.username)}
                   />
-                </span>
-              )}
-              {account?.knowledge?.description && (
-                <span
-                  className={
-                    "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-2 text-onSurfaceHigh font-medium"
-                  }
-                >
-                  {account?.knowledge?.description}
                 </span>
               )}
             </div>
@@ -107,11 +122,8 @@ export const AccountHeader = ({
       <div className="flex flex-col md:flex-row md:space-x-2"></div>
       <BalanceBlock
         title={"Total Balance"}
-        amount={(
-          BigInt(calculateTotalBalance(account)) +
-          BigInt(calculateVotes(account?.dpos?.unlocking))
-        ).toString()}
-        total={totalBalance.toString()}
+        amount={account.totalBalance}
+        total={account.totalBalance}
         colorTitle={"text-onInfobar"}
         colorBg={"bg-primary"}
         colorText={"text-onPrimaryHigh"}
@@ -119,27 +131,27 @@ export const AccountHeader = ({
       />
       <BalanceBlock
         title={"Total Available"}
-        amount={account?.summary?.balance}
-        total={totalBalance.toString()}
+        amount={account.balance}
+        total={account.totalBalance}
         colorTitle={"text-onInfobar"}
         colorBg={"bg-success"}
         colorText={"text-onSuccess"}
       />
-      {account?.dpos?.unlocking && (
+      {account.unlocking && (
         <BalanceBlock
           title={"Total Unlocking"}
-          amount={calculateVotes(account?.dpos?.unlocking)}
-          total={totalBalance.toString()}
+          amount={account.unlocking}
+          total={account.totalBalance}
           colorTitle={"text-onInfobar"}
           colorBg={"bg-warning"}
           colorText={"text-onWarning"}
         />
       )}
-      {parseInt(calculateVotes(account?.dpos?.sentVotes)) > 0 && (
+      {parseInt(account.sentVotes) > 0 && (
         <BalanceBlock
           title={"Total Locked"}
-          amount={calculateVotes(account?.dpos?.sentVotes)}
-          total={totalBalance.toString()}
+          amount={account.sentVotes}
+          total={account.totalBalance}
           colorTitle={"text-onInfobar"}
           colorBg={"bg-error"}
           colorText={"text-onError"}

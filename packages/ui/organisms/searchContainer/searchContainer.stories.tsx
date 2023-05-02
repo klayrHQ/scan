@@ -3,6 +3,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { SearchContainer } from "./searchContainer";
 import {compactString} from "../../assets/utils";
+import {Popover} from "../../atoms/popover/popover";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 
 export default {
   title: "Organisms/SearchContainer",
@@ -47,7 +49,32 @@ export default {
   }
 } as any;
 
-const Template: ComponentStory<typeof SearchContainer> = (args) => <SearchContainer {...args} />;
+const Template: ComponentStory<typeof SearchContainer> = (args) => (
+  <Popover
+    button={
+    <button className={"group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full"}>
+      <div className="relative w-full cursor-pointer" >
+        <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+          <MagnifyingGlassIcon />
+        </div>
+        <input
+          id="search"
+          name="search"
+          className={[
+            "block w-full pl-8 pr-3 py-2 border border-transparent rounded text-base cursor-pointer",
+            "leading-5 bg-background text-onBackground placeholder-onSurfaceLow",
+          ].join(" ")}
+          type="search"
+          readOnly={true}
+          autoComplete="off"
+          placeholder="Search"
+        />
+      </div>
+    </button>
+  }>
+    <SearchContainer {...args} />
+  </Popover>
+);
 
 export const Primary: ComponentMeta<typeof SearchContainer> = Template.bind({});
 Primary.args = {
@@ -56,29 +83,16 @@ Primary.args = {
 
 export const RecentSearch: ComponentMeta<typeof SearchContainer> = Template.bind({});
 RecentSearch.args = {
-  saveSearch: {
-    saveSearch: () => console.log("saved search"),
-    recentSearches: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ],
-    recentSearchesStorage: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ]
-  }
+  recentSearches: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ],
 };
 
 export const Ads: ComponentMeta<typeof SearchContainer> = Template.bind({});
@@ -101,29 +115,16 @@ Ads.args = {
 
 export const Complete: ComponentMeta<typeof SearchContainer> = Template.bind({});
 Complete.args = {
-  saveSearch: {
-    saveSearch: () => console.log("saved search"),
-    recentSearches: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ],
-    recentSearchesStorage: [
-      {
-        address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-        username: "test"
-      },
-      {
-        address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-        username: "moosty"
-      },
-    ]
-  },
+  recentSearches: [
+    {
+      address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+      username: "test"
+    },
+    {
+      address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
+      username: "moosty"
+    },
+  ],
   ads: [
     {
       className: "bg-primary",

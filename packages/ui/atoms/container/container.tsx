@@ -1,84 +1,77 @@
-import React, { CSSProperties } from "react";
-import { Colors } from "../../types";
-import { cva } from "class-variance-authority";
+import React, {FC} from "react";
+import {cva} from "class-variance-authority";
 
-interface Props {
-  children?: any;
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  bgColor?: string;
   width?: string;
-  bgColor?: Colors;
-  className?: string | undefined;
-  style?: CSSProperties;
   rounded?: boolean;
   gap?: number;
-  card?: boolean;
-  nftCard?: boolean;
-  basic?: boolean;
   shadow?: boolean;
-  section?: boolean;
+  fullWidth?: boolean;
+  colorVariant?: "light" | "dark" | "sand";
+  section?: boolean,
 }
 
-const container = cva(
-  ["flex", "flex-col", "box-border"],
-  {
-    variants: {
-      card: {
-        true: "md:max-w-collectionCard  box-border p-4 bg-surface hover:bg-surface-1 cursor-pointer",
-        false: "",
-      },
-        section: {
-          true: "max-w-[1400px] mx-auto w-app space-y-8",
-        },
-        nftCard: {
-        true: "w-[281.3px] h-auto box-border p-2 bg-surface hover:bg-surface-1 cursor-pointer",
-        false: "space-y-8",
-      },
-      shadow: {
-        true: "shadow-card",
-      },
-      rounded: {
-        true: "rounded-default",
-      },
-        basic: {
-          true: "",
-            false: "",
-        },
+const container = cva(["flex", "flex-col", "box-border"], {
+  variants: {
+    section: {
+      true: "w-app mx-auto",
+      false: "w-full",
     },
-
-    compoundVariants: [],
+    shadow: {
+      true: "shadow-card",
+    },
+    rounded: {
+      true: "rounded",
+    },
+    colorVariant: {
+      light: "",
+      dark: "",
+      sand: "",
+    },
+    fullWidth: {
+      true: "w-full",
+    },
   },
-);
+  // compoundVariants: [{
+  //   type: "contentBlock",
+  //   colorVariant: "light",
+  //   className: "bg-surface text-secondary",
+  // },
+  //   {
+  //     type: "contentBlock",
+  //     colorVariant: "dark",
+  //     className: "bg-surface-4 text-primary",
+  //   },
+  //   {
+  //     type: "contentBlock",
+  //     colorVariant: "sand",
+  //     className: "bg-tertiary text-body",
+  //   },
+  // ],
+});
 
-export const Container = ({
-  className,
-  rounded,
-  style,
-  gap = 0,
-  card,
-  basic,
+export const Container: FC<Props> = ({
   bgColor,
-  shadow,
   children,
-  width = "app",
-    section,
+  className,
+  gap = 8,
+  rounded,
+  section,
+  shadow,
+  width = "",
+  colorVariant,
   ...props
-}: Props) => {
-
+}) => {
   return (
     <div
       className={container({
-        // @ts-ignore
-        className: `${className} space-y-${gap} w-${width} bg-${bgColor}`,
         rounded,
-        gap,
-        card,
-        basic,
-        bgColor,
+        section,
         shadow,
-        children,
-        width,
-          section,
+        colorVariant,
+        className: `${className} space-y-${gap} w-${width} bg-${bgColor}`,
       })}
-      style={style}
       {...props}
     >
       {children}
