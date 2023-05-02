@@ -47,17 +47,17 @@ export const typography = cva(["border-none"], {
   variants: {
     size: {
       Heading1:
-        "text-40 sm:text-60 md:text-80 font-heading text-header ",
+        "text-40 sm:text-60 md:text-80 font-heading",
       Heading2:
-        "text-16 sm:text-20 md:text-40 font-heading text-header",
+        "text-16 sm:text-20 md:text-40 font-heading",
       Heading3:
-        "text-14 sm:text-20 md:text-32 font-heading text-header",
+        "text-14 sm:text-20 md:text-32 font-heading",
       Heading4:
-        "text-12 sm:text-18 md:text-24 font-heading text-header",
+        "text-12 sm:text-18 md:text-24 font-heading",
       Heading5:
-        "text-12 sm:text-12 md:text-16 font-heading text-header",
+        "text-12 sm:text-12 md:text-16 font-heading",
       Heading6:
-        "text-10 sm:text-10 md:text-12 font-heading text-header",
+        "text-10 sm:text-10 md:text-12 font-heading",
       Button:
         "text-12 sm:text-12 md:text-16 font-heading align-middle",
       ParagraphLarge: "text-16 sm:text-20 md:text-32",

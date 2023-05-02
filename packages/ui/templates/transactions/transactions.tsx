@@ -13,21 +13,19 @@ import {
 } from "../../assets/mockupData/mockupData";
 import {Footer} from "../../organisms/footer/footer";
 import {Container} from "../../atoms/container/container";
-import {statusType} from "../../types";
-import {TopBarProps} from "../../organisms/topBar/topBar";
+import {HeaderMockup} from "../../organisms/header/header.stories";
 
 interface TransactionsProps {
-  status: statusType
-  topBarData: TopBarProps
+
 }
 
 export const Transactions: FC<TransactionsProps> = ({
-  status,
-  topBarData,
+
 }) => {
   return(
     <Container className={"bg-background"}>
-      <Header status={status} topBarData={topBarData} />
+      {/* @ts-ignore */}
+      <HeaderMockup />
       <Grid className={"m-auto max-w-app"}>
         <Table
           oddClassName={"bg-surface-1"}

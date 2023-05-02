@@ -51,6 +51,7 @@ export default {
 
 const Template: ComponentStory<typeof SearchContainer> = (args) => (
   <Popover
+    className={"top-0 w-screen max-w-full lg:max-w-xl"}
     button={
     <button className={"group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full"}>
       <div className="relative w-full cursor-pointer" >

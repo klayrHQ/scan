@@ -9,18 +9,18 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button?: ReactElement;
   children: ReactNode;
   closeButton?: ReactElement;
-  type?: "primary" | "secondary";
+  type?: "base" | "primary";
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-// source = https://headlessui.com/react/dialog
-
 const modalCVA = cva(
-  ["w-full  max-w-md max-w-max", "rounded", "transform overflow-hidden", "p-6", "text-left align-middle shadow-xl transition-all"],
+  ["w-full  max-w-md max-w-max", "rounded", "transform overflow-hidden", "text-left align-middle shadow-xl transition-all"],
   {
     variants: {
       type: {
         primary: "text-onPrimary bg-primary",
-        secondary: "text-body bg-background",
+        base: "text-body bg-background",
       },
     },
   },
@@ -29,12 +29,13 @@ const modalCVA = cva(
 export const Modal:FC<Props> = ({
   children,
   button,
-  type= "primary",
+  type= "base",
   className,
   padding,
   closeButton,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <>
@@ -93,8 +94,8 @@ export const Modal:FC<Props> = ({
                 <Dialog.Panel
                   className={modalCVA({
                     className: [
-                      "space-y-4 box-border",
-                      padding ? `p-${padding}` : "p-4",
+                      "box-border",
+                      padding ? `p-${padding}` : "",
                       className,
                     ],
                     type,
