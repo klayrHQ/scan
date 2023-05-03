@@ -19,7 +19,7 @@ export default {
     },
   },
   args: {
-    footerData: [
+    footerContent: [
       {
         category: "Liskscan",
         items: [
@@ -81,5 +81,20 @@ const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 export const Primary: ComponentMeta<typeof Footer> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-
+  copyrightContent:
+    <p className="text-base text-onBackgroundLow font-bold mb-2">
+      &copy;{new Date().getFullYear()} by{" "}
+      <a
+        className={"text-secondary"}
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://moosty.com"
+      >
+        MOOSTY
+      </a>
+      <span className={"text-onBackgroundMedium mx-2"}>I|I</span>
+      <span className={"text-onBackgroundLow"}>
+        -
+      </span>
+    </p>,
 };

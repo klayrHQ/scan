@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Transactions } from "./transactions";
 import { compactString } from "../../assets/utils";
@@ -42,7 +42,13 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Transactions> = (args) => <Transactions {...args} />;
+const Template: ComponentStory<typeof Transactions> = (args) => {
+  const [openFilterModal, setOpenFilterModal] = useState<boolean>(false)
+
+  return(
+    <Transactions {...args} openFilterModal={openFilterModal} setOpenFilterModal={setOpenFilterModal} />
+  )
+};
 
 export const Primary: ComponentMeta<typeof Transactions> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

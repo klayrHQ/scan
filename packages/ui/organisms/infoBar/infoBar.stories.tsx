@@ -61,12 +61,9 @@ export const InfoBarMockup: ComponentStory<typeof InfoBar> = () => {
           placement={"bottom"}
           offset={[0,10]}
         >
-          <Button
+          <CogIcon
             onClick={() => console.log("themes")}
-            className="cursor-pointer flex-shrink-0 rounded-full border-0"
-            label={<CogIcon
-              className="w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow"/>}
-          />
+            className="w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0"/>
         </Tooltip>,
       ]}
     />

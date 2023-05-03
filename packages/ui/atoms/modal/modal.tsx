@@ -3,6 +3,7 @@ import React, {cloneElement, FC, ReactElement, ReactNode, useState} from "react"
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import {cva} from "class-variance-authority";
+import {cls} from "../../assets/utils";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   padding?: string;
@@ -42,6 +43,10 @@ export const Modal:FC<Props> = ({
       <div className="flex items-center justify-center">
         {button ? (
           cloneElement(button, {
+            className: cls([
+              button.props.className,
+              "cursor-pointer",
+            ]),
             onClick: () => setIsOpen(!isOpen),
           })
         ) : (
@@ -61,15 +66,15 @@ export const Modal:FC<Props> = ({
         }}
         >
           <Transition.Child
-            enter="ease-in duration-200"
-            enterFrom="opacity-full"
-            enterTo=""
-            leave="ease-in duration-200"
-            leaveFrom=""
-            leaveTo="opacity-full"
+            enter="ease-in duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-40"
+            leave="ease-in duration-300"
+            leaveFrom="opacity-40"
+            leaveTo="opacity-0"
           >
             <Dialog.Overlay
-              className="fixed inset-0 bg-surface-4 bg-opacity-high transition duration-300"
+              className="fixed inset-0 bg-black transition duration-300"
               onClick={() => setIsOpen(false)}
             />
           </Transition.Child>

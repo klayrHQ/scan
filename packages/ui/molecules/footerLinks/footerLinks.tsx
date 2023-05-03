@@ -1,7 +1,7 @@
 import React from "react"
 import {List} from "../../atoms/list/list";
 
-export interface FooterLinksProps {
+interface FooterLinksProps {
   category: string
   items: {
     label: string
