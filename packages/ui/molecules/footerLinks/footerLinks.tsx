@@ -1,6 +1,7 @@
 import React from "react"
+import {List} from "../../atoms/list/list";
 
-export interface FooterLinksProps {
+interface FooterLinksProps {
   category: string
   items: {
     label: string
@@ -17,24 +18,7 @@ export const FooterLinks = ({
       <div className=" font-medium text-onFooter uppercase mb-2">
         <b>{category}</b>
       </div>
-      <ul className="list-reset leading-normal">
-        {items &&
-          items.map((item) => (
-            <li
-              key={`link-${item.label}`}
-              className=" cursor-pointer  text-base text-onFooter hover:underline "
-            >
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-onFooter"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-      </ul>
+      <List listItems={items} />
     </div>
   )
 }

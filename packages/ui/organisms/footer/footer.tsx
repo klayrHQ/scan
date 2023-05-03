@@ -1,27 +1,27 @@
-import React from "react"
-import { FooterLinks, FooterLinksProps } from "../../molecules/footerLinks/footerLinks";
+import React, {FC, ReactNode} from "react"
+import { FooterLinks } from "../../molecules/footerLinks/footerLinks";
 import { LinkedinIcon, TwitterIcon } from "../../assets/icons"
-import {useRouter} from "next/router";
+import {Container} from "../../atoms/container/container";
 
 interface FooterProps {
   className?: string
-  footerData?: Array<FooterLinksProps>
+  footerContent?: Array<{category: string, items: Array<{ label: string, link: string }>}>
+  copyrightContent?: string | ReactNode
 }
 
-export const Footer = ({
+export const Footer: FC<FooterProps> = ({
   className,
-  footerData
-}: FooterProps) => {
-  const router = useRouter()
-
+  footerContent,
+  copyrightContent,
+}) => {
   return (
     <div className={`w-full h-auto block text-onFooter text-left mt-8 ${className}`}>
       <div className="relative top-0 bottom-0 w-full h-full bg-footer">
         <div className="container w-app max-w-app mx-auto px-6">
           <div className="sm:flex py-8">
             <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
-              {footerData &&
-                footerData.map((item) => (
+              {footerContent &&
+                footerContent.map((item) => (
                   <div key={`link-${item.category}`} className="flex flex-col">
                     <FooterLinks {...item} />
                   </div>
@@ -51,27 +51,13 @@ export const Footer = ({
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-6">
+      <Container className="container mx-auto px-6">
         <div className=" border-gray-300 flex flex-col items-center">
           <div className="sm:w-2/3 text-center py-4">
-            <p className="text-base text-onBackgroundLow font-bold mb-2">
-              &copy;{new Date().getFullYear()} by{" "}
-              <a
-                className={"text-secondary"}
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://moosty.com"
-              >
-                MOOSTY
-              </a>
-              <span className={"text-onBackgroundMedium mx-2"}>I|I</span>
-              <span className={"text-onBackgroundLow"}>
-              -{/*[{process?.env?.BUILD_ID?.substr(0, 7)}]*/}
-            </span>
-            </p>
+            {copyrightContent}
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }

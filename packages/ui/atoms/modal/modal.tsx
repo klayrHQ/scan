@@ -3,24 +3,25 @@ import React, {cloneElement, FC, ReactElement, ReactNode, useState} from "react"
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import {cva} from "class-variance-authority";
+import {cls} from "../../assets/utils";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   padding?: string;
   button?: ReactElement;
   children: ReactNode;
   closeButton?: ReactElement;
-  type?: "primary" | "secondary";
+  type?: "base" | "primary";
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-// source = https://headlessui.com/react/dialog
-
 const modalCVA = cva(
-  ["w-full  max-w-md max-w-max", "rounded", "transform overflow-hidden", "p-6", "text-left align-middle shadow-xl transition-all"],
+  ["w-full  max-w-md max-w-max", "rounded", "transform overflow-hidden", "text-left align-middle shadow-xl transition-all"],
   {
     variants: {
       type: {
         primary: "text-onPrimary bg-primary",
-        secondary: "text-body bg-background",
+        base: "text-body bg-background",
       },
     },
   },
@@ -29,18 +30,23 @@ const modalCVA = cva(
 export const Modal:FC<Props> = ({
   children,
   button,
-  type= "primary",
+  type= "base",
   className,
   padding,
   closeButton,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <>
       <div className="flex items-center justify-center">
         {button ? (
           cloneElement(button, {
+            className: cls([
+              button.props.className,
+              "cursor-pointer",
+            ]),
             onClick: () => setIsOpen(!isOpen),
           })
         ) : (
@@ -60,15 +66,15 @@ export const Modal:FC<Props> = ({
         }}
         >
           <Transition.Child
-            enter="ease-in duration-200"
-            enterFrom="opacity-full"
-            enterTo=""
-            leave="ease-in duration-200"
-            leaveFrom=""
-            leaveTo="opacity-full"
+            enter="ease-in duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-40"
+            leave="ease-in duration-300"
+            leaveFrom="opacity-40"
+            leaveTo="opacity-0"
           >
             <Dialog.Overlay
-              className="fixed inset-0 bg-surface-4 bg-opacity-high transition duration-300"
+              className="fixed inset-0 bg-black transition duration-300"
               onClick={() => setIsOpen(false)}
             />
           </Transition.Child>
@@ -93,8 +99,8 @@ export const Modal:FC<Props> = ({
                 <Dialog.Panel
                   className={modalCVA({
                     className: [
-                      "space-y-4 box-border",
-                      padding ? `p-${padding}` : "p-4",
+                      "box-border",
+                      padding ? `p-${padding}` : "",
                       className,
                     ],
                     type,

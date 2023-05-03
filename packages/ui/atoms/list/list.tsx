@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, ReactNode} from "react";
 import {Typography} from "../typography/typography";
 import {cls} from "../../assets/utils";
 
@@ -38,7 +38,7 @@ interface ListProps {
   color?: string
   size?: size
   tag?: tag
-  listItems: Array<{ label: string, href?: string, color?: string, size?: size, className?: string, tag?: tag }>
+  listItems: Array<{ label: string | ReactNode, link?: string, color?: string, size?: size, className?: string, tag?: tag }>
 }
 
 export const List: FC<ListProps> = ({
@@ -52,13 +52,13 @@ export const List: FC<ListProps> = ({
   return (
     <ul
       className={cls([
-        "pl-8 list-none",
+        "pl-0 list-none",
         className
       ])}
     >
       {
         listItems.map(item => (
-          <li>
+          <li key={`link-${item.label}`}>
             <Typography
               className={cls([
                 item.className,
@@ -67,8 +67,21 @@ export const List: FC<ListProps> = ({
               color={item.color || color || "current"}
               size={item.size || size || "body"}
               tag={item.tag || tag || "span"}
+              link={!!item.link}
             >
-              {item.label}
+              {
+                item.link ?
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-onFooter no-underline"
+                  >
+                    {item.label}
+                  </a>
+                  :
+                  item.label
+              }
             </Typography>
           </li>
         ))

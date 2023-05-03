@@ -13,6 +13,7 @@ import {MagnifyingGlassIcon, StarIcon} from "@heroicons/react/24/solid";
 import {MobileMenu} from "../mobileMenu/mobileMenu";
 import {Tooltip} from "../../atoms/tooltip/tooltip";
 import {Link} from "../../atoms/link/link";
+import {GotoTop} from "../../atoms/gotoTop/gotoTop";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -123,7 +124,6 @@ export const TopBarMockup: ComponentStory<typeof TopBar> = () => {
           />
         </Popover>,
         <MobileMenu
-          status={"connected"}
           menuItems={Array.from(Array(5).keys()).map(
             (index) => (
               <>
@@ -205,7 +205,8 @@ export const TopBarMockup: ComponentStory<typeof TopBar> = () => {
                   onClick={() => console.log("route to favourite account")}
                 />
               </Popover>
-            </div>
+            </div>,
+            <GotoTop />
           ]}
         />
       ]}

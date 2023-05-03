@@ -1,14 +1,17 @@
 import React from "react";
 import {ComponentStory, ComponentMeta} from "@storybook/react";
-import {Modal, Button, Typography, Grid} from "../..";
+import {Grid} from "../grid/grid";
+import {Modal} from "./modal";
+import {Typography} from "../typography/typography";
+import {Button} from "../button/button";
 
 const children = (
   <>
     <Typography color={"inherit"} size={"Heading2"} tag={"h2"}>Congratulations on your first NFT!</Typography>
     <Typography color={"inherit"} size={"ParagraphSmall"} tag={"h2"}>What an amazing NFT you just bought! Well done. </Typography>
     <Grid columns={2}>
-      <Button fullWidth key={1} type={"secondary"} label={"Secondary"} />
-      <Button fullWidth key={2} type={"primary"} label={"Primary"} />
+      <Button width={"full"} key={1} type={"secondary"} label={"Secondary"} />
+      <Button width={"full"} key={2} type={"primary"} label={"Primary"} />
     </Grid>
   </>
 )
@@ -47,32 +50,14 @@ Primary.args = {
   type: "primary",
 };
 
-export const secondary: ComponentMeta<typeof Modal> = Template.bind({});
-secondary.args = {
-  type: "secondary",
-};
-
-export const tertiary: ComponentMeta<typeof Modal> = Template.bind({});
-tertiary.args = {
-  type: "tertiary",
-};
-
-export const quaternary: ComponentMeta<typeof Modal> = Template.bind({});
-quaternary.args = {
-  type: "quaternary",
-};
-
-export const search: ComponentMeta<typeof Modal> = Template.bind({});
-search.args = {
-  type: "search",
+export const Base: ComponentMeta<typeof Modal> = Template.bind({});
+Base.args = {
+  type: "base",
 };
 
 export const CloseButton: ComponentStory<typeof Modal> = (args) => (
   <Grid columns={5}>
-    <Modal {...args} closeButton type={"primary"} />
-    <Modal {...args} closeButton type={"secondary"}/>
-    <Modal {...args} closeButton type={"tertiary"}/>
-    <Modal {...args} closeButton type={"quaternary"}/>
-    <Modal {...args} closeButton type={"search"}/>
+    <Modal {...args} type={"primary"} />
+    <Modal {...args} type={"base"}/>
   </Grid>
 )
