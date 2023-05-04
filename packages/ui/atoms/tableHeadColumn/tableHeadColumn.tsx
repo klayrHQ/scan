@@ -18,7 +18,7 @@ export const TableHeadColumn = ({
     <th
       onClick={() => onClick && onClick(value)}
       className={[
-        "sticky top-0 px-6 py-3 ",
+        "sticky top-0 px-4 py-3 ",
         "p-4",
         "table-cell",
         className,
