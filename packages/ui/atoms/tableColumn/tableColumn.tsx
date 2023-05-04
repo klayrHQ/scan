@@ -4,6 +4,7 @@ import {Typography} from "../typography/typography";
 export interface TableColProps {
   className?: string
   value?: string | any
+  colspan?: number
 }
 
 /**
@@ -11,6 +12,7 @@ export interface TableColProps {
  */
 export const TableColumn = ({
   className,
+  colspan,
   value,
   ...props
 }: TableColProps) => {
@@ -24,6 +26,7 @@ export const TableColumn = ({
         "p-4",
         className ? className : "",
       ].join(" ")}
+      colSpan={colspan}
       {...props}
     >
       <Typography tag={"span"}>

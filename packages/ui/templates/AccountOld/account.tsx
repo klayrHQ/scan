@@ -1,7 +1,7 @@
 import React from "react";
 import {Table} from "../../organisms/table/table";
 import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
-import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
+import {AccountDetailsOld} from "../../organisms/accountDetailsOld/accountDetailsOld";
 import {Footer} from "../../organisms/footer/footer";
 import {Container} from "../../atoms/container/container";
 import {
@@ -32,7 +32,7 @@ interface AccountProps {
   transactionsCount: {in: number, out: number}
 }
 
-export const Account = ({
+export const AccountOld = ({
   account,
   favourites,
   saveFavourite,
@@ -56,7 +56,7 @@ export const Account = ({
           />
         </Grid>
         <Grid className={"m-auto w-full max-w-app mt-6"}>
-          <AccountDetails
+          <AccountDetailsOld
             accountDetails={account.accountDetails}
             compactString={compactString}
             copyNoteText={copyNoteText}

@@ -22,3 +22,21 @@ export const accountHeader = {
   status: "non-eligible",
   description: "test",
 }
+
+export const account = {
+  address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
+  hexAddress: "fb6147017c624135733f0d203781d4a83ce193e6",
+  balance: "6996629",
+  username: "test",
+  status: "non-eligible",
+  isBanned: false,
+  nonce: "adsfg",
+  sent: 12,
+  received: 12,
+  owner: "test",
+  totalBalance: "6996629",
+  unlocking: "12",
+  sentVotes: "12",
+  rank: 2010,
+  description: "test",
+}

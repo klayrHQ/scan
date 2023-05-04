@@ -12,6 +12,7 @@ interface BalanceBlockProps {
   colorBg: string
   colorText: string
   noPercentage?: boolean
+  width?: string
 }
 
 export const BalanceBlock = ({
@@ -23,9 +24,10 @@ export const BalanceBlock = ({
   colorText,
   colorTitle,
   noPercentage = false,
+  width,
 }: BalanceBlockProps) => {
   return (
-    <Highlight className={[className, colorBg, "px-4"].join(" ")}>
+    <Highlight className={[className, colorBg, "px-4", "flex-col flex"].join(" ")} width={width}>
       <Typography tag={"span"} className={colorTitle}>{title}</Typography>
       <div className="flex flex-row items-center space-x-2">
         <Currency

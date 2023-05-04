@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Account } from "./account";
+import { AccountOld } from "./account";
 import { compactString } from "../../assets/utils";
 import { accountDetails, accountHeader } from "../../assets/mockupData/accountData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Templates/Account",
-  component: Account,
+  title: "Templates/AccountOld",
+  component: AccountOld,
   argTypes: {
     backgroundColor: { control: "color" },
     color: { control: "color" },
@@ -47,15 +47,15 @@ export default {
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Account> = (args) => <Account {...args} />;
+const Template: ComponentStory<typeof AccountOld> = (args) => <AccountOld {...args} />;
 
-export const Primary: ComponentMeta<typeof Account> = Template.bind({});
+export const Primary: ComponentMeta<typeof AccountOld> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
 
 };
 
-export const CopiedItem: ComponentMeta<typeof Account> = Template.bind({});
+export const CopiedItem: ComponentMeta<typeof AccountOld> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 CopiedItem.args = {
   copyNoteText: "You have copied some text",

@@ -40,6 +40,7 @@ export const TableBody = ({
           hoverClassName,
           y % 2 === 1 ? oddClassName : evenClassName,
           y % 2 === 1 ? "tableRowOdd" : "tableRowEven",
+          row.className
         ].join(" ")}
         cols={row.cols}
         id={row.id}
@@ -53,6 +54,7 @@ export const TableBody = ({
           hoverClassName,
           y % 2 === 1 ? oddClassName : evenClassName,
           y % 2 === 1 ? "tableRowOdd" : "tableRowEven",
+          row.className
         ].join(" ")}
         cols={row.cols}
         id={row.id}
@@ -66,6 +68,7 @@ export const TableBody = ({
           hoverClassName,
           y % 2 === 1 ? oddClassName : evenClassName,
           y % 2 === 1 ? "tableRowOdd" : "tableRowEven",
+          row.className
         ].join(" ")}
         cols={row.cols}
         id={row.id}

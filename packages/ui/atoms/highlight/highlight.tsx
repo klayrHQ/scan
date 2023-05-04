@@ -5,6 +5,7 @@ interface HighlightProps {
   className?: string;
   children: any;
   size?: 'small' | 'medium' | 'large';
+  width?: string
 }
 
 /**
@@ -14,6 +15,7 @@ export const Highlight = ({
   primary = false,
   className,
   size,
+  width,
   children,
   ...props
 }: HighlightProps) => {
@@ -21,10 +23,11 @@ export const Highlight = ({
   return (
     <div
       className={[
-        'rounded border-none p-2 w-max',
+        'rounded border-none p-2',
         className,
         size === "large" ? "text-lg" : size === "small" ? "text-sm p-1" : "",
         primary ? "bg-primary text-onPrimaryHigh" : "",
+        width ? `w-${width}` : "w-max",
         mode
       ].join(' ')}
       {...props}

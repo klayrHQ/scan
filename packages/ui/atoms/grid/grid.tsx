@@ -29,11 +29,11 @@ export const Grid = ({
         flex
           ? `flex ${
               columns > 1
-                ? `sm:flex-row sm:space-x-${gap}`
+                ? `sm:flex-row sm:gap-${gap}`
                 : gap > 0
-                ? `sm:flex-col sm:space-y-${gap}`
+                ? `sm:flex-col sm:gap-${gap}`
                 : `flex-col`
-            } ${mobileColumns > 1 ? `flex-row space-x-${gap}` : `flex-col`}`
+            } ${mobileColumns > 1 ? `flex-row gap-${gap}` : `flex-col`}`
           : `grid gap-${gap} grid-cols-${mobileColumns} lg:grid-cols-${columns}`,
       ].join(" ")}
       {...props}
