@@ -7,7 +7,6 @@ const {
   borderWidth,
   widths,
   textOpacity,
-  shadowBox,
   gridTemplateColumns,
   fontSize,
   cursor,
@@ -169,6 +168,7 @@ module.exports = {
       "divider",
       "divide-x-1",
       "divide-surface-6",
+      "min-h-2",
   ],
   darkMode: "media", // or 'class'
   theme: {
