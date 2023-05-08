@@ -139,14 +139,21 @@ export default {
         total: "$100",
       },
     ],
+    sortOptions: [
+      "Highest value",
+      "Lowest value",
+      "Alphabetical",
+    ]
   }
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Account> = (args) => {
   const [showAllAssets, setShowAllAssets] = useState<boolean>(false)
+  const totalAssets = args.assetsData && args.assetsData.reduce((total, asset) => {return total + parseFloat(asset.total.replace(/[^0-9.,-]/g, ''))}, 0)
+
   return (
-    <Account {...args} showAllAssets={showAllAssets} setShowAllAssets={setShowAllAssets} />
+    <Account {...args} showAllAssets={showAllAssets} setShowAllAssets={setShowAllAssets} totalAssets={totalAssets ? `$${totalAssets.toString()}` : "$0"} />
   )
 }
 
