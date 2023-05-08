@@ -16,7 +16,7 @@ export const FavouriteButton = ({
   iconColor,
 }: FavouriteButtonProps) => {
   return (
-    <span>
+    <span className={"flex items-center"}>
       {favourited ?
           <StarIconSolid
             className={["w-5 h-5 cursor-pointer", "text-" + iconColor].join(" ")}

@@ -1,5 +1,5 @@
 import React, {ReactNode} from "react"
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
+import {ArrowDownIcon, ArrowSmallUpIcon as ArrowSmUpIcon, MagnifyingGlassIcon} from "@heroicons/react/24/solid"
 import {
   BlockDataType,
 } from "@moosty/lisk-service-provider"
@@ -10,6 +10,8 @@ import {Typography} from "../../atoms/typography/typography";
 import {FavouriteButton} from "../../atoms/favouriteButton/favouriteButton";
 import {BalanceBlock} from "../../atoms/balanceBlock/balanceBlock";
 import {Grid} from "../../atoms/grid/grid";
+import {Transition} from "@headlessui/react";
+import {cls} from "../../assets/utils";
 
 interface AccountDetailsProps {
   account: {
@@ -37,8 +39,12 @@ interface AccountDetailsProps {
   saveFavourite: (address: string, balance: string, username?: string) => void
   unFavourite: (address: string) => void
   assetsData?: Array<{name: string | ReactNode, amount: string, total: string}>
+  totalAssets?: string
   showAllAssets?: boolean
   setShowAllAssets?: (show: boolean) => void
+  sortOptions?: Array<string>
+  sortFunction?: () => void
+  searchFunction?: () => void
 }
 
 export const AccountDetails = ({
@@ -48,20 +54,21 @@ export const AccountDetails = ({
   saveFavourite,
   unFavourite,
   assetsData,
+  totalAssets = "0",
   showAllAssets,
   setShowAllAssets,
+  sortFunction,
+  searchFunction,
+  sortOptions,
 }: AccountDetailsProps) => {
 
   return (
-    <Grid
-      flex
-      className={"gap-8"}
-      columns={2}
-      gap={8}
+    <div
+      className={"gap-8 flex flex-col lg:flex-row"}
     >
       <Grid
         className={
-          "bg-surface-2 rounded text-sm p-6 shadow gap-4 h-full w-1/3"
+          "bg-surface-2 rounded text-sm p-6 shadow gap-4 h-full w-full lg:w-1/3"
         }
         flex
         columns={1}
@@ -108,8 +115,8 @@ export const AccountDetails = ({
                           "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-2 text-onSurfaceHigh font-medium"
                         }
                       >
-                      {account.description}
-                    </span>
+                        {account.description}
+                      </span>
                     )}
                     <FavouriteButton
                       favourited={favourites?.findIndex(i => i.address === account.address) !== -1}
@@ -149,11 +156,20 @@ export const AccountDetails = ({
         <Grid flex columns={1} className={"gap-2"}>
           <Grid flex>
             <Typography className={"font-bold"} tag={"span"} color={"primary"}>{"Address"}</Typography>
-            <Typography tag={"span"} color={"onSurfaceLow"}>{account.address}</Typography>
+            <Typography tag={"span"} color={"onSurfaceLow"}>
+              {account.address}
+            </Typography>
           </Grid>
           <Grid flex>
             <Typography className={"font-bold"} tag={"span"} color={"primary"}>{"Total Transactions"}</Typography>
-            <Typography tag={"span"} color={"onSurfaceLow"}>{account.address}</Typography>
+            <Typography tag={"span"} color={"onSurfaceLow"}>
+              <div className={"flex flex-tableRow"}>
+                <ArrowSmUpIcon className="text-error h-5 w-5 float-left" />
+                <span>{account.sent}</span>
+                <ArrowDownIcon className="text-success h-5 w-5 float-left" />
+                <span>{account.received}</span>
+              </div>
+            </Typography>
           </Grid>
         </Grid>
         <div className={"mt-auto"}>
@@ -170,66 +186,124 @@ export const AccountDetails = ({
           />
         </div>
       </Grid>
-      <Grid flex gap={4} className={"rounded shadow w-2/3 p-6 gap-4"}>
+      <Grid flex gap={4} className={"rounded shadow w-full lg:w-2/3 p-6 gap-4"}>
         <Grid flex columns={2} className={"justify-between"}>
           <Typography tag={"h2"} size={"Heading5"}>
             {"Assets"}
           </Typography>
-          <div className={"flex gap-4"}>
+          <div className={"gap-4 items-center hidden md:flex"}>
+            {/*Asset Search*/}
             <div
-              className={"ml-auto border-surface-3 border-solid border-[1px] rounded px-2 h-8 flex items-center gap-2"}>
+              className={cls([
+                "ml-auto bg-surface border-surface-3 border-solid border-[1px]",
+                "rounded px-2 h-8 flex items-center gap-2 w-56",
+              ])}
+            >
               <MagnifyingGlassIcon className={"w-3 h-3"}/>
-              <input className={"border-none focus:outline-none"} placeholder={"Search Assets"}/>
+              <input
+                className={"border-none focus:outline-none flex-grow"}
+                placeholder={"Search Assets"}
+                onChange={searchFunction}
+              />
             </div>
+
+            {/*Asset Sorting*/}
             <div
-              className={"ml-auto rounded py-2 px-1 flex items-center gap-2"}>
+              className={"ml-auto rounded px-1 flex gap-2"}>
               <label htmlFor={"sort"}>
                 <Typography tag={"span"} color={"onSurfaceLow"}>
                   {"Sort Type"}
                 </Typography>
               </label>
-              <select>
-                <option>{"total value"}</option>
-                <option>{"lowest value"}</option>
-                <option>{"abc"}</option>
+              <select
+                className={"rounded bg-surface border-solid border-surface-3 border-[1px] h-8 px-2 cursor-pointer w-48"}
+                onChange={sortFunction}
+              >
+                {
+                  sortOptions && sortOptions.map(option => (
+                    <option value={option}>{option}</option>
+                  ))
+                }
               </select>
             </div>
           </div>
         </Grid>
         <Grid className={"gap-2"} flex>
           <div className={"flex px-4"}>
-            <div style={{flexGrow: "2"}}>{"Name"}</div>
-            <div className={"text-right"} style={{flexGrow: "1"}}>{"Amount"}</div>
-            <div className={"text-right"} style={{flexGrow: "1"}}>{"Total Value"}</div>
+            <div style={{flexGrow: "2"}}>
+              <Typography tag={"span"} size={"body"}>{"Name"}</Typography>
+            </div>
+            <div className={"text-right"} style={{flexGrow: "1"}}>
+              <Typography tag={"span"} size={"body"}>{"Amount"}</Typography>
+            </div>
+            <div className={"text-right hidden md:block"} style={{flexGrow: "1"}}>
+              <Typography tag={"span"} size={"body"}>{"Total Value"}</Typography>
+            </div>
           </div>
           {
             assetsData && assetsData.slice(0,3).map(row => (
               <div className={"flex p-4 border-solid border-[1px] border-surface-3 rounded items-center"}>
                 <div style={{flexGrow: "2"}}>{row.name}</div>
-                <div className={"text-right"} style={{flexGrow: "1"}}>{row.amount}</div>
-                <div className={"text-right"} style={{flexGrow: "1"}}>{row.total}</div>
+                <div className={"text-right flex flex-col md:block"} style={{flexGrow: "1"}}>
+                  <Typography tag={"span"} size={"body"}>{row.amount}</Typography>
+                  <Typography tag={"span"} size={"subBody"} className={"md:hidden"}>{row.total}</Typography>
+                </div>
+                <div className={"text-right hidden md:block"} style={{flexGrow: "1"}}>
+                  <Typography tag={"span"} size={"body"}>{row.total}</Typography>
+                </div>
               </div>
             ))
           }
-          {
-            showAllAssets && assetsData && assetsData.slice(3,assetsData.length).map(row => (
-              <div className={"flex p-4 border-solid border-[1px] border-surface-3 rounded items-center"}>
-                <div style={{flexGrow: "2"}}>{row.name}</div>
-                <div className={"text-right"} style={{flexGrow: "1"}}>{row.amount}</div>
-                <div className={"text-right"} style={{flexGrow: "1"}}>{row.total}</div>
-              </div>
-            ))
-          }
+          <Grid
+            className={cls([
+              "gap-2 transition-all ease-in-out duration-300 overflow-hidden",
+              !showAllAssets && "-my-1",
+            ])}
+            flex
+            style={{
+              maxHeight: showAllAssets && assetsData ? `${assetsData.slice(3,assetsData.length).length * 80}px` : "0px",
+            }}
+          >
+            {
+              assetsData && assetsData.slice(3,assetsData.length).map(row => (
+                <div className={"flex p-4 border-solid border-[1px] border-surface-3 rounded items-center"}>
+                  <div style={{flexGrow: "2"}}>
+                    <Typography tag={"span"} size={"body"}> {row.name}</Typography>
+                  </div>
+                  <div className={"text-right flex flex-col md:block"} style={{flexGrow: "1"}}>
+                    <Typography tag={"span"} size={"body"}>{row.amount}</Typography>
+                    <Typography tag={"span"} size={"subBody"} className={"md:hidden"}>{row.total}</Typography>
+                  </div>
+                  <div className={"text-right hidden md:block"} style={{flexGrow: "1"}}>
+                    <Typography tag={"span"} size={"body"}>{row.total}</Typography>
+                  </div>
+                </div>
+              ))
+            }
+          </Grid>
           <div
             className={"flex p-4 border-solid border-[1px] border-surface-3 rounded items-center bg-surface-2 cursor-pointer hover:bg-surface-1"}
             onClick={() => setShowAllAssets &&  setShowAllAssets(!showAllAssets)}
           >
-            <div style={{flexGrow: "2"}}><Typography tag={"span"} color={"onSurfaceLow"}>{`${assetsData && (assetsData.length - 3)} other tokens`}</Typography></div>
-            <div className={"text-right"} style={{flexGrow: "1"}}>{""}</div>
-            <div className={"text-right"} style={{flexGrow: "1"}}>{"$1000"}</div>
+            <div style={{flexGrow: "2"}}>
+              <Typography tag={"span"} color={"onSurfaceLow"}>
+                {
+                  showAllAssets ?
+                    "show less"
+                    :
+                  `${assetsData && (assetsData.length - 3)} other tokens`
+                }
+              </Typography>
+            </div>
+            <div className={"text-right"} style={{flexGrow: "1"}}>
+              {""}
+            </div>
+            <div className={"text-right"} style={{flexGrow: "1"}}>
+              <Typography tag={"span"} size={"body"}>{totalAssets}</Typography>
+            </div>
           </div>
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   )
 }

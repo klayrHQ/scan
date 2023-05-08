@@ -33,8 +33,12 @@ interface AccountProps {
   setCopyNoteText: Function
   transactionsCount: {in: number, out: number}
   assetsData?: Array<{name: string | ReactNode, amount: string, total: string}>
+  totalAssets?: string
   showAllAssets?: boolean
   setShowAllAssets?: (show: boolean) => void
+  sortOptions?: Array<string>
+  sortFunction?: () => void
+  searchFunction?: () => void
 }
 
 export const Account = ({
@@ -46,8 +50,12 @@ export const Account = ({
   copyNoteText,
   setCopyNoteText,
   assetsData,
+  totalAssets,
   showAllAssets,
   setShowAllAssets,
+  sortOptions,
+  sortFunction,
+  searchFunction,
 }: AccountProps) => {
 
   return (
@@ -63,8 +71,12 @@ export const Account = ({
             saveFavourite={saveFavourite}
             unFavourite={unFavourite}
             assetsData={assetsData}
+            totalAssets={totalAssets}
             showAllAssets={showAllAssets}
             setShowAllAssets={setShowAllAssets}
+            sortOptions={sortOptions}
+            sortFunction={sortFunction}
+            searchFunction={searchFunction}
           />
         </Grid>
         <Grid className={"m-auto w-full max-w-app"}>
