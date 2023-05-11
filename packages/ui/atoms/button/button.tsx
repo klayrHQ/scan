@@ -4,7 +4,7 @@ import {cva} from "class-variance-authority";
 import {cls} from "../../assets/utils";
 
 interface ButtonProps {
-  type?: "primary" | "secondary" | "transparent"
+  type?: "primary" | "secondary" | "tertiary" | "transparent"
   className?: string
   hover?: boolean
   active?: boolean
@@ -26,6 +26,7 @@ const buttonCVA = cva(
       type: {
         primary: "bg-primary text-onPrimary border-primary",
         secondary: "bg-secondary text-onSecondary border-secondary",
+        tertiary: "text-onSurfaceLow border-none",
         transparent: "bg-transparent text-onSurfaceHigh border-transparent",
       },
       size: {
@@ -58,6 +59,11 @@ const buttonCVA = cva(
         className: "hover:border-surface-1 hover:bg-surface-1 hover:text-onSurfaceHigh",
       },
       {
+        type: "tertiary",
+        hover: true,
+        className: "hover:bg-surface-3",
+      },
+      {
         type: "transparent",
         hover: true,
         className: "hover:border-primary hover:text-onSurfaceHigh",
@@ -71,6 +77,11 @@ const buttonCVA = cva(
         type: "secondary",
         active: true,
         className: "bg-surface-1 border-surface-1 text-onSurfaceHigh",
+      },
+      {
+        type: "tertiary",
+        active: true,
+        className: "bg-surface-4 text-onSurfaceHigh",
       },
       {
         type: "transparent",
@@ -113,6 +124,7 @@ export const Button = ({
       <Typography
         className={"block"}
         tag={"span"}
+        size={size === "small" ? "subBody" : size === "large" ? "ParagraphLarge" : "body"}
       >
         {label}
         {children}

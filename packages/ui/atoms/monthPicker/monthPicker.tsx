@@ -11,8 +11,6 @@ interface MonthPickerProps {
   toValue: number,
   setFromValue: any,
   setToValue: any,
-  resetRef: any,
-  conditionalRef?: any,
   max?: number
   selectMonth: (month: string, year: number) => void,
   selectQuarter: (quarter: string, year: number) => void,
@@ -21,6 +19,8 @@ interface MonthPickerProps {
   setYear1: (year: number) => void
   year2: number
   setYear2: (year: number) => void
+  borderColor: string
+  borderWidth: string
 }
 
 export const MonthPicker: FC<MonthPickerProps> = ({
@@ -37,6 +37,8 @@ export const MonthPicker: FC<MonthPickerProps> = ({
   setYear1,
   year2,
   setYear2,
+  borderColor= "surface-4",
+  borderWidth,
 }) => {
 
   const months = [
@@ -57,13 +59,23 @@ export const MonthPicker: FC<MonthPickerProps> = ({
 
   return (
     <div className={cls(["relative text-onSurfaceHigh", className])}>
-      <div className="flex flex-col border-2 border-r-0 border-b-0 border-solid border-collapse font-bold">
+      <div className={cls([
+        borderColor ? `border-${borderColor}` : "",
+        borderWidth ? `border-${borderWidth}` : "border-2",
+        "flex flex-col border-r-0 border-b-0 border-solid",
+        "border-collapse font-bold"
+      ])}>
         <div className="grid" style={{gridTemplateColumns: "repeat(24,1fr)"}}>
           {months.map((month) => (
             <div
               onClick={() => selectMonth(month, year1)}
               key={`${month}-1`}
-              className="h-8 border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
+              className={cls([
+                borderColor ? `border-${borderColor}` : "",
+                borderWidth ? `border-${borderWidth}` : "border-2",
+                "h-8 border-t-0 border-l-0 border-solid",
+                "text-center flex items-center justify-center cursor-pointer"
+              ])}
             >
               <span className="hidden md:inline">{month}</span>
               <span className="md:hidden">{month.substring(0, 1)}</span>
@@ -73,7 +85,12 @@ export const MonthPicker: FC<MonthPickerProps> = ({
             <div
               onClick={() => selectMonth(month, year2)}
               key={`${month}-2`}
-              className="h-8 border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
+              className={cls([
+                borderColor ? `border-${borderColor}` : "",
+                borderWidth ? `border-${borderWidth}` : "border-2",
+                "h-8 border-t-0 border-l-0 border-solid",
+                "text-center flex items-center justify-center cursor-pointer"
+              ])}
             >
               <span className="hidden md:inline">{month}</span>
               <span className="md:hidden">{month.substring(0, 1)}</span>
@@ -85,7 +102,12 @@ export const MonthPicker: FC<MonthPickerProps> = ({
             <div
               onClick={() => selectQuarter(quarter, year1)}
               key={`${quarter}-1`}
-              className="border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
+              className={cls([
+                borderColor ? `border-${borderColor}` : "",
+                borderWidth ? `border-${borderWidth}` : "border-2",
+                "border-t-0 border-l-0 border-solid",
+                "text-center flex items-center justify-center cursor-pointer"
+              ])}
             >
               <div className={"pointer"}>{quarter}</div>
             </div>
@@ -94,7 +116,12 @@ export const MonthPicker: FC<MonthPickerProps> = ({
             <div
               onClick={() => selectQuarter(quarter, year2)}
               key={`${quarter}-2`}
-              className="border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
+              className={cls([
+                borderColor ? `border-${borderColor}` : "",
+                borderWidth ? `border-${borderWidth}` : "border-2",
+                "border-t-0 border-l-0 border-solid",
+                "text-center flex items-center justify-center cursor-pointer"
+              ])}
             >
               {quarter}
             </div>
@@ -103,7 +130,12 @@ export const MonthPicker: FC<MonthPickerProps> = ({
         <div className="grid h-8" style={{gridTemplateColumns: "repeat(2, 1fr)"}}>
           <div
             onClick={() => selectYear(year1)}
-            className="w-full text-center border-2 border-t-0 border-l-0 border-solid h-8 flex items-center justify-center cursor-pointer"
+            className={cls([
+              borderColor ? `border-${borderColor}` : "",
+              borderWidth ? `border-${borderWidth}` : "border-2",
+              "w-full text-center border-t-0 border-l-0 border-solid",
+              "h-8 flex items-center justify-center cursor-pointer"
+            ])}
           >
             <IconButton
               icon={"chevronLeft"}
@@ -130,7 +162,12 @@ export const MonthPicker: FC<MonthPickerProps> = ({
           </div>
           <div
             onClick={() => selectYear(year2)}
-            className="w-full text-center border-2 border-t-0 border-l-0 border-solid h-8 flex items-center justify-center cursor-pointer"
+            className={cls([
+              borderColor ? `border-${borderColor}` : "",
+              borderWidth ? `border-${borderWidth}` : "border-2",
+              "w-full text-center border-t-0 border-l-0 border-solid",
+              "h-8 flex items-center justify-center cursor-pointer"
+            ])}
           >
             <IconButton
               icon={"chevronLeft"}

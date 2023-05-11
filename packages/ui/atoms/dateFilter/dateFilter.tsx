@@ -1,10 +1,12 @@
 import React, {FC, useRef} from "react"
-//import DatePicker from "react-datepicker"
+import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { MonthPicker} from "../monthPicker/monthPicker";
+import {Button} from "../button/button";
+import {cls} from "../../assets/utils";
 
 interface DateFilterProps {
-  classes?: string,
+  className?: string,
   filters: {
     dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined
   } | undefined,
@@ -13,115 +15,101 @@ interface DateFilterProps {
   toValue: number,
   setFromValue: any,
   setToValue: any,
-  resetRef: any,
   filterModes: {dateFilter?:"slider" | "custom"} | undefined,
   setFilterModes: React.Dispatch<React.SetStateAction<{dateFilter?: "slider" | "custom"} | undefined>>,
+  monthPickerFunctions: {
+    selectMonth: (month: string, year: number) => void,
+    selectQuarter: (quarter: string, year: number) => void,
+    selectYear: (year: number) => void,
+    year1: number
+    setYear1: (year: number) => void
+    year2: number
+    setYear2: (year: number) => void
+  }
+  onChange: (dates: any) => void
 }
 
 export const DateFilter: FC<DateFilterProps> = ({
-  classes,
+  className,
   filters,
   setFilters,
   fromValue,
   toValue,
   setFromValue,
   setToValue,
-  resetRef,
   filterModes,
-  setFilterModes
+  setFilterModes,
+  monthPickerFunctions,
+  onChange,
 }) => {
-  const usedDatepicker = useRef(false)
   let isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-  // @ts-ignore
-  /*const isSafari = typeof window.GestureEvent === "function"*/
-
-  const onChange = (dates: any) => {
-    const [start, end] = dates
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {from: start, to: previousFilters?.dateFilters?.to}
-    }))
-    if (!end) {
-      setFilters(previousFilters => ({
-        ...previousFilters,
-        dateFilters: {from: previousFilters?.dateFilters?.from, to: end}
-      }))
-      return
-    }
-    const newEndDate = new Date(end)
-    newEndDate.setHours(23, 59, 59, 999)
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {from: previousFilters?.dateFilters?.from, to: newEndDate}
-    }))
-
-    usedDatepicker.current = true
-  }
-
-  /*useEffect(() => {
-    isSafari ? console.log("Is Safari") : console.log("Is Not Safari")
-  }, [])*/
 
   return (
-    <div className={classes}>
+    <div className={cls(["w-full",className])}>
       <div className={`hidden ${isSafari ? "md:hidden" : "md:block"}`}>
-        <div className="my-4">
-          <button
-            className={`md:mr-2 px-2 py-2 w-1/2 md:max-w-max rounded text-xs font-medium cursor-pointer hover:bg-surface-3 ${
-              filterModes?.dateFilter === "slider" && "bg-surface-4 text-onSurfaceHigh font-medium"
-            }`}
+        <div className="my-4 flex gap-2">
+          <Button
             onClick={() => setFilterModes(previousModes => ({
               ...previousModes,
               dateFilter: "slider"
             }))}
-          >
-            Slider
-          </button>
-          <button
-            className={`md:mr-2 px-2 py-2 w-1/2 md:max-w-max rounded text-xs font-medium cursor-pointer hover:bg-surface-3 ${
-              filterModes?.dateFilter === "custom" && "bg-surface-4 text-onSurfaceHigh"
-            }`}
+            label={"Slider"}
+            size={"small"}
+            type={"tertiary"}
+            active={filterModes?.dateFilter === "slider"}
+          />
+          <Button
             onClick={() => setFilterModes(previousModes => ({
               ...previousModes,
               dateFilter: "custom"
             }))}
-          >
-            Custom range
-          </button>
+            label={"Custom range"}
+            size={"small"}
+            type={"tertiary"}
+            active={filterModes?.dateFilter === "custom"}
+          />
         </div>
         { filterModes?.dateFilter === "slider" &&
             <div className="mb-4">
-               {/* <MonthPicker
+                <MonthPicker
+                    max={24}
                     fromValue={fromValue}
                     toValue={toValue}
                     setFromValue={setFromValue}
                     setToValue={setToValue}
-                />*/}
+                    year1={monthPickerFunctions.year1}
+                    setYear1={monthPickerFunctions.setYear1}
+                    year2={monthPickerFunctions.year2}
+                    setYear2={monthPickerFunctions.setYear2}
+                    selectYear={monthPickerFunctions.selectYear}
+                    selectMonth={monthPickerFunctions.selectMonth}
+                    selectQuarter={monthPickerFunctions.selectQuarter}
+                />
             </div>
         }
         {filterModes?.dateFilter === "custom" && (
           <div>
-            {/*<DatePicker
+            <DatePicker
               selected={filters?.dateFilters?.from}
               onChange={onChange}
               startDate={filters?.dateFilters?.from}
               endDate={filters?.dateFilters?.to}
               selectsRange
               inline
-            />*/}
+            />
           </div>
         )}
       </div>
       <div className={`${isSafari ? "block md:block" : "md:hidden"}`}>
         <div>
-          {/*<DatePicker
+          <DatePicker
             selected={filters?.dateFilters?.from}
             onChange={onChange}
             startDate={filters?.dateFilters?.from}
             endDate={filters?.dateFilters?.to}
             selectsRange
             inline
-          />*/}
+          />
         </div>
       </div>
     </div>

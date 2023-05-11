@@ -86,3 +86,28 @@ export type iconVariants =
   | "logOut"
   | "undefined"
   | "number"
+
+export interface FiltersType {
+  dateRange?: string | null | undefined,
+  dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined,
+  amountRange?: string | null | undefined,
+  amountFilters?: {from: number | null | undefined, to: number | null | undefined} | undefined,
+  sender?: string | null | undefined,
+  recipient?: string | null | undefined,
+  data?: string | null | undefined,
+}
+
+export interface FormattedFiltersType {
+  timestamp?: string,
+  amount?: string,
+  senderAddress?: string,
+  senderUsername?: string,
+  recipientAddress?: string,
+  recipientUsername?: string,
+  data?: string,
+}
+
+export interface FilterModesType {
+  dateFilter?: "slider" | "custom",
+  amountFilter?: "buttons" | "slider" | "range",
+}
