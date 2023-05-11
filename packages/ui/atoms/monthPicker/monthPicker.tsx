@@ -1,32 +1,43 @@
-import {FC, useEffect, useRef, useState} from "react"
+import {FC} from "react"
 import { MultiRangeSlider } from "../multiRangeSlider/multiRangeSlider";
 import { ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import React from "react"
+import {IconButton} from "../iconButton/iconButton";
+import {cls} from "../../assets/utils";
 
-export const MonthPicker: FC<{
-  filters: {
-    dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined
-  } | undefined,
-  setFilters: React.Dispatch<React.SetStateAction<{} | undefined>>,
+interface MonthPickerProps {
+  className?: string
   fromValue: number,
   toValue: number,
   setFromValue: any,
   setToValue: any,
   resetRef: any,
   conditionalRef?: any,
-}> = ({
-        filters,
-        setFilters,
-        fromValue,
-        toValue,
-        setFromValue,
-        setToValue,
-        resetRef,
-        conditionalRef,
-      }) => {
-  const max = 24
-  const firstUpdate = useRef(true)
-  const updateYear = useRef(false)
+  max?: number
+  selectMonth: (month: string, year: number) => void,
+  selectQuarter: (quarter: string, year: number) => void,
+  selectYear: (year: number) => void,
+  year1: number
+  setYear1: (year: number) => void
+  year2: number
+  setYear2: (year: number) => void
+}
+
+export const MonthPicker: FC<MonthPickerProps> = ({
+  className,
+  fromValue,
+  toValue,
+  setFromValue,
+  setToValue,
+  max = 24,
+  selectMonth,
+  selectQuarter,
+  selectYear,
+  year1,
+  setYear1,
+  year2,
+  setYear2,
+}) => {
 
   const months = [
     "Jan",
@@ -43,226 +54,109 @@ export const MonthPicker: FC<{
     "Dec",
   ]
   const quarters = ["Q1", "Q2", "Q3", "Q4"]
-  const [year, setYear] = useState<number>(new Date().getFullYear() - 1)
-  const [year2, setYear2] = useState<number>(new Date().getFullYear())
-  const getThumbNumber = (fromDate: Date, toDate: Date) => {
-    setFromValue(
-      fromDate.getFullYear() === year
-        ? fromDate.getMonth()
-        : 12 + fromDate.getMonth(),
-    )
-    setToValue(
-      toDate.getFullYear() === year
-        ? toDate.getMonth() + 1
-        : 12 + toDate.getMonth() + 1,
-    )
-  }
-  const getYear = (value: number) => (value < 12 ? year : year2)
-  const getMonth = (value: number, modulo = 12) => value % modulo
-  const getToMonth = (value: number) =>
-    getMonth(value, 13) + Math.floor((value - 1) / 12)
-  const getMonthDays = (value: number) =>
-    new Date(getYear(value - 1), getMonth(value), 0).getDate()
-  const getMonthDaysByDate = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
-  }
-
-  useEffect(() => {
-    if (firstUpdate.current && !filters?.dateFilters?.from && !filters?.dateFilters?.to) {
-      firstUpdate.current = false
-      fromValue && setFromValue(fromValue)
-      toValue && setToValue(toValue)
-      return
-    }
-
-    if(resetRef.current) {
-      resetRef.current = false
-      if(updateYear.current) {
-        setFilters(previousFilters => ({
-          ...previousFilters,
-          dateFilters: {
-            from: new Date(`${getYear(fromValue)}-${getMonth(fromValue) + 1}-01 00:00:00`),
-            to: new Date(
-              `${getYear(toValue - 1)}-${getToMonth(toValue)}-${getMonthDays(
-                toValue,
-              )} 23:59:59`)
-          }
-        }))
-        return
-      }
-      filters?.dateFilters?.from && setFromValue(fromValue)
-      filters?.dateFilters?.to && setToValue(toValue)
-      return
-    }
-
-    if(conditionalRef.current) {
-      conditionalRef.current = false
-      return
-    }
-
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {
-        from: new Date(`${getYear(fromValue)}-${getMonth(fromValue) + 1}-01 00:00:00`),
-        to: new Date(
-          `${getYear(toValue - 1)}-${getToMonth(toValue)}-${getMonthDays(
-            toValue,
-          )} 23:59:59`)
-      }
-    }))
-
-  }, [fromValue, toValue, year, year2])
-
-  useEffect(() => {
-    if(updateYear.current) {
-      updateYear.current = false
-    } else {
-      filters?.dateFilters?.from && filters?.dateFilters?.to && getThumbNumber(filters?.dateFilters?.from, filters?.dateFilters?.to)
-    }
-
-    /*filters?.dateFilters?.from && filters?.dateFilters?.to && getThumbNumber(filters?.dateFilters?.from, filters?.dateFilters?.to)*/
-  }, [filters?.dateFilters?.from, filters?.dateFilters?.to])
-
-  const selectYear = (y: number) => {
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {
-        from: new Date(`${y}-1-01 00:00:00`),
-        to: new Date(`${y}-12-31 23:59:59`),
-      }
-    }))
-  }
-
-  const selectQuarter = (q: string, y: number) => {
-    const quarter = quarters.indexOf(q)
-    const fromMonth = quarter * 3
-    const toMonth = quarter * 3 + 3
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {
-        from: new Date(`${y}-${fromMonth + 1}-01 00:00:00`),
-        to: new Date(
-          `${y}-${toMonth}-${getMonthDaysByDate(
-            new Date(`${y}-${toMonth}-01`),
-          )} 23:59:59`),
-      }
-    }))
-  }
-
-  const selectMonth = (m: string, y: number) => {
-    const month = months.indexOf(m)
-    setFilters(previousFilters => ({
-      ...previousFilters,
-      dateFilters: {
-        from: new Date(`${y}-${month + 1}-01 00:00:00`),
-        to: new Date(
-          `${y}-${month + 1}-${getMonthDaysByDate(
-            new Date(`${y}-${month + 1}-01`),
-          )} 23:59:59`),
-      }
-    }))
-  }
 
   return (
-    <div className="relative text-onSurfaceHigh">
-      <table className="flex flex-col border-[1px] border-collapse font-bold">
-        <tbody>
-        <tr className="flex">
+    <div className={cls(["relative text-onSurfaceHigh", className])}>
+      <div className="flex flex-col border-2 border-r-0 border-b-0 border-solid border-collapse font-bold">
+        <div className="grid" style={{gridTemplateColumns: "repeat(24,1fr)"}}>
           {months.map((month) => (
-            <td
-              onClick={() => selectMonth(month, year)}
+            <div
+              onClick={() => selectMonth(month, year1)}
               key={`${month}-1`}
-              className="w-[8.35%] h-8 border-[1px] text-center flex items-center justify-center cursor-pointer"
+              className="h-8 border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
             >
               <span className="hidden md:inline">{month}</span>
               <span className="md:hidden">{month.substring(0, 1)}</span>
-            </td>
+            </div>
           ))}
           {months.map((month) => (
-            <td
+            <div
               onClick={() => selectMonth(month, year2)}
               key={`${month}-2`}
-              className="w-[8.35%] h-8 border-[1px] text-center flex items-center justify-center cursor-pointer"
+              className="h-8 border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
             >
               <span className="hidden md:inline">{month}</span>
               <span className="md:hidden">{month.substring(0, 1)}</span>
-            </td>
+            </div>
           ))}
-        </tr>
-        <tr className="flex h-8">
+        </div>
+        <div className="grid h-8" style={{gridTemplateColumns: "repeat(8, 1fr)"}}>
           {quarters.map((quarter) => (
-            <td
-              onClick={() => selectQuarter(quarter, year)}
+            <div
+              onClick={() => selectQuarter(quarter, year1)}
               key={`${quarter}-1`}
-              className="w-1/4 border-[1px] text-center flex items-center justify-center cursor-pointer"
+              className="border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
             >
               <div className={"pointer"}>{quarter}</div>
-            </td>
+            </div>
           ))}
           {quarters.map((quarter) => (
-            <td
+            <div
               onClick={() => selectQuarter(quarter, year2)}
               key={`${quarter}-2`}
-              className="w-1/4 border-[1px] text-center flex items-center justify-center cursor-pointer"
+              className="border-2 border-t-0 border-l-0 border-solid text-center flex items-center justify-center cursor-pointer"
             >
               {quarter}
-            </td>
+            </div>
           ))}
-        </tr>
-        <tr className="flex h-8">
-          <td
-            onClick={() => selectYear(year)}
-            className="w-full text-center border-[1px] h-8 flex items-center justify-center cursor-pointer"
+        </div>
+        <div className="grid h-8" style={{gridTemplateColumns: "repeat(2, 1fr)"}}>
+          <div
+            onClick={() => selectYear(year1)}
+            className="w-full text-center border-2 border-t-0 border-l-0 border-solid h-8 flex items-center justify-center cursor-pointer"
           >
-            <button
+            <IconButton
+              icon={"chevronLeft"}
               className="cursor-pointer relative z-10 h-full"
+              color={"body"}
               onClick={() => {
-                updateYear.current = true
-                setYear(year - 1)
+                setYear1(year1 - 1)
               }}
-            >
-              <ChevronLeftIcon className="h-full" />
-            </button>
-            {year}
-            <button
+              size={"small"}
+              type={"iconOnly"}
+            />
+            {year1}
+            <IconButton
+              icon={"chevronRight"}
               className="cursor-pointer relative z-10 h-full"
+              color={"body"}
               onClick={() => {
-                updateYear.current = true
-                setYear(year + 1)
+                setYear1(year1 + 1)
               }}
-              disabled={year + 1 === year2}
-            >
-              <ChevronRightIcon className="h-full" />
-            </button>
-          </td>
-          <td
+              disabled={year1 + 1 === year2}
+              size={"small"}
+              type={"iconOnly"}
+            />
+          </div>
+          <div
             onClick={() => selectYear(year2)}
-            className="w-full text-center border-[1px] h-8 flex items-center justify-center cursor-pointer"
+            className="w-full text-center border-2 border-t-0 border-l-0 border-solid h-8 flex items-center justify-center cursor-pointer"
           >
-            <button
+            <IconButton
+              icon={"chevronLeft"}
               className="cursor-pointer relative z-10 h-full"
+              color={"body"}
               onClick={() => {
-                updateYear.current = true
                 setYear2(year2 - 1)
               }}
-              disabled={year2 - 1 === year}
-            >
-              <ChevronLeftIcon className="h-full" />
-            </button>
+              disabled={year2 - 1 === year1}
+              size={"small"}
+              type={"iconOnly"}
+            />
             {year2}
-            <button
+            <IconButton
+              icon={"chevronRight"}
               className="cursor-pointer relative z-10 h-full"
+              color={"body"}
               onClick={() => {
-                updateYear.current = true
                 setYear2(year2 + 1)
               }}
-            >
-              <ChevronRightIcon className="h-full" />
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+              size={"small"}
+              type={"iconOnly"}
+            />
+          </div>
+        </div>
+      </div>
       <div className="absolute w-full h-full top-0 left-0 pointer-events-none">
         <MultiRangeSlider
           fromValue={fromValue}
@@ -272,6 +166,9 @@ export const MonthPicker: FC<{
           className={"h-full"}
           setFromValue={setFromValue}
           setToValue={setToValue}
+          fillColor={"transparent"}
+          fillClassName={"border-primary border-2 border-solid"}
+          trackColor={"transparent"}
         />
       </div>
     </div>

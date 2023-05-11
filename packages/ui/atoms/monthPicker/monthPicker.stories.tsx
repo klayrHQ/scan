@@ -18,16 +18,16 @@ export default {
     },
   },
   args: {
-
+    className: "w-10/12"
   }
 } as any;
 
 const Template: ComponentStory<typeof MonthPicker> = (args) => {
   const [fromValue, setFromValue] = useState<number>(0)
-  const [toValue, setToValue] = useState<number>(100)
+  const [toValue, setToValue] = useState<number>(args.max || 24)
 
   return (
-    <div className={"h-[100vh] w-[100vw] flex items-center p-8"}>
+    <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
       <MonthPicker {...args} fromValue={fromValue} toValue={toValue} setFromValue={setFromValue} setToValue={setToValue}/>
     </div>
   )
