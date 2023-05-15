@@ -4,7 +4,7 @@ import { DateFilter } from "./dateFilter";
 import {FilterModesType, FiltersType} from "../../types";
 
 export default {
-  title: "Atoms/DateFilter",
+  title: "Atoms/Filters/DateFilter",
   component: DateFilter,
   argTypes: {
     backgroundColor: { control: "color" },

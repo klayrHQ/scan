@@ -1,8 +1,7 @@
 import React from 'react'
-import {Button} from "../../atoms";
+import {Button} from "../index";
 
 export interface FilterButtonsProps {
-  primary?: boolean
   buttons: {
     label: string
     state: string
@@ -15,19 +14,19 @@ export interface FilterButtonsProps {
 }
 
 export const FilterButtons = ({
-  primary = true,
   buttons,
   onChange,
   resetFilters,
   defaultState,
   className,
-  selection
+  selection,
 }: FilterButtonsProps) => {
   return (
     <>
       <div className={[className, "hidden md:flex"].join(" ")}>
         {buttons && buttons.map((button) => (
           <Button
+            active={selection === button.state}
             key={`button-${button.state}`}
             className={[
               " md:mr-2 px-3 py-2",
@@ -43,7 +42,6 @@ export const FilterButtons = ({
               resetFilters && resetFilters()
             }}
             label={button.label}
-            primary={primary && selection === button.state}
           />
         ))}
       </div>

@@ -8,9 +8,9 @@ import {cls} from "../../assets/utils";
 interface MonthPickerProps {
   className?: string
   fromValue: number,
+  setFromValue: (value: number) => void,
   toValue: number,
-  setFromValue: any,
-  setToValue: any,
+  setToValue: (value: number) => void,
   max?: number
   selectMonth: (month: string, year: number) => void,
   selectQuarter: (quarter: string, year: number) => void,
@@ -19,8 +19,8 @@ interface MonthPickerProps {
   setYear1: (year: number) => void
   year2: number
   setYear2: (year: number) => void
-  borderColor: string
-  borderWidth: string
+  borderColor?: string
+  borderWidth?: string
 }
 
 export const MonthPicker: FC<MonthPickerProps> = ({

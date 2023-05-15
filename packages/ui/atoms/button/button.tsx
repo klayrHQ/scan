@@ -26,7 +26,7 @@ const buttonCVA = cva(
       type: {
         primary: "bg-primary text-onPrimary border-primary",
         secondary: "bg-secondary text-onSecondary border-secondary",
-        tertiary: "text-onSurfaceLow border-none",
+        tertiary: "text-onSurfaceHigh border-none",
         transparent: "bg-transparent text-onSurfaceHigh border-transparent",
       },
       size: {
@@ -66,7 +66,7 @@ const buttonCVA = cva(
       {
         type: "transparent",
         hover: true,
-        className: "hover:border-primary hover:text-onSurfaceHigh",
+        className: "hover:bg-surface-3 hover:text-onSurfaceHigh",
       },
       {
         type: "primary",

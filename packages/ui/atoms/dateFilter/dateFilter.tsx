@@ -4,17 +4,21 @@ import "react-datepicker/dist/react-datepicker.css"
 import { MonthPicker} from "../monthPicker/monthPicker";
 import {Button} from "../button/button";
 import {cls} from "../../assets/utils";
+import {SwitchButtons} from "../switchButtons/switchButtons";
+import {Typography} from "../typography/typography";
+import {Grid} from "../grid/grid";
 
 interface DateFilterProps {
+  title?: string,
   className?: string,
   filters: {
     dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined
   } | undefined,
   setFilters: React.Dispatch<React.SetStateAction<{dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined} | undefined>>,
   fromValue: number,
+  setFromValue: (value: number) => void,
   toValue: number,
-  setFromValue: any,
-  setToValue: any,
+  setToValue: (value: number) => void,
   filterModes: {dateFilter?:"slider" | "custom"} | undefined,
   setFilterModes: React.Dispatch<React.SetStateAction<{dateFilter?: "slider" | "custom"} | undefined>>,
   monthPickerFunctions: {
@@ -45,47 +49,53 @@ export const DateFilter: FC<DateFilterProps> = ({
   let isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
   return (
-    <div className={cls(["w-full",className])}>
-      <div className={`hidden ${isSafari ? "md:hidden" : "md:block"}`}>
-        <div className="my-4 flex gap-2">
-          <Button
-            onClick={() => setFilterModes(previousModes => ({
+    <Grid
+      flex
+      className={cls([
+        "gap-4",
+        className
+      ])}
+    >
+      <Typography tag={"h2"}>{"Date"}</Typography>
+      <SwitchButtons
+        className={`hidden ${isSafari ? "md:hidden" : "md:block"}`}
+        activeButton={filterModes?.dateFilter}
+        buttons={[
+          {
+            label: "Slider",
+            onClick: () => setFilterModes(previousModes => ({
               ...previousModes,
               dateFilter: "slider"
-            }))}
-            label={"Slider"}
-            size={"small"}
-            type={"tertiary"}
-            active={filterModes?.dateFilter === "slider"}
-          />
-          <Button
-            onClick={() => setFilterModes(previousModes => ({
+            })),
+          },
+          {
+            label: "Custom",
+            onClick: () => setFilterModes(previousModes => ({
               ...previousModes,
               dateFilter: "custom"
-            }))}
-            label={"Custom range"}
-            size={"small"}
-            type={"tertiary"}
-            active={filterModes?.dateFilter === "custom"}
-          />
-        </div>
-        { filterModes?.dateFilter === "slider" &&
-            <div className="mb-4">
-                <MonthPicker
-                    max={24}
-                    fromValue={fromValue}
-                    toValue={toValue}
-                    setFromValue={setFromValue}
-                    setToValue={setToValue}
-                    year1={monthPickerFunctions.year1}
-                    setYear1={monthPickerFunctions.setYear1}
-                    year2={monthPickerFunctions.year2}
-                    setYear2={monthPickerFunctions.setYear2}
-                    selectYear={monthPickerFunctions.selectYear}
-                    selectMonth={monthPickerFunctions.selectMonth}
-                    selectQuarter={monthPickerFunctions.selectQuarter}
-                />
-            </div>
+            })),
+          },
+        ]}
+        size={"small"}
+      />
+      <div className={`hidden ${isSafari ? "md:hidden" : "md:block"}`}>
+        {filterModes?.dateFilter === "slider" &&
+          <div>
+            <MonthPicker
+              max={24}
+              fromValue={fromValue}
+              toValue={toValue}
+              setFromValue={setFromValue}
+              setToValue={setToValue}
+              year1={monthPickerFunctions.year1}
+              setYear1={monthPickerFunctions.setYear1}
+              year2={monthPickerFunctions.year2}
+              setYear2={monthPickerFunctions.setYear2}
+              selectYear={monthPickerFunctions.selectYear}
+              selectMonth={monthPickerFunctions.selectMonth}
+              selectQuarter={monthPickerFunctions.selectQuarter}
+            />
+          </div>
         }
         {filterModes?.dateFilter === "custom" && (
           <div>
@@ -112,6 +122,6 @@ export const DateFilter: FC<DateFilterProps> = ({
           />
         </div>
       </div>
-    </div>
+    </Grid>
   )
 }

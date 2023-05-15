@@ -10,10 +10,10 @@ interface MultiRangeSliderProps {
   trackColor?: string
   fillClassName?: string
   fillColor?: string
-  setFromValue: any
-  setToValue: any
   fromValue: number
+  setFromValue: (value: number) => void
   toValue: number
+  setToValue: (value: number) => void
   steps?: number
 }
 

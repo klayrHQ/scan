@@ -4,6 +4,9 @@ import { Transactions } from "./transactions";
 import { compactString } from "../../assets/utils";
 import {DateFilter} from "../../atoms/dateFilter/dateFilter";
 import {FilterModesType, FiltersType} from "../../types";
+import {Typography} from "../../atoms/typography/typography";
+import {AmountFilter} from "../../atoms/amountFilter/amountFilter";
+import {Grid} from "../../atoms/grid/grid";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -46,11 +49,14 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Transactions> = (args) => {
   const [openFilterModal, setOpenFilterModal] = useState<boolean>(false)
-  const [fromValue, setFromValue] = useState<number>(0)
-  const [toValue, setToValue] = useState<number>(24)
+  const [dateFrom, setDateFrom] = useState<number>(0)
+  const [dateTo, setDateTo] = useState<number>(24)
+  const [amountFrom, setAmountFrom] = useState<number>(0)
+  const [amountTo, setAmountTo] = useState<number>(24)
   const [filters, setFilters] = useState<FiltersType | undefined>({})
-  const [filterModes, setFilterModes] = useState<FilterModesType | undefined>({dateFilter: "slider"})
+  const [filterModes, setFilterModes] = useState<FilterModesType | undefined>({dateFilter: "slider", amountFilter: "buttons"})
   const usedDatepicker = useRef(false)
+  const [validInput, setValidInput] = useState<boolean>(true)
 
   const [year1, setYear1] = useState(2022)
   const [year2, setYear2] = useState(2023)
@@ -93,18 +99,35 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
       openFilterModal={openFilterModal}
       setOpenFilterModal={setOpenFilterModal}
       filterComponents={
-        <DateFilter
-          filters={filters}
-          setFilters={setFilters}
-          fromValue={fromValue}
-          toValue={toValue}
-          setFromValue={setFromValue}
-          setToValue={setToValue}
-          filterModes={filterModes}
-          setFilterModes={setFilterModes}
-          monthPickerFunctions={monthPickerFunctions}
-          onChange={onChange}
-        />}
+        <Grid columns={2} className={"gap-4"}>
+          <DateFilter
+            className={"col-span-2"}
+            filters={filters}
+            setFilters={setFilters}
+            fromValue={dateFrom}
+            toValue={dateTo}
+            setFromValue={setDateFrom}
+            setToValue={setDateTo}
+            filterModes={filterModes}
+            setFilterModes={setFilterModes}
+            monthPickerFunctions={monthPickerFunctions}
+            onChange={onChange}
+          />
+          <AmountFilter
+            buttons={[1, 10, 100, 1000, 10000, 100000, 1000000]}
+            filters={filters}
+            setFilters={setFilters}
+            filterModes={filterModes}
+            setFilterModes={setFilterModes}
+            fromValue={amountFrom}
+            setFromValue={setAmountFrom}
+            toValue={amountTo}
+            setToValue={setAmountTo}
+            validInput={validInput}
+            setValidInput={setValidInput}
+          />
+        </Grid>
+      }
     />
   )
 };
