@@ -5,7 +5,7 @@ import { Paper } from "./paper";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Paper",
+  title: "Atoms/Layout/Paper",
   component: Paper,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {

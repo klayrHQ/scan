@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from "react";
+import React, {FC, ReactElement, ReactNode} from "react";
 import {Grid} from "../../atoms/grid/grid";
 import {Typography} from "../../atoms/typography/typography";
 import {Button} from "../../atoms";
@@ -6,7 +6,7 @@ import {cls} from "../../assets/utils";
 
 interface FilterContainerProps {
   title?: string
-  filters?: Array<ReactNode>
+  filterComponents?: ReactNode
   activeFilters?: Array<string>
   results?: number
   filterFunction?: () => void
@@ -16,7 +16,7 @@ interface FilterContainerProps {
 
 export const FilterContainer: FC<FilterContainerProps> = ({
   title,
-  filters,
+  filterComponents,
   activeFilters,
   results,
   filterFunction,
@@ -29,14 +29,14 @@ export const FilterContainer: FC<FilterContainerProps> = ({
       flex
     >
       <div className={"px-6 md:px-10 py-4 md:pt-8 drop-shadow-sm z-20 top-0 left-0 bg-surface-2 relative"}>
-        <Typography color={"current"} tag={"h2"} size={"Heading4"} className={"pb-4 text-lg md:text-4xl font-bold "}>
+        <Typography color={"onSurfaceHigh"} tag={"h2"} size={"Heading4"} className={"pb-4 text-lg md:text-4xl font-bold "}>
           {title || "Filter Items"}
         </Typography>
         {/*<ActiveFilters filters={filters} resetFilters={resetFilters} />*/}
       </div>
       <div className={"px-6 md:px-10 py-4 md:pt-8 overflow-y-auto"}>
         <div className={"block w-full mx-auto"}>
-          {filters}
+          {filterComponents}
         </div>
       </div>
       <div className={"px-6 md:px-10 py-4 md:pt-8 flex mt-10 items-center mt-auto bottom-0 right-0 z-10 justify-between w-full bg-surface-1"}>

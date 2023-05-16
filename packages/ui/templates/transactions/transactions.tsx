@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, ReactNode} from "react";
 import {Header} from "../../organisms/header/header";
 import {Grid} from "../../atoms/grid/grid";
 import {Table} from "../../organisms/table/table";
@@ -21,11 +21,13 @@ import {FilterContainer} from "../../organisms/filterContainer/filterContainer";
 interface TransactionsProps {
   openFilterModal: boolean
   setOpenFilterModal: (open: boolean) => void
+  filterComponents?: ReactNode
 }
 
 export const Transactions: FC<TransactionsProps> = ({
   openFilterModal,
   setOpenFilterModal,
+  filterComponents,
 }) => {
   return(
     <Container className={"bg-background"}>
@@ -46,7 +48,7 @@ export const Transactions: FC<TransactionsProps> = ({
               />
             }
           >
-            <FilterContainer/>
+            <FilterContainer filterComponents={filterComponents}/>
           </Modal>
         </Grid>
         <Grid className={"m-auto max-w-app w-full"}>

@@ -5,7 +5,7 @@ import { Input } from "./input";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Input",
+  title: "Atoms/Input/Input",
   component: Input,
   argTypes: {
     className: { control: "text" },

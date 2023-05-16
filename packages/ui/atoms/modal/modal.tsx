@@ -74,7 +74,7 @@ export const Modal:FC<Props> = ({
             leaveTo="opacity-0"
           >
             <Dialog.Overlay
-              className="fixed inset-0 bg-black transition duration-300"
+              className="fixed inset-0 bg-primary transition duration-300"
               onClick={() => setIsOpen(false)}
             />
           </Transition.Child>
