@@ -56,7 +56,7 @@ export const DateFilter: FC<DateFilterProps> = ({
         className
       ])}
     >
-      <Typography tag={"h2"}>{"Date"}</Typography>
+      <Typography color={"onSurfaceHigh"} tag={"h3"} size={"Heading5"}>{"Date"}</Typography>
       <SwitchButtons
         className={`hidden ${isSafari ? "md:hidden" : "md:block"}`}
         activeButton={filterModes?.dateFilter}

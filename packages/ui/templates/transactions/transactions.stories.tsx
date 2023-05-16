@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Transactions } from "./transactions";
 import { compactString } from "../../assets/utils";
@@ -7,6 +7,9 @@ import {FilterModesType, FiltersType} from "../../types";
 import {Typography} from "../../atoms/typography/typography";
 import {AmountFilter} from "../../atoms/amountFilter/amountFilter";
 import {Grid} from "../../atoms/grid/grid";
+import {UserFilter} from "../../atoms/userFilter/userFilter";
+import {search} from "../../assets/mockupData/mockupData";
+import {DataFilter} from "../../atoms/dataFilter/dataFilter";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -58,6 +61,36 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
   const usedDatepicker = useRef(false)
   const [validInput, setValidInput] = useState<boolean>(true)
 
+  const [type, setType] = useState<"sender" | "recipient">("sender")
+  const [senderInput, setSenderInput] = useState<string>("")
+  const [recipientInput, setRecipientInput] = useState<string>("")
+  const setSearch = search.setSearch
+  const [hide, setHide] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (type === "recipient" && filters?.recipient) {
+      setRecipientInput(filters.recipient)
+    }
+
+    if (type === "sender" && filters?.sender) {
+      setSenderInput(filters.sender)
+    }
+  }, [filters?.recipient, filters?.sender])
+
+  useEffect(() => {
+    if (senderInput && senderInput.length > 2) {
+      setSearch(senderInput)
+    } else {
+      setSearch("")
+    }
+
+    if (recipientInput && recipientInput.length > 2) {
+      setSearch(recipientInput)
+    } else {
+      setSearch("")
+    }
+  }, [senderInput,recipientInput])
+
   const [year1, setYear1] = useState(2022)
   const [year2, setYear2] = useState(2023)
   const monthPickerFunctions = {
@@ -99,7 +132,7 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
       openFilterModal={openFilterModal}
       setOpenFilterModal={setOpenFilterModal}
       filterComponents={
-        <Grid columns={2} className={"gap-4"}>
+        <Grid columns={2} className={"gap-10"}>
           <DateFilter
             className={"col-span-2"}
             filters={filters}
@@ -125,6 +158,23 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
             setToValue={setAmountTo}
             validInput={validInput}
             setValidInput={setValidInput}
+          />
+          <UserFilter
+            type={type}
+            setType={setType}
+            filters={filters}
+            filterItems={() => console.log("test")}
+            setFilters={setFilters}
+            results={search.results.results}
+            senderInput={senderInput}
+            recipientInput={recipientInput}
+            hide={hide}
+            setHide={setHide}
+          />
+          <DataFilter
+            filters={filters}
+            setFilters={setFilters}
+            filterItems={() => console.log("test")}
           />
         </Grid>
       }

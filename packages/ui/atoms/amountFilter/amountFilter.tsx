@@ -5,6 +5,7 @@ import {SwitchButtons} from "../switchButtons/switchButtons";
 import {Typography} from "../typography/typography";
 import {Grid} from "../grid/grid";
 import {cls} from "../../assets/utils";
+import {Input} from "../input/input";
 
 interface AmountFilterProps {
   title?: string,
@@ -52,7 +53,7 @@ export const AmountFilter: FC<AmountFilterProps> = ({
       flex
       className={cls(["gap-4", className])}
     >
-      <Typography tag={"h2"}>{title || "Amount"}</Typography>
+      <Typography color={"onSurfaceHigh"} tag={"h3"} size={"Heading5"}>{title || "Amount"}</Typography>
       <SwitchButtons
         activeButton={filterModes?.amountFilter}
         buttons={[
@@ -103,8 +104,8 @@ export const AmountFilter: FC<AmountFilterProps> = ({
           <div className={`hidden md:block`}>
             <div className="flex gap-4 w-full">
               <MultiRangeSlider
-                className="w-full h-4"
-                trackClassName="bg-surface-2"
+                className="w-full h-2"
+                trackClassName="bg-surface-4"
                 min={0}
                 max={max}
                 setFromValue={setFromValue}
@@ -121,11 +122,12 @@ export const AmountFilter: FC<AmountFilterProps> = ({
           <div className="flex justify-left gap-5">
             <div>
               <p>From amount:</p>
-              <input
-                className={`block w-full pl-3 pr-3 py-2 border border-transparent rounded-md text-base leading-5 bg-surface-3 text-onSurfaceLow placeholder-onSurfaceLow focus:outline-none focus:bg-surface-3 focus:border-surface-2 focus:ring-surface-2 focus:text-onSurfaceLight ${!validInput && "border-red focus:border-red"}`}
-                step="any"
-                min="0"
-                type="number"
+              <Input
+                error={!validInput}
+                step={"any"}
+                min={0}
+                fieldType={"number"}
+                styleType={"tertiary"}
                 onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
                   if (filters?.amountFilters && filters?.amountFilters?.to && parseFloat(e.target.value) > filters?.amountFilters?.to) {
@@ -160,11 +162,12 @@ export const AmountFilter: FC<AmountFilterProps> = ({
             </div>
             <div>
               <p>To amount:</p>
-              <input
-                className={`block w-full pl-3 pr-3 py-2 border border-transparent rounded-md text-base leading-5 bg-surface-3 text-onSurfaceHigh placeholder-onSurfaceLow focus:outline-none focus:bg-surface-3 focus:border-surface-2 focus:ring-surface-2 focus:text-onSurfaceLight ${!validInput && "border-red focus:border-red"}`}
-                step="any"
-                min="0"
-                type="number"
+              <Input
+                error={!validInput}
+                step={"any"}
+                min={0}
+                fieldType={"number"}
+                styleType={"tertiary"}
                 onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
                   if (filters?.amountFilters?.from && parseFloat(e.target.value) < filters?.amountFilters?.from) {

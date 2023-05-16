@@ -30,8 +30,8 @@
     appearance: none;
     -moz-appearance: none;
     border: solid 6px currentColor;
-    height: 100%;
-    min-height: 35px;
+    border-radius: 500px;
+    height: var(--thumb-width);
     width: var(--thumb-width);
     background-color: #18213A;
     box-sizing: border-box;
@@ -46,9 +46,17 @@
     -webkit-appearance: none;
     border: solid 6px currentColor;
     border-radius: 500px;
-    height: 35px;
-    min-height: 1.1em;
+    height: var(--thumb-width);
     width: var(--thumb-width);
     background-color: #18213A;
     color: inherit;
+}
+
+.monthPicker .slider::-moz-range-thumb {
+    height: 35px;
+}
+
+.monthPicker .slider::-webkit-slider-thumb {
+    min-height: 1.1em;
+    height: 35px;
 }

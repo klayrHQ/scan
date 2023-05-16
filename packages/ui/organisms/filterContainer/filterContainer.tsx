@@ -29,7 +29,7 @@ export const FilterContainer: FC<FilterContainerProps> = ({
       flex
     >
       <div className={"px-6 md:px-10 py-4 md:pt-8 drop-shadow-sm z-20 top-0 left-0 bg-surface-2 relative"}>
-        <Typography color={"current"} tag={"h2"} size={"Heading4"} className={"pb-4 text-lg md:text-4xl font-bold "}>
+        <Typography color={"onSurfaceHigh"} tag={"h2"} size={"Heading4"} className={"pb-4 text-lg md:text-4xl font-bold "}>
           {title || "Filter Items"}
         </Typography>
         {/*<ActiveFilters filters={filters} resetFilters={resetFilters} />*/}

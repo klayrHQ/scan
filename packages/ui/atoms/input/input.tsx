@@ -1,42 +1,78 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
+import {cls} from "../../assets/utils";
+import {cva} from "class-variance-authority";
 
-interface InputProps {
+interface InputProps extends React.HTMLAttributes<HTMLInputElement>{
   disabled?: boolean
   error?: boolean
   className?: string
-  placeholder: string
-  name: string
+  placeholder?: string
+  id?: string
   size?: 'small' | 'medium' | 'large'
-  fullWidth?: boolean
-  onChange?: () => void
-  type?: "text" | "number" | "email" | "password"
+  width?: string
+  onChange?: ChangeEventHandler<HTMLInputElement>
+  fieldType?: "text" | "number" | "email" | "password"
+  autoComplete?: string
+  value?: string | number
+  styleType?: "primary" | "secondary" | "tertiary" | "transparent"
+  step?: number | string
+  min?: number | string
+  max?: number | string
+  maxLength?: number
 }
 
-/**
- * Primary UI component for user interaction
- */
+const inputCVA = cva(
+  [
+    "block border-none focus:outline-none",
+  ],
+  {
+    variants: {
+      styleType: {
+        primary: "bg-background text-onBackground rounded",
+        secondary: "bg-background text-onBackground rounded",
+        tertiary: "bg-surface-3 text-onSurfaceLow placeholder-onSurfaceLow rounded-md",
+        transparent: "bg-transparent",
+      },
+      size: {
+        small: "p-2",
+        medium: "p-3",
+        large: "p-4",
+      },
+      error: {
+        true: "outline-error outline-2 outline",
+      },
+      disabled: {
+        true: "bg-background text-surface-8",
+      }
+    },
+  },
+)
+
 export const Input = ({
   disabled,
   error,
   className,
   placeholder,
-  name,
-  size,
-  fullWidth,
-  type = "text",
+  id,
+  size = "medium",
+  width,
+  fieldType = "text",
+  styleType = "primary",
   ...props
  }: InputProps) => {
   return (
     <input
-      type={type}
-      className={[
-        'rounded block border-none mt-2 bg-background text-onBackground',
-        className,
-        fullWidth ? "w-full" : "",
-        size === "large" ? "p-4" : size === "small" ? "p-2" : "p-3",
-        error ? "outline-error outline-2 outline" : "",
-        disabled ? "bg-background text-surface-8" : "",
-      ].join(' ')}
+      type={fieldType}
+      className={inputCVA({
+        styleType,
+        size,
+        error,
+        disabled,
+        className: cls([
+          className,
+          width ? `w-${width}` : "",
+        ])
+      })}
       placeholder={placeholder}
       disabled={disabled}
       {...props}
