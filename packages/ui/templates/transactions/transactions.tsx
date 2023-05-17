@@ -17,17 +17,31 @@ import {HeaderMockup} from "../../organisms/header/header.stories";
 import {Modal} from "../../atoms/modal/modal";
 import {FunnelIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {FilterContainer} from "../../organisms/filterContainer/filterContainer";
+import {FiltersType} from "../../types";
+import {FilterButtons} from "../../atoms/filterButtons/filterButtons";
 
 interface TransactionsProps {
+  filters: FiltersType
+  resetFilters: () => void
   openFilterModal: boolean
   setOpenFilterModal: (open: boolean) => void
   filterComponents?: ReactNode
+  activeFilters?: Array<{ filterName: string, filterValue: string }>
+  filterButtons?: Array<{ label: string, state: string }>
+  filterButtonsOnChange?: (newState: string) => void
+  activeFilterButton?: string
 }
 
 export const Transactions: FC<TransactionsProps> = ({
+  filters,
   openFilterModal,
   setOpenFilterModal,
   filterComponents,
+  activeFilters,
+  filterButtons,
+  resetFilters,
+  filterButtonsOnChange,
+  activeFilterButton,
 }) => {
   return(
     <Container className={"bg-background"}>
@@ -35,7 +49,16 @@ export const Transactions: FC<TransactionsProps> = ({
       <HeaderMockup />
       <Container section>
         <Grid flex className={"justify-between m-auto max-w-app w-full"} columns={2}>
-          {/*vvvvv Filter buttons*/}
+          {
+            filterButtons && filterButtonsOnChange &&
+            <FilterButtons
+              className="md:flex md:flex-row md:flex-wrap"
+              buttons={filterButtons}
+              selection={activeFilterButton || "all"}
+              onChange={filterButtonsOnChange}
+              resetFilters={resetFilters}
+            />
+          }
           <div/>
 
           <Modal
@@ -48,7 +71,12 @@ export const Transactions: FC<TransactionsProps> = ({
               />
             }
           >
-            <FilterContainer filterComponents={filterComponents}/>
+            <FilterContainer
+              filterComponents={filterComponents}
+              filterFunction={() => console.log(filters)}
+              resetFunction={(filter) => console.log(filter)}
+              activeFilters={activeFilters}
+            />
           </Modal>
         </Grid>
         <Grid className={"m-auto max-w-app w-full"}>

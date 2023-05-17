@@ -10,6 +10,7 @@ import {Grid} from "../../atoms/grid/grid";
 import {UserFilter} from "../../atoms/userFilter/userFilter";
 import {search} from "../../assets/mockupData/mockupData";
 import {DataFilter} from "../../atoms/dataFilter/dataFilter";
+import {DirectionFilter} from "../../atoms/directionFilter/directionFilter";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -46,6 +47,24 @@ export default {
         balance: {number: "1000", decimals: "123"}
       },
     ],
+    filterButtons: [
+      {
+        label: "all txs",
+        state: "all",
+      },
+      {
+        label: "transfer",
+        state: "transfer",
+      },
+      {
+        label: "voteDelegate",
+        state: "voteDelegate",
+      },
+      {
+        label: "unlockToken",
+        state: "unlockToken",
+      },
+    ]
   }
 } as any;
 
@@ -66,6 +85,47 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
   const [recipientInput, setRecipientInput] = useState<string>("")
   const setSearch = search.setSearch
   const [hide, setHide] = useState<boolean>(true)
+
+  const [activeFilters, setActiveFilters] = useState<Array<{ filterName: string, filterValue: string }>>()
+
+  const [activeFilterButton, setActiveFilterButton] = useState<string>("all")
+
+  const setActiveFiltersHelper = (filterName: string, filterValue: string) => {
+    const filter = { filterName, filterValue }
+    setActiveFilters((prevActiveFilters) => {
+      if (prevActiveFilters) {
+        if (prevActiveFilters.findIndex(i => i.filterName === filter.filterName) !== -1) {
+          return [filter, ...prevActiveFilters.filter((s) => s.filterName !== filter.filterName)]
+        }
+        return [filter, ...prevActiveFilters]
+      }
+      return [filter]
+    })
+  }
+
+  useEffect(() => {
+    if (filters?.dateFilters) {
+      const fromString = filters.dateFilters.from && filters.dateFilters.from.toLocaleString()
+      const toString = filters.dateFilters.to && filters.dateFilters.to.toLocaleString()
+      const filterValue = fromString + " " + toString || ""
+      setActiveFiltersHelper("date", filterValue)
+    }
+    if (filters?.amountFilters) {
+      const fromString = filters.amountFilters.from && filters.amountFilters.from.toLocaleString()
+      const toString = filters.amountFilters.to && filters.amountFilters.to.toLocaleString()
+      const filterValue = fromString + " " + toString || ""
+      setActiveFiltersHelper("amount", filterValue)
+    }
+    if (filters?.sender) {
+      setActiveFiltersHelper("sender", filters.sender)
+    }
+    if (filters?.recipient) {
+      setActiveFiltersHelper("recipient", filters.recipient)
+    }
+    if (filters?.data) {
+      setActiveFiltersHelper("data", filters.data)
+    }
+  }, [filters, activeFilters])
 
   useEffect(() => {
     if (type === "recipient" && filters?.recipient) {
@@ -129,6 +189,9 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
   return(
     <Transactions
       {...args}
+      activeFilters={activeFilters}
+      activeFilterButton={activeFilterButton}
+      filterButtonsOnChange={setActiveFilterButton}
       openFilterModal={openFilterModal}
       setOpenFilterModal={setOpenFilterModal}
       filterComponents={
@@ -158,6 +221,11 @@ const Template: ComponentStory<typeof Transactions> = (args) => {
             setToValue={setAmountTo}
             validInput={validInput}
             setValidInput={setValidInput}
+          />
+          <DirectionFilter
+            account={"test"}
+            filters={filters}
+            setFilters={setFilters}
           />
           <UserFilter
             type={type}

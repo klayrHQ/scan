@@ -5,7 +5,7 @@ import { FilterButtons } from "./filterButtons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Input/FilterButtons",
+  title: "Atoms/Filters/FilterButtons",
   component: FilterButtons,
   argTypes: {
     className: { control: "text" },

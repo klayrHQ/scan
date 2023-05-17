@@ -1,20 +1,18 @@
-import React, {FC, useRef} from "react"
+import React, {FC} from "react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { MonthPicker} from "../monthPicker/monthPicker";
-import {Button} from "../button/button";
 import {cls} from "../../assets/utils";
 import {SwitchButtons} from "../switchButtons/switchButtons";
 import {Typography} from "../typography/typography";
 import {Grid} from "../grid/grid";
+import {FiltersType} from "../../types";
 
 interface DateFilterProps {
   title?: string,
   className?: string,
-  filters: {
-    dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined
-  } | undefined,
-  setFilters: React.Dispatch<React.SetStateAction<{dateFilters?: {from: Date | null | undefined, to: Date | null | undefined} | undefined} | undefined>>,
+  filters: FiltersType | undefined,
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType | undefined>>,
   fromValue: number,
   setFromValue: (value: number) => void,
   toValue: number,
