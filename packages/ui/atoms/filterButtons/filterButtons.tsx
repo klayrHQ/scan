@@ -1,14 +1,12 @@
 import React from 'react'
 import {Button} from "../index";
+import {cls} from "../../assets/utils";
+import {Grid} from "../grid/grid";
 
 export interface FilterButtonsProps {
-  buttons: {
-    label: string
-    state: string
-  }[]
-  defaultState: string
+  buttons: Array<{ label: string, state: string }>
   className?: string
-  onChange(newState: string): void
+  onChange: (newState: string) => void
   resetFilters?: Function
   selection: string
 }
@@ -17,34 +15,26 @@ export const FilterButtons = ({
   buttons,
   onChange,
   resetFilters,
-  defaultState,
   className,
   selection,
 }: FilterButtonsProps) => {
   return (
     <>
-      <div className={[className, "hidden md:flex"].join(" ")}>
+      <Grid flex className={cls([className, "hidden md:flex gap-2"])} columns={2}>
         {buttons && buttons.map((button) => (
           <Button
             active={selection === button.state}
+            hover
             key={`button-${button.state}`}
-            className={[
-              " md:mr-2 px-3 py-2",
-              "w-1/2 md:max-w-max rounded",
-              "text-sm font-medium",
-              "cursor-pointer",
-              selection === button.state
-                ? ""
-                : "text-onSurfaceHigh hover:bg-surface-1 hover:text-onSurfaceHigh border-none",
-            ].join(" ")}
             onClick={() => {
               onChange(button.state)
               resetFilters && resetFilters()
             }}
             label={button.label}
+            type={"transparent"}
           />
         ))}
-      </div>
+      </Grid>
       <div className={"block md:hidden w-app mx-auto"}>
         <select
           className="w-full rounded text-onSurfaceMedium border-none text-base"

@@ -3,14 +3,15 @@ import {Grid} from "../../atoms/grid/grid";
 import {Typography} from "../../atoms/typography/typography";
 import {Button} from "../../atoms";
 import {cls} from "../../assets/utils";
+import {ActiveFilters} from "../../atoms/activeFilters/activeFilters";
 
 interface FilterContainerProps {
   title?: string
   filterComponents?: ReactNode
-  activeFilters?: Array<string>
+  activeFilters?: Array<{ filterName: string, filterValue: string }>
   results?: number
-  filterFunction?: () => void
-  resetFunction?: () => void
+  filterFunction: () => void
+  resetFunction: (filter: string) => void
   filtering?: boolean
 }
 
@@ -32,7 +33,7 @@ export const FilterContainer: FC<FilterContainerProps> = ({
         <Typography color={"onSurfaceHigh"} tag={"h2"} size={"Heading4"} className={"pb-4 text-lg md:text-4xl font-bold "}>
           {title || "Filter Items"}
         </Typography>
-        {/*<ActiveFilters filters={filters} resetFilters={resetFilters} />*/}
+        <ActiveFilters activeFilters={activeFilters} resetFilters={resetFunction} />
       </div>
       <div className={"px-6 md:px-10 py-4 md:pt-8 overflow-y-auto"}>
         <div className={"block w-full mx-auto"}>

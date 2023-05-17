@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from "react"
+import React, {FC} from "react"
 import { Avatar} from "../avatar/avatar";
 import {FiltersType} from "../../types";
 import {Typography} from "../typography/typography";
@@ -15,7 +15,7 @@ interface UserFilterProps {
   setType: (type: "sender" | "recipient") => void
   filters: FiltersType | undefined
   filterItems: Function
-  setFilters: React.Dispatch<React.SetStateAction<{} | undefined>>
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType | undefined>>
   results: Array<{ type: string, username?: string, id: string }>
   senderInput: string
   recipientInput: string

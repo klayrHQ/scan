@@ -13,7 +13,7 @@ interface ButtonProps {
   label: string | any
   size?: 'small' | 'medium' | 'large'
   width?: string
-  onClick?: () => void
+  onClick?: (...args: any[]) => void
   children?: any
 }
 
@@ -27,7 +27,7 @@ const buttonCVA = cva(
         primary: "bg-primary text-onPrimary border-primary",
         secondary: "bg-secondary text-onSecondary border-secondary",
         tertiary: "text-onSurfaceHigh border-none",
-        transparent: "bg-transparent text-onSurfaceHigh border-transparent",
+        transparent: "border-transparent",
       },
       size: {
         small: "px-2 py-1",
@@ -35,16 +35,16 @@ const buttonCVA = cva(
         large: "px-4 py-3",
       },
       rounded: {
-        true: "rounded",
+        true: "rounded-md",
       },
       hover: {
         true: "hover:border-2",
       },
       active: {
-        true: "bg-surface-1 border-surface-1 text-onSurfaceHigh",
+        true: "",
       },
       disabled: {
-        true: "bg-surface-3 border-surface-3 text-surface-8",
+        true: "",
       }
     },
     compoundVariants: [

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from "react"
+import React, {FC} from "react"
 import { MultiRangeSlider } from "../multiRangeSlider/multiRangeSlider";
 import {Button} from "../button/button";
 import {SwitchButtons} from "../switchButtons/switchButtons";
@@ -6,15 +6,14 @@ import {Typography} from "../typography/typography";
 import {Grid} from "../grid/grid";
 import {cls} from "../../assets/utils";
 import {Input} from "../input/input";
+import {FiltersType} from "../../types";
 
 interface AmountFilterProps {
   title?: string,
   className?: string,
   buttons: number[],
-  filters: {
-    amountFilters?: {from: number | null | undefined, to: number | null | undefined} | undefined
-  } | undefined,
-  setFilters: React.Dispatch<React.SetStateAction<{amountFilters?: {from: number | null | undefined, to: number | null | undefined}} | undefined>>,
+  filters: FiltersType | undefined,
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType | undefined>>,
   filterModes: {amountFilter?:"buttons" | "slider" | "range"} | undefined,
   setFilterModes: React.Dispatch<React.SetStateAction<{amountFilter?: "buttons" | "slider" | "range"} | undefined>>,
   fromValue: number,

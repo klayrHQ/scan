@@ -14,7 +14,7 @@ export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
   backgroundColor?: string;
   color?: string;
   align?: "left" | "center" | "right";
-  size?: "xs" | "small" | "medium" | "large" | "number" | "input";
+  size?: "xs" | "small" | "medium" | "large" | "number" | "input" | "auto";
   fullWidth?: boolean;
   label?: string;
   onClick?: () => void;
@@ -43,6 +43,7 @@ const iconClass = cva(
         large: "h-16 w-16",
         number: "h-iconNumber w-iconNumber",
         input: "h-inputField w-inputField",
+        auto: "h-auto w-auto",
       },
       rounded: {
         true: "",
