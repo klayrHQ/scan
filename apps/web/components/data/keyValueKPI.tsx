@@ -1,5 +1,8 @@
+"use client"
 import {KeyValueRow} from "ui";
-import {getFromDottedKey} from "../../lib/dotString";
+import {getDottedKeyType, getFromDottedKey} from "../../lib/dotString";
+import {BlocksResponse} from "@liskscan/lisk-service-client/lib/types/api/blocks";
+import {useEffect, useState} from "react";
 
 export interface KeyValueKPIProps {
   label: string
@@ -7,17 +10,27 @@ export interface KeyValueKPIProps {
   backupKey: string,
   color?: string,
   data: Record<string, any>
+  lastBlock?: BlocksResponse["data"][0]
 }
-export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopbar"}: KeyValueKPIProps) => {
-  const value = getFromDottedKey(dottedKey, "none", {none: 1}, data)?.toLocaleString()
-  const backupValue = backupKey && getFromDottedKey(backupKey, "none", {none: 1}, data)?.toLocaleString()
+const getValue = (dottedKey: string, backupKey: string, data: Record<string, any>, lastBlock?: BlocksResponse["data"][0], ) => {
+  const mainValue = getFromDottedKey(dottedKey, "none", {none: 1}, {...data, lastBlock})?.toLocaleString()
+  const backupValue = backupKey && getFromDottedKey(backupKey, "none", {none: 1}, {...data, lastBlock})?.toLocaleString()
+  return mainValue || backupValue || ""
+}
+export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopbar", lastBlock}: KeyValueKPIProps) => {
+  const [value, updateValue] = useState(getValue(dottedKey, backupKey, data, lastBlock))
 
+  useEffect(() => {
+    if (getDottedKeyType(dottedKey) === "lastBlock" || getDottedKeyType(backupKey) === "lastBlock") {
+      updateValue(getValue(dottedKey, backupKey, data, lastBlock))
+    }
+  }, [lastBlock, backupKey, data, dottedKey])
   return <KeyValueRow
     key={label}
     inline
     color={color}
     label={label}
-    value={value || backupValue || ""}
+    value={value}
     valueBold
     />
 }

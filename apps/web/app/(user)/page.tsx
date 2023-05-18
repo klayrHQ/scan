@@ -2,10 +2,9 @@ import React from "react";
 import { makeTable } from "../../lib/sanity.table";
 import { Table } from "../../components/data/table/table";
 import { getTable } from "../../lib/queries/getTable";
-import { Container } from "ui/atoms/container/container";
 import {Typography} from "ui";
 
-export const revalidate = 1;
+export const revalidate = 10;
 
 export default async function Web() {
   const table = await getTable({ slug: "blocks" });

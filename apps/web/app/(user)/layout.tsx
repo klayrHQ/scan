@@ -72,7 +72,6 @@ export default async function RootLayout({
               apps={apps}
               index={index}
               status={status}
-              height={status.status === "success" ? status?.data?.height : 0}
             />
             {children}
           </div>

@@ -10,7 +10,6 @@ import {
   IndexStatusResponse,
   NetworkStatusResponse,
 } from "@liskscan/lisk-service-client/lib/types";
-import { getFromDottedKey } from "../../lib/dotString";
 import { InfoBarKPISType } from "../../lib/queries/getInfoBarKPIS";
 import { TopBar } from "ui/organisms/topBar/topBar";
 import Image from "next/image";
@@ -18,14 +17,12 @@ import { SettingsType } from "../../lib/queries/getSettings";
 import { KeyValueKPI } from "../../components/data/keyValueKPI";
 
 export const TopBarLayout = ({
-  height,
   status,
   apps,
   kpis,
   settings,
   index,
 }: {
-  height: number;
   status: NetworkStatusResponse;
   apps: BlockchainAppsMetaResponse;
   kpis: InfoBarKPISType[];
@@ -33,24 +30,14 @@ export const TopBarLayout = ({
   index: IndexStatusResponse;
 }) => {
   const { client, lastBlock } = useService();
-  const [heightState, updateHeight] = useState(height);
   const [appState, updateAppState] =
-    useState<BlockchainAppsMetaResponse["data"][0]>();
+    useState<BlockchainAppsMetaResponse["data"][0] | undefined>(apps?.data?.find(({ chainID }) => chainID === status.data.chainID));
 
-  useEffect(() => {
-    const getStatus = async () => {
-      const status = await client.rpc("get.network.status");
-      if (status.status === "success") {
-        updateHeight(status.data.height);
-      }
-    };
-    getStatus();
-  }, []);
   useEffect(() => {
     updateAppState(
       apps?.data?.find(({ chainID }) => chainID === status.data.chainID)
     );
-  }, [apps]);
+  }, [apps, status.data.chainID]);
   return (
     <TopBarClient>
       <InfoBar
@@ -66,7 +53,7 @@ export const TopBarLayout = ({
             <span
               key={"status-icon"}
               className={cls([
-                client.socket.connected ? "bg-success" : "bg-error",
+                lastBlock && client.socket.connected ? "bg-success" : "bg-error",
                 "rounded-full w-4 h-4 flex aspect-square mr-2"
               ])}
             />
@@ -77,11 +64,12 @@ export const TopBarLayout = ({
                   dottedKey={key}
                   label={label}
                   backupKey={backup}
+                  lastBlock={lastBlock}
                   data={{
                     index,
                     status,
                     app: appState,
-                    lastBlock,
+                    lastBlock: lastBlock,
                   }}
                 />
               ))}

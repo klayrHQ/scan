@@ -22,3 +22,5 @@ export const getFromDottedKey = (
     split?.[0] ? split[0] === rowKey ? row : data : {}
   );
 };
+
+export const getDottedKeyType = (key: string) => key?.split(".")[0]
