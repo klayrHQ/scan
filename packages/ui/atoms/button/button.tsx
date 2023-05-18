@@ -4,7 +4,7 @@ import {cva} from "class-variance-authority";
 import {cls} from "../../assets/utils";
 
 interface ButtonProps {
-  type?: "primary" | "secondary" | "transparent"
+  type?: "primary" | "secondary" | "tertiary" | "transparent"
   className?: string
   hover?: boolean
   active?: boolean
@@ -13,7 +13,7 @@ interface ButtonProps {
   label: string | any
   size?: 'small' | 'medium' | 'large'
   width?: string
-  onClick?: () => void
+  onClick?: (...args: any[]) => void
   children?: any
 }
 
@@ -26,7 +26,8 @@ const buttonCVA = cva(
       type: {
         primary: "bg-primary text-onPrimary border-primary",
         secondary: "bg-secondary text-onSecondary border-secondary",
-        transparent: "bg-transparent text-onSurfaceHigh border-transparent",
+        tertiary: "text-onSurfaceHigh border-none",
+        transparent: "border-transparent",
       },
       size: {
         small: "px-2 py-1",
@@ -34,16 +35,16 @@ const buttonCVA = cva(
         large: "px-4 py-3",
       },
       rounded: {
-        true: "rounded",
+        true: "rounded-md",
       },
       hover: {
         true: "hover:border-2",
       },
       active: {
-        true: "bg-surface-1 border-surface-1 text-onSurfaceHigh",
+        true: "",
       },
       disabled: {
-        true: "bg-surface-3 border-surface-3 text-surface-8",
+        true: "",
       }
     },
     compoundVariants: [
@@ -58,9 +59,14 @@ const buttonCVA = cva(
         className: "hover:border-surface-1 hover:bg-surface-1 hover:text-onSurfaceHigh",
       },
       {
+        type: "tertiary",
+        hover: true,
+        className: "hover:bg-surface-3",
+      },
+      {
         type: "transparent",
         hover: true,
-        className: "hover:border-primary hover:text-onSurfaceHigh",
+        className: "hover:bg-surface-3 hover:text-onSurfaceHigh",
       },
       {
         type: "primary",
@@ -71,6 +77,11 @@ const buttonCVA = cva(
         type: "secondary",
         active: true,
         className: "bg-surface-1 border-surface-1 text-onSurfaceHigh",
+      },
+      {
+        type: "tertiary",
+        active: true,
+        className: "bg-surface-4 text-onSurfaceHigh",
       },
       {
         type: "transparent",
@@ -113,6 +124,7 @@ export const Button = ({
       <Typography
         className={"block"}
         tag={"span"}
+        size={size === "small" ? "subBody" : size === "large" ? "ParagraphLarge" : "body"}
       >
         {label}
         {children}

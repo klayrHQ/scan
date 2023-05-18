@@ -5,7 +5,7 @@ import { FilterButtons } from "./filterButtons";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Molecules/FilterButtons",
+  title: "Atoms/Filters/FilterButtons",
   component: FilterButtons,
   argTypes: {
     className: { control: "text" },
@@ -78,7 +78,6 @@ Secondary.args = {
       state: "ex2",
     }
   ],
-  primary: false,
 };
 
 export const SecondaryActive: ComponentMeta<typeof FilterButtons> = Template.bind({});
@@ -98,6 +97,5 @@ SecondaryActive.args = {
       state: "ex2",
     }
   ],
-  primary: false,
   selection: "all",
 };

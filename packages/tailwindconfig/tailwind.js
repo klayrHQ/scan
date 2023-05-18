@@ -382,9 +382,7 @@ const colors = {
   copacabanaYellow: "rgb(247,227,110)",
   candyPink: "rgb(255,209,210)",
   furyRed: "rgb(255,71,90)",
-  inherit: "",
-  current: "",
-  transparent: "",
+
   black: "",
   white: "",
   slate: "",
@@ -406,6 +404,9 @@ const colors = {
   fuchsia: "",
   pink:"",
   rose: "",
+  inherit: "inherit",
+  current: "current",
+  transparent: "transparent",
 }
 
 module.exports = {
@@ -413,6 +414,7 @@ module.exports = {
   backgroundPosition,
   borderRadius,
   borderWidth,
+  colors,
   columns,
   fontSize,
   fontWeight,
@@ -425,6 +427,5 @@ module.exports = {
   maxWidth,
   maxHeight,
   minHeight,
-  zIndex,
-  colors
+  zIndex
 };

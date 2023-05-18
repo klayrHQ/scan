@@ -1,0 +1,62 @@
+.slider::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
+    display: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
+}
+
+.slider {
+    --thumb-width: 1.2em;
+    background: transparent;
+    pointer-events: none;
+    z-index: 5;
+    width: calc(100% + var(--thumb-width));
+    left: calc(var(--thumb-width) / -2);
+    -webkit-appearance: none;
+}
+
+.slider::-moz-range-thumb {
+    cursor: ew-resize;
+    position: relative;
+    pointer-events: all;
+    appearance: none;
+    -moz-appearance: none;
+    border: solid 6px currentColor;
+    border-radius: 500px;
+    height: var(--thumb-width);
+    width: var(--thumb-width);
+    background-color: #18213A;
+    box-sizing: border-box;
+    color: inherit;
+}
+
+.slider::-webkit-slider-thumb {
+    cursor: ew-resize;
+    position: relative;
+    pointer-events: all;
+    appearance: none;
+    -webkit-appearance: none;
+    border: solid 6px currentColor;
+    border-radius: 500px;
+    height: var(--thumb-width);
+    width: var(--thumb-width);
+    background-color: #18213A;
+    color: inherit;
+}
+
+.monthPicker .slider::-moz-range-thumb {
+    height: 35px;
+}
+
+.monthPicker .slider::-webkit-slider-thumb {
+    min-height: 1.1em;
+    height: 35px;
+}
