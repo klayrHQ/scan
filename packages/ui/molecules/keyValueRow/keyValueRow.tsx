@@ -1,18 +1,16 @@
-import React, {ReactNode} from "react"
-import { Paper} from "../../atoms/paper/paper";
-import {Typography} from "../../atoms/typography/typography";
-import {cls} from "../../assets/utils";
+import React, { ReactNode } from "react";
+import { cls, Typography, Paper } from "../..";
 
 interface KeyValueRowProps {
-  label?: ReactNode | string
-  value?: ReactNode | string
-  className?: string
-  classNameValue?: string
-  icon?: ReactNode | string
-  surface?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-  inline?: boolean
-  color?: string
-  valueBold?: boolean
+  label?: ReactNode | string;
+  value?: ReactNode | string;
+  className?: string;
+  classNameValue?: string;
+  icon?: ReactNode | string;
+  surface?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  inline?: boolean;
+  color?: string;
+  valueBold?: boolean;
 }
 
 export const KeyValueRow = ({
@@ -36,14 +34,14 @@ export const KeyValueRow = ({
   >
     <div
       className={cls([
-        inline ? "inline-flex w-max gap-1" : "flex md:flex-grow flex-col md:flex-row justify-between w-full gap-2",
+        inline
+          ? "inline-flex w-max gap-1"
+          : "flex md:flex-grow flex-col md:flex-row justify-between w-full gap-2",
       ])}
     >
       <Typography
         tag={"span"}
-        className={cls([
-          "capitalize font-medium",
-        ])}
+        className={cls(["capitalize font-medium"])}
         color={color ? color : "onSurfaceMedium"}
         size={inline ? "subBody" : "body"}
       >
@@ -53,6 +51,7 @@ export const KeyValueRow = ({
         tag={"span"}
         className={cls([
           classNameValue,
+          "min-w-spacer",
           valueBold ? "font-bold" : "font-medium",
         ])}
         color={color ? color : "onSurfaceHigh"}
@@ -61,10 +60,6 @@ export const KeyValueRow = ({
         {value}
       </Typography>
     </div>
-    { icon &&
-      <div className="hidden md:block w-8">
-        {icon}
-      </div>
-    }
+    {icon && <div className="hidden md:block w-8">{icon}</div>}
   </Paper>
-)
+);

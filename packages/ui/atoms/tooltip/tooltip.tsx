@@ -1,4 +1,5 @@
-import React, {JSXElementConstructor, ReactElement, useRef, useState} from "react"
+"use client"
+import React, {JSXElementConstructor, ReactElement} from "react"
 import Tippy from "@tippyjs/react"
 import 'tippy.js/dist/tippy.css'
 import 'tippy.js/animations/shift-toward.css';
