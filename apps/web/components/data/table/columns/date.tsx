@@ -1,5 +1,6 @@
 import { ColumnProps } from "./index";
 import { cls, Typography } from "ui";
+import {ValueFormatter} from "../../../valueFormatter";
 
 export const DateColumn = ({ params, values }: ColumnProps) => (
   <Typography
@@ -7,6 +8,6 @@ export const DateColumn = ({ params, values }: ColumnProps) => (
     className={cls(["border-surfaceDark", params?.className])}
     {...params}
   >
-    {typeof values === "object" ? values[0] : values}
+    {values[0].value ? <ValueFormatter value={values[0].value} {...values[0].format} /> : <></>}
   </Typography>
 );

@@ -2,10 +2,11 @@ import { DoubleRowColumn } from "./doubleRow";
 import { PlainColumn } from "./plain";
 import { DefaultHeadColumn } from "./head";
 import {DateColumn} from "./date";
+import {ValueFormat, ValueFormatterProps} from "../../../valueFormatter";
 
 export interface ColumnProps {
   params: Record<string, any>;
-  values: string | number | (string | number)[];
+  values: ValueFormat[];
 }
 
 export const ColumnComponents = {

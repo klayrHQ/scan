@@ -1,12 +1,10 @@
-import { Typography } from "ui";
 import {ColumnProps} from "./index";
+import {ValueFormatter} from "../../../valueFormatter";
 
 export const DefaultHeadColumn = ({
   values,
 }: ColumnProps) => {
   return (
-    <Typography tag={"span"} className={"table-cell relative text-left"}>
-      {typeof values === "object" ? values[0] : values}
-    </Typography>
+    <>{values[0].value ? <ValueFormatter value={values[0].value} {...values[0].format} /> : <></>}</>
   );
 };

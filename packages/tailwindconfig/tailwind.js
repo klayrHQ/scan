@@ -189,6 +189,7 @@ const fontSize = {
   10: ["0.625rem", { lineHeight: "1.5em", }],
   12: ["0.75rem", { lineHeight: "1.5em", }],
   14: ["0.875rem", { lineHeight: "1.5em", }],
+  base: ["0.875rem", { lineHeight: "0", }],
   16: ["1rem", { lineHeight: "1.5em", }],
   20: ["1.25rem", { lineHeight: "1.5em", }],
   24: ["1.5rem", { lineHeight: "1.5em", }],

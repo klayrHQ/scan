@@ -1,17 +1,12 @@
-import { getAllData, ServiceQueries } from "./sanity.service";
 import { RPCResponses } from "@liskscan/lisk-service-client/lib/types";
 import { getFromDottedKey } from "./dotString";
+import { ValueFormat } from "../components/valueFormatter";
 
 export interface MakeTableProps {
-  queries: ServiceQueries[];
+  data: Record<string, RPCResponses<any>>;
   key: string;
-  head: {
-    label: string;
-    colspan: number;
-    styling: any;
-  }[];
   cols: {
-    keys: string[];
+    valueKeys: ValueFormat[];
     href?: {
       url: string;
       keys?: string[];
@@ -19,17 +14,27 @@ export interface MakeTableProps {
   }[];
 }
 
-export const makeTable = async ({
+export const makeTable = ({
   key,
   cols,
-  queries,
-  head,
-}: MakeTableProps): Promise<{ rows: (string | number)[][] }> => {
-  const data = (await getAllData(queries)) as RPCResponses<any>;
+  data,
+}: MakeTableProps): { rows: (string | number)[][] } => {
   if (data[key]?.status === "success") {
-    const rows = data[key].data.map((row: any) =>
+    const rows = data[key]?.data?.map((row: any) =>
       cols.map((col) =>
-        col.keys.map((k) => getFromDottedKey(k, key, row, data))
+        col.valueKeys.map((valueFormat) => {
+          if (valueFormat.type === "key") {
+            return {
+              ...valueFormat,
+              value: isMeta(valueFormat.value)
+                ? getFromDottedKey(valueFormat.value || "", "meta", row, data)
+                : getFromDottedKey(valueFormat.value || "", key, row, data),
+            };
+          }
+          if (valueFormat.type === "literal") {
+            return valueFormat;
+          }
+        })
       )
     );
     return { rows };
@@ -38,3 +43,5 @@ export const makeTable = async ({
     rows: [[]],
   };
 };
+
+const isMeta = (key?: string) => (key ? key.split(".")?.[1] === "meta" : false);

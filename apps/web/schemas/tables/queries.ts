@@ -1,5 +1,6 @@
 import {defineType} from 'sanity'
 import {Methods} from "./methods";
+import {UpdateOn} from "../slices/table";
 
 export default defineType({
   name: "query",
@@ -68,6 +69,49 @@ export default defineType({
           to: [{ type: "subQuery" }],
         },
       ],
+    },
+    {
+      name: "calculations",
+      type: "array",
+      title: "Calculated fields",
+      of: [
+        {
+          type: "object",
+          name: "calculation",
+          fields: [
+            {
+              name: "name",
+              type: "string",
+              title: "Field name",
+            },
+            {
+              name: "calculation",
+              type: "string",
+              title: "Calculation",
+              description: "eg. %d / %d * 100"
+            },
+            {
+              name: "keys",
+              type: "array",
+              title: "Keys",
+              of: [
+                {
+                  type: "string",
+                  name: "key",
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "updateOn",
+      type: "string",
+      title: "Update on",
+      options: {
+        list: UpdateOn,
+      },
     },
   ],
 });

@@ -43,13 +43,11 @@ export default async function RootLayout({
     }
   ]);
   console.log(new Date().getTime() - start, "ms")
-  const { status, apps, index, blocks } = result as {
+  const { status, apps, index } = result as {
     status: NetworkStatusResponse;
     apps: BlockchainAppsMetaResponse;
-    blocks: BlocksResponse;
     index: IndexStatusResponse
   };
-
   return (
     <html>
       <LiskscanLogs />
@@ -72,6 +70,7 @@ export default async function RootLayout({
               apps={apps}
               index={index}
               status={status}
+              menuItems={menuItems}
             />
             {children}
           </div>

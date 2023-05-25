@@ -4,6 +4,7 @@ export type InfoBarKPISType = {
   label: string;
   key: string;
   backup: string;
+  _key: string
 };
 
 export const getInfoBarKPIS = async (): Promise<{ kpis: InfoBarKPISType[] }> =>

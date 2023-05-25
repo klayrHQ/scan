@@ -2,9 +2,14 @@ import { sanityClient } from "../sanity.client";
 
 export type menuItem = {
   label: string;
-  href: string;
+  link: string;
   _key: string;
+  subMenu?: any[]
 };
 
 export const getNav = async (): Promise<menuItem[]> =>
-  sanityClient.fetch(`*[_type == "topNavigation"][0].menuItems`);
+  sanityClient.fetch(`*[_type == "menu"]{
+    items[]{
+      ...,
+    }
+  }[0].items`);

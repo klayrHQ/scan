@@ -20,11 +20,9 @@ module.exports = {
     "@etchteam/storybook-addon-status",
     "storybook-addon-next-router",
     {
-      name: "@storybook/addon-postcss",
+      name: '@storybook/addon-styling',
       options: {
-        postcssLoaderOptions: {
-          implementation: require("postcss"),
-        },
+        postCss: true,
       },
     },
   ],

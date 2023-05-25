@@ -47,7 +47,7 @@ export default defineType({
       options: {
         list: [
           {title: "For every row (forEach)", value: "forEach"},
-          {title: "Match by key (singleMatch)", value: "singleMatch"}
+          {title: "Match by key (singleMatch)", value: "singleMatch"},
         ]
       }
     },
@@ -74,5 +74,40 @@ export default defineType({
         },
       ],
     },
+    {
+      name: "calculations",
+      type: "array",
+      title: "Calculated fields",
+      of: [
+        {
+          type: "object",
+          name: "calculation",
+          fields: [
+            {
+              name: "name",
+              type: "string",
+              title: "Field name",
+            },
+            {
+              name: "calculation",
+              type: "string",
+              title: "Calculation",
+              description: "eg. %d / %d * 100"
+            },
+            {
+              name: "keys",
+              type: "array",
+              title: "Keys",
+              of: [
+                {
+                  type: "string",
+                  name: "key",
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   ],
 });

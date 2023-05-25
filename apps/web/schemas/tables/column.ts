@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import {SanityValue} from "../layout/value";
 
 export default defineType({
   name: "column",
@@ -15,9 +16,7 @@ export default defineType({
       type: "array",
       title: "Head label",
       of: [
-        {
-          type: "string"
-        }
+        { type: "object", fields: SanityValue }
       ]
     },
     {
@@ -68,7 +67,7 @@ export default defineType({
       type: "array",
       title: "Value keys",
       of: [
-        { type: "string" }
+        { type: "object", fields: SanityValue }
       ]
     }
   ],

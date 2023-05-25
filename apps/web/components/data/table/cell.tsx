@@ -16,6 +16,7 @@ export interface CellProps {
   ValueComponent: FC<any>;
   showOn: ShowOnCell;
   className?: string;
+  values: { name: string; _key: string; type: string; value: string }[];
 
   [key: string]: any;
 }
@@ -45,13 +46,24 @@ export const Cell = ({
   className,
   type = "row",
   ...props
-}: CellProps) =>
-  type === "row" ? (
-    <td className={cls(["border-b-1 p-2", className, getShowClass(showOn)])}>
-      <Component {...props} />
-    </td>
-  ) : (
+}: CellProps) => {
+  if (!props.values) {
+    return (
+      <td
+        className={cls(["border-b-1 p-2", className, getShowClass(showOn)])}
+      ></td>
+    );
+  }
+  if (type === "row") {
+    return (
+      <td className={cls(["border-b-1 p-2", className, getShowClass(showOn)])}>
+        {Component && <Component {...props} />}
+      </td>
+    );
+  }
+  return (
     <th className={cls(["border-b-1 p-4", className, getShowClass(showOn)])}>
-      <Component {...props} />
+      {Component && <Component {...props} />}
     </th>
   );
+};

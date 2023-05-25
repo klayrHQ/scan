@@ -1,8 +1,10 @@
-import {Grid, Typography} from "ui";
+import {Grid} from "ui";
+import {ValueFormatter} from "../../../valueFormatter";
+import {ColumnProps} from "./index";
 
-export const DoubleRowColumn = ({values}: {values: (number | string)[]}) => {
+export const DoubleRowColumn = ({values}: ColumnProps) => {
   return <Grid columns={1}>
-    <Typography tag={"span"} bold>{values?.[0]}</Typography>
-    <Typography tag={"span"}>{values?.[1]}</Typography>
+    {values[0].value ? <ValueFormatter value={values[0].value} {...values[0].format} /> : <></>}
+    {values[1].value ? <ValueFormatter value={values[1].value} {...values[1].format} /> : <></>}
   </Grid>
 }

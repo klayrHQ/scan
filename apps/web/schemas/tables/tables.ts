@@ -22,17 +22,18 @@ export default {
         source: "title",
       },
     },
+    // {
+    //   name: "queries",
+    //   type: "array",
+    //   title: "Queries",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: [{ type: "query" }],
+    //     },
+    //   ],
+    // },
     {
-      name: "queries",
-      type: "array",
-      title: "Queries",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "query" }],
-        },
-      ],
-    },{
       name: "columns",
       type: "array",
       title: "Columns",

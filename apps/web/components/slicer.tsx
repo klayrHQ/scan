@@ -1,23 +1,48 @@
-import { Slices } from "../slices";
-import React from "react";
-
-type SliceOptions = keyof typeof Slices;
+"use client";
+import { Slices, SlicesTypes } from "../slices";
+import React, { useEffect } from "react";
+import { useService } from "../providers/service";
 
 export interface SlicerProps {
+  queryData?: any;
+  queries?: any;
+  id?: string;
   slices: Array<{
     id: string;
-    _type: SliceOptions;
+    _type: SlicesTypes;
+    _id: string;
     [x: string | number | symbol]: unknown;
   }>;
+  uri?: string
 }
 
-export const Slicer = ({ slices, }: SlicerProps) => {
+export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => {
+  const { setQueries, cache, setID } = useService();
+  useEffect(() => {
+    if (setQueries) {
+      setQueries(queries);
+    }
+  }, [setQueries]);
+  useEffect(() => {
+    if (setID) {
+      setID(id);
+    }
+  }, [setID, id]);
+
   return (
     <>
       {slices.filter(Boolean).map((slice) => {
         const Tag = Slices[slice._type];
-        // @ts-ignore
-        return <Tag key={slice._id} {...slice} />;
+        return (
+          <Tag
+            key={slice._id}
+            {...slice}
+            id={id}
+            queryData={cache || queryData}
+            queries={queries}
+            uri={uri}
+          />
+        );
       })}
     </>
   );

@@ -6,8 +6,10 @@ export interface HeadProps {
   cols?: CellProps[];
 }
 
-export const Head = ({ className, cols, ...props }: HeadProps) => (
-  <thead>
+export const Head = ({ className, cols, ...props }: HeadProps) => {
+
+  return (
+    <thead>
     <tr
       className={cls([
         "border-b-1 rounded",
@@ -17,8 +19,9 @@ export const Head = ({ className, cols, ...props }: HeadProps) => (
       {...props}
     >
       {cols?.map((col, index) => (
-        <Cell key={`head-${index}`} type={"head"} {...col} />
+        <Cell key={`head-${index}`} type={"head"} {...col}/>
       ))}
     </tr>
-  </thead>
-);
+    </thead>
+  );
+}
