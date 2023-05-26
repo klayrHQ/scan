@@ -47,7 +47,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@chainsafe/blst": "^0.2.8",
     "@sanity/base": "^2.35.5",
     "@sanity/eslint-config-studio": "^2.0.1",
     "@types/node": "^17.0.12",
