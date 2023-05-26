@@ -13,7 +13,7 @@ export default async function Web() {
   // });
   return (
     <>
-      <div className={"w-max-app mx-auto"}>
+      <div className={"w-max-app mx-auto w-app"}>
         {/*<Table columns={table.columns} rows={tableRows?.rows} />*/}
         <ValueFormatter
           color={{
