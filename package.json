@@ -1,6 +1,7 @@
 {
-  "name": "liskscan-frontend",
-  "version": "0.0.41",
+
+  "name": "colecti-frontend",
+  "version": "0.0.42",
   "private": true,
   "workspaces": [
     "apps/*",
