@@ -5,7 +5,7 @@ RUN apk update
 WORKDIR /app
 RUN yarn global add turbo
 COPY . .
-RUN turbo prune --docker
+RUN turbo prune --scope=liskscan --docker
 
 # Add lockfile and package.json's of isolated subworkspace
 FROM node:alpine AS installer
@@ -22,7 +22,7 @@ RUN yarn install
 # Build the project
 COPY --from=builder /app/out/full/ .
 #COPY turbo.json turbo.json
-RUN yarn turbo run build --filter=web...
+RUN yarn turbo run build --filter=liskscan...
 
 FROM node:alpine AS runner
 WORKDIR /app
