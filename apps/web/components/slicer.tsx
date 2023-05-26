@@ -29,6 +29,8 @@ export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => 
     }
   }, [setID, id]);
 
+  useEffect(() => console.log("CACHE", cache), [cache])
+
   return (
     <>
       {slices.filter(Boolean).map((slice) => {
