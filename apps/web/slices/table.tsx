@@ -28,7 +28,7 @@ export const TableSlice = ({queryData, data, table}: any) => {
   }, [queryData]);
   return (
     <>
-      <div className={"w-max-app mx-auto"}>
+      <div className={"max-w-app mx-auto w-full"}>
         <Table
           // columns={processTable(props.table).columns}
           // rows={props?.data?.rows}

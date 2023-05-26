@@ -150,7 +150,7 @@
     --color-primary: hsl(var(--theme-primary), 69%, 52%);
     --color-primaryDark: hsl(var(--theme-primary), 72%, 44%);
 
-    --color-onPrimary: var(--color-lisk-white);
+    --color-onPrimary: hsl(var(--theme-primary), 100%, 0%);
     --color-onPrimaryHigh: hsl(var(--theme-primary), 100%, 90%);
     --color-onPrimaryMedium: hsl(var(--theme-primary), 100%, 70%);
     --color-onPrimaryLow: hsl(var(--theme-primary), 100%, 60%);
@@ -187,7 +187,7 @@
     --color-table-header-bg: rgba(159,183,249,.3);
     --color-table-header-text: var(--color-lisk-athens-white);
     --color-table-header-border: hsl(216, 100%, 98%);
-    --color-table-odd-bg: #1c2542;
+    --color-table-odd-bg: var(--color-background);
     --color-table-odd-text: var(--color-lisk-athens-white);
     --color-table-odd-border:hsla(0,0%,40%,.4);
     --color-table-odd-link: #9fb7f9;

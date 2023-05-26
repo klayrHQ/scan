@@ -10,7 +10,7 @@ export interface TableProps {
 }
 
 export const Table = ({ rows, columns }: TableProps) => (
-  <table className={cls([ "border-collapse rounded",])}>
+  <table className={cls([ "border-collapse rounded w-full",])}>
     <Head cols={columns} />
     <Body rows={rows} columns={columns} />
     {rows && rows.length === 0 && <Empty colSpan={2} emptyLabel={"TODO EMPTY"} />}
