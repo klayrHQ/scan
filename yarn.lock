@@ -1988,62 +1988,6 @@
   dependencies:
     "@lezer/common" "^1.0.0"
 
-"@liskhq/lisk-codec@^0.3.0-beta.1":
-  version "0.3.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-codec/-/lisk-codec-0.3.0-beta.1.tgz"
-  integrity sha512-j3Gn5+z2uLOC+T34/Ycm7AfqNK5YkwLkBB/ZX+MZp0U/pidsWOMYCbHaEQScXWUv0BgZdCECGuzzMwXGzHvPfg==
-  dependencies:
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.1"
-    "@liskhq/lisk-utils" "^0.3.0-beta.1"
-    "@liskhq/lisk-validator" "^0.7.0-beta.1"
-
-"@liskhq/lisk-cryptography@^4.0.0-beta.1":
-  version "4.0.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-cryptography/-/lisk-cryptography-4.0.0-beta.1.tgz"
-  integrity sha512-bmLAKLRRBhidWSMA9OS/Q365c78PupoAQgqVqzfRYlGKw8AsZSf9iAknMeDt2a/5M8NcYdU4FiKxtJZdzA3LEw==
-  dependencies:
-    "@liskhq/lisk-passphrase" "^4.0.0-beta.1"
-    buffer-reverse "1.0.1"
-    ed2curve "0.3.0"
-    hash-wasm "4.9.0"
-    tweetnacl "1.0.3"
-    varuint-bitcoin "1.1.2"
-
-"@liskhq/lisk-passphrase@^4.0.0-beta.1":
-  version "4.0.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-passphrase/-/lisk-passphrase-4.0.0-beta.1.tgz"
-  integrity sha512-+Cqw4Nq5ETRIMc8jLl4IMhiQ2bunnt9gNLnUrCJ6pwYX4MD8GHvy/C/pQ+n3AxAIEhHveqoTTk+HqROMIuJlpw==
-  dependencies:
-    bip39 "3.0.3"
-
-"@liskhq/lisk-transactions@^6.0.0-beta.1":
-  version "6.0.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-transactions/-/lisk-transactions-6.0.0-beta.1.tgz"
-  integrity sha512-6M4lveS39KBnGjencYsxKGyYgwMrvQTwjWsmAz+f93aUN6RSNnkj5phNBqom4aFvo8DewqEk4icCRX5oDbY61A==
-  dependencies:
-    "@liskhq/lisk-codec" "^0.3.0-beta.1"
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.1"
-    "@liskhq/lisk-validator" "^0.7.0-beta.1"
-
-"@liskhq/lisk-utils@^0.3.0-beta.1":
-  version "0.3.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-utils/-/lisk-utils-0.3.0-beta.1.tgz"
-  integrity sha512-aMJBOQWoLkTZjO53xjYWIK1AgTgLLxdV7IQYHdGAx+pcOw3YerISMJ1qz7IKj37bF48YmdvddfnGbSrtywFrng==
-  dependencies:
-    lodash.clonedeep "4.5.0"
-
-"@liskhq/lisk-validator@^0.7.0-beta.1":
-  version "0.7.0-beta.1"
-  resolved "https://npm.colecti.io/@liskhq/lisk-validator/-/lisk-validator-0.7.0-beta.1.tgz"
-  integrity sha512-On1jh9qlliB0wvQNdlT0qFZBsDxH/+nZKC/B2z+YXtjC0Bb1/GuRdAgof4qt14c1tIpYQ71iQrX8GH7WIb3Myw==
-  dependencies:
-    "@liskhq/lisk-cryptography" "^4.0.0-beta.1"
-    ajv "8.1.0"
-    ajv-formats "2.1.1"
-    debug "4.3.4"
-    semver "7.3.8"
-    validator "13.7.0"
-
 "@liskscan/lisk-service-client@^0.0.8":
   version "0.0.8"
   resolved "https://npm.colecti.io/@liskscan/lisk-service-client/-/lisk-service-client-0.0.8.tgz"
@@ -4600,11 +4544,6 @@
   resolved "https://npm.colecti.io/@types/node/-/node-20.2.0.tgz"
   integrity sha512-3iD2jaCCziTx04uudpJKwe39QxXgSUnpxXSvRQjRvHPxFQfmfP4NXIm/NURVeNlTCc+ru4WqjYGTmpXrW9uMlw==
 
-"@types/node@11.11.6":
-  version "11.11.6"
-  resolved "https://npm.colecti.io/@types/node/-/node-11.11.6.tgz"
-  integrity sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ==
-
 "@types/node@^12.12.6":
   version "12.20.55"
   resolved "https://npm.colecti.io/@types/node/-/node-12.20.55.tgz"
@@ -5783,7 +5722,7 @@ ajv-errors@^1.0.0:
   resolved "https://npm.colecti.io/ajv-errors/-/ajv-errors-1.0.1.tgz"
   integrity sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ==
 
-ajv-formats@2.1.1, ajv-formats@^2.1.1:
+ajv-formats@^2.1.1:
   version "2.1.1"
   resolved "https://npm.colecti.io/ajv-formats/-/ajv-formats-2.1.1.tgz"
   integrity sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==
@@ -5801,16 +5740,6 @@ ajv-keywords@^5.1.0:
   integrity sha512-YCS/JNFAUyr5vAuhk1DWm1CBxRHW9LbJ2ozWeemrIqpbsqKjHVxYPyi5GC0rjZIT5JxJ3virVTS8wk4i/Z+krw==
   dependencies:
     fast-deep-equal "^3.1.3"
-
-ajv@8.1.0:
-  version "8.1.0"
-  resolved "https://npm.colecti.io/ajv/-/ajv-8.1.0.tgz"
-  integrity sha512-B/Sk2Ix7A36fs/ZkuGLIR86EdjbgR6fsAcbx9lOP/QBSXujDNbVmIS/U4Itz5k8fPFDeVZl/zQ/gJW4Jrq6XjQ==
-  dependencies:
-    fast-deep-equal "^3.1.1"
-    json-schema-traverse "^1.0.0"
-    require-from-string "^2.0.2"
-    uri-js "^4.2.2"
 
 ajv@^6.0.0, ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
   version "6.12.6"
@@ -6455,16 +6384,6 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-bip39@3.0.3:
-  version "3.0.3"
-  resolved "https://npm.colecti.io/bip39/-/bip39-3.0.3.tgz"
-  integrity sha512-P0dKrz4g0V0BjXfx7d9QNkJ/Txcz/k+hM9TnjqjUaXtuOfAvxXSw2rJw8DX0e3ZPwnK/IgDxoRqf0bvoVCqbMg==
-  dependencies:
-    "@types/node" "11.11.6"
-    create-hash "^1.1.0"
-    pbkdf2 "^3.0.9"
-    randombytes "^2.0.1"
-
 bl@^4.0.3:
   version "4.1.0"
   resolved "https://npm.colecti.io/bl/-/bl-4.1.0.tgz"
@@ -6765,11 +6684,6 @@ buffer-from@^1.0.0, buffer-from@^1.1.1:
   version "1.1.2"
   resolved "https://npm.colecti.io/buffer-from/-/buffer-from-1.1.2.tgz"
   integrity sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==
-
-buffer-reverse@1.0.1:
-  version "1.0.1"
-  resolved "https://npm.colecti.io/buffer-reverse/-/buffer-reverse-1.0.1.tgz"
-  integrity sha512-M87YIUBsZ6N924W57vDwT/aOu8hw7ZgdByz6ijksLjmHJELBASmYTTlNHRgjE+pTsT9oJXGaDSgqqwfdHotDUg==
 
 buffer-to-arraybuffer@^0.0.5:
   version "0.0.5"
@@ -7834,7 +7748,7 @@ debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@4.3.4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.3, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
+debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.3, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
   version "4.3.4"
   resolved "https://npm.colecti.io/debug/-/debug-4.3.4.tgz"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -8241,13 +8155,6 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
-
-ed2curve@0.3.0:
-  version "0.3.0"
-  resolved "https://npm.colecti.io/ed2curve/-/ed2curve-0.3.0.tgz"
-  integrity sha512-8w2fmmq3hv9rCrcI7g9hms2pMunQr1JINfcjwR9tAyZqhtyaMN991lF/ZfHfr5tzZQ8c7y7aBgZbjfbd0fjFwQ==
-  dependencies:
-    tweetnacl "1.x.x"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -10424,11 +10331,6 @@ hash-base@^3.0.0:
     readable-stream "^3.6.0"
     safe-buffer "^5.2.0"
 
-hash-wasm@4.9.0:
-  version "4.9.0"
-  resolved "https://npm.colecti.io/hash-wasm/-/hash-wasm-4.9.0.tgz"
-  integrity sha512-7SW7ejyfnRxuOc7ptQHSf4LDoZaWOivfzqw+5rpcQku0nHfmicPKE51ra9BiRLAmT8+gGLestr1XroUkqdjL6w==
-
 hash.js@1.1.7, hash.js@^1.0.0, hash.js@^1.0.3, hash.js@^1.1.7:
   version "1.1.7"
   resolved "https://npm.colecti.io/hash.js/-/hash.js-1.1.7.tgz"
@@ -11918,11 +11820,6 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash.clonedeep@4.5.0:
-  version "4.5.0"
-  resolved "https://npm.colecti.io/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
-  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
-
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://npm.colecti.io/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
@@ -13367,7 +13264,7 @@ pathe@^1.1.0:
   resolved "https://npm.colecti.io/pathe/-/pathe-1.1.0.tgz"
   integrity sha512-ODbEPR0KKHqECXW1GoxdDb+AZvULmXjVPy4rt+pGo2+TnjJTIPJQSVS6N63n8T2Ip+syHhbn52OewKicV0373w==
 
-pbkdf2@^3.0.17, pbkdf2@^3.0.3, pbkdf2@^3.0.9:
+pbkdf2@^3.0.17, pbkdf2@^3.0.3:
   version "3.1.2"
   resolved "https://npm.colecti.io/pbkdf2/-/pbkdf2-3.1.2.tgz"
   integrity sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==
@@ -15084,13 +14981,6 @@ semver@6.1.1:
   resolved "https://npm.colecti.io/semver/-/semver-6.1.1.tgz"
   integrity sha512-rWYq2e5iYW+fFe/oPPtYJxYgjBm8sC4rmoGdUOgBB7VnwKt6HrL793l2voH1UlsyYZpJ4g0wfjnTEO1s1NP2eQ==
 
-semver@7.3.8:
-  version "7.3.8"
-  resolved "https://npm.colecti.io/semver/-/semver-7.3.8.tgz"
-  integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
-  dependencies:
-    lru-cache "^6.0.0"
-
 semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
   version "6.3.0"
   resolved "https://npm.colecti.io/semver/-/semver-6.3.0.tgz"
@@ -16384,11 +16274,6 @@ turbo@latest:
     turbo-windows-64 "1.9.9"
     turbo-windows-arm64 "1.9.9"
 
-tweetnacl@1.0.3, tweetnacl@1.x.x:
-  version "1.0.3"
-  resolved "https://npm.colecti.io/tweetnacl/-/tweetnacl-1.0.3.tgz"
-  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
-
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://npm.colecti.io/tweetnacl/-/tweetnacl-0.14.5.tgz"
@@ -16803,11 +16688,6 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@13.7.0:
-  version "13.7.0"
-  resolved "https://npm.colecti.io/validator/-/validator-13.7.0.tgz"
-  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
-
 valtio@1.10.5:
   version "1.10.5"
   resolved "https://npm.colecti.io/valtio/-/valtio-1.10.5.tgz"
@@ -16825,13 +16705,6 @@ varint@^5.0.0:
   version "5.0.2"
   resolved "https://npm.colecti.io/varint/-/varint-5.0.2.tgz"
   integrity sha512-lKxKYG6H03yCZUpAGOPOsMcGxd1RHCu1iKvEHYDPmTyq2HueGhD73ssNBqqQWfvYs04G9iUFRvmAVLW20Jw6ow==
-
-varuint-bitcoin@1.1.2:
-  version "1.1.2"
-  resolved "https://npm.colecti.io/varuint-bitcoin/-/varuint-bitcoin-1.1.2.tgz"
-  integrity sha512-4EVb+w4rx+YfVM32HQX42AbbT7/1f5zwAYhIujKXKk8NQK+JfRVl3pqT3hjNn/L+RstigmGGKVwHA/P0wgITZw==
-  dependencies:
-    safe-buffer "^5.1.1"
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"

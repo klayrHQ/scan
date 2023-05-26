@@ -16,7 +16,6 @@
   "dependencies": {
     "@headlessui/react": "^0.0.0-insiders.fcfd554",
     "@heroicons/react": "^2.0.18",
-    "@liskhq/lisk-transactions": "^6.0.0-beta.1",
     "@liskscan/lisk-service-client": "^0.0.8",
     "@portabletext/react": "^2.0.1",
     "@sanity/client": "^5.2.2",
