@@ -44,9 +44,9 @@ export interface ServiceQueries {
 export const client = new LiskService({
   // url: "51.15.142.42:9901",
   // url: "51.158.162.30:9901",
-  url: "51.158.244.16:9901",
-  // url: "betanet-service.lisk.com",
-  disableTLS: true,
+  // url: "51.158.244.16:9901",
+  url: "betanet-service.liskscan.com",
+  disableTLS: false,
 });
 
 export const getAllData = async (
