@@ -13,7 +13,6 @@ type ValueTypes =
   | "number"
   | "beddows"
   | "boolean"
-  | "commission"
   | "float"
   | "timestamp"
   | "hex";

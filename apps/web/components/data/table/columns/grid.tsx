@@ -2,9 +2,7 @@ import { ValueFormatter } from "../../../valueFormatter";
 import { ColumnProps } from "./index";
 
 export const GridColumn = ({ values }: ColumnProps) => {
-  console.log(Math.floor(values.length / 2))
   const rows = Array(Math.ceil(values.length / 2), 1);
-  console.log(values.slice(2, 4), rows)
   return (
     <div className={"flex"}>
       {rows.map((v, i) => (
