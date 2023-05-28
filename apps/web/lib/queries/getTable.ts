@@ -11,7 +11,7 @@ export const processTable = (result: any) => {
   //   });
   //   queries.push({ ...query, params });
   // }
-  const keys: {keys: string[]}[] = [];
+  const keys: { keys: string[] }[] = [];
   const columns = result.columns.map(
     (column: {
       component: ColumnTypes;
@@ -19,6 +19,7 @@ export const processTable = (result: any) => {
       headValues: string[];
       valueKeys: string[];
       showOn: ShowOnCell;
+      className: string;
     }) => {
       keys.push({ keys: column.valueKeys });
       return {
@@ -26,11 +27,12 @@ export const processTable = (result: any) => {
         ValueComponent: ColumnComponents[column.valueComponent],
         values: column.headValues,
         showOn: column.showOn,
+        className: column.className,
       };
     }
   );
   return { ...result, columns, keys };
-}
+};
 
 export const getTable = async ({ slug }: { slug: string }): Promise<any> => {
   const result =
@@ -46,7 +48,7 @@ export const getTable = async ({ slug }: { slug: string }): Promise<any> => {
   title, 
   key,
 }[0]`);
-  return processTable(result)
+  return processTable(result);
   // const queries = [];
   // for (const query of result.queries) {
   //   let params: Record<string, any> = {};

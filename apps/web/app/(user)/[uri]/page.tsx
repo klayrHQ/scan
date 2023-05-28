@@ -54,7 +54,7 @@ const getSlices = async (uri: string) => {
 
   return {
     sections: await Promise.all(
-      page.sections.map(async (section: any) => {
+      page?.sections?.map(async (section: any) => {
         if (section.table) {
           const rows = await getTableRows(queryResponses, section.table);
           return { ...section, data: { rows } };
