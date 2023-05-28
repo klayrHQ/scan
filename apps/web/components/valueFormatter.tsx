@@ -13,6 +13,7 @@ type ValueTypes =
   | "number"
   | "beddows"
   | "boolean"
+  | "commission"
   | "float"
   | "timestamp"
   | "hex";
@@ -56,6 +57,7 @@ type Formats =
   | "date"
   | "shortAddress"
   | "percentage"
+  | "commission"
   | "currency"
   | "number"
   | "avatar"
@@ -214,12 +216,13 @@ const parsers = {
 const formatters = {
   plain: (value: any) => value?.toString(),
   shortAddress: (value: any) => shortenAddress(value),
+  commission: (value: any) => value/100 + "%",
   percentage: (value: any) => value + "%",
   currency: (value: any) => convertBeddowsToLSK(value),
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => value,
   icon: (value: any) => "",
-  date: (value: any) => value,
+  date: (value: any) => new Date(value).getTime(),
   fromNow: (value: any) => new Date().getTime() - new Date(value * 1000).getTime() > 60 * 60 * 1000 ? new Date(value * 1000).toLocaleString() : formatDistance(
     new Date(value * 1000),
     new Date(),

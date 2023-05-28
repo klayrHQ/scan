@@ -188,6 +188,7 @@ export const SanityValue = [
             { title: "date", value: "date" },
             { title: "shortAddress", value: "shortAddress" },
             { title: "percentage", value: "percentage" },
+            { title: "commission", value: "commission" },
             { title: "currency", value: "currency" },
             { title: "number", value: "number" },
             { title: "avatar", value: "avatar" },
