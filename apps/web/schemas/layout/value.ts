@@ -424,15 +424,25 @@ export const SanityValue = [
           },
         ],
       },
-      { title: "Link", type: "string", name: "link" },
+      {
+        title: "Link",
+        type: "object",
+        name: "link",
+        fields: [
+          {
+            title: "Href",
+            type: "string",
+            name: "href",
+            description: "eg. /account/%s",
+          },
+          {
+            title: "Keys",
+            type: "array",
+            name: "keys",
+            of: [{ type: "string" }],
+          },
+        ],
+      },
     ],
-  },
-  {
-    name: "updateOn",
-    type: "string",
-    title: "Update on",
-    options: {
-      list: UpdateOn,
-    },
   },
 ];

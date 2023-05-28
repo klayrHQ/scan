@@ -113,6 +113,7 @@ export interface ValueFormat {
   updateOn?: UpdateOnType;
   value?: any;
   copy?: boolean;
+  _key?: string
 }
 
 export const ValueFormatter = ({

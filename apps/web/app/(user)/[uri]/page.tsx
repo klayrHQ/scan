@@ -7,7 +7,7 @@ import { getQueries } from "../../../lib/sanity.queries";
 
 export const revalidate = 60;
 
-const getSlices = async (uri: string) => {
+export const getSlices = async (uri: string) => {
   const page =
     await sanityClient.fetch(`*[_type=="pages" && slug.current == "${uri}"]{
     ...,

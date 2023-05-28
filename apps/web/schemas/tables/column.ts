@@ -58,6 +58,7 @@ export default defineType({
         list: [
           {title: "Plain", value: "PlainColumn"},
           {title: "Double row", value: "DoubleRowColumn"},
+          {title: "Grid colum (2)", value: "GridColumn"},
           {title: "Date", value: "DateColumn"},
         ]
       }
