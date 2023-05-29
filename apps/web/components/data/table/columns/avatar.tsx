@@ -1,0 +1,15 @@
+import {ColumnProps} from "./index";
+import {cls, Typography} from "ui";
+import {ValueFormatter} from "../../../valueFormatter";
+import {Avatar} from "ui/atoms/avatar/avatar";
+
+export const AvatarColumn = ({params, values}: ColumnProps) => {
+  return <span className={"flex space-x-2"}><Avatar size={20} username={values[0].value.name} address={values[0].value.address} />{<ValueFormatter value={values[0].value.name || values[0].value.address} {...values[0].format} />}</span>
+// <Typography
+//   tag={"span"}
+//   className={cls(["border-surfaceDark", params?.className])}
+//   {...params}
+// >
+//   {typeof values === "object" ? values[0] : values}
+// </Typography>
+}
