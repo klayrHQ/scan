@@ -44,7 +44,7 @@ export const Tooltip = ({
       theme={theme || "liskscan"}
       animation={"shift-toward"}
     >
-      {children}
+      <div>{children}</div>
     </Tippy>
   ) : (
     <>{children}</>

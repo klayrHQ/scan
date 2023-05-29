@@ -6,6 +6,7 @@ import { UpdateOnType } from "../schemas/slices/table";
 import {CopyButton} from "./data/copy";
 import {convertBeddowsToLSK} from "../lib/queries/lisk";
 import {formatDistance} from "date-fns";
+import {Avatar} from "ui/atoms/avatar/avatar";
 
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
@@ -58,6 +59,7 @@ type Formats =
   | "percentage"
   | "commission"
   | "currency"
+  | "fee"
   | "number"
   | "avatar"
   | "icon";
@@ -207,7 +209,7 @@ const parsers = {
   number: (value?: string) => parseInt(value || "0", 10),
   float: (value?: string) => parseFloat(value || "0"),
   beddows: (value?: string) => value, //BigInt(value || "0"),
-  timestamp: (value?: string) => parseInt(value || "0"), //value ? new Date(value + 1000) : new Date(),
+  timestamp: (value?: string) => parseInt(value || "0")*1000, //value ? new Date(value + 1000) : new Date(),
   boolean: (value?: boolean) => value === true,
   hex: (value?: string) => Buffer.from(value || "", "hex"),
 };
@@ -217,13 +219,14 @@ const formatters = {
   shortAddress: (value: any) => shortenAddress(value),
   commission: (value: any) => value/100 + "%",
   percentage: (value: any) => value + "%",
-  currency: (value: any) => convertBeddowsToLSK(value),
+  currency: (value: any) => `${value ? parseInt(parseFloat(convertBeddowsToLSK(value)).toFixed(2)).toLocaleString() + " LSK" : ""}`,
+  fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
   number: (value: any) => value.toLocaleString(),
-  avatar: (value: any) => value,
+  avatar: (value: any) => <Avatar address={value} size={20} />,
   icon: (value: any) => "",
-  date: (value: any) => new Date(value).getTime(),
-  fromNow: (value: any) => new Date().getTime() - new Date(value * 1000).getTime() > 60 * 60 * 1000 ? new Date(value * 1000).toLocaleString() : formatDistance(
-    new Date(value * 1000),
+  date: (value: any) => new Date(value).toLocaleString(),
+  fromNow: (value: any) => new Date().getTime() - new Date(value).getTime() > 60 * 60 * 1000 ? new Date(value).toLocaleString() : formatDistance(
+    new Date(value),
     new Date(),
     {
       addSuffix: true,

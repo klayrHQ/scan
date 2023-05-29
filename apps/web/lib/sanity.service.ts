@@ -111,7 +111,7 @@ export const getAllData = async (
                   subQuery.serviceType,
                   subQuery.call,
                   {
-                    [subQuery.primaryKey]: foreignKey,
+                    [subQuery.primaryKey]: foreignKey.toString(),
                   }
                 );
                 if (response.status === "success" && response?.data) {
