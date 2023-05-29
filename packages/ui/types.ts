@@ -1,4 +1,5 @@
 import {ReactElement} from "react";
+import {NetworkEndpoint} from "@moosty/lisk-service-provider";
 
 export type tableRowsType = Array<{
   id: string,
@@ -57,6 +58,7 @@ export type iconVariants =
   | "exclamationTriangle"
   | "identification"
   | "check"
+  | "checkCircle"
   | "checkShield"
   | "arrowUp"
   | "arrowDown"
@@ -110,4 +112,46 @@ export interface FormattedFiltersType {
 export interface FilterModesType {
   dateFilter?: "slider" | "custom",
   amountFilter?: "buttons" | "slider" | "range",
+}
+
+export interface ThemeType {
+  bg: {
+    s: number
+    l: number
+  }
+  handle: string
+  name: string
+  primary: number
+  secondary: number
+  type: string
+}
+
+export interface CurrencyType {
+  id: number
+  symbol: string
+  sign: string
+  name: string
+  flag?: string
+  default: {
+    sign: boolean
+    symbol: boolean
+    fractions: number
+  }
+}
+
+export interface SettingsItemType {
+  label: string
+  subLabel: string
+  link: string
+  icon?: any
+  hideOnMobile?: boolean
+  view: JSX.Element
+}
+
+export interface NetworkType {
+  id: string
+  endpoint: NetworkEndpoint[]
+  network: string
+  communityId: string
+  default?: boolean
 }
