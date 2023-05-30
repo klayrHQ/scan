@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Logo } from "../../molecules/logo/logo";
 import { LiskScanIcon } from "../../assets/icons";
 import { Menu } from "../../molecules/menu/menu";
+import {MobileMenu} from "../mobileMenu/mobileMenu";
 
 export interface TopBarProps {
   menuItems: ReactNode[];
@@ -32,12 +33,13 @@ export const TopBar = ({
               {menuItems}
             </div>
           </div>
-          {/*<Menu menuItems={menuItems}/>*/}
         </div>
         <div className="relative flex flex-row items-center space-x-4 lg:ml-4">
           {menuItemsRight}
         </div>
       </div>
+
+      {/*<MobileMenu menuItems={menuItems} />*/}
     </nav>
   </>
 );

@@ -1,10 +1,8 @@
 import { SlicerProps } from "../components/slicer";
 import { Grid } from "ui";
 import { ValueFormatter } from "../components/valueFormatter";
-import { getDottedKeyType, getFromDottedKey } from "../lib/dotString";
-import { IconButton } from "ui/atoms/iconButton/iconButton";
-import { DocumentDuplicateIcon } from "@heroicons/react/24/solid";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { getFromDottedKey } from "../lib/dotString";
+import util from "util";
 
 export const Kpi = ({
   queryData,
@@ -40,12 +38,27 @@ export const Kpi = ({
         if (value.type === "key") {
           v = getFromDottedKey(value.value, "row", queryData, queryData) || "-";
         }
+        let link = undefined
+        if (value.format?.link?.href) {
+          link = {
+            href: value.format.link.href,
+            keys: []
+          }
+        }
+        if (value.format?.link?.keys?.length > 0 && value.format?.link?.href) {
+          const keys = value.format.link.keys.map((key: string) => getFromDottedKey(key, "row", queryData, queryData))
+          link = {
+            href: util.format(value.format.link.href, ...keys),
+            keys
+          }
+        }
         return (
           <ValueFormatter
             key={value._key}
             value={v || value.value}
             copy={copy === index}
             {...value.format}
+            link={link}
           />
         );
       })}

@@ -73,7 +73,10 @@ export interface ValueFormatterProps {
   tooltip?: TooltipType;
   icon?: Icon;
   color?: Color;
-  link?: string;
+  link?: {
+    href?: string,
+    keys?: string[]
+  };
   copy?: boolean;
 }
 
@@ -108,7 +111,10 @@ export interface ValueFormat {
     format?: Formats;
     tooltip?: TooltipType;
     icon?: Icon;
-    link?: string;
+    link?: {
+      href?: string;
+      keys?: string[];
+    };
     tag?: Tags;
   };
   name?: string;
@@ -149,8 +155,8 @@ export const ValueFormatter = ({
     );
   return (
     <>
-      {link && (
-        <Link href={link}>
+      {link?.href && (
+        <Link href={link.href}>
           <InnerTooltip
             {...{
               icon,
