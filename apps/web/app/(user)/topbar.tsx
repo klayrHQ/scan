@@ -132,20 +132,20 @@ export const TopBarLayout = ({
             <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
               <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
             </Tooltip>
-            <Tooltip label="Dark mode" placement={"bottom"} offset={[0, 10]}>
+            <Tooltip label={themeMode === "dark" ? "Dark mode" : "Light mode"} placement={"bottom"} offset={[0, 10]}>
               {themeMode === "dark" ? (
                 <MoonIcon
                   onClick={() => {
-                    switchThemeMode()
-                    updateThemeMode("light")
+                    switchThemeMode();
+                    updateThemeMode("light");
                   }}
                   className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0"
                 />
               ) : (
                 <SunIcon
                   onClick={() => {
-                    switchThemeMode()
-                    updateThemeMode("dark")
+                    switchThemeMode();
+                    updateThemeMode("dark");
                   }}
                   className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0"
                 />
