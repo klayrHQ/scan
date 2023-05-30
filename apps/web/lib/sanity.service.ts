@@ -152,12 +152,16 @@ export const getAllData = async (
             `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
             ]?.data) {
             for (const index in responses[query.key].data) {
-              const childRequest = responses[query.key].data[index];
-              const found = responses[
-                `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-                ]?.data?.find((d: any) => d[subQuery.primaryKey] === childRequest[subQuery.foreignKey])
-              if (found) {
-                responses[query.key].data[index][`${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`] = found
+              try {
+                const childRequest = responses[query.key].data[index];
+                const found = responses[
+                  `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
+                  ]?.data?.find((d: any) => d[subQuery.primaryKey] === childRequest[subQuery.foreignKey])
+                if (found) {
+                  responses[query.key].data[index][`${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`] = found
+                }
+              } catch (e) {
+                
               }
             }
           }
