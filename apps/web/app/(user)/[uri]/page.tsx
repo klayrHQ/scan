@@ -17,7 +17,7 @@ export const getSlices = async (uri: string) => {
       call,
       params[]{key, value},
       serviceType,
-      subQueries[]->{type,foreignKey,primaryKey,call,serviceType}
+      subQueries[]->{type,foreignKey,primaryKey,call,serviceType,params}
     },
     sections[]->{
       ...,
