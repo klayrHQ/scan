@@ -35,7 +35,7 @@
   --color-onSecondary: hsl(calc(var(--theme-primary) + 180), 90%, 90%);
 
   --color-onSurfaceLinkHigh: hsl(var(--theme-primary), 100%, 30%);
-  --color-onSurfaceLinkMedium: hsl(var(--theme-primary), 69%, 40%);
+  --color-onSurfaceLinkMedium: hsl(var(--theme-primary), 69%, 60%);
   --color-onSurfaceLinkLow: hsl(var(--theme-primary), 69%, 52%);
 
   --color-onPrimaryLinkHigh: hsl(var(--theme-primary), 69%, 52%);
@@ -64,9 +64,9 @@
   /* tables */
   --color-table-header-bg: rgba(159,183,249,.3);
   --color-table-header-text: var(--color-lisk-athens-white);
-  --color-table-header-border: hsl(216, 100%, 98%);
-  --color-table-odd-bg: #1c2542;
-  --color-table-odd-text: var(--color-lisk-athens-white);
+  --color-table-header-border: hsla(0, 0%, 100%, 0.1);
+  --color-table-odd-bg: var(--color-background);
+  --color-table-odd-text: hsla(0, 0%, 100%, 0.8);
   --color-table-odd-border:hsla(0,0%,40%,1);
   --color-table-odd-link: #9fb7f9;
   --color-table-even-bg: var(--color-background);
@@ -76,7 +76,7 @@
 
   /*donkere kleuren*/
   --color-onSurfaceHigh: hsl(0, 10%, 80%);
-  --color-onSurfaceMedium: hsl(0, 0%, 45%);
+  --color-onSurfaceMedium: hsl(0, 0%, 60%);
   --color-onSurfaceLow: hsl(var(--theme-primary), 1%, 50%, .9);
 
   --color-onSurfacePrimaryHigh: hsl(var(--theme-primary), 69%, 52%);
