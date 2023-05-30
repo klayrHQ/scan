@@ -15,6 +15,7 @@ export const Body = ({ rows, columns }: BodyProps) => {
           key={`row-${row[0]?.[0]._key}-${row[0]?.[0].value}`}
           columns={columns}
           data={row}
+          index={index}
         />
       ))}
     </tbody>

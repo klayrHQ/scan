@@ -1,5 +1,6 @@
 import { defineType } from "sanity";
 import {SanityValue} from "../layout/value";
+import {NrColumn} from "../../components/data";
 
 export default defineType({
   name: "column",
@@ -62,6 +63,7 @@ export default defineType({
           {title: "Date", value: "DateColumn"},
           {title: "Avatar + username/address", value: "AvatarColumn"},
           {title: "Validator Status + Allocated time", value: "ValidatorStatusColumn"},
+          {title: "Index nr", value: "NrColumn"},
         ]
       }
     },
