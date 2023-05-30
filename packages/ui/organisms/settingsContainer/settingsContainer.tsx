@@ -43,7 +43,7 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
       <div
         className={[
           "inline-block align-bottom rounded-lg",
-          "text-left overflow-hidden shadow-xl transform",
+          "text-left overflow-hidden transform",
           "transition-all md:my-8 sm:align-middle",
           "w-full md:max-w-app h-screen",
         ].join(" ")}

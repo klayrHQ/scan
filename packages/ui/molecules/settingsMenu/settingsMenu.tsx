@@ -3,6 +3,7 @@ import { Paper} from "../../atoms/paper/paper";
 import { CurrencyType, SettingsItemType } from "../../types"
 import {Icon} from "../../atoms/icon/icon";
 import {ThemeType} from "../../types";
+import {Typography} from "../../atoms/typography/typography";
 
 interface SettingsMenuProps {
   settingsModalState: {open: boolean, view: string, mobileOpen: boolean, args?: any}
@@ -80,7 +81,8 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
             ].join(" ")}
           >
             <div className="">
-              <p
+              <Typography
+                tag={"span"}
                 className={[
                   "text-base font-base",
                   item.link === settingsModalState?.view
@@ -90,7 +92,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
                 ].join(" ")}
               >
                 {item.label}
-              </p>
+              </Typography>
             </div>
             <div className="flex flex-row items-center ">
               <span className="text-onSurfaceLow hover:text-onSurfacePrimaryHigh">

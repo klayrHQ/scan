@@ -126,19 +126,6 @@ export interface ThemeType {
   type: string
 }
 
-export interface CurrencyType {
-  id: number
-  symbol: string
-  sign: string
-  name: string
-  flag?: string
-  default: {
-    sign: boolean
-    symbol: boolean
-    fractions: number
-  }
-}
-
 export interface SettingsItemType {
   label: string
   subLabel: string
@@ -154,4 +141,22 @@ export interface NetworkType {
   network: string
   communityId: string
   default?: boolean
+}
+
+export interface CurrencyType {
+  id: number
+  symbol: string
+  sign: string
+  name: string
+  flag?: string
+  default: {
+    sign: boolean
+    symbol: boolean
+    fractions: number
+  }
+}
+
+export interface CurrencyCategory {
+  category: string
+  currencies: CurrencyType[]
 }

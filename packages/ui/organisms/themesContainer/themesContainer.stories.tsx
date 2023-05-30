@@ -4,7 +4,7 @@ import { ThemesContainer } from "./themesContainer";
 import {ThemeType} from "../../types";
 
 export default {
-  title: "Organisms/ThemesContainer",
+  title: "Organisms/Settings/ThemesContainer",
   component: ThemesContainer,
   argTypes: {
   },

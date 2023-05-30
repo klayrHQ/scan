@@ -7,7 +7,7 @@ import Status from "../../atoms/status/status";
 interface NetworkContainerProps {
   parsedSettings?: any
   setSetting: (handle: string, newState: any) => void
-  serviceClient: any
+  serviceClient?: any
   status: statusType
   networks: Array<NetworkType>
   emptyCustomNetwork: NetworkType

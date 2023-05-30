@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { NetworkContainer } from "./networkContainer";
 import {NetworkType} from "../../types";
-import * as net from "net";
 import {useLiskService} from "@moosty/lisk-service-provider";
 
 const emptyCustomNetwork: NetworkType = {
@@ -43,7 +42,7 @@ const networks: NetworkType[] = [
 ]
 
 export default {
-  title: "Organisms/NetworkContainer",
+  title: "Organisms/Settings/NetworkContainer",
   component: NetworkContainer,
   argTypes: {
   },

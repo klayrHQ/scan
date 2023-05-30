@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SettingsContainer } from "./settingsContainer";
 import {ThemesContainer} from "../themesContainer/themesContainer";
-import {ThemeType} from "../../types";
+import {CurrencyType, ThemeType} from "../../types";
+import {Modal} from "../../atoms/modal/modal";
+import {NetworkContainer} from "../networkContainer/networkContainer";
+import {useLiskService} from "@moosty/lisk-service-provider";
+import {emptyCustomNetwork, networks} from "../../assets/mockupData/networks";
+import {HotKeysContainer} from "../hotKeysContainer/hotKeysContainer";
+import {hotKeysCombos} from "../../assets/mockupData/hotkeys";
+import {CurrencyContainer} from "../currencyContainer/currencyContainer";
 
 export default {
-  title: "Organisms/SettingsContainer",
+  title: "Organisms/Settings/SettingsContainer",
   component: SettingsContainer,
   argTypes: {
   },
@@ -17,8 +24,6 @@ export default {
     },
   },
   args: {
-    settingsModalState: {open: true, view: "Theme", mobileOpen: false},
-    closeSettingsModal: () => console.log("close modal"),
     themes: [
       {
         bg: {
@@ -43,14 +48,23 @@ export default {
       secondary: 456,
       type: "test",
     },
-    changeSettingsView: (view: string) => console.log(view)
   }
 } as any;
 
 const Template: ComponentStory<typeof SettingsContainer> = (args) => {
+  const [open, setOpen] = useState(false)
+  const [settingsModalState, setSettingsModalState] = useState({open: true, view: "Theme", mobileOpen: false})
+
   return(
-    <SettingsContainer {...args} />
-  )
+    <Modal className={"w-full max-w-app"} isOpen={open} setIsOpen={setOpen} type={"transparent"}>
+      <SettingsContainer
+        {...args}
+        settingsModalState={settingsModalState}
+        changeSettingsView={(view) => setSettingsModalState({...settingsModalState, view: view})}
+        closeSettingsModal={() => setOpen(false)}
+      />
+    </Modal>
+)
 };
 
 export const Primary: ComponentMeta<typeof SettingsContainer> = Template.bind({});
@@ -87,6 +101,51 @@ Primary.args = {
         updateProperty={(property: string, newValue: string | number) => console.log(property)}
         switchTheme={(theme: ThemeType) => console.log(theme)}
         setSetting={(handle: string, newState: any) => console.log(handle)}
+      />,
+    },
+    {
+      link: "Hotkeys",
+      label: "Hotkeys",
+      view: <HotKeysContainer hotKeyGroups={hotKeysCombos} />,
+    },
+    {
+      link: "Currency",
+      label: "Currency",
+      view: <CurrencyContainer
+        setSetting={(handle: string, newState: any) => console.log(handle)}
+        minMax={{ min: 1, max: 100000 }}
+        switchConvert={() => console.log("switchConvert")}
+        closeSettingsModal={() => console.log("close modal")}
+        setSelectedCurrency={(currency: CurrencyType) => console.log(currency)}
+        categories={[
+          {
+            category: "1",
+            currencies: [
+              {
+                id: 0,
+                symbol: "DOL",
+                sign: "$",
+                name: "Dollar",
+                flag: "USA",
+                default: {
+                  sign: true,
+                  symbol: true,
+                  fractions: 2,
+                },
+              },
+            ],
+          },
+        ]}
+      />,
+    },
+    {
+      link: "Network",
+      label: "Network",
+      view: <NetworkContainer
+        status={"connected"}
+        setSetting={(handle: string, newState: any) => console.log(handle)}
+        networks={networks}
+        emptyCustomNetwork={emptyCustomNetwork}
       />,
     },
   ],
