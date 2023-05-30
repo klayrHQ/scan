@@ -1,12 +1,12 @@
 import { Grid, Tags, Tooltip, TooltipPlacement, Typography } from "ui";
 import { IconListTypes, iconsList } from "./iconList";
-import { cloneElement, } from "react";
+import { cloneElement } from "react";
 import Link from "next/link";
 import { UpdateOnType } from "../schemas/slices/table";
-import {CopyButton} from "./data/copy";
-import {convertBeddowsToLSK} from "../lib/queries/lisk";
-import {formatDistance} from "date-fns";
-import {Avatar} from "ui/atoms/avatar/avatar";
+import { CopyButton } from "./data/copy";
+import { convertBeddowsToLSK } from "../lib/queries/lisk";
+import { formatDistance } from "date-fns";
+import { Avatar } from "ui/atoms/avatar/avatar";
 
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
@@ -74,8 +74,8 @@ export interface ValueFormatterProps {
   icon?: Icon;
   color?: Color;
   link?: {
-    href?: string,
-    keys?: string[]
+    href?: string;
+    keys?: string[];
   };
   copy?: boolean;
 }
@@ -122,7 +122,7 @@ export interface ValueFormat {
   updateOn?: UpdateOnType;
   value?: any;
   copy?: boolean;
-  _key?: string
+  _key?: string;
 }
 
 export const ValueFormatter = ({
@@ -216,35 +216,38 @@ const parsers = {
   number: (value?: string) => parseInt(value || "0", 10),
   float: (value?: string) => parseFloat(value || "0"),
   beddows: (value?: string) => value, //BigInt(value || "0"),
-  timestamp: (value?: string) => parseInt(value || "0")*1000, //value ? new Date(value + 1000) : new Date(),
+  timestamp: (value?: string) => parseInt(value || "0") * 1000, //value ? new Date(value + 1000) : new Date(),
   boolean: (value?: boolean) => value === true,
   hex: (value?: string) => Buffer.from(value || "", "hex"),
 };
-
-
 
 const formatters = {
   plain: (value: any) => value?.toString(),
   shortAddress: (value: any) => shortenAddress(value),
   commission: (value: any) => {
-    console.log(value)
-    return value/100 + "%"
+    return value / 100 + "%";
   },
   percentage: (value: any) => value + "%",
-  currency: (value: any) => `${value ? parseInt(parseFloat(convertBeddowsToLSK(value)).toFixed(2)).toLocaleString() + " LSK" : ""}`,
+  currency: (value: any) =>
+    `${
+      value
+        ? parseInt(
+            parseFloat(convertBeddowsToLSK(value)).toFixed(2)
+          ).toLocaleString() + " LSK"
+        : ""
+    }`,
   fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),
-  fromNow: (value: any) => new Date().getTime() - new Date(value).getTime() > 60 * 60 * 1000 ? new Date(value).toLocaleString() : formatDistance(
-    new Date(value),
-    new Date(),
-    {
-      addSuffix: true,
-      includeSeconds: true,
-    }
-  )
+  fromNow: (value: any) =>
+    new Date().getTime() - new Date(value).getTime() > 60 * 60 * 1000
+      ? new Date(value).toLocaleString()
+      : formatDistance(new Date(value), new Date(), {
+          addSuffix: true,
+          includeSeconds: true,
+        }),
 };
 
 const InnerValue = ({
@@ -259,17 +262,16 @@ const InnerValue = ({
 }: InnerValueProps) => {
   const value = formatters[format](parsedValue);
   return (
-      <Grid gap={1} columns={2} mobileColumns={2} flex>
-        {icon && icon.before && parsedIcon}
-        <Typography color={parsedColor} tag={tag} {...typographyProps}>
-          {value}
-        </Typography>
-        {copy && <CopyButton value={value} />}
-        {icon && !icon.before && parsedIcon}
-      </Grid>
+    <Grid gap={1} columns={2} mobileColumns={2} flex>
+      {icon && icon.before && parsedIcon}
+      <Typography color={parsedColor} tag={tag} {...typographyProps}>
+        {value}
+      </Typography>
+      {copy && <CopyButton value={value} />}
+      {icon && !icon.before && parsedIcon}
+    </Grid>
   );
 };
-
 
 const InnerTooltip = ({
   icon,
@@ -360,12 +362,18 @@ const parseTooltip = (tooltip?: TooltipType, value?: any) => {
 
 const parseValue = (type: ValueTypes, value?: any) => parsers[type](value);
 const shortenAddress = (value: string) =>
-  value ? value.length > 11 ? value.slice(0, 6) + "..." + value.slice(-5) : value : "";
+  value
+    ? value.length > 11
+      ? value.slice(0, 6) + "..." + value.slice(-5)
+      : value
+    : "";
 
 export const parseProps = (props?: SanityProps, id?: string) =>
   props
     ? props.reduce(
-        (obj: Record<string, any>, item) => ((obj[item.key] = item.value === "id" ? id : item.value), obj),
+        (obj: Record<string, any>, item) => (
+          (obj[item.key] = item.value === "id" ? id : item.value), obj
+        ),
         {}
       )
     : {};

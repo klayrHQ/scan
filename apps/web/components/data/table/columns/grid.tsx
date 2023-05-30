@@ -6,9 +6,12 @@ export const GridColumn = ({ values }: ColumnProps) => {
   return (
     <div>
       {rows.map((v, i) => (
-        <div className={"flex flex-row"}>
-          {values.slice(i * 2, 2 + (i * 2)).map((value, index) => (
-            <div className={`${index % 2 === 1 ? "grow" : ""}`}>
+        <div key={`${v}-${i}`} className={"flex flex-row"}>
+          {values.slice(i * 2, 2 + i * 2).map((value, index) => (
+            <div
+              key={`${value}-${index}-${i}`}
+              className={`${index % 2 === 1 ? "grow" : ""}`}
+            >
               <ValueFormatter
                 key={`${value._key}-${value.value}`}
                 value={value.value}
