@@ -221,10 +221,15 @@ const parsers = {
   hex: (value?: string) => Buffer.from(value || "", "hex"),
 };
 
+
+
 const formatters = {
   plain: (value: any) => value?.toString(),
   shortAddress: (value: any) => shortenAddress(value),
-  commission: (value: any) => value/100 + "%",
+  commission: (value: any) => {
+    console.log(value)
+    return value/100 + "%"
+  },
   percentage: (value: any) => value + "%",
   currency: (value: any) => `${value ? parseInt(parseFloat(convertBeddowsToLSK(value)).toFixed(2)).toLocaleString() + " LSK" : ""}`,
   fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
@@ -239,7 +244,7 @@ const formatters = {
       addSuffix: true,
       includeSeconds: true,
     }
-  ),
+  )
 };
 
 const InnerValue = ({

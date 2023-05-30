@@ -7,6 +7,7 @@ import {GridColumn} from "./grid";
 import { AvatarColumn } from "./avatar";
 import {ValidatorStatusColumn} from "./validatorStatus";
 import {NrColumn} from "./nr";
+import {StakesColumn} from "./stakes";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -23,8 +24,9 @@ export const ColumnComponents = {
   AvatarColumn: AvatarColumn,
   ValidatorStatusColumn: ValidatorStatusColumn,
   NrColumn: NrColumn,
+  StakesColumn: StakesColumn,
 };
 
 export type ColumnTypes = keyof typeof ColumnComponents;
 
-export { DefaultHeadColumn, DoubleRowColumn, PlainColumn, DateColumn, GridColumn, AvatarColumn,ValidatorStatusColumn, NrColumn };
+export { DefaultHeadColumn, DoubleRowColumn, PlainColumn, DateColumn, GridColumn, AvatarColumn,ValidatorStatusColumn, NrColumn, StakesColumn };

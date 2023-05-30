@@ -17,9 +17,9 @@ export interface RowProps {
 export const Row = ({ params, columns, data, index }: RowProps) => {
   return (
     <tr className={cls([
-      "border-b-1 table-row",
-      "odd:border-b-tableOddBorder odd:bg-tableOddBG odd:text-tableOddText",
-      "border-b-tableEvenBorder bg-tableEvenBG text-tableEvenText py-4"])} {...params}>
+      "border-b border-r-0 border-l-0 border-t-0 border-solid border-platinumGray",
+      " odd:bg-tableOddBG odd:text-tableOddText",
+      "bg-tableEvenBG text-tableEvenText py-4"])} {...params}>
       {columns.map((column, i) => (
         <Cell
           {...column}

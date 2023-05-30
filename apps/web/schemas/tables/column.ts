@@ -64,6 +64,7 @@ export default defineType({
           {title: "Avatar + username/address", value: "AvatarColumn"},
           {title: "Validator Status + Allocated time", value: "ValidatorStatusColumn"},
           {title: "Index nr", value: "NrColumn"},
+          {title: "Stakes", value: "StakesColumn"},
         ]
       }
     },
