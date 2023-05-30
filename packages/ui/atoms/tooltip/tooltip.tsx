@@ -36,6 +36,7 @@ export const Tooltip = ({
   offset,
   theme,
 }: TooltipProps) => {
+
   return label ? (
     <Tippy
       placement={placement}

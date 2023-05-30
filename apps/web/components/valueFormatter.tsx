@@ -132,6 +132,7 @@ export const ValueFormatter = ({
   const typographyProps = parseProps(typography);
   const parsedValue = parseValue(type, value);
   const parsedTooltip = parseTooltip(tooltip, parsedValue);
+
   const parsedColor =
     color && color.conditions && color.conditions?.length > 0
       ? parseColor(color, parsedValue)
@@ -244,7 +245,6 @@ const InnerValue = ({
 }: InnerValueProps) => {
   const value = formatters[format](parsedValue);
   return (
-    <div>
       <Grid gap={1} columns={2} mobileColumns={2} flex>
         {icon && icon.before && parsedIcon}
         <Typography color={parsedColor} tag={tag} {...typographyProps}>
@@ -253,7 +253,6 @@ const InnerValue = ({
         {copy && <CopyButton value={value} />}
         {icon && !icon.before && parsedIcon}
       </Grid>
-    </div>
   );
 };
 

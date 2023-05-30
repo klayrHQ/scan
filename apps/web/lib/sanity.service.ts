@@ -86,8 +86,12 @@ export const getAllData = async (
                   calculation.calculation,
                   ...keys
                 );
-                const result = eval(parsedCalculation);
-                return { ...row, [calculation.name]: result };
+                try {
+                  const result = eval(parsedCalculation);
+                  return {...row, [calculation.name]: result};
+                } catch (e) {
+                    return {...row}
+                }
               }
             );
           } else {
@@ -111,7 +115,7 @@ export const getAllData = async (
                   subQuery.serviceType,
                   subQuery.call,
                   {
-                    [subQuery.primaryKey]: foreignKey,
+                    [subQuery.primaryKey]: foreignKey.toString(),
                   }
                 );
                 if (response.status === "success" && response?.data) {
