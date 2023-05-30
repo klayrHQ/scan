@@ -3,27 +3,32 @@ import { Footer } from "../../components/layout/footer";
 import { getNav } from "../../lib/queries/getNav";
 import { getSettings } from "../../lib/queries/getSettings";
 import { getFooter } from "../../lib/queries/getFooter";
-import { TopBarLayout } from "./topbar";
+import {TopBarLayout,} from "./topbar";
 import { ServiceProvider } from "../../providers/service";
 import { getAllData } from "../../lib/sanity.service";
 import {
   BlockchainAppsMetaResponse, IndexStatusResponse,
   NetworkStatusResponse,
 } from "@liskscan/lisk-service-client/lib/types";
-import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import { LiskscanLogs } from "../../lib/logs.liskscan";
 import {getInfoBarKPIS} from "../../lib/queries/getInfoBarKPIS";
 import "../../global.css";
+import {getLayoutContent} from "../../lib/queries/getLayoutContent";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const menuItems = await getNav();
-  const settings = await getSettings();
-  const footer = await getFooter();
-  const infoBar = await getInfoBarKPIS()
+  // const startSanity = new Date().getTime()
+  // const menuItems = await getNav();
+  // const settings = await getSettings();
+  // const footer = await getFooter();
+  // const infoBar = await getInfoBarKPIS()
+  // console.log("load speed (content): ", new Date().getTime() - startSanity, "ms")
+  const startSanity = new Date().getTime()
+  const {menuItems, settings, footer, infoBar} = await getLayoutContent()
+  console.log("load speed (content): ", new Date().getTime() - startSanity, "ms")
   const start = new Date().getTime()
   const result = await getAllData([
     {
@@ -42,17 +47,17 @@ export default async function RootLayout({
       serviceType: "lisk-service"
     }
   ]);
-  console.log(new Date().getTime() - start, "ms")
+  console.log("load speed (apps, status, index): ", new Date().getTime() - start, "ms")
   const { status, apps, index } = result as {
     status: NetworkStatusResponse;
     apps: BlockchainAppsMetaResponse;
     index: IndexStatusResponse
   };
   return (
-    <html>
+    <html className={"dark"}>
       <LiskscanLogs />
       <head>
-        <title>Blocks | Liskscan - Lisk blockchain explorer</title>
+        <title>Liskscan - Lisk blockchain explorer</title>
         <link rel={"icon"} href={"/images/logo-dark.svg"}/>
         <link rel={"shortcut icon"} href={"/images/logo-dark.svg"}/>
         <link rel={"apple-touch-icon"} href={"/images/logo-dark.svg"}/>
@@ -76,6 +81,7 @@ export default async function RootLayout({
           </div>
           <Footer copyright={settings.copyright} lists={footer.lists} />
         </ServiceProvider>
+        <script dangerouslySetInnerHTML={{ __html: `(function () { updateTheme() })()`}} />
       </body>
     </html>
   );

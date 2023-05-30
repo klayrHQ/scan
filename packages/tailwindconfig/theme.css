@@ -1,4 +1,7 @@
-:root {
+.dark {
+  /*:root {*/
+  color-scheme: dark;
+
   --theme-primary: 216;
   --theme-secondary: 120;
   /* LISK KLEUREN TOEGEVOEGD */
@@ -123,9 +126,10 @@
   --color-gray: 231 231 230;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
 
+.light {
+  /*:root {*/
+    color-scheme: light;
     --theme-primary: 216;
     --theme-secondary: 120;
     /* LISK KLEUREN TOEGEVOEGD */
@@ -247,4 +251,4 @@
     --color-white: 255 255 255;
     --color-gray: 231 231 230;
   }
-}
+

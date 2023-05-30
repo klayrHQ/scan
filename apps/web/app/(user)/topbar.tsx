@@ -1,7 +1,11 @@
 "use client";
 import { TopBarClient } from "../../components/layout/topbar";
 import React, { useEffect, useState } from "react";
-import { Cog6ToothIcon as CogIcon } from "@heroicons/react/24/solid";
+import {
+  Cog6ToothIcon as CogIcon,
+  MoonIcon,
+  SunIcon,
+} from "@heroicons/react/24/solid";
 import { Grid, Tooltip, KeyValueRow, InfoBar, Typography, cls } from "ui";
 import { formatDistance } from "date-fns";
 import { useService } from "../../providers/service";
@@ -19,6 +23,7 @@ import { MenuItem } from "../../components/layout/menuItem";
 import Link from "next/link";
 import { SubMenu } from "../../components/layout/subMenu";
 import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
+import {getCurrentTheme, switchThemeMode, updateTheme} from "./theme";
 
 export const TopBarLayout = ({
   status,
@@ -39,6 +44,12 @@ export const TopBarLayout = ({
   const [appState, updateAppState] = useState<
     BlockchainAppsMetaResponse["data"][0] | undefined
   >(apps?.data?.find(({ chainID }) => chainID === status.data.chainID));
+  const [themeMode, updateThemeMode] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    updateThemeMode(getCurrentTheme());
+    updateTheme();
+  }, []);
 
   useEffect(() => {
     updateAppState(
@@ -47,7 +58,6 @@ export const TopBarLayout = ({
   }, [apps, status?.data?.chainID]);
 
   useEffect(() => console.log(events), [events?.["new.block"]]);
-  // console.log(menuItems);
   return (
     <TopBarClient>
       <InfoBar
@@ -120,7 +130,26 @@ export const TopBarLayout = ({
               valueBold
             />
             <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
-              <CogIcon className="w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
+              <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
+            </Tooltip>
+            <Tooltip label="Dark mode" placement={"bottom"} offset={[0, 10]}>
+              {themeMode === "dark" ? (
+                <MoonIcon
+                  onClick={() => {
+                    switchThemeMode()
+                    updateThemeMode("light")
+                  }}
+                  className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0"
+                />
+              ) : (
+                <SunIcon
+                  onClick={() => {
+                    switchThemeMode()
+                    updateThemeMode("dark")
+                  }}
+                  className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0"
+                />
+              )}
             </Tooltip>
           </div>,
         ]}
