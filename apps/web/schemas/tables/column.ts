@@ -60,6 +60,8 @@ export default defineType({
           {title: "Double row", value: "DoubleRowColumn"},
           {title: "Grid colum (2)", value: "GridColumn"},
           {title: "Date", value: "DateColumn"},
+          {title: "Avatar + username/address", value: "AvatarColumn"},
+          {title: "Validator Status + Allocated time", value: "ValidatorStatusColumn"},
         ]
       }
     },

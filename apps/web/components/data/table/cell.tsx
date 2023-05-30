@@ -50,19 +50,19 @@ export const Cell = ({
   if (!props.values) {
     return (
       <td
-        className={cls(["border-b-1 p-2 pl-4", className, getShowClass(showOn)])}
+        className={cls(["border-b-1 p-2 pl-4 font-medium", className, getShowClass(showOn)])}
       ></td>
     );
   }
   if (type === "row") {
     return (
-      <td className={cls(["border-b-1 p-2 pl-4", className, getShowClass(showOn)])}>
+      <td className={cls(["border-b-1 p-2 pl-4 font-medium", className, getShowClass(showOn)])}>
         {Component && <Component {...props} />}
       </td>
     );
   }
   return (
-    <th className={cls(["border-b-1 p-4", className, getShowClass(showOn)])}>
+    <th className={cls(["border-b-1 p-4 font-medium", className, getShowClass(showOn)])}>
       {Component && <Component {...props} />}
     </th>
   );
