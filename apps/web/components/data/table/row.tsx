@@ -18,7 +18,7 @@ export interface RowProps {
 export const Row = ({ params, columns, data, index, queryData }: RowProps) => {
   return (
     <tr className={cls([
-      "border-b border-r-0 border-l-0 border-t-0 border-solid border-tableHeaderBorder",
+      "border-b border-r-0 border-l-0 border-t-0 border-solid border-tableHeaderBorder hover:bg-surface-1",
       " odd:bg-tableOddBG odd:text-tableOddText",
       "bg-tableEvenBG text-tableEvenText py-4"])} {...params}>
       {columns.map((column, i) => (
