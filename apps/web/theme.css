@@ -9,7 +9,7 @@
 
   --color-lisk-silver-gray: #c5cfe4;
   --color-lisk-platinum-gray: hsl(218, 42%, 91%);
-  --color-lisk-athens-white: hsl(210, 33%, 98%);
+  --color-lisk-athens-white: hsla(210, 40%, 98%, 0.9);
 
   --color-lisk-ufo-green: hsl(148, 68%, 50%);
   --color-lisk-ufo-green-opacity: hsl(148, 68%, 93%);
