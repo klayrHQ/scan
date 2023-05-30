@@ -1,15 +1,20 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { Slicer } from "../../../components/slicer";
-import { sanityClient } from "../../../lib/sanity.client";
+import {draftsClient, sanityClient} from "../../../lib/sanity.client";
 import { makeTable } from "../../../lib/sanity.table";
 import { getQueries } from "../../../lib/sanity.queries";
+import {draftMode} from "next/headers";
+import {SanityClient} from "@sanity/preview-kit/client";
 
 export const revalidate = 60;
 
-export const getSlices = async (uri: string) => {
+export const getSlices = async (uri: string, client: SanityClient) => {
+  if (!client) {
+    notFound();
+  }
   const page =
-    await sanityClient.fetch(`*[_type=="pages" && slug.current == "${uri}"]{
+    await client.fetch(`*[_type=="pages" && slug.current == "${uri}"]{
     ...,
     queries[]->{
       ...,
@@ -105,12 +110,15 @@ const getTableRows = (
 };
 
 export default async function Web({ params }: any) {
-  const sections = await getSlices(params.uri);
+  const isDraftMode = draftMode().isEnabled
+  const client = isDraftMode ? draftsClient : sanityClient
+
+  const sections = await getSlices(params.uri, client);
   return (
       <Slicer
         slices={sections.sections}
         queryData={sections.queryData}
-        queries={sections.page.queries}
+        queries={sections.page?.queries}
       />
   );
 }

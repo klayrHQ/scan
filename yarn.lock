@@ -2621,6 +2621,19 @@
     suspend-react "^0.0.10"
     tiny-invariant "^1.3.1"
 
+"@sanity/preview-kit@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@sanity/preview-kit/-/preview-kit-1.5.4.tgz#13da6703278200f6eb734379b332e2b0a2d69b8a"
+  integrity sha512-yeaToBDOuxAYmJptV10tvDN9FPb1+rryRzBW8722aVkJizVZnEAl6//9lDy7Hg6xsJ51C0VwnOF5R7jw5oOHrQ==
+  dependencies:
+    "@sanity/client" "^6.1.1"
+    "@sanity/eventsource" "^5.0.0"
+    "@sanity/groq-store" "^2.1.0"
+    "@vercel/stega" "^0.0.5"
+    lodash.isplainobject "^4.0.6"
+    suspend-react "^0.0.10"
+    tiny-invariant "^1.3.1"
+
 "@sanity/schema@2.35.0":
   version "2.35.0"
   resolved "https://npm.colecti.io/@sanity/schema/-/schema-2.35.0.tgz"
@@ -4864,6 +4877,11 @@
   version "0.0.4"
   resolved "https://npm.colecti.io/@vercel/stega/-/stega-0.0.4.tgz"
   integrity sha512-4c9AibBOJ9oGvvev0f5QFbdcDPmOjkxdlrKb5Y70DnAc0ThtFujod8DRGA/RLFQ5lAvgRTdpvoczl8GhHuxFJQ==
+
+"@vercel/stega@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@vercel/stega/-/stega-0.0.5.tgz#96e0efd2c7ecfed35f30bf76c7ce618f613fa288"
+  integrity sha512-vvuUYW0rBp4Ea9xv0LilqFyDHAW9tvy4GL70G1ayGisQwpOYIPChmiw/56jqZvpxjE9gjQIApLfglOcdZe3PcA==
 
 "@vitejs/plugin-react@^3.0.0":
   version "3.1.0"

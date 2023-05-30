@@ -2,11 +2,16 @@ import React from "react";
 import { ValueFormatter } from "../../components/valueFormatter";
 import {getSlices} from "./[uri]/page";
 import {Slicer} from "../../components/slicer";
+import {draftMode} from "next/headers";
+import {draftsClient, sanityClient} from "../../lib/sanity.client";
+import RefreshButton from "./refreshButton";
 
 export const revalidate = 5;
 
 export default async function Web() {
-  const sections = await getSlices("home");
+  const isDraftMode = draftMode().isEnabled
+  const client = isDraftMode ? draftsClient : sanityClient
+  const sections = await getSlices("home", client);
   // const table = await getTable({ slug: "blocks" });
   // const tableRows = await makeTable({
   //   queries: [...table.queries],

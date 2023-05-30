@@ -1,7 +1,8 @@
-import { sanityClient } from "../sanity.client";
+// import { sanityClient } from "../sanity.client";
+import {SanityClient} from "@sanity/preview-kit/client";
 
-export const getLayoutContent = async () => {
-  const response = await sanityClient.fetch(
+export const getLayoutContent = async (client: SanityClient) => {
+  const response = await client.fetch(
     `*[_type == "menu" || _type == "settings" || _type == "footer" || _type == "infobar"]`
   );
 

@@ -23,7 +23,8 @@ import { MenuItem } from "../../components/layout/menuItem";
 import Link from "next/link";
 import { SubMenu } from "../../components/layout/subMenu";
 import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
-import {getCurrentTheme, switchThemeMode, updateTheme} from "./theme";
+import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
+import RefreshButton from "./refreshButton";
 
 export const TopBarLayout = ({
   status,
@@ -32,6 +33,7 @@ export const TopBarLayout = ({
   settings,
   index,
   menuItems,
+  isDraftMode,
 }: {
   status: NetworkStatusResponse;
   apps: BlockchainAppsMetaResponse;
@@ -39,6 +41,7 @@ export const TopBarLayout = ({
   settings: SettingsType;
   index: IndexStatusResponse;
   menuItems: any[];
+  isDraftMode: boolean;
 }) => {
   const { events, connected, lastUpdate } = useService();
   const [appState, updateAppState] = useState<
@@ -132,7 +135,11 @@ export const TopBarLayout = ({
             <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
               <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
             </Tooltip>
-            <Tooltip label={themeMode === "dark" ? "Dark mode" : "Light mode"} placement={"bottom"} offset={[0, 10]}>
+            <Tooltip
+              label={themeMode === "dark" ? "Dark mode" : "Light mode"}
+              placement={"bottom"}
+              offset={[0, 10]}
+            >
               {themeMode === "dark" ? (
                 <MoonIcon
                   onClick={() => {
@@ -151,6 +158,7 @@ export const TopBarLayout = ({
                 />
               )}
             </Tooltip>
+            <RefreshButton isDraftMode={isDraftMode} />
           </div>,
         ]}
       />
