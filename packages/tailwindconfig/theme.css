@@ -84,7 +84,7 @@
   --color-onSurfacePrimaryLow: hsl(var(--theme-primary), 80%, 80% );
 
   --color-surface: hsl(var(--theme-primary), 100%, 99%, 0%);
-  --color-surface-1: hsl(var(--theme-primary), 100%, 10%);
+  --color-surface-1: hsl(var(--theme-primary), 50%, 15%);
   --color-surface-2: hsl(var(--theme-primary), 100%, 96%);
   --color-surface-3: rgba(110,147,247,.3);
   --color-surface-4: hsl(var(--theme-primary), 100%, 90%);
