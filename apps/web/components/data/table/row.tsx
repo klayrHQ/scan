@@ -3,6 +3,7 @@ import { Cell, ShowOnCell } from "./cell";
 import {cls} from "ui";
 
 export interface RowProps {
+  queryData?: Record<string, any>
   params?: Record<string, any>;
   columns: {
     Component: FC<any>;
@@ -14,7 +15,7 @@ export interface RowProps {
   index: number
 }
 
-export const Row = ({ params, columns, data, index }: RowProps) => {
+export const Row = ({ params, columns, data, index, queryData }: RowProps) => {
   return (
     <tr className={cls([
       "border-b border-r-0 border-l-0 border-t-0 border-solid border-platinumGray",
@@ -22,6 +23,7 @@ export const Row = ({ params, columns, data, index }: RowProps) => {
       "bg-tableEvenBG text-tableEvenText py-4"])} {...params}>
       {columns.map((column, i) => (
         <Cell
+          queryData={queryData}
           {...column}
           index={index}
           key={`cell-${column.values[0]._key}`}
