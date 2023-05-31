@@ -3,7 +3,7 @@ import { cls, Container, Grid, Typography } from "ui";
 import Link from "next/link";
 import { getFromDottedKey } from "../lib/dotString";
 import { useState } from "react";
-import {TableSlice} from "./table";
+import { TableSlice } from "./table";
 
 export const TransactionTabsSlice = ({
   queryData,
@@ -26,10 +26,17 @@ export const TransactionTabsSlice = ({
   const switchCategory = (category: string) => {
     setCurrentCategory(category);
   };
-  const className = ["hover:bg-menuButton", "hover:text-onMenuButton","active:bg-primary", "bg-surface-1", "text-onSurfaceMedium", "text-10"];
+  const className = [
+    "hover:bg-menuButton",
+    "hover:text-onMenuButton",
+    "active:bg-primary",
+    "text-onSurfaceMedium",
+    "text-10",
+  ];
   //: ["bg-menuButton", "text-onMenuButton"];
   let subCategories: Record<string, string[]> = {};
-  const categories: string[] = [...new Set(
+  const categories: string[] = [
+    ...new Set(
       keys.map((k: string) => {
         const split = k.split(":");
         if (subCategories[split[0]]) {
@@ -60,9 +67,15 @@ export const TransactionTabsSlice = ({
               "border-transparent",
               "hover:border-2",
               ...className,
+              ...("all" === currentCategory || !currentCategory
+                ? [
+                  "bg-primary",
+                  "text-onMenuButton",
+                ]
+                : ["bg-surface-1"]),
             ])}
           >
-           All
+            All
           </Typography>
         </Link>
         {categories?.map((tab: string) => {
@@ -84,6 +97,12 @@ export const TransactionTabsSlice = ({
                 "border-transparent",
                 "hover:border-2",
                 ...className,
+                ...(tab === currentCategory
+                  ? [
+                      "bg-primary",
+                      "text-onMenuButton",
+                    ]
+                  : ["bg-surface-1"]),
               ])}
             >
               {tab}
@@ -111,15 +130,25 @@ export const TransactionTabsSlice = ({
                   "border-transparent",
                   "hover:border-2",
                   ...className,
+                  ...(`${currentCategory}:${label}` === id
+                    ? [
+                      "bg-primary",
+                      "text-onMenuButton",
+                    ]
+                    : ["bg-surface-1"]),
                 ])}
               >
-                {label.split(/(?=[A-Z])/).join(' ')}
+                {label.split(/(?=[A-Z])/).join(" ")}
               </Typography>
             </Link>
           );
         })}
       </Grid>
-      <TableSlice {...dynamicTabs.content} queryData={queryData} queries={queries}  />
+      <TableSlice
+        {...dynamicTabs.content}
+        queryData={queryData}
+        queries={queries}
+      />
     </Container>
   );
 };
