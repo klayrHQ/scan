@@ -60,7 +60,7 @@ export const typography = cva(["border-none"], {
       ParagraphLarge: "text-16 sm:text-20 md:text-32",
       ParagraphSmall: "text-12 sm:text-15 md:text-15",
       Paragraph6: "text-10 sm:text-10 md:text-12 font-body",
-      menu: "text-9 sm:text-9 md:text-16 font-body text-header",
+      menu: "text-9 sm:text-9 md:text-12 font-body text-header",
       blurbTitle: "text-9 sm:text-9 md:text-10 font-body",
       body: "text-12 sm:text-13 md:text-14 font-body ",
       subBody: "text-10 sm:text-11 md:text-12 font-body",

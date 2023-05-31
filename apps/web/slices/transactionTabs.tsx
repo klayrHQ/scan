@@ -26,7 +26,7 @@ export const TransactionTabsSlice = ({
   const switchCategory = (category: string) => {
     setCurrentCategory(category);
   };
-  const className = ["hover:bg-menuButton", "hover:text-onMenuButton"];
+  const className = ["hover:bg-menuButton", "hover:text-onMenuButton","active:bg-primary", "bg-surface-1", "text-onSurfaceMedium", "text-10"];
   //: ["bg-menuButton", "text-onMenuButton"];
   let subCategories: Record<string, string[]> = {};
   const categories: string[] = [...new Set(
@@ -46,6 +46,7 @@ export const TransactionTabsSlice = ({
       <Grid flex gap={2} columns={2}>
         <Link key={"all"} href={"/transactions"}>
           <Typography
+            size={"menu"}
             tag={"span"}
             className={cls([
               "capitalize",
@@ -67,6 +68,7 @@ export const TransactionTabsSlice = ({
         {categories?.map((tab: string) => {
           return (
             <Typography
+              size={"menu"}
               key={tab}
               tag={"span"}
               onClick={() => switchCategory(tab)}
@@ -96,6 +98,7 @@ export const TransactionTabsSlice = ({
             <Link key={label} href={link}>
               <Typography
                 tag={"span"}
+                size={"menu"}
                 className={cls([
                   "capitalize",
                   "block cursor-pointer text-onInfobar",

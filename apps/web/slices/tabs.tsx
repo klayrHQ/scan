@@ -16,7 +16,7 @@ export const TabsSlice = ({
   const handleClick = (handle: string) => {
     console.log(handle);
   };
-  const className = ["hover:bg-menuButton", "hover:text-onMenuButton"];
+  const className = ["hover:bg-menuButton", "hover:text-onMenuButton", "active:bg-primary", "bg-surface-1"];
   //: ["bg-menuButton", "text-onMenuButton"];
   return (
     <Container section className={"max-w-app"}>
@@ -56,7 +56,7 @@ export const TabsSlice = ({
                 <Typography
                   tag={"span"}
                   className={cls([
-                    "block cursor-pointer text-onInfobar",
+                    "block cursor-pointer text-onInfobar bg-primary",
                     "group",
                     "px-3 py-2 mr-1",
                     "rounded-md",
