@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { cls, Container, Grid, Typography } from "ui";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
-import {Slicer} from "../components/slicer";
+import { useSearchParams } from "next/navigation";
+import { Slicer } from "../components/slicer";
 
 export const TabsSlice = ({
   queryData,
@@ -15,7 +15,10 @@ export const TabsSlice = ({
   ...props
 }: any) => {
   const searchParams = useSearchParams();
-  const activeTab = staticTabs.find((tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey)
+  const activeTab =
+    staticTabs.find(
+      (tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey
+    ) || staticTabs[0];
 
   const className = [
     "hover:bg-menuButton",
@@ -26,7 +29,10 @@ export const TabsSlice = ({
     <Container section className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
         {staticTabs?.map(
-          ({ label, queryKey, content, handle: { current }, _key }: any) => {
+          (
+            { label, queryKey, content, handle: { current }, _key }: any,
+            index: number
+          ) => {
             const link = !queryKey
               ? `/${uri}`
               : id
@@ -47,7 +53,11 @@ export const TabsSlice = ({
                     "border-transparent",
                     "hover:border-2",
                     ...className,
-                    ...(searchParams?.get(current) === queryKey
+                    ...(searchParams?.get(current)
+                      ? searchParams?.get(current) === queryKey
+                        ? ["bg-primary", "text-onMenuButton"]
+                        : ["bg-surface-1"]
+                      : index === 0
                       ? ["bg-primary", "text-onMenuButton"]
                       : ["bg-surface-1"]),
                   ])}
@@ -59,11 +69,13 @@ export const TabsSlice = ({
           }
         )}
       </Grid>
-      <Slicer
-        slices={[activeTab.content]}
-        queryData={queryData}
-        queries={queries}
-      />
+      {activeTab.content && (
+        <Slicer
+          slices={[activeTab.content]}
+          queryData={queryData}
+          queries={queries}
+        />
+      )}
     </Container>
   );
 };
