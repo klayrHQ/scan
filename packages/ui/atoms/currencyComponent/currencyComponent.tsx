@@ -1,18 +1,20 @@
 import React, { FC } from "react"
-import flags from "../../assets/icons/currencyFlags";
 import { CurrencyType } from "../../types";
 import { Icon } from "../icon/icon";
+import {Typography} from "../typography/typography";
 
 interface CurrencyComponentProps {
   currency: CurrencyType
   selected: boolean
   onClick(): void
+  flags?: any
 }
 
 export const CurrencyComponent: FC<CurrencyComponentProps> = ({
   currency,
   selected,
   onClick,
+  flags,
 }) => {
   const { name, symbol, sign, flag } = currency
   return (
@@ -36,17 +38,18 @@ export const CurrencyComponent: FC<CurrencyComponentProps> = ({
           alt={sign}
         />
         <div className="flex flex-col text-left align-left">
-          <div
+          <Typography
+            tag={"span"}
             className={[
               "font-bold group-hover:text-onPrimaryHigh",
               selected ? "text-onPrimaryHigh" : "text-onSurfaceHigh",
             ].join(" ")}
           >
             {name}
-          </div>
-          <div className="text-xs text-onPrimaryMedium font-medium">
-            {symbol} - {sign}
-          </div>
+          </Typography>
+          <Typography tag={"span"} className="text-onPrimaryMedium font-medium" size={"subBody"}>
+            {symbol}{" - "}{sign}
+          </Typography>
         </div>
       </div>
       {selected && <Icon icon={"checkCircle"} className="w-7 h-7 bg-success text-onSuccess rounded p-1" />}

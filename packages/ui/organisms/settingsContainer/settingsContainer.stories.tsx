@@ -10,6 +10,7 @@ import {emptyCustomNetwork, networks} from "../../assets/mockupData/networks";
 import {HotKeysContainer} from "../hotKeysContainer/hotKeysContainer";
 import {hotKeysCombos} from "../../assets/mockupData/hotkeys";
 import {CurrencyContainer} from "../currencyContainer/currencyContainer";
+import flags from "../../assets/icons/currencyFlags";
 
 export default {
   title: "Organisms/Settings/SettingsContainer",
@@ -69,6 +70,9 @@ const Template: ComponentStory<typeof SettingsContainer> = (args) => {
 
 export const Primary: ComponentMeta<typeof SettingsContainer> = Template.bind({});
 Primary.args = {
+  parsedSettings: {
+    decimals: 3,
+  },
   views: [
     {
       link: "Theme",
@@ -112,6 +116,7 @@ Primary.args = {
       link: "Currency",
       label: "Currency",
       view: <CurrencyContainer
+        flags={flags}
         setSetting={(handle: string, newState: any) => console.log(handle)}
         minMax={{ min: 1, max: 100000 }}
         switchConvert={() => console.log("switchConvert")}
@@ -123,10 +128,20 @@ Primary.args = {
             currencies: [
               {
                 id: 0,
-                symbol: "DOL",
+                symbol: "USD",
                 sign: "$",
-                name: "Dollar",
-                flag: "USA",
+                name: "United States Dollar",
+                default: {
+                  sign: true,
+                  symbol: true,
+                  fractions: 2,
+                },
+              },
+              {
+                id: 0,
+                symbol: "EUR",
+                sign: "€",
+                name: "Euro",
                 default: {
                   sign: true,
                   symbol: true,

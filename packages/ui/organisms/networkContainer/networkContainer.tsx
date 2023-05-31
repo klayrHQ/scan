@@ -3,6 +3,7 @@ import { Paper} from "../../atoms/paper/paper";
 import { NetworkEndpoint } from "@moosty/lisk-service-provider"
 import { NetworkType, statusType} from "../../types";
 import Status from "../../atoms/status/status";
+import {Typography} from "../../atoms/typography/typography";
 
 interface NetworkContainerProps {
   parsedSettings?: any
@@ -31,21 +32,22 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
   return (
     <div className="flex flex-col space-y-4">
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <h2 className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
-          Select a Network!
-        </h2>
-        <span>Select one of the Lisk networks or add your custom network.</span>
+        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+          {"Select a Network!"}
+        </Typography>
+        <Typography tag={"span"}>{"Select one of the Lisk networks or add your custom network."}</Typography>
       </Paper>
       <Paper surface={1} className="p-4 flex flex-row space-x-2">
         <Status status={status} />
-        {parsedSettings?.networks?.communityId} (
-        {parsedSettings?.networks?.network})
+        <Typography tag={"span"}>
+          {`${parsedSettings?.networks?.communityId} (${parsedSettings?.networks?.network})`}
+        </Typography>
       </Paper>
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <span className="font-medium">Network (COMING SOON)</span>
+        <Typography tag={"span"} className="font-medium">{"Network(COMING SOON)"}</Typography>
         <select
           value={parsedSettings?.networks?.id}
-          className="w-full rounded text-onSurfaceMedium border-none text-base bg-surface-3"
+          className="w-full rounded text-onSurfaceMedium border-none text-base bg-surface-3 p-4 focus:outline-primary"
           onChange={(e) => {
             if (e.target.value !== "custom") {
               // changeNetwork(networks.find((n) => n.id === e.target.value))
@@ -56,7 +58,7 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
         >
           {networks.map((network) => (
             <option key={network.id} value={network.id}>
-              {network.communityId} ({network.network})
+              <Typography tag={"span"}>{`${network.communityId}(${network.network})`}</Typography>
             </option>
           ))}
         </select>

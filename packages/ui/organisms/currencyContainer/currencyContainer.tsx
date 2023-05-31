@@ -3,6 +3,7 @@ import { CurrencyComponent } from "../../atoms/currencyComponent/currencyCompone
 import { Decimals } from "../../atoms/decimals/decimals";
 import { Paper } from "../../atoms/paper/paper";
 import { CurrencyType, CurrencyCategory } from "../../types";
+import {Typography} from "../../atoms/typography/typography";
 
 interface CurrencyContainerProps {
   closeSettingsModal: () => void
@@ -12,6 +13,7 @@ interface CurrencyContainerProps {
   minMax: { min: number; max: number },
   switchConvert: () => void
   setSetting: (handle: string, newState: any) => void
+  flags?: any
 }
 
 export const CurrencyContainer: FC<CurrencyContainerProps> = ({
@@ -22,14 +24,15 @@ export const CurrencyContainer: FC<CurrencyContainerProps> = ({
   minMax,
   switchConvert,
   setSetting,
+  flags,
 }) => {
   return (
     <div className=" flex flex-col space-y-4 align-bottom rounded text-left overflow-hidden transform transition-all w-app mx-auto sm:align-middle sm:max-w-app sm:w-full">
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <h2 className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
-          Select your preferable Currency!
-        </h2>
-        <span>Format the way Liskscan shows all currency values.</span>
+        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+          {"Select your preferable Currency!"}
+        </Typography>
+        <Typography tag={"span"}>{"Format the way Liskscan shows all currency values."}</Typography>
       </Paper>
       <div className="bg-surface-1 text-onSurfaceHigh w-full block rounded">
         <Decimals minMax={minMax} switchConvert={switchConvert} setSetting={setSetting} parsedSettings={parsedSettings}/>
@@ -58,6 +61,7 @@ export const CurrencyContainer: FC<CurrencyContainerProps> = ({
                   }}
                   currency={singleCurrency}
                   key={`${singleCurrency?.id}-${group?.category}`}
+                  flags={flags}
                 />
               ))}
             </div>
