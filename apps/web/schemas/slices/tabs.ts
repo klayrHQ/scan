@@ -47,21 +47,5 @@ export default defineType({
         },
       ],
     },
-    {
-      name: "dynamicTabs",
-      type: "object",
-      title: "Dynamic Tabs",
-      fields: [
-        { type: "object", name: "label", title: "Label", fields: SanityValue },
-        { type: "string", name: "idKey", title: "id key" },
-        { type: "string", name: "queryKey", title: "query key" },
-        {
-          name: "content",
-          title: "Content",
-          type: "reference",
-          to: [...sliceDocumentNames],
-        },
-      ],
-    },
   ],
 });

@@ -2,8 +2,10 @@
 import { Slices, SlicesTypes } from "../slices";
 import React, { useEffect } from "react";
 import { useService } from "../providers/service";
+import {ParsedUrlQuery} from "querystring";
 
 export interface SlicerProps {
+  query?: ParsedUrlQuery
   queryData?: any;
   queries?: any;
   id?: string;
@@ -16,7 +18,7 @@ export interface SlicerProps {
   uri?: string
 }
 
-export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => {
+export const Slicer = ({ slices, queryData, queries, id, uri, query }: SlicerProps) => {
   const { setQueries, cache, setID } = useService();
   useEffect(() => {
     if (setQueries) {
@@ -43,6 +45,7 @@ export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => 
             queryData={cache || queryData}
             queries={queries}
             uri={uri}
+            query={query}
           />
         );
       })}

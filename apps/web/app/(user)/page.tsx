@@ -4,7 +4,6 @@ import {getSlices} from "./[uri]/page";
 import {Slicer} from "../../components/slicer";
 import {draftMode} from "next/headers";
 import {draftsClient, sanityClient} from "../../lib/sanity.client";
-import RefreshButton from "./refreshButton";
 
 export const revalidate = 5;
 

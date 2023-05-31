@@ -12,7 +12,7 @@ export const TabsSlice = ({
   uri,
   ...props
 }: any) => {
-  const keys = getFromDottedKey(dynamicTabs.label.value, "test", queryData, queryData) || []
+  console.log(props)
   const handleClick = (handle: string) => {
     console.log(handle);
   };
@@ -23,7 +23,7 @@ export const TabsSlice = ({
       <Grid flex gap={2} columns={2}>
         {staticTabs?.map(
           ({ label, queryKey, content, handle: { current }, _key }: any) => {
-            const link = !queryKey ? `/${uri}` : `/${uri}/${queryKey}`;
+            const link = !queryKey ? `/${uri}` : id ? `/${uri}/${id}?${current}=${queryKey}` : `/${uri}?${current}=${queryKey}`;
             return (
               <Link key={_key} href={link}>
                 <Typography
@@ -40,32 +40,12 @@ export const TabsSlice = ({
                     "border-transparent",
                     "hover:border-2",
                     ...className,
-                  ])}
-                >
-                  {label}
-                </Typography>
-              </Link>
-            );
-          }
-        )}
-        {keys?.map(
-          (label: string) => {
-            const link = `/${uri}/${label}`;
-            return (
-              <Link key={label} href={link}>
-                <Typography
-                  tag={"span"}
-                  className={cls([
-                    "block cursor-pointer text-onInfobar bg-primary",
-                    "group",
-                    "px-3 py-2 mr-1",
-                    "rounded-md",
-                    "text-base no-underline",
-                    "font-medium",
-                    "flex flex-row",
-                    "border-transparent",
-                    "hover:border-2",
-                    ...className,
+                    ...(`${queryKey}:${label}` === queryKey
+                      ? [
+                        "bg-primary",
+                        "text-onMenuButton",
+                      ]
+                      : ["bg-surface-1"]),
                   ])}
                 >
                   {label}
