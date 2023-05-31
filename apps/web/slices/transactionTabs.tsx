@@ -6,23 +6,19 @@ import { useState } from "react";
 import { TableSlice } from "./table";
 
 export const TransactionTabsSlice = ({
-                                       queryData,
-                                       id,
-                                       staticTabs,
-                                       dynamicTabs,
-                                       name,
-                                       queries,
-                                       uri,
-                                       ...props
-                                     }: any) => {
+  queryData,
+  id,
+  staticTabs,
+  dynamicTabs,
+  name,
+  queries,
+  uri,
+}: any) => {
   const [currentCategory, setCurrentCategory] = useState(id?.split(":")[0]);
-  // const currentCategory = id.split(":")[0]
   const keys =
     getFromDottedKey(dynamicTabs.label.value, "test", queryData, queryData) ||
     [];
-  const handleClick = (handle: string) => {
-    console.log(handle);
-  };
+
   const switchCategory = (category: string) => {
     setCurrentCategory(category);
   };
@@ -67,13 +63,8 @@ export const TransactionTabsSlice = ({
               "hover:border-2",
               ...className,
               ...("all" === currentCategory || !currentCategory
-                ? [
-                  "bg-primaryLight",
-                  "text-onMenuButton",
-                ]
-                : ["bg-surface-1",
-                  "text-onSurfaceMedium",
-                ]),
+                ? ["bg-primaryLight", "text-onMenuButton"]
+                : ["bg-surface-1", "text-onSurfaceMedium"]),
             ])}
           >
             All
@@ -99,13 +90,8 @@ export const TransactionTabsSlice = ({
                 "hover:border-2",
                 ...className,
                 ...(tab === currentCategory
-                  ? [
-                    "bg-primaryLight",
-                    "text-onMenuButton",
-                  ]
-                  : ["bg-surface-1",
-                    "text-onSurfaceMedium",
-                  ]),
+                  ? ["bg-primaryLight", "text-onMenuButton"]
+                  : ["bg-surface-1", "text-onSurfaceMedium"]),
               ])}
             >
               {tab}
@@ -134,13 +120,8 @@ export const TransactionTabsSlice = ({
                   "hover:border-2",
                   ...className,
                   ...(`${currentCategory}:${label}` === id
-                    ? [
-                      "bg-primaryLight",
-                      "text-onMenuButton",
-                    ]
-                    : ["bg-surface-1",
-                      "text-onSurfaceMedium",
-                    ]),
+                    ? ["bg-primaryLight", "text-onMenuButton"]
+                    : ["bg-surface-1", "text-onSurfaceMedium"]),
                 ])}
               >
                 {label.split(/(?=[A-Z])/).join(" ")}

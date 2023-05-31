@@ -3,9 +3,9 @@ import { Slices, SlicesTypes } from "../slices";
 import React, { useEffect } from "react";
 import { useService } from "../providers/service";
 import {ParsedUrlQuery} from "querystring";
+import {ReadonlyURLSearchParams} from "next/navigation";
 
 export interface SlicerProps {
-  query?: ParsedUrlQuery
   queryData?: any;
   queries?: any;
   id?: string;
@@ -18,7 +18,7 @@ export interface SlicerProps {
   uri?: string
 }
 
-export const Slicer = ({ slices, queryData, queries, id, uri, query }: SlicerProps) => {
+export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => {
   const { setQueries, cache, setID } = useService();
   useEffect(() => {
     if (setQueries) {
@@ -45,7 +45,6 @@ export const Slicer = ({ slices, queryData, queries, id, uri, query }: SlicerPro
             queryData={cache || queryData}
             queries={queries}
             uri={uri}
-            query={query}
           />
         );
       })}

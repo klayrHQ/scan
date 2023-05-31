@@ -1,9 +1,6 @@
 import React from "react";
 import { draftMode } from "next/headers";
 import { Footer } from "../../components/layout/footer";
-import { getNav } from "../../lib/queries/getNav";
-import { getSettings } from "../../lib/queries/getSettings";
-import { getFooter } from "../../lib/queries/getFooter";
 import { TopBarLayout } from "./topbar";
 import { ServiceProvider } from "../../providers/service";
 import { getAllData } from "../../lib/sanity.service";
@@ -13,7 +10,6 @@ import {
   NetworkStatusResponse,
 } from "@liskscan/lisk-service-client/lib/types";
 import { LiskscanLogs } from "../../lib/logs.liskscan";
-import { getInfoBarKPIS } from "../../lib/queries/getInfoBarKPIS";
 import "../../global.css";
 import { getLayoutContent } from "../../lib/queries/getLayoutContent";
 import { draftsClient, sanityClient } from "../../lib/sanity.client";

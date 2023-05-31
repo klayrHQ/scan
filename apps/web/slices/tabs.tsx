@@ -1,6 +1,8 @@
+"use client"
 import { cls, Container, Grid, Typography } from "ui";
 import Link from "next/link";
-import {getFromDottedKey} from "../lib/dotString";
+import {useSearchParams} from "next/navigation";
+import {Slicer} from "../components/slicer";
 
 export const TabsSlice = ({
   queryData,
@@ -12,23 +14,28 @@ export const TabsSlice = ({
   uri,
   ...props
 }: any) => {
-  console.log(props)
-  const handleClick = (handle: string) => {
-    console.log(handle);
-  };
-  const className = ["hover:bg-menuButton", "hover:text-onMenuButton", "active:bg-primary", "bg-surface-1"];
-  //: ["bg-menuButton", "text-onMenuButton"];
+  const searchParams = useSearchParams();
+  const activeTab = staticTabs.find((tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey)
+
+  const className = [
+    "hover:bg-menuButton",
+    "hover:text-onMenuButton",
+    "active:bg-primary",
+  ];
   return (
     <Container section className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
         {staticTabs?.map(
           ({ label, queryKey, content, handle: { current }, _key }: any) => {
-            const link = !queryKey ? `/${uri}` : id ? `/${uri}/${id}?${current}=${queryKey}` : `/${uri}?${current}=${queryKey}`;
+            const link = !queryKey
+              ? `/${uri}`
+              : id
+              ? `/${uri}/${id}?${current}=${queryKey}`
+              : `/${uri}?${current}=${queryKey}`;
             return (
               <Link key={_key} href={link}>
                 <Typography
                   tag={"span"}
-                  onClick={() => handleClick(queryKey)}
                   className={cls([
                     "block cursor-pointer text-onInfobar",
                     "group",
@@ -40,11 +47,8 @@ export const TabsSlice = ({
                     "border-transparent",
                     "hover:border-2",
                     ...className,
-                    ...(`${queryKey}:${label}` === queryKey
-                      ? [
-                        "bg-primary",
-                        "text-onMenuButton",
-                      ]
+                    ...(searchParams?.get(current) === queryKey
+                      ? ["bg-primary", "text-onMenuButton"]
                       : ["bg-surface-1"]),
                   ])}
                 >
@@ -55,6 +59,11 @@ export const TabsSlice = ({
           }
         )}
       </Grid>
+      <Slicer
+        slices={[activeTab.content]}
+        queryData={queryData}
+        queries={queries}
+      />
     </Container>
   );
 };

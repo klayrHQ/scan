@@ -1,5 +1,5 @@
 import React from "react";
-import { notFound } from "next/navigation";
+import {notFound, useSearchParams} from "next/navigation";
 import { Slicer } from "../../../../components/slicer";
 import {draftsClient, sanityClient} from "../../../../lib/sanity.client";
 import { makeTable } from "../../../../lib/sanity.table";
