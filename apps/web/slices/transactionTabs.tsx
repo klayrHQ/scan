@@ -67,6 +67,7 @@ export const TransactionTabsSlice = ({
         {categories?.map((tab: string) => {
           return (
             <Typography
+              key={tab}
               tag={"span"}
               onClick={() => switchCategory(tab)}
               className={cls([
