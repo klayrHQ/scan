@@ -5,7 +5,7 @@ import {
   RPCResponses,
 } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
-import { getDotString, getFromDottedKey } from "./dotString";
+import {getDotString, getDottedKeyType, getFromDottedKey} from "./dotString";
 import { parseProps } from "../components/valueFormatter";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
@@ -79,8 +79,12 @@ export const getAllData = async (
             // data array
             responses[query.key].data = responses[query.key].data.map(
               (row: any) => {
-                const keys = calculation.keys.map((k) =>
-                  getFromDottedKey("row." + k, "row", row, { row })
+                const keys = calculation.keys.map((k) => {
+                  if (responses[getDottedKeyType(k)]) {
+                    return getFromDottedKey(k, "row", row, responses)
+                  }
+                   return getFromDottedKey("row." + k, "row", row, {row})
+                  }
                 );
                 const parsedCalculation = util.format(
                   calculation.calculation,
@@ -161,7 +165,7 @@ export const getAllData = async (
                   responses[query.key].data[index][`${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`] = found
                 }
               } catch (e) {
-                
+
               }
             }
           }

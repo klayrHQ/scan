@@ -23,6 +23,18 @@ const getSlices = async (uri: string, id: string, client: SanityClient) => {
       },
       sections[]->{
         ...,
+        dynamicTabs{
+          ...,
+          content->{
+          ...,
+            table->{   
+              ...,
+              columns[]->,
+              title, 
+              key,
+            },
+          },
+        },
         staticTabs[]{
           ..., 
           content->{
@@ -37,42 +49,54 @@ const getSlices = async (uri: string, id: string, client: SanityClient) => {
         },
         columns[]->{
           ...,
-            staticTabs[]{
-              ..., 
-              content->{
-                ...,
-                table->{   
-                  ...,
-                  columns[]->,
-                  title, 
-                  key,
-                },
-              },
-            },
-            table->{   
-              ...,
-              columns[]->,
-              title, 
-              key,
-            },
-            columns[]->{
-              ...,
-              table->{
+          dynamicTabs{
+            ...,
+            content->{
+            ...,
+              table->{   
                 ...,
                 columns[]->,
                 title, 
                 key,
               },
-            }
+            },
           },
-          table->{
+          staticTabs[]{
+            ..., 
+            content->{
+              ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
+          table->{   
             ...,
             columns[]->,
             title, 
             key,
+          },
+          columns[]->{
+            ...,
+            table->{
+              ...,
+              columns[]->,
+              title, 
+              key,
+            },
           }
+        },
+        table->{
+          ...,
+          columns[]->,
+          title, 
+          key,
         }
-      }[0]`);
+      }
+    }[0]`);
   if (!page) {
     notFound();
   }

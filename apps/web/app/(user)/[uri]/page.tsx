@@ -26,8 +26,32 @@ export const getSlices = async (uri: string, client: SanityClient) => {
     },
     sections[]->{
       ...,
+      dynamicTabs{
+            ...,
+            content->{
+            ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
       columns[]->{
         ...,
+        dynamicTabs{
+            ...,
+            content->{
+            ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
         table->{   
           ...,
           columns[]->,
@@ -36,6 +60,18 @@ export const getSlices = async (uri: string, client: SanityClient) => {
         },
         columns[]->{
           ...,
+          dynamicTabs{
+            ...,
+            content->{
+            ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
           table->{
             ...,
             columns[]->,
