@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import { HotKey } from "../../atoms/hotkey/hotkey";
 import { HotKeyGroup } from "../../molecules/hotKeyGroup/hotKeyGroup";
 import { Paper} from "../../atoms/paper/paper";
+import {Typography} from "../../atoms/typography/typography";
 
 interface HotKeysContainerProps {
   hotKeyGroups: Array<{
@@ -19,15 +20,15 @@ export const HotKeysContainer: FC<HotKeysContainerProps> = ({
   <div className="flex flex-col space-y-4">
     <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
       <div className="flex flex-row space-x-2 items-center">
-        <h2 className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
           Master The Hot Keys!{" "}
-        </h2>{" "}
+        </Typography>{" "}
         <HotKey hotKey={"ctrl"} />
         <span className="text-center font-medium text-onSurfaceMedium">+</span>
         <HotKey hotKey={"/"} />
       </div>
 
-      <span>Learn how to navigate the Lisk blockchain with your keys only.</span>
+      <Typography tag={"span"}>{"Learn how to navigate the Lisk blockchain with your keys only."}</Typography>
     </Paper>
     <Paper
       surface={1}

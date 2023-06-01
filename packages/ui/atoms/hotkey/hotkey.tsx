@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import {Typography} from "../typography/typography";
 
 interface HotKeyProps {
   hotKey: string | any
@@ -18,7 +19,7 @@ export const HotKey: FC<HotKeyProps> = ({
         "bg-gray-600 px-3 py-1 font-bold",
       ].join(" ")}
     >
-      {hotKey === "ctrl" ? (isMacOs ? "cmd" : "ctrl") : hotKey}
+      <Typography tag={"span"}>{hotKey === "ctrl" ? (isMacOs ? "cmd" : "ctrl") : hotKey}</Typography>
     </div>
   )
 }

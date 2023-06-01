@@ -4,6 +4,7 @@ import { Paper } from "../../atoms/paper/paper";
 import {Icon} from "../../atoms/icon/icon";
 import {SettingsMenu} from "../../molecules/settingsMenu/settingsMenu";
 import {ThemeType} from "../../types";
+import {Typography} from "../../atoms/typography/typography";
 //import { SettingsMenu } from "components/modals/settings/SettingsMenu"
 
 interface settingsContainerProps {
@@ -79,13 +80,13 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
               >
                 <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"arrowLeft"} />
               </div>
-              <span className="font-medium">
+              <Typography tag={"span"} className="font-medium">
                 {
                   views.find(
                     (v) => v.link === settingsModalState.view,
                   )?.label
                 }
-              </span>
+              </Typography>
               <div
                 onClick={() => {
                   settingsModalState?.args?.onClick()
