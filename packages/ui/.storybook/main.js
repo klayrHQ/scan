@@ -1,13 +1,10 @@
 module.exports = {
   stories: [
-    "../**/*.stories.mdx",
-    "../**/*.stories.@(js|jsx|ts|tsx)",
     "../atoms/**/*.stories.@(js|jsx|ts|tsx)",
     "../molecules/**/*.stories.@(js|jsx|ts|tsx)",
     "../organisms/**/*.stories.@(js|jsx|ts|tsx)",
     "../stories/**/*.stories.@(js|jsx|ts|tsx)",
     "../templates/**/*.stories.@(js|jsx|ts|tsx)",
-    "../pages/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
@@ -16,18 +13,23 @@ module.exports = {
     "@storybook/addon-a11y",
     "storybook-dark-mode",
     "@storybook/addon-backgrounds",
+    "storybook-addon-theme-toggle",
     "@storybook/addon-measure",
     "@etchteam/storybook-addon-status",
-    "storybook-addon-next-router",
+    // "storybook-addon-next-router",
     {
-      name: '@storybook/addon-styling',
+      name: "@storybook/addon-styling",
       options: {
         postCss: true,
       },
     },
+    "@storybook/addon-mdx-gfm",
   ],
-  framework: "@storybook/react",
-  core: {
-    builder: "@storybook/builder-webpack5",
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {},
+  },
+  docs: {
+    autodocs: true,
   },
 };

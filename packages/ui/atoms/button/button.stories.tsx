@@ -13,13 +13,11 @@ export default {
     fullWidth: { control: "boolean", defaultValue: false },
     active: { control: "boolean", defaultValue: false },
     hover: { control: "boolean", defaultValue: false },
-    disabled: { control: "boolean", defaultValue: false},
+    disabled: { control: "boolean", defaultValue: false },
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
@@ -30,7 +28,6 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 export const Primary: ComponentMeta<typeof Button> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
   label: "Button",
 };
 
@@ -42,7 +39,6 @@ Secondary.args = {
 export const Hover: ComponentMeta<typeof Button> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Hover.args = {
-  primary: true,
   label: "Button",
   hover: true,
 };
@@ -56,21 +52,18 @@ SecondaryHover.args = {
 export const Disabled: ComponentMeta<typeof Button> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Disabled.args = {
-  primary: true,
   label: "Button",
   disabled: true,
 };
 
 export const Large: ComponentMeta<typeof Button> = Template.bind({});
 Large.args = {
-  primary: true,
   size: "large",
   label: "Button",
 };
 
 export const Small: ComponentMeta<typeof Button> = Template.bind({});
 Small.args = {
-  primary: true,
   size: "small",
   label: "Button",
 };

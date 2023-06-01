@@ -6,11 +6,14 @@
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "storybook": "storybook start -p 6006",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-typescript": "^7.21.5",
     "@etchteam/storybook-addon-status": "^4.2.4",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
@@ -23,12 +26,12 @@
     "@storybook/addon-essentials": "^7.0.12",
     "@storybook/addon-interactions": "^7.0.12",
     "@storybook/addon-links": "^7.0.12",
+    "@storybook/addon-mdx-gfm": "^7.0.12",
     "@storybook/addon-measure": "^7.0.12",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addon-styling": "^1.0.8",
-    "@storybook/builder-webpack5": "^7.0.12",
-    "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^7.0.12",
+    "@storybook/react-webpack5": "^7.0.12",
     "@storybook/testing-library": "^0.1.0",
     "@tippyjs/react": "^4.2.6",
     "@types/react": "^18.0.22",
@@ -36,10 +39,15 @@
     "@types/react-dom": "^18.0.7",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.3.0",
+    "babel-plugin-jsx-to-dom": "^0.6.1",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "class-variance-authority": "^0.4.0",
     "copy-to-clipboard": "^3.3.3",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
+    "glob-promise": "^6.0.2",
     "js-sha256": "^0.9.0",
     "next": "^13.0.6",
     "postcss": "^8.4.18",
@@ -49,8 +57,9 @@
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "^4.0.6",
     "react-popper": "^2.3.0",
-    "storybook": "^7.0.12",
+    "storybook": "^7.0.18",
     "storybook-addon-next-router": "^4.0.2",
+    "storybook-addon-theme-toggle": "^0.0.1",
     "storybook-dark-mode": "^3.0.0",
     "tailwindconfig": "*",
     "tailwindcss": "^3.2.2",
@@ -59,6 +68,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "babel-preset-latest": "^6.24.1",
     "storybook-addon-next-router": "^4.0.2"
   }
 }
