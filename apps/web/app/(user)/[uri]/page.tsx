@@ -1,20 +1,23 @@
 import React from "react";
-import {notFound, useRouter, useSearchParams} from "next/navigation";
+import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { Slicer } from "../../../components/slicer";
-import {draftsClient, sanityClient} from "../../../lib/sanity.client";
+import { draftsClient, sanityClient } from "../../../lib/sanity.client";
 import { makeTable } from "../../../lib/sanity.table";
 import { getQueries } from "../../../lib/sanity.queries";
-import {draftMode} from "next/headers";
-import {SanityClient} from "@sanity/preview-kit/client";
+import { draftMode } from "next/headers";
+import { SanityClient } from "@sanity/preview-kit/client";
+import { sanitySsrQuery } from "../../../lib/sanity.groq";
 
 export const revalidate = 60;
 
-export const getSlices = async (uri: string, client: SanityClient) => {
-  if (!client) {
+export const getSlices = async (
+  uri: string,
+  fetch: (query: string) => Promise<any>
+) => {
+  if (!fetch) {
     notFound();
   }
-  const page =
-    await client.fetch(`*[_type=="pages" && slug.current == "${uri}"]{
+  const page = await fetch(`*[_type=="pages" && slug.current == "${uri}"]{
     ...,
     queries[]->{
       ...,
@@ -133,10 +136,7 @@ export const getSlices = async (uri: string, client: SanityClient) => {
   };
 };
 
-const getTableRows = (
-  queryResponses: Record<string, any>,
-  table: any
-) => {
+const getTableRows = (queryResponses: Record<string, any>, table: any) => {
   const tableRows = makeTable({
     data: queryResponses,
     key: table.key,
@@ -146,15 +146,15 @@ const getTableRows = (
 };
 
 export default async function Web({ params }: any) {
-  const isDraftMode = draftMode().isEnabled
-  const client = isDraftMode ? draftsClient : sanityClient
+  const isDraftMode = draftMode().isEnabled;
+  const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;
 
   const sections = await getSlices(params.uri, client);
   return (
-      <Slicer
-        slices={sections.sections}
-        queryData={sections.queryData}
-        queries={sections.page?.queries}
-      />
+    <Slicer
+      slices={sections.sections}
+      queryData={sections.queryData}
+      queries={sections.page?.queries}
+    />
   );
 }

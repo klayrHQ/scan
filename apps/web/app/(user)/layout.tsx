@@ -13,14 +13,30 @@ import { LiskscanLogs } from "../../lib/logs.liskscan";
 import "../../global.css";
 import { getLayoutContent } from "../../lib/queries/getLayoutContent";
 import { draftsClient, sanityClient } from "../../lib/sanity.client";
+import { SanityStoreProvider } from "../../providers/sanity";
+import { sanitySsrQuery, setSanitySSRSnapshot } from "../../lib/sanity.groq";
+import { SanityDocument } from "@sanity/types";
 
+const getSanitySnapshot = async (): Promise<{
+  result: SanityDocument[];
+  query: string;
+}> => {
+  const snapshotResponse = await fetch(
+    "https://s0i2hzjh.api.sanity.io/v2021-10-21/data/query/production?query=*",
+    { next: { tags: ["revalidate"] } }
+  );
+  console.log("Sanity snapshot taken");
+  return snapshotResponse.json();
+};
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const snapshot = await getSanitySnapshot();
+  setSanitySSRSnapshot(snapshot);
   const isDraftMode = draftMode().isEnabled;
-  const client = isDraftMode ? draftsClient : sanityClient;
+  const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;
 
   // const startSanity = new Date().getTime()
   // const menuItems = await getNav();
@@ -75,28 +91,45 @@ export default async function RootLayout({
         <link rel={"apple-touch-icon"} href={"/images/logo-dark.svg"} />
       </head>
       <body className={"bg-background"}>
-        <ServiceProvider>
-          <div
-            className={
-              "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
-            }
-          >
-            <TopBarLayout
-              isDraftMode={isDraftMode}
-              settings={settings}
-              kpis={infoBar.kpis}
-              apps={apps}
-              index={index}
-              status={status}
-              menuItems={menuItems}
-            />
-            {children}
-          </div>
-          <Footer copyright={settings.copyright} lists={footer.lists} />
-        </ServiceProvider>
+        <SanityStoreProvider snapshot={snapshot}>
+          <ServiceProvider>
+            <div
+              className={
+                "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
+              }
+            >
+              <TopBarLayout
+                isDraftMode={isDraftMode}
+                settings={settings}
+                kpis={infoBar.kpis}
+                apps={apps}
+                index={index}
+                status={status}
+                menuItems={menuItems}
+              />
+              {children}
+            </div>
+            <Footer copyright={settings.copyright} lists={footer.lists} />
+          </ServiceProvider>
+        </SanityStoreProvider>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function () { updateTheme() })()`,
+            __html: `(function () { 
+              const updateTheme = () => {
+                switch (getCurrentTheme()) {
+                  case "dark":
+                    document.documentElement.classList.add("dark");
+                    document.documentElement.classList.remove("light");
+                    document.documentElement.setAttribute("color-theme", "dark");
+                    break;
+                  default:
+                    document.documentElement.classList.remove("dark");
+                    document.documentElement.classList.add("light");
+                    document.documentElement.setAttribute("color-theme", "light");
+                }
+              };
+              updateTheme() 
+            })()`,
           }}
         />
       </body>

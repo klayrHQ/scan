@@ -1,11 +1,12 @@
 import { Row } from "./row";
 import React from "react";
 import { CellProps } from "./cell";
+import { nanoid } from "nanoid";
 
 export interface BodyProps {
   rows?: any[][];
   columns: CellProps[];
-  queryData?: Record<string, any>
+  queryData?: Record<string, any>;
 }
 
 export const Body = ({ rows, columns, queryData }: BodyProps) => {
@@ -14,7 +15,7 @@ export const Body = ({ rows, columns, queryData }: BodyProps) => {
       {rows?.map((row, index) => (
         <Row
           queryData={queryData}
-          key={`row-${row[0]?.[0]._key}-${row[0]?.[0].value}`}
+          key={nanoid()}
           columns={columns}
           data={row}
           index={index}

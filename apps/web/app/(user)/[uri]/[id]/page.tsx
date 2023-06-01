@@ -6,12 +6,12 @@ import { makeTable } from "../../../../lib/sanity.table";
 import { getQueries } from "../../../../lib/sanity.queries";
 import { draftMode } from "next/headers";
 import { SanityClient } from "@sanity/preview-kit/client";
+import { sanitySsrQuery } from "../../../../lib/sanity.groq";
 
 export const revalidate = 60;
 
-const getSlices = async (uri: string, id: string, client: SanityClient) => {
-  const page =
-    await client.fetch(`*[_type=="pages" && slug.current == "${uri}-id"]{
+const getSlices = async (uri: string, id: string, fetch: any) => {
+  const page = await fetch(`*[_type=="pages" && slug.current == "${uri}-id"]{
       ...,
       queries[]->{
         ...,
@@ -152,7 +152,7 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
 
 export default async function Web({ params }: any) {
   const isDraftMode = draftMode().isEnabled;
-  const client = isDraftMode ? draftsClient : sanityClient;
+  const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;
   const sections = await getSlices(
     params.uri,
     decodeURIComponent(params.id),

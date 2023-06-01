@@ -6,7 +6,7 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
-import { Grid, Tooltip, KeyValueRow, InfoBar, Typography, cls } from "ui";
+import { cls, Grid, InfoBar, KeyValueRow, Tooltip, Typography } from "ui";
 import { formatDistance } from "date-fns";
 import { useService } from "../../providers/service";
 import {
@@ -25,6 +25,7 @@ import { SubMenu } from "../../components/layout/subMenu";
 import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
 import RefreshButton from "./refreshButton";
+import { useSanity } from "../../providers/sanity";
 
 export const TopBarLayout = ({
   status,

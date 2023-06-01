@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { DocumentDuplicateIcon } from "@heroicons/react/24/solid";
 import { useNotification } from "ui/assets/utils";
@@ -9,6 +10,7 @@ export const CopyButton = ({ value }: { value: string }) => {
 
   return (
     <>
+      {/*// @ts-ignore*/}
       <CopyToClipboard text={value || ""}>
         <DocumentDuplicateIcon
           onClick={() => setCopyNoteText(`Copied: "${value}"`)}
