@@ -17,9 +17,7 @@ export default {
   title: "Templates/Transactions",
   component: Transactions,
   argTypes: {
-    backgroundColor: { control: "color" },
-    color: { control: "color" },
-    className: { control: "text" },
+
   },
   parameters: {
     status: {
