@@ -23,7 +23,7 @@ export interface SlicerProps {
 
 export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
   const path = usePathname();
-  const [uri, id] = path?.split("/").slice(1) || [null, null];
+  const [uri, id] = path?.split("/").slice(1) || [undefined, undefined];
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
   const { setQueries, cache, setID } = useService();
   useEffect(() => {
@@ -32,7 +32,7 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
     }
   }, [setQueries]);
   useEffect(() => {
-    if (id && setID) {
+    if (setID) {
       setID(id);
     }
   }, [setID, id]);
@@ -45,7 +45,7 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
         const Tag = Slices[slice._type];
         return (
           <Tag
-            key={slice._id}
+            key={`${slice._id}${uri}_${id}_${JSON.stringify(queryParams)}`}
             {...slice}
             id={id}
             queryData={cache || queryData}

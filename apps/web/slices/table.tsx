@@ -4,7 +4,7 @@ import { Table } from "../components/data/table/table";
 import React, { useEffect, useState } from "react";
 import { processTable } from "../lib/queries/getTable";
 
-export const TableSlice = ({ queryData, data, table }: any) => {
+export const TableSlice = ({ queryData, data, table, id }: any) => {
   // const {lastBlock} = useService()
   const [tableState, updateTable] = useState<{
     table: any;
@@ -27,20 +27,19 @@ export const TableSlice = ({ queryData, data, table }: any) => {
     }
   }, [queryData]);
   return (
-    <>
-      <div className={"max-w-app mx-auto w-full"}>
-        <Table
-          queryData={queryData}
-          // columns={processTable(props.table).columns}
-          // rows={props?.data?.rows}
-          columns={tableState?.table?.columns || processTable(table).columns}
-          rows={
-            tableState?.rows && tableState.rows.length > 0
-              ? tableState?.rows
-              : data?.rows
-          }
-        />
-      </div>
-    </>
+    <div className={"max-w-app mx-auto w-full"}>
+      <Table
+        key={id}
+        queryData={queryData}
+        // columns={processTable(props.table).columns}
+        // rows={props?.data?.rows}
+        columns={tableState?.table?.columns || processTable(table).columns}
+        rows={
+          tableState?.rows && tableState.rows.length > 0
+            ? tableState?.rows
+            : data?.rows
+        }
+      />
+    </div>
   );
 };
