@@ -24,8 +24,7 @@ export const TransactionTabsSlice = ({
   };
   const className = [
     "hover:bg-menuButton",
-    "hover:text-onMenuButton",
-    "active:bg-primary",
+    "hover:text-onSurfaceHigh",
     "text-10",
   ];
   //: ["bg-menuButton", "text-onMenuButton"];
@@ -52,7 +51,7 @@ export const TransactionTabsSlice = ({
             tag={"span"}
             className={cls([
               "capitalize",
-              "block cursor-pointer text-onInfobar",
+              "block cursor-pointer",
               "group",
               "px-3 py-2 mr-1",
               "rounded-md",
@@ -63,8 +62,8 @@ export const TransactionTabsSlice = ({
               "hover:border-2",
               ...className,
               ...("all" === currentCategory || !currentCategory
-                ? ["bg-primaryLight", "text-onMenuButton"]
-                : ["bg-surface-1", "text-onSurfaceMedium"]),
+                ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
+                : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
             ])}
           >
             All
@@ -79,7 +78,7 @@ export const TransactionTabsSlice = ({
               onClick={() => switchCategory(tab)}
               className={cls([
                 "capitalize",
-                "block cursor-pointer text-onInfobar",
+                "block cursor-pointer",
                 "group",
                 "px-3 py-2 mr-1",
                 "rounded-md",
@@ -90,8 +89,8 @@ export const TransactionTabsSlice = ({
                 "hover:border-2",
                 ...className,
                 ...(tab === currentCategory
-                  ? ["bg-primaryLight", "text-onMenuButton"]
-                  : ["bg-surface-1", "text-onSurfaceMedium"]),
+                  ? ["bg-menuButton", "text-onMenuButton","hover:text-onMenuButton"]
+                  : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
               ])}
             >
               {tab}
@@ -109,7 +108,7 @@ export const TransactionTabsSlice = ({
                 size={"menu"}
                 className={cls([
                   "capitalize",
-                  "block cursor-pointer text-onInfobar",
+                  "block cursor-pointer",
                   "group",
                   "px-3 py-2 mr-1",
                   "rounded-md",
@@ -120,8 +119,8 @@ export const TransactionTabsSlice = ({
                   "hover:border-2",
                   ...className,
                   ...(`${currentCategory}:${label}` === id
-                    ? ["bg-primaryLight", "text-onMenuButton"]
-                    : ["bg-surface-1", "text-onSurfaceMedium"]),
+                    ? ["bg-menuButton", "text-onMenuButton","hover:text-onMenuButton"]
+                    : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
                 ])}
               >
                 {label.split(/(?=[A-Z])/).join(" ")}

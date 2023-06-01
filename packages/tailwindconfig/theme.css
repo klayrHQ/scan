@@ -2,7 +2,7 @@
   /*:root {*/
   color-scheme: dark;
 
-  --theme-primary: 216;
+  --theme-primary: 224;
   --theme-secondary: 120;
   /* LISK KLEUREN TOEGEVOEGD */
   --color-lisk-zodiac-blue: hsl(224, 59%, 11%);
@@ -53,16 +53,16 @@
   --color-topbar: hsl(var(--theme-primary), 69%, 52%);
   --color-onTopbar: hsl(var(--theme-primary), 72%, 100%);
 
-  --color-menuButton: var(--color-primaryLight);
+  --color-menuButton: hsl(var(--theme-primary), 72%, 20%);
   --color-onMenuButton: var(--color-onPrimaryHigh);
-  --color-infobar: hsl(224, 65%, 52%);
+  --color-infobar: hsl(224, 65%, 45%);
   --color-onInfobar: hsl(var(--theme-primary), 72%, 100%);
   --color-footer: var(--color-background);
   --color-onFooter: hsl(354, 100%, 100%);
 
 
   /* tables */
-  --color-table-header-bg: rgba(159,183,249,.3);
+  --color-table-header-bg: var(--color-surface-2);
   --color-table-header-text: var(--color-lisk-athens-white);
   --color-table-header-border: hsla(0, 0%, 100%, 0.1);
   --color-table-odd-bg: var(--color-background);
@@ -85,7 +85,7 @@
 
   --color-surface: hsl(var(--theme-primary), 100%, 99%, 0%);
   --color-surface-1: hsl(var(--theme-primary), 50%, 15%);
-  --color-surface-2: hsl(var(--theme-primary), 100%, 96%);
+  --color-surface-2: hsl(var(--theme-primary), 50%, 25%);
   --color-surface-3: rgba(110,147,247,.3);
   --color-surface-4: hsl(var(--theme-primary), 100%, 90%);
   --color-surface-5: hsl(var(--theme-primary), 100%, 86%);
@@ -130,7 +130,7 @@
 .light {
   /*:root {*/
     color-scheme: light;
-    --theme-primary: 216;
+    --theme-primary: 224;
     --theme-secondary: 120;
     /* LISK KLEUREN TOEGEVOEGD */
     --color-lisk-zodiac-blue: hsl(224, 59%, 11%);
@@ -181,14 +181,14 @@
     --color-topbar: hsl(var(--theme-primary), 69%, 52%);
     --color-onTopbar: hsl(var(--theme-primary), 72%, 100%);
 
-    --color-menuButton: var(--color-primaryLight);
+    --color-menuButton: hsl(var(--theme-primary), 70%, 50%);
     --color-onMenuButton: var(--color-onPrimaryHigh);
     --color-infobar: hsl(var(--theme-primary), 72%, 44%);
     --color-onInfobar: hsl(var(--theme-primary), 72%, 100%);
     --color-footer: hsl(var(--theme-primary), 69%, 52%);
     --color-onFooter: hsl(354, 100%, 100%);
 
-    --color-table-header-bg: rgba(159,183,249,.3);
+    --color-table-header-bg: var(--color-surface-2);
     --color-table-header-text: var(--color-lisk-athens-white);
     --color-table-header-border: hsl(216, 100%, 98%);
     --color-table-odd-bg: var(--color-background);
