@@ -50,7 +50,7 @@ import {
   TrashIcon,
   UserIcon,
   WalletIcon,
-  XMarkIcon, BarsArrowDownIcon, ArrowLongLeftIcon, ArrowRightOnRectangleIcon, CheckCircleIcon,
+  XMarkIcon, BarsArrowDownIcon, ArrowLongLeftIcon, ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 import {
   FunnelIcon,
@@ -89,7 +89,6 @@ export const iconList = {
   exclamationTriangle: ExclamationTriangleIcon,
   identification: IdentificationIcon,
   check: CheckIcon,
-  checkCircle: CheckCircleIcon,
   checkShield: ShieldCheckIcon,
   arrowUp: ArrowLongUpIcon,
   arrowDown: ArrowLongDownIcon,
