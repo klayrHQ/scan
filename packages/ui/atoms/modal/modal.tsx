@@ -10,23 +10,18 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   button?: ReactElement;
   children: ReactNode;
   closeButton?: ReactElement;
-  type?: "base" | "primary" | "transparent";
+  type?: "base" | "primary";
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  width?: string
 }
 
 const modalCVA = cva(
-  [
-    "transform overflow-hidden",
-    "text-left align-middle transition-all"
-  ],
+  ["w-full  max-w-md max-w-max", "rounded", "transform overflow-hidden", "text-left align-middle shadow-xl transition-all"],
   {
     variants: {
       type: {
-        primary: "text-onPrimary bg-primary shadow-xl rounded",
-        base: "text-body bg-background shadow-xl rounded",
-        transparent: "bg-transparent",
+        primary: "text-onPrimary bg-primary",
+        base: "text-body bg-background",
       },
     },
   },
@@ -41,7 +36,6 @@ export const Modal:FC<Props> = ({
   closeButton,
   isOpen,
   setIsOpen,
-  width,
 }) => {
 
   return (
@@ -80,7 +74,7 @@ export const Modal:FC<Props> = ({
             leaveTo="opacity-0"
           >
             <Dialog.Overlay
-              className="fixed inset-0 bg-[black] bg-opacity-60 transition duration-300"
+              className="fixed inset-0 bg-primary transition duration-300"
               onClick={() => setIsOpen(false)}
             />
           </Transition.Child>
@@ -107,7 +101,6 @@ export const Modal:FC<Props> = ({
                     className: [
                       "box-border",
                       padding ? `p-${padding}` : "",
-                      width ? `w-${width}` : "",
                       className,
                     ],
                     type,

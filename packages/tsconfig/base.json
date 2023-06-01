@@ -17,6 +17,5 @@
     "strict": true
   },
   "exclude": ["node_modules"],
-  "include": ["src/components", "src/custom.d.ts"],
   "plugins": [{ "name": "next" }]
 }
