@@ -1,7 +1,6 @@
-import React, { FC } from "react"
+import React from "react"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
-import {TableProps} from "../../organisms/table/table";
 import {Typography} from "../typography/typography";
 
 export interface LinkProps {

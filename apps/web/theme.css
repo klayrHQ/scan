@@ -1,0 +1,221 @@
+:root {
+
+  --theme-primary: 216;
+  --theme-secondary: 120;
+  /* LISK KLEUREN TOEGEVOEGD */
+  --color-lisk-zodiac-blue: hsl(224, 59%, 11%);
+  --color-lisk-ultramarine-blue: #335ed4;
+  --color-lisk-ink-blue: hsl(222, 61%, 37%);
+
+  --color-lisk-silver-gray: #c5cfe4;
+  --color-lisk-platinum-gray: hsl(218, 42%, 91%);
+  --color-lisk-athens-white: hsla(210, 40%, 98%, 0.9);
+
+  --color-lisk-ufo-green: hsl(148, 68%, 50%);
+  --color-lisk-ufo-green-opacity: hsl(148, 68%, 93%);
+  --color-lisk-ufo-green-opacity-dark: hsl(152, 30%, 17%);
+  --color-lisk-copacabana-yellow: hsl(51, 90%, 70%);
+  --color-lisk-candy-pink: hsl(359, 100%, 91%);
+  --color-lisk-fury-red: hsl(354, 100%, 64%);
+  --color-lisk-white: hsl(0, 0%, 98%);
+  /*--color-text: var(--color-morph-2-800);*/
+
+  --color-primaryLight: hsl(var(--theme-primary), 77%, 60%);
+  --color-primary: hsl(var(--theme-primary), 69%, 52%);
+  --color-primaryDark: hsl(var(--theme-primary), 72%, 44%);
+
+  --color-onPrimary: var(--color-lisk-white);
+  --color-onPrimaryHigh: hsl(var(--theme-primary), 100%, 90%);
+  --color-onPrimaryMedium: hsl(var(--theme-primary), 100%, 70%);
+  --color-onPrimaryLow: hsl(var(--theme-primary), 100%, 60%);
+
+  --color-secondary: hsl(calc(var(--theme-primary) + 180), 69%, 52%, 1);
+  --color-onSecondary: hsl(calc(var(--theme-primary) + 180), 90%, 90%);
+
+  --color-onSurfaceLinkHigh: hsl(var(--theme-primary), 100%, 30%);
+  --color-onSurfaceLinkMedium: hsl(var(--theme-primary), 69%, 40%);
+  --color-onSurfaceLinkLow: hsl(var(--theme-primary), 69%, 52%);
+
+  --color-onPrimaryLinkHigh: hsl(var(--theme-primary), 69%, 52%);
+  --color-onPrimaryLinkMedium: hsl(var(--theme-primary), 69%, 52%);
+  --color-onPrimaryLinkLow: hsl(var(--theme-primary), 69%, 52%);
+
+
+  --color-background: hsl(0, 0%, 100%);
+  --color-onBackgroundLow: var(--color-primaryLight);
+  --color-onBackgroundMedium: var(--color-primary);
+  --color-onBackgroundHigh: var(--color-primaryDark);
+
+  --color-header: var(--color-background);
+  --color-onHeader: var(--color-background);
+  --color-topbar: hsl(var(--theme-primary), 69%, 52%);
+  --color-onTopbar: hsl(var(--theme-primary), 72%, 100%);
+
+  --color-menuButton: var(--color-primaryLight);
+  --color-onMenuButton: var(--color-onPrimaryHigh);
+  --color-infobar: hsl(var(--theme-primary), 72%, 44%);
+  --color-onInfobar: hsl(var(--theme-primary), 72%, 100%);
+  --color-footer: hsl(var(--theme-primary), 69%, 52%);
+  --color-onFooter: hsl(354, 100%, 100%);
+
+
+  /*donkere kleuren*/
+  --color-onSurfaceHigh: hsl(0, 0%, 10%);
+  --color-onSurfaceMedium: hsl(0, 0%, 45%);
+  --color-onSurfaceLow: hsl(var(--theme-primary), 1%, 50%, .9);
+
+  --color-onSurfacePrimaryHigh: hsl(var(--theme-primary), 69%, 52%);
+  --color-onSurfacePrimaryMedium: hsl(var(--theme-primary), 69%, 52%);
+  --color-onSurfacePrimaryLow: hsl(var(--theme-primary), 80%, 80% );
+
+  --color-surface: hsl(var(--theme-primary), 100%, 99%, 0%);
+  --color-surface-1: hsl(var(--theme-primary), 100%, 98%);
+  --color-surface-2: hsl(var(--theme-primary), 100%, 96%);
+  --color-surface-3: hsl(var(--theme-primary), 100%, 94%);
+  --color-surface-4: hsl(var(--theme-primary), 100%, 90%);
+  --color-surface-5: hsl(var(--theme-primary), 100%, 86%);
+  --color-surface-6: hsl(var(--theme-primary), 100%, 84%);
+  --color-surface-7: hsl(var(--theme-primary), 100%, 82%);
+  --color-surface-8: hsl(var(--theme-primary), 100%, 80%);
+
+
+  --color-yellow: hsl(41, 89%, 60%);
+  --color-red: hsl(354, 100%, 64%);
+  --color-green: hsl(148, 68%, 50%);
+
+  --color-onError: hsl(354, 100%, 34%);
+  --color-error: hsl(354, 100%, 70%);
+  --color-onSuccess: hsl(148, 68%, 30%);
+  --color-success: hsl(148, 68%, 60%, 1);
+  --color-info: hsl(224, 89%, 60%);
+  --color-onInfo: hsl(224, 89%, 93%);
+  --color-warning: hsl(41, 89%, 60%);
+  --color-onWarning: hsl(39, 70%, 21%);
+
+
+
+
+
+  --color-colecti-azule: 13 117 253;
+  --color-colecti-eerie: 26 26 26;
+  --color-colecti-lobster: 255 66 45;
+  --color-colecti-sand: 237 237 206;
+  --color-colecti-tulip: 255 135 141;
+  --color-colecti-volt: 212 255 0;
+  --color-colecti-azuleDark: 12 49 226;
+  --color-colecti-eerieLight: 58 58 58;
+  --color-colecti-lobsterDark: 255 18 8;
+  --color-colecti-sandDark: 220 220 166;
+  --color-colecti-voltDark: 184 255 1;
+
+  --color-black: 0 0 0;
+  --color-white: 255 255 255;
+  --color-gray: 231 231 230;
+}
+
+.liskscan {
+  --color-primary-text: var(--color-colecti-eerie);
+  --color-secondary-text: 255 255 255;
+  --color-primary: var(--color-colecti-volt);
+  --color-primary-alt: var(--color-colecti-voltDark);
+  --color-secondary: var(--color-colecti-azule);
+  --color-secondary-alt: var(--color-colecti-azuleDark);
+  --color-tertiary: var(--color-colecti-sand);
+  --color-tertiary-alt: var(--color-colecti-sandDark);
+  --color-quaternary: var(--color-colecti-tulip);
+  --color-quaternary-alt: var(--color-colecti-tulip);
+  --color-quinary: var(--color-colecti-eerie);
+  --color-quinary-alt: var(--color-colecti-eerieLight);
+  --color-info: var(--color-colecti-azule);
+  --color-warning: 255 204 0;
+  --color-error: var(--color-colecti-lobsterDark);
+  --color-body: var(--color-colecti-eerie);
+  --color-body-alt: var(--color-white);
+  --color-title: var(--color-colecti-eerie);
+  --color-background: 243 243 240;
+  --color-surface: 255 255 255;
+  --color-surface-1: 243 243 240;
+  --color-surface-2: 231 231 227;
+  --color-surface-3: 218 218 213;
+  --color-surface-4: 26 26 26;
+  --color-expandableButton: var(--color-white);
+  --color-expandableButtonActive: var(--color-colecti-eerieLight);
+  --color-nftCardText: var(--color-white);
+
+  --color-button-bg-primary: var(--color-colecti-volt);
+  --color-button-text-primary: var(--color-colecti-eerie);
+  --color-button-bg-primary-hover: var(--color-colecti-voltDark);
+  --color-button-text-primary-hover: var(--color-colecti-eerie);
+  --color-button-bg-primary-focus: var(--color-colecti-volt);
+  --color-button-text-primary-focus: var(--color-colecti-eerie);
+  --color-button-bg-primary-disabled: var(--color-colecti-voltDark);
+  --color-button-text-primary-disabled: var(--color-colecti-eerie);
+
+  --color-button-bg-secondary: var(--color-colecti-eerie);
+  --color-button-text-secondary: var(--color-white);
+  --color-button-bg-secondary-hover: var(--color-colecti-eerieLight);
+  --color-button-text-secondary-hover: var(--color-white);
+  --color-button-bg-secondary-focus: var(--color-colecti-eerieLight);
+  --color-button-text-secondary-focus: var(--color-white);
+  --color-button-bg-secondary-disabled: var(--color-colecti-eerieLight);
+  --color-button-text-secondary-disabled: var(--color-colecti-eerie);
+
+  --color-button-bg-tertiary: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary: var(--color-body);
+  --color-button-bg-tertiary-hover: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary-hover: var(--color-body);
+  --color-button-bg-tertiary-focus: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary-focus: var(--color-body);
+  --color-button-bg-tertiary-disabled: var(--color-colecti-voltDark);
+  --color-button-text-tertiary-disabled: var(--color-colecti-eerie);
+}
+
+.liskscan-dark {
+  --color-primary-text: var(--color-colecti-eerie);
+  --color-secondary-text: var(--color-white);
+  --color-primary: var(--color-colecti-volt);
+  --color-primary-alt: var(--color-colecti-voltDark);
+  --color-secondary: var(--color-colecti-azule);
+  --color-secondary-alt: var(--color-colecti-azuleDark);
+  --color-tertiary: var(--color-colecti-sand);
+  --color-tertiary-alt: var(--color-colecti-sandDark);
+  --color-quaternary: var(--color-colecti-tulip);
+  --color-quaternary-alt: var(--color-colecti-tulip);
+  --color-quinary: var(--color-colecti-eerie);
+  --color-quinary-alt: var(--color-colecti-eerieLight);
+  --color-info: var(--color-colecti-azule);
+  --color-warning: 255 204 0;
+  --color-error: var(--color-colecti-lobsterDark);
+  --color-body: 220 216 216;
+  --color-body-alt: var(--color-colecti-eerie);
+  --color-title: 176 174 174;
+  --color-background: 26 26 26;
+  --color-surface: 0 0 0;
+  --color-surface-1: 18 18 18;
+  --color-surface-2: 34 34 34;
+  --color-surface-3: 51 51 51;
+  --color-surface-4: 68 68 68;
+  --color-expandableButton: var(--color-colecti-eerieLight);
+  --color-expandableButtonActive: var(--color-white);
+  --color-nftCardText: var(--color-white);
+  --color-button-bg-primary: var(--color-primary);
+  --color-button-text-primary: var(--color-colecti-eerie);
+  --color-button-bg-primary-hover: var(--color-primary);
+  --color-button-text-primary-hover: var(--color-colecti-eerie);
+  --color-button-bg-primary-focus: var(--color-primary);
+  --color-button-text-primary-focus: var(--color-colecti-eerie);
+
+  --color-button-bg-secondary: var(--color-colecti-eerieLight);
+  --color-button-text-secondary: var(--color-white);
+  --color-button-bg-secondary-hover: var(--color-surface-1);
+  --color-button-text-secondary-hover: var(--color-white);
+  --color-button-bg-secondary-focus: var(--color-colecti-eerieLight);
+  --color-button-text-secondary-focus: var(--color-white);
+
+  --color-button-bg-tertiary: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary: var(--color-body);
+  --color-button-bg-tertiary-hover: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary-hover: var(--color-body);
+  --color-button-bg-tertiary-focus: var(--color-colecti-eerieLight);
+  --color-button-text-tertiary-focus: var(--color-body);
+}

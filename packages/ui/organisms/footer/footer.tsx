@@ -3,9 +3,9 @@ import { FooterLinks } from "../../molecules/footerLinks/footerLinks";
 import { LinkedinIcon, TwitterIcon } from "../../assets/icons"
 import {Container} from "../../atoms/container/container";
 
-interface FooterProps {
+export interface FooterProps {
   className?: string
-  footerContent?: Array<{category: string, items: Array<{ label: string, link: string }>}>
+  footerContent?: Array<{title: string, items: { label: string, href: string, _key: string }[]}>
   copyrightContent?: string | ReactNode
 }
 
@@ -22,7 +22,7 @@ export const Footer: FC<FooterProps> = ({
             <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
               {footerContent &&
                 footerContent.map((item) => (
-                  <div key={`link-${item.category}`} className="flex flex-col">
+                  <div key={`link-${item.title}`} className="flex flex-col">
                     <FooterLinks {...item} />
                   </div>
                 ))}

@@ -17,12 +17,14 @@ export const InfoBar: FC<InfoBarProps> = ({
         flex
         columns={2}
         mobileColumns={2}
+        gap={4}
       >
         <Grid
           className="space-x-2 md:space-x-4 items-center"
           flex
           columns={2}
           mobileColumns={2}
+          gap={4}
         >
           {infoItemsLeft}
         </Grid>

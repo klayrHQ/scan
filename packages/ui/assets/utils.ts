@@ -1,4 +1,4 @@
-import { AccountDataType } from "@moosty/lisk-service-provider"
+"use client"
 import {useEffect, useRef, useState} from "react";
 
 export const clean = (obj: any) => {

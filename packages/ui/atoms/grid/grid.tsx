@@ -1,4 +1,5 @@
 import React from "react";
+import {cls} from "../../utils";
 
 export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export const Grid = ({
 }: GridProps) => {
   return (
     <div
-      className={[
+      className={cls([
         className,
         justifyBetween && "justify-between",
         flex
@@ -35,7 +36,7 @@ export const Grid = ({
                 : `flex-col`
             } ${mobileColumns > 1 ? `flex-row gap-${gap}` : `flex-col`}`
           : `grid gap-${gap} grid-cols-${mobileColumns} lg:grid-cols-${columns}`,
-      ].join(" ")}
+      ])}
       {...props}
     >
       {children}

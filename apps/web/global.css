@@ -1,0 +1,23 @@
+@import "tailwindconfig/global.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: rgb(var(--color-background));
+  margin: 0;
+}
+@font-face {
+  font-family: 'inter';
+  src: url('./assets/fonts/Inter-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'verdana';
+  src: url('./assets/fonts/Verdana.ttf');
+}
+
+@font-face {
+  font-family: 'monaco';
+  src: url('./assets/fonts/Monaco.ttf');
+}

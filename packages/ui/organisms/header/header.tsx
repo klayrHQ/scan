@@ -9,7 +9,7 @@ interface HeaderProps {
   children?: any
   infoItemsLeft?: Array<ReactNode>
   infoItemsRight?: Array<ReactNode>
-  menuItems: Array<{ label: string, link: string }>
+  menuItems: Array<ReactNode>
   logo: ReactNode
   menuItemsRight?: Array<ReactNode>
 }
