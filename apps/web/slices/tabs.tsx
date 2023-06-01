@@ -3,6 +3,8 @@ import { cls, Container, Grid, Typography } from "ui";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Slicer } from "../components/slicer";
+import useQueryParams, { QueryParams } from "../hooks/useQueryParams";
+import { useEffect } from "react";
 
 export const TabsSlice = ({
   queryData,
@@ -14,7 +16,9 @@ export const TabsSlice = ({
   uri,
   ...props
 }: any) => {
+  const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
+
   const activeTab =
     staticTabs.find(
       (tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey
@@ -25,6 +29,10 @@ export const TabsSlice = ({
     "hover:text-onMenuButton",
     "active:bg-primary",
   ];
+
+  const handleChange = (handle: string, value: string) => {
+    setQueryParams({ [handle]: value });
+  };
   return (
     <Container section className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
@@ -39,32 +47,33 @@ export const TabsSlice = ({
               ? `/${uri}/${id}?${current}=${queryKey}`
               : `/${uri}?${current}=${queryKey}`;
             return (
-              <Link key={_key} href={link}>
-                <Typography
-                  tag={"span"}
-                  className={cls([
-                    "block cursor-pointer text-onInfobar",
-                    "group",
-                    "px-3 py-2 mr-1",
-                    "rounded-md",
-                    "text-base no-underline",
-                    "font-medium",
-                    "flex flex-row",
-                    "border-transparent",
-                    "hover:border-2",
-                    ...className,
-                    ...(searchParams?.get(current)
-                      ? searchParams?.get(current) === queryKey
-                        ? ["bg-primary", "text-onMenuButton"]
-                        : ["bg-surface-1"]
-                      : index === 0
+              // <Link key={_key} href={link}>
+              <Typography
+                onClick={() => handleChange(current, queryKey)}
+                tag={"span"}
+                className={cls([
+                  "block cursor-pointer text-onInfobar",
+                  "group",
+                  "px-3 py-2 mr-1",
+                  "rounded-md",
+                  "text-base no-underline",
+                  "font-medium",
+                  "flex flex-row",
+                  "border-transparent",
+                  "hover:border-2",
+                  ...className,
+                  ...(searchParams?.get(current)
+                    ? searchParams?.get(current) === queryKey
                       ? ["bg-primary", "text-onMenuButton"]
-                      : ["bg-surface-1"]),
-                  ])}
-                >
-                  {label}
-                </Typography>
-              </Link>
+                      : ["bg-surface-1"]
+                    : index === 0
+                    ? ["bg-primary", "text-onMenuButton"]
+                    : ["bg-surface-1"]),
+                ])}
+              >
+                {label}
+              </Typography>
+              // </Link>
             );
           }
         )}

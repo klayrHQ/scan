@@ -2,23 +2,29 @@
 import { Slices, SlicesTypes } from "../slices";
 import React, { useEffect } from "react";
 import { useService } from "../providers/service";
-import {ParsedUrlQuery} from "querystring";
-import {ReadonlyURLSearchParams} from "next/navigation";
+import { ParsedUrlQuery } from "querystring";
+import {
+  ReadonlyURLSearchParams,
+  usePathname,
+  useRouter,
+} from "next/navigation";
+import useQueryParams, { QueryParams } from "../hooks/useQueryParams";
 
 export interface SlicerProps {
   queryData?: any;
   queries?: any;
-  id?: string;
   slices: Array<{
     id: string;
     _type: SlicesTypes;
     _id: string;
     [x: string | number | symbol]: unknown;
   }>;
-  uri?: string
 }
 
-export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => {
+export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
+  const path = usePathname();
+  const [uri, id] = path?.split("/").slice(1) || [null, null];
+  const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
   const { setQueries, cache, setID } = useService();
   useEffect(() => {
     if (setQueries) {
@@ -26,12 +32,12 @@ export const Slicer = ({ slices, queryData, queries, id, uri }: SlicerProps) => 
     }
   }, [setQueries]);
   useEffect(() => {
-    if (setID) {
+    if (id && setID) {
       setID(id);
     }
   }, [setID, id]);
 
-  useEffect(() => console.log("CACHE", cache), [cache])
+  useEffect(() => console.log("CACHE", cache), [cache]);
 
   return (
     <>

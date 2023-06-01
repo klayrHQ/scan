@@ -60,7 +60,7 @@ export const TopBarLayout = ({
     );
   }, [apps, status?.data?.chainID]);
 
-  useEffect(() => console.log(events), [events?.["new.block"]]);
+  useEffect(() => console.log("EVENTS", events), [events?.["new.block"]]);
   return (
     <TopBarClient>
       <InfoBar

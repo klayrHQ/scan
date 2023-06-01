@@ -1,11 +1,11 @@
 import React from "react";
-import {notFound, useSearchParams} from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import { Slicer } from "../../../../components/slicer";
-import {draftsClient, sanityClient} from "../../../../lib/sanity.client";
+import { draftsClient, sanityClient } from "../../../../lib/sanity.client";
 import { makeTable } from "../../../../lib/sanity.table";
 import { getQueries } from "../../../../lib/sanity.queries";
-import {draftMode} from "next/headers";
-import {SanityClient} from "@sanity/preview-kit/client";
+import { draftMode } from "next/headers";
+import { SanityClient } from "@sanity/preview-kit/client";
 
 export const revalidate = 60;
 
@@ -151,16 +151,18 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
 };
 
 export default async function Web({ params }: any) {
-  const isDraftMode = draftMode().isEnabled
-  const client = isDraftMode ? draftsClient : sanityClient
-  const sections = await getSlices(params.uri, decodeURIComponent(params.id), client);
+  const isDraftMode = draftMode().isEnabled;
+  const client = isDraftMode ? draftsClient : sanityClient;
+  const sections = await getSlices(
+    params.uri,
+    decodeURIComponent(params.id),
+    client
+  );
   return (
     <Slicer
       slices={sections.sections}
       queryData={sections.queryData}
       queries={sections.page.queries}
-      id={decodeURIComponent(params.id)}
-      uri={params.uri}
     />
   );
 }
