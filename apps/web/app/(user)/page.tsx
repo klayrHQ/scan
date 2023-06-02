@@ -7,7 +7,7 @@ import { draftsClient, sanityClient } from "../../lib/sanity.client";
 import { useSanity } from "../../providers/sanity";
 import { sanitySsrQuery } from "../../lib/sanity.groq";
 
-// export const revalidate = 5;
+export const revalidate = 5;
 
 export default async function Web() {
   const isDraftMode = draftMode().isEnabled;
