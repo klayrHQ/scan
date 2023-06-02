@@ -25,9 +25,9 @@ export const TabsSlice = ({
     ) || staticTabs[0];
 
   const className = [
-    "hover:bg-menuButton",
-    "hover:text-onMenuButton",
-    "active:bg-primary",
+    "hover:bg-surface-2",
+    "text-onMenuButton",
+    "active:bg-menuButton",
   ];
 
   const handleChange = (handle: string, value: string) => {
@@ -64,11 +64,11 @@ export const TabsSlice = ({
                   ...className,
                   ...(searchParams?.get(current)
                     ? searchParams?.get(current) === queryKey
-                      ? ["bg-primary", "text-onMenuButton"]
-                      : ["bg-surface-1"]
+                      ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
+                      : ["", "text-onSurfaceHigh hover:bg-surface-1"]
                     : index === 0
-                    ? ["bg-primary", "text-onMenuButton"]
-                    : ["bg-surface-1"]),
+                      ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
+                      : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
                 ])}
               >
                 {label}

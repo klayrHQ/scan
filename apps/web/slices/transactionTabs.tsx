@@ -43,7 +43,7 @@ export const TransactionTabsSlice = ({
     ),
   ] as string[];
   return (
-    <Container section className={"max-w-app space-y-4"}>
+    <Container section className={"max-w-app space-y-1"}>
       <Grid flex gap={2} columns={2}>
         <Link key={"all"} href={"/transactions"}>
           <Typography
@@ -89,7 +89,7 @@ export const TransactionTabsSlice = ({
                 "hover:border-2",
                 ...className,
                 ...(tab === currentCategory
-                  ? ["bg-menuButton", "text-onMenuButton","hover:text-onMenuButton"]
+                  ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
                   : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
               ])}
             >
@@ -119,7 +119,7 @@ export const TransactionTabsSlice = ({
                   "hover:border-2",
                   ...className,
                   ...(`${currentCategory}:${label}` === id
-                    ? ["bg-menuButton", "text-onMenuButton","hover:text-onMenuButton"]
+                    ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
                     : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
                 ])}
               >

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { cls } from "ui";
+import {Icon} from "ui/atoms/icon/icon";
 
 export type ShowOnCell =
   | "mobile"
@@ -63,7 +64,8 @@ export const Cell = ({
   }
   return (
     <th className={cls(["border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br font-medium", className, getShowClass(showOn)])}>
-      {Component && <Component {...props} />}
+      {Component && <Component {...props} />
+      }
     </th>
   );
 };

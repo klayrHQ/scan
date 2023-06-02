@@ -53,8 +53,8 @@
   --color-topbar: hsl(var(--theme-primary), 69%, 52%);
   --color-onTopbar: hsl(var(--theme-primary), 72%, 100%);
 
-  --color-menuButton: hsl(var(--theme-primary), 72%, 20%);
-  --color-onMenuButton: var(--color-onPrimaryHigh);
+    --color-menuButton: var(--color-surface-2);
+    --color-onMenuButton: var(--color-onSurfacePrimaryHigh);
   --color-infobar: hsl(224, 65%, 45%);
   --color-onInfobar: hsl(var(--theme-primary), 72%, 100%);
   --color-footer: var(--color-background);
@@ -181,8 +181,8 @@
     --color-topbar: hsl(var(--theme-primary), 69%, 52%);
     --color-onTopbar: hsl(var(--theme-primary), 72%, 100%);
 
-    --color-menuButton: hsl(var(--theme-primary), 70%, 50%);
-    --color-onMenuButton: var(--color-onPrimaryHigh);
+    --color-menuButton: var(--color-surface-2);
+    --color-onMenuButton: var(--color-onSurfacePrimaryHigh);
     --color-infobar: hsl(var(--theme-primary), 72%, 44%);
     --color-onInfobar: hsl(var(--theme-primary), 72%, 100%);
     --color-footer: hsl(var(--theme-primary), 69%, 52%);

@@ -13,7 +13,7 @@ export const Head = ({ className, cols, ...props }: HeadProps) => {
     <tr
       className={cls([
         "border-b-1 rounded",
-        "border-b-tableHeaderBorder bg-tableHeaderBG text-tableHeaderText p-4 sticky",
+        "border-b-tableHeaderBorder bg-tableHeaderBG text-tableHeaderText p-4",
         className,
       ])}
       {...props}
