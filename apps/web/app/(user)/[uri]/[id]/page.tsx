@@ -1,14 +1,13 @@
 import React from "react";
-import { notFound, useSearchParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Slicer } from "../../../../components/slicer";
-import { draftsClient, sanityClient } from "../../../../lib/sanity.client";
+import { draftsClient } from "../../../../lib/sanity.client";
 import { makeTable } from "../../../../lib/sanity.table";
 import { getQueries } from "../../../../lib/sanity.queries";
 import { draftMode } from "next/headers";
-import { SanityClient } from "@sanity/preview-kit/client";
 import { sanitySsrQuery } from "../../../../lib/sanity.groq";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 const getSlices = async (uri: string, id: string, fetch: any) => {
   const page = await fetch(`*[_type=="pages" && slug.current == "${uri}-id"]{

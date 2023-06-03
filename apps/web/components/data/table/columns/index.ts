@@ -2,12 +2,13 @@ import { DoubleRowColumn } from "./doubleRow";
 import { PlainColumn } from "./plain";
 import { DefaultHeadColumn } from "./head";
 import { DateColumn } from "./date";
-import { ValueFormat, ValueFormatterProps } from "../../../valueFormatter";
+import { ValueFormat } from "../../../valueFormatter";
 import { GridColumn } from "./grid";
 import { AvatarColumn } from "./avatar";
 import { ValidatorStatusColumn } from "./validatorStatus";
 import { NrColumn } from "./nr";
 import { StakesColumn } from "./stakes";
+import { OrColumn } from "./or";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -26,6 +27,7 @@ export const ColumnComponents = {
   ValidatorStatusColumn: ValidatorStatusColumn,
   NrColumn: NrColumn,
   StakesColumn: StakesColumn,
+  OrColumn: OrColumn,
 };
 
 export type ColumnTypes = keyof typeof ColumnComponents;
@@ -40,4 +42,5 @@ export {
   ValidatorStatusColumn,
   NrColumn,
   StakesColumn,
+  OrColumn,
 };

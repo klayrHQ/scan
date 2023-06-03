@@ -24,33 +24,43 @@ export const makeTable = ({
     const rows = data[key]?.data?.map((row: any) =>
       cols.map((col) =>
         col.valueKeys.map((valueFormat) => {
-          let link = undefined
+          let link = undefined;
           if (valueFormat.format?.link?.href) {
             link = {
               href: valueFormat.format.link.href,
-              keys: []
-            }
+              keys: [],
+            };
           }
-          if (valueFormat.format?.link?.keys && valueFormat.format?.link?.keys?.length > 0 && valueFormat.format?.link?.href) {
-
-            const keys = valueFormat.format.link.keys.map((k) => getFromDottedKey(k, isMeta(key) ? "meta" : key, row, data))
+          if (
+            valueFormat.format?.link?.keys &&
+            valueFormat.format?.link?.keys?.length > 0 &&
+            valueFormat.format?.link?.href
+          ) {
+            const keys = valueFormat.format.link.keys.map((k) =>
+              getFromDottedKey(k, isMeta(key) ? "meta" : key, row, data)
+            );
 
             link = {
               href: util.format(valueFormat.format.link.href, ...keys),
-              keys
-            }
+              keys,
+            };
           }
           if (valueFormat.type === "key") {
             return {
               ...valueFormat,
-              format: {...valueFormat.format, link},
+              format: { ...valueFormat.format, link },
               value: isMeta(valueFormat.value)
-                ? getFromDottedKey(valueFormat.value || "", "meta", row, data)
+                ? getFromDottedKey(
+                    valueFormat.value.replace("_meta", "meta") || "",
+                    "meta",
+                    row,
+                    data
+                  )
                 : getFromDottedKey(valueFormat.value || "", key, row, data),
             };
           }
           if (valueFormat.type === "literal") {
-            return {...valueFormat, format: {...valueFormat.format, link}};
+            return { ...valueFormat, format: { ...valueFormat.format, link } };
           }
         })
       )
@@ -62,4 +72,5 @@ export const makeTable = ({
   };
 };
 
-const isMeta = (key?: string) => (key ? key.split(".")?.[1] === "meta" : false);
+const isMeta = (key?: string) =>
+  key ? key.split(".")?.[1] === "_meta" : false;
