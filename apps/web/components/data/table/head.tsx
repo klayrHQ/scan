@@ -12,7 +12,7 @@ export const Head = ({ className, cols, ...props }: HeadProps) => {
     <thead>
     <tr
       className={cls([
-        "border-b-1 rounded",
+        "border-b-1 rounded md:sticky md:top-28 z-10",
         "border-b-tableHeaderBorder bg-tableHeaderBG text-tableHeaderText p-4",
         className,
       ])}

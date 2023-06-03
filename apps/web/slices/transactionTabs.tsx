@@ -43,7 +43,7 @@ export const TransactionTabsSlice = ({
     ),
   ] as string[];
   return (
-    <Container section gap={2} className={"max-w-app"}>
+    <Container bgColor={"background"} section gap={2} className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
         <Link key={"all"} href={"/transactions"}>
           <Typography

@@ -27,7 +27,7 @@ export const TableSlice = ({ queryData, data, table, id }: any) => {
     }
   }, [queryData]);
   return (
-    <div className={"max-w-app mx-auto w-full"}>
+    <div className={"max-w-app mx-auto w-full bg-background"}>
       <Table
         key={id}
         queryData={queryData}

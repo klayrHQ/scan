@@ -34,7 +34,7 @@ export const TabsSlice = ({
     setQueryParams({ [handle]: value });
   };
   return (
-    <Container  section className={"max-w-app space-y-1"}>
+    <Container gap={2}  section className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
         {staticTabs?.map(
           (
