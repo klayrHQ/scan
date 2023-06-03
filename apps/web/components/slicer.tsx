@@ -41,16 +41,16 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
 
   return (
     <>
-      {slices.filter(Boolean).map((slice) => {
+      {slices.filter(Boolean).map((slice, i) => {
         const Tag = Slices[slice._type];
         return (
           <Tag
-            key={`${slice._id}${uri}_${id}_${JSON.stringify(queryParams)}`}
             {...slice}
             id={id}
             queryData={cache || queryData}
             queries={queries}
             uri={uri}
+            key={`${slice._id}${uri}_${id}_${JSON.stringify(queryParams)}-${i}`}
           />
         );
       })}
