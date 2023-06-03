@@ -2788,10 +2788,10 @@
   dependencies:
     "@lezer/common" "^1.0.0"
 
-"@liskscan/lisk-service-client@^0.0.8":
-  version "0.0.8"
-  resolved "https://npm.colecti.io/@liskscan/lisk-service-client/-/lisk-service-client-0.0.8.tgz"
-  integrity sha512-xYag0RtnKnbpDrKh44DwB98M7pnZnd3HaQ/JbaHG76jWc/7GNGQens18oEVps1bc4R5PlhA7BWdHPM7KN6lFpw==
+"@liskscan/lisk-service-client@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@liskscan/lisk-service-client/-/lisk-service-client-0.0.9.tgz#15a70919a1c2106258883361d715517b28da5254"
+  integrity sha512-Dsx+cCiWdSvVRAehpwUWOMOX+mQdbz+Y5uzDvY8v0qTFc2DkZ1sE1fRr6p54Yu4Tq/qw4KfTrq+qzJiOx0xj5w==
   dependencies:
     socket.io-client "^4.6.1"
 
