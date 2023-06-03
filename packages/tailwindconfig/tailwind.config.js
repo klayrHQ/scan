@@ -198,9 +198,15 @@ module.exports = {
       "items-center",
       "justify-between",
       "space-x-2",
+      "space-x-4",
+      "space-x-6",
+      "space-x-8",
+      "space-x-10",
+      "space-x-12",
       "capitalize",
       "inline-flex",
       "list-none",
+      "w-100",
   ],
   darkMode: "media", // or 'class'
   theme: {
@@ -396,6 +402,7 @@ module.exports = {
       72: "18rem",
       80: "20rem",
       96: "24rem",
+      100: "32rem",
     },
     animation: {
       none: "none",
