@@ -2,9 +2,9 @@ import React, {ReactNode} from 'react';
 import {Favourite} from "../../molecules/favourite/favourite";
 
 interface FavouritesProps {
-  onClick: () => void
-  xOnClick: () => void
-  favourites: Array<{username?: string | ReactNode, address: string | ReactNode, balance?: string | ReactNode, avatar?: ReactNode}>
+  onClick: (address: string) => void
+  xOnClick: (address: string) => void
+  favourites?: Array<{username?: string, address: string, balance?: string, avatar?: ReactNode}>
   className?: string
   favClassName?: string
 }
