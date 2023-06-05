@@ -37,7 +37,7 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
     }
   }, [setID, id]);
 
-  useEffect(() => console.log("CACHE", cache), [cache]);
+  useEffect(() => console.log("CACHE", uri, id, cache), [cache]);
 
   return (
     <>
@@ -46,11 +46,12 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
         return (
           <Tag
             {...slice}
-            id={id}
             queryData={cache || queryData}
             queries={queries}
-            uri={uri}
             key={`${slice._id}${uri}_${id}_${JSON.stringify(queryParams)}-${i}`}
+            id={id}
+            uri={uri}
+            test={"asdfasdf"}
           />
         );
       })}

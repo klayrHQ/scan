@@ -15,7 +15,7 @@ export interface FavouritesContextProps {
   setFavourites: React.Dispatch<SetStateAction<favouriteDataType[]>>
   unFavourite: (address: string) => void
   updateFavourites: () => void
-  isInFavourites: (address: string) => void
+  isInFavourites: (address: string) => boolean
 }
 
 interface AccountEnvelope extends Omit<Envelope, "data"> {

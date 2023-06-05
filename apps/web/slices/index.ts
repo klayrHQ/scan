@@ -5,6 +5,7 @@ import {Kpi} from "./kpi";
 import {TabsSlice} from "./tabs";
 import {TransactionTabsSlice} from "./transactionTabs";
 import {StakesAccount} from "./stakesAccount";
+import {FavoriteSlice} from "./favorite";
 
 export const Slices = {
   titleBox: TitleBoxSlice,
@@ -13,6 +14,7 @@ export const Slices = {
   kpi: Kpi,
   tabs: TabsSlice,
   transactionTabs: TransactionTabsSlice,
-  stakesAccount: StakesAccount
+  stakesAccount: StakesAccount,
+  favorite: FavoriteSlice
 };
 export type SlicesTypes =  keyof typeof Slices
