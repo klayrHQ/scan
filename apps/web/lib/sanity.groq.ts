@@ -23,7 +23,7 @@ export const sanitySsrQuery = async <R = any>(
       )
     );
   }
-  const tree = parse(groqQuery, { params });
+  const tree = parse(groqQuery);
   const result = await evaluate(tree, {
     dataset: documents,
     params,

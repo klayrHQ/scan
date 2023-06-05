@@ -1,8 +1,5 @@
-import React, {Fragment, ReactNode, useEffect} from "react"
-import { Popover, Transition } from "@headlessui/react"
-import { StarIcon } from "@heroicons/react/24/solid"
-import { Tooltip } from "../../atoms/tooltip/tooltip";
-import { useRouter } from "next/router"
+import React, {ReactNode} from "react"
+
 import {Favourites} from "../favourites/favourites";
 
 export interface FavouritesWindowProps {

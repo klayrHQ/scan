@@ -1,5 +1,5 @@
 "use client"
-import {createContext, FC, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
+import {createContext, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
 import { AccountDataType, useLiskService, Envelope } from "@moosty/lisk-service-provider"
 import { calculateTotalBalance } from "ui/assets/utils";
 

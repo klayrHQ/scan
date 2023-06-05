@@ -1,12 +1,4 @@
 "use client";
-/*
-https://s0i2hzjh.api.sanity.io/v2021-10-21/data/query/production?query=*
- */
-/*
-  - fetch all documents - cache with hoook
-  - set as snapshot in provider
-  - use provider for further queries
- */
 import { parse, evaluate } from "groq-js";
 import { createContext, useContext } from "react";
 import { SanityDocument } from "@sanity/types";
@@ -36,9 +28,9 @@ export const SanityStoreProvider = ({
     groqQuery: string,
     params?: Record<string, unknown>
   ): Promise<R> => {
-    const tree = parse(groqQuery, { params });
+    const tree = parse(groqQuery);
 
-    const result = await evaluate(tree as any, {
+    const result = await evaluate(tree, {
       dataset: indexedDocuments,
       params,
     });

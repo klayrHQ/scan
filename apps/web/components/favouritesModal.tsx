@@ -5,20 +5,22 @@ import {Tooltip, Typography} from "ui";
 import {FavouritesWindow} from "ui/organisms/favouritesWindow/favouritesWindow";
 import {Popover} from "ui/atoms/popover/popover";
 import {useSaveFavourites} from "../providers/favourites";
-import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 export const FavouritesModalClient = ({
   menuCloseFunction,
 }: {
   menuCloseFunction?: () => void
 }) => {
+  const router = useRouter();
+
   const [open, setOpen] = useState(false)
   const { favourites, unFavourite, updateFavourites } = useSaveFavourites()
 
   const goToAccount = (address: string) => {
     setOpen(false)
     router.push(`/account/${address}`)
-    menuCloseFunction
+    menuCloseFunction && menuCloseFunction()
   }
 
   return (

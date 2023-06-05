@@ -3,13 +3,14 @@ import React, {useState} from "react";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {SearchContainer} from "ui/organisms/searchContainer/searchContainer";
 import {Popover} from "ui/atoms/popover/popover";
-import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 export const SearchModalClient = ({
   menuCloseFunction,
 } : {
   menuCloseFunction?: () => void
 }) => {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [searchValue, setSearchValue] = useState<string>()
   const recentSearches = [{address: "", username: "", avatar: ""}]
@@ -42,7 +43,7 @@ export const SearchModalClient = ({
   const goToAddress = (address?: string) => {
     setOpen(false)
     router.push(`/account/${address || searchValue}`)
-    menuCloseFunction
+    menuCloseFunction && menuCloseFunction()
   }
 
   return (

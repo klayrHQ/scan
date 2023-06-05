@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {XCircleIcon} from "@heroicons/react/24/outline";
-import {Typography} from "../../atoms/typography/typography";
+import {Typography} from "../../atoms";
 import {compactString} from "../../assets/utils";
 
 interface FavouriteProps {
