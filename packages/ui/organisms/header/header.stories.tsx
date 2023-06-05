@@ -47,6 +47,8 @@ Primary.args = {
 };
 
 export const HeaderMockup: ComponentStory<typeof Header> = () => {
+  const [openSearch, setOpenSearch] = useState(false)
+  const [openFavourites, setOpenFavourites] = useState(false)
   const [searchValue, setSearchValue] = useState<string>()
 
   return (
@@ -83,6 +85,8 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
       menuItems={menuItems}
       menuItemsRight={[
         <Popover
+          open={openFavourites}
+          setOpen={setOpenFavourites}
           containerClassName={"hidden md:block"}
           className={"top-0 w-screen max-w-full lg:max-w-xl"}
           placement={"right"}
@@ -116,6 +120,8 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
           />
         </Popover>,
         <Popover
+          open={openSearch}
+          setOpen={setOpenSearch}
           containerClassName={"hidden md:block"}
           containerWidth={"full"}
           className={"top-0 w-screen max-w-full lg:max-w-xl"}

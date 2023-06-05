@@ -6,9 +6,9 @@ import { useRouter } from "next/router"
 import {Favourites} from "../favourites/favourites";
 
 export interface FavouritesWindowProps {
-  onClick: () => void
-  favourites: Array<{username?: string | ReactNode, address: string | ReactNode, avatar?: ReactNode}>
-  unFavourite: () => void
+  onClick: (address: string) => void
+  favourites?: Array<{username?: string, address: string, avatar?: ReactNode}>
+  unFavourite: (address: string) => void
 }
 
 export const FavouritesWindow = ({

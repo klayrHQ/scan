@@ -1,6 +1,6 @@
 "use client";
 import { TopBarClient } from "../../components/layout/topbar";
-import React, { useEffect, useState } from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import {
   Cog6ToothIcon as CogIcon,
   MoonIcon,
@@ -26,6 +26,8 @@ import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/bloc
 import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
 import RefreshButton from "./refreshButton";
 import { useSanity } from "../../providers/sanity";
+import {FavouritesModalClient} from "../../components/favouritesModal";
+import {SearchModalClient} from "../../components/searchModal";
 
 export const TopBarLayout = ({
   status,
@@ -173,7 +175,10 @@ export const TopBarLayout = ({
             </Link>
           )
         )}
-        menuItemsRight={[]}
+        menuItemsRight={[
+          <FavouritesModalClient />,
+          <SearchModalClient />,
+        ]}
         logo={
           <div
             className={[
