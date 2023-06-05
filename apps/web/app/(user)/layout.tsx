@@ -16,6 +16,7 @@ import { draftsClient, sanityClient } from "../../lib/sanity.client";
 import { SanityStoreProvider } from "../../providers/sanity";
 import { sanitySsrQuery, setSanitySSRSnapshot } from "../../lib/sanity.groq";
 import { SanityDocument } from "@sanity/types";
+import {FavouritesProvider} from "../../providers/favourites";
 
 const getSanitySnapshot = async (): Promise<{
   result: SanityDocument[];
@@ -93,23 +94,25 @@ export default async function RootLayout({
       <body className={"bg-background"}>
         <SanityStoreProvider snapshot={snapshot}>
           <ServiceProvider>
-            <div
-              className={
-                "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
-              }
-            >
-              <TopBarLayout
-                isDraftMode={isDraftMode}
-                settings={settings}
-                kpis={infoBar.kpis}
-                apps={apps}
-                index={index}
-                status={status}
-                menuItems={menuItems}
-              />
-              {children}
-            </div>
-            <Footer copyright={settings.copyright} lists={footer.lists} />
+            <FavouritesProvider>
+              <div
+                className={
+                  "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
+                }
+              >
+                <TopBarLayout
+                  isDraftMode={isDraftMode}
+                  settings={settings}
+                  kpis={infoBar.kpis}
+                  apps={apps}
+                  index={index}
+                  status={status}
+                  menuItems={menuItems}
+                />
+                {children}
+              </div>
+              <Footer copyright={settings.copyright} lists={footer.lists}/>
+            </FavouritesProvider>
           </ServiceProvider>
         </SanityStoreProvider>
         <script

@@ -12,6 +12,9 @@ import { cva } from "class-variance-authority";
 import {cls} from "../../assets/utils";
 
 interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  disabled?: boolean;
   containerClassName?: string;
   button: ReactNode;
   buttonOnClick?: () => void;
@@ -94,27 +97,11 @@ export const Popover: FC<PopoverProps> = ({
   roundedMobile = true,
   hideMobileBackdrop,
   placement= "left",
+  open,
+  setOpen,
+  disabled,
   ...props
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <>
@@ -130,6 +117,7 @@ export const Popover: FC<PopoverProps> = ({
           className={
             "p-0 w-full border-none outline-none bg-transparent rounded-small"
           }
+          disabled={disabled}
           onClick={buttonOnClick}
         >
           {button}
@@ -160,18 +148,18 @@ export const Popover: FC<PopoverProps> = ({
         <div className={"tablet:hidden"}>
           <div
             onClick={() => {
-              setIsOpen(!isOpen);
+              setOpen(!open);
               buttonOnClick;
             }}
           >
             {button}
           </div>
           <div className={"absolute top-0"}>
-            <Transition show={isOpen}>
+            <Transition show={open}>
               <Dialog
                 as="div"
                 onClose={() => {
-                  setIsOpen(false);
+                  setOpen(false);
                 }}
               >
                 {
@@ -187,7 +175,7 @@ export const Popover: FC<PopoverProps> = ({
                     >
                         <Dialog.Overlay
                             className="fixed inset-0 transition duration-300 z-40"
-                            onClick={() => setIsOpen(false)}
+                            onClick={() => setOpen(false)}
                         />
                     </Transition.Child>
                 }
@@ -225,17 +213,7 @@ export const Popover: FC<PopoverProps> = ({
                         closeIcon && "pt-12",
                       ]),
                     })}
-                    style={{
-                      height: mobileSlideIn === "belowTopBar" ?
-                        !isScrolled ? "calc(100vh - 5rem)"
-                          : "calc(100vh - 3.5rem)"
-                        : "",
-                      top: mobileSlideIn === "belowTopBar" ?
-                        !isScrolled ? "5rem"
-                          : "3.5rem"
-                        : "",
-                      ...style,
-                    }}
+                    style={style}
                     {...props}
                   >
                     {closeIcon && (
@@ -245,7 +223,7 @@ export const Popover: FC<PopoverProps> = ({
                         }
                       >
                         {cloneElement(closeIcon, {
-                          onClick: () => setIsOpen(false),
+                          onClick: () => setOpen(false),
                         })}
                       </div>
                     )}

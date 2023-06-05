@@ -337,22 +337,11 @@ export const favourites = [
 ]
 
 export const menuItems = [
-  {
-    label: "Transactions",
-    link: "#",
-  },
-  {
-    label: "Delegates",
-    link: "#",
-  },
-  {
-    label: "Votes",
-    link: "#",
-  },
-  {
-    label: "Tools",
-    link: "#",
-  }
+  <span>{"transactions"}</span>,
+  <span>{"validators"}</span>,
+  <span>{"blocks"}</span>,
+  <span>{"graphs"}</span>,
+  <span>{"test"}</span>,
 ]
 
 export const search = {
