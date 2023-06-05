@@ -46,6 +46,7 @@ export const client = new LiskService({
   // url: "51.158.162.30:9901",
   // url: "51.158.244.16:9901",
   url: "betanet-service.liskscan.com",
+  // url: "betanet-service.lisk.com",
   disableTLS: false,
 });
 
