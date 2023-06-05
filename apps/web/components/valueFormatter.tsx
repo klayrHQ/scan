@@ -234,7 +234,7 @@ const formatters = {
         ? parseInt(
             parseFloat(convertBeddowsToLSK(value)).toFixed(2)
           ).toLocaleString() + " LSK"
-        : ""
+        : "0 LSK"
     }`,
   fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
   number: (value: any) => value.toLocaleString(),

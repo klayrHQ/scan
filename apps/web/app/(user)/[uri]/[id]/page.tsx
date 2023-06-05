@@ -38,6 +38,48 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
           ..., 
           content->{
             ...,
+            columns[]->{
+          ...,
+          dynamicTabs{
+            ...,
+            content->{
+            ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
+          staticTabs[]{
+            ..., 
+            content->{
+              ...,
+              table->{   
+                ...,
+                columns[]->,
+                title, 
+                key,
+              },
+            },
+          },
+          table->{   
+            ...,
+            columns[]->,
+            title, 
+            key,
+          },
+          columns[]->{
+            ...,
+            table->{
+              ...,
+              columns[]->,
+              title, 
+              key,
+            },
+          }
+        },
             table->{   
               ...,
               columns[]->,

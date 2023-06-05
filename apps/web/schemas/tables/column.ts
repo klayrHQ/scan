@@ -65,6 +65,7 @@ export default defineType({
           },
           { title: "Index nr", value: "NrColumn" },
           { title: "Stakes", value: "StakesColumn" },
+          { title: "Stakes Account", value: "StakesAccountColumn" },
         ],
       },
     },

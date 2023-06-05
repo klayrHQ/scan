@@ -4,10 +4,11 @@ import titleBox from "./titleBox";
 import { kpi } from "./kpi";
 import tabs from "./tabs";
 import transactionTabs from "./transactionTabs";
+import {stakesAccount} from "./stakesAccount";
 
 const sliceDocumentNames: {
   type: string;
-}[] = [tabs, table, titleBox, kpi, { name: "grid" }, transactionTabs].map(
+}[] = [tabs, table, titleBox, kpi,stakesAccount, { name: "grid" }, transactionTabs].map(
   (doc) => ({
     type: doc.name,
   })
