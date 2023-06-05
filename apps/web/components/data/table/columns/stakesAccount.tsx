@@ -5,7 +5,7 @@ import {Avatar} from "ui/atoms/avatar/avatar";
 import {RPCResponses} from "@liskscan/lisk-service-client/lib/types";
 import Link from "next/link";
 
-export const StakesAccountColumn = ({ params, values, queryData }: ColumnProps&{queryData?: {validators_dontTouch:RPCResponses<"get.pos.validators">}}) => {
+export const StakesAccountColumn = ({ params, values, queryData }: ColumnProps&{values: any[], queryData?: {validators_dontTouch:RPCResponses<"get.pos.validators">}}) => {
   console.log(values,"random")
     return (
       <span className={"flex flex-col space-y-2 p-2 rounded align-right  w-full"}>
