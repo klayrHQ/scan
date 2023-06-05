@@ -2,6 +2,7 @@
 import {createContext, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
 import { AccountDataType, useLiskService, Envelope } from "@moosty/lisk-service-provider"
 import { calculateTotalBalance } from "ui/assets/utils";
+import {client} from "../lib/sanity.service";
 
 export interface favouriteDataType {
   address: string
@@ -27,7 +28,6 @@ export const FavouritesContext = createContext<FavouritesContextProps>({} as Fav
 export const useSaveFavourites = () => useContext(FavouritesContext)
 export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
   const [favourites, setFavourites] = useState<Array<favouriteDataType>>([])
-  const { serviceClient } = useLiskService()
 
   const isInFavourites = (address: string) => favourites.findIndex(favourite => favourite.address === address) > -1
 
@@ -38,13 +38,12 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
 
   const updateFavourites = () => {
     const updateFavourite = async (address: string) => {
-      const { data } = (await serviceClient?.get("get.accounts", { limit: 1, address: address })) as AccountEnvelope
-
-      if (data) {
+      const result = await client.rpc("get.token.balances", { address })
+      if (result.status === "success") {
         setFavourites(prevFavourites => {
           if (prevFavourites) {
             const favouriteIndex = prevFavourites?.findIndex(fav => fav.address === address)
-            const totalBalance = BigInt(calculateTotalBalance(data[0]))
+            const totalBalance = BigInt(result.data.availableBalance)
 
             if (favouriteIndex > -1) {
               prevFavourites[favouriteIndex].balance = totalBalance.toString()
@@ -62,7 +61,7 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
 
   useEffect(() => {
     updateFavourites()
-  }, [serviceClient])
+  }, [client])
 
   //add favourite to favourites array
   const saveFavourite = (address: string, balance: string, name?: string) => {
