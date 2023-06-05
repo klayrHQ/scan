@@ -4,6 +4,9 @@ import { SlicerProps } from "../components/slicer";
 import { ValueFormatter } from "../components/valueFormatter";
 import { getFromDottedKey } from "../lib/dotString";
 import util from "util";
+import {PoSStakesResponse} from "@liskscan/lisk-service-client";
+
+
 
 export const StakesAccount = ({
   queryData,
@@ -24,10 +27,11 @@ export const StakesAccount = ({
     <span
       className={"grid grid-cols-2 gap-2 space-y-2 p-2 rounded align-right  "}
     >
+
       {values?.map((value, index) => {
-        let v: { address: string; name: string; amount: string }[] = [];
+        let v: PoSStakesResponse["data"]["stakes"] = [];
         if (value.type === "key") {
-          v = getFromDottedKey(value.value, "row", queryData, queryData);
+          v = getFromDottedKey<PoSStakesResponse["data"]["stakes"]>(value.value, "row", queryData, queryData);
         }
         let link = undefined;
         if (value.format?.link?.href) {

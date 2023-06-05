@@ -6,6 +6,7 @@ import { makeTable } from "../../../lib/sanity.table";
 import { getQueries } from "../../../lib/sanity.queries";
 import { draftMode } from "next/headers";
 import { sanitySsrQuery } from "../../../lib/sanity.groq";
+import {client} from "../../../lib/sanity.service";
 
 export const revalidate = 10;
 
@@ -143,7 +144,18 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
   });
   return tableRows.rows;
 };
+export async function generateStaticParams() {
 
+  const list: {uri: string}[] = [
+    {uri: "stakes"},
+    {uri: "validators"},
+    {uri: "transactions"},
+    {uri: "blocks"},
+    {uri: "events"},
+  ]
+
+  return list
+}
 export default async function Web({ params }: any) {
   const isDraftMode = draftMode().isEnabled;
   const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;

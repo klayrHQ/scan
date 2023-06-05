@@ -6,12 +6,12 @@ import { calculateTotalBalance } from "ui/assets/utils";
 export interface favouriteDataType {
   address: string
   balance?: string
-  username?: string
+  name?: string
 }
 
 export interface FavouritesContextProps {
   favourites: Array<favouriteDataType>
-  saveFavourite: (address: string, balance: string, username?: string) => void
+  saveFavourite: (address: string, balance: string, name?: string) => void
   setFavourites: React.Dispatch<SetStateAction<favouriteDataType[]>>
   unFavourite: (address: string) => void
   updateFavourites: () => void
@@ -65,8 +65,8 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
   }, [serviceClient])
 
   //add favourite to favourites array
-  const saveFavourite = (address: string, balance: string, username?: string) => {
-    const favourite = { address, username, balance }
+  const saveFavourite = (address: string, balance: string, name?: string) => {
+    const favourite = { address, name, balance }
     const favouriteLimit = 10
     setFavourites((previousFavourites) => {
       if (previousFavourites) {

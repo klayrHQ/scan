@@ -6,7 +6,7 @@ export const getDotString = (keys: (string | number)[], obj: Record<string, any>
   }
 };
 
-export const getFromDottedKey = (
+export const getFromDottedKey = <B = any>(
   key: string,
   rowKey: string,
   row: Record<string, any>,
@@ -15,12 +15,12 @@ export const getFromDottedKey = (
   const split = key?.split(".")?.map(item => {
     // If the item can be parsed to a number, it's probably an array index
     const parsed = Number.parseInt(item, 10);
-    return Number.isNaN(parsed) ? item : parsed;
+    return Number.isNaN(parsed) ? item : parsed
   });
   return getDotString(
     split?.[0] ? split[0] === rowKey ? split.slice(1) : split : [],
     split?.[0] ? split[0] === rowKey ? row : data : {}
-  );
+  ) as B
 };
 
 export const getDottedKeyType = (key: string) => key?.split(".")[0]
