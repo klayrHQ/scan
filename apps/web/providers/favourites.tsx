@@ -43,9 +43,10 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
         setFavourites(prevFavourites => {
           if (prevFavourites) {
             const favouriteIndex = prevFavourites?.findIndex(fav => fav.address === address)
-            const totalBalance = BigInt(result.data.availableBalance)
+            // @ts-ignore
+            const totalBalance = result.data[0].availableBalance ? BigInt(result.data[0].availableBalance) : undefined
 
-            if (favouriteIndex > -1) {
+            if (favouriteIndex > -1 && totalBalance) {
               prevFavourites[favouriteIndex].balance = totalBalance.toString()
             }
           }
