@@ -4,6 +4,8 @@ import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
 import {SearchContainer} from "ui/organisms/searchContainer/searchContainer";
 import {Popover} from "ui/atoms/popover/popover";
 import {useRouter} from "next/navigation";
+import {favourites} from "ui/assets/mockupData/mockupData";
+import {useSaveSearch} from "../providers/recentSearches";
 
 export const SearchModalClient = ({
   menuCloseFunction,
@@ -13,7 +15,7 @@ export const SearchModalClient = ({
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [searchValue, setSearchValue] = useState<string>()
-  const recentSearches = [{address: "", username: "", avatar: ""}]
+  const { saveSearch, recentSearches, setRecentSearches } = useSaveSearch()
 
   const SearchResult = ({address}: {address: string}) => (
     <div onClick={() => goToAddress(address)}>
@@ -40,9 +42,10 @@ export const SearchModalClient = ({
     },
   ]
 
-  const goToAddress = (address?: string) => {
+  const goToAddress = (address?: string, username?: string) => {
+    router.push(`/account/${address}`)
+    saveSearch(address, username)
     setOpen(false)
-    router.push(`/account/${address || searchValue}`)
     menuCloseFunction && menuCloseFunction()
   }
 

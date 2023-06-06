@@ -1,12 +1,10 @@
 "use client"
 import {createContext, ReactNode, SetStateAction, useContext, useEffect, useState} from "react"
-import { AccountDataType, useLiskService, Envelope } from "@moosty/lisk-service-provider"
-import { calculateTotalBalance } from "ui/assets/utils";
 import {client} from "../lib/sanity.service";
 
 export interface favouriteDataType {
   address: string
-  balance?: string
+  balance: string
   name?: string
 }
 
@@ -17,10 +15,6 @@ export interface FavouritesContextProps {
   unFavourite: (address: string) => void
   updateFavourites: () => void
   isInFavourites: (address: string) => boolean
-}
-
-interface AccountEnvelope extends Omit<Envelope, "data"> {
-  data?: AccountDataType[]
 }
 
 export const FavouritesContext = createContext<FavouritesContextProps>({} as FavouritesContextProps)
@@ -47,7 +41,9 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
             const totalBalance = result.data[0].availableBalance ? BigInt(result.data[0].availableBalance) : undefined
 
             if (favouriteIndex > -1 && totalBalance) {
+              console.log(prevFavourites[favouriteIndex])
               prevFavourites[favouriteIndex].balance = totalBalance.toString()
+              console.log(prevFavourites[favouriteIndex])
             }
           }
           return prevFavourites
@@ -66,7 +62,7 @@ export const FavouritesProvider = ({ children }: {children: ReactNode}) => {
 
   //add favourite to favourites array
   const saveFavourite = (address: string, balance: string, name?: string) => {
-    const favourite = { address, name, balance }
+    const favourite = { address, balance, name }
     const favouriteLimit = 10
     setFavourites((previousFavourites) => {
       if (previousFavourites) {

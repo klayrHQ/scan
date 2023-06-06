@@ -318,20 +318,20 @@ export const footerData = [
 
 export const favourites = [
   {
-    address: compactString("lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke", 15),
+    address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
     username: "test",
-    balance: <Currency number={"1000"} decimals={"123"} />,
+    balance: "12344545",
     avatar: <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={20} />
   },
   {
-    address: compactString("lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294", 15),
+    address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
     username: "moosty",
-    balance: <Currency number={"1000"} decimals={"123"} />,
+    balance: "12344545",
     avatar: <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={20} />
   },
   {
-    address: compactString("lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g", 15),
-    balance: <Currency number={"1000"} decimals={"123"} />,
+    address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
+    balance: "12344545",
     avatar: <Avatar address={"lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"} size={20} />
   },
 ]

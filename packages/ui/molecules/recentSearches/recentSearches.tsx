@@ -1,11 +1,12 @@
-import React, {ReactNode} from "react"
-import { useRouter } from "next/router"
+import React from "react"
 import { Avatar } from "../../atoms/avatar/avatar";
+import {compactString} from "../../assets/utils";
+import {Popover} from "@headlessui/react";
 
 interface RecentSearchesProps {
-  onClick?: () => void
+  onClick: (address?: string, username?: string) => void
   className?: string
-  recentSearches: Array<{address: string | ReactNode, username?: string | ReactNode, avatar?: ReactNode}>
+  recentSearches?: Array<{address: string, username?: string}>
 }
 
 export const RecentSearches = ({
@@ -18,21 +19,22 @@ export const RecentSearches = ({
     <div className={`text-onBackgroundHigh p-2 font-medium mt-2 ${className ? className : ""}`}>
       <p className="text-onSurfaceHigh">Recent Searches</p>
       <div className="grid grid-cols-1 md:grid-rows-1 md:grid-cols-3 py-2 divider-1 gap-4">
-        {recentSearches.map((recentSearch, index) => {
+        {recentSearches?.map((recentSearch, index) => {
           return (
             recentSearch &&
-            <span
+            <Popover.Button
+              as={"span"}
               className="relative cursor-pointer text-onSurfaceHigh flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-2 rounded transition capitalize items-center"
               key={`last-search-${index}`}
-              onClick={onClick}
+              onClick={() => onClick(recentSearch.address, recentSearch.username)}
             >
               <span className="absolute top-[7px]">
-                {recentSearch.avatar}
+                <Avatar className="mr-2" address={recentSearch.address} size={20}/>
               </span>
               <span className="ml-7">
-                {recentSearch.username ? recentSearch.username : recentSearch.address}
+                {recentSearch.username ? recentSearch.username : compactString(recentSearch.address, 18)}
               </span>
-            </span>
+            </Popover.Button>
           )
         })}
       </div>

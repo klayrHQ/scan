@@ -4,7 +4,7 @@ import {Favourites} from "../favourites/favourites";
 
 export interface FavouritesWindowProps {
   onClick: (address: string) => void
-  favourites?: Array<{username?: string, address: string, avatar?: ReactNode}>
+  favourites?: Array<{username?: string, address: string, balance: string}>
   unFavourite: (address: string) => void
 }
 

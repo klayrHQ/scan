@@ -4,7 +4,7 @@ import {Favourite} from "../../molecules/favourite/favourite";
 interface FavouritesProps {
   onClick: (address: string) => void
   xOnClick: (address: string) => void
-  favourites?: Array<{name?: string, address: string, balance?: string, avatar?: ReactNode}>
+  favourites?: Array<{name?: string, address: string, balance: string}>
   className?: string
   favClassName?: string
 }
@@ -29,7 +29,6 @@ export const Favourites = ({
                 fav &&
                 <Favourite
                   key={fav.name}
-                  avatar={fav.avatar}
                   address={fav.address}
                   username={fav.name}
                   balance={fav.balance}
