@@ -9,10 +9,14 @@ export interface HeadProps {
 export const Head = ({ className, cols, ...props }: HeadProps) => {
 
   return (
-    <thead>
+    <thead className={cls([
+      "md:sticky md:top-28 z-10",
+      "before:absolute before:left-0 before:right-0 before:-top-2",
+      "before:h-2 before:bg-background before:content-['']",
+    ])}>
     <tr
       className={cls([
-        "border-b-1 rounded md:sticky md:top-28 z-10",
+        "border-b-1 rounded",
         "border-b-tableHeaderBorder bg-tableHeaderBG text-tableHeaderText p-4",
         className,
       ])}
