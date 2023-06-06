@@ -28,6 +28,7 @@ import RefreshButton from "./refreshButton";
 import { useSanity } from "../../providers/sanity";
 import {FavouritesModalClient} from "../../components/favouritesModal";
 import {SearchModalClient} from "../../components/searchModal";
+import {MobileMenuClient} from "../../components/mobileMenuModal";
 
 export const TopBarLayout = ({
   status,
@@ -178,6 +179,7 @@ export const TopBarLayout = ({
         menuItemsRight={[
           <FavouritesModalClient />,
           <SearchModalClient />,
+          <MobileMenuClient />,
         ]}
         logo={
           <div
