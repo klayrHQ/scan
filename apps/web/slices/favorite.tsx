@@ -14,7 +14,7 @@ export const FavoriteSlice = ({queryData}: SlicerProps) => {
       unFavourite(id!)
     }
     else {
-      saveFavourite(id!, queryData["account-auth"].meta?.name, queryData["account-id-balances"].data[0].availableBalance)
+      saveFavourite(id!, queryData["account-id-balances"].data[0].availableBalance, queryData["account-auth"].meta?.name)
     }
   }
   useEffect(() => console.log(uri, id, "props"), [uri, id])

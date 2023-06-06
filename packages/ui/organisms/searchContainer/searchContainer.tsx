@@ -7,9 +7,9 @@ import {tableRowsType} from "../../types";
 
 export interface SearchContainerProps {
   className?: string
-  recentSearches: {address: string | ReactNode, username?: string | ReactNode, avatar?: ReactNode}[]
+  recentSearches?: Array<{address: string, username?: string}>
   searching?: boolean
-  searchFunction: () => void
+  searchFunction: (address?: string, username?: string) => void
   searchValue?: string
   setSearchValue: (value: string) => void
   searchResults?: tableRowsType

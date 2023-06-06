@@ -4,7 +4,7 @@ import { Link} from "../../atoms/link/link";
 import {tableRowsType} from "../../types";
 
 interface SearchProps {
-  searchFunction?: (args: any) => void
+  searchFunction: (address?: string) => void
   searchResults?: tableRowsType
   searchValue?: string
   setSearchValue: (value: string) => void
