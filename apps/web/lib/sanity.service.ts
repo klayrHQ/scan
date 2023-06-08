@@ -6,7 +6,7 @@ import {
 } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
 import {getDotString, getDottedKeyType, getFromDottedKey} from "./dotString";
-import { parseProps } from "../components/valueFormatter";
+import { parseProps } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
 

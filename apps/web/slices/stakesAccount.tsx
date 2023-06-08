@@ -1,7 +1,7 @@
 import { Avatar } from "ui/atoms/avatar/avatar";
 import Link from "next/link";
 import { SlicerProps } from "../components/slicer";
-import { ValueFormatter } from "../components/valueFormatter";
+import { ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { getFromDottedKey } from "../lib/dotString";
 import util from "util";
 import {PoSStakesResponse} from "@liskscan/lisk-service-client";

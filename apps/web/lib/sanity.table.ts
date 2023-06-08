@@ -1,6 +1,6 @@
 import { RPCResponses } from "@liskscan/lisk-service-client/lib/types";
 import { getFromDottedKey } from "./dotString";
-import { ValueFormat } from "../components/valueFormatter";
+import { ValueFormat } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import util from "util";
 
 export interface MakeTableProps {

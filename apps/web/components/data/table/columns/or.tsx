@@ -1,5 +1,5 @@
 import { ColumnProps } from "./index";
-import { ValueFormatter } from "../../../valueFormatter";
+import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 
 export const OrColumn = ({ values }: ColumnProps) => {
   return (

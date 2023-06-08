@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ValueFormatter } from "../../components/valueFormatter";
+import { ValueFormatter } from "../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { getSlices } from "./[uri]/page";
 import { Slicer } from "../../components/slicer";
 import { draftMode } from "next/headers";

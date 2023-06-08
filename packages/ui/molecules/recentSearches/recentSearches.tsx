@@ -2,6 +2,7 @@ import React from "react"
 import { Avatar } from "../../atoms/avatar/avatar";
 import {compactString} from "../../assets/utils";
 import {Popover} from "@headlessui/react";
+import {ValueFormatter} from "../../atoms/valueFormatter/valueFormatter";
 
 interface RecentSearchesProps {
   onClick: (address?: string, username?: string) => void
@@ -32,7 +33,7 @@ export const RecentSearches = ({
                 <Avatar className="mr-2" address={recentSearch.address} size={20}/>
               </span>
               <span className="ml-7">
-                {recentSearch.username ? recentSearch.username : compactString(recentSearch.address, 18)}
+                {recentSearch.username ? recentSearch.username : <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />}
               </span>
             </Popover.Button>
           )

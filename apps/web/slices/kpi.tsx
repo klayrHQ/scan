@@ -1,6 +1,6 @@
 import { SlicerProps } from "../components/slicer";
 import { Grid } from "ui";
-import { ValueFormatter } from "../components/valueFormatter";
+import { ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { getFromDottedKey } from "../lib/dotString";
 import util from "util";
 

@@ -109,18 +109,16 @@ export const ModalFullHeight: FC<ModalFullHeightProps> = ({
                   "overflow-x-hidden overflow-y-auto",
                   "fixed top-0 right-0",
                   "bg-surface",
-                  "p-6 text-left align-middle shadow-xl",
+                  "text-left align-middle shadow-xl",
                 ].join(" ")}
               >
-                <div className="flex flex-col p-4 gap-8">
-                  {children}
-                </div>
+                {children}
                 {
                   closeButton &&
                     cloneElement(closeButton, {
                       className: cls([
                         closeButton.props.className,
-                        "absolute top-3 right-3 z-50"
+                        "absolute top-3 right-0 z-50"
                       ]),
                       onClick: () => setIsOpen(false),
                     })

@@ -6,11 +6,14 @@ import {Popover} from "ui/atoms/popover/popover";
 import {useRouter} from "next/navigation";
 import {favourites} from "ui/assets/mockupData/mockupData";
 import {useSaveSearch} from "../providers/recentSearches";
+import {cls} from "ui";
 
-export const SearchModalClient = ({
+export const SearchModal = ({
   menuCloseFunction,
+  mobile,
 } : {
   menuCloseFunction?: () => void
+  mobile?: boolean
 }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -53,14 +56,14 @@ export const SearchModalClient = ({
     <Popover
       open={open}
       setOpen={setOpen}
-      containerClassName={"hidden md:block"}
+      containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={"full"}
-      className={"top-0 w-screen max-w-full lg:max-w-xl"}
+      className={cls(["top-0 w-screen max-w-full lg:max-w-xl", mobile && "shadow"])}
       placement={"right"}
       button={
         <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative cursor-pointer">
           <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-            <MagnifyingGlassIcon />
+            <MagnifyingGlassIcon className={"w-4 h-4"} />
           </div>
           <input
             id="search"

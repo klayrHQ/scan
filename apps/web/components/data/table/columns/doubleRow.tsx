@@ -1,5 +1,5 @@
 import {Grid} from "ui";
-import {ValueFormatter} from "../../../valueFormatter";
+import {ValueFormatter} from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import {ColumnProps} from "./index";
 
 export const DoubleRowColumn = ({values}: ColumnProps) => {

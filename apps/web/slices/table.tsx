@@ -39,6 +39,7 @@ export const TableSlice = ({ queryData, data, table, id }: any) => {
             ? tableState?.rows
             : data?.rows
         }
+        sticky={table.sticky}
       />
     </div>
   );

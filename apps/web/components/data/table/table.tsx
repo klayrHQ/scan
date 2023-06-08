@@ -8,11 +8,12 @@ export interface TableProps {
   rows?: any[][];
   columns: CellProps[];
   queryData?: Record<string, any>
+  sticky?: boolean
 }
 
-export const Table = ({ rows, columns,queryData }: TableProps) => (
+export const Table = ({ rows, columns,queryData, sticky = true }: TableProps) => (
   <table className={cls([ "border-collapse rounded w-full",])}>
-    <Head cols={columns} />
+    <Head cols={columns} sticky={sticky} />
     <Body queryData={queryData} rows={rows} columns={columns} />
     {rows && rows.length === 0 && <Empty colSpan={2} emptyLabel={"TODO EMPTY"} />}
   </table>
