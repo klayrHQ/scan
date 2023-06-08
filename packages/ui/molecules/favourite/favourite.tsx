@@ -4,6 +4,7 @@ import {Typography} from "../../atoms";
 import {compactString} from "../../assets/utils";
 import {Avatar} from "../../atoms/avatar/avatar";
 import {Popover} from "@headlessui/react";
+import {ValueFormatter} from "../../atoms/valueFormatter/valueFormatter";
 
 interface FavouriteProps {
   onClick: (address: string) => void
@@ -37,17 +38,17 @@ export const Favourite = ({
       <Typography tag={"span"} className="flex flex-col grow-[2] items-start">
         {username && <span className="font-semibold capitalize">{username}</span>}
         <span className="">
-          {compactString(address, 30)}
+          <ValueFormatter value={address} type={"string"} format={"shortAddress"} />
         </span>
         {balance &&
           <span className="mr-10 inline md:hidden">
-            {balance}
+            <ValueFormatter value={balance} type={"string"} format={"currency"} />
           </span>
         }
       </Typography>
       {balance &&
         <span className="mr-10 hidden md:inline">
-          {balance}
+          <ValueFormatter value={balance} type={"string"} format={"currency"} />
         </span>
       }
       <button

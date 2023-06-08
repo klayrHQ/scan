@@ -34,6 +34,11 @@ export default {
     //   ],
     // },
     {
+      name: "sticky",
+      type: "boolean",
+      title: "Sticky Table-head",
+    },
+    {
       name: "columns",
       type: "array",
       title: "Columns",

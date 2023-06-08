@@ -12,12 +12,12 @@ export const MenuItem = ({ label, link }: MenuItemProps) => {
   const isActive = pathname?.split("/")[1] === link?.split("/")[1];
   const className = !isActive
     ? ["hover:bg-menuButton", "hover:text-onMenuButton"]
-    : ["bg-menuButton", "text-onMenuButton"];
+    : ["md:bg-menuButton", "text-onMenuButton"];
   return (
     <Typography
       tag={"span"}
       className={cls([
-        "block cursor-pointer text-onInfobar",
+        "block cursor-pointer md:text-onInfobar",
         "group",
         "px-3 py-2 mr-1",
         "rounded-md",

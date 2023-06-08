@@ -1,5 +1,5 @@
 import { ColumnProps } from "./index";
-import { ValueFormatter } from "../../../valueFormatter";
+import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { Avatar } from "ui/atoms/avatar/avatar";
 
 export const AvatarColumn = ({ params, values }: ColumnProps) => {

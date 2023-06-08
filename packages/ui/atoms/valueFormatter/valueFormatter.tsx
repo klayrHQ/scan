@@ -1,12 +1,13 @@
-import { Grid, Tags, Tooltip, TooltipPlacement, Typography } from "ui";
-import { IconListTypes, iconsList } from "./iconList";
+import React from "react";
+import { Grid, Tags, Tooltip, TooltipPlacement, Typography } from "../index";
+import { IconListTypes, iconsList } from "liskscan/components/iconList";
 import { cloneElement } from "react";
 import Link from "next/link";
-import { UpdateOnType } from "../schemas/slices/table";
-import { CopyButton } from "./data/copy";
-import { convertBeddowsToLSK } from "../lib/queries/lisk";
+import { UpdateOnType } from "liskscan/schemas/slices/table";
+import { CopyButton } from "liskscan/components/data/copy";
+import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { formatDistance } from "date-fns";
-import { Avatar } from "ui/atoms/avatar/avatar";
+import { Avatar} from "../avatar/avatar";
 
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =

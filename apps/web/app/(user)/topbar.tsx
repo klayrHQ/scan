@@ -26,9 +26,9 @@ import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/bloc
 import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
 import RefreshButton from "./refreshButton";
 import { useSanity } from "../../providers/sanity";
-import {FavouritesModalClient} from "../../components/favouritesModal";
-import {SearchModalClient} from "../../components/searchModal";
-import {MobileMenuClient} from "../../components/mobileMenuModal";
+import {FavouritesModal} from "../../components/favouritesModal";
+import {SearchModal} from "../../components/searchModal";
+import {MobileMenuModal} from "../../components/mobileMenuModal";
 
 export const TopBarLayout = ({
   status,
@@ -177,9 +177,9 @@ export const TopBarLayout = ({
           )
         )}
         menuItemsRight={[
-          <FavouritesModalClient />,
-          <SearchModalClient />,
-          <MobileMenuClient />,
+          <FavouritesModal />,
+          <SearchModal />,
+          <MobileMenuModal menuItems={menuItems} connected={connected} lastUpdate={lastUpdate} kpis={kpis} appState={appState} events={events} themeMode={themeMode} updateThemeMode={updateThemeMode} index={index}/>,
         ]}
         logo={
           <div

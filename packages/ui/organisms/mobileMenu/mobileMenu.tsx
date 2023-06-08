@@ -8,6 +8,7 @@ interface MobileMenuProps {
   subMenu?: Array<ReactNode>
   menuItemsTop?: Array<ReactNode>
   menuTitle?: string
+  infoBar?: ReactNode
 }
 
 export const MobileMenu = ({
@@ -15,19 +16,15 @@ export const MobileMenu = ({
   subMenu,
   menuItemsTop,
   menuTitle,
+  infoBar,
 }: MobileMenuProps) => {
   return (
     <div
-      className={"lg:hidden fixed inset-0 top-10 bg-background w-full overflow-auto z-50 "}
+      className={"lg:hidden bg-background w-full"}
       id="mobile-menu"
     >
+      {infoBar}
       <div className={"lg:hidden w-full bg-background flex flex-tableRow justify-between mb-2 px-4 py-4 mx-auto"}>
-        {/*<Logo*/}
-        {/*  link={"#"}*/}
-        {/*  href={"#"}*/}
-        {/*  color={"primary"}*/}
-        {/*  image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-primary"/>}*/}
-        {/*/>*/}
         <span className="text-onSurfaceHigh font-medium">
           {menuTitle || "Liskscan Menu"}
         </span>
@@ -35,13 +32,13 @@ export const MobileMenu = ({
       </div>
       {menuItemsTop}
       <Grid
-        className="px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col gap-4"
+        className="px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col gap-4 box-border"
         flex
       >
         {menuItems}
       </Grid>
       <Grid
-        className="mt-4 px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col text-onSurfaceMedium gap-4"
+        className="mt-4 px-4 pt-4 pb-5 bg-surface-1 mx-4 rounded flex-col text-onSurfaceMedium gap-4 box-border"
         flex
       >
         {subMenu}

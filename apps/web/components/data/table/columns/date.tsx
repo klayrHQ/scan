@@ -1,6 +1,6 @@
 import { ColumnProps } from "./index";
 import { cls, Typography } from "ui";
-import {ValueFormatter} from "../../../valueFormatter";
+import {ValueFormatter} from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 
 export const DateColumn = ({ params, values }: ColumnProps) => (
   <Typography

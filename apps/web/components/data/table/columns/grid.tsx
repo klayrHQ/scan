@@ -1,4 +1,4 @@
-import { ValueFormatter } from "../../../valueFormatter";
+import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { ColumnProps } from "./index";
 
 export const GridColumn = ({ values }: ColumnProps) => {

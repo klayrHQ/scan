@@ -1,6 +1,6 @@
 import { Container, Grid, Tooltip, Typography } from "ui";
 import { InfoOutlineIcon } from "@sanity/icons";
-import { ValueFormat, ValueFormatter } from "../components/valueFormatter";
+import { ValueFormat, ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 
 export const TitleBoxSlice = ({
   title,

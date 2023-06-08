@@ -7,10 +7,12 @@ import {Popover} from "ui/atoms/popover/popover";
 import {useSaveFavourites} from "../providers/favourites";
 import {useRouter} from "next/navigation";
 
-export const FavouritesModalClient = ({
+export const FavouritesModal = ({
   menuCloseFunction,
+  mobile = false,
 }: {
   menuCloseFunction?: () => void
+  mobile?: boolean
 }) => {
   const router = useRouter();
 
@@ -27,17 +29,23 @@ export const FavouritesModalClient = ({
     <Popover
       open={open}
       setOpen={setOpen}
-      containerClassName={"hidden md:block"}
-      className={"top-0 w-screen max-w-full lg:max-w-xl"}
+      containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
+      containerWidth={mobile ? "full" : "auto"}
+      className={!mobile ? "top-0 w-screen max-w-full lg:max-w-xl" : "max-w-full w-full shadow"}
       placement={"right"}
       disabled={!favourites || favourites.length <= 0}
       button={
         favourites && favourites.length > 0 ? (
           <div
-            className={`cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+            className={
+              !mobile ?
+              "group cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-primary"
+              :
+              "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-1"
+            }
           >
-            <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-            <Typography tag={"span"} color={"onTopbar"}>Favourites</Typography>
+            <StarIcon className={"w-4 lg:w-5 h-4 lg:h-5 mr-1 text-inherit"} />
+            <Typography tag={"span"} color={"inherit"}>Favourites</Typography>
           </div>
         ) : (
           <Tooltip
@@ -45,10 +53,15 @@ export const FavouritesModalClient = ({
             placement={"bottom"}
           >
             <div
-              className={`cursor-default hover:bg-topbar hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
+              className={
+              !mobile ?
+                "cursor-default hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar"
+                :
+                "cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-1"
+              }
             >
-              <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-              <Typography tag={"span"} color={"onTopbar"}>Favourites</Typography>
+              <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-inherit" />
+              <Typography tag={"span"}>Favourites</Typography>
             </div>
           </Tooltip>
         )

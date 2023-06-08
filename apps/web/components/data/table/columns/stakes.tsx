@@ -1,6 +1,6 @@
 import { ColumnProps } from "./index";
 import { cls, Typography } from "ui";
-import { ValueFormatter } from "../../../valueFormatter";
+import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import {Avatar} from "ui/atoms/avatar/avatar";
 import {RPCResponses} from "@liskscan/lisk-service-client/lib/types";
 import Link from "next/link";

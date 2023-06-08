@@ -45,7 +45,7 @@ export const getTable = async ({ slug }: { slug: string }): Promise<any> => {
     subQueries[]->{type,foreignKey,primaryKey,call,serviceType}
   },
   columns[]->,
-  title, 
+  title,
   key,
 }[0]`);
   return processTable(result);
