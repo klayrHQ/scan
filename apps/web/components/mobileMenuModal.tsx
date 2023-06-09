@@ -32,6 +32,7 @@ export const MobileMenuModal = ({
   appState,
   events,
   themeMode,
+  status,
   updateThemeMode,
 }: {
   menuItems: Array<any>
@@ -41,6 +42,7 @@ export const MobileMenuModal = ({
   index: IndexStatusResponse
   appState: any
   events: any
+  status: any
   themeMode: string
   updateThemeMode: (themeMode: "dark" | "light") => void
 }) => {
