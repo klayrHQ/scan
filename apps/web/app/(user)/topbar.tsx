@@ -179,7 +179,7 @@ export const TopBarLayout = ({
         menuItemsRight={[
           <FavouritesModal />,
           <SearchModal />,
-          <MobileMenuModal menuItems={menuItems} connected={connected} lastUpdate={lastUpdate} kpis={kpis} appState={appState} events={events} themeMode={themeMode} updateThemeMode={updateThemeMode} index={index}/>,
+          <MobileMenuModal menuItems={menuItems} connected={connected} lastUpdate={lastUpdate} kpis={kpis} appState={appState} events={events} themeMode={themeMode} status={status} updateThemeMode={updateThemeMode} index={index}/>,
         ]}
         logo={
           <div
