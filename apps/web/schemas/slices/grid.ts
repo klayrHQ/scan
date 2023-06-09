@@ -4,16 +4,25 @@ import titleBox from "./titleBox";
 import { kpi } from "./kpi";
 import tabs from "./tabs";
 import transactionTabs from "./transactionTabs";
-import {stakesAccount} from "./stakesAccount";
-import {favorite} from "./favorite";
+import { stakesAccount } from "./stakesAccount";
+import { favorite } from "./favorite";
+import accountHeader from "./accountHeader";
 
 const sliceDocumentNames: {
   type: string;
-}[] = [tabs, table, titleBox, kpi,stakesAccount, favorite, { name: "grid" }, transactionTabs].map(
-  (doc) => ({
-    type: doc.name,
-  })
-);
+}[] = [
+  tabs,
+  table,
+  titleBox,
+  kpi,
+  stakesAccount,
+  accountHeader,
+  favorite,
+  { name: "grid" },
+  transactionTabs,
+].map((doc) => ({
+  type: doc.name,
+}));
 
 export default defineType({
   name: "grid",

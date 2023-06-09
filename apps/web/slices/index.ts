@@ -1,11 +1,12 @@
-import {TitleBoxSlice} from "./titleBox";
-import {TableSlice} from "./table";
-import {GridSlice} from "./grid";
-import {Kpi} from "./kpi";
-import {TabsSlice} from "./tabs";
-import {TransactionTabsSlice} from "./transactionTabs";
-import {StakesAccount} from "./stakesAccount";
-import {FavoriteSlice} from "./favorite";
+import { TitleBoxSlice } from "./titleBox";
+import { TableSlice } from "./table";
+import { GridSlice } from "./grid";
+import { Kpi } from "./kpi";
+import { TabsSlice } from "./tabs";
+import { TransactionTabsSlice } from "./transactionTabs";
+import { StakesAccount } from "./stakesAccount";
+import { FavoriteSlice } from "./favorite";
+import { AccountHeader } from "./accountHeader";
 
 export const Slices = {
   titleBox: TitleBoxSlice,
@@ -15,6 +16,7 @@ export const Slices = {
   tabs: TabsSlice,
   transactionTabs: TransactionTabsSlice,
   stakesAccount: StakesAccount,
-  favorite: FavoriteSlice
+  favorite: FavoriteSlice,
+  accountHeader: AccountHeader,
 };
-export type SlicesTypes =  keyof typeof Slices
+export type SlicesTypes = keyof typeof Slices;
