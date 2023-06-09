@@ -1,4 +1,4 @@
-import { Grid, ValueFormatter } from "ui";
+import { Grid, Typography, ValueFormatter } from "ui";
 import { getFromDottedKey } from "../lib/dotString";
 import { SlicerProps } from "../components/slicer";
 import { useSaveFavourites } from "../providers/favourites";
@@ -57,16 +57,29 @@ export const AccountHeader = ({
       mobileColumns={mobileColumns}
     >
       <Grid columns={2} flex>
-        <Avatar className={"mr-3"} address={value?.address || ""} size={43} />
+        <span className={"relative"}>
+          <Avatar className={"mr-3"} address={value?.address || ""} size={43} />
+          {isInFavourites(id!) ? (
+            <StarIcon
+              className={
+                "w-6 h-6 text-yellow absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
+              }
+              onClick={() => handleClick()}
+            />
+          ) : (
+            <StarIconOutline
+              className={
+                "w-6 h-6 text-onSurfaceMedium absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
+              }
+              onClick={() => handleClick()}
+            />
+          )}
+        </span>
         <Grid columns={2} flex>
           <Grid columns={1} flex>
-            <ValueFormatter
-              key={value.name}
-              value={value.name}
-              copy={copy === value.index}
-              {...value.format}
-              link={value.link}
-            />
+            <Typography size={"Heading5"} bold tag={"span"} className={""}>
+              {value.name}
+            </Typography>
             <ValueFormatter
               key={value.address}
               value={value.address}
