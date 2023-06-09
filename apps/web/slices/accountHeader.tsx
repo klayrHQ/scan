@@ -54,8 +54,20 @@ export const AccountHeader = ({
   useEffect(() => console.log(uri, id, "props"), [uri, id]);
   const value =
     getFromDottedKey(values.value, "row", queryData, queryData) || "-";
+  const rank =
+    getFromDottedKey(
+      "account-validator-id.data.0.rank",
+      "row",
+      queryData,
+      queryData
+    ) || "-";
   const status =
-    getFromDottedKey(values.status, "row", queryData, queryData) || "-";
+    getFromDottedKey(
+      "account-validator-id.data.0.status",
+      "row",
+      queryData,
+      queryData
+    ) || "-";
   return (
     <Grid
       justifyBetween={justifyBetween}
@@ -63,8 +75,9 @@ export const AccountHeader = ({
       gap={gap}
       columns={cols}
       mobileColumns={mobileColumns}
+      className={"relative"}
     >
-      <Grid gap={2} className={"items-center"} columns={2} flex>
+      <Grid gap={2} className={"items-center relative"} columns={2} flex>
         <span className={"relative"}>
           <Avatar className={"mr-3"} address={value?.address || ""} size={43} />
           {isInFavourites(id!) ? (
@@ -91,7 +104,7 @@ export const AccountHeader = ({
               tag={"span"}
               className={"capitalize font-semibold  "}
             >
-              {value.name}
+              {rank}. {value.name}
             </Typography>
             <Typography
               size={"subBody"}
@@ -105,6 +118,15 @@ export const AccountHeader = ({
           </Grid>
         </Grid>
       </Grid>
+      <Typography
+        className={
+          "absolute top-0 right-0 bg-surface-2 shadow rounded px-2 py-0.5 text-onSurfaceHigh font-semibold"
+        }
+        tag={"span"}
+        size={"subBody"}
+      >
+        {status}
+      </Typography>
     </Grid>
   );
 };

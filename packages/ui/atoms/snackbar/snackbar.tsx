@@ -1,18 +1,15 @@
-import React, { useState } from "react"
-import { Dialog } from "@headlessui/react"
-import { InformationCircleIcon } from "@heroicons/react/24/solid"
-import {Typography} from "../typography/typography";
+import React, { useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { Typography } from "../typography/typography";
 
 interface SnackbarProps {
-  message: string
-  toggleState?: any
+  message: string;
+  toggleState?: any;
 }
 
-export const Snackbar = ({
-  message,
-  toggleState,
-}: SnackbarProps) => {
-  const [isOpen, setIsOpen] = useState(true)
+export const Snackbar = ({ message, toggleState }: SnackbarProps) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Dialog
@@ -21,12 +18,15 @@ export const Snackbar = ({
         toggleState !== null ? () => toggleState("") : () => setIsOpen(false)
       }
       className={[
-        "fixed z-50 overflow-y-auto lg:w-2/12 top-4 right-4 flex flex-tableRow justify-end w-max",
+        "fixed z-50 overflow-x-auto top-4 right-4 flex flex-tableRow justify-end max-w-max p-2 rounded",
       ].join(" ")}
     >
       <Dialog.Overlay />
       <Dialog.Description>
-        <div className="rounded-md bg-surface-4 max-w-app p-4 m-2">
+        <div
+          className="bg-surface-1 shadow
+         rounded max-w-app p-4 m-2"
+        >
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <InformationCircleIcon
@@ -35,11 +35,13 @@ export const Snackbar = ({
               />
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
-              <Typography tag={"p"} className="text-base text-onSurfaceHigh">{message}</Typography>
+              <Typography tag={"p"} className="text-base text-onSurfaceHigh">
+                {message}
+              </Typography>
             </div>
           </div>
         </div>
       </Dialog.Description>
     </Dialog>
-  )
-}
+  );
+};
