@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar } from "ui/atoms/avatar/avatar";
+import { CopyButton } from "../components/data/copy";
 
 export const AccountHeader = ({
   queryData,
@@ -29,6 +30,13 @@ export const AccountHeader = ({
   isFlex: boolean;
   copy: number;
 }) => {
+  const shortenAddress = (value: string) =>
+    value
+      ? value.length > 11
+        ? value.slice(0, 8) + "..." + value.slice(-7)
+        : value
+      : "";
+
   const { isInFavourites, saveFavourite, unFavourite } = useSaveFavourites();
   const path = usePathname();
   const [uri, id] = path?.split("/").slice(1) || [undefined, undefined];
@@ -46,8 +54,8 @@ export const AccountHeader = ({
   useEffect(() => console.log(uri, id, "props"), [uri, id]);
   const value =
     getFromDottedKey(values.value, "row", queryData, queryData) || "-";
-  console.log(value, "valueslog", values, "values");
-
+  const status =
+    getFromDottedKey(values.status, "row", queryData, queryData) || "-";
   return (
     <Grid
       justifyBetween={justifyBetween}
@@ -56,7 +64,7 @@ export const AccountHeader = ({
       columns={cols}
       mobileColumns={mobileColumns}
     >
-      <Grid columns={2} flex>
+      <Grid gap={2} className={"items-center"} columns={2} flex>
         <span className={"relative"}>
           <Avatar className={"mr-3"} address={value?.address || ""} size={43} />
           {isInFavourites(id!) ? (
@@ -75,27 +83,26 @@ export const AccountHeader = ({
             />
           )}
         </span>
-        <Grid columns={2} flex>
+        <Grid gap={1} columns={1} flex>
           <Grid columns={1} flex>
-            <Typography size={"Heading5"} bold tag={"span"} className={""}>
+            <Typography
+              size={"body"}
+              bold
+              tag={"span"}
+              className={"capitalize font-semibold  "}
+            >
               {value.name}
             </Typography>
-            <ValueFormatter
-              key={value.address}
-              value={value.address}
-              copy={copy === value.index}
-              {...value.format}
-              link={value.link}
-            />
+            <Typography
+              size={"subBody"}
+              bold
+              tag={"span"}
+              className={"items-center flex flex-row "}
+            >
+              {shortenAddress(value.address)}
+              <CopyButton value={value.address} />
+            </Typography>
           </Grid>
-          {isInFavourites(id!) ? (
-            <StarIcon className={"w-6 h-6"} onClick={() => handleClick()} />
-          ) : (
-            <StarIconOutline
-              className={"w-6 h-6"}
-              onClick={() => handleClick()}
-            />
-          )}
         </Grid>
       </Grid>
     </Grid>

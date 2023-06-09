@@ -7,7 +7,7 @@ import { UpdateOnType } from "liskscan/schemas/slices/table";
 import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { formatDistance } from "date-fns";
-import { Avatar} from "../avatar/avatar";
+import { Avatar } from "../avatar/avatar";
 
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
@@ -263,7 +263,13 @@ const InnerValue = ({
 }: InnerValueProps) => {
   const value = formatters[format](parsedValue);
   return (
-    <Grid gap={1} columns={2} mobileColumns={2} flex>
+    <Grid
+      className={"flex flex-row items-center"}
+      gap={1}
+      columns={2}
+      mobileColumns={2}
+      flex
+    >
       {icon && icon.before && parsedIcon}
       <Typography color={parsedColor} tag={tag} {...typographyProps}>
         {value}

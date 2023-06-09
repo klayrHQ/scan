@@ -14,7 +14,7 @@ export const CopyButton = ({ value }: { value: string }) => {
       <CopyToClipboard text={value || ""}>
         <DocumentDuplicateIcon
           onClick={() => setCopyNoteText(`Copied: "${value}"`)}
-          className="cursor-pointer h-4 w-4 text-onSurfaceMedium hover:text-onSurfacePrimaryMedium focus:text-accentPrimary text-surfacePrimaryDark text-xs"
+          className="cursor-pointer h-4 w-4 rounded-full hover:bg-surface-2 hover:shadow p-0.5 text-onSurfaceLow hover:text-onSurfacePrimaryMedium focus:text-accentPrimary text-surfacePrimaryDark text-xs"
         />
       </CopyToClipboard>
       {copyNoteText !== "" && (
