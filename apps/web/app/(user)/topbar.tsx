@@ -1,6 +1,6 @@
 "use client";
 import { TopBarClient } from "../../components/layout/topbar";
-import React, {ReactNode, useEffect, useState} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   Cog6ToothIcon as CogIcon,
   MoonIcon,
@@ -26,9 +26,9 @@ import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/bloc
 import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
 import RefreshButton from "./refreshButton";
 import { useSanity } from "../../providers/sanity";
-import {FavouritesModal} from "../../components/favouritesModal";
-import {SearchModal} from "../../components/searchModal";
-import {MobileMenuModal} from "../../components/mobileMenuModal";
+import { FavouritesModal } from "../../components/favouritesModal";
+import { SearchModal } from "../../components/searchModal";
+import { MobileMenuModal } from "../../components/mobileMenuModal";
 
 export const TopBarLayout = ({
   status,
@@ -71,7 +71,7 @@ export const TopBarLayout = ({
         infoItemsLeft={[
           <Grid
             key={"asdf"}
-            className={"gap-2"}
+            className={"gap-0 lg:gap-2"}
             gap={2}
             flex
             columns={2}
@@ -179,7 +179,18 @@ export const TopBarLayout = ({
         menuItemsRight={[
           <FavouritesModal />,
           <SearchModal />,
-          <MobileMenuModal menuItems={menuItems} connected={connected} lastUpdate={lastUpdate} kpis={kpis} appState={appState} events={events} themeMode={themeMode} status={status} updateThemeMode={updateThemeMode} index={index}/>,
+          <MobileMenuModal
+            menuItems={menuItems}
+            connected={connected}
+            lastUpdate={lastUpdate}
+            kpis={kpis}
+            appState={appState}
+            events={events}
+            themeMode={themeMode}
+            status={status}
+            updateThemeMode={updateThemeMode}
+            index={index}
+          />,
         ]}
         logo={
           <div

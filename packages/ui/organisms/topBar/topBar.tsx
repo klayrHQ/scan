@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Logo } from "../../molecules/logo/logo";
 import { LiskScanIcon } from "../../assets/icons";
 import { Menu } from "../../molecules/menu/menu";
-import {MobileMenu} from "../mobileMenu/mobileMenu";
+import { MobileMenu } from "../mobileMenu/mobileMenu";
 
 export interface TopBarProps {
   menuItems: ReactNode[];
@@ -25,7 +25,7 @@ export const TopBar = ({
         className,
       ].join(" ")}
     >
-      <div className="flex w-app max-w-app m-auto justify-between items-center h-16 w-full">
+      <div className="flex w-app max-w-app m-auto justify-between items-center h-16">
         <div className="flex gap-1">
           {logo}
           <div className="hidden lg:flex lg:ml-6 space-x-4">

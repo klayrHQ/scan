@@ -1,4 +1,4 @@
-import { Grid, Typography, ValueFormatter } from "ui";
+import { Grid, Tooltip, Typography, ValueFormatter } from "ui";
 import { getFromDottedKey } from "../lib/dotString";
 import { SlicerProps } from "../components/slicer";
 import { useSaveFavourites } from "../providers/favourites";
@@ -77,20 +77,26 @@ export const AccountHeader = ({
       mobileColumns={mobileColumns}
       className={"relative"}
     >
-      <Grid gap={2} className={"items-center relative"} columns={2} flex>
+      <Grid
+        gap={0}
+        mobileColumns={2}
+        className={"items-center relative"}
+        columns={2}
+        flex
+      >
         <span className={"relative"}>
           <Avatar className={"mr-3"} address={value?.address || ""} size={43} />
           {isInFavourites(id!) ? (
             <StarIcon
               className={
-                "w-6 h-6 text-yellow absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
+                "w-6 h-6 text-yellow hover:shadow-lg cursor-pointer absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
               }
               onClick={() => handleClick()}
             />
           ) : (
             <StarIconOutline
               className={
-                "w-6 h-6 text-onSurfaceMedium absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
+                "w-6 h-6 text-onSurfaceMedium hover:shadow-lg cursor-pointer absolute -top-2 -left-2 bg-surface-1 shadow rounded-full p-1"
               }
               onClick={() => handleClick()}
             />
@@ -118,15 +124,17 @@ export const AccountHeader = ({
           </Grid>
         </Grid>
       </Grid>
-      <Typography
-        className={
-          "absolute top-0 right-0 bg-surface-2 shadow rounded px-2 py-0.5 text-onSurfaceHigh font-semibold"
-        }
-        tag={"span"}
-        size={"subBody"}
-      >
-        {status}
-      </Typography>
+      <Tooltip placement={"bottom-end"} label={`${status} validator`}>
+        <Typography
+          className={
+            "absolute uppercase top-0 right-0 bg-surface-2 shadow rounded px-3 py-1 text-onSurfaceHigh font-semibold"
+          }
+          tag={"span"}
+          size={"subBody"}
+        >
+          {status}
+        </Typography>
+      </Tooltip>
     </Grid>
   );
 };
