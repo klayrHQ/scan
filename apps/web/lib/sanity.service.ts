@@ -5,7 +5,7 @@ import {
   RPCResponses,
 } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
-import {getDotString, getDottedKeyType, getFromDottedKey} from "./dotString";
+import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
 import { parseProps } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
@@ -82,20 +82,19 @@ export const getAllData = async (
               (row: any) => {
                 const keys = calculation.keys.map((k) => {
                   if (responses[getDottedKeyType(k)]) {
-                    return getFromDottedKey(k, "row", row, responses)
+                    return getFromDottedKey(k, "row", row, responses);
                   }
-                   return getFromDottedKey("row." + k, "row", row, {row})
-                  }
-                );
+                  return getFromDottedKey("row." + k, "row", row, { row });
+                });
                 const parsedCalculation = util.format(
                   calculation.calculation,
                   ...keys
                 );
                 try {
                   const result = eval(parsedCalculation);
-                  return {...row, [calculation.name]: result};
+                  return { ...row, [calculation.name]: result };
                 } catch (e) {
-                    return {...row}
+                  return { ...row };
                 }
               }
             );
@@ -109,8 +108,12 @@ export const getAllData = async (
       for (const subQuery of query.subQueries) {
         if (subQuery.type === "forEach") {
           if (responses[query.key].status === "success") {
-            for (const index in responses[query.key].data) {
-              const childRequest = responses[query.key].data[index];
+            const data =
+              responses[query.key].data?.stakes ||
+              responses[query.key].data?.stakers ||
+              responses[query.key].data;
+            for (const index in data) {
+              const childRequest = data[index];
               const foreignKey = getDotString(
                 subQuery.foreignKey.split("."),
                 childRequest
@@ -133,7 +136,7 @@ export const getAllData = async (
                   };
                 }
               }
-              responses[query.key].data[index][
+              data[index][
                 `${subQuery.call.replaceAll(
                   ".",
                   "_"
@@ -153,21 +156,29 @@ export const getAllData = async (
             subQuery.call,
             parseProps(subQuery.params)
           );
-          if (responses[query.key].status === "success" && responses[
-            `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-            ]?.data) {
+          if (
+            responses[query.key].status === "success" &&
+            responses[
+              `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
+            ]?.data
+          ) {
             for (const index in responses[query.key].data) {
               try {
                 const childRequest = responses[query.key].data[index];
                 const found = responses[
                   `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-                  ]?.data?.find((d: any) => d[subQuery.primaryKey] === childRequest[subQuery.foreignKey])
+                ]?.data?.find(
+                  (d: any) =>
+                    d[subQuery.primaryKey] === childRequest[subQuery.foreignKey]
+                );
                 if (found) {
-                  responses[query.key].data[index][`${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`] = found
+                  responses[query.key].data[index][
+                    `${subQuery.call.replaceAll(".", "_")}_${
+                      subQuery.primaryKey
+                    }`
+                  ] = found;
                 }
-              } catch (e) {
-
-              }
+              } catch (e) {}
             }
           }
         }
@@ -181,7 +192,8 @@ export const getData = async (
   serviceType: ServiceTypes,
   call: CallsRPC | string,
   params?: any
-): Promise<RPCResponses<RPCCalls> & { data?: any }> => { // todo fix any data
+): Promise<RPCResponses<RPCCalls> & { data?: any }> => {
+  // todo fix any data
   switch (serviceType) {
     default:
       return await client.rpc(call as CallsRPC, params);

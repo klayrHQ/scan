@@ -21,7 +21,8 @@ export const makeTable = ({
   data,
 }: MakeTableProps): { rows: (string | number)[][] } => {
   if (data[key]?.status === "success") {
-    const parsedData = data[key]?.data?.stakes || data[key]?.data;
+    const parsedData =
+      data[key]?.data?.stakers || data[key]?.data?.stakes || data[key]?.data;
     const rows = parsedData?.map((row: any) =>
       cols.map((col) =>
         col.valueKeys.map((valueFormat) => {

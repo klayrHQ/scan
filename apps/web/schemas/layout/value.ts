@@ -193,6 +193,7 @@ export const SanityValue = [
             { title: "fee", value: "fee" },
             { title: "number", value: "number" },
             { title: "avatar", value: "avatar" },
+            { title: "avatarAddress", value: "avatarAddress" },
             { title: "icon", value: "icon" },
           ],
         },

@@ -60,6 +60,7 @@ type Formats =
   | "percentage"
   | "commission"
   | "currency"
+  | "avatarAddress"
   | "fee"
   | "number"
   | "avatar"
@@ -240,6 +241,9 @@ const formatters = {
   fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
+  avatarAddress: (value: any) => {
+    return <Avatar address={value} size={20} />;
+  },
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),
   fromNow: (value: any) =>
