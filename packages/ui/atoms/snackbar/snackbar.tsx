@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
@@ -25,7 +26,7 @@ export const Snackbar = ({ message, toggleState }: SnackbarProps) => {
       <Dialog.Description>
         <div
           className="bg-surface-1 shadow
-         rounded max-w-app p-4 m-2"
+         rounded max-w-sm p-4 m-2"
         >
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
@@ -35,7 +36,7 @@ export const Snackbar = ({ message, toggleState }: SnackbarProps) => {
               />
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
-              <Typography tag={"p"} className="text-base text-onSurfaceHigh">
+              <Typography tag={"p"} className="text-base text-onSurfaceHigh leading-5 break-all">
                 {message}
               </Typography>
             </div>
