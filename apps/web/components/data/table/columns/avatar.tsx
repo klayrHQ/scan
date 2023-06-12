@@ -1,11 +1,11 @@
 import { ColumnProps } from "./index";
-import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { ValueFormatter } from "ui";
 import { Avatar } from "ui/atoms/avatar/avatar";
 
 export const AvatarColumn = ({ params, values }: ColumnProps) => {
   return (
     <span className={"flex flex-row space-x-2 items-center"}>
-      {values[0].value.address && (
+      {values[0]?.value?.address && (
         <Avatar size={20} address={values[0].value.address} />
       )}
       {

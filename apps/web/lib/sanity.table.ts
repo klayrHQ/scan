@@ -21,7 +21,8 @@ export const makeTable = ({
   data,
 }: MakeTableProps): { rows: (string | number)[][] } => {
   if (data[key]?.status === "success") {
-    const rows = data[key]?.data?.map((row: any) =>
+    const parsedData = data[key]?.data?.stakes || data[key]?.data;
+    const rows = parsedData?.map((row: any) =>
       cols.map((col) =>
         col.valueKeys.map((valueFormat) => {
           let link = undefined;
@@ -60,7 +61,10 @@ export const makeTable = ({
             };
           }
           if (valueFormat.type === "literal") {
-            return { ...valueFormat, format: { ...valueFormat.format, link } };
+            return {
+              ...valueFormat,
+              format: { ...valueFormat.format, link },
+            };
           }
         })
       )

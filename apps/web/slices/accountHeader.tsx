@@ -67,7 +67,7 @@ export const AccountHeader = ({
       "row",
       queryData,
       queryData
-    ) || "-";
+    ) || "Regular account";
   return (
     <Grid
       justifyBetween={justifyBetween}
@@ -104,14 +104,23 @@ export const AccountHeader = ({
         </span>
         <Grid gap={1} columns={1} flex>
           <Grid columns={1} flex>
-            <Typography
-              size={"body"}
-              bold
-              tag={"span"}
-              className={"capitalize font-semibold  "}
-            >
-              {rank}. {value.name}
-            </Typography>
+            {value.name ? (
+              <Typography
+                size={"body"}
+                bold
+                tag={"span"}
+                className={"capitalize font-semibold  "}
+              >
+                {rank}. {value.name}
+              </Typography>
+            ) : (
+              <Typography
+                size={"body"}
+                bold
+                tag={"span"}
+                className={"capitalize font-semibold  "}
+              ></Typography>
+            )}
             <Typography
               size={"subBody"}
               bold
