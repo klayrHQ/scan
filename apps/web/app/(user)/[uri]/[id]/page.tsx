@@ -6,7 +6,7 @@ import { makeTable } from "../../../../lib/sanity.table";
 import { getQueries } from "../../../../lib/sanity.queries";
 import { draftMode } from "next/headers";
 import { sanitySsrQuery } from "../../../../lib/sanity.groq";
-import {client} from "../../../../lib/sanity.service";
+import { client } from "../../../../lib/sanity.service";
 
 export const revalidate = 10;
 
@@ -26,7 +26,7 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
         dynamicTabs{
           ...,
           content->{
-          ...,
+            ...,
             table->{   
               ...,
               columns[]->,
@@ -39,48 +39,102 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
           ..., 
           content->{
             ...,
+            staticTabs[]{
+              ..., 
+              content->{
+                ...,
+                columns[]->{
+                  ...,
+                  dynamicTabs{
+                    ...,
+                    content->{
+                    ...,
+                      table->{   
+                        ...,
+                        columns[]->,
+                        title, 
+                        key,
+                      },
+                    },
+                  },
+                  staticTabs[]{
+                    ..., 
+                    content->{
+                      ...,
+                      table->{   
+                        ...,
+                        columns[]->,
+                        title, 
+                        key,
+                      },
+                    },
+                  },
+                  table->{   
+                    ...,
+                    columns[]->,
+                    title, 
+                    key,
+                  },
+                  columns[]->{
+                    ...,
+                    table->{
+                      ...,
+                      columns[]->,
+                      title, 
+                      key,
+                    },
+                  }
+                },
+                table->{   
+                  ...,
+                  columns[]->,
+                  title, 
+                  key,
+                },
+              },
+            },
             columns[]->{
-          ...,
-          dynamicTabs{
-            ...,
-            content->{
-            ...,
+              ...,
+              dynamicTabs{
+                ...,
+                content->{
+                  ...,
+                  table->{   
+                    ...,
+                    columns[]->,
+                    title, 
+                    key,
+                  },
+                },
+              },
+              staticTabs[]{
+                ..., 
+                content->{
+                  ...,
+                  table->{   
+                    ...,
+                    columns[]->,
+                    title, 
+                    key,
+                  },
+                },
+              },
               table->{   
                 ...,
                 columns[]->,
                 title, 
                 key,
               },
-            },
-          },
-          staticTabs[]{
-            ..., 
-            content->{
-              ...,
-              table->{   
+              columns[]->{
                 ...,
-                columns[]->,
-                title, 
-                key,
-              },
+                table->{
+                  ...,
+                  columns[]->,
+                  title, 
+                  key,
+                },
+              }
             },
-          },
-          table->{   
-            ...,
-            columns[]->,
-            title, 
-            key,
-          },
-          columns[]->{
-            ...,
-            table->{
-              ...,
-              columns[]->,
-              title, 
-              key,
-            },
-          }
-        },
             table->{   
               ...,
               columns[]->,
@@ -193,18 +247,21 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
 };
 
 export async function generateStaticParams() {
-  const transactionTypes = await client.rpc("get.network.status")
-  const validators = await client.rpc("get.pos.validators", {limit: 1000})
-  const list: {id: string, uri: string}[] = []
+  const transactionTypes = await client.rpc("get.network.status");
+  const validators = await client.rpc("get.pos.validators", { limit: 1000 });
+  const list: { id: string; uri: string }[] = [];
   if (transactionTypes.status === "success") {
-    transactionTypes.data.moduleCommands.map(moduleCommand => list.push({uri: "transactions", id: moduleCommand}))
+    transactionTypes.data.moduleCommands.map((moduleCommand) =>
+      list.push({ uri: "transactions", id: moduleCommand })
+    );
   }
   if (validators.status === "success") {
-    validators.data.forEach(validator => list.push({uri: "account", id: validator.address}))
+    validators.data.forEach((validator) =>
+      list.push({ uri: "account", id: validator.address })
+    );
   }
-  return list
+  return list;
 }
-
 
 export default async function Web({ params }: any) {
   const isDraftMode = draftMode().isEnabled;

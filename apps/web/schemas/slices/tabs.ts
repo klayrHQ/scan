@@ -3,12 +3,19 @@ import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";
 import tabs from "./tabs";
-import {SanityValue} from "../layout/value";
-import {stakesAccount} from "./stakesAccount";
+import { SanityValue } from "../layout/value";
+import { stakesAccount } from "./stakesAccount";
 
 const sliceDocumentNames: {
   type: string;
-}[] = [{ name: "tabs" }, table,stakesAccount, titleBox, kpi, { name: "grid" }].map((doc) => ({
+}[] = [
+  { name: "tabs" },
+  table,
+  stakesAccount,
+  titleBox,
+  kpi,
+  { name: "grid" },
+].map((doc) => ({
   type: doc.name,
 }));
 
@@ -47,6 +54,11 @@ export default defineType({
           ],
         },
       ],
+    },
+    {
+      name: "container",
+      type: "boolean",
+      title: "Outer container with shadow & padding",
     },
   ],
 });

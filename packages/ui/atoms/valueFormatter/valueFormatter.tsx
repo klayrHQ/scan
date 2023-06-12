@@ -227,7 +227,7 @@ const formatters = {
   plain: (value: any) => value?.toString(),
   shortAddress: (value: any) => shortenAddress(value),
   commission: (value: any) => {
-    return value / 100 + "%";
+    return value != 0 ? value / 100 + "%" : "0%";
   },
   percentage: (value: any) => value + "%",
   currency: (value: any) =>
@@ -242,7 +242,18 @@ const formatters = {
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => {
-    return <Avatar address={value} size={20} />;
+    return (
+      <span className={"flex flex-row space-x-2 items-center"}>
+        {value?.value?.address && (
+          <Avatar size={20} address={value.value.address} />
+        )}
+        {
+          <Typography tag={"span"} size={"subBody"}>
+            {value.value.name || value.value.address}
+          </Typography>
+        }
+      </span>
+    );
   },
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),

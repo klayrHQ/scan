@@ -13,6 +13,7 @@ export const TabsSlice = ({
   dynamicTabs,
   name,
   queries,
+  container,
   uri,
   ...props
 }: any) => {
@@ -34,7 +35,13 @@ export const TabsSlice = ({
     setQueryParams({ [handle]: value });
   };
   return (
-    <Container gap={2}  section className={"max-w-app"}>
+    <Container
+      gap={2}
+      className={[
+        "w-full rounded",
+        container ? "shadow p-4 w-app max-w-app mx-auto " : "",
+      ].join(" ")}
+    >
       <Grid flex gap={2} columns={2}>
         {staticTabs?.map(
           (
@@ -64,11 +71,19 @@ export const TabsSlice = ({
                   ...className,
                   ...(searchParams?.get(current)
                     ? searchParams?.get(current) === queryKey
-                      ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
+                      ? [
+                          "bg-menuButton",
+                          "text-onMenuButton",
+                          "hover:text-onMenuButton",
+                        ]
                       : ["", "text-onSurfaceHigh hover:bg-surface-1"]
                     : index === 0
-                      ? ["bg-menuButton", "text-onMenuButton", "hover:text-onMenuButton"]
-                      : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
+                    ? [
+                        "bg-menuButton",
+                        "text-onMenuButton",
+                        "hover:text-onMenuButton",
+                      ]
+                    : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
                 ])}
               >
                 {label}
