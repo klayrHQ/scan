@@ -39,7 +39,7 @@ export const TabsSlice = ({
       gap={2}
       className={[
         "w-full rounded",
-        container ? "shadow p-4 w-app max-w-app mx-auto " : "",
+        container ? "shadow-xl p-4 w-app max-w-app mx-auto " : "",
       ].join(" ")}
     >
       <Grid flex gap={2} columns={2}>
