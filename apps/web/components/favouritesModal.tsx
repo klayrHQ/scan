@@ -41,7 +41,7 @@ export const FavouritesModal = ({
               !mobile ?
               "group cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-primary"
               :
-              "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-1"
+              "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
             }
           >
             <StarIcon className={"w-4 lg:w-5 h-4 lg:h-5 mr-1 text-inherit"} />
@@ -57,7 +57,7 @@ export const FavouritesModal = ({
               !mobile ?
                 "cursor-default hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar"
                 :
-                "cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-1"
+                "cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
               }
             >
               <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-inherit" />

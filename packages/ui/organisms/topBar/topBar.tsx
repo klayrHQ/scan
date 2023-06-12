@@ -20,7 +20,7 @@ export const TopBar = ({
   <>
     <nav
       className={[
-        "bg-topbar text-onTopbar ",
+        "bg-topbar text-onTopbar px-2",
         "z-40 relative w-full flex md:mb-4 items-center",
         className,
       ].join(" ")}

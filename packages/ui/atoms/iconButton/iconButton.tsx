@@ -22,6 +22,7 @@ export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
   rounded?: boolean;
   disabled?: boolean;
   toggle?: boolean;
+  screenReader?: string;
 }
 
 const iconClass = cva(
@@ -92,6 +93,7 @@ export const IconButton: FC<IconProps> = ({
   icon,
   number,
   color,
+  screenReader,
   ...props
 }) => (
   <span
@@ -106,6 +108,7 @@ export const IconButton: FC<IconProps> = ({
     })}
     {...props}
   >
+    <span className="sr-only">{screenReader}</span>
     <Icon icon={icon} number={number} type={type} color={color} />
   </span>
 );

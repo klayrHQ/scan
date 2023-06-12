@@ -20,6 +20,7 @@ import {BlocksResponse} from "@liskscan/lisk-service-client/lib/types/api/blocks
 import {switchThemeMode} from "../app/(user)/theme";
 import {InfoBarKPISType} from "../lib/queries/getInfoBarKPIS";
 import {IndexStatusResponse} from "@liskscan/lisk-service-client/lib/types";
+import {IconButton} from "ui/atoms/iconButton/iconButton";
 
 
 export const MobileMenuModal = ({
@@ -66,30 +67,14 @@ export const MobileMenuModal = ({
     <ModalFullHeight
       containerClassname={"md:hidden"}
       button={
-        <Button
-          className="inline-flex items-center justify-center px-2 rounded-md text-gray-400 bg-transparent border-none hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        <IconButton
+          className="inline-flex items-center justify-center rounded-md text-gray-400 bg-transparent border-none hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          label={
-            <>
-              <span className="sr-only">Open main menu</span>
-              <MenuIcon className="h-5 w-5 text-onTopbar"/>
-            </>
-          }
-        />
-      }
-      closeButton={
-        <Button
-          className="inline-flex items-center justify-center px-2 focus:outline-none top-[3rem]"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-          label={
-            <>
-              <span className="sr-only">Close main menu</span>
-              <XIcon className="h-5 w-5" />
-            </>
-          }
-          type={"transparent"}
+          icon={"menu"}
+          screenReader={"Open main menu"}
+          size={"xs"}
+          type={"iconOnly"}
         />
       }
       setIsOpen={setOpen}
@@ -100,7 +85,7 @@ export const MobileMenuModal = ({
         infoItemsLeft={[
           <Grid
             key={"asdf"}
-            className={"gap-2"}
+            className={"gap-0 lg:gap-2"}
             gap={2}
             flex
             columns={2}
@@ -218,6 +203,18 @@ export const MobileMenuModal = ({
             <FavouritesModal menuCloseFunction={() => setOpen(false)} mobile={true} />
           </div>
         ]}
+        closeButton={
+          <IconButton
+            className="inline-flex items-center justify-center focus:outline-none"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            icon={"x"}
+            onClick={() => setOpen(false)}
+            screenReader={"Close main menu"}
+            size={"xs"}
+            type={"iconOnly"}
+          />
+        }
       />
     </ModalFullHeight>
   )
