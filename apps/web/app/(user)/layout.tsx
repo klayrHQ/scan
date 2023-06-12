@@ -18,6 +18,7 @@ import { sanitySsrQuery, setSanitySSRSnapshot } from "../../lib/sanity.groq";
 import { SanityDocument } from "@sanity/types";
 import {FavouritesProvider} from "../../providers/favourites";
 import {RecentSearchesProvider} from "../../providers/recentSearches";
+import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
 
 const getSanitySnapshot = async (): Promise<{
   result: SanityDocument[];
@@ -114,6 +115,7 @@ export default async function RootLayout({
                   {children}
                 </div>
                 <Footer copyright={settings.copyright} lists={footer.lists}/>
+                <FloatingMenuContainer menuItems={menuItems} />
               </RecentSearchesProvider>
             </FavouritesProvider>
           </ServiceProvider>

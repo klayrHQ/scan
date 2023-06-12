@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {ModalFullHeight} from "ui/atoms/modalFullHeight/modalFullHeight";
 import {Button, cls, Grid, InfoBar, KeyValueRow, Tooltip} from "ui";
 import {
@@ -18,7 +18,6 @@ import {formatDistance} from "date-fns";
 import {KeyValueKPI} from "./data/keyValueKPI";
 import {BlocksResponse} from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import {switchThemeMode} from "../app/(user)/theme";
-import RefreshButton from "../app/(user)/refreshButton";
 import {InfoBarKPISType} from "../lib/queries/getInfoBarKPIS";
 import {IndexStatusResponse} from "@liskscan/lisk-service-client/lib/types";
 
@@ -48,10 +47,6 @@ export const MobileMenuModal = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false)
 
-  useEffect(() => {
-    console.log(submenu)
-  }, [menuItems])
-
   const extractSubmenu = (items: Array<any>) => {
     let tempSubMenu: any[] = []
     items.map((item) => {
@@ -78,7 +73,7 @@ export const MobileMenuModal = ({
           label={
             <>
               <span className="sr-only">Open main menu</span>
-              <MenuIcon className="h-5 w-5"/>
+              <MenuIcon className="h-5 w-5 text-onTopbar"/>
             </>
           }
         />

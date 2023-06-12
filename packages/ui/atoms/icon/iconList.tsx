@@ -50,7 +50,14 @@ import {
   TrashIcon,
   UserIcon,
   WalletIcon,
-  XMarkIcon, BarsArrowDownIcon, ArrowLongLeftIcon, ArrowRightOnRectangleIcon, CheckCircleIcon,
+  XMarkIcon,
+  BarsArrowDownIcon,
+  ArrowLongLeftIcon,
+  ArrowRightOnRectangleIcon,
+  CheckCircleIcon,
+  HomeIcon,
+  UsersIcon,
+  ArchiveBoxIcon,
 } from "@heroicons/react/24/solid";
 import {
   FunnelIcon,
@@ -117,6 +124,9 @@ export const iconList = {
   filter: FunnelIcon,
   barsArrowDown: BarsArrowDownIcon,
   logOut: ArrowRightOnRectangleIcon,
+  home: HomeIcon,
+  users: UsersIcon,
+  archive: ArchiveBoxIcon,
   undefined: "undefined",
   number: "undefined",
 };

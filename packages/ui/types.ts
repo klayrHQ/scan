@@ -86,6 +86,9 @@ export type iconVariants =
   | "filter"
   | "barsArrowDown"
   | "logOut"
+  | "home"
+  | "users"
+  | "archive"
   | "undefined"
   | "number"
 

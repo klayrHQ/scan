@@ -3,6 +3,7 @@ import { cva } from "class-variance-authority";
 import { iconVariants } from "../../types";
 import { Typography } from "../typography/typography";
 import { iconList } from "./iconList";
+import {cls} from "../../utils";
 
 interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {
   type?:
@@ -172,19 +173,6 @@ const iconClass = cva(
   },
 );
 
-const numberClass = cva(
-  [],
-  {
-    variants: {
-      type: {
-        primary: "body",
-        outlined: "body",
-        iconOnly: "body",
-      },
-    },
-  },
-)
-
 const factory = () => {
   const Icon: FC<IconProps> = ({
     type,
@@ -192,12 +180,15 @@ const factory = () => {
     icon,
     number,
     align = "none",
+    color,
+    className,
     ...props
   }) => {
     const heroIconClasses = iconClass({
       type,
       size,
       align,
+      className: className,
       icon: icon as "chevronLeft2" | "chevronDownSvg" | "menuSvg" | "account2" | "tooltipArrow" | "logoCreators" | "logoMarketplace" | "logoSketch" | "logoStandard" | "arrowRight",
     });
     const Component = iconList[icon];
@@ -205,17 +196,15 @@ const factory = () => {
       <>
         {number && (
           <Typography
-            className={`mx-auto my-auto`}
-            color={numberClass({
-              type,
-            })}
+            className={cls(["mx-auto my-auto", className])}
+            color={color}
             tag={"h4"}
           >
             {number}
           </Typography>
         )}
         {!number && icon && (
-          <Component className={heroIconClasses} {...props} />
+          <Component className={cls([heroIconClasses, color && `text-${color}`])} {...props} />
         )}
       </>
     );
