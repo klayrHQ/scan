@@ -133,17 +133,19 @@ export const AccountHeader = ({
           </Grid>
         </Grid>
       </Grid>
-      <Tooltip placement={"bottom-end"} label={`${status} validator`}>
-        <Typography
-          className={
-            "absolute uppercase top-0 right-0 bg-surface-2 shadow rounded px-3 py-1 text-onSurfaceHigh font-semibold"
-          }
-          tag={"span"}
-          size={"subBody"}
-        >
-          {status}
-        </Typography>
-      </Tooltip>
+      <div className={"absolute top-0 right-0"}>
+        <Tooltip placement={"bottom-end"} label={`${status} validator`}>
+          <Typography
+            className={
+              "uppercase bg-surface-2 shadow rounded px-3 py-1 text-onSurfaceHigh font-semibold"
+            }
+            tag={"span"}
+            size={"subBody"}
+          >
+            {status}
+          </Typography>
+        </Tooltip>
+      </div>
     </Grid>
   );
 };
