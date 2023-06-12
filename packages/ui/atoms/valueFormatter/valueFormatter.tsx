@@ -8,7 +8,51 @@ import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { formatDistance } from "date-fns";
 import { Avatar } from "../avatar/avatar";
+import relativeTime from "dayjs/plugin/relativeTime";
+import updateLocale from "dayjs/plugin/updateLocale";
+import dayjs from "dayjs";
+import "dayjs/plugin/relativeTime";
+import "dayjs/locale/en"; // Import the locale file for English
 
+dayjs.extend(relativeTime);
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale("en", {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: (number: any, withoutSuffix: any, key: any, isFuture: any) => {
+      if (isFuture) {
+        if (number <= 5) {
+          return "now";
+        } else if (number <= 60) {
+          const nearestMultipleOfFive = Math.ceil(number / 5) * 5;
+          return nearestMultipleOfFive + "s";
+        } else {
+          const minutes = Math.floor(number / 60);
+          const seconds = Math.ceil(number / 60 / 5) * 5;
+          let timeString = "";
+
+          if (minutes > 0) {
+            timeString += minutes + "m";
+          }
+          if (seconds > 0) {
+            timeString += "" + seconds + "s";
+          }
+
+          return timeString.trim();
+        }
+      } else {
+        return number + "s";
+      }
+    },
+    m: "1m",
+    mm: "%dm",
+  },
+});
+
+const futureDate = dayjs().add(15, "seconds");
+const countdown = futureDate.fromNow();
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
   | "string"
@@ -143,6 +187,8 @@ export const ValueFormatter = ({
   const parsedValue = parseValue(type, value);
   const parsedTooltip = parseTooltip(tooltip, parsedValue);
 
+  const dayjs = require("dayjs");
+
   const parsedColor =
     color && color.conditions && color.conditions?.length > 0
       ? parseColor(color, parsedValue)
@@ -257,13 +303,24 @@ const formatters = {
   },
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),
-  fromNow: (value: any) =>
-    new Date().getTime() - new Date(value).getTime() > 60 * 60 * 1000
-      ? new Date(value).toLocaleString()
-      : formatDistance(new Date(value), new Date(), {
-          addSuffix: true,
-          includeSeconds: true,
-        }),
+  // fromNow: (value: any) =>
+  //   new Date().getTime() - new Date(value).getTime() > 60 * 60 * 1000
+  //     ? new Date(value).toLocaleString()
+  //     : formatDistance(new Date(value), new Date(), {
+  //         addSuffix: true,
+  //         includeSeconds: true,
+  //       }),
+
+  fromNow: (value: any) => {
+    const date = dayjs(value);
+    const now = dayjs();
+
+    if (now.diff(date, "hour") > 1) {
+      return date.format("DD MMM 'YY HH:mm");
+    }
+
+    return date.fromNow();
+  },
 };
 
 const InnerValue = ({
