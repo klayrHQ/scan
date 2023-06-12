@@ -69,7 +69,7 @@ export const SearchModal = ({
             id="search"
             name="search"
             className={[
-              "block w-full pl-8 pr-3 py-2 border border-transparent rounded text-base cursor-pointer",
+              "block w-full pl-[1.85rem] pr-3 py-2 border border-transparent rounded text-base cursor-pointer",
               "leading-5 bg-background text-onBackground placeholder-onSurfaceLow",
             ].join(" ")}
             type="search"
