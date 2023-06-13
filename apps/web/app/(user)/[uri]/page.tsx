@@ -44,17 +44,17 @@ export const getSlices = async (
       columns[]->{
         ...,
         dynamicTabs{
+          ...,
+          content->{
             ...,
-            content->{
-            ...,
-              table->{   
-                ...,
-                columns[]->,
-                title, 
-                key,
-              },
+            table->{   
+              ...,
+              columns[]->,
+              title, 
+              key,
             },
           },
+        },
         table->{   
           ...,
           columns[]->,
@@ -63,6 +63,9 @@ export const getSlices = async (
         },
         columns[]->{
           ...,
+          columns[]->{
+            ...,
+          },
           dynamicTabs{
             ...,
             content->{
