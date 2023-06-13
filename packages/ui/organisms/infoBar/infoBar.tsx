@@ -20,7 +20,7 @@ export const InfoBar: FC<InfoBarProps> = ({
         gap={4}
       >
         <Grid
-          className="space-x-2 md:space-x-4 items-center"
+          className="space-x-2 md:space-x-4 items-center w-full"
           flex
           columns={2}
           mobileColumns={2}
@@ -29,7 +29,7 @@ export const InfoBar: FC<InfoBarProps> = ({
           {infoItemsLeft}
         </Grid>
         <Grid
-          className="justify-end w-app md:w-full md:w-auto space-x-2 md:space-x-4 items-center"
+          className="justify-end md:w-full md:w-auto space-x-2 md:space-x-4 items-center"
           flex
           columns={2}
           mobileColumns={2}
