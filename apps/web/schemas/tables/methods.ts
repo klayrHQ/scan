@@ -1,12 +1,26 @@
-
 export const Methods = [
   { value: "get.auth", title: `get.auth (Lisk Service)` },
   { value: "get.blockchain.apps", title: `get.blockchain.apps (Lisk Service)` },
-  { value: "get.blockchain.apps.statistics", title: `get.blockchain.apps.statistics (Lisk Service)` },
-  { value: "get.blockchain.apps.meta", title: `get.blockchain.apps.meta (Lisk Service)` },
-  { value: "get.blockchain.apps.meta.list", title: `get.blockchain.apps.meta.list (Lisk Service)` },
-  { value: "get.blockchain.apps.meta.tokens", title: `get.blockchain.apps.meta.tokens (Lisk Service)` },
-  { value: "get.blockchain.apps.meta.tokens.supported", title: `get.blockchain.apps.meta.tokens.supported (Lisk Service)` },
+  {
+    value: "get.blockchain.apps.statistics",
+    title: `get.blockchain.apps.statistics (Lisk Service)`,
+  },
+  {
+    value: "get.blockchain.apps.meta",
+    title: `get.blockchain.apps.meta (Lisk Service)`,
+  },
+  {
+    value: "get.blockchain.apps.meta.list",
+    title: `get.blockchain.apps.meta.list (Lisk Service)`,
+  },
+  {
+    value: "get.blockchain.apps.meta.tokens",
+    title: `get.blockchain.apps.meta.tokens (Lisk Service)`,
+  },
+  {
+    value: "get.blockchain.apps.meta.tokens.supported",
+    title: `get.blockchain.apps.meta.tokens.supported (Lisk Service)`,
+  },
   { value: "get.blocks", title: `get.blocks (Lisk Service)` },
   { value: "get.blocks.assets", title: `get.blocks.assets (Lisk Service)` },
   { value: "get.events", title: `get.events (Lisk Service)` },
@@ -15,25 +29,50 @@ export const Methods = [
   { value: "get.legacy", title: `get.legacy (Lisk Service)` },
   { value: "get.market.prices", title: `get.market.prices (Lisk Service)` },
   { value: "get.network.peers", title: `get.network.peers (Lisk Service)` },
-  { value: "get.network.statistics", title: `get.network.statistics (Lisk Service)` },
+  {
+    value: "get.network.statistics",
+    title: `get.network.statistics (Lisk Service)`,
+  },
   { value: "get.network.status", title: `get.network.status (Lisk Service)` },
-  { value: "get.pos.rewards.claimable", title: `get.pos.rewards.claimable (Lisk Service)` },
-  { value: "get.pos.rewards.locked", title: `get.pos.rewards.locked (Lisk Service)` },
+  {
+    value: "get.pos.rewards.claimable",
+    title: `get.pos.rewards.claimable (Lisk Service)`,
+  },
+  {
+    value: "get.pos.rewards.locked",
+    title: `get.pos.rewards.locked (Lisk Service)`,
+  },
   { value: "get.pos.constants", title: `get.pos.constants (Lisk Service)` },
   { value: "get.pos.stakers", title: `get.pos.stakers (Lisk Service)` },
   { value: "get.pos.stakes", title: `get.pos.stakes (Lisk Service)` },
   { value: "get.pos.unlocks", title: `get.pos.unlocks (Lisk Service)` },
   { value: "get.pos.validators", title: `get.pos.validators (Lisk Service)` },
-  { value: "get.reward.annual-inflation", title: `get.reward.annual-inflation (Lisk Service)` },
-  { value: "get.reward.constants", title: `get.reward.constants (Lisk Service)` },
+  {
+    value: "get.reward.annual-inflation",
+    title: `get.reward.annual-inflation (Lisk Service)`,
+  },
+  {
+    value: "get.reward.constants",
+    title: `get.reward.constants (Lisk Service)`,
+  },
   { value: "get.reward.default", title: `get.reward.default (Lisk Service)` },
   { value: "get.schemas", title: `get.schemas (Lisk Service)` },
   { value: "get.index.status", title: `get.index.status (Lisk Service)` },
-  { value: "get.token.account.exist", title: `get.token.account.exist (Lisk Service)` },
+  {
+    value: "get.token.account.exist",
+    title: `get.token.account.exist (Lisk Service)`,
+  },
   { value: "get.token.balances", title: `get.token.balances (Lisk Service)` },
+  {
+    value: "get.token.balances.top",
+    title: `get.token.balances.top (Lisk Service)`,
+  },
   { value: "get.token.constants", title: `get.token.constants (Lisk Service)` },
   { value: "get.token.summary", title: `get.token.summary (Lisk Service)` },
   { value: "get.transactions", title: `get.transactions (Lisk Service)` },
-  { value: "get.transactions.statistics", title: `get.transactions.statistics (Lisk Service)` },
-  { value: "get.validator", title: `get.validator (Lisk Service)` }
-]
+  {
+    value: "get.transactions.statistics",
+    title: `get.transactions.statistics (Lisk Service)`,
+  },
+  { value: "get.validator", title: `get.validator (Lisk Service)` },
+];

@@ -288,14 +288,13 @@ const formatters = {
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => {
+    console.log(value, "avatarAddress");
     return (
       <span className={"flex flex-row space-x-2 items-center"}>
-        {value?.value?.address && (
-          <Avatar size={20} address={value.value.address} />
-        )}
+        {value?.address && <Avatar size={20} address={value?.address} />}
         {
           <Typography tag={"span"} size={"subBody"}>
-            {value.value.name || value.value.address}
+            {value?.name || value?.address}
           </Typography>
         }
       </span>
