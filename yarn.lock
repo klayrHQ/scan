@@ -8500,6 +8500,11 @@ date-now@1.0.1:
   resolved "https://npm.colecti.io/date-now/-/date-now-1.0.1.tgz"
   integrity sha512-yiizelQCqYLUEVT4zqYihOW6Ird7Qyc6fD3Pv5xGxk4+Jz0rsB1dMN2KyNV6jgOHYh5K+sPGCSOknQN4Upa3pg==
 
+dayjs@^1.11.8:
+  version "1.11.8"
+  resolved "https://npm.colecti.io/dayjs/-/dayjs-1.11.8.tgz#4282f139c8c19dd6d0c7bd571e30c2d0ba7698ea"
+  integrity sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==
+
 debounce@1.0.0:
   version "1.0.0"
   resolved "https://npm.colecti.io/debounce/-/debounce-1.0.0.tgz"

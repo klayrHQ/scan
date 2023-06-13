@@ -108,10 +108,7 @@ export const getAllData = async (
       for (const subQuery of query.subQueries) {
         if (subQuery.type === "forEach") {
           if (responses[query.key].status === "success") {
-            const data =
-              responses[query.key].data?.stakes ||
-              responses[query.key].data?.stakers ||
-              responses[query.key].data;
+            const data = getIterableData(responses[query.key]?.data)
             for (const index in data) {
               const childRequest = data[index];
               const foreignKey = getDotString(
@@ -187,6 +184,22 @@ export const getAllData = async (
   }
   return responses;
 };
+
+export const getIterableData = (data: any) => {
+  if (!data) {
+    return []
+  }
+  if (data[0]) {
+    return data
+  }
+  const keys = Object.keys(data)
+  for (const k of keys) {
+    if (data[k][0]) {
+      return data[k]
+    }
+  }
+  return []
+}
 
 export const getData = async (
   serviceType: ServiceTypes,

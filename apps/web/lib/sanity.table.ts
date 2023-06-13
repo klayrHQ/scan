@@ -1,7 +1,8 @@
 import { RPCResponses } from "@liskscan/lisk-service-client/lib/types";
 import { getFromDottedKey } from "./dotString";
-import { ValueFormat } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { ValueFormat } from "ui";
 import util from "util";
+import {getIterableData} from "./sanity.service";
 
 export interface MakeTableProps {
   data: Record<string, RPCResponses<any>>;
@@ -21,8 +22,7 @@ export const makeTable = ({
   data,
 }: MakeTableProps): { rows: (string | number)[][] } => {
   if (data[key]?.status === "success") {
-    const parsedData =
-      data[key]?.data?.stakers || data[key]?.data?.stakes || data[key]?.data;
+    const parsedData = getIterableData(data[key]?.data)
     const rows = parsedData?.map((row: any) =>
       cols.map((col) =>
         col.valueKeys.map((valueFormat) => {
