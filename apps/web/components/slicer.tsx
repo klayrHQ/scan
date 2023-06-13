@@ -25,7 +25,7 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
   const path = usePathname();
   const [uri, id] = path?.split("/").slice(1) || [undefined, undefined];
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
-  const { setQueries, cache, setID } = useService();
+  const { setQueries, cache, setID, nextPage } = useService();
   useEffect(() => {
     if (setQueries) {
       setQueries(queries);
@@ -36,6 +36,12 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
       setID(id);
     }
   }, [setID, id]);
+
+  useEffect(() => {
+    if(queries) {
+      nextPage("test")
+    }
+  }, [queries])
 
   useEffect(() => console.log("CACHE", uri, id, cache), [cache]);
 
@@ -51,7 +57,6 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
             key={`${slice._id}${uri}_${id}_${JSON.stringify(queryParams)}-${i}`}
             id={id}
             uri={uri}
-            test={"asdfasdf"}
           />
         );
       })}

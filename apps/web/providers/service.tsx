@@ -30,6 +30,7 @@ type ServiceContextType = {
   events: Record<string, EventsResponse | BlocksResponse["data"][0]>;
   setQueries(queries: ServiceQueries[]): void;
   setID(id?: string): void
+  nextPage(queryKey?: string): void
 };
 const ServiceContext = createContext<ServiceContextType>(
   {} as ServiceContextType
@@ -51,6 +52,13 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   >();
 
   const updateQuery = async () => {
+    const response = await getAllData(queries, undefined, id);
+    setCache((prevState) => ({ ...prevState, ...response }));
+    setLastUpdate(new Date().getTime());
+  };
+
+  const nextPage = async (queryKey: string) => {
+    console.log(queries)
     const response = await getAllData(queries, undefined, id);
     setCache((prevState) => ({ ...prevState, ...response }));
     setLastUpdate(new Date().getTime());
@@ -161,6 +169,7 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
         cache,
         lastUpdate,
         setID,
+        nextPage,
       }}
     >
       {children}

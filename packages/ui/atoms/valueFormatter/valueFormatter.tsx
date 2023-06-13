@@ -6,7 +6,6 @@ import Link from "next/link";
 import { UpdateOnType } from "liskscan/schemas/slices/table";
 import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
-import { formatDistance } from "date-fns";
 import { Avatar } from "../avatar/avatar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
@@ -61,7 +60,8 @@ type ValueTypes =
   | "boolean"
   | "float"
   | "timestamp"
-  | "hex";
+  | "hex"
+  | "object";
 type Operators = "==" | "!=" | "<=" | ">=" | "<" | ">";
 type Icon = {
   conditions?: {
@@ -174,7 +174,7 @@ export interface ValueFormat {
 export const ValueFormatter = ({
   value,
   typography,
-  type = "string",
+  type,
   format = "plain",
   tag = "span",
   tooltip,
@@ -267,6 +267,7 @@ const parsers = {
   timestamp: (value?: string) => parseInt(value || "0") * 1000, //value ? new Date(value + 1000) : new Date(),
   boolean: (value?: boolean) => value === true,
   hex: (value?: string) => Buffer.from(value || "", "hex"),
+  object: (value?: any) => value,
 };
 
 const formatters = {
@@ -287,20 +288,20 @@ const formatters = {
   fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
-  avatarAddress: (value: any) => {
-    return (
-      <span className={"flex flex-row space-x-2 items-center"}>
-        {value?.value?.address && (
-          <Avatar size={20} address={value.value.address} />
+  avatarAddress: (value: any) => (
+    <span className={"flex flex-row space-x-2 items-center"}>
+      {value?.address && <Avatar size={20} address={value.address} />}
+      <Typography tag={"span"} size={"subBody"}>
+        {value.name || (
+          <ValueFormatter
+            value={value.address}
+            typography={[{ key: "size", value: "subBody" }]}
+            format={"shortAddress"}
+          />
         )}
-        {
-          <Typography tag={"span"} size={"subBody"}>
-            {value.value.name || value.value.address}
-          </Typography>
-        }
-      </span>
-    );
-  },
+      </Typography>
+    </span>
+  ),
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),
   // fromNow: (value: any) =>
@@ -439,7 +440,8 @@ const parseTooltip = (tooltip?: TooltipType, value?: any) => {
   return result || tooltip.value || "";
 };
 
-const parseValue = (type: ValueTypes, value?: any) => parsers[type](value);
+const parseValue = (type?: ValueTypes, value?: any) =>
+  type ? parsers[type](value) : value;
 const shortenAddress = (value: string) =>
   value
     ? value.length > 11

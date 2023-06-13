@@ -174,6 +174,7 @@ export const SanityValue = [
             { title: "float", value: "float" },
             { title: "timestamp", value: "timestamp" },
             { title: "hex", value: "hex" },
+            { title: "object", value: "object" },
           ],
         },
       },

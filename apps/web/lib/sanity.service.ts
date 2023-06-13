@@ -213,6 +213,15 @@ export const getData = async (
   }
 };
 
+export const getNextData = async (
+  serviceType: ServiceTypes,
+  call: CallsRPC | string,
+  params?: any
+): Promise<RPCResponses<RPCCalls> & { data?: any }> => {
+  const nextParams = {...params, offset: (params?.offset || 0) + (params?.limit || 10)}
+  return await getData(serviceType, call, nextParams)
+};
+
 export const keyFromData = (
   findKey: string,
   data: Record<string, CallTypesRPC[CallsRPC]["response"]>
