@@ -10,7 +10,6 @@ interface LiskAvatarProps {
   size: number
   uniqueSvgUrlHash?: any
   className?: string
-  username?: boolean
   circle?: boolean
   collectible?: boolean
 }
@@ -20,7 +19,6 @@ export const LiskAvatar = ({
         size,
         uniqueSvgUrlHash = "liskScan",
         className,
-        username,
         circle,
         collectible
       }: LiskAvatarProps) => {

@@ -3,55 +3,11 @@ import { Grid, Tags, Tooltip, TooltipPlacement, Typography } from "../index";
 import { IconListTypes, iconsList } from "liskscan/components/iconList";
 import { cloneElement } from "react";
 import Link from "next/link";
-import { UpdateOnType } from "liskscan/schemas/slices/table";
 import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { Avatar } from "../avatar/avatar";
-import relativeTime from "dayjs/plugin/relativeTime";
-import updateLocale from "dayjs/plugin/updateLocale";
-import dayjs from "dayjs";
-import "dayjs/plugin/relativeTime";
-import "dayjs/locale/en"; // Import the locale file for English
+import {dayjs} from "../../utils/time";
 
-dayjs.extend(relativeTime);
-dayjs.extend(updateLocale);
-
-dayjs.updateLocale("en", {
-  relativeTime: {
-    future: "in %s",
-    past: "%s ago",
-    s: (number: any, withoutSuffix: any, key: any, isFuture: any) => {
-      if (isFuture) {
-        if (number <= 5) {
-          return "now";
-        } else if (number <= 60) {
-          const nearestMultipleOfFive = Math.ceil(number / 5) * 5;
-          return nearestMultipleOfFive + "s";
-        } else {
-          const minutes = Math.floor(number / 60);
-          const seconds = Math.ceil(number / 60 / 5) * 5;
-          let timeString = "";
-
-          if (minutes > 0) {
-            timeString += minutes + "m";
-          }
-          if (seconds > 0) {
-            timeString += "" + seconds + "s";
-          }
-
-          return timeString.trim();
-        }
-      } else {
-        return number + "s";
-      }
-    },
-    m: "1m",
-    mm: "%dm",
-  },
-});
-
-const futureDate = dayjs().add(15, "seconds");
-const countdown = futureDate.fromNow();
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
   | "string"
@@ -165,7 +121,6 @@ export interface ValueFormat {
   };
   name?: string;
   type?: "literal" | "key";
-  updateOn?: UpdateOnType;
   value?: any;
   copy?: boolean;
   _key?: string;

@@ -1,14 +1,9 @@
-import React, { FC, useEffect, useState } from "react"
+import React from "react"
 import { LiskAvatar } from "../liskAvatar/liskAvatar";
-
-/*import { Pumpkin } from "liskscan/halloween/Pumpkin"
-import { useAvatars } from "providers/Avatars"
-import { NftsDataType } from "assets/content/types"
-import { AmplifireIcon } from "../../../liskscan/amplifire/amplifireIcon"*/
 
 interface AvatarProps {
   seed?: string
-  address?: string
+  address: string
   className?: string
   size?: number
   username?: boolean
@@ -40,8 +35,7 @@ export const Avatar = ({
       <LiskAvatar
         size={size || 0}
         collectible={collectible}
-        address={address || ""}
-        username={username}
+        address={address}
         className={className}
       />
       {/*{!currentAvatar || standard ? (
