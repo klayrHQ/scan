@@ -29,6 +29,7 @@ import { useSanity } from "../../providers/sanity";
 import { FavouritesModal } from "../../components/favouritesModal";
 import { SearchModal } from "../../components/searchModal";
 import { MobileMenuModal } from "../../components/mobileMenuModal";
+import { KPICarousel } from "../../components/data/KPICarousel";
 
 export const TopBarLayout = ({
   status,
@@ -71,11 +72,11 @@ export const TopBarLayout = ({
         infoItemsLeft={[
           <Grid
             key={"asdf"}
-            className={"gap-0 lg:gap-2"}
+            className={"gap-0 lg:gap-2 w-full"}
             gap={2}
             flex
             columns={2}
-            mobileColumns={1}
+            mobileColumns={2}
           >
             <Tooltip
               placement={"left"}
@@ -105,21 +106,27 @@ export const TopBarLayout = ({
               />
             </Tooltip>
             {kpis &&
-              kpis?.map(({ key, label, backup, _key }) => (
-                <KeyValueKPI
-                  key={_key}
-                  dottedKey={key}
-                  label={label}
-                  backupKey={backup}
-                  lastBlock={events["new.block"] as BlocksResponse["data"][0]}
-                  data={{
-                    index,
-                    status,
-                    app: appState,
-                    lastBlock: events["new.block"],
-                  }}
-                />
-              ))}
+              <>
+                {kpis?.map(({ key, label, backup, _key }) => (
+                  <div className={"hidden md:inline"}>
+                    <KeyValueKPI
+                      key={_key}
+                      dottedKey={key}
+                      label={label}
+                      backupKey={backup}
+                      lastBlock={events["new.block"] as BlocksResponse["data"][0]}
+                      data={{
+                        index,
+                        status,
+                        app: appState,
+                        lastBlock: events["new.block"],
+                      }}
+                    />
+                  </div>
+                ))}
+                <KPICarousel kpis={kpis} index={index} appState={appState} events={events} status={status} />
+              </>
+            }
           </Grid>,
         ]}
         infoItemsRight={[
