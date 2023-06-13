@@ -244,18 +244,25 @@ const formatters = {
   number: (value: any) => value.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => (
-    <span className={"flex flex-row space-x-2 items-center"}>
+    <Grid
+      columns={2}
+      flex
+      mobileColumns={2}
+      className={"space-x-2 items-center"}
+    >
       {value?.address && <Avatar size={20} address={value.address} />}
-      <Typography tag={"span"} size={"subBody"}>
-        {value.name || (
-          <ValueFormatter
-            value={value.address}
-            typography={[{ key: "size", value: "subBody" }]}
-            format={"shortAddress"}
-          />
-        )}
-      </Typography>
-    </span>
+      <Grid columns={1} mobileColumns={1}>
+        <Typography tag={"span"} size={"body"}>
+          {value.name || (
+            <ValueFormatter
+              value={value.address}
+              typography={[{ key: "size", value: "subBody" }]}
+              format={"shortAddress"}
+            />
+          )}
+        </Typography>
+      </Grid>
+    </Grid>
   ),
   icon: (value: any) => "",
   date: (value: any) => new Date(value).toLocaleString(),
