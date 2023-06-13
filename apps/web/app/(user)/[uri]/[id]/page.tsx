@@ -246,6 +246,7 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
   return tableRows.rows;
 };
 
+/*
 export async function generateStaticParams() {
   const transactionTypes = await client.rpc("get.network.status");
   const validators = await client.rpc("get.pos.validators", { limit: 1000 });
@@ -262,7 +263,7 @@ export async function generateStaticParams() {
   }
   return list;
 }
-
+*/
 export default async function Web({ params }: any) {
   const isDraftMode = draftMode().isEnabled;
   const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;
