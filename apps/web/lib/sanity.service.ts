@@ -6,7 +6,7 @@ import {
 } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
 import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
-import { parseProps } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { parseProps } from "ui";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
 
@@ -49,6 +49,38 @@ export const client = new LiskService({
   // url: "betanet-service.lisk.com",
   disableTLS: false,
 });
+let timestamps: Record<number, number> = {}
+export const getTimestamp = async (height: number): Promise<number> => {
+  if (timestamps[height]) {
+    return timestamps[height]
+  }
+  const response = await getData(
+    "lisk-service",
+    "get.blocks",
+    { height: height.toString(), }
+  )
+  if (response.status === "success") {
+    timestamps[height] = response.data[0].timestamp
+    return response.data[0].timestamp
+  }
+  return 0
+}
+
+export const needsTimestampImport = (call: ServiceQueries["call"]) => {
+  if (call === "get.pos.validators") {
+    return true
+  }
+  return false
+}
+
+export const getTimestampHeightKeys = (call: ServiceQueries["call"]) => {
+  if (call === "get.pos.validators") {
+    return [
+      "lastGeneratedHeight",
+      "lastCommissionIncreaseHeight"
+    ]
+  }
+}
 
 export const getAllData = async (
   queries: ServiceQueries[],
@@ -74,6 +106,16 @@ export const getAllData = async (
         query.call,
         parseProps(query.params, id)
       );
+      if (needsTimestampImport(query.call)) {
+        const keys = getTimestampHeightKeys(query.call)
+        if (keys) {
+          for (const index in responses[query.key]?.data) {
+            for (const key of keys) {
+              responses[query.key].data[index][key.replace("Height", "Timestamp")] = await getTimestamp(responses[query.key]?.data[index][key])
+            }
+          }
+        }
+      }
       if (query.calculations) {
         for (const calculation of query.calculations) {
             const d = getIterableData(responses[query.key].data)
@@ -122,6 +164,16 @@ export const getAllData = async (
                   }
                 );
                 if (response.status === "success" && response?.data) {
+                  if (needsTimestampImport(subQuery.call)) {
+                    const keys = getTimestampHeightKeys(subQuery.call)
+                    if (keys) {
+                      for (const index in response?.data) {
+                        for (const key of keys) {
+                          response.data[index][key.replace("Height", "Timestamp")] = await getTimestamp(response.data[index][key])
+                        }
+                      }
+                    }
+                  }
                   responses[`${foreignKey}_${subQuery.call}`] = {
                     ...response,
                     data:
@@ -157,6 +209,16 @@ export const getAllData = async (
               `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
             ]?.data
           ) {
+            if (needsTimestampImport(subQuery.call)) {
+              const keys = getTimestampHeightKeys(subQuery.call)
+              if (keys) {
+                for (const index in responses[query.key].data) {
+                  for (const key of keys) {
+                    responses[query.key].data[index][key.replace("Height", "Timestamp")] = await getTimestamp(responses[query.key].data[index][key])
+                  }
+                }
+              }
+            }
             for (const index in responses[query.key].data) {
               try {
                 const childRequest = responses[query.key].data[index];
