@@ -314,9 +314,8 @@ const formatters = {
 
   fromNow: (value: any) => {
     const date = dayjs(value);
-    const now = dayjs();
 
-    if (now.diff(date, "hour") > 1) {
+    if (dayjs().diff(date, "hour") > 1) {
       return date.format("DD MMM 'YY HH:mm");
     }
 
