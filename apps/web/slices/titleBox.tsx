@@ -1,4 +1,11 @@
-import { Container, Grid, Tooltip, Typography, ValueFormat, ValueFormatter} from "ui";
+import {
+  Container,
+  Grid,
+  Tooltip,
+  Typography,
+  ValueFormat,
+  ValueFormatter,
+} from "ui";
 import { InfoOutlineIcon } from "@sanity/icons";
 
 export const TitleBoxSlice = ({
@@ -13,7 +20,7 @@ export const TitleBoxSlice = ({
   return (
     <Container section className={"max-w-app"}>
       <Grid columns={1}>
-        <Grid flex columns={2} gap={0} className={"items-center"}>
+        <Grid flex columns={2} gap={0} className={"md:items-center"}>
           {title && title.value && (
             <ValueFormatter value={title.value} {...title.format} />
           )}
