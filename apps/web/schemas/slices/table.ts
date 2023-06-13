@@ -36,5 +36,10 @@ export default defineType({
       title: "Table",
       to: [{ type: "tables" }],
     },
+    {
+      name: "container",
+      type: "boolean",
+      title: "Outer container with shadow & padding",
+    },
   ],
 });

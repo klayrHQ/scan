@@ -4,7 +4,7 @@ import { Table } from "../components/data/table/table";
 import React, { useEffect, useState } from "react";
 import { processTable } from "../lib/queries/getTable";
 
-export const TableSlice = ({ queryData, data, table, id }: any) => {
+export const TableSlice = ({ queryData, data, table, id, container }: any) => {
   // const {lastBlock} = useService()
   const [tableState, updateTable] = useState<{
     table: any;
@@ -26,8 +26,14 @@ export const TableSlice = ({ queryData, data, table, id }: any) => {
       getData();
     }
   }, [queryData]);
+
   return (
-    <div className={"max-w-app mx-auto w-full bg-background"}>
+    <div
+      className={[
+        "max-w-app mx-auto w-full bg-background rounded",
+        container ? "shadow-xl p-4 w-app mx-auto " : "",
+      ].join(" ")}
+    >
       <Table
         key={id}
         queryData={queryData}
