@@ -1,6 +1,5 @@
-import { Container, Grid, Tooltip, Typography } from "ui";
+import { Container, Grid, Tooltip, Typography, ValueFormat, ValueFormatter} from "ui";
 import { InfoOutlineIcon } from "@sanity/icons";
-import { ValueFormat, ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 
 export const TitleBoxSlice = ({
   title,
@@ -8,7 +7,7 @@ export const TitleBoxSlice = ({
   info,
 }: {
   title?: ValueFormat;
-  description?: string;
+  description?: ValueFormat;
   info?: string;
 }) => {
   return (
@@ -25,9 +24,9 @@ export const TitleBoxSlice = ({
             </Tooltip>
           )}
         </Grid>
-        {description && (
+        {description && description.value && (
           <Typography tag={"p"} size={"body"} color={"onBackground"}>
-            {description}
+            {description.value}
           </Typography>
         )}
       </Grid>

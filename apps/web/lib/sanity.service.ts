@@ -76,9 +76,10 @@ export const getAllData = async (
       );
       if (query.calculations) {
         for (const calculation of query.calculations) {
-          if (responses[query.key].data?.[0]) {
+            const d = getIterableData(responses[query.key].data)
+
             // data array
-            responses[query.key].data = responses[query.key].data.map(
+            responses[query.key].data = d?.map(
               (row: any) => {
                 const keys = calculation.keys.map((k) => {
                   if (responses[getDottedKeyType(k)]) {
@@ -98,9 +99,6 @@ export const getAllData = async (
                 }
               }
             );
-          } else {
-            // data object
-          }
         }
       }
     }

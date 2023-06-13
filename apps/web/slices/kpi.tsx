@@ -36,7 +36,7 @@ export const Kpi = ({
       {values?.map((value, index) => {
         let v: any = "";
         if (value.type === "key") {
-          v = getFromDottedKey(value.value, "row", queryData, queryData) || "-";
+          v = getFromDottedKey(value.value, "row", queryData, queryData);
         }
         let link = undefined
         if (value.format?.link?.href) {
@@ -55,7 +55,7 @@ export const Kpi = ({
         return (
           <ValueFormatter
             key={value._key}
-            value={v || value.value}
+            value={value.type === "key" ? v : value.value}
             copy={copy === index}
             {...value.format}
             link={link}
