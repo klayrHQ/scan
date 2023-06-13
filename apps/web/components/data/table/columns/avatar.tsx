@@ -2,10 +2,12 @@ import { ColumnProps } from "./index";
 import { ValueFormatter } from "ui";
 import {LiskAvatar} from "ui/atoms/liskAvatar/liskAvatar";
 import React from "react";
+import Link from "next/link";
 
 export const AvatarColumn = ({ params, values }: ColumnProps) => {
   return (
-    <span className={"flex flex-row space-x-2 items-center"}>
+    // eslint-disable-next-line react/jsx-no-undef
+    <Link href={`/account/${values[0]?.value?.address}`} className={"flex flex-row space-x-2 items-center"}>
       {values[0]?.value?.address && (
         <LiskAvatar
           size={20}
@@ -19,7 +21,7 @@ export const AvatarColumn = ({ params, values }: ColumnProps) => {
           {...values[0].format}
           format={!values[0].value.name ? "shortAddress" : "plain"}
         />
-    </span>
+    </Link>
   );
   // <Typography
   //   tag={"span"}
