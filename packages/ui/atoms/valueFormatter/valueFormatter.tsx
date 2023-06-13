@@ -142,7 +142,7 @@ export const ValueFormatter = ({
   const parsedValue = parseValue(type, value);
   const parsedTooltip = parseTooltip(tooltip, parsedValue);
 
-  const dayjs = require("dayjs");
+ // const dayjs = require("dayjs");
 
   const parsedColor =
     color && color.conditions && color.conditions?.length > 0
@@ -277,7 +277,7 @@ const formatters = {
   fromNow: (value: any) => {
     const date = dayjs(value);
 
-    if (dayjs().diff(date, "hour") > 1) {
+    if (dayjs().diff(date, "hour") >= 1) {
       return date.format("DD MMM 'YY HH:mm");
     }
 
