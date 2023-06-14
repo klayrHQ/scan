@@ -5,6 +5,7 @@ import { kpi } from "./kpi";
 import tabs from "./tabs";
 import { SanityValue } from "../layout/value";
 import { stakesAccount } from "./stakesAccount";
+import {divider} from "./divider";
 
 const sliceDocumentNames: {
   type: string;
@@ -14,6 +15,7 @@ const sliceDocumentNames: {
   stakesAccount,
   titleBox,
   kpi,
+  divider,
   { name: "grid" },
 ].map((doc) => ({
   type: doc.name,
