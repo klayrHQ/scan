@@ -33,8 +33,10 @@ export const KPICarousel = ({
       {kpis?.map(({ key, label, backup, _key }) => (
         <div
           className={cls([
-            "absolute translate-x-full opacity-0 duration-300 ease-in",
-            currentKPI.label === label ? "opacity-100 left-0 translate-x-0 transition-all cursor-pointer" : "pointer-events-none transition-transform",
+            "absolute opacity-0 duration-300 ease-in",
+            currentKPI.label === label ?
+              "opacity-100 left-0 translate-x-0 transition-all cursor-pointer"
+              : "pointer-events-none transition-transform translate-x-full",
           ])}
           onClick={handleNextClick}
         >
