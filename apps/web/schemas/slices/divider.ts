@@ -31,14 +31,19 @@ export const divider = defineType({
       title: "Divider thickness",
     },
     {
-      name: "borderStyle",
-      type: "string",
-      title: "Divider style (solid, dotted, etc.)",
-    },
-    {
       name: "align",
       type: "string",
       title: "Alignment",
+      initialValue: "center",
+      options: {
+        list: [
+          {title: "None", value: ""},
+          {title: "Left", value: "start"},
+          {title: "Center", value: "center"},
+          {title: "Right", value: "end"},
+        ],
+        layout: "radio",
+      },
     },
     {
       name: "marginY",
