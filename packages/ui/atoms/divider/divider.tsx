@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {cls} from "../../utils";
 
-interface DividerProps {
+export interface DividerProps {
   className?: string
   color?: string
   width?: string
@@ -24,7 +24,8 @@ export const Divider: FC<DividerProps> = ({
     <div
       className={cls([
         "w-full",
-        `text-${align}`,
+        "flex",
+        `justify-${align}`,
       ])}
     >
       <hr
@@ -35,7 +36,7 @@ export const Divider: FC<DividerProps> = ({
           width && `w-${width}`,
           borderWidth && `border-${borderWidth}`,
           borderStyle ? `border-${borderStyle}` : "border-solid",
-          marginY && `my-${marginY}`,
+          marginY ? `my-${marginY}` : "m-0",
         ])}
       />
     </div>

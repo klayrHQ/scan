@@ -7,6 +7,7 @@ import transactionTabs from "./transactionTabs";
 import { stakesAccount } from "./stakesAccount";
 import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
+import { divider } from "./divider";
 
 export const slices = [
   favorite,
@@ -18,5 +19,6 @@ export const slices = [
   transactionTabs,
   stakesAccount,
   accountHeader,
+  divider,
 ];
 export const sliceDocumentNames: string[] = slices.map((doc) => doc.name);

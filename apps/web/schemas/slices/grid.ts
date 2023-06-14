@@ -7,6 +7,7 @@ import transactionTabs from "./transactionTabs";
 import { stakesAccount } from "./stakesAccount";
 import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
+import {divider} from "./divider";
 
 const sliceDocumentNames: {
   type: string;
@@ -18,6 +19,7 @@ const sliceDocumentNames: {
   stakesAccount,
   accountHeader,
   favorite,
+  divider,
   { name: "grid" },
   transactionTabs,
 ].map((doc) => ({
