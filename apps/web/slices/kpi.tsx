@@ -9,6 +9,7 @@ export const Kpi = ({
   queries,
   name,
   values,
+  className,
   gap,
   justifyBetween,
   cols,
@@ -24,6 +25,7 @@ export const Kpi = ({
   mobileColumns: number;
   isFlex: boolean;
   copy: number;
+  className: any;
 }) => {
   return (
     <Grid
@@ -31,6 +33,7 @@ export const Kpi = ({
       flex={isFlex}
       gap={gap}
       columns={cols}
+      className={className}
       mobileColumns={mobileColumns}
     >
       {values?.map((value, index) => {
@@ -38,19 +41,21 @@ export const Kpi = ({
         if (value.type === "key") {
           v = getFromDottedKey(value.value, "row", queryData, queryData);
         }
-        let link = undefined
+        let link = undefined;
         if (value.format?.link?.href) {
           link = {
             href: value.format.link.href,
-            keys: []
-          }
+            keys: [],
+          };
         }
         if (value.format?.link?.keys?.length > 0 && value.format?.link?.href) {
-          const keys = value.format.link.keys.map((key: string) => getFromDottedKey(key, "row", queryData, queryData))
+          const keys = value.format.link.keys.map((key: string) =>
+            getFromDottedKey(key, "row", queryData, queryData)
+          );
           link = {
             href: util.format(value.format.link.href, ...keys),
-            keys
-          }
+            keys,
+          };
         }
         return (
           <ValueFormatter
