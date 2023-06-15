@@ -8,6 +8,7 @@ import { stakesAccount } from "./stakesAccount";
 import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
 import { divider } from "./divider";
+import {jsonItem} from "./jsonItem";
 
 export const slices = [
   favorite,
@@ -20,5 +21,6 @@ export const slices = [
   stakesAccount,
   accountHeader,
   divider,
+  jsonItem,
 ];
 export const sliceDocumentNames: string[] = slices.map((doc) => doc.name);
