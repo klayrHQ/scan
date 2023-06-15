@@ -9,7 +9,8 @@ import { ValidatorStatusColumn } from "./validatorStatus";
 import { NrColumn } from "./nr";
 import { StakesColumn } from "./stakes";
 import { OrColumn } from "./or";
-import {StakesAccountColumn} from "./stakesAccount";
+import { StakesAccountColumn } from "./stakesAccount";
+import { LogoColumn } from "./logo";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -30,6 +31,7 @@ export const ColumnComponents = {
   StakesColumn: StakesColumn,
   OrColumn: OrColumn,
   StakesAccountColumn: StakesAccountColumn,
+  LogoColumn: LogoColumn,
 };
 
 export type ColumnTypes = keyof typeof ColumnComponents;
@@ -45,5 +47,5 @@ export {
   NrColumn,
   StakesColumn,
   OrColumn,
-  StakesAccountColumn
+  StakesAccountColumn,
 };

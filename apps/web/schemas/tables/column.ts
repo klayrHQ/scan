@@ -1,6 +1,7 @@
 import { defineType } from "sanity";
 import { SanityValue } from "../layout/value";
 import { NrColumn, OrColumn } from "../../components/data";
+import { LogoColumn } from "../../components/data/table/columns/logo";
 
 export default defineType({
   name: "column",
@@ -54,6 +55,7 @@ export default defineType({
       options: {
         list: [
           { title: "Plain", value: "PlainColumn" },
+          { title: "Logo", value: "LogoColumn" },
           { title: "Or Column", value: "OrColumn" },
           { title: "Double row", value: "DoubleRowColumn" },
           { title: "Grid colum (2)", value: "GridColumn" },

@@ -8,6 +8,7 @@ import { StakesAccount } from "./stakesAccount";
 import { FavoriteSlice } from "./favorite";
 import { AccountHeader } from "./accountHeader";
 import { DividerSlice } from "./divider";
+import { ValidatorTabs } from "./validatorsTabs";
 
 export const Slices = {
   titleBox: TitleBoxSlice,
@@ -20,5 +21,6 @@ export const Slices = {
   favorite: FavoriteSlice,
   accountHeader: AccountHeader,
   divider: DividerSlice,
+  validatorTabs: ValidatorTabs,
 };
 export type SlicesTypes = keyof typeof Slices;
