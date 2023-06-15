@@ -6,7 +6,8 @@ import {
   ValueFormat,
   ValueFormatter,
 } from "ui";
-import { InfoOutlineIcon } from "@sanity/icons";
+import { InfoFilledIcon, InfoOutlineIcon } from "@sanity/icons";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
 export const TitleBoxSlice = ({
   title,
@@ -20,14 +21,18 @@ export const TitleBoxSlice = ({
   return (
     <Container section className={"max-w-app"}>
       <Grid columns={1}>
-        <Grid flex columns={2} gap={0} className={"md:items-center"}>
+        <Grid flex columns={2} gap={0} className={"items-center"}>
           {title && title.value && (
             <ValueFormatter value={title.value} {...title.format} />
           )}
 
           {info && (
             <Tooltip label={info}>
-              <InfoOutlineIcon className={"text-onInfobar mx-2 h-5 w-5"} />
+              <InfoOutlineIcon
+                className={
+                  "text-onSurfaceLow cursor-pointer -ml-2 flex items-center h-4 w-4"
+                }
+              />
             </Tooltip>
           )}
         </Grid>
