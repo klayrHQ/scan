@@ -9,6 +9,7 @@ import { FavoriteSlice } from "./favorite";
 import { AccountHeader } from "./accountHeader";
 import { DividerSlice } from "./divider";
 import { ValidatorTabs } from "./validatorsTabs";
+import {JsonItemSlice} from "./jsonItem";
 
 export const Slices = {
   titleBox: TitleBoxSlice,
@@ -22,5 +23,6 @@ export const Slices = {
   accountHeader: AccountHeader,
   divider: DividerSlice,
   validatorTabs: ValidatorTabs,
+  jsonItem: JsonItemSlice,
 };
 export type SlicesTypes = keyof typeof Slices;

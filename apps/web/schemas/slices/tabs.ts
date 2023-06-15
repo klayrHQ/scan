@@ -6,6 +6,7 @@ import tabs from "./tabs";
 import { SanityValue } from "../layout/value";
 import { stakesAccount } from "./stakesAccount";
 import {divider} from "./divider";
+import {jsonItem} from "./jsonItem";
 
 const sliceDocumentNames: {
   type: string;
@@ -16,6 +17,7 @@ const sliceDocumentNames: {
   titleBox,
   kpi,
   divider,
+  jsonItem,
   { name: "grid" },
 ].map((doc) => ({
   type: doc.name,
