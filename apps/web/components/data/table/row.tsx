@@ -13,10 +13,18 @@ export interface RowProps {
     values: { name: string; _key: string; type: string; value: string }[];
   }[];
   data: any[];
+  row: any;
   index: number;
 }
 
-export const Row = ({ params, columns, data, index, queryData }: RowProps) => {
+export const Row = ({
+  params,
+  columns,
+  data,
+  index,
+  queryData,
+  row,
+}: RowProps) => {
   return (
     <tr
       className={cls([
@@ -29,6 +37,7 @@ export const Row = ({ params, columns, data, index, queryData }: RowProps) => {
       {columns.map((column, i) => (
         <Cell
           queryData={queryData}
+          row={row}
           {...column}
           index={index}
           key={nanoid()}

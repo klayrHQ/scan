@@ -11,6 +11,7 @@ interface KeyValueRowProps {
   inline?: boolean;
   color?: string;
   valueBold?: boolean;
+  col?: boolean;
 }
 
 export const KeyValueRow = ({
@@ -22,6 +23,7 @@ export const KeyValueRow = ({
   surface = 0,
   inline,
   color,
+  col = true,
   valueBold,
 }: KeyValueRowProps) => (
   <Paper
@@ -34,16 +36,18 @@ export const KeyValueRow = ({
   >
     <div
       className={cls([
+        col ? "flex-col flex" : "md:flex-row",
+
         inline
           ? "inline-flex w-max gap-1"
-          : "flex md:flex-grow flex-col md:flex-row justify-between w-full gap-2",
+          : "flex md:flex-grow justify-between w-full text-left",
       ])}
     >
       <Typography
         tag={"span"}
-        className={cls(["capitalize font-medium"])}
-        color={color ? color : "onSurfaceMedium"}
-        size={inline ? "subBody" : "body"}
+        className={cls(["capitalize"])}
+        color={color ? color : "onSurfaceHigh"}
+        size={inline ? "subBody" : "subBody"}
       >
         {label}
       </Typography>
@@ -52,10 +56,10 @@ export const KeyValueRow = ({
         className={cls([
           classNameValue,
           "min-w-spacer",
-          valueBold ? "font-bold" : "font-medium",
+          valueBold ? "font-bold" : "",
         ])}
-        color={color ? color : "onSurfaceHigh"}
-        size={inline ? "subBody" : "body"}
+        color={color ? color : "onSurfaceLow"}
+        size={inline ? "subBody" : "subBody"}
       >
         {value}
       </Typography>

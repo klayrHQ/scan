@@ -13,6 +13,7 @@ export type ShowOnCell =
 
 export interface CellProps {
   type?: "head" | "row";
+  row?: any;
   Component: FC<any>;
   ValueComponent: FC<any>;
   showOn: ShowOnCell;

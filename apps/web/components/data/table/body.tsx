@@ -14,6 +14,7 @@ export const Body = ({ rows, columns, queryData }: BodyProps) => {
     <tbody>
       {rows?.map((row, index) => (
         <Row
+          row={row}
           queryData={queryData}
           key={nanoid()}
           columns={columns}
