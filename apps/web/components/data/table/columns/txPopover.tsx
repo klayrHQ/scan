@@ -83,17 +83,22 @@ export const TxPopover = ({
           <KeyValueRow
             col
             label={"Status:"}
-            value={`${values[0].value} Total of ${row?.confirmations} confirmations`}
+            value={`${row?.executionStatus} Total of ${row?.confirmations} confirmations`}
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
           <KeyValueRow
+            col
             label={"Fee:"}
             value={`${row?.fee} (min fee: ${row?.minFee})`}
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
-          <KeyValueRow label={"Data:"} value={row?.params?.data || "No Data"} />
+          <KeyValueRow
+            col
+            label={"Data:"}
+            value={row?.params?.data || "No Data"}
+          />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
-          <KeyValueRow label={"Nonce:"} value={row?.nonce} />
+          <KeyValueRow col label={"Nonce:"} value={row?.nonce} />
         </Grid>
       </Grid>
     </Popover>

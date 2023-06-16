@@ -23,7 +23,7 @@ export const KeyValueRow = ({
   surface = 0,
   inline,
   color,
-  col = true,
+  col = false,
   valueBold,
 }: KeyValueRowProps) => (
   <Paper
