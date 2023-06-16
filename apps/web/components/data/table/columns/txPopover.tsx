@@ -26,11 +26,10 @@ export const TxPopover = ({
 }: {
   menuCloseFunction?: () => void;
   mobile?: boolean;
-  values: ColumnProps;
   queryData?: any;
   data?: any;
   index: number;
-}) => {
+} & ColumnProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   console.log(queryData?.["transaction-moduleCommand"]?.data?.[index], "query");
