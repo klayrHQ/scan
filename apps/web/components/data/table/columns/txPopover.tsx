@@ -1,28 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/solid";
-import { SearchContainer } from "ui/organisms/searchContainer/searchContainer";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Popover } from "ui/atoms/popover/popover";
 import { useRouter } from "next/navigation";
-import { favourites } from "ui/assets/mockupData/mockupData";
 import { cls, Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
-import { Kpi } from "../../../../slices/kpi";
-import { KeyValueKPI } from "../../keyValueKPI";
 
 export const TxPopover = ({
-  menuCloseFunction,
   mobile,
-  values,
   queryData,
   index,
-  data,
 }: {
   menuCloseFunction?: () => void;
   mobile?: boolean;
@@ -38,7 +27,6 @@ export const TxPopover = ({
     <Popover
       open={open}
       setOpen={setOpen}
-      containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={"full"}
       className={cls([
         "top-0 w-screen max-w-full lg:max-w-md shadow-xl",
