@@ -7,7 +7,8 @@ import { cls, Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
 import { CheckCircleIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
-import { ErrorFilledIcon } from "@sanity/icons";
+import { ErrorFilledIcon, EyeOpenIcon } from "@sanity/icons";
+import { EyeDropperIcon } from "@heroicons/react/24/outline";
 
 export const TxPopover = ({
   mobile,
@@ -32,12 +33,16 @@ export const TxPopover = ({
       className={cls(["top-0 w-screen max-w-full lg:max-w-md shadow-xl"])}
       placement={"center"}
       button={
-        <div className="group hover:bg-surface-2 text-onSurfaceLow rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
+        <div className="rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
           <span className={"mx-auto w-6"}>
-            <EyeIcon className={"w-4 h-4"} />
+            <EyeOpenIcon
+              className={
+                "w-6 h-6  p-1 hover:text-onSurfacePrimaryMedium text-onSurfaceLow border-surface-2 border-solid aspect-square group hover:bg-surface-2 rounded flex items-center text-base font-medium focus:outline-none relative cursor-pointer"
+              }
+            />
             {row?.executionStatus === "fail" && (
               <ErrorFilledIcon
-                className={"w-4 h-4 absolute top-0 right-2 text-error"}
+                className={"w-4 h-4 absolute top-0 right-1 text-error"}
               />
             )}
           </span>
