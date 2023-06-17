@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Popover } from "ui/atoms/popover/popover";
 import { useRouter } from "next/navigation";
 import { cls, Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
-import { EyeIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
 import { ErrorFilledIcon } from "@sanity/icons";
@@ -28,11 +28,8 @@ export const TxPopover = ({
     <Popover
       open={open}
       setOpen={setOpen}
-      containerWidth={"full"}
-      className={cls([
-        "top-0 w-screen max-w-full lg:max-w-md shadow-xl",
-        mobile && "shadow",
-      ])}
+      containerWidth={mobile ? "full" : "lg:max-w-md"}
+      className={cls(["top-0 w-screen max-w-full lg:max-w-md shadow-xl"])}
       placement={"center"}
       button={
         <div className="group hover:bg-surface-2 text-onSurfaceLow rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
@@ -79,7 +76,35 @@ export const TxPopover = ({
           <KeyValueRow
             col
             label={"Status:"}
-            value={`${row?.executionStatus} Total of ${row?.confirmations} confirmations`}
+            value={
+              <span className={"flex flex-row items-center space-x-2"}>
+                <span className={"flex flex-row items-center space-x-1"}>
+                  {row?.executionStatus === "fail" ? (
+                    <ErrorFilledIcon className="w-4 h-4 text-error" />
+                  ) : (
+                    <CheckCircleIcon className="w-4 h-4 text-success" />
+                  )}
+                  <Typography
+                    color={
+                      row?.executionStatus === "fail" ? "error" : "success"
+                    }
+                    noMargin
+                    noPadding
+                    size={"subBody"}
+                    tag={"span"}
+                  >
+                    {row?.executionStatus}
+                  </Typography>
+                </span>
+                <Typography
+                  color={row?.executionStatus === "fail" ? "error" : "success"}
+                  size={"subBody"}
+                  tag={"span"}
+                >
+                  ({row?.confirmations} confirmations)
+                </Typography>
+              </span>
+            }
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
           <KeyValueRow
