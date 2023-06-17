@@ -1,8 +1,10 @@
-import {JsonItem} from "../components/jsonItem";
+import { JsonItem } from "../components/jsonItem";
+import { getFromDottedKey } from "../lib/dotString";
 
 export const JsonItemSlice = ({
-  src,
   className,
+  queryData,
+  value,
   childClassName,
   expanderClassName,
   labelClassName,
@@ -12,23 +14,25 @@ export const JsonItemSlice = ({
   stringClassName,
   booleanClassName,
   copy,
-} : {
-  src: string
-  className?: string
-  childClassName?: string
-  expanderClassName?: string
-  labelClassName?: string
-  nullClassName?: string
-  undefinedClassName?: string
-  numberClassName?: string
-  stringClassName?: string
-  booleanClassName?: string
-  copy?: boolean
+}: {
+  queryData: any;
+  value: any;
+  className?: string;
+  childClassName?: string;
+  expanderClassName?: string;
+  labelClassName?: string;
+  nullClassName?: string;
+  undefinedClassName?: string;
+  numberClassName?: string;
+  stringClassName?: string;
+  booleanClassName?: string;
+  copy?: boolean;
 }) => {
-
+  const JSONValue = getFromDottedKey(value, "row", queryData, queryData);
+  console.log(JSONValue, "src");
   return (
     <JsonItem
-      src={src}
+      src={JSONValue}
       className={className}
       childClassName={childClassName}
       expanderClassName={expanderClassName}
@@ -39,5 +43,5 @@ export const JsonItemSlice = ({
       stringClassName={stringClassName}
       booleanClassName={booleanClassName}
     />
-  )
-}
+  );
+};

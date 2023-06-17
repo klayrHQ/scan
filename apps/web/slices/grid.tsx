@@ -4,17 +4,17 @@ import { FC } from "react";
 
 export const GridSlice: FC<{
   columns?: { _type: SlicesTypes; _id: string }[];
-  options?: {key: string, value: string}[];
-  queryData?: Record<string, any>
-  data?: any
-}> = ({ columns, options, queryData, data, }) => {
+  options?: { key: string; value: string }[];
+  queryData?: Record<string, any>;
+  data?: any;
+}> = ({ columns, options, queryData, data }) => {
   const parseOptions = () => {
-    const parsedOptions: Record<string, any> = {}
-    options?.map(({key, value}) => {
-      parsedOptions[key] = value
-    })
-    return parsedOptions
-  }
+    const parsedOptions: Record<string, any> = {};
+    options?.map(({ key, value }) => {
+      parsedOptions[key] = value;
+    });
+    return parsedOptions;
+  };
   return (
     <Grid {...parseOptions()}>
       {columns &&
