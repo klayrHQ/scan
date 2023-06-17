@@ -15,19 +15,20 @@ const {
   minHeight,
   maxHeight,
   maxWidth,
-  zIndex, colors,
-} = require( "./tailwind");
+  zIndex,
+  colors,
+} = require("./tailwind");
 
 const getKeyMap = (obj, prefix) => {
-  return ([
-    ...Object.keys(obj).map(key => `${prefix}-${key}`),
-    ...Object.keys(obj).map(key => `xs:${prefix}-${key}`),
-    ...Object.keys(obj).map(key => `sm:${prefix}-${key}`),
-    ...Object.keys(obj).map(key => `md:${prefix}-${key}`),
-    ...Object.keys(obj).map(key => `lg:${prefix}-${key}`),
-    ...Object.keys(obj).map(key => `xl:${prefix}-${key}`),
-  ])
-}
+  return [
+    ...Object.keys(obj).map((key) => `${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `xs:${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `sm:${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `md:${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `lg:${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `xl:${prefix}-${key}`),
+  ];
+};
 
 const numberList = {
   px: 0,
@@ -36,7 +37,7 @@ const numberList = {
   1: 0,
   1.5: 0,
   2: 0,
-  2.5:0,
+  2.5: 0,
   3: 0,
   3.5: 0,
   4: 0,
@@ -67,7 +68,7 @@ const numberList = {
   96: 0,
   auto: "auto",
   none: "none",
-}
+};
 
 module.exports = {
   // mode: 'jit',
@@ -172,6 +173,9 @@ module.exports = {
     "w-8",
     "w-9",
     "w-10",
+    "w-60",
+    "w-1/4",
+    "w-1/5",
     "w-max",
     "w-full",
     "w-app",
@@ -182,31 +186,31 @@ module.exports = {
     "text-left",
     "text-center",
     "text-right",
-      "text-onBackground",
-      "border-background",
-      "border-solid",
-      "border-primary",
-      "divider",
-      "divide-x-1",
-      "divide-surface-6",
-      "bg-opacity-full",
-      "tablet:bg-opacity-full",
-      "tablet:static",
-      "flex-row",
-      "sm:flex-row",
-      "md:flex-row",
-      "items-center",
-      "justify-between",
-      "space-x-2",
-      "space-x-4",
-      "space-x-6",
-      "space-x-8",
-      "space-x-10",
-      "space-x-12",
-      "capitalize",
-      "inline-flex",
-      "list-none",
-      "w-100",
+    "text-onBackground",
+    "border-background",
+    "border-solid",
+    "border-primary",
+    "divider",
+    "divide-x-1",
+    "divide-surface-6",
+    "bg-opacity-full",
+    "tablet:bg-opacity-full",
+    "tablet:static",
+    "flex-row",
+    "sm:flex-row",
+    "md:flex-row",
+    "items-center",
+    "justify-between",
+    "space-x-2",
+    "space-x-4",
+    "space-x-6",
+    "space-x-8",
+    "space-x-10",
+    "space-x-12",
+    "capitalize",
+    "inline-flex",
+    "list-none",
+    "w-100",
   ],
   darkMode: "media", // or 'class'
   theme: {
@@ -1152,7 +1156,7 @@ module.exports = {
     width: ({ theme }) => ({
       auto: "auto",
       ...theme("spacing"),
-      ...widths
+      ...widths,
     }),
     willChange: {
       auto: "auto",

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { Avatar } from "../avatar/avatar";
-import {dayjs} from "../../utils/time";
+import { dayjs } from "../../utils/time";
 
 export type SanityProps = { key: string; value: string }[];
 type ValueTypes =
@@ -57,6 +57,7 @@ type Formats =
   | "fromNow"
   | "date"
   | "shortAddress"
+  | "shortenAddressEnd"
   | "percentage"
   | "commission"
   | "currency"
@@ -142,7 +143,7 @@ export const ValueFormatter = ({
   const parsedValue = parseValue(type, value);
   const parsedTooltip = parseTooltip(tooltip, parsedValue);
 
- // const dayjs = require("dayjs");
+  // const dayjs = require("dayjs");
 
   const parsedColor =
     color && color.conditions && color.conditions?.length > 0
@@ -228,6 +229,7 @@ const parsers = {
 const formatters = {
   plain: (value: any) => value?.toString(),
   shortAddress: (value: any) => shortenAddress(value),
+  shortenAddressEnd: (value: any) => shortenAddressEnd(value),
   commission: (value: any) => {
     return value != 0 ? value / 100 + "%" : "0%";
   },
@@ -409,6 +411,9 @@ const shortenAddress = (value: string) =>
       ? value.slice(0, 6) + "..." + value.slice(-5)
       : value
     : "";
+
+const shortenAddressEnd = (value: string) =>
+  value ? (value.length > 28 ? value.slice(0, 25) + "..." : value) : "";
 
 export const parseProps = (props?: SanityProps, id?: string) =>
   props

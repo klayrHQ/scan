@@ -7,6 +7,7 @@ import { cls, Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
 import { EyeIcon } from "@heroicons/react/24/outline";
 import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
+import { ErrorFilledIcon } from "@sanity/icons";
 
 export const TxPopover = ({
   mobile,
@@ -34,8 +35,15 @@ export const TxPopover = ({
       ])}
       placement={"center"}
       button={
-        <div className="group hover:bg-surface-2  text-onSurfaceLow rounded inline-flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
-          <EyeIcon className={"w-4 h-4"} />
+        <div className="group hover:bg-surface-2 text-onSurfaceLow rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
+          <span className={"mx-auto w-6"}>
+            <EyeIcon className={"w-4 h-4"} />
+            {row?.executionStatus === "fail" && (
+              <ErrorFilledIcon
+                className={"w-4 h-4 absolute top-0 right-2 text-error"}
+              />
+            )}
+          </span>
         </div>
       }
     >
