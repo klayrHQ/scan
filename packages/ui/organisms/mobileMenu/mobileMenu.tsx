@@ -22,7 +22,7 @@ export const MobileMenu = ({
 }: MobileMenuProps) => {
   return (
     <div
-      className={"lg:hidden bg-background w-full h-full px-2"}
+      className={"lg:hidden bg-background w-full h-max min-h-full px-2"}
       id="mobile-menu"
     >
       {infoBar}
