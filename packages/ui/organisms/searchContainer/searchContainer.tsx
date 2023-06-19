@@ -14,6 +14,8 @@ export interface SearchContainerProps {
   setSearchValue: (value: string) => void
   searchResults?: tableRowsType
   ads?: Array<{ content: any, className: string }>
+  setFilters?: (value: string) => void
+  filtersList?: Array<any>
 }
 
 export const SearchContainer: FC<SearchContainerProps> = ({
@@ -25,11 +27,13 @@ export const SearchContainer: FC<SearchContainerProps> = ({
   setSearchValue,
   searchResults,
   ads,
+  setFilters,
+  filtersList,
 }) => {
 
   return (
     <div className={cls([
-      "rounded shadow-1 overflow-hidden flex flex-col divider divide-y-2 bg-background w-full",
+      "rounded shadow-1 flex flex-col divider divide-y-2 bg-background w-full",
       className,
     ])}>
       <Search
@@ -38,6 +42,8 @@ export const SearchContainer: FC<SearchContainerProps> = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         searchResults={searchResults}
+        setFilters={setFilters}
+        filtersList={filtersList}
       />
       {recentSearches &&
         <div className="px-2">

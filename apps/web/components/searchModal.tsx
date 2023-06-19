@@ -52,6 +52,15 @@ export const SearchModal = ({
     menuCloseFunction && menuCloseFunction()
   }
 
+  const [filter, setFilter] = useState("")
+
+  const filtersList = [
+    "Transactions",
+    "Validators",
+    "Stakes",
+    "Blocks",
+  ]
+
   return (
     <Popover
       open={open}
@@ -87,6 +96,8 @@ export const SearchModal = ({
         searchValue={searchValue}
         searching={false}
         searchResults={searchResults}
+        setFilters={setFilter}
+        filtersList={filtersList}
       />
     </Popover>
   )

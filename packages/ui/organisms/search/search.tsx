@@ -2,6 +2,10 @@ import React, {FC} from "react"
 import { Table } from "../table/table";
 import { Link} from "../../atoms/link/link";
 import {tableRowsType} from "../../types";
+import {Select} from "../../atoms/select/select";
+import {Icon} from "../../atoms/icon/icon";
+import {Grid} from "../../atoms";
+import {cls} from "../../assets/utils";
 
 interface SearchProps {
   searchFunction: (address?: string) => void
@@ -9,6 +13,8 @@ interface SearchProps {
   searchValue?: string
   setSearchValue: (value: string) => void
   searching?: boolean
+  setFilters?: (value: string) => void
+  filtersList?: Array<any>
 }
 
 export const Search: FC<SearchProps> = ({
@@ -17,6 +23,8 @@ export const Search: FC<SearchProps> = ({
   searchValue,
   setSearchValue,
   searching = false,
+  setFilters,
+  filtersList,
 }) => {
 
   return (
@@ -25,7 +33,12 @@ export const Search: FC<SearchProps> = ({
         <label htmlFor="search" className="sr-only">
           Search
         </label>
-        <div className="relative ">
+        <Grid
+          className="relative items-center"
+          flex
+          columns={2}
+          mobileColumns={2}
+        >
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg
               className="h-4 w-4 text-onSurfaceDark"
@@ -40,6 +53,7 @@ export const Search: FC<SearchProps> = ({
                 clipRule="evenodd"
               />
             </svg>
+            {/*<Icon icon={"search"} color={"currentColor"}/>*/}
           </div>
           <input
             id="search"
@@ -74,7 +88,24 @@ export const Search: FC<SearchProps> = ({
               !searching && "hidden",
             ].join(" ")}
           />
-        </div>
+          {
+            setFilters &&
+              <div className={cls([
+                "w-48 relative before:absolute before:content-['']",
+                "before:-left-[1px] before:w-[1px] before:h-3/4 ",
+                "before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto",
+              ])}>
+                <Select
+                  id={"search_filter"}
+                  placeholder={"Filter"}
+                  onChange={setFilters}
+                  optionsList={filtersList}
+                  transition
+                  width={"full"}
+                />
+              </div>
+          }
+        </Grid>
       </div>
       {searchValue && searchValue?.length > 2 && searchResults &&
         <div className="w-full">
