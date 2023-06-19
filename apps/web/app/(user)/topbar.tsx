@@ -66,6 +66,14 @@ export const TopBarLayout = ({
   }, [apps, status?.data?.chainID]);
 
   useEffect(() => console.log("EVENTS", events), [events?.["new.block"]]);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % kpis.length);
+  };
+
+  const currentKPI = kpis[currentIndex];
   return (
     <TopBarClient>
       <InfoBar
@@ -124,7 +132,15 @@ export const TopBarLayout = ({
                     />
                   </div>
                 ))}
-                <KPICarousel kpis={kpis} index={index} appState={appState} events={events} status={status} />
+                <KPICarousel
+                  kpis={kpis}
+                  index={index}
+                  appState={appState}
+                  events={events}
+                  status={status}
+                  currentKPI={currentKPI}
+                  handleNextClick={handleNextClick}
+                />
               </>
             }
           </Grid>,
@@ -197,6 +213,8 @@ export const TopBarLayout = ({
             status={status}
             updateThemeMode={updateThemeMode}
             index={index}
+            currentKPI={currentKPI}
+            handleNextClick={handleNextClick}
           />,
         ]}
         logo={

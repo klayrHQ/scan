@@ -1,32 +1,27 @@
-"use client"
 import {InfoBarKPISType} from "../../lib/queries/getInfoBarKPIS";
-import React, {useState} from "react";
+import React from "react";
 import {BlocksResponse} from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import {KeyValueKPI} from "./keyValueKPI";
 import {IndexStatusResponse} from "@liskscan/lisk-service-client/lib/types";
 import {cls} from "ui";
-
 
 export const KPICarousel = ({
   kpis,
   events,
   index,
   status,
-  appState
+  appState,
+  currentKPI,
+  handleNextClick,
 }: {
   kpis: InfoBarKPISType[]
   index: IndexStatusResponse
   appState: any
   events: any
   status: any
+  currentKPI: InfoBarKPISType
+  handleNextClick: () => void
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % kpis.length);
-  };
-
-  const currentKPI = kpis[currentIndex];
 
   return (
     <div className={"max-w-full w-full relative md:hidden overflow-x-hidden h-4 flex-grow"}>
