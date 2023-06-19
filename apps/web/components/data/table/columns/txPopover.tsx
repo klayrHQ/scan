@@ -30,7 +30,7 @@ export const TxPopover = ({
       open={open}
       setOpen={setOpen}
       containerWidth={mobile ? "full" : "lg:max-w-md"}
-      className={cls(["top-0 w-screen max-w-full lg:max-w-md shadow-xl"])}
+      className={cls(["top-0 w-screen max-w-[84vw] md:max-w-[50vw] lg:max-w-md shadow-xl"])}
       placement={"center"}
       button={
         <div className="rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
@@ -51,7 +51,7 @@ export const TxPopover = ({
     >
       <Grid className={"w-full"} columns={1} gap={2}>
         <Grid
-          className={"px-4 pt-2 "}
+          className={"px-4 pt-2 w-full"}
           columns={2}
           flex
           justifyBetween
