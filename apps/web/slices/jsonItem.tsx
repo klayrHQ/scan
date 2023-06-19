@@ -4,7 +4,7 @@ import { getFromDottedKey } from "../lib/dotString";
 export const JsonItemSlice = ({
   className,
   queryData,
-  value,
+  src,
   childClassName,
   expanderClassName,
   labelClassName,
@@ -25,10 +25,11 @@ export const JsonItemSlice = ({
   undefinedClassName?: string;
   numberClassName?: string;
   stringClassName?: string;
+  src: any;
   booleanClassName?: string;
   copy?: boolean;
 }) => {
-  const JSONValue = getFromDottedKey(value, "row", queryData, queryData);
+  const JSONValue = getFromDottedKey(src, "row", queryData, queryData);
   console.log(JSONValue, "src");
   return (
     <JsonItem
