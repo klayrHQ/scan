@@ -126,7 +126,7 @@ export const Popover: FC<PopoverProps> = ({
           className={popover({
             className: cls([
               className,
-              "tablet:w-auto",
+              "w-max tablet:w-auto",
               width && mobileWidth
                 ? `tablet:w-${width}`
                 : width && !mobileWidth && `w-${width}`,
