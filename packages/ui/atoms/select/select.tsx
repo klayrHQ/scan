@@ -1,0 +1,160 @@
+"use client"
+
+import React, {cloneElement, FC, ReactElement, useState} from "react";
+import { cva } from "class-variance-authority";
+import { nanoid } from "nanoid";
+import {Grid, Typography} from "../..";
+import {cls} from "../../utils";
+import {Icon} from "../icon/icon";
+
+interface SelectProps
+  // extends React.DetailedHTMLProps<
+  //   React.SelectHTMLAttributes<HTMLSelectElement>,
+  //   HTMLSelectElement
+  // >
+{
+  id: string;
+  placeholder: string;
+  // may eventually need to become required param
+  optionsList?: string[];
+  onChange: (value: string) => void;
+  transition?: boolean;
+  type?: "base" | "assetSorting";
+  width?: string;
+  listWidth?: string;
+  listOrigin?: "right" | "left";
+  textAlign?: "left" | "center" | "right";
+  openButton?: ReactElement;
+}
+
+const options = cva(
+  [
+    "box-border flex flex-col border-none shadow-xl",
+  ],
+  {
+    variants: {
+      transition: {
+        true: "px-2 transition-all duration-300",
+        false: "p-2 max-h-72 overflow-y-auto",
+      },
+      textAlign: {
+        left: "text-left",
+        center: "text-center",
+        right: "text-right",
+      }
+    },
+  },
+)
+
+export const Select: FC<SelectProps> = ({
+  id,
+  placeholder,
+  optionsList = [],
+  onChange,
+  transition = false,
+  type= "base",
+  width,
+  listWidth,
+  listOrigin,
+  textAlign= "left",
+  openButton,
+}) => {
+  const [currentValue, setCurrentValue] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setOpen(prev => !prev);
+  }
+  const handleValueChange = (value: string) => {
+    setCurrentValue(value);
+  };
+  const handleChange = (value: string) => {
+    handleValueChange(value);
+    // call method, if it exists
+    if (onChange) onChange(value);
+    // close, after all tasks are finished
+    toggleOpen();
+  };
+
+  const values = optionsList.map(value => (
+    <div
+      className={cls([
+        value === currentValue ? "text-primary" : "",
+        "w-full my-1 py-1 px-2 rounded-xs cursor-pointer outline-none",
+        type === "assetSorting" ? "hover:bg-surface-3 hover:text-surface-4" : "hover:bg-surface-1",
+      ])}
+      key={`${value}: ${nanoid()}`}
+      onClick={() => handleChange(value)}
+    >
+      <Typography
+        bold
+        className={`overflow-clip`}
+        color={value === currentValue ? "bg-primary" : "current"}
+        tag={"span"}
+      >
+        {value}
+      </Typography>
+    </div>
+  ))
+
+  return (
+    <div className={cls(["h-10 m-0 relative", width ? `w-${width}` : "w-52"])} id={id}>
+      <div className={"absolute inset-0 h-max bg-background z-50"}>
+        {
+          openButton ?
+          cloneElement(openButton, {
+            onClick: toggleOpen,
+          })
+          :
+          <button
+            className={"w-full cursor-pointer px-4 py-2 bg-transparent border-none"}
+            onClick={toggleOpen}
+            //style={{ transition: "0.3s ease", }}
+          >
+            <Grid
+              className={"justify-between items-center w-full max-h-10 border-surface-4"}
+              columns={3}
+              flex
+              gap={2}
+            >
+              <Typography
+                align={"center"}
+                bold
+                className={`pt-0.5 max-h-10 overflow-hidden ${currentValue === "" ? "opacity-high" : ""}`}
+                color={"current"}
+                tag={"span"}
+              >
+                {currentValue !== "" ? currentValue : placeholder}
+              </Typography>
+
+              <Icon
+                className={cls([
+                  "text-current h-4 w-4",
+                  transition ? `transition-transform duration-200 ${open ? "rotate-180" : ""}` : "",
+                ])}
+                icon={"chevronDown"}
+                size={"xs"}
+              />
+            </Grid>
+          </button>
+        }
+
+        <div
+          className={options({
+            className: cls([
+              transition ? (open ? "max-h-72 overflow-y-hidden py-2" : "max-h-0 overflow-hidden py-0 border-none")
+                : (open ? "visible" : "hidden"),
+              listWidth ? `w-${listWidth}` : "w-full",
+              listOrigin && `absolute ${listOrigin}-0 z-50 bg-background`,
+            ]),
+            transition,
+            textAlign,
+          })}
+        >
+          {values}
+        </div>
+      </div>
+    </div>
+  );
+
+};
