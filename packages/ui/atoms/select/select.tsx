@@ -1,6 +1,6 @@
 "use client"
 
-import React, {cloneElement, FC, ReactElement, useState} from "react";
+import React, {cloneElement, FC, ReactElement, ReactNode, useState} from "react";
 import { cva } from "class-variance-authority";
 import { nanoid } from "nanoid";
 import {Grid, Typography} from "../..";
@@ -14,8 +14,9 @@ interface SelectProps
   // >
 {
   id: string;
-  placeholder: string;
-  // may eventually need to become required param
+  className?: string;
+  placeholder: string | ReactNode;
+  placeholderActive?: string | ReactNode;
   optionsList?: string[];
   onChange: (value: string) => void;
   transition?: boolean;
@@ -25,6 +26,7 @@ interface SelectProps
   listOrigin?: "right" | "left";
   textAlign?: "left" | "center" | "right";
   openButton?: ReactElement;
+  icon?: boolean;
 }
 
 const options = cva(
@@ -48,7 +50,9 @@ const options = cva(
 
 export const Select: FC<SelectProps> = ({
   id,
+  className,
   placeholder,
+  placeholderActive,
   optionsList = [],
   onChange,
   transition = false,
@@ -58,6 +62,7 @@ export const Select: FC<SelectProps> = ({
   listOrigin,
   textAlign= "left",
   openButton,
+  icon = true,
 }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [open, setOpen] = useState(false);
@@ -98,7 +103,14 @@ export const Select: FC<SelectProps> = ({
   ))
 
   return (
-    <div className={cls(["h-10 m-0 relative", width ? `w-${width}` : "w-52"])} id={id}>
+    <div
+      className={cls(
+      ["h-10 m-0 relative",
+        width ? `w-${width}` : "w-52",
+        className,
+      ])}
+      id={id}
+    >
       <div className={"absolute inset-0 h-max bg-background z-50"}>
         {
           openButton ?
@@ -124,17 +136,24 @@ export const Select: FC<SelectProps> = ({
                 color={"current"}
                 tag={"span"}
               >
-                {currentValue !== "" ? currentValue : placeholder}
+                {
+                  typeof placeholder === "string" ? currentValue !== "" ? currentValue : placeholder :
+                    currentValue !== "" ? placeholderActive : placeholder
+                }
+
               </Typography>
 
-              <Icon
-                className={cls([
-                  "text-current h-4 w-4",
-                  transition ? `transition-transform duration-200 ${open ? "rotate-180" : ""}` : "",
-                ])}
-                icon={"chevronDown"}
-                size={"xs"}
-              />
+              {
+                icon &&
+                <Icon
+                  className={cls([
+                    "text-current h-4 w-4",
+                    transition ? `transition-transform duration-200 ${open ? "rotate-180" : ""}` : "",
+                  ])}
+                  icon={"chevronDown"}
+                  size={"xs"}
+                />
+              }
             </Grid>
           </button>
         }

@@ -58,6 +58,7 @@ import {
   HomeIcon,
   UsersIcon,
   ArchiveBoxIcon,
+  FunnelIcon as FunnelIconSolid
 } from "@heroicons/react/24/solid";
 import {
   FunnelIcon,
@@ -122,6 +123,7 @@ export const iconList = {
   sparkles: SparklesIcon,
   wallet: WalletIcon,
   filter: FunnelIcon,
+  filterSolid: FunnelIconSolid,
   barsArrowDown: BarsArrowDownIcon,
   logOut: ArrowRightOnRectangleIcon,
   home: HomeIcon,

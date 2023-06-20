@@ -84,6 +84,7 @@ export type iconVariants =
   | "sparkles"
   | "wallet"
   | "filter"
+  | "filterSolid"
   | "barsArrowDown"
   | "logOut"
   | "home"
