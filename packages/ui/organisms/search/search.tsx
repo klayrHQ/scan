@@ -91,17 +91,31 @@ export const Search: FC<SearchProps> = ({
           {
             setFilters &&
               <div className={cls([
-                "w-48 relative before:absolute before:content-['']",
+                "w-16 lg:w-48 relative before:absolute before:content-['']",
                 "before:-left-[1px] before:w-[1px] before:h-3/4 ",
                 "before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto",
               ])}>
                 <Select
                   id={"search_filter"}
+                  className={"hidden lg:block"}
                   placeholder={"Filter"}
                   onChange={setFilters}
                   optionsList={filtersList}
                   transition
                   width={"full"}
+                />
+                <Select
+                  id={"search_filter_mobile"}
+                  icon={false}
+                  className={"lg:hidden"}
+                  placeholder={<Icon icon={"filter"} />}
+                  placeholderActive={<Icon icon={"filterSolid"} />}
+                  onChange={setFilters}
+                  optionsList={filtersList}
+                  listWidth={"48"}
+                  listOrigin={"right"}
+                  transition
+                  width={"w-full"}
                 />
               </div>
           }
