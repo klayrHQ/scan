@@ -32,6 +32,7 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
       className={[
         "max-w-app mx-auto w-full bg-background rounded",
         container ? "shadow-xl p-4 w-app mx-auto " : "",
+        !table.sticky ? "overflow-x-auto" : "",
       ].join(" ")}
     >
       <Table
