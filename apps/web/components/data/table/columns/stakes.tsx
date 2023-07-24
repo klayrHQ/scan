@@ -1,6 +1,6 @@
 import { ColumnProps } from "./index";
 import { cls, Typography } from "ui";
-import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { ValueFormatter } from "ui";
 import {Avatar} from "ui/atoms/avatar/avatar";
 import {RPCResponses} from "@liskscan/lisk-service-client/lib/types";
 import Link from "next/link";
@@ -16,7 +16,7 @@ export const StakesColumn = ({ params, values, queryData }: ColumnProps&{queryDa
   <Avatar address={value.validatorAddress} size={20} />
   <ValueFormatter
     // @ts-ignore
-    value={queryData?.validators_dontTouch.data.find((validator)=>validator.address === value.validatorAddress).name || value.validatorAddress}
+    value={queryData?.validators_dontTouch.data.find((validator)=>validator.address === value.validatorAddress)?.name || value.validatorAddress}
     {...values[1].format}
   />
 </span>
@@ -31,5 +31,5 @@ export const StakesColumn = ({ params, values, queryData }: ColumnProps&{queryDa
 </span>
     );
   }
-return <></>
+return  <></>
 };
