@@ -35,7 +35,8 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
       className={[
         "max-w-app mx-auto w-full bg-background rounded",
         container ? "shadow-xl p-4 w-app mx-auto " : "",
-        !table.sticky ? "overflow-x-auto" : "",
+        "overflow-x-auto md:overflow-x-visible",
+        //!table.sticky ? "overflow-x-auto md:overflow-x-visible" : "",
       ].join(" ")}
     >
       <Table
@@ -51,6 +52,7 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
             : data?.rows
         }
         sticky={table.sticky}
+        stickyMobile={table.stickyMobile}
         stickyRef={stickyRef}
       />
     </div>

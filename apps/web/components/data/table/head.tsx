@@ -6,17 +6,19 @@ export interface HeadProps {
   className?: string;
   cols?: CellProps[];
   sticky?: boolean
+  stickyMobile?: boolean;
   stickyRef?: MutableRefObject<any>;
   isStuck?: boolean;
 }
 
-export const Head = ({ className, cols, sticky, stickyRef, isStuck, ...props }: HeadProps) => {
+export const Head = ({ className, cols, sticky, stickyMobile, stickyRef, isStuck, ...props }: HeadProps) => {
 
   return (
     <thead
       className={cls([
-        sticky && "sticky top-28 z-10",
-        sticky && isStuck && "before:absolute before:left-0 before:right-0 before:-top-2 before:h-2 before:bg-background before:content-['']"
+        sticky && "md:sticky md:top-28 z-10",
+        stickyMobile && "sticky top-28 z-10",
+        (sticky || stickyMobile) && isStuck && "md:before:absolute md:before:left-0 md:before:right-0 md:before:-top-2 md:before:h-2 md:before:bg-background md:before:content-['']",
       ])}
       ref={stickyRef}
     >

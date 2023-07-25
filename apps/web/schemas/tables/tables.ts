@@ -39,6 +39,11 @@ export default {
       title: "Sticky Table-head",
     },
     {
+      name: "stickyMobile",
+      type: "boolean",
+      title: "Sticky Table-head on Mobile",
+    },
+    {
       name: "columns",
       type: "array",
       title: "Columns",
