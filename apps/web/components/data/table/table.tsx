@@ -15,7 +15,7 @@ export const Table = ({
   rows,
   columns,
   queryData,
-  sticky = true,
+  sticky,
 }: TableProps) => (
   <table className={cls(["border-collapse rounded w-full overflow-x-auto"])}>
     <Head cols={columns} sticky={sticky} />
