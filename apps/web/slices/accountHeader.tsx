@@ -109,7 +109,7 @@ export const AccountHeader = ({
                 size={"body"}
                 bold
                 tag={"span"}
-                className={"capitalize font-semibold  "}
+                className={"capitalize font-semibold"}
               >
                 {rank}. {value.name}
               </Typography>
@@ -118,8 +118,9 @@ export const AccountHeader = ({
                 size={"body"}
                 bold
                 tag={"span"}
-                className={"capitalize font-semibold  "}
-              ></Typography>
+                className={"capitalize font-semibold h-5"}
+              >
+              </Typography>
             )}
             <Typography
               size={"subBody"}
