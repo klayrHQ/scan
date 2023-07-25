@@ -59,7 +59,7 @@ export const Search: FC<SearchProps> = ({
             id="search"
             name="search"
             className={[
-              "block w-full pl-8 pr-3 py-4 border-none shadow-0 border-transparent rounded text-base cursor-pointer",
+              "block w-full pl-8 pr-3 py-2 border-none shadow-0 border-transparent rounded text-base cursor-pointer",
               "leading-5 bg-background text-onBackground placeholder-onSurfaceLow",
               "focus:border-surface-0 focus:shadow-0 focus:ring-0 focus:outline-none",
             ].join(" ")}
