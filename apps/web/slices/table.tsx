@@ -3,6 +3,7 @@ import { makeTable } from "../lib/sanity.table";
 import { Table } from "../components/data/table/table";
 import React, { useEffect, useState } from "react";
 import { processTable } from "../lib/queries/getTable";
+import {useIsStuck} from "../hooks/useIsStuck";
 
 export const TableSlice = ({ queryData, data, table, id, container }: any) => {
   // const {lastBlock} = useService()
@@ -27,6 +28,8 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
     }
   }, [queryData]);
 
+  const [isStuck, stickyRef] = useIsStuck(28)
+
   return (
     <div
       className={[
@@ -41,12 +44,14 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         // columns={processTable(props.table).columns}
         // rows={props?.data?.rows}
         columns={tableState?.table?.columns || processTable(table).columns}
+        isStuck={isStuck}
         rows={
           tableState?.rows && tableState.rows.length > 0
             ? tableState?.rows
             : data?.rows
         }
         sticky={table.sticky}
+        stickyRef={stickyRef}
       />
     </div>
   );

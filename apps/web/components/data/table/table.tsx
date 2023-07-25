@@ -3,12 +3,15 @@ import { Body } from "./body";
 import { Empty } from "./empty";
 import { CellProps } from "./cell";
 import { cls } from "ui";
+import {MutableRefObject} from "react";
 
 export interface TableProps {
   rows?: any[][];
   columns: CellProps[];
   queryData?: Record<string, any>;
   sticky?: boolean;
+  stickyRef?: MutableRefObject<HTMLDivElement | null>;
+  isStuck?: boolean;
 }
 
 export const Table = ({
@@ -16,9 +19,11 @@ export const Table = ({
   columns,
   queryData,
   sticky,
+  stickyRef,
+  isStuck,
 }: TableProps) => (
-  <table className={cls(["border-collapse rounded w-full overflow-x-auto"])}>
-    <Head cols={columns} sticky={sticky} />
+  <table className={cls(["border-collapse rounded w-full"])}>
+    <Head cols={columns} isStuck={isStuck} sticky={sticky} stickyRef={stickyRef}/>
     <Body queryData={queryData} rows={rows} columns={columns} />
     {rows && rows.length === 0 && (
       <Empty colSpan={2} emptyLabel={"TODO EMPTY"} />
