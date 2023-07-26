@@ -50,6 +50,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@amcharts/amcharts5": "^5.4.1",
     "@babel/core": "^7.0.0",
     "@sanity/base": "^2.35.5",
     "@sanity/eslint-config-studio": "^2.0.1",

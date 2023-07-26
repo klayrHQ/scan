@@ -7,6 +7,7 @@ import { SanityValue } from "../layout/value";
 import { stakesAccount } from "./stakesAccount";
 import {divider} from "./divider";
 import {jsonItem} from "./jsonItem";
+import {chart} from "./chart";
 
 const sliceDocumentNames: {
   type: string;
@@ -18,6 +19,7 @@ const sliceDocumentNames: {
   kpi,
   divider,
   jsonItem,
+  chart,
   { name: "grid" },
 ].map((doc) => ({
   type: doc.name,

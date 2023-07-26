@@ -9,6 +9,7 @@ import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
 import {divider} from "./divider";
 import {jsonItem} from "./jsonItem";
+import {chart} from "./chart";
 
 const sliceDocumentNames: {
   type: string;
@@ -22,6 +23,7 @@ const sliceDocumentNames: {
   favorite,
   divider,
   jsonItem,
+  chart,
   { name: "grid" },
   transactionTabs,
 ].map((doc) => ({
