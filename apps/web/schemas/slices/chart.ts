@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import {SanityValue} from "../layout/value";
 
 export const chart = defineType({
   name: "chart",
@@ -24,9 +25,61 @@ export const chart = defineType({
       },
     },
     {
-      name: "chartData",
+      name: "labelKey",
       type: "string",
-      title: "Chart Data",
+      title: "Label Key",
     },
+    {
+      name: "valueKey",
+      type: "string",
+      title: "Value Key",
+    },
+    {
+      name: "chartDataKey",
+      type: "string",
+      title: "Chart Data Query",
+      description: "What query should be generating the data to populate the chart",
+    },
+    /*{
+      name: "chartData",
+      type: "object",
+      title: "Chart Data",
+      fields: [
+        {
+          name: "label",
+          type: "object",
+          title: "Label",
+          fields: [
+            {
+              name: "key",
+              type: "string",
+              title: "Key",
+            },
+            {
+              name: "value",
+              type: "string",
+              title: "Value",
+            },
+          ]
+        },
+        {
+          name: "value",
+          type: "object",
+          title: "Value",
+          fields: [
+            {
+              name: "key",
+              type: "string",
+              title: "Key",
+            },
+            {
+              name: "value",
+              type: "string",
+              title: "Value",
+            },
+          ]
+        },
+      ],
+    },*/
   ]
 })
