@@ -12,6 +12,26 @@ export const chart = defineType({
       title: "Name",
     },
     {
+      name: "chartTitle",
+      type: "string",
+      title: "Title",
+    },
+    {
+      name: "id",
+      type: "string",
+      title: "ID",
+    },
+    {
+      name: "className",
+      type: "string",
+      title: "ClassName",
+    },
+    {
+      name: "height",
+      type: "string",
+      title: "Height",
+    },
+    {
       name: "chartType",
       type: "string",
       title: "ChartType",

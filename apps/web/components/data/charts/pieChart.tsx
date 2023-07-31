@@ -4,11 +4,28 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import {FlexibleArrayType} from "../../../slices/chart";
+import {cls, Typography} from "ui";
 
-export const PieChart = ({chartData }: {chartData: FlexibleArrayType[]}) => {
+export const PieChart = ({
+  chartData,
+  id,
+  title,
+  className,
+  height,
+  labelKey,
+  valueKey,
+}: {
+  chartData: FlexibleArrayType[];
+  id: string;
+  title?: string;
+  className?: string;
+  height?: string;
+  labelKey: string;
+  valueKey: string;
+}) => {
   useLayoutEffect(() => {
 
-    let root = am5.Root.new("chartdiv");
+    let root = am5.Root.new(`${id}ChartDiv`);
     let chart = root.container.children.push(
       am5percent.PieChart.new(root, {})
     );
@@ -20,8 +37,8 @@ export const PieChart = ({chartData }: {chartData: FlexibleArrayType[]}) => {
     let series = chart.series.push(
       am5percent.PieSeries.new(root, {
         name: "Series",
-        categoryField: Object.keys(chartData[0])[0].toString(),
-        valueField: Object.keys(chartData[0])[1].toString(),
+        categoryField: labelKey,
+        valueField: valueKey,
         alignLabels: false,
       })
     );
@@ -36,6 +53,9 @@ export const PieChart = ({chartData }: {chartData: FlexibleArrayType[]}) => {
   }, [chartData]);
 
   return (
-    <div id="chartdiv" style={{ width: "100%", height: "500px" }} />
+    <div className={cls(["flex gap-4 flex-col", className])}>
+      <Typography tag={"h2"} size={"Heading5"}>{title}</Typography>
+      <div id={`${id}ChartDiv`} style={{width: "100%", height: height || "250px",}}/>
+    </div>
   );
 }
