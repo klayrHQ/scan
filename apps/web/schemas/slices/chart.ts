@@ -41,6 +41,7 @@ export const chart = defineType({
           {title: "Donut Chart", value: "donut"},
           {title: "Pie Chart", value: "pie"},
           {title: "Columns Chart", value: "columns"},
+          {title: "Double Columns Chart", value: "doubleColumns"}
         ],
       },
     },
@@ -53,6 +54,12 @@ export const chart = defineType({
       name: "valueKey",
       type: "string",
       title: "Value Key",
+    },
+    {
+      name: "valueKey2",
+      type: "string",
+      title: "Value Key 2",
+      hidden: ({ parent, value }) => !value && parent?.chartType !== "doubleColumns"
     },
     {
       name: "chartDataKey",

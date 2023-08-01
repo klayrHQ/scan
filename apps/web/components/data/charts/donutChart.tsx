@@ -26,7 +26,14 @@ export const DonutChart = ({
 }) => {
   useLayoutEffect(() => {
 
-    let root = am5.Root.new(`${id}ChartDiv`);
+    let root = am5.Root.new(`${id}ChartDiv`, {
+      tooltipContainerBounds: {
+        top: 50,
+        right: 100,
+        bottom: 50,
+        left: 100
+      }
+    });
     let chart = root.container.children.push(
       am5percent.PieChart.new(root, {})
     );
@@ -42,6 +49,10 @@ export const DonutChart = ({
         valueField: valueKey,
         alignLabels: false,
         innerRadius: am5.percent(50),
+        tooltip: am5.Tooltip.new(root, {
+          keepTargetHover: true
+        })
+
       })
     );
     series.data.setAll(chartData);

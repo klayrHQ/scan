@@ -6,27 +6,13 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import {FlexibleArrayType} from "../../../slices/chart";
 import {cls, Typography} from "ui";
 
-const data = [{
-  category: "Research",
-  value1: 1000,
-  value2: 588
-}, {
-  category: "Marketing",
-  value1: 1200,
-  value2: 1800
-}, {
-  category: "Sales",
-  value1: 850,
-  value2: 1230
-}];
-
 export const DoubleColumnsChart = ({
-                               chartData,
-                               id,
-                               title,
-                               className,
-                               height,
-                             }: {
+  chartData,
+  id,
+  title,
+  className,
+  height,
+}: {
   chartData: FlexibleArrayType[];
   id: string;
   title?: string;
@@ -43,13 +29,19 @@ export const DoubleColumnsChart = ({
 
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        panY: false,
+        panY: true,
         layout: root.verticalLayout
       })
     );
 
-    // Create Y-axis
-    let yAxis = chart.yAxes.push(
+    // Create Y-axes
+    let yAxis1 = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        renderer: am5xy.AxisRendererY.new(root, {})
+      })
+    );
+
+    let yAxis2 = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {})
       })
@@ -59,7 +51,7 @@ export const DoubleColumnsChart = ({
     let xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
-        categoryField: "category"
+        categoryField: Object.keys(chartData[0])[0].toString()
       })
     );
     xAxis.data.setAll(chartData);
@@ -67,31 +59,34 @@ export const DoubleColumnsChart = ({
     // Create series
     let series1 = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "Series",
+        name: Object.keys(chartData[0])[1].toString(),
         xAxis: xAxis,
-        yAxis: yAxis,
+        yAxis: yAxis1,
         valueYField: Object.keys(chartData[0])[1].toString(),
-        categoryXField: "category"
+        categoryXField: Object.keys(chartData[0])[0].toString()
       })
     );
     series1.data.setAll(chartData);
 
-    if(chartData[0][2]) {
-      let series2 = chart.series.push(
-        am5xy.ColumnSeries.new(root, {
-          name: "Series",
-          xAxis: xAxis,
-          yAxis: yAxis,
-          valueYField: Object.keys(chartData[0])[2].toString(),
-          categoryXField: "category"
-        })
-      );
-      series2.data.setAll(chartData);
-    }
+    let series2 = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: Object.keys(chartData[0])[2].toString(),
+        xAxis: xAxis,
+        yAxis: yAxis2,
+        valueYField: Object.keys(chartData[0])[2].toString(),
+        categoryXField: Object.keys(chartData[0])[0].toString()
+      })
+    );
+    series2.data.setAll(chartData);
 
     // Add legend
     let legend = chart.children.push(am5.Legend.new(root, {}));
     legend.data.setAll(chart.series.values);
+
+    // Add cursor
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+    let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+    cursor.lineY.set("visible", false);
 
     return () => {
       root.dispose();

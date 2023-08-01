@@ -107,8 +107,8 @@ export const ColumnsChart = ({
       })
     }));
 
-// Create series
-// https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+    // Create series
+    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
     let series = chart.series.push(am5xy.ColumnSeries.new(root, {
       name: "Series 1",
       xAxis: xAxis,
