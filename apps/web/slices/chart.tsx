@@ -67,11 +67,13 @@ export const ChartSlice = ({
     } else {
       if (extractedData) {
         const sortedData = extractedData
-          .slice() // Create a copy to avoid modifying the original array
-          .sort((a: (string | number | Date)[], b: (string | number | Date)[]) => {
-            if (a[0] && b[0]) {
-              const dateA = new Date(a[0]);
-              const dateB = new Date(b[0]);
+          .sort((a: any, b: any) => {
+            console.log("a", a)
+            if (a.date && b.date) {
+              const dateA = new Date(a.date);
+              const dateB = new Date(b.date);
+              console.log("dateA", dateA)
+              console.log("dateB", dateB)
               return dateA.getTime() - dateB.getTime();
             }
             return 0;
@@ -89,13 +91,12 @@ export const ChartSlice = ({
             [valueKey2|| values[2][0]]: lsk,
           };
         });
-
+        console.log("sortedData", sortedData)
         setChartData(chartDataArray)
       }
     }
 
     //console.log("keyLabel", labelKey)
-    console.log("beddowsToLskTest", convertBeddowsToLSK(String(1809221654001)))
     console.log("chartData", chartData)
   }, [queryData]);
 
