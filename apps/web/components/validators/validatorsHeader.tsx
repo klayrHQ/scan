@@ -1,7 +1,19 @@
-import {Grid, Typography} from "ui";
+import {Grid, KeyValueRow, Typography} from "ui";
 import {ConsoleLogTester} from "../consoleLogTester";
 
-export const ValidatorsHeader = ({kpis}: { kpis: any}) => {
+export const ValidatorsHeader = ({
+  kpis
+}: {
+  kpis: {
+    validators: {
+      label: string,
+      total: number | string
+    }[]
+    generators: {
+      total: string
+    }[]
+  }
+}) => {
 
   return (
     <Grid
@@ -23,6 +35,20 @@ export const ValidatorsHeader = ({kpis}: { kpis: any}) => {
         mobileColumns={3}
         gap={4}
       >
+        {
+          kpis?.validators?.map(total => {
+            return (
+              <KeyValueRow
+                label={total.label}
+                value={total.total}
+                col
+                valueBold
+                inline
+                classNameValue={"text-xl"}
+              />
+            )
+          })
+        }
       </Grid>
       <Grid
         className={"bg-surface-1 p-4 rounded shadow-xl"}

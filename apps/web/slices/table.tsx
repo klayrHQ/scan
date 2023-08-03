@@ -4,6 +4,7 @@ import { Table } from "../components/data/table/table";
 import React, { useEffect, useState } from "react";
 import { processTable } from "../lib/queries/getTable";
 import {useIsStuck} from "../hooks/useIsStuck";
+import {ConsoleLogTester} from "../components/consoleLogTester";
 
 export const TableSlice = ({ queryData, data, table, id, container }: any) => {
   // const {lastBlock} = useService()
@@ -20,6 +21,8 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         key: table.key,
         cols: table.columns,
       });
+      console.log(queryData)
+      console.log(table)
       // console.log("QDQDQ", tableRows, queryData.blocks?.data[0].height)
       updateTable({ rows: tableRows.rows, table: processedTable });
     };
