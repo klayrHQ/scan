@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, {ReactElement, ReactNode, useEffect, useState} from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { SearchContainer } from "ui/organisms/searchContainer/searchContainer";
 import { Popover } from "ui/atoms/popover/popover";
@@ -31,7 +31,7 @@ export const SearchModal = ({
   );
 
   const [searchResults, setSearchResults] = useState<
-    { id: string; cols: { value: ReactNode }[] }[]
+    { id: string; cols: { value: ReactElement }[] }[]
   >([
     {
       id: "0",
