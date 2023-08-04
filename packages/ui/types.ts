@@ -5,7 +5,7 @@ export type tableRowsType = Array<{
   id: string,
   className?: string,
   cols: Array<{
-    value?: string | ReactElement | ReactNode
+    value?: string | ReactElement
     className?: string
     colspan?: number
   }>
