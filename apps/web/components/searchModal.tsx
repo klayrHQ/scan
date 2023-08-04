@@ -1,65 +1,77 @@
-"use client"
-import React, {useState} from "react";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid";
-import {SearchContainer} from "ui/organisms/searchContainer/searchContainer";
-import {Popover} from "ui/atoms/popover/popover";
-import {useRouter} from "next/navigation";
-import {favourites} from "ui/assets/mockupData/mockupData";
-import {useSaveSearch} from "../providers/recentSearches";
-import {cls} from "ui";
+"use client";
+import React, { ReactNode, useEffect, useState } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { SearchContainer } from "ui/organisms/searchContainer/searchContainer";
+import { Popover } from "ui/atoms/popover/popover";
+import { useRouter } from "next/navigation";
+// import {favourites} from "ui/assets/mockupData/mockupData";
+import { useSaveSearch } from "../providers/recentSearches";
+import { cls } from "ui";
+import { search } from "../lib/search";
+import {useService} from "../providers/service";
 
 export const SearchModal = ({
   menuCloseFunction,
   mobile,
-} : {
-  menuCloseFunction?: () => void
-  mobile?: boolean
+}: {
+  menuCloseFunction?: () => void;
+  mobile?: boolean;
 }) => {
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [searchValue, setSearchValue] = useState<string>()
-  const { saveSearch, recentSearches, setRecentSearches } = useSaveSearch()
+  const { client } = useService()
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>();
+  const { saveSearch, recentSearches, setRecentSearches } = useSaveSearch();
+  const [filter, setFilter] = useState<string | undefined>(undefined);
 
-  const SearchResult = ({address}: {address: string}) => (
-    <div onClick={() => goToAddress(address)}>
-      {address}
-    </div>
-  )
+  const filtersList = ["All", "Transactions", "Validators", "Stakes", "Blocks"];
 
-  const searchResults = [
+  const SearchResult = ({ address }: { address: string }) => (
+    <div onClick={() => goToAddress(address)}>{address}</div>
+  );
+
+  const [searchResults, setSearchResults] = useState<
+    { id: string; cols: { value: ReactNode }[] }[]
+  >([
     {
       id: "0",
       cols: [
         {
-          value: <SearchResult address={"test"}/>,
-        }
-      ]
+          value: (
+            <SearchResult
+              address={"lskk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
+            />
+          ),
+        },
+      ],
     },
     {
       id: "1",
       cols: [
         {
-          value: <SearchResult address={"test2"}/>,
-        }
-      ]
+          value: (
+            <SearchResult
+              address={"lskk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
+            />
+          ),
+        },
+      ],
     },
-  ]
+  ]);
 
   const goToAddress = (address?: string, username?: string) => {
-    router.push(`/account/${address}`)
-    saveSearch(address, username)
-    setOpen(false)
-    menuCloseFunction && menuCloseFunction()
-  }
+    router.push(`/account/${address}`);
+    saveSearch(address, username);
+    setOpen(false);
+    menuCloseFunction && menuCloseFunction();
+  };
 
-  const [filter, setFilter] = useState("")
-
-  const filtersList = [
-    "Transactions",
-    "Validators",
-    "Stakes",
-    "Blocks",
-  ]
+  useEffect(() => {
+    const getResults = async () => {
+      setSearchResults(await search(client, saveSearch, setOpen, menuCloseFunction, searchValue, filter))
+    }
+    getResults()
+  }, [searchValue, filter]);
 
   return (
     <Popover
@@ -67,7 +79,10 @@ export const SearchModal = ({
       setOpen={setOpen}
       containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={"full"}
-      className={cls(["top-0 w-screen max-w-full lg:max-w-xl", mobile && "shadow"])}
+      className={cls([
+        "top-0 w-screen max-w-full lg:max-w-xl",
+        mobile && "shadow",
+      ])}
       placement={"right"}
       button={
         <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative cursor-pointer">
@@ -100,5 +115,5 @@ export const SearchModal = ({
         filtersList={filtersList}
       />
     </Popover>
-  )
-}
+  );
+};

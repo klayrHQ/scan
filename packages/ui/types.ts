@@ -1,11 +1,11 @@
-import {ReactElement} from "react";
+import {ReactElement, ReactNode} from "react";
 import {NetworkEndpoint} from "@moosty/lisk-service-provider";
 
 export type tableRowsType = Array<{
   id: string,
   className?: string,
   cols: Array<{
-    value?: string | ReactElement
+    value?: string | ReactElement | ReactNode
     className?: string
     colspan?: number
   }>
