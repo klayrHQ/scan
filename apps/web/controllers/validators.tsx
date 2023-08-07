@@ -1,10 +1,18 @@
-import {getNextData} from "../lib/sanity.service";
+import {getData, getNextData} from "../lib/sanity.service";
 
 export const getValidatorsFromAPI = async (params?: any) => {
   try {
-    // Call the getNextData function with the service type and the "get.pos.validators" call.
-    const result = await getNextData("lisk-service", "get.pos.validators", params);
-    console.log("Validators", result);
+    const result = await getData("lisk-service", "get.pos.validators", params);
+    return result;
+  } catch (error) {
+    console.error("Error fetching validators:", error);
+    return []
+  }
+}
+
+export const getGeneratorsFromAPI = async  (params?: any) => {
+  try {
+    const result = await getData("lisk-service", "get.generators", params);
     return result;
   } catch (error) {
     console.error("Error fetching validators:", error);

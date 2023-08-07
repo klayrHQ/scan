@@ -68,7 +68,7 @@ type Formats =
   | "icon";
 
 export interface ValueFormatterProps {
-  value: string;
+  value: string | {};
   tag?: Tags;
   typography?: SanityProps;
   type?: ValueTypes;

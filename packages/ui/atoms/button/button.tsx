@@ -4,7 +4,7 @@ import {cva} from "class-variance-authority";
 import {cls} from "../../assets/utils";
 
 interface ButtonProps {
-  type?: "primary" | "secondary" | "tertiary" | "transparent"
+  type?: "primary" | "secondary" | "tertiary" | "transparent" | "tabButton"
   className?: string
   hover?: boolean
   active?: boolean
@@ -28,6 +28,7 @@ const buttonCVA = cva(
         secondary: "bg-secondary text-onSecondary border-secondary",
         tertiary: "text-onSurfaceHigh border-none",
         transparent: "border-transparent",
+        tabButton: "border-transparent",
       },
       size: {
         small: "px-2 py-1",
@@ -69,6 +70,11 @@ const buttonCVA = cva(
         className: "hover:bg-surface-3 hover:text-onSurfaceHigh",
       },
       {
+        type: "tabButton",
+        hover: true,
+        className: "hover:bg-surface-1 hover:text-onSurfaceHigh",
+      },
+      {
         type: "primary",
         active: true,
         className: "bg-surface-1 border-surface-1 text-onSurfaceHigh",
@@ -87,6 +93,11 @@ const buttonCVA = cva(
         type: "transparent",
         active: true,
         className: "bg-primary text-onPrimary border-primary",
+      },
+      {
+        type: "tabButton",
+        active: true,
+        className: "bg-surface-2 text-primary",
       },
     ],
   },

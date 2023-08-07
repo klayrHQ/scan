@@ -1,5 +1,6 @@
-import {Grid, KeyValueRow, Typography} from "ui";
+import {Grid, KeyValueRow, Typography, ValueFormatter} from "ui";
 import {ConsoleLogTester} from "../consoleLogTester";
+import {Divider} from "ui/atoms/divider/divider";
 
 export const ValidatorsHeader = ({
   kpis
@@ -10,7 +11,8 @@ export const ValidatorsHeader = ({
       total: number | string
     }[]
     generators: {
-      total: string
+      address: string
+      name: string
     }[]
   }
 }) => {
@@ -19,9 +21,9 @@ export const ValidatorsHeader = ({
     <Grid
       columns={3}
       gap={8}
-      className={"max-w-app w-app mx-auto min-h-50 mb-4"}
+      className={"max-w-app w-app mx-auto min-h-50"}
     >
-      <Grid flex columns={1} className={"px-4"}>
+      <Grid flex columns={1} className={"px-5"}>
         <Typography tag={"h1"} size={"Heading3"}>
           {"Validators"}
         </Typography>
@@ -33,31 +35,48 @@ export const ValidatorsHeader = ({
         className={"bg-surface-1 p-4 rounded shadow-xl"}
         columns={2}
         mobileColumns={3}
-        gap={4}
+        gap={5}
       >
         {
           kpis?.validators?.map(total => {
             return (
               <KeyValueRow
+                color={"onPrimary"}
                 label={total.label}
                 value={total.total}
                 col
                 valueBold
+                valueSize={"Heading5"}
                 inline
-                classNameValue={"text-xl"}
               />
             )
           })
         }
       </Grid>
-      <Grid
-        className={"bg-surface-1 p-4 rounded shadow-xl"}
-        columns={2}
-        mobileColumns={3}
-        gap={4}
-      >
-
-      </Grid>
+      <div className={"flex-col flex gap-4 bg-surface-1 py-4 rounded shadow-xl"}>
+        <Grid className={"w-app mx-auto"} flex>
+          <Typography className={"font-semibold"} color={"onPrimary"} tag={"span"}>
+            {"Next Generators"}
+          </Typography>
+        </Grid>
+        <Divider color={"surface-2"} width={"full"}/>
+        <Grid
+          className={"w-app mx-auto"}
+          columns={2}
+          mobileColumns={3}
+          gap={8}
+        >
+          {
+            kpis.generators.map(generator => (
+              <ValueFormatter
+                value={{address: generator?.address, name: generator?.name}}
+                format={"avatarAddress"}
+                link={{href: `/account/${generator?.address}`}}
+              />
+            ))
+          }
+        </Grid>
+      </div>
     </Grid>
   )
 }

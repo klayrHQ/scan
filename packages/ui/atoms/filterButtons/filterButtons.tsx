@@ -20,7 +20,7 @@ export const FilterButtons = ({
 }: FilterButtonsProps) => {
   return (
     <>
-      <Grid flex className={cls([className, "hidden md:flex gap-2"])} columns={2}>
+      <Grid flex className={cls([className, "hidden md:flex gap-1"])} columns={2} gap={1}>
         {buttons && buttons.map((button) => (
           <Button
             active={selection === button.state}
@@ -30,8 +30,9 @@ export const FilterButtons = ({
               onChange(button.state)
               resetFilters && resetFilters()
             }}
+            size={"small"}
             label={button.label}
-            type={"transparent"}
+            type={"tabButton"}
           />
         ))}
       </Grid>

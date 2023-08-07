@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { cls, Typography, Paper } from "../..";
+import {cls, Typography, Paper, Sizes} from "../..";
 
 interface KeyValueRowProps {
   label?: ReactNode | string;
@@ -12,6 +12,7 @@ interface KeyValueRowProps {
   color?: string;
   valueBold?: boolean;
   col?: boolean;
+  valueSize?: Sizes;
 }
 
 export const KeyValueRow = ({
@@ -25,6 +26,7 @@ export const KeyValueRow = ({
   color,
   col = false,
   valueBold,
+  valueSize
 }: KeyValueRowProps) => (
   <Paper
     surface={surface}
@@ -59,7 +61,7 @@ export const KeyValueRow = ({
           valueBold ? "font-bold" : "",
         ])}
         color={color ? color : "onSurfaceLow"}
-        size={inline ? "subBody" : "subBody"}
+        size={valueSize ? valueSize : "subBody"}
       >
         {value}
       </Typography>

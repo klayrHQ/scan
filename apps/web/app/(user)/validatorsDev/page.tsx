@@ -1,33 +1,28 @@
-import {Container, Grid, Typography} from "ui";
-import {getValidatorsFromAPI} from "../../../controllers/validators";
-import {ValidatorsHeader} from "../../../components/validators/validatorsHeader";
-import {ValidatorsTable} from "../../../components/validators/validatorsTable";
+import {getGeneratorsFromAPI, getValidatorsFromAPI} from "../../../controllers/validators";
+import {Validators} from "../../../components/validators/validators";
+
+/*const statuses = [
+  "all",
+  "active",
+  "standby",
+  "ineligible",
+  "banned",
+  "punished",
+]*/
 
 const Page = async () => {
-  const validators = await getValidatorsFromAPI({limit: 100})
+  const validators = {
+    all: await getValidatorsFromAPI({limit: 100, offset: 0, sort: "rank:asc"}),
+    active: await getValidatorsFromAPI({limit: 100, offset: 0, status: "active", sort: "rank:asc"}),
+    standby: await getValidatorsFromAPI({limit: 100, offset: 0, status: "standby", sort: "rank:asc"}),
+    ineligible: await getValidatorsFromAPI({limit: 100, offset: 0, status: "ineligible", sort: "rank:asc"}),
+    banned: await getValidatorsFromAPI({limit: 100, offset: 0, status: "banned", sort: "rank:asc"}),
+    punished: await getValidatorsFromAPI({limit: 100, offset: 0, status: "punished", sort: "rank:asc"}),
+  }
 
-  return (
-    <Container section>
-      <ValidatorsHeader
-        kpis={{
-          validators: [
-            {
-              // @ts-ignore
-              total: validators?.meta?.total,
-              label: "Total validators",
-            },
-          ],
-          generators: [
-            {
-              // @ts-ignore
-              total: validators?.meta?.total
-            }
-          ]
-        }}
-      />
-      <ValidatorsTable validators={validators} />
-    </Container>
-  )
+  const generators = await getGeneratorsFromAPI({limit: 6})
+
+  return <Validators fetchedValidators={validators} fetchedGenerators={generators} />
 }
 
 export default Page
