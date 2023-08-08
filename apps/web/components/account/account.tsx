@@ -1,0 +1,124 @@
+"use client"
+import {useService} from "../../providers/service";
+import React, {useEffect, useState} from "react";
+import {getAccountQueries} from "./queries";
+import {Container, Grid} from "ui";
+import {AccountHeader} from "./accountHeader";
+import {FilterButtons} from "ui/atoms/filterButtons/filterButtons";
+import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
+import {useSearchParams} from "next/navigation";
+import {Transactions} from "./tabContent/transactions";
+import {Validator} from "./tabContent/validator";
+import {Stakes} from "./tabContent/stakes";
+import {Tokens} from "./tabContent/tokens";
+import {Events} from "./tabContent/events";
+import {Blocks} from "./tabContent/blocks";
+
+const buttons = [
+  {
+    label: "Transactions",
+    state: "transactions"
+  },
+  {
+    label: "Validator",
+    state: "validator"
+  },
+  {
+    label: "Stakes",
+    state: "stakes"
+  },
+  {
+    label: "Tokens",
+    state: "tokens"
+  },
+  {
+    label: "Events",
+    state: "events"
+  },
+  {
+    label: "Blocks",
+    state: "blocks"
+  },
+]
+
+const stakesTabButtons = [
+  {
+    label: "Outgoing Stakes",
+    state: "stakes"
+  },
+  {
+    label: "Incoming Stakes",
+    state: "stakers"
+  }
+]
+
+const tabsComponents = {
+  transactions: Transactions,
+  validator: Validator,
+  stakes: Stakes,
+  tokens: Tokens,
+  events: Events,
+  blocks: Blocks,
+}
+
+type tabsTypes =
+  | "transactions"
+  | "validator"
+  | "stakes"
+  | "tokens"
+  | "events"
+  | "blocks"
+
+
+export const Account = ({
+  id,
+}: {
+  id: string;
+}) => {
+  const {cache, setQueries} = useService()
+  const [queryData, setQueryData] = useState()
+
+  useEffect(() => {
+    setQueries(getAccountQueries(id))
+  }, [getAccountQueries])
+
+  useEffect(() => {
+    if(cache) {
+      // @ts-ignore
+      setQueryData(cache)
+    }
+  }, [cache])
+
+  const { setQueryParams } = useQueryParams<QueryParams>();
+  const searchParams = useSearchParams();
+
+  const handleChange = (value: string) => {
+    // @ts-ignore
+    setQueryParams({ ["tab"]: value });
+  };
+
+  const handleSubChange = (value: string) => {
+    // @ts-ignore
+    setQueryParams({ ["subTab"]: value });
+  };
+
+  // @ts-ignore
+  const activeTab: tabsTypes = searchParams?.get("tab") || "transactions";
+  const activeSubTab = searchParams?.get("subTab") || "stakes";
+
+  const TabComponent = tabsComponents[activeTab]
+
+  return (
+    <Container section gap={8}>
+      <AccountHeader queryData={queryData} />
+      <Grid className={"max-w-app mx-auto w-full shadow-xl p-4"} gap={2}>
+        <FilterButtons buttons={buttons} onChange={handleChange} selection={activeTab} />
+        {
+          activeTab === "stakes" &&
+          <FilterButtons buttons={stakesTabButtons} onChange={handleSubChange} selection={activeSubTab} />
+        }
+        <TabComponent queryData={queryData} tab={activeSubTab}/>
+      </Grid>
+    </Container>
+  )
+}

@@ -129,7 +129,7 @@ export const validatorColumns: FormattedColumnType[] = [
       }
     ],
     _type: "column",
-    valueComponent: "NrColumn",
+    valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
     showOn: "always"
   },

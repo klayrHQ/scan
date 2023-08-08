@@ -1,4 +1,4 @@
-import {getData, getNextData} from "../lib/sanity.service";
+import {getData} from "../lib/sanity.service";
 
 export const getValidatorsFromAPI = async (params?: any) => {
   try {
@@ -15,7 +15,7 @@ export const getGeneratorsFromAPI = async  (params?: any) => {
     const result = await getData("lisk-service", "get.generators", params);
     return result;
   } catch (error) {
-    console.error("Error fetching validators:", error);
+    console.error("Error fetching generators:", error);
     return []
   }
 }

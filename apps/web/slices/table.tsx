@@ -42,6 +42,8 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         //!table.sticky ? "overflow-x-auto md:overflow-x-visible" : "",
       ].join(" ")}
     >
+      {/*<ConsoleLogTester data={JSON.stringify(table.columns)} />*/}
+      {/*<ConsoleLogTester data={queryData} />*/}
       <Table
         key={id}
         queryData={queryData}

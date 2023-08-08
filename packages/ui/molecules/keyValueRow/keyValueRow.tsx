@@ -45,26 +45,36 @@ export const KeyValueRow = ({
           : "flex md:flex-grow justify-between w-full text-left",
       ])}
     >
-      <Typography
-        tag={"span"}
-        className={cls(["capitalize"])}
-        color={color ? color : "onSurfaceHigh"}
-        size={inline ? "subBody" : "subBody"}
-      >
-        {label}
-      </Typography>
-      <Typography
-        tag={"span"}
-        className={cls([
-          classNameValue,
-          "min-w-spacer",
-          valueBold ? "font-bold" : "",
-        ])}
-        color={color ? color : "onSurfaceLow"}
-        size={valueSize ? valueSize : "subBody"}
-      >
-        {value}
-      </Typography>
+      {
+        typeof label === "string" ?
+        <Typography
+          tag={"span"}
+          className={cls(["capitalize"])}
+          color={color ? color : "onSurfaceHigh"}
+          size={inline ? "subBody" : "subBody"}
+        >
+          {label}
+        </Typography>
+          :
+          label
+      }
+      {
+        typeof value === "string" ?
+        <Typography
+          tag={"span"}
+          className={cls([
+            classNameValue,
+            "min-w-spacer",
+            valueBold ? "font-bold" : "",
+          ])}
+          color={color ? color : "onSurfaceLow"}
+          size={valueSize ? valueSize : "subBody"}
+        >
+          {value}
+        </Typography>
+          :
+          value
+      }
     </div>
     {icon && <div className="hidden md:block w-8">{icon}</div>}
   </Paper>

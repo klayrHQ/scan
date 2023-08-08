@@ -1,7 +1,7 @@
 "use client"
 import {Button} from "ui";
 
-export const ConsoleLogTester = ({label,data,}: {label?: string; data: string | Array<any> | object | number;}) => (
+export const ConsoleLogTester = ({label,data,}: {label?: string; data: any}) => (
   <Button
     label={"test"}
     onClick={(e) => {

@@ -8,6 +8,7 @@ import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar } from "ui/atoms/avatar/avatar";
 import { CopyButton } from "../components/data/copy";
+import {ConsoleLogTester} from "../components/consoleLogTester";
 
 export const AccountHeader = ({
   queryData,
