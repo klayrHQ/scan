@@ -9,7 +9,7 @@ export const Events = ({
 
   return (
     <TableSlice
-      queryData={queryData || []}
+      queryData={{events: queryData["account-events"]}}
       table={{
         key: "events",
         columns: eventsColumns,

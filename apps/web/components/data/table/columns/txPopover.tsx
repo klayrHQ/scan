@@ -24,7 +24,10 @@ export const TxPopover = ({
   const router = useRouter();
   const [open, setOpen] = useState(false);
   console.log(queryData?.["transaction-moduleCommand"]?.data?.[index], "query");
-  const row = queryData?.["transaction-moduleCommand"]?.data?.[index];
+  const row =
+    queryData?.transactions ?
+      queryData?.transactions?.data?.[index] :
+      queryData?.["transaction-moduleCommand"]?.data?.[index];
   return (
     <Popover
       open={open}

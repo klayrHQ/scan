@@ -41,12 +41,9 @@ export const ValidatorsHeader = ({
           kpis?.validators?.map(total => {
             return (
               <KeyValueRow
-                color={"onPrimary"}
                 label={total.label}
-                value={total.total}
+                value={<Typography className={"font-bold"} color={"onPrimary"} tag={"span"} size={"Heading5"}>{total.total}</Typography>}
                 col
-                valueBold
-                valueSize={"Heading5"}
                 inline
               />
             )

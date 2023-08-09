@@ -9,7 +9,7 @@ export const Tokens = ({
 
   return (
     <TableSlice
-      queryData={queryData || []}
+      queryData={{tokens: queryData["account-id-balances"], rewards: queryData["account-rewards-claimable"]}}
       table={{
         key: "tokens",
         columns: tokenColumns,

@@ -11,7 +11,7 @@ export const Stakes = ({
 
   return (
     <TableSlice
-      queryData={queryData || []}
+      queryData={{stakes: queryData["account-stakes-sent"], stakers: queryData["account-received-stakes"]}}
       table={{
         key: tab === "stakers" ? "stakers" : "stakes",
         columns: tab === "stakers" ? stakersColumns : stakesColumns,

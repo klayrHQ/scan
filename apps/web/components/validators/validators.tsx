@@ -3,10 +3,11 @@ import {ValidatorsHeader} from "./validatorsHeader";
 import {ValidatorsTable} from "./validatorsTable";
 import {Container} from "ui";
 import {useEffect, useState} from "react";
-import {FilterButtons} from "ui/atoms/filterButtons/filterButtons";
 import {ConsoleLogTester} from "../consoleLogTester";
 import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
 import {useSearchParams} from "next/navigation";
+import {useService} from "../../providers/service";
+import {validatorQueries} from "./queries";
 
 const buttons = [
   {
@@ -42,8 +43,14 @@ export const Validators = ({
   fetchedValidators: any,
   fetchedGenerators: any,
 }) => {
-  const [validators, setValidators] = useState<{all: [], active: [], standby: [], ineligible: [], banned: [], punished: []}>()
-  const [generators, setGenerators] = useState()
+  const [validators, setValidators] = useState<{all: [], active: [], standby: [], ineligible: [], banned: [], punished: []}>(fetchedValidators)
+  const [generators, setGenerators] = useState(fetchedGenerators)
+
+  const {cache, setQueries} = useService()
+
+  useEffect(() => {
+    setQueries(validatorQueries)
+  }, [validatorQueries])
 
   const { setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
@@ -56,16 +63,24 @@ export const Validators = ({
   const activeTab = searchParams?.get("status") || "all";
 
   useEffect(() => {
-    if (fetchedValidators) {
-      setValidators(fetchedValidators)
+    if (cache) {
+      setValidators({
+        all: cache["validators"],
+        active: cache["validators-active"],
+        standby: cache["validators-standby"],
+        ineligible: cache["validators-ineligible"],
+        banned: cache["validators-banned"],
+        punished: cache["validators-punished"],
+      })
     }
-  }, [fetchedValidators])
+    console.log(cache)
+  }, [cache])
 
   useEffect(() => {
-    if (fetchedGenerators) {
-      setGenerators(fetchedGenerators)
+    if (cache) {
+      setGenerators(cache["generators"])
     }
-  }, [fetchedGenerators])
+  }, [cache])
 
   return (
     <Container section gap={8}>

@@ -43,7 +43,8 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
       ].join(" ")}
     >
       {/*<ConsoleLogTester data={JSON.stringify(table.columns)} />*/}
-      {/*<ConsoleLogTester data={queryData} />*/}
+      {/*<ConsoleLogTester label={"QueryData"} data={queryData} />*/}
+      {/*<ConsoleLogTester label={"Table"} data={table} />*/}
       <Table
         key={id}
         queryData={queryData}

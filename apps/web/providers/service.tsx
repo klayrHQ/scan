@@ -52,6 +52,7 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   >();
 
   const updateQuery = async () => {
+    //console.log("queries", JSON.stringify(queries))
     const response = await getAllData(queries, undefined, id);
     setCache((prevState) => ({ ...prevState, ...response }));
     setLastUpdate(new Date().getTime());

@@ -1,7 +1,14 @@
-import {ServiceQueries, ServiceTypes} from "../../lib/sanity.service";
+import {ServiceQueries} from "../../lib/sanity.service";
 
 export const getAccountQueries = (id: string) => {
   const accountQueries: ServiceQueries[] = [
+    {
+      key: "network-status",
+      updateOn: "lastBlock",
+      call: "get.network.status",
+      serviceType: "lisk-service",
+      params: null,
+    },
     {
       updateOn: "lastTransactions",
       key: "account-id-balances",
@@ -21,10 +28,19 @@ export const getAccountQueries = (id: string) => {
         {
           name: "txType",
           _key: "19b4fb2c7f86",
-          calculation: "%s".split(":").join(" "),
+          calculation: `"%s".split(":").join(" ")`,
           keys: [
             "moduleCommand"
           ],
+        },
+        {
+          _key: "5c9a08198b7d",
+          calculation: "%d - %d",
+          keys: [
+            "network-status.data.height",
+            "block.height"
+          ],
+          name: "confirmations"
         }
       ],
       updateOn: "lastTransactions",
@@ -62,20 +78,20 @@ export const getAccountQueries = (id: string) => {
       calculations: [
         {
           _key: "95a2197a7342",
-          calculation: "%s".split(/(?=[A-Z])/).join(" "),
+          calculation: `"%s".split(/(?=[A-Z])/).join(" ")`,
           keys: [
             "name"
           ],
           name: "event"
         },
         {
-          calculation: "%s".split(/(?=[A-Z])/).join(" "),
+          calculation: `"%s".split(/(?=[A-Z])/).join(" ")`,
           keys: [
             "module"
           ],
           name: "moduleParsed",
           _key: "fe9bf558f1f3"
-        }
+        },
       ],
       params: [
         {

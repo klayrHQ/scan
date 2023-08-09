@@ -72,11 +72,26 @@ type tabsTypes =
 
 export const Account = ({
   id,
+  initialData,
 }: {
   id: string;
+  initialData: any
 }) => {
   const {cache, setQueries} = useService()
-  const [queryData, setQueryData] = useState()
+  const [queryData, setQueryData] = useState(initialData)
+
+  /*const temp = {
+    auth: cache["account-auth"],
+    events: cache["account-events"],
+    balances: cache["account-id-balancec"],
+    blocks: cache["account-id-blocks"],
+    transactions: cache["account-id-transactions"],
+    receivedStakes: cache["account-received-stakes"],
+    rewardsClaimable: cache["account-rewards-claimable"],
+    sentStakes: cache["account-stakes-sent"],
+    unlocks: cache["account-unlocks"],
+    validatorId: cache["account-validator-id"],
+  }*/
 
   useEffect(() => {
     setQueries(getAccountQueries(id))
@@ -87,6 +102,7 @@ export const Account = ({
       // @ts-ignore
       setQueryData(cache)
     }
+    console.log(queryData)
   }, [cache])
 
   const { setQueryParams } = useQueryParams<QueryParams>();
