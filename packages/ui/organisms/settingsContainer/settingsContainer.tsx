@@ -11,7 +11,6 @@ interface settingsContainerProps {
   settingsModalState: { open: boolean, view: string, mobileOpen: boolean, args?: any }
   closeSettingsModal: () => void
   openSettingsModal: (view: string, arg?: any) => void
-  jumpSettingsMenu: (direction: "up" | "down") => void
   views: Array<any>
   parsedSettings?: any
   changeSettingsView: (view: string) => void
@@ -23,7 +22,6 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
   settingsModalState,
   closeSettingsModal,
   openSettingsModal,
-  jumpSettingsMenu,
   views,
   parsedSettings,
   changeSettingsView,

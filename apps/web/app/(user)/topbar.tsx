@@ -30,6 +30,7 @@ import { FavouritesModal } from "../../components/favouritesModal";
 import { SearchModal } from "../../components/searchModal";
 import { MobileMenuModal } from "../../components/mobileMenuModal";
 import { KPICarousel } from "../../components/data/KPICarousel";
+import {SettingsModal} from "../../components/settingsModal";
 
 export const TopBarLayout = ({
   status,
@@ -159,9 +160,7 @@ export const TopBarLayout = ({
               value={"108,614,363 EUR"}
               valueBold
             />
-            <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
-              <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
-            </Tooltip>
+            <SettingsModal />
             <Tooltip
               label={themeMode === "dark" ? "Dark mode" : "Light mode"}
               placement={"bottom"}
