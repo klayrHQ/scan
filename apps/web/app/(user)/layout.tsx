@@ -99,26 +99,24 @@ export default async function RootLayout({
           <ServiceProvider>
             <FavouritesProvider>
               <RecentSearchesProvider>
-                <SettingsProvider>
-                  <div
-                    className={
-                      "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
-                    }
-                  >
-                    <TopBarLayout
-                      isDraftMode={isDraftMode}
-                      settings={settings}
-                      kpis={infoBar.kpis}
-                      apps={apps}
-                      index={index}
-                      status={status}
-                      menuItems={menuItems}
-                    />
-                    {children}
-                  </div>
-                  <Footer copyright={settings.copyright} lists={footer.lists}/>
-                  <FloatingMenuContainer menuItems={menuItems} />
-                </SettingsProvider>
+                <div
+                  className={
+                    "flex flex-col box-border bg-background space-y-8 w-full top-0 left-0 right-0"
+                  }
+                >
+                  <TopBarLayout
+                    isDraftMode={isDraftMode}
+                    settings={settings}
+                    kpis={infoBar.kpis}
+                    apps={apps}
+                    index={index}
+                    status={status}
+                    menuItems={menuItems}
+                  />
+                  {children}
+                </div>
+                <Footer copyright={settings.copyright} lists={footer.lists}/>
+                <FloatingMenuContainer menuItems={menuItems} />
               </RecentSearchesProvider>
             </FavouritesProvider>
           </ServiceProvider>

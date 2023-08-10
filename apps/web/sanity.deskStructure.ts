@@ -4,7 +4,7 @@ import {
   CogIcon,
   UlistIcon,
   ThListIcon,
-  InfoOutlineIcon, DesktopIcon, EqualIcon, MasterDetailIcon, MenuIcon
+  InfoOutlineIcon, DesktopIcon, EqualIcon, MasterDetailIcon, MenuIcon, DashboardIcon, TagIcon
 } from "@sanity/icons";
 import {sliceDocumentNames} from "./schemas/slices";
 
@@ -138,4 +138,21 @@ export const sanityDeskStructure = (S: any) =>
       //       listItem.getId(),
       //     ),
       // ),
+      S.listItem()
+        .title("News")
+        .icon(DashboardIcon)
+        .child(
+          S.list()
+            .title("News")
+            .items([
+              S.listItem()
+                .title("News Items")
+                .icon(DashboardIcon)
+                .child(S.documentTypeList("news").title("All Items")),
+              S.listItem()
+                .title("Categories")
+                .icon(TagIcon)
+                .child(S.documentTypeList("newsCategories").title("All Categories")),
+            ]),
+        ),
     ]);

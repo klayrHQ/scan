@@ -8,6 +8,7 @@ import { stakesAccount } from "./stakesAccount";
 import {divider} from "./divider";
 import {jsonItem} from "./jsonItem";
 import {chart} from "./chart";
+import newsGrid from "../news/newsGrid";
 
 const sliceDocumentNames: {
   type: string;
@@ -20,6 +21,7 @@ const sliceDocumentNames: {
   divider,
   jsonItem,
   chart,
+  newsGrid,
   { name: "grid" },
 ].map((doc) => ({
   type: doc.name,

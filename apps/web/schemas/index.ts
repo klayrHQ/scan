@@ -10,6 +10,9 @@ import infoBar from "./layout/infoBar";
 import { slices } from "./slices";
 import pages from "./framework/pages";
 import menu from "./framework/menu";
+import news from "./news/news";
+import newsCategories from "./news/newsCategories";
+import newsGrid from "./news/newsGrid";
 
 export const schemaTypes = [
   settings,
@@ -23,5 +26,8 @@ export const schemaTypes = [
   infoBar,
   pages,
   menu,
+  news,
+  newsCategories,
+  newsGrid,
   ...slices,
 ];
