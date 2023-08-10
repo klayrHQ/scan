@@ -28,7 +28,7 @@ type NewsItemRefType = {
 //Todo categories fetchen en aan items toevoegen
 //Todo img upload verwerken + condition toevoegen voor imgType: url = imgObj gebruiken, upload = img gebruiken
 //Todo date verwerken naar "x uur/dagen/maanden geleden"
-//Todo tablet responsive fixen
+//Todo tablet responsive maken
 export const NewsGrid = ({
   newsItems,
 }: {
@@ -53,7 +53,7 @@ export const NewsGrid = ({
 
   return (
     <Grid
-      className={"gap-4 lg:gap-8"}
+      className={"gap-4 md:gap-8"}
       columns={newsItems?.length || 4}
     >
       {
@@ -63,11 +63,11 @@ export const NewsGrid = ({
           return (
             <Link key={`newsItem-${index + 1}`} href={item?.url || ""}>
               <Grid className={"gap-2"} columns={1} flex gap={2} mobileColumns={2}>
-                <div className={"w-1/4 lg:w-full aspect-video"}>
+                <div className={"w-1/4 md:w-full aspect-video"}>
                   <img className={"max-w-full max-h-full aspect-video rounded"} src={item?.imgObj.url || ""}
                        alt={item?.imgObj.alt} title={item?.imgObj.title} height={400} width={800}/>
                 </div>
-                <Grid className={"mx-2 py-2 lg:py-1"} columns={1} flex gap={0}>
+                <Grid className={"mx-2 py-2 md:py-1"} columns={1} flex gap={0}>
                   {/* Category moet nog apart gefetcht worden vvv */}
                   <Typography color={"primary"} tag={"span"}>{item?.category.title}</Typography>
                   <Typography color={"onPrimary"} tag={"span"}>{item?.title}</Typography>
