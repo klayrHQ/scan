@@ -4,6 +4,7 @@ import {ConsoleLogTester} from "../components/consoleLogTester";
 import {sanityFetch} from "../components/sanity/fetch";
 import {useEffect, useState} from "react";
 import Link from "next/link";
+import {dayjs} from "ui/utils/time";
 
 type NewsItemType = {
   _id: string
@@ -58,7 +59,20 @@ export const NewsGrid = ({
     >
       {
         parsedItems.map((item, index) => {
-          const date = ""
+
+          const date = dayjs(item?._createdAt);
+          let dateString;
+
+          if (dayjs().diff(date, "hour") >= 24) {
+            dateString = date.format("DD MMM 'YY HH:mm");
+          } else {
+            dateString = date.fromNow();
+          }
+
+
+
+
+
 
           return (
             <Link key={`newsItem-${index + 1}`} href={item?.url || ""}>
@@ -70,8 +84,9 @@ export const NewsGrid = ({
                 <Grid className={"mx-2 py-2 md:py-1"} columns={1} flex gap={0}>
                   {/* Category moet nog apart gefetcht worden vvv */}
                   <Typography color={"primary"} tag={"span"}>{item?.category.title}</Typography>
-                  <Typography color={"onPrimary"} tag={"span"}>{item?.title}</Typography>
-                  <ValueFormatter value={item ? new Date(item?._createdAt) : ""} type={"string"} format={"fromNow"} />
+                  <Typography bold color={"onSurfacePrimary"} tag={"span"}>{item?.title}</Typography>
+                  <Typography size={"subBody"} bold color={"onSurfaceMedium"} tag={"span"}>{dateString}</Typography>
+                  {/*<ValueFormatter  value={item ? new Date(item?._createdAt) : ""} type={"string"} format={"fromNow"} />*/}
                 </Grid>
               </Grid>
             </Link>
