@@ -3,7 +3,7 @@ import {Validators} from "../../../components/validators/validators";
 import {getAllData} from "../../../lib/sanity.service";
 import {validatorQueries} from "../../../components/validators/queries";
 // export const dynamic = "force-dynamic";
-export const revalidate = 0;
+//export const revalidate = 0;
 /*const statuses = [
   "all",
   "active",
