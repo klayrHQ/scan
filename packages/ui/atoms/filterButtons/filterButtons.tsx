@@ -1,7 +1,9 @@
+"use client"
 import React from 'react'
 import {Button} from "../index";
 import {cls} from "../../assets/utils";
 import {Grid} from "../grid/grid";
+import {Select} from "../select/select";
 
 export interface FilterButtonsProps {
   buttons: Array<{ label: string, state: string }>
@@ -18,6 +20,12 @@ export const FilterButtons = ({
   className,
   selection,
 }: FilterButtonsProps) => {
+
+  const handleChange = (selectValue: string) => {
+    onChange(selectValue)
+    resetFilters && resetFilters()
+  }
+
   return (
     <>
       <Grid flex className={cls([className, "hidden md:flex gap-1"])} columns={2} gap={1}>
@@ -37,16 +45,23 @@ export const FilterButtons = ({
         ))}
       </Grid>
       <div className={"block md:hidden w-app mx-auto"}>
-        <select
-          className="w-full rounded text-onSurfaceMedium border-none text-base"
-          onChange={(e)=> {
-            // @ts-ignore
-            onChange(e.target.value)
-            resetFilters && resetFilters()
-          }}
-        >
-          {buttons && buttons.map(button => <option key={button.state} value={button.state}>{button.label}</option>)}
-        </select> </div>
+        <Select
+          defaultValue={selection}
+          id={"filterButtons"}
+          innerClassName={"border-surface-3 border-solid border-1"}
+          onChange={handleChange}
+          optionsList={buttons.map(button => {
+            return {
+              label: button.label,
+              value: button.state
+            }
+          })}
+          placeholder={""}
+          rounded
+          transition
+          width={"full"}
+        />
+      </div>
     </>
   )
 }

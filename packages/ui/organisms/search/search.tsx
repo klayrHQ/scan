@@ -14,7 +14,7 @@ interface SearchProps {
   setSearchValue: (value: string) => void
   searching?: boolean
   setFilters?: (value: string) => void
-  filtersList?: Array<any>
+  filtersList?: Array<{label?: string, value: string}>
 }
 
 export const Search: FC<SearchProps> = ({
@@ -100,7 +100,7 @@ export const Search: FC<SearchProps> = ({
                   className={"hidden lg:block"}
                   placeholder={"Filter"}
                   onChange={setFilters}
-                  optionsList={filtersList}
+                  optionsList={filtersList || []}
                   transition
                   width={"full"}
                 />
@@ -111,7 +111,7 @@ export const Search: FC<SearchProps> = ({
                   placeholder={<Icon icon={"filter"} />}
                   placeholderActive={<Icon icon={"filterSolid"} />}
                   onChange={setFilters}
-                  optionsList={filtersList}
+                  optionsList={filtersList || []}
                   listWidth={"48"}
                   listOrigin={"right"}
                   transition

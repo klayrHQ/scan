@@ -24,7 +24,28 @@ export const SearchModal = ({
   const { saveSearch, recentSearches, setRecentSearches } = useSaveSearch();
   const [filter, setFilter] = useState<string | undefined>(undefined);
 
-  const filtersList = ["All", "Transactions", "Validators", "Stakes", "Blocks"];
+  const filtersList = [
+    {
+      label: "All",
+      value: "all"
+    },
+    {
+      label: "Transactions",
+      value: "transactions"
+    },
+    {
+      label: "Validators",
+      value: "validators"
+    },
+    {
+      label: "Stakes",
+      value: "stakes"
+    },
+    {
+      label: "Blocks",
+      value: "blocks"
+    },
+  ];
 
   const SearchResult = ({ address }: { address: string }) => (
     <div onClick={() => goToAddress(address)}>{address}</div>

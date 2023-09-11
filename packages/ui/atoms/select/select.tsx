@@ -14,10 +14,12 @@ interface SelectProps
   // >
 {
   id: string;
+  defaultValue?: string;
   className?: string;
+  innerClassName?: string;
   placeholder: string | ReactNode;
   placeholderActive?: string | ReactNode;
-  optionsList?: string[];
+  optionsList: Array<{label?: string, value: string}>;
   onChange: (value: string) => void;
   transition?: boolean;
   type?: "base" | "assetSorting";
@@ -27,6 +29,7 @@ interface SelectProps
   textAlign?: "left" | "center" | "right";
   openButton?: ReactElement;
   icon?: boolean;
+  rounded?: boolean;
 }
 
 const options = cva(
@@ -50,7 +53,9 @@ const options = cva(
 
 export const Select: FC<SelectProps> = ({
   id,
+  defaultValue,
   className,
+  innerClassName,
   placeholder,
   placeholderActive,
   optionsList = [],
@@ -63,20 +68,19 @@ export const Select: FC<SelectProps> = ({
   textAlign= "left",
   openButton,
   icon = true,
+  rounded,
 }) => {
-  const [currentValue, setCurrentValue] = useState('');
+  const [currentValue, setCurrentValue] = useState<{ label?: string, value: string } | undefined>(optionsList.find(option => option.value === defaultValue));
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
     setOpen(prev => !prev);
   }
-  const handleValueChange = (value: string) => {
+
+  const handleChange = (value: { label?: string, value: string }) => {
     setCurrentValue(value);
-  };
-  const handleChange = (value: string) => {
-    handleValueChange(value);
     // call method, if it exists
-    if (onChange) onChange(value);
+    if (onChange) onChange(value.value);
     // close, after all tasks are finished
     toggleOpen();
   };
@@ -84,7 +88,7 @@ export const Select: FC<SelectProps> = ({
   const values = optionsList.map(value => (
     <div
       className={cls([
-        value === currentValue ? "text-primary" : "",
+        value.value === currentValue?.value ? "text-primary" : "",
         "w-full my-1 py-1 px-2 rounded-xs cursor-pointer outline-none",
         type === "assetSorting" ? "hover:bg-surface-3 hover:text-surface-4" : "hover:bg-surface-1",
       ])}
@@ -97,7 +101,7 @@ export const Select: FC<SelectProps> = ({
         color={value === currentValue ? "bg-primary" : "current"}
         tag={"span"}
       >
-        {value}
+        {value.label || value.value}
       </Typography>
     </div>
   ))
@@ -111,7 +115,11 @@ export const Select: FC<SelectProps> = ({
       ])}
       id={id}
     >
-      <div className={"absolute inset-0 h-max bg-background z-50"}>
+      <div className={cls([
+        "absolute inset-0 h-max bg-background z-50",
+        rounded ? `rounded-md` : "",
+        innerClassName,
+      ])}>
         {
           openButton ?
           cloneElement(openButton, {
@@ -128,19 +136,20 @@ export const Select: FC<SelectProps> = ({
               columns={3}
               flex
               gap={2}
+              mobileColumns={3}
             >
               <Typography
                 align={"center"}
                 bold
-                className={`pt-0.5 max-h-10 overflow-hidden ${currentValue === "" ? "opacity-high" : ""}`}
+                className={`pt-0.5 max-h-10 overflow-hidden ${!currentValue ? "opacity-high" : ""}`}
                 color={"current"}
                 tag={"span"}
               >
                 {
-                  typeof placeholder === "string" ? currentValue !== "" ? currentValue : placeholder :
-                    currentValue !== "" ? placeholderActive : placeholder
+                  typeof placeholder === "string" ?
+                    currentValue ? currentValue.label : placeholder :
+                    currentValue ? placeholderActive : placeholder
                 }
-
               </Typography>
 
               {
