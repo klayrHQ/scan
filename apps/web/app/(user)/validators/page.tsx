@@ -2,7 +2,7 @@ import {getGeneratorsFromAPI, getValidatorsFromAPI} from "../../../controllers/v
 import {Validators} from "../../../components/validators/validators";
 import {getAllData} from "../../../lib/sanity.service";
 import {validatorQueries} from "../../../components/validators/queries";
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 /*const statuses = [
   "all",
