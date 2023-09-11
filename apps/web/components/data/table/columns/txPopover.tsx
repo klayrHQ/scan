@@ -9,6 +9,8 @@ import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
 import { ErrorFilledIcon, EyeOpenIcon } from "@sanity/icons";
 import { EyeDropperIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import {ConsoleLogTester} from "../../../consoleLogTester";
 
 export const TxPopover = ({
   mobile,
@@ -68,15 +70,17 @@ export const TxPopover = ({
           >
             Additional Info
           </Typography>
-          <Typography
-            className={"items-center flex flex-row space-x-2"}
-            color={"onSurfaceHigh"}
-            tag={"span"}
-            size={"subBody"}
-          >
-            See more details
-            <ArrowRightIcon className={"w-3 h-3"} />
-          </Typography>
+          <Link href={`/transaction/${row?.id}`}>
+            <Typography
+              className={"items-center flex flex-row space-x-2"}
+              color={"onSurfaceHigh"}
+              tag={"span"}
+              size={"subBody"}
+            >
+              See more details
+              <ArrowRightIcon className={"w-3 h-3 mt-[2px] ml-1"} />
+            </Typography>
+          </Link>
         </Grid>
 
         <Divider color={"surface-1"} align={"center"} width={"full"} />
