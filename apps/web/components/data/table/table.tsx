@@ -28,7 +28,7 @@ export const Table = ({
     <Head cols={columns} isStuck={isStuck} sticky={sticky} stickyMobile={stickyMobile} stickyRef={stickyRef}/>
     <Body queryData={queryData} rows={rows} columns={columns} />
     {rows && rows.length === 0 && (
-      <Empty colSpan={2} emptyLabel={"TODO EMPTY"} />
+      <Empty colSpan={2} emptyLabel={"No Data Available"} />
     )}
   </table>
 );
