@@ -63,7 +63,7 @@ export const JsonItem = ({
   };
 
   return (
-    <div className={"w-app mx-auto relative"}>
+    <div className={"relative"}>
       <JsonView data={src} style={lightStyles} />
       {/*{
         copy &&

@@ -58,32 +58,32 @@ export const Validators = ({
   const buttons = [
     {
       // @ts-ignore
-      label: `All (${validators?.all?.meta?.total})`,
+      label: `All (${validators?.all?.meta?.count})`,
       state: "all"
     },
     {
       // @ts-ignore
-      label: `Active (${validators?.active?.meta?.total})`,
+      label: `Active (${validators?.active?.meta?.count})`,
       state: "active"
     },
     {
       // @ts-ignore
-      label: `Standby (${validators?.standby?.meta?.total})`,
+      label: `Standby (${validators?.standby?.meta?.count})`,
       state: "standby"
     },
     {
       // @ts-ignore
-      label: `Ineligible (${validators?.ineligible?.meta?.total})`,
+      label: `Ineligible (${validators?.ineligible?.meta?.count})`,
       state: "ineligible"
     },
     {
       // @ts-ignore
-      label: `Banned (${validators?.banned?.meta?.total})`,
+      label: `Banned (${validators?.banned?.meta?.count})`,
       state: "banned"
     },
     {
       // @ts-ignore
-      label: `Punished (${validators?.punished?.meta?.total})`,
+      label: `Punished (${validators?.punished?.meta?.count})`,
       state: "punished"
     },
   ]
