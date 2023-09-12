@@ -116,7 +116,7 @@ export const Select: FC<SelectProps> = ({
       id={id}
     >
       <div className={cls([
-        "absolute inset-0 h-max bg-background z-50",
+        "absolute inset-0 h-max bg-background z-40",
         rounded ? `rounded-md` : "",
         innerClassName,
       ])}>

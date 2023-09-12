@@ -9,33 +9,6 @@ import {useSearchParams} from "next/navigation";
 import {useService} from "../../providers/service";
 import {validatorQueries} from "./queries";
 
-const buttons = [
-  {
-    label: "All",
-    state: "all"
-  },
-  {
-    label: "Active",
-    state: "active"
-  },
-  {
-    label: "Standby",
-    state: "standby"
-  },
-  {
-    label: "Ineligible",
-    state: "ineligible"
-  },
-  {
-    label: "Banned",
-    state: "banned"
-  },
-  {
-    label: "Punished",
-    state: "punished"
-  },
-]
-
 export const Validators = ({
   fetchedValidators,
   fetchedGenerators,
@@ -81,6 +54,39 @@ export const Validators = ({
       setGenerators(cache["generators"])
     }
   }, [cache])
+
+  const buttons = [
+    {
+      // @ts-ignore
+      label: `All (${validators?.all?.meta?.total})`,
+      state: "all"
+    },
+    {
+      // @ts-ignore
+      label: `Active (${validators?.active?.meta?.total})`,
+      state: "active"
+    },
+    {
+      // @ts-ignore
+      label: `Standby (${validators?.standby?.meta?.total})`,
+      state: "standby"
+    },
+    {
+      // @ts-ignore
+      label: `Ineligible (${validators?.ineligible?.meta?.total})`,
+      state: "ineligible"
+    },
+    {
+      // @ts-ignore
+      label: `Banned (${validators?.banned?.meta?.total})`,
+      state: "banned"
+    },
+    {
+      // @ts-ignore
+      label: `Punished (${validators?.punished?.meta?.total})`,
+      state: "punished"
+    },
+  ]
 
   return (
     <Container section gap={8}>
