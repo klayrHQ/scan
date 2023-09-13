@@ -24,7 +24,7 @@ export const validatorQueries: ServiceQueries[] = [
       },
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       }
     ],
     updateOn: "never",
@@ -39,7 +39,7 @@ export const validatorQueries: ServiceQueries[] = [
       },
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       }
     ],
     updateOn: "never",
@@ -56,7 +56,7 @@ export const validatorQueries: ServiceQueries[] = [
       },
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       }
     ],
     updateOn: "never",
@@ -70,7 +70,7 @@ export const validatorQueries: ServiceQueries[] = [
       },
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       }
     ],
     updateOn: "never",
@@ -88,7 +88,7 @@ export const validatorQueries: ServiceQueries[] = [
       },
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       }
     ],
     updateOn: "never",
@@ -97,7 +97,7 @@ export const validatorQueries: ServiceQueries[] = [
     params: [
       {
         key: "limit",
-        value: "100"
+        value: "1000"
       },
       {
         key: "sort",
