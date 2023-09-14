@@ -3,6 +3,7 @@ import { Grid } from "ui";
 import { ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { getFromDottedKey } from "../lib/dotString";
 import util from "util";
+import {ConsoleLogTester} from "../components/consoleLogTester";
 
 export const Kpi = ({
   queryData,
@@ -41,6 +42,18 @@ export const Kpi = ({
         if (value.type === "key") {
           v = getFromDottedKey(value.value, "row", queryData, queryData);
         }
+        if (value.type === "calculated") {
+          const keys = value?.calculations[0]?.keys?.map((key: string) => {
+            return getFromDottedKey(key, "row", queryData, queryData)
+          })
+
+          const parsedCalculation = util.format(
+            value.calculations[0].calculation,
+            ...keys
+          );
+
+          v = Number(eval(parsedCalculation));
+        }
         let link = undefined;
         if (value.format?.link?.href) {
           link = {
@@ -60,7 +73,7 @@ export const Kpi = ({
         return (
           <ValueFormatter
             key={value._key}
-            value={value.type === "key" ? v : value.value}
+            value={value.type === "key" || value.type === "calculated" ? v : value.value}
             copy={copy === index}
             {...value.format}
             link={link}
