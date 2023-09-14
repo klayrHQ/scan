@@ -115,7 +115,7 @@ export default async function RootLayout({
                   />
                   {children}
                 </div>
-                <Footer copyright={settings.copyright} lists={footer.lists}/>
+                <Footer copyright={settings.copyright} lists={footer}/>
                 <FloatingMenuContainer menuItems={menuItems} />
               </RecentSearchesProvider>
             </FavouritesProvider>
