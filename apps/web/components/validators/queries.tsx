@@ -17,6 +17,21 @@ export const validatorQueries: ServiceQueries[] = [
     key: "validators-active",
     call: "get.pos.validators",
     serviceType: "lisk-service",
+    subQueries: [
+      {
+        type: "singleMatch",
+        foreignKey: "address",
+        primaryKey: "address",
+        call: "get.generators",
+        serviceType: "lisk-service",
+        params: [
+          {
+            value: "103",
+            key: "limit",
+          }
+        ]
+      }
+    ],
     params: [
       {
         key: "status",
@@ -116,10 +131,8 @@ export const validatorQueries: ServiceQueries[] = [
         serviceType: "lisk-service",
         params: [
           {
-            _key: "8a4865466adf",
             value: "103",
             key: "limit",
-            _type: "inline"
           }
         ]
       }
