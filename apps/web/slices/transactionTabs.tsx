@@ -4,6 +4,9 @@ import Link from "next/link";
 import { getFromDottedKey } from "../lib/dotString";
 import { useState } from "react";
 import { TableSlice } from "./table";
+import {ConsoleLogTester} from "../components/consoleLogTester";
+import {Select} from "ui/atoms/select/select";
+import {usePathname, useRouter} from "next/navigation";
 
 export const TransactionTabsSlice = ({
   queryData,
@@ -18,6 +21,9 @@ export const TransactionTabsSlice = ({
   const keys =
     getFromDottedKey(dynamicTabs.label.value, "test", queryData, queryData) ||
     [];
+
+  const router = useRouter()
+  const currentPath = usePathname()
 
   const switchCategory = (category: string) => {
     setCurrentCategory(category);
@@ -42,9 +48,14 @@ export const TransactionTabsSlice = ({
       })
     ),
   ] as string[];
+
+  const filter = (value: string) => {
+    router.push(`/transactions/${currentCategory}:${value}`)
+  }
+
   return (
     <Container bgColor={"background"} section gap={2} className={"max-w-app"}>
-      <Grid flex gap={2} columns={2}>
+      <Grid className={"hidden lg:flex"} flex gap={2} columns={2}>
         <Link key={"all"} href={"/transactions"}>
           <Typography
             size={"menu"}
@@ -98,7 +109,7 @@ export const TransactionTabsSlice = ({
           );
         })}
       </Grid>
-      <Grid flex gap={2} columns={2}>
+      <Grid className={"hidden lg:flex"} flex gap={2} columns={2}>
         {subCategories?.[currentCategory]?.map((label: string) => {
           const link = `/transactions/${currentCategory}:${label}`;
           return (
@@ -129,6 +140,40 @@ export const TransactionTabsSlice = ({
           );
         })}
       </Grid>
+      <Select
+          className={"lg:hidden"}
+          id={"subCategories"}
+          innerClassName={"border-surface-3 border-solid border-1"}
+          placeholder={currentCategory || "All"}
+          optionsList={categories.map(cat => {
+            return {
+              label: cat.charAt(0).toUpperCase() + cat.slice(1),
+              value: cat
+            }
+          })}
+          onChange={switchCategory}
+          rounded
+          width={"full"}
+          zIndex={"40"}
+      />
+      {
+        subCategories?.[currentCategory] &&
+          <Select
+            className={"lg:hidden"}
+            id={"subCategories"}
+            innerClassName={"border-surface-3 border-solid border-1"}
+            placeholder={currentPath?.split("/").pop()?.split(":").pop() || "Filter"}
+            optionsList={subCategories?.[currentCategory]?.map(cat => {
+              return {
+                label: cat.charAt(0).toUpperCase() + cat.slice(1),
+                value: cat,
+              }
+            })}
+            onChange={filter}
+            rounded
+            width={"full"}
+          />
+      }
       <TableSlice
         {...dynamicTabs.content}
         queryData={queryData}

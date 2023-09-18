@@ -30,6 +30,7 @@ interface SelectProps
   openButton?: ReactElement;
   icon?: boolean;
   rounded?: boolean;
+  zIndex?: string;
 }
 
 const options = cva(
@@ -69,6 +70,7 @@ export const Select: FC<SelectProps> = ({
   openButton,
   icon = true,
   rounded,
+  zIndex,
 }) => {
   const [currentValue, setCurrentValue] = useState<{ label?: string, value: string } | undefined>(optionsList.find(option => option.value === defaultValue));
   const [open, setOpen] = useState(false);
@@ -116,9 +118,10 @@ export const Select: FC<SelectProps> = ({
       id={id}
     >
       <div className={cls([
-        "absolute inset-0 h-max bg-background z-40",
+        "absolute inset-0 h-max bg-background",
         rounded ? `rounded-md` : "",
         innerClassName,
+        zIndex ? `z-${zIndex}` : "z-30",
       ])}>
         {
           openButton ?
@@ -141,7 +144,7 @@ export const Select: FC<SelectProps> = ({
               <Typography
                 align={"center"}
                 bold
-                className={`pt-0.5 max-h-10 overflow-hidden ${!currentValue ? "opacity-high" : ""}`}
+                className={`pt-0.5 max-h-10 overflow-hidden capitalize ${!currentValue ? "opacity-high" : ""}`}
                 color={"current"}
                 tag={"span"}
               >
