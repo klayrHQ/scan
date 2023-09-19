@@ -20,6 +20,7 @@ import {FavouritesProvider} from "../../providers/favourites";
 import {RecentSearchesProvider} from "../../providers/recentSearches";
 import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
 import {SettingsProvider} from "../../providers/settings";
+import {LineChart} from "../../components/data/charts/lineChart";
 
 const getSanitySnapshot = async (): Promise<{
   result: SanityDocument[];
@@ -112,6 +113,20 @@ export default async function RootLayout({
                     index={index}
                     status={status}
                     menuItems={menuItems}
+                  />
+                  <LineChart
+                    chartData={[
+                      {
+                        country: "USA",
+                        value: 2025
+                      }, {
+                        country: "China",
+                        value: 1882
+                      },
+                    ]}
+                    id={"1"}
+                    labelKey={"valueLocked"}
+                    valueKey={"date"}
                   />
                   {children}
                 </div>

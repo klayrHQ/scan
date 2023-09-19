@@ -5,6 +5,7 @@ import {ColumnsChart} from "../components/data/charts/columnsChart";
 import {useEffect, useState} from "react";
 import {DoubleColumnsChart} from "../components/data/charts/doubleColumnsChart";
 import {convertBeddowsToLSK} from "../lib/queries/lisk";
+import {LineChart} from "../components/data/charts/lineChart";
 
 export type FlexibleArrayType = {
   [key: string]: number | string;
@@ -15,6 +16,7 @@ const chartList = {
   donut: DonutChart,
   columns: ColumnsChart,
   doubleColumns: DoubleColumnsChart,
+  line: LineChart,
 }
 
 export const ChartSlice = ({
@@ -31,7 +33,7 @@ export const ChartSlice = ({
 }: {
   id: string;
   queryData: any;
-  chartType?: "pie" | "donut" | "columns" | "doubleColumns";
+  chartType?: "pie" | "donut" | "columns" | "doubleColumns" | "line";
   chartDataKey: string;
   labelKey?: string;
   valueKey?: string;

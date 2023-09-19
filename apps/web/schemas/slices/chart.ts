@@ -1,5 +1,4 @@
 import { defineType } from "sanity";
-import {SanityValue} from "../layout/value";
 
 export const chart = defineType({
   name: "chart",
@@ -41,7 +40,8 @@ export const chart = defineType({
           {title: "Donut Chart", value: "donut"},
           {title: "Pie Chart", value: "pie"},
           {title: "Columns Chart", value: "columns"},
-          {title: "Double Columns Chart", value: "doubleColumns"}
+          {title: "Double Columns Chart", value: "doubleColumns"},
+          {title: "Line Chart", value: "line"}
         ],
       },
     },
