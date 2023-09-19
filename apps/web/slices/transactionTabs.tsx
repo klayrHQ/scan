@@ -141,8 +141,8 @@ export const TransactionTabsSlice = ({
         })}
       </Grid>
       <Select
-          className={"lg:hidden"}
-          id={"subCategories"}
+          className={"lg:hidden mx-auto"}
+          id={"categories"}
           innerClassName={"border-surface-3 border-solid border-1"}
           placeholder={currentCategory || "All"}
           optionsList={categories.map(cat => {
@@ -153,13 +153,13 @@ export const TransactionTabsSlice = ({
           })}
           onChange={switchCategory}
           rounded
-          width={"full"}
+          width={"app"}
           zIndex={"40"}
       />
       {
         subCategories?.[currentCategory] &&
           <Select
-            className={"lg:hidden"}
+            className={"lg:hidden mx-auto"}
             id={"subCategories"}
             innerClassName={"border-surface-3 border-solid border-1"}
             placeholder={currentPath?.split("/").pop()?.split(":").pop() || "Filter"}
@@ -171,7 +171,7 @@ export const TransactionTabsSlice = ({
             })}
             onChange={filter}
             rounded
-            width={"full"}
+            width={"app"}
           />
       }
       <TableSlice

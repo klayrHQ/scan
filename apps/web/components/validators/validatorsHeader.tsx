@@ -1,6 +1,7 @@
 import {Grid, KeyValueRow, Typography, ValueFormatter} from "ui";
 import {ConsoleLogTester} from "../consoleLogTester";
 import {Divider} from "ui/atoms/divider/divider";
+import {TitleBoxSlice} from "../../slices/titleBox";
 
 export const ValidatorsHeader = ({
   kpis
@@ -21,16 +22,28 @@ export const ValidatorsHeader = ({
     <Grid
       columns={3}
       gap={8}
-      className={"max-w-app w-app mx-auto min-h-50"}
+      className={"max-w-app md:w-app mx-auto min-h-50"}
     >
-      <Grid flex columns={1} className={"px-5"}>
-        <Typography tag={"h1"} size={"Heading3"}>
-          {"Validators"}
-        </Typography>
-        <Typography tag={"p"}>
-          {"Discover a comprehensive overview of all validators and essential on-chain statistics."}
-        </Typography>
-      </Grid>
+      <TitleBoxSlice
+        description={{
+          type: "literal",
+          value: "Discover a comprehensive overview of all validators and essential on-chain statistics."
+        }}
+        title={{
+          format: {
+            // @ts-ignore
+            typography: [
+              {
+                value: "Heading3",
+                key: "size"
+              }
+            ],
+            tag: "h2"
+          },
+          type: "literal",
+          value: "Validators"
+        }}
+      />
       <Grid
         className={"bg-surface-1 p-4 rounded shadow-xl"}
         columns={2}

@@ -147,6 +147,7 @@ const widths = {
   "10/12": "83.333333%",
   "11/12": "91.666667%",
   full: "100%",
+  app: "90%",
   screen: "100vw",
   min: "min-content",
   max: "max-content",

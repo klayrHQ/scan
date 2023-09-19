@@ -179,6 +179,8 @@ module.exports = {
     "w-max",
     "w-full",
     "w-app",
+    "md:w-app",
+    "lg:w-app",
     "text-sm",
     "text-lg",
     "text-xl",

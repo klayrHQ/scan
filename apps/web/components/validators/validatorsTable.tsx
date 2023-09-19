@@ -18,8 +18,7 @@ export const ValidatorsTable = ({
 }) => {
 
   return (
-    <Grid className={"max-w-app w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
-      {/*<ConsoleLogTester data={validators} />*/}
+    <Grid className={"max-w-app lg:w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
       <FilterButtons
         buttons={buttons}
         // @ts-ignore
