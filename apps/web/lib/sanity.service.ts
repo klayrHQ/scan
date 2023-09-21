@@ -265,7 +265,7 @@ export const getData = async (
   serviceType: ServiceTypes,
   call: CallsRPC | string,
   params?: any
-): Promise<RPCResponses<RPCCalls> & { data?: any }> => {
+): Promise<RPCResponses<RPCCalls> & { data?: any, meta?: any }> => {
   // todo fix any data
   switch (serviceType) {
     default:
