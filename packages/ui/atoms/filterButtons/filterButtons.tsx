@@ -44,7 +44,7 @@ export const FilterButtons = ({
           />
         ))}
       </Grid>
-      <div className={"block md:hidden w-app mx-auto"}>
+      <div className={"block md:hidden w-full mx-auto"}>
         <Select
           defaultValue={selection}
           id={"filterButtons"}

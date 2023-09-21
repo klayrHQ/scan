@@ -153,7 +153,7 @@ export const TransactionTabsSlice = ({
           })}
           onChange={switchCategory}
           rounded
-          width={"app"}
+          width={"full"}
           zIndex={"40"}
       />
       {
@@ -171,7 +171,7 @@ export const TransactionTabsSlice = ({
             })}
             onChange={filter}
             rounded
-            width={"app"}
+            width={"full"}
           />
       }
       <TableSlice
