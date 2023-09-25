@@ -9,6 +9,7 @@ import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
 import { parseProps } from "ui";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
+export const serviceURL = process.env.NEXT_PUBLIC_SERVICE_URL!;
 
 export type ServiceTypes =
   | "lisk-service"
@@ -45,7 +46,7 @@ export const client = new LiskService({
   // url: "51.15.142.42:9901",
   // url: "51.158.162.30:9901",
   // url: "51.158.244.16:9901",
-  url: "betanet-service.liskscan.com",
+  url: serviceURL,
   // url: "betanet-service.lisk.com",
   disableTLS: false,
 });
