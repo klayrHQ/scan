@@ -9,6 +9,7 @@ import {divider} from "./divider";
 import {jsonItem} from "./jsonItem";
 import {chart} from "./chart";
 import newsGrid from "../news/newsGrid";
+import {countryFlag} from "./countryFlag";
 
 const sliceDocumentNames: {
   type: string;
@@ -22,6 +23,7 @@ const sliceDocumentNames: {
   jsonItem,
   chart,
   newsGrid,
+  countryFlag,
   { name: "grid" },
 ].map((doc) => ({
   type: doc.name,

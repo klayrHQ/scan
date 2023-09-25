@@ -12,6 +12,7 @@ import { OrColumn } from "./or";
 import { StakesAccountColumn } from "./stakesAccount";
 import { LogoColumn } from "./logo";
 import { TxPopover } from "./txPopover";
+import { CountryFlagColumn } from "./countryFlagColumn";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -34,6 +35,7 @@ export const ColumnComponents = {
   StakesAccountColumn: StakesAccountColumn,
   LogoColumn: LogoColumn,
   TxPopoverColumn: TxPopover,
+  CountryFlagColumn: CountryFlagColumn,
 };
 
 export type ColumnTypes = keyof typeof ColumnComponents;

@@ -20,6 +20,7 @@ import {FavouritesProvider} from "../../providers/favourites";
 import {RecentSearchesProvider} from "../../providers/recentSearches";
 import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
 import {SettingsProvider} from "../../providers/settings";
+import {CountryFlag} from "../../slices/countryFlag";
 
 const getSanitySnapshot = async (): Promise<{
   result: SanityDocument[];

@@ -10,6 +10,7 @@ import accountHeader from "./accountHeader";
 import { divider } from "./divider";
 import {jsonItem} from "./jsonItem";
 import {chart} from "./chart";
+import {countryFlag} from "./countryFlag";
 
 export const slices = [
   favorite,
@@ -24,5 +25,6 @@ export const slices = [
   divider,
   jsonItem,
   chart,
+  countryFlag,
 ];
 export const sliceDocumentNames: string[] = slices.map((doc) => doc.name);

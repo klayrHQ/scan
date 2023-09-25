@@ -12,6 +12,7 @@ import { ValidatorTabs } from "./validatorsTabs";
 import { JsonItemSlice } from "./jsonItem";
 import { ChartSlice } from "./chart";
 import {NewsGrid} from "./newsGrid";
+import {CountryFlag} from "./countryFlag";
 
 export const Slices = {
   titleBox: TitleBoxSlice,
@@ -28,5 +29,6 @@ export const Slices = {
   jsonItem: JsonItemSlice,
   chart: ChartSlice,
   newsGrid: NewsGrid,
+  countryFlag: CountryFlag,
 };
 export type SlicesTypes = keyof typeof Slices;
