@@ -123,7 +123,7 @@ export const MobileMenuModal = ({
             {kpis &&
               <>
                 {kpis?.map(({ key, label, backup, _key }) => (
-                  <div className={"hidden md:inline"}>
+                  <div className={"hidden md:inline"} key={key}>
                     <KeyValueKPI
                       key={_key}
                       dottedKey={key}

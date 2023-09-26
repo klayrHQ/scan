@@ -68,11 +68,11 @@ export const FavouritesModal = ({
       }
       buttonOnClick={updateFavourites}
     >
-      <FavouritesWindow
-        favourites={favourites}
-        unFavourite={unFavourite}
-        onClick={goToAccount}
-      />
+      {/*<FavouritesWindow*/}
+      {/*  favourites={favourites}*/}
+      {/*  unFavourite={unFavourite}*/}
+      {/*  onClick={goToAccount}*/}
+      {/*/>*/}
     </Popover>
   )
 }

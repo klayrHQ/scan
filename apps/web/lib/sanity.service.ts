@@ -60,9 +60,15 @@ export const getTimestamp = async (height: number): Promise<number> => {
     "get.blocks",
     { height: height.toString(), }
   )
+  // console.log(response)
   if (response.status === "success") {
-    timestamps[height] = response.data[0].timestamp
-    return response.data[0].timestamp
+    // console.log(response.data)
+    if (response.data.length === 0) {
+      timestamps[height] = 1695731780
+      return 1695731780
+    }
+    timestamps[height] = response.data?.[0]?.timestamp || 1695731780
+    return response.data[0]?.timestamp || 1695731780
   }
   return 0
 }
