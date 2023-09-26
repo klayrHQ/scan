@@ -10,11 +10,11 @@ export const settings: SettingType[] = [
       id: "lisk",
       endpoint: [
         {
-          host: "wss://betanet-service.service.liskscan.com",
+          host: "wss://testnet-service.liskscan.com",
           type: "serviceRPC",
         },
         {
-          host: "https://betanet-service.service.liskscan.com",
+          host: "https://testnet-service.liskscan.com",
           type: "serviceHTTP",
         },
       ],
