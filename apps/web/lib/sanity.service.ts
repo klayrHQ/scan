@@ -9,7 +9,7 @@ import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
 import { parseProps } from "ui";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
-export const serviceURL = process.env.NEXT_PUBLIC_SERVICE_URL || "betanet-service.liskscan.com";
+export const serviceURL = process.env.NEXT_PUBLIC_SERVICE_URL || "testnet-service.liskscan.com";
 
 export type ServiceTypes =
   | "lisk-service"
