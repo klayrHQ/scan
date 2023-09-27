@@ -17,7 +17,6 @@ export const ValidatorsHeader = ({
     }[]
   }
 }) => {
-
   return (
     <Grid
       columns={3}
@@ -54,6 +53,7 @@ export const ValidatorsHeader = ({
           kpis?.validators?.map(total => {
             return (
               <KeyValueRow
+                key={total.label}
                 label={total.label}
                 value={<Typography className={"font-bold"} color={"onPrimary"} tag={"span"} size={"Heading5"}>{total.total}</Typography>}
                 col
@@ -79,6 +79,7 @@ export const ValidatorsHeader = ({
           {
             kpis.generators.map(generator => (
               <ValueFormatter
+                key={generator?.address}
                 value={{address: generator?.address, name: generator?.name}}
                 format={"avatarAddress"}
                 link={{href: `/account/${generator?.address}`}}

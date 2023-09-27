@@ -1,9 +1,8 @@
-import {ColumnProps} from "./index";
-import {ValueFormatter} from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import {ValueFormatter} from "ui";
 
 export const DefaultHeadColumn = ({
   values,
-}: ColumnProps) => {
+}: {values: any[]}) => {
   return (
     <>{values[0].value ? <ValueFormatter value={values[0].value} {...values[0].format} /> : <></>}</>
   );

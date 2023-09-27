@@ -31,6 +31,7 @@
     "@walletconnect/web3-provider": "^1.8.0",
     "@web3modal/standalone": "^2.4.1",
     "class-variance-authority": "^0.4.0",
+    "cron": "^2.4.4",
     "dayjs": "^1.11.8",
     "groq-js": "^1.1.9",
     "nanoid": "^4.0.2",

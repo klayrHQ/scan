@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { cls } from "ui";
-import { Icon } from "ui/atoms/icon/icon";
 
 export type ShowOnCell =
   | "mobile"

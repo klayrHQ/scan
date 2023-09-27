@@ -1,5 +1,5 @@
 import { ColumnProps } from "./index";
-import { ValueFormatter } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { ValueFormatter } from "ui";
 import { cls } from "ui";
 import React from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";

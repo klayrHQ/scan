@@ -230,7 +230,7 @@ export const validatorColumns: FormattedColumnType[] = [
         }
       },
       {
-        value: "validators.get_generators_address.nextAllocatedTime",
+        value: "validators.nextAllocatedTime",
         format: {
           typography: [
             {

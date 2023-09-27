@@ -21,9 +21,10 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         key: table.key,
         cols: table.columns,
       });
-      console.log(queryData)
-      console.log(table)
+      // console.log(processedTable)
+      // console.log(queryData)
       // console.log("QDQDQ", tableRows, queryData.blocks?.data[0].height)
+      // console.log(tableRows)
       updateTable({ rows: tableRows.rows, table: processedTable });
     };
     if (queryData[table.key]) {

@@ -2,7 +2,7 @@ import { DoubleRowColumn } from "./doubleRow";
 import { PlainColumn } from "./plain";
 import { DefaultHeadColumn } from "./head";
 import { DateColumn } from "./date";
-import { ValueFormat } from "../../../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import { ValueFormat } from "ui";
 import { GridColumn } from "./grid";
 import { AvatarColumn } from "./avatar";
 import { ValidatorStatusColumn } from "./validatorStatus";

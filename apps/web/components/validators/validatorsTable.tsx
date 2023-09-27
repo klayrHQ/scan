@@ -1,9 +1,28 @@
-"use client"
-import {Grid} from "ui";
-import {ConsoleLogTester} from "../consoleLogTester";
-import {TableSlice} from "../../slices/table";
-import {validatorColumns} from "./validatorColumns";
-import {FilterButtons} from "ui/atoms/filterButtons/filterButtons";
+"use client";
+import {cls, Grid,} from "ui";
+import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
+import {DefaultHeadColumn, DoubleRowColumn, GridColumn, ValidatorStatusColumn,} from "../data";
+import {StaticPlainColumn} from "../data/table/columns/staticPlain";
+import {ShowOnCell} from "../data/table/cell";
+
+const getShowClass = (showOn: ShowOnCell) => {
+  switch (showOn) {
+    case "mobile":
+      return "table-cell md:hidden";
+    case "tablet":
+      return "hidden md:table-cell lg:hidden";
+    case "desktop":
+      return "hidden lg:table-cell";
+    case "mobileTablet":
+      return "table-cell lg:hidden";
+    case "tabletDesktop":
+      return "hidden md:table-cell";
+    case "mobileDesktop":
+      return "table-cell md:hidden lg:table-cell";
+    default:
+      return "table-cell";
+  }
+};
 
 export const ValidatorsTable = ({
   validators,
@@ -11,12 +30,11 @@ export const ValidatorsTable = ({
   setActiveTab,
   activeTab,
 }: {
-  validators: any
-  buttons: { label: string; state: string; }[],
-  setActiveTab: any,
-  activeTab: string,
+  validators: any;
+  buttons: { label: string; state: string }[];
+  setActiveTab: any;
+  activeTab: string;
 }) => {
-
   return (
     <Grid className={"max-w-app lg:w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
       <FilterButtons
@@ -25,15 +43,573 @@ export const ValidatorsTable = ({
         onChange={setActiveTab}
         selection={activeTab}
       />
-      <TableSlice
-        id={"validatorsTable"}
-        queryData={{validators: validators}}
-        table={{
-          key: "validators",
-          columns: validatorColumns,
-          sticky: true,
-        }}
-      />
+      <div
+        className={[
+          "max-w-app mx-auto w-full bg-background rounded",
+          // "shadow-xl p-4 w-app mx-auto ",
+          "overflow-x-auto md:overflow-x-visible",
+          //!table.sticky ? "overflow-x-auto md:overflow-x-visible" : "",
+        ].join(" ")}
+      >
+        <table className={"border-collapse rounded w-full"}>
+          <thead
+            className={
+              "md:before:absolute md:before:left-0 md:before:right-0 md:before:-top-2 md:before:h-2 md:before:bg-background md:before:content-['']"
+            }
+          >
+            <tr
+              className={cls([
+                "border-b-1 rounded",
+                "border-b-tableHeaderBorder bg-tableHeaderBG text-tableHeaderText p-4",
+              ])}
+            >
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "#",
+                      name: "rank",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Validator",
+                      name: "ValidatorName",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      value: "Status",
+                      format: {
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Status",
+                      type: "literal",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Total Blocks",
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Total Blocks",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      value: "Validator Weight",
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Validator Weight",
+                      type: "literal",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "ValidatorSelfStake",
+                      type: "literal",
+                      value: "Self Stake",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("desktop"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Total Stake",
+                      format: {
+                        format: "plain",
+                        type: "string",
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                      },
+                      name: "TotalStake",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Commission (%)",
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "commission",
+                    },
+                  ]}
+                />
+              </th>
+              <th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      name: "Rewards",
+                      type: "literal",
+                      value: "Rewards",
+                      format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value:
+                            "Total rewards earned by validator + Self stake rewards earned by validator",
+                        },
+                        type: "string",
+                        typography: [
+                          {
+                            value:
+                              "w-full text-right flex items-center flex-row",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                      },
+                    },
+                  ]}
+                />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => (
+              <tr>
+                <td
+                  className={cls([
+                    "border-b-1 p-2 pl-4 font-medium",
+                    getShowClass("always"),
+                  ])}
+                >
+                  <StaticPlainColumn
+                    values={{
+                      value: validator.rank,
+                      format: {
+                        format: "number",
+                        type: "number",
+                      },
+                      type: "literal",
+                    }}
+                  />
+                </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}><GridColumn params={{}} index={1} queryData={[]} values={[
+                  {
+                    format: {
+                      typography: [
+                        {
+                          value: "mr-2",
+                          key: "className"
+                        }
+                      ],
+                      format: "avatar",
+                      type: "string"
+                    },
+                    name: "avatar",
+                    type: "literal",
+                    value: validator.address
+                  },
+                  {
+                    format: {
+                      format: "plain",
+                      link: {
+                        keys: [
+                          "validators.address"
+                        ],
+                        href: "/account/%s"
+                      },
+                      type: "string"
+                    },
+                    name: "validatorName",
+                    type: "literal",
+                    value: validator.name
+                  }
+                ]}/> </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}>
+                  <ValidatorStatusColumn key={validator.nextAllocatedTime - (new Date().getTime() / 10000)} params={{}} index={1} queryData={[]} values={ [
+                    {
+                      name: "status",
+                      type: "literal",
+                      value: validator.status,
+                      format: {
+                        typography: [
+                          {
+                            key: "className"
+                          }
+                        ],
+                        format: "icon",
+                        icon: {
+                          conditions: [
+                            {
+                              iconProps: [
+                                {
+                                  value: "text-success h-5 w-5",
+                                  key: "className"
+                                }
+                              ],
+                              operator: "==",
+                              icon: "CheckCircleIconSolid",
+                              conditionValue: "active"
+                            },
+                            {
+                              operator: "==",
+                              icon: "MinusCircleIconOutline",
+                              conditionValue: "standby",
+                              iconProps: [
+                                {
+                                  key: "className",
+                                  value: "text-info h-5 w-5"
+                                }
+                              ]
+                            },
+                            {
+                              icon: "ChevronRightIconOutline",
+                              conditionValue: "ineligible",
+                              iconProps: [
+                                {
+                                  value: "text-info h-4 w-4",
+                                  key: "className"
+                                }
+                              ],
+                              operator: "=="
+                            }
+                          ]
+                        },
+                        type: "string"
+                      }
+                    },
+                    {
+                      value: validator.nextAllocatedTime,
+                      format: {
+                        typography: [
+                          {
+                            value: " w-full",
+                            key: "className"
+                          },
+                          {
+                            value: "body",
+                            key: "size"
+                          }
+                        ],
+                        format: "fromNow",
+                        type: "timestamp"
+                      },
+                      name: "nextAllocatedTime",
+                      type: "literal"
+                    },
+                    {
+                      format: {
+                        format: "plain",
+                        type: "string"
+                      },
+                      name: "StatusLabel",
+                      type: "literal",
+                      value: validator.status
+                    },
+                    {
+                      value: validator.consecutiveMissedBlocks,
+                      format: {
+                        format: "number",
+                        type: "number"
+                      },
+                      name: "missedBlocks",
+                      type: "literal"
+                    }
+                  ] as any}
+                  />
+                </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}>
+                  <StaticPlainColumn values={{
+                    name: "generatedBlocks",
+                    type: "literal",
+                    value: validator.generatedBlocks,
+                    format: {
+                      typography: [
+                        {
+                          value: "text-right w-full font-bold",
+                          key: "className",
+                        }
+                      ],
+                      format: "number",
+                      type: "number"
+                    }
+                  }}/>
+                </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}>
+                  <StaticPlainColumn values={{
+                    type: "literal",
+                    updateOn: "lastBlock",
+                    value: validator.validatorWeight,
+                    format: {
+                      typography: [
+                        {
+                          value: "w-full text-right",
+                          key: "className"
+                        }
+                      ],
+                      format: "currency",
+                      type: "beddows"
+                    },
+                    name: "ValidatorVoteweight",
+                  }}/>
+                </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}><StaticPlainColumn values={{
+                  type: "literal",
+                  value: validator.selfStake,
+                  format: {
+                    type: "beddows",
+                    typography: [
+                      {
+                        value: "text-right w-full",
+                        key: "className"
+                      }
+                    ],
+                    format: "currency"
+                  },
+                  name: "ValidatorSelfStake",
+                }}/> </td>
+                <td  className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}><StaticPlainColumn values={{
+                  type: "literal",
+                  updateOn: "lastBlock",
+                  value: validator.totalStake,
+                  format: {
+                    type: "beddows",
+                    typography: [
+                      {
+                        value: "w-full text-right",
+                        key: "className",
+                      }
+                    ],
+                    format: "currency"
+                  },
+                  name: "Total Stake"
+                }}/> </td>
+                <td className={cls([
+                  "border-b-1 p-2 pl-4 font-medium",
+                  getShowClass("always"),
+                ])}><StaticPlainColumn values={
+                  {
+                    type: "literal",
+                    value: `${validator.commission}%`,
+                    format: {
+                      type: "number",
+                      typography: [
+                        {
+                          value: "w-full text-right",
+                          key: "className"
+                        }
+                      ],
+                      format: "commission",
+                      tooltip: {
+                        placement: "top-start",
+                        value: "Set commission by validator"
+                      }
+                    },
+                    name: "commission %"
+                  }
+                }/> </td>
+                <td
+                  className={cls([
+                    "border-b-1 p-2 pl-4 font-medium",
+                    getShowClass("always"),
+                  ])}
+                >
+                  <DoubleRowColumn
+                    params={{}}
+                    index={1}
+                    queryData={[]}
+                    values={[
+                      {
+                        type: "literal",
+                        value: validator.earnedRewards,
+                        format: {
+                          tooltip: {
+                            placement: "auto",
+                            value: "Total Rewards ",
+                          },
+                          type: "beddows",
+                          typography: [
+                            {
+                              value: "text-right w-full",
+                              key: "className",
+                            },
+                          ],
+                          format: "currency",
+                        },
+                        name: "Total Rewards",
+                      },
+                      {
+                        name: "totalSelfStakeRewards",
+                        type: "literal",
+                        value: validator.totalSelfStakeRewards,
+                        format: {
+                          format: "currency",
+                          tooltip: {
+                            placement: "auto",
+                            value: "total Self Stake Rewards",
+                          },
+                          type: "beddows",
+                          typography: [
+                            {
+                              key: "className",
+                              value: "text-right w-full text-onSurfaceMedium",
+                            },
+                            {
+                              value: "subBody",
+                              key: "size",
+                            },
+                          ],
+                        },
+                      },
+                    ]}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/*<TableSlice*/}
+      {/*  id={"validatorsTable"}*/}
+      {/*  queryData={{validators: { data: validators, status: "success" } }}*/}
+      {/*  table={{*/}
+      {/*    key: "validators",*/}
+      {/*    columns: validatorColumns,*/}
+      {/*    sticky: true,*/}
+      {/*  }}*/}
+      {/*/>*/}
     </Grid>
-  )
-}
+  );
+};

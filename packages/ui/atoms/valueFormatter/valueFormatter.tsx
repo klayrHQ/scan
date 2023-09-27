@@ -19,7 +19,7 @@ type ValueTypes =
   | "hex"
   | "object";
 type Operators = "==" | "!=" | "<=" | ">=" | "<" | ">";
-type Icon = {
+export type Icon = {
   conditions?: {
     conditionValue: string;
     operator: Operators;
@@ -113,6 +113,7 @@ export interface ValueFormat {
     color?: Color;
     format?: Formats;
     tooltip?: TooltipType;
+    typography?: any;
     icon?: Icon;
     link?: {
       href?: string;

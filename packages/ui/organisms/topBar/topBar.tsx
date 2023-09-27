@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
-import { Logo } from "../../molecules/logo/logo";
-import { LiskScanIcon } from "../../assets/icons";
-import { Menu } from "../../molecules/menu/menu";
-import { MobileMenu } from "../mobileMenu/mobileMenu";
+// import { Logo } from "../../molecules/logo/logo";
+// import { LiskScanIcon } from "../../assets/icons";
+// import { Menu } from "../../molecules/menu/menu";
+// import { MobileMenu } from "../mobileMenu/mobileMenu";
 
 export interface TopBarProps {
   menuItems: ReactNode[];

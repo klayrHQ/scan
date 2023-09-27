@@ -1,44 +1,56 @@
-import {getGeneratorsFromAPI, getValidatorsFromAPI} from "../../../controllers/validators";
-import {Validators} from "../../../components/validators/validators";
-import {getAllData} from "../../../lib/sanity.service";
-import {validatorQueries} from "../../../components/validators/queries";
-// export const dynamic = "force-dynamic";
-//export const revalidate = 0;
-/*const statuses = [
-  "all",
-  "active",
-  "standby",
-  "ineligible",
-  "banned",
-  "punished",
-]*/
+"use client";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Validators } from "../../../components/validators/validators";
 
-const Page = async () => {
-  const queryData = await getAllData(validatorQueries)
+const Page = () => {
+  const searchParams = useSearchParams();
+  const [validators, setValidators] = useState<any[]>([]);
+  const [generators, setGenerators] = useState<{ data: any[] }>({ data: [] });
+  const [stats, setStats] = useState<{
+    standby: number;
+    active: number;
+    punished: number;
+    banned: number;
+    ineligible: number;
+  }>({
+    standby: 0,
+    active: 0,
+    punished: 0,
+    banned: 0,
+    ineligible: 0,
+  });
+  useEffect(() => {
+    const updateValidators = async () => {
+      const status = searchParams?.get("status") ?? "active";
+      const validatorsResponse = await fetch(
+        `https://cached-testnet-service.liskscan.com/validators${
+          status === "all" ? "" : `/${status}`
+        }`
+      );
+      const generatorsResponse = await fetch(
+        `https://cached-testnet-service.liskscan.com/generators`
+      );
+      const statsResponse = await fetch(
+        `https://cached-testnet-service.liskscan.com/validators/stats`
+      );
+      setValidators(await validatorsResponse.json());
+      setGenerators(await generatorsResponse.json());
+      setStats(await statsResponse.json());
+    };
+    updateValidators();
+  }, []);
+  return (
+    <>
+      {validators && generators && (
+        <Validators
+          fetchedValidators={validators}
+          fetchedGeneratorKPI={generators?.data?.slice(0, 6)}
+          stats={stats}
+        />
+      )}
+    </>
+  );
+};
 
-  const validators = {
-    all: queryData["validators"],
-    active: queryData["validators-active"],
-    standby: queryData["validators-standby"],
-    ineligible: queryData["validators-ineligible"],
-    banned: queryData["validators-banned"],
-    punished: queryData["validators-punished"],
-  }
-
-  const generators = queryData["generators"]
-
-  /*const validators = {
-    all: await getValidatorsFromAPI({limit: 100, offset: 0, sort: "rank:asc"}),
-    active: await getValidatorsFromAPI({limit: 100, offset: 0, status: "active", sort: "rank:asc"}),
-    standby: await getValidatorsFromAPI({limit: 100, offset: 0, status: "standby", sort: "rank:asc"}),
-    ineligible: await getValidatorsFromAPI({limit: 100, offset: 0, status: "ineligible", sort: "rank:asc"}),
-    banned: await getValidatorsFromAPI({limit: 100, offset: 0, status: "banned", sort: "rank:asc"}),
-    punished: await getValidatorsFromAPI({limit: 100, offset: 0, status: "punished", sort: "rank:asc"}),
-  }*/
-
-  //const generators = await getGeneratorsFromAPI({limit: 6})
-
-  return <Validators fetchedValidators={validators} fetchedGenerators={generators} />
-}
-
-export default Page
+export default Page;

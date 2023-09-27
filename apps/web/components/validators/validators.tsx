@@ -1,145 +1,157 @@
-"use client"
-import {ValidatorsHeader} from "./validatorsHeader";
-import {ValidatorsTable} from "./validatorsTable";
-import {Container} from "ui";
-import {useEffect, useState} from "react";
-import {ConsoleLogTester} from "../consoleLogTester";
-import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
-import {useSearchParams} from "next/navigation";
-import {useService} from "../../providers/service";
-import {validatorQueries} from "./queries";
+"use client";
+import { ValidatorsHeader } from "./validatorsHeader";
+import { ValidatorsTable } from "./validatorsTable";
+import { Container } from "ui";
+import { useEffect, useState } from "react";
+import useQueryParams, { QueryParams } from "../../hooks/useQueryParams";
+import { useSearchParams } from "next/navigation";
+import { useService } from "../../providers/service";
 
 export const Validators = ({
   fetchedValidators,
-  fetchedGenerators,
+  stats,
+  fetchedGeneratorKPI,
 }: {
-  fetchedValidators: any,
-  fetchedGenerators: any,
+  fetchedValidators: any[];
+  stats: {
+    standby: number;
+    active: number;
+    punished: number;
+    banned: number;
+    ineligible: number;
+  };
+  fetchedGeneratorKPI: any[];
 }) => {
-  const [validators, setValidators] = useState<{all: [], active: [], standby: [], ineligible: [], banned: [], punished: []}>(fetchedValidators)
-  const [generators, setGenerators] = useState(fetchedGenerators)
+  const [validators, setValidators] = useState<any[]>(fetchedValidators);
 
-  const {cache, setQueries} = useService()
+  const { cache, queries, setQueries } = useService();
 
-  useEffect(() => {
-    setQueries(validatorQueries)
-  }, [validatorQueries])
+  if (setQueries && (!queries || queries.length === 0)) {
+    setQueries && setQueries([
+      {
+        serviceType: "lisk-service",
+        params: [
+          {
+            key: "limit",
+            value: "6",
+          },
+        ],
+        updateOn: "lastGenerators",
+        key: "generators",
+        call: "get.generators",
+      },
+    ]);
+  }
 
   const { setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
-
+  const [activeTab, setActiveTab] = useState<string>(searchParams?.get("status") || "active");
   const handleChange = (value: string) => {
     // @ts-ignore
     setQueryParams({ ["status"]: value });
   };
 
-  const activeTab = searchParams?.get("status") || "all";
 
   useEffect(() => {
-    if (cache) {
-      setValidators({
-        all: cache["validators"],
-        active: cache["validators-active"],
-        standby: cache["validators-standby"],
-        ineligible: cache["validators-ineligible"],
-        banned: cache["validators-banned"],
-        punished: cache["validators-punished"],
-      })
-    }
-    console.log(cache)
-  }, [cache])
+    setActiveTab(searchParams?.get("status") || "active");
+  }, [searchParams]);
 
   useEffect(() => {
-    if (cache) {
-      setGenerators(cache["generators"])
-    }
-  }, [cache])
+    const getValidators = async () => {
+      const validators = await fetch(
+        `https://cached-testnet-service.liskscan.com/validators${activeTab === "all" ? "" : `/${activeTab}`}`,
+        {
+          next: { revalidate: 0 },
+        }
+      );
+      const validatorsJSON = await validators.json();
+      setValidators(validatorsJSON);
+    };
+      getValidators();
+  }, [cache, activeTab]);
+
 
   const buttons = [
+    // {
+    //   label: `All (${
+    //     stats?.active +
+    //     stats?.standby +
+    //     stats?.ineligible +
+    //     stats?.banned +
+    //     stats?.punished
+    //   })`,
+    //   state: "all",
+    // },
     {
-      // @ts-ignore
-      label: `All (${validators?.all?.meta?.count})`,
-      state: "all"
+      label: `Active (${stats?.active})`,
+      state: "active",
     },
     {
-      // @ts-ignore
-      label: `Active (${validators?.active?.meta?.count})`,
-      state: "active"
+      label: `Standby (${stats?.standby})`,
+      state: "standby",
     },
     {
-      // @ts-ignore
-      label: `Standby (${validators?.standby?.meta?.count})`,
-      state: "standby"
+      label: `Ineligible (${stats?.ineligible})`,
+      state: "ineligible",
     },
     {
-      // @ts-ignore
-      label: `Ineligible (${validators?.ineligible?.meta?.count})`,
-      state: "ineligible"
+      label: `Banned (${stats?.banned})`,
+      state: "banned",
     },
     {
-      // @ts-ignore
-      label: `Banned (${validators?.banned?.meta?.count})`,
-      state: "banned"
+      label: `Punished (${stats?.punished})`,
+      state: "punished",
     },
-    {
-      // @ts-ignore
-      label: `Punished (${validators?.punished?.meta?.count})`,
-      state: "punished"
-    },
-  ]
-
+  ];
   return (
     <Container section gap={8}>
-      {
-        generators && validators &&
+      {fetchedGeneratorKPI && stats && validators && (
         <>
           <ValidatorsHeader
             kpis={{
               validators: [
                 {
-                  // @ts-ignore
-                  total: validators?.all?.meta?.total,
+                  total:
+                    stats?.active +
+                    stats?.standby +
+                    stats?.ineligible +
+                    stats?.banned +
+                    stats?.punished,
                   label: "Total validators",
                 },
                 {
-                  // @ts-ignore
-                  total: validators?.active?.meta?.total,
+                  total: stats?.active,
                   label: "Active validators",
                 },
                 {
-                  // @ts-ignore
-                  total: validators?.standby?.meta?.total,
+                  total: stats?.standby,
                   label: "Standby validators",
                 },
                 {
-                  // @ts-ignore
-                  total: validators?.ineligible?.meta?.total,
+                  total: stats?.ineligible,
                   label: "Ineligible validators",
                 },
                 {
-                  // @ts-ignore
-                  total: validators?.banned?.meta?.total,
+                  total: stats?.banned,
                   label: "Banned validators",
                 },
                 {
-                  // @ts-ignore
-                  total: validators?.punished?.meta?.total,
+                  total: stats?.punished,
                   label: "Punished validators",
                 },
               ],
-              // @ts-ignore
-              generators: generators.data,
+              generators: cache?.generators?.data ?? fetchedGeneratorKPI,
             }}
           />
+
           <ValidatorsTable
-            // @ts-ignore
-            validators={validators ? validators[activeTab] : validators?.all}
+            validators={validators}
             buttons={buttons}
             setActiveTab={handleChange}
             activeTab={activeTab}
           />
         </>
-      }
+      )}
     </Container>
-  )
-}
+  );
+};
