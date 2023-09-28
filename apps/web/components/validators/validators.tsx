@@ -96,16 +96,16 @@ export const Validators = ({
       state: "standby",
     },
     {
+      label: `Punished (${stats?.punished})`,
+      state: "punished",
+    },
+    {
       label: `Ineligible (${stats?.ineligible})`,
       state: "ineligible",
     },
     {
       label: `Banned (${stats?.banned})`,
       state: "banned",
-    },
-    {
-      label: `Punished (${stats?.punished})`,
-      state: "punished",
     },
   ];
   return (
