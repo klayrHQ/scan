@@ -13,12 +13,14 @@ const Page = () => {
     punished: number;
     banned: number;
     ineligible: number;
+    eligible: number;
   }>({
     standby: 0,
     active: 0,
     punished: 0,
     banned: 0,
     ineligible: 0,
+    eligible: 0,
   });
   useEffect(() => {
     const updateValidators = async () => {

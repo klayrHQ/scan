@@ -19,6 +19,7 @@ export const Validators = ({
     punished: number;
     banned: number;
     ineligible: number;
+    eligible: number;
   };
   fetchedGeneratorKPI: any[];
 }) => {
@@ -82,6 +83,10 @@ export const Validators = ({
     //   })`,
     //   state: "all",
     // },
+    {
+      label: `Eligible (${stats?.eligible})`,
+      state: "active",
+    },
     {
       label: `Active (${stats?.active})`,
       state: "active",
