@@ -333,7 +333,7 @@ export const ValidatorsTable = ({
                         keys: [
                           "validators.address"
                         ],
-                        href: "/account/%s"
+                        href: `/account/${validator.address}`
                       },
                       type: "string"
                     },
