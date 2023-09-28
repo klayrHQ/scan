@@ -24,7 +24,7 @@ const Page = () => {
   });
   useEffect(() => {
     const updateValidators = async () => {
-      const status = searchParams?.get("status") ?? "active";
+      const status = searchParams?.get("status") ?? "eligible";
       const validatorsResponse = await fetch(
         `https://cached-testnet-service.liskscan.com/validators${
           status === "all" ? "" : `/${status}`

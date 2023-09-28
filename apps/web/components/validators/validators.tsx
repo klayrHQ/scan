@@ -46,7 +46,7 @@ export const Validators = ({
 
   const { setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<string>(searchParams?.get("status") || "active");
+  const [activeTab, setActiveTab] = useState<string>(searchParams?.get("status") || "eligible");
   const handleChange = (value: string) => {
     // @ts-ignore
     setQueryParams({ ["status"]: value });
@@ -54,7 +54,7 @@ export const Validators = ({
 
 
   useEffect(() => {
-    setActiveTab(searchParams?.get("status") || "active");
+    setActiveTab(searchParams?.get("status") || "eligible");
   }, [searchParams]);
 
   useEffect(() => {
