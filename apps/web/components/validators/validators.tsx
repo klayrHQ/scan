@@ -85,7 +85,7 @@ export const Validators = ({
     // },
     {
       label: `Eligible (${stats?.eligible})`,
-      state: "active",
+      state: "eligible",
     },
     {
       label: `Active (${stats?.active})`,
