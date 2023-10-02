@@ -170,32 +170,32 @@ export const ValidatorsTable = ({
                   ]}
                 />
               </th>
-              <th
-                className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
-                  getShowClass("always"),
-                ])}
-              >
-                <DefaultHeadColumn
-                  values={[
-                    {
-                      format: {
-                        typography: [
-                          {
-                            value: "w-full text-right",
-                            key: "className",
-                          },
-                        ],
-                        format: "plain",
-                        type: "string",
-                      },
-                      name: "ValidatorSelfStake",
-                      type: "literal",
-                      value: "Self Stake",
-                    },
-                  ]}
-                />
-              </th>
+              {/*<th*/}
+              {/*  className={cls([*/}
+              {/*    "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",*/}
+              {/*    getShowClass("always"),*/}
+              {/*  ])}*/}
+              {/*>*/}
+              {/*  <DefaultHeadColumn*/}
+              {/*    values={[*/}
+              {/*      {*/}
+              {/*        format: {*/}
+              {/*          typography: [*/}
+              {/*            {*/}
+              {/*              value: "w-full text-right",*/}
+              {/*              key: "className",*/}
+              {/*            },*/}
+              {/*          ],*/}
+              {/*          format: "plain",*/}
+              {/*          type: "string",*/}
+              {/*        },*/}
+              {/*        name: "ValidatorSelfStake",*/}
+              {/*        type: "literal",*/}
+              {/*        value: "Self Stake",*/}
+              {/*      },*/}
+              {/*    ]}*/}
+              {/*  />*/}
+              {/*</th>*/}
               <th
                 className={cls([
                   "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
@@ -217,7 +217,7 @@ export const ValidatorsTable = ({
                           },
                         ],
                       },
-                      name: "TotalStake",
+                      name: "SelfStake",
                     },
                   ]}
                 />
@@ -331,6 +331,7 @@ export const ValidatorsTable = ({
           </thead>
           <tbody>
             {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => {
+              const capacity = (validator.totalStake/ (validator.selfStake * 10) * 100);
 
               const RB = parseFloat(validator.rewards.blockReward)
               const RM = parseFloat(validator.rewards.monthlyReward)
@@ -525,60 +526,147 @@ export const ValidatorsTable = ({
                   "border-b-1 p-2 pl-4 font-medium",
                   getShowClass("always"),
                 ])}>
-                  <StaticPlainColumn values={{
-                    type: "literal",
-                    updateOn: "lastBlock",
-                    value: validator.validatorWeight,
-                    format: {
-                      typography: [
+                  <DoubleRowColumn
+                      params={{}}
+                      index={1}
+                      queryData={[]}
+                      values={[
                         {
-                          value: "w-full text-right",
-                          key: "className"
-                        }
-                      ],
-                      format: "currency",
-                      type: "beddows"
-                    },
-                    name: "ValidatorVoteweight",
-                  }}/>
+                          type: "literal",
+                          value: validator.validatorWeight,
+                          format: {
+                            tooltip: {
+                              placement: "auto",
+                              value: "Validator Weight, maximum of 10x Self Stake ",
+                            },
+                            type: "beddows",
+                            typography: [
+                              {
+                                value: "text-right w-full",
+                                key: "className",
+                              },
+                            ],
+                            format: "currency",
+                          },
+                          name: "Total Rewards",
+                        },
+                        {
+                          name: "Stake Capacity",
+                          type: "literal",
+                          value: capacity,
+                          format: {
+                            format: "percentage",
+                            tooltip: {
+                              placement: "auto",
+                              value: " Stake Capacity",
+                            },
+                            type: "string",
+                            typography: [
+                              {
+                                key: "className",
+                                value: "text-right w-full text-onSurfaceMedium",
+                              },
+                              {
+                                value: "subBody",
+                                key: "size",
+                              },
+                            ],
+                          },
+                        },
+                      ]}
+                  />
                 </td>
                 <td  className={cls([
                   "border-b-1 p-2 pl-4 font-medium",
                   getShowClass("always"),
-                ])}><StaticPlainColumn values={{
-                  type: "literal",
-                  value: validator.selfStake,
-                  format: {
-                    type: "beddows",
-                    typography: [
-                      {
-                        value: "text-right w-full",
-                        key: "className"
-                      }
-                    ],
-                    format: "currency"
-                  },
-                  name: "ValidatorSelfStake",
-                }}/> </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}><StaticPlainColumn values={{
-                  type: "literal",
-                  updateOn: "lastBlock",
-                  value: validator.totalStake,
-                  format: {
-                    type: "beddows",
-                    typography: [
-                      {
-                        value: "w-full text-right",
-                        key: "className",
-                      }
-                    ],
-                    format: "currency"
-                  },
-                  name: "Total Stake"
-                }}/> </td>
+                ])}>
+                  <DoubleRowColumn
+                      params={{}}
+                      index={1}
+                      queryData={[]}
+                      values={[
+                        {
+                          type: "literal",
+                          value: validator.totalStake,
+                          format: {
+                            tooltip: {
+                              placement: "auto",
+                              value: "Validator total received stake ",
+                            },
+                            type: "beddows",
+                            typography: [
+                              {
+                                value: "text-right w-full",
+                                key: "className",
+                              },
+                            ],
+                            format: "currency",
+                          },
+                          name: "Total received stake",
+                        },
+                        {
+                          name: "total Self Stake",
+                          type: "literal",
+                          value: validator.selfStake,
+                          format: {
+                            format: "currency",
+                            tooltip: {
+                              placement: "auto",
+                              value: " Total Self Stake",
+                            },
+                            type: "beddows",
+                            typography: [
+                              {
+                                key: "className",
+                                value: "text-right w-full text-onSurfaceMedium",
+                              },
+                              {
+                                value: "subBody",
+                                key: "size",
+                              },
+                            ],
+                          },
+                        },
+                      ]}
+                  />
+                </td>
+                {/*<td  className={cls([*/}
+                {/*  "border-b-1 p-2 pl-4 font-medium",*/}
+                {/*  getShowClass("always"),*/}
+                {/*])}><StaticPlainColumn values={{*/}
+                {/*  type: "literal",*/}
+                {/*  value: validator.selfStake,*/}
+                {/*  format: {*/}
+                {/*    type: "beddows",*/}
+                {/*    typography: [*/}
+                {/*      {*/}
+                {/*        value: "text-right w-full",*/}
+                {/*        key: "className"*/}
+                {/*      }*/}
+                {/*    ],*/}
+                {/*    format: "currency"*/}
+                {/*  },*/}
+                {/*  name: "ValidatorSelfStake",*/}
+                {/*}}/> </td>*/}
+                {/*<td  className={cls([*/}
+                {/*  "border-b-1 p-2 pl-4 font-medium",*/}
+                {/*  getShowClass("always"),*/}
+                {/*])}><StaticPlainColumn values={{*/}
+                {/*  type: "literal",*/}
+                {/*  updateOn: "lastBlock",*/}
+                {/*  value: validator.selfStake,*/}
+                {/*  format: {*/}
+                {/*    type: "beddows",*/}
+                {/*    typography: [*/}
+                {/*      {*/}
+                {/*        value: "w-full text-right",*/}
+                {/*        key: "className",*/}
+                {/*      }*/}
+                {/*    ],*/}
+                {/*    format: "currency"*/}
+                {/*  },*/}
+                {/*  name: "Total Stake"*/}
+                {/*}}/> </td>*/}
                 <td className={cls([
                   "border-b-1 p-2 pl-4 font-medium",
                   getShowClass("always"),
