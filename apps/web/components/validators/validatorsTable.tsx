@@ -4,6 +4,7 @@ import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import {DefaultHeadColumn, DoubleRowColumn, GridColumn, ValidatorStatusColumn,} from "../data";
 import {StaticPlainColumn} from "../data/table/columns/staticPlain";
 import {ShowOnCell} from "../data/table/cell";
+import {ConsoleLogTester} from "../consoleLogTester";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -24,6 +25,7 @@ const getShowClass = (showOn: ShowOnCell) => {
   }
 };
 
+
 export const ValidatorsTable = ({
   validators,
   buttons,
@@ -35,6 +37,7 @@ export const ValidatorsTable = ({
   setActiveTab: any;
   activeTab: string;
 }) => {
+
   return (
     <Grid className={"max-w-app lg:w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
       <FilterButtons
@@ -229,7 +232,7 @@ export const ValidatorsTable = ({
                   values={[
                     {
                       type: "literal",
-                      value: "Commission (%)",
+                      value: "Commission",
                       format: {
                         typography: [
                           {
@@ -284,11 +287,70 @@ export const ValidatorsTable = ({
                     },
                   ]}
                 />
+              </th><th
+                className={cls([
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  getShowClass("always"),
+                ])}
+              >
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      name: "Rewards",
+                      type: "literal",
+                      value: "Staking Rewards",
+                      format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value:
+                            "Rewards you earn per monthh by staking 1000LSK for the validator + the APR",
+                        },
+                        type: "string",
+                        typography: [
+                          {
+                            value:
+                              "w-full text-right flex items-center flex-row",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                      },
+                    },
+                  ]}
+                />
               </th>
             </tr>
           </thead>
           <tbody>
-            {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => (
+            {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => {
+
+              const RB = parseFloat(validator.rewards.blockReward)
+              const RM = parseFloat(validator.rewards.monthlyReward)
+              const RY = parseFloat(validator.rewards.yearlyReward)
+              const RD = parseFloat(validator.rewards.dailyRewar)
+              const C = validator.commission/100
+              const S = parseFloat(validator.totalStake)
+              const inputStake = 1000
+
+              const stakersRewardPerMonth = (RM:any, C:any, S:any) => RM * (1 - C / 100) * (inputStake / S);
+              const stakersRewardPerYear = (RY:any, C:any, S:any) => RY * (1 - C / 100) * (inputStake / S);
+              const stakersRewardPerBlock = (RB:any, C:any, S:any) => RB * (1 - C / 100) * (inputStake / S);
+              const resultPerMonth = stakersRewardPerMonth(RM, C, S).toString();
+              const resultPerBlock = stakersRewardPerBlock(RB, C, S).toString();
+              const resultPerYear = stakersRewardPerYear(RY, C, S).toString();
+              const APR = (parseFloat(resultPerYear) / inputStake) * 100;
+
+              return (
+
+
               <tr>
                 <td
                   className={cls([
@@ -306,6 +368,7 @@ export const ValidatorsTable = ({
                       type: "literal",
                     }}
                   />
+
                 </td>
                 <td  className={cls([
                   "border-b-1 p-2 pl-4 font-medium",
@@ -571,14 +634,14 @@ export const ValidatorsTable = ({
                         name: "Total Rewards",
                       },
                       {
-                        name: "totalSelfStakeRewards",
+                        name: "DynamicBlockReward",
                         type: "literal",
-                        value: validator.totalSelfStakeRewards,
+                        value: validator.rewards.blockReward,
                         format: {
                           format: "currency",
                           tooltip: {
                             placement: "auto",
-                            value: "total Self Stake Rewards",
+                            value: "Dynamic Block Reward",
                           },
                           type: "beddows",
                           typography: [
@@ -595,9 +658,64 @@ export const ValidatorsTable = ({
                       },
                     ]}
                   />
+                </td> <td
+                  className={cls([
+                    "border-b-1 p-2 pl-4 font-medium",
+                    getShowClass("always"),
+                  ])}
+                >
+                  <DoubleRowColumn
+                    params={{}}
+                    index={1}
+                    queryData={[]}
+                    values={[
+                      {
+                        type: "literal",
+                        value: resultPerMonth,
+                        format: {
+                          tooltip: {
+                            placement: "auto",
+                            value: "Staking Rewards per 1000 LSK per Month",
+                          },
+                          type: "beddows",
+                          typography: [
+                            {
+                              value: "text-right w-full",
+                              key: "className",
+                            },
+                          ],
+                          format: "fee",
+                        },
+                        name: "Total Rewards",
+                      },
+                      {
+                        name: "APR",
+                        type: "literal",
+                        value: ~APR,
+                        format: {
+                          format: "percentage",
+                          tooltip: {
+                            placement: "auto",
+                            value: "APR is the yearly rate of return on staking 1000 LSK,",
+                          },
+                          type: "string",
+                          typography: [
+                            {
+                              key: "className",
+                              value: "text-right w-full text-onSurfaceMedium",
+                            },
+                            {
+                              value: "subBody",
+                              key: "size",
+                            },
+                          ],
+                        },
+                      },
+                    ]}
+                  />
                 </td>
               </tr>
-            ))}
+            )})}
           </tbody>
         </table>
       </div>

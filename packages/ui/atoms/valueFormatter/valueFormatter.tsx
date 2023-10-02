@@ -234,7 +234,7 @@ const formatters = {
   commission: (value: any) => {
     return value != 0 ? value / 100 + "%" : "0%";
   },
-  percentage: (value: any) => value + "%",
+  percentage: (value: any) => parseFloat(value).toFixed(2) + "%",
   currency: (value: any) =>
     `${
       value
@@ -243,7 +243,7 @@ const formatters = {
           ).toLocaleString() + " LSK"
         : "0 LSK"
     }`,
-  fee: (value: any) => `${value ? convertBeddowsToLSK(value) + " LSK" : ""}`,
+  fee: (value: any) => `${value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " LSK" : ""}`,
   number: (value: any) => value?.toLocaleString(),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => (
