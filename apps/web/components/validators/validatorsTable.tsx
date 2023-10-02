@@ -340,7 +340,6 @@ export const ValidatorsTable = ({
               const C = validator.commission/100
               const inputStake = 3000000000000
               const S = parseFloat(validator.totalStake)+ inputStake
-              console.log(RM,"RM", C,"C", S,"totalStake+inputstake", validator.name)
 
               const stakersRewardPerMonth = (RM:any, C:any, S:any) => RM * (1 - C / 100) * (inputStake / S);
               const stakersRewardPerYear = (RY:any, C:any, S:any) => RY * (1 - C / 100) * (inputStake / S);
@@ -350,7 +349,6 @@ export const ValidatorsTable = ({
               const resultPerBlock = stakersRewardPerBlock(RB, C, S).toString();
               const resultPerYear = stakersRewardPerYear(RY, C, S).toString();
               const APR = (parseFloat(resultPerYear) / inputStake) * 100;
-              console.log(resultPerMonth, "resultpermonth", resultPerMonthLSK,"resultpermonth", validator.name)
               return (
 
 
