@@ -691,7 +691,7 @@ export const ValidatorsTable = ({
                       {
                         name: "APR",
                         type: "literal",
-                        value: ~APR,
+                        value: APR,
                         format: {
                           format: "percentage",
                           tooltip: {
