@@ -28,7 +28,7 @@ export const FilterButtons = ({
 
   return (
     <>
-      <Grid flex className={cls([className, "hidden md:flex gap-1"])} columns={2} gap={1}>
+      <Grid flex className={cls([className, "hidden md:flex gap-1 h-max"])} columns={2} gap={1}>
         {buttons && buttons.map((button) => (
           <Button
             active={selection === button.state}

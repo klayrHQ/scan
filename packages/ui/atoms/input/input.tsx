@@ -1,4 +1,5 @@
-import React, { ChangeEventHandler } from 'react';
+"use client"
+import React, {ChangeEvent, ChangeEventHandler} from 'react';
 import {cls} from "../../assets/utils";
 import {cva} from "class-variance-authority";
 
@@ -19,6 +20,8 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement>{
   min?: number | string
   max?: number | string
   maxLength?: number
+  setValue?: (value: string) => void
+  numbersOnly?: boolean
 }
 
 const inputCVA = cva(
@@ -58,8 +61,25 @@ export const Input = ({
   width,
   fieldType = "text",
   styleType = "primary",
+  setValue,
+  onChange,
+  numbersOnly,
   ...props
  }: InputProps) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (numbersOnly) {
+      if (event.target.value.charAt(0) === "," || event.target.value.charAt(0) === ".") {
+        event.target.value = `0${event.target.value.replace(/[^0-9.,]/g, "")}`; // Remove non-numeric characters and add a 0 before separator if separator is first character
+      } else {
+        event.target.value = event.target.value.replace(/[^0-9.,]/g, ""); // Remove non-numeric characters
+      }
+    }
+
+    if (setValue) {
+      setValue(event.target.value);
+    }
+  };
+
   return (
     <input
       type={fieldType}
@@ -73,6 +93,7 @@ export const Input = ({
           width ? `w-${width}` : "",
         ])
       })}
+      onChange={setValue ? handleChange : onChange}
       placeholder={placeholder}
       disabled={disabled}
       {...props}

@@ -1,10 +1,15 @@
 "use client";
-import {cls, Grid,} from "ui";
+import {cls, Grid, Typography,} from "ui";
 import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import {DefaultHeadColumn, DoubleRowColumn, GridColumn, ValidatorStatusColumn,} from "../data";
 import {StaticPlainColumn} from "../data/table/columns/staticPlain";
 import {ShowOnCell} from "../data/table/cell";
 import {ConsoleLogTester} from "../consoleLogTester";
+import {Input} from "ui/atoms/input/input";
+import {Select} from "ui/atoms/select/select";
+import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
+import {useSearchParams} from "next/navigation";
+import {useEffect, useState} from "react";
 import {convertBeddowsToLSK} from "../../lib/queries/lisk";
 
 const getShowClass = (showOn: ShowOnCell) => {
@@ -38,15 +43,62 @@ export const ValidatorsTable = ({
   setActiveTab: any;
   activeTab: string;
 }) => {
+  const { setQueryParams } = useQueryParams<QueryParams>();
+  const searchParams = useSearchParams();
+
+  const [stakingRewardsAmount, setStakingRewardsAmount] = useState<string>(searchParams?.get("stakingAmount") || "1000");
+  const [stakingRewardsPeriod, setStakingRewardsPeriod] = useState<string>(searchParams?.get("stakingPeriod") || "month");
+
+  useEffect(() => {
+    // @ts-ignore
+    setQueryParams({ ["stakingPeriod"]: stakingRewardsPeriod });
+
+    // @ts-ignore
+    setQueryParams({ ["stakingAmount"]: stakingRewardsAmount });
+  }, [stakingRewardsPeriod, stakingRewardsAmount])
 
   return (
     <Grid className={"max-w-app lg:w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
-      <FilterButtons
-        buttons={buttons}
-        // @ts-ignore
-        onChange={setActiveTab}
-        selection={activeTab}
-      />
+      <Grid flex columns={2} className={"justify-between items-end"}>
+        <FilterButtons
+          buttons={buttons}
+          // @ts-ignore
+          onChange={setActiveTab}
+          selection={activeTab}
+        />
+        <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
+          <Typography className={"ml-2"} tag={"span"} size={"subBody"}>{"LSK"}</Typography>
+          <Input
+            className={"bg-transparent"}
+            numbersOnly
+            placeholder={"Staking amount"}
+            value={stakingRewardsAmount}
+            setValue={setStakingRewardsAmount}
+          />
+          <Select
+            className={"relative before:absolute before:content-[''] before:-left-[1px] before:w-[1px] before:h-3/4  before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto w-28"}
+            defaultValue={stakingRewardsPeriod}
+            innerClassName={"bg-surface-1"}
+            id={"staking-rewards"}
+            placeholder={"month"}
+            optionsList={[
+              {
+                value: "block",
+                label: "Block",
+              },
+              {
+                value: "month",
+                label: "Month",
+              },
+              {
+                value: "year",
+                label: "Year",
+              },
+            ]}
+            onChange={setStakingRewardsPeriod}
+          />
+        </Grid>
+      </Grid>
       <div
         className={[
           "max-w-app mx-auto w-full bg-background rounded",
@@ -58,7 +110,7 @@ export const ValidatorsTable = ({
         <table className={"border-collapse rounded w-full"}>
           <thead
             className={
-              "md:before:absolute md:before:left-0 md:before:right-0 md:before:-top-2 md:before:h-2 md:before:bg-background md:before:content-['']"
+              "md:before:absolute md:before:left-0 md:before:right-0 md:before:-top-2 md:before:h-2 md:before:bg-background md:before:content-[''] md:sticky md:top-28 z-10"
             }
           >
             <tr
@@ -312,7 +364,7 @@ export const ValidatorsTable = ({
                         },
                         tooltip: {
                           value:
-                            "Rewards you earn per monthh by staking 1000LSK for the validator + the APR",
+                            `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount}LSK for the validator + the APR`,
                         },
                         type: "string",
                         typography: [
@@ -348,6 +400,13 @@ export const ValidatorsTable = ({
               const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
               const resultPerBlock = stakersRewardPerBlock(RB, C, S).toString();
               const resultPerYear = stakersRewardPerYear(RY, C, S).toString();
+
+              const resultPerPeriod =
+                stakingRewardsPeriod === "block" ? resultPerBlock :
+                  stakingRewardsPeriod === "month" ? resultPerMonth :
+                    stakingRewardsPeriod === "year" ? resultPerYear :
+                      resultPerYear
+
               const APR = (parseFloat(resultPerYear) / inputStake) * 100;
               return (
 
@@ -759,20 +818,20 @@ export const ValidatorsTable = ({
                     values={[
                       {
                         type: "literal",
-                        value: resultPerMonthLSK,
+                        value: parseFloat(resultPerMonthLSK) > 0 ? resultPerMonthLSK : "No rewards",
                         format: {
                           tooltip: {
                             placement: "auto",
-                            value: "Staking Rewards per 1000 LSK per Month",
+                            value: `Staking Rewards per ${stakingRewardsAmount} LSK per ${stakingRewardsPeriod}`,
                           },
-                          type: "beddows",
+                          type: parseFloat(resultPerMonthLSK) > 0 ? "beddows" : "string",
                           typography: [
                             {
                               value: "text-right w-full",
                               key: "className",
                             },
                           ],
-                          format: "fee",
+                          format: parseFloat(resultPerMonthLSK) > 0 ? "fee" : "plain",
                         },
                         name: "Total Rewards",
                       },
@@ -784,7 +843,7 @@ export const ValidatorsTable = ({
                           format: "percentage",
                           tooltip: {
                             placement: "auto",
-                            value: "APR is the yearly rate of return on staking 1000 LSK,",
+                            value: `APR is the yearly rate of return on staking 1000 LSK,`,
                           },
                           type: "string",
                           typography: [
