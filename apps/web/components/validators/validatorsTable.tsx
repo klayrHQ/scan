@@ -66,38 +66,45 @@ export const ValidatorsTable = ({
           onChange={setActiveTab}
           selection={activeTab}
         />
-        <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
-          <Typography className={"ml-2"} tag={"span"} size={"subBody"}>{"LSK"}</Typography>
-          <Input
-            className={"bg-transparent"}
-            numbersOnly
-            placeholder={"Staking amount"}
-            value={stakingRewardsAmount}
-            setValue={setStakingRewardsAmount}
-          />
-          <Select
-            className={"relative before:absolute before:content-[''] before:-left-[1px] before:w-[1px] before:h-3/4  before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto w-28"}
-            defaultValue={stakingRewardsPeriod}
-            innerClassName={"bg-surface-1"}
-            id={"staking-rewards"}
-            placeholder={"month"}
-            optionsList={[
-              {
-                value: "block",
-                label: "Block",
-              },
-              {
-                value: "month",
-                label: "Month",
-              },
-              {
-                value: "year",
-                label: "Year",
-              },
-            ]}
-            onChange={setStakingRewardsPeriod}
-          />
+        <Grid columns={1} gap={1}>
+          <Typography className={"text-left"} tag={"span"} size={"label"}>Staking Calculator</Typography>
+          <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
+            <Typography className={"ml-2"} tag={"span"} size={"subBody"}>{"LSK"}</Typography>
+            <Input
+                className={"bg-transparent"}
+                numbersOnly
+                placeholder={"Staking amount"}
+                value={stakingRewardsAmount}
+                setValue={setStakingRewardsAmount}
+            />
+            <Select
+                className={"relative before:absolute before:content-[''] before:-left-[1px] before:w-[1px] before:h-3/4  before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto w-28"}
+                defaultValue={stakingRewardsPeriod}
+                innerClassName={"bg-surface-1"}
+                id={"staking-rewards"}
+                placeholder={"month"}
+                optionsList={[
+                  {
+                    value: "block",
+                    label: "Block",
+                  }, {
+                    value: "day",
+                    label: "Day",
+                  },
+                  {
+                    value: "month",
+                    label: "Month",
+                  },
+                  {
+                    value: "year",
+                    label: "Year",
+                  },
+                ]}
+                onChange={setStakingRewardsPeriod}
+            />
+          </Grid>
         </Grid>
+
       </Grid>
       <div
         className={[
@@ -390,19 +397,22 @@ export const ValidatorsTable = ({
               const RY = parseInt(validator.rewards.yearlyReward, 10)
               const RD = parseInt(validator.rewards.dailyReward, 10)
               const C = validator.commission/100
-              const inputStake = 3000000000000
+              const inputStake = (parseInt(stakingRewardsAmount) * 100000000)
               const S = parseFloat(validator.totalStake)+ inputStake
 
               const stakersRewardPerMonth = (RM:any, C:any, S:any) => RM * (1 - C / 100) * (inputStake / S);
+              const stakersRewardPerDay = (RD:any, C:any, S:any) => RD * (1 - C / 100) * (inputStake / S);
               const stakersRewardPerYear = (RY:any, C:any, S:any) => RY * (1 - C / 100) * (inputStake / S);
               const stakersRewardPerBlock = (RB:any, C:any, S:any) => RB * (1 - C / 100) * (inputStake / S);
               const resultPerMonth = parseInt(stakersRewardPerMonth(RM, C, S).toString()).toString();
-              const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
-              const resultPerBlock = stakersRewardPerBlock(RB, C, S).toString();
-              const resultPerYear = stakersRewardPerYear(RY, C, S).toString();
+              const resultPerDay = parseInt(stakersRewardPerDay(RD, C, S).toString()).toString();
+              // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
+              const resultPerBlock = parseInt(stakersRewardPerBlock(RB, C, S).toString()).toString();
+              const resultPerYear = parseInt(stakersRewardPerYear(RY, C, S).toString()).toString();
 
               const resultPerPeriod =
                 stakingRewardsPeriod === "block" ? resultPerBlock :
+                stakingRewardsPeriod === "day" ? resultPerDay :
                   stakingRewardsPeriod === "month" ? resultPerMonth :
                     stakingRewardsPeriod === "year" ? resultPerYear :
                       resultPerYear
@@ -818,20 +828,20 @@ export const ValidatorsTable = ({
                     values={[
                       {
                         type: "literal",
-                        value: parseFloat(resultPerMonthLSK) > 0 ? resultPerMonthLSK : "No rewards",
+                        value: parseFloat(resultPerPeriod) > 0 ? resultPerPeriod : "-",
                         format: {
                           tooltip: {
                             placement: "auto",
                             value: `Staking Rewards per ${stakingRewardsAmount} LSK per ${stakingRewardsPeriod}`,
                           },
-                          type: parseFloat(resultPerMonthLSK) > 0 ? "beddows" : "string",
+                          type: parseFloat(resultPerPeriod) > 0 ? "beddows" : "string",
                           typography: [
                             {
                               value: "text-right w-full",
                               key: "className",
                             },
                           ],
-                          format: parseFloat(resultPerMonthLSK) > 0 ? "fee" : "plain",
+                          format: parseFloat(resultPerPeriod) > 0 ? "fee" : "plain",
                         },
                         name: "Total Rewards",
                       },
