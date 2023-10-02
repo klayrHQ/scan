@@ -5,6 +5,7 @@ import {DefaultHeadColumn, DoubleRowColumn, GridColumn, ValidatorStatusColumn,} 
 import {StaticPlainColumn} from "../data/table/columns/staticPlain";
 import {ShowOnCell} from "../data/table/cell";
 import {ConsoleLogTester} from "../consoleLogTester";
+import {convertBeddowsToLSK} from "../../lib/queries/lisk";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -332,23 +333,24 @@ export const ValidatorsTable = ({
           <tbody>
             {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => {
               const capacity = (validator.totalStake/ (validator.selfStake * 10) * 100);
-
-              const RB = parseFloat(validator.rewards.blockReward)
-              const RM = parseFloat(validator.rewards.monthlyReward)
-              const RY = parseFloat(validator.rewards.yearlyReward)
-              const RD = parseFloat(validator.rewards.dailyRewar)
+              const RB = parseInt(validator.rewards.blockReward, 10)
+              const RM = parseInt(validator.rewards.monthlyReward, 10)
+              const RY = parseInt(validator.rewards.yearlyReward, 10)
+              const RD = parseInt(validator.rewards.dailyReward, 10)
               const C = validator.commission/100
-              const S = parseFloat(validator.totalStake)
-              const inputStake = 1000
+              const inputStake = 3000000000000
+              const S = parseFloat(validator.totalStake)+ inputStake
+              console.log(RM,"RM", C,"C", S,"totalStake+inputstake", validator.name)
 
               const stakersRewardPerMonth = (RM:any, C:any, S:any) => RM * (1 - C / 100) * (inputStake / S);
               const stakersRewardPerYear = (RY:any, C:any, S:any) => RY * (1 - C / 100) * (inputStake / S);
               const stakersRewardPerBlock = (RB:any, C:any, S:any) => RB * (1 - C / 100) * (inputStake / S);
-              const resultPerMonth = stakersRewardPerMonth(RM, C, S).toString();
+              const resultPerMonth = parseInt(stakersRewardPerMonth(RM, C, S).toString()).toString();
+              const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
               const resultPerBlock = stakersRewardPerBlock(RB, C, S).toString();
               const resultPerYear = stakersRewardPerYear(RY, C, S).toString();
               const APR = (parseFloat(resultPerYear) / inputStake) * 100;
-
+              console.log(resultPerMonth, "resultpermonth", resultPerMonthLSK,"resultpermonth", validator.name)
               return (
 
 
@@ -759,7 +761,7 @@ export const ValidatorsTable = ({
                     values={[
                       {
                         type: "literal",
-                        value: resultPerMonth,
+                        value: resultPerMonthLSK,
                         format: {
                           tooltip: {
                             placement: "auto",
