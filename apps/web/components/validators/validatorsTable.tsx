@@ -259,7 +259,6 @@ export const ValidatorsTable = ({
               <th
                 className={cls([
                   "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
-                  getShowClass("desktop"),
                 ])}
               >
                 <DefaultHeadColumn
