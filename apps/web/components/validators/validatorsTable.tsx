@@ -66,7 +66,7 @@ export const ValidatorsTable = ({
           onChange={setActiveTab}
           selection={activeTab}
         />
-        <Grid columns={1} gap={1}>
+        <Grid className={"hidden md:grid"} columns={1} gap={1}>
           <Typography className={"text-left"} tag={"span"} size={"label"}>Staking Calculator</Typography>
           <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
             <Typography className={"ml-2"} tag={"span"} size={"subBody"}>{"LSK"}</Typography>

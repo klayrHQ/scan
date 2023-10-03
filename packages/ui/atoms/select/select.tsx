@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import {Grid, Typography} from "../..";
 import {cls} from "../../utils";
 import {Icon} from "../icon/icon";
+import {useClickOutside} from "liskscan/hooks/clickOutside";
 
 interface SelectProps
   // extends React.DetailedHTMLProps<
@@ -79,6 +80,10 @@ export const Select: FC<SelectProps> = ({
     setOpen(prev => !prev);
   }
 
+  const container = useClickOutside(() => {
+    setOpen(false)
+  })
+
   const handleChange = (value: { label?: string, value: string }) => {
     setCurrentValue(value);
     // call method, if it exists
@@ -116,6 +121,8 @@ export const Select: FC<SelectProps> = ({
         className,
       ])}
       id={id}
+      // @ts-ignore
+      ref={container}
     >
       <div className={cls([
         "absolute inset-0 h-max bg-background",
