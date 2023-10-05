@@ -331,7 +331,7 @@ export const ValidatorsTable = ({
                         },
                         tooltip: {
                           value:
-                            "Total rewards earned by validator + Self stake rewards earned by validator",
+                            "Total rewards earned by validator until now + single block reward earned by validator",
                         },
                         type: "string",
                         typography: [
