@@ -370,7 +370,7 @@ export const ValidatorsTable = ({
                         },
                         tooltip: {
                           value:
-                            `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount}LSK for the validator + the APR`,
+                            `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
                         },
                         type: "string",
                         typography: [
@@ -852,7 +852,7 @@ export const ValidatorsTable = ({
                           format: "percentage",
                           tooltip: {
                             placement: "auto",
-                            value: `APR is the yearly rate of return on staking 1000 LSK,`,
+                            value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK,`,
                           },
                           type: "string",
                           typography: [
