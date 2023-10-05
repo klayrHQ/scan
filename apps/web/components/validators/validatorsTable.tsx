@@ -794,7 +794,7 @@ export const ValidatorsTable = ({
                         type: "literal",
                         value: validator.rewards.blockReward,
                         format: {
-                          format: "currency",
+                          format: "fee",
                           tooltip: {
                             placement: "auto",
                             value: "Dynamic Block Reward",
