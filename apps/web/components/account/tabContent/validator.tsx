@@ -58,6 +58,17 @@ export const Validator = ({
         label={<ValueFormatter value={"Total Self Stake Rewards"} type={"string"} format={"plain"} />}
         value={<ValueFormatter value={queryData["account-validator-id"].data[0].totalSelfStakeRewards} type={"beddows"} format={"currency"} />}
       />
+        <KeyValueRow valueBold valueSize={"subBody"} className={"bg-surface-1 p-2 rounded"}
+        col
+        label={<ValueFormatter value={"Max Height Generated"} type={"string"} format={"plain"} />}
+        value={<ValueFormatter value={queryData["account-id-blocks"].data[0].maxHeightGenerated
+        } type={"number"} format={"number"} />}
+      /><KeyValueRow valueBold valueSize={"subBody"} className={"bg-surface-1 p-2 rounded"}
+        col
+        label={<ValueFormatter value={"Max Height Prevoted"} type={"string"} format={"plain"} />}
+        value={<ValueFormatter value={queryData["account-id-blocks"].data[0].maxHeightPrevoted
+        } type={"number"} format={"number"} />}
+      />
     </Grid>
   )
 }
