@@ -19,12 +19,27 @@ const getValue = (dottedKey: string, backupKey: string, data: Record<string, any
 }
 export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopbar", lastBlock}: KeyValueKPIProps) => {
   const [value, updateValue] = useState(getValue(dottedKey, backupKey, data, lastBlock))
-
+  if (label === "round") {
+    const round = lastBlock?.height ? Math.floor(lastBlock.height / 103) : 0
+    updateValue(round)
+  }
+  if (label === "round progress") {
+    const progress = lastBlock?.height ? lastBlock.height % 103 : 0
+    updateValue(`${progress} / 103`)
+  }
   useEffect(() => {
+    if (label === "round") {
+      const round = lastBlock?.height ? Math.floor(lastBlock.height / 103) : 0
+      updateValue(round)
+    }
+    if (label === "round progress") {
+      const progress = lastBlock?.height ? lastBlock.height % 103 : 0
+      updateValue(`${progress} / 103`)
+    }
     if (getDottedKeyType(dottedKey) === "lastBlock" || getDottedKeyType(backupKey) === "lastBlock") {
       updateValue(getValue(dottedKey, backupKey, data, lastBlock))
     }
-  }, [lastBlock, backupKey, data, dottedKey])
+  }, [lastBlock, backupKey, data, dottedKey, label])
   return <KeyValueRow
     key={label}
     inline
