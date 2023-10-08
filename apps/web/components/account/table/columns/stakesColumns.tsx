@@ -93,7 +93,7 @@ export const stakesColumns = [
   {
     name: "Commission",
     component: "DefaultHeadColumn",
-    valueComponent: "DoubleRowColumn",
+    valueComponent: "PlainColumn",
     valueKeys: [
       {
         format: {
@@ -110,25 +110,6 @@ export const stakesColumns = [
         type: "key",
         value: "stakes.get_pos_validators_address.data.commission"
       },
-      {
-        type: "key",
-        value: "stakes.get_pos_validators_address.data.lastCommissionIncreaseTimestamp",
-        format: {
-          typography: [
-            {
-              value: "text-onSurfaceMedium w-full text-right ",
-              key: "className",
-            },
-            {
-              value: "subBody",
-              key: "size"
-            }
-          ],
-          format: "fromNow",
-          type: "timestamp"
-        },
-        name: "time",
-      }
     ],
     headValues: [
       {
