@@ -41,6 +41,10 @@ export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopba
       const certifiedHeight = lastBlock?.aggregateCommit?.height || 0
       updateValue(`${certifiedHeight}`)
     }
+    if (label === "synced") {
+      const synced = !data.status.data.syncing ? "yes" : "no"
+      updateValue(`${synced}`)
+    }
     if (getDottedKeyType(dottedKey) === "lastBlock" || getDottedKeyType(backupKey) === "lastBlock") {
       updateValue(getValue(dottedKey, backupKey, data, lastBlock))
     }
