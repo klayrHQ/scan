@@ -22,7 +22,10 @@ export const ValidatorStatusColumn = ({ values }: ColumnProps) => {
           <ValueFormatter value={values[1].value} {...values[1].format} />
         ) : (
           <ValueFormatter
-            value={`Missed ${values[3].value} blocks`}
+            tooltip={{
+              value: `Missed ${values[3].value} block${values[3].value > 1 ? "s" : ""}`,
+            }}
+            value={`${values[3].value} block${values[3].value > 1 ? "s" : ""}`}
             {...values[2].format}
           />
         )
