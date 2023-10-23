@@ -21,7 +21,7 @@ export const ValidatorsHeader = ({
     <Grid
       columns={3}
       gap={8}
-      className={"max-w-app md:w-app mx-auto min-h-50"}
+      className={"max-w-app md:w-full mx-auto min-h-50"}
     >
       <TitleBoxSlice
         description={{

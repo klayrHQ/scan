@@ -58,7 +58,7 @@ export const ValidatorsTable = ({
   }, [stakingRewardsPeriod, stakingRewardsAmount])
 
   return (
-    <Grid className={"max-w-app lg:w-app mx-auto min-h-50 mb-4 gap-4"} gap={4}>
+    <Grid className={"max-w-app lg:w-full mx-auto min-h-50 mb-4 gap-4"} gap={4}>
       <Grid flex columns={2} className={"justify-between items-end"}>
         <FilterButtons
           buttons={buttons}
