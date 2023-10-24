@@ -116,8 +116,8 @@ export const TopBarLayout = ({
             </Tooltip>
             {kpis &&
               <>
-                {kpis?.map(({ key, label, backup, _key }) => (
-                  <div className={"hidden md:inline"} key={key}>
+                {kpis?.map(({ key, label, backup, _key }, i) => (
+                  <div className={"hidden md:inline"} key={`desktop-${key}-${i}`}>
                     <KeyValueKPI
                       key={_key}
                       dottedKey={key}
