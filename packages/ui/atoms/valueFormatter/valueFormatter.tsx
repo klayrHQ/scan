@@ -9,7 +9,7 @@ import { Avatar } from "../avatar/avatar";
 import { dayjs } from "../../utils/time";
 
 export type SanityProps = { key: string; value: string }[];
-type ValueTypes =
+export type ValueTypes =
   | "string"
   | "number"
   | "beddows"
@@ -52,7 +52,7 @@ type TooltipType = {
 
   value?: string;
 };
-type Formats =
+export type Formats =
   | "plain"
   | "fromNow"
   | "date"
