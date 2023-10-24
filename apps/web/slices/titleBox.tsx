@@ -6,8 +6,7 @@ import {
   ValueFormat,
   ValueFormatter,
 } from "ui";
-import { InfoFilledIcon, InfoOutlineIcon } from "@sanity/icons";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
+import { InfoOutlineIcon } from "@sanity/icons";
 
 export const TitleBoxSlice = ({
   title,
@@ -37,7 +36,7 @@ export const TitleBoxSlice = ({
           )}
         </Grid>
         {description && description.value && (
-          <Typography tag={"p"} size={"body"} color={"onBackground"}>
+          <Typography className={"mx-auto lg:mx-0"} tag={"p"} size={"body"} color={"onBackground"}>
             {description.value}
           </Typography>
         )}
