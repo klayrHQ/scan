@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {Typography} from "../typography/typography";
 
 export interface TableColProps {
@@ -29,9 +29,14 @@ export const TableColumn = ({
       colSpan={colspan}
       {...props}
     >
-      <Typography tag={"span"}>
-        {value}
-      </Typography>
+      {
+        typeof value === "string" ?
+          <Typography tag={"span"}>
+            {value}
+          </Typography>
+          :
+          value
+      }
     </td>
   );
 };

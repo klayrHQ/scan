@@ -102,7 +102,7 @@ export const SearchModal = ({
       containerWidth={"full"}
       className={cls([
         "top-0 w-screen max-w-full lg:max-w-xl",
-        mobile && "shadow",
+        "shadow",
       ])}
       placement={"right"}
       button={

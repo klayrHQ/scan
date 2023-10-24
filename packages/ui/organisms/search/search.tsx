@@ -127,6 +127,7 @@ export const Search: FC<SearchProps> = ({
             <Table
               className="my-[4px]"
               evenClassName="bg-background text-onSurfaceHigh"
+              fullWidth
               oddClassName="bg-background text-onSurfaceHigh"
               rows={searchResults}
               rounded={false}

@@ -112,6 +112,7 @@ const getKeyMap = (obj, prefix) => {
     ...Object.keys(obj).map((key) => `${prefix}-${key}`),
     ...Object.keys(obj).map((key) => `lg:${prefix}-${key}`),
     ...Object.keys(obj).map((key) => `md:${prefix}-${key}`),
+    ...Object.keys(obj).map((key) => `sm:${prefix}-${key}`),
   ];
 };
 

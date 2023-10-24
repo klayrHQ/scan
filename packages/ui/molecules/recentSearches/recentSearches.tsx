@@ -3,6 +3,7 @@ import { Avatar } from "../../atoms/avatar/avatar";
 import {compactString} from "../../assets/utils";
 import {Popover} from "@headlessui/react";
 import {ValueFormatter} from "../../atoms/valueFormatter/valueFormatter";
+import {Typography} from "../../atoms";
 
 interface RecentSearchesProps {
   onClick: (address?: string, username?: string) => void
@@ -25,16 +26,16 @@ export const RecentSearches = ({
             recentSearch &&
             <Popover.Button
               as={"span"}
-              className="relative cursor-pointer text-onSurfaceHigh flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-2 rounded transition capitalize items-center"
+              className="cursor-pointer text-onSurfaceHigh flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-2 rounded transition capitalize items-center"
               key={`last-search-${index}`}
               onClick={() => onClick(recentSearch.address, recentSearch.username)}
             >
-              <span className="absolute top-[7px]">
-                <Avatar className="mr-2" address={recentSearch.address} size={20}/>
-              </span>
-              <span className="ml-7">
-                {recentSearch.username ? recentSearch.username : <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />}
-              </span>
+              <Avatar className="mr-2" address={recentSearch.address} size={20}/>
+              {
+                recentSearch.username ?
+                  <Typography tag={"span"}>{recentSearch.username}</Typography> :
+                  <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />
+              }
             </Popover.Button>
           )
         })}

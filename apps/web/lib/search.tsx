@@ -25,17 +25,18 @@ export const search = async (
         cols: [
           {
             value: (
-                <SearchResult
-                    saveSearch={saveSearch}
-                    setOpen={setOpen}
-                    menuCloseFunction={menuCloseFunction}
-                    type={"account"}
-                    data={{
-                      value,
-                      label: account.meta.name ?? value,
-                    }}
-                />
+              <SearchResult
+                saveSearch={saveSearch}
+                setOpen={setOpen}
+                menuCloseFunction={menuCloseFunction}
+                type={"account"}
+                data={{
+                  value,
+                  label: account.meta.name ?? value,
+                }}
+              />
             ),
+            className: "py-2 px-4 text-left",
           },
         ],
       });
@@ -44,25 +45,26 @@ export const search = async (
   if (searchType.type === "blockHeight") {
     const block = await getBlockByHeight(client, value)
     if (block) {
-        results.push({
-            id: results.length.toString(),
-            cols: [
-                {
-                    value: (
-                        <SearchResult
-                            saveSearch={saveSearch}
-                            setOpen={setOpen}
-                            menuCloseFunction={menuCloseFunction}
-                            type={"block"}
-                            data={{
-                                value: block.id,
-                                label: block.id,
-                            }}
-                        />
-                    ),
-                },
-            ],
-        })
+      results.push({
+        id: results.length.toString(),
+        cols: [
+          {
+            value: (
+              <SearchResult
+                saveSearch={saveSearch}
+                setOpen={setOpen}
+                menuCloseFunction={menuCloseFunction}
+                type={"block"}
+                data={{
+                  value: block.id,
+                  label: block.id,
+                }}
+              />
+            ),
+            className: "py-2 px-4 text-left",
+          },
+        ],
+      })
     }
   }
   if (searchType.type === "unknown") {
@@ -74,17 +76,18 @@ export const search = async (
           cols: [
             {
               value: (
-                  <SearchResult
-                      saveSearch={saveSearch}
-                      setOpen={setOpen}
-                      menuCloseFunction={menuCloseFunction}
-                      type={"account"}
-                      data={{
-                        value: validator.address,
-                        label: validator.name,
-                      }}
-                  />
+                <SearchResult
+                  saveSearch={saveSearch}
+                  setOpen={setOpen}
+                  menuCloseFunction={menuCloseFunction}
+                  type={"account"}
+                  data={{
+                    value: validator.address,
+                    label: validator.name,
+                  }}
+                />
               ),
+              className: "py-2 px-4 text-left",
             },
           ],
         });
