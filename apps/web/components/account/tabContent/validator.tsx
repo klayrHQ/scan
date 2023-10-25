@@ -62,7 +62,7 @@ export const Validator = ({
     },
     {
       label: "Commission %",
-      value: queryData["account-validator-id"].data[0].commission,
+      value: queryData["account-validator-id"].data[0].commission / 100,
       type: "number",
       format: "percentage",
     },
