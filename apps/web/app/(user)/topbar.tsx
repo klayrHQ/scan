@@ -52,7 +52,7 @@ export const TopBarLayout = ({
   const { events, connected, lastUpdate } = useService();
   const [appState, updateAppState] = useState<
     BlockchainAppsMetaResponse["data"][0] | undefined
-  >(apps?.data?.find(({ chainID }) => chainID === status.data.chainID));
+  >(apps?.data?.find(({ chainID }) => chainID === status?.data?.chainID));
   const [themeMode, updateThemeMode] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export const TopBarLayout = ({
 
   useEffect(() => {
     updateAppState(
-      apps?.data?.find(({ chainID }) => chainID === status.data.chainID)
+      apps?.data?.find(({ chainID }) => chainID === status?.data?.chainID)
     );
   }, [apps, status?.data?.chainID]);
 
