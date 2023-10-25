@@ -126,7 +126,7 @@ export const Account = ({
 
   return (
     <Container section gap={8}>
-      <AccountHeader queryData={queryData} />
+      <AccountHeader address={id} queryData={queryData} />
       <Grid className={"max-w-app mx-auto w-full shadow-xl p-4"} gap={2}>
         <FilterButtons buttons={buttons} onChange={handleChange} selection={activeTab} />
         {

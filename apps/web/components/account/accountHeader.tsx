@@ -5,12 +5,20 @@ import {tokenColumns} from "./table/columns/tokenColumns";
 import React from "react";
 import {AccountHeader as AccountHeaderSlice} from "../../slices/accountHeader";
 import {Tokens} from "./tabContent/tokens";
+import {Icon} from "ui/atoms/icon/icon";
+import {ConsoleLogTester} from "../consoleLogTester";
 
 export const AccountHeader = ({
-  queryData
+  queryData,
+  address,
 }: {
   queryData: any
+  address: string
 }) => {
+  const transactions = {
+    in: queryData["account-id-transactions"]?.data.filter((tx: { sender: { address: string; }; }) => tx.sender.address !== address).length,
+    out: queryData["account-id-transactions"]?.data.filter((tx: { sender: { address: string; }; }) => tx.sender.address === address).length,
+  }
 
   return (
     <Grid
@@ -56,8 +64,26 @@ export const AccountHeader = ({
         />
         <KeyValueRow
           color={"onPrimary"}
-          label={<ValueFormatter value={"Total Transactions"} type={"string"} format={"plain"} />}
-          value={queryData ? <ValueFormatter value={queryData["account-id-transactions"]?.meta.total} type={"string"} format={"number"} /> : ""}
+          label={<ValueFormatter value={"Transactions"} type={"string"} format={"plain"} />}
+          value={
+            queryData ?
+              <div className={"flex"}>
+                <Icon color={"error"} icon={"arrowUp"} />
+                <ValueFormatter
+                  value={transactions.out}
+                  type={"number"}
+                  format={"number"}
+                />
+                <Icon color={"success"} icon={"arrowDown"} />
+                <ValueFormatter
+                  value={transactions.in}
+                  type={"number"}
+                  format={"number"}
+                />
+              </div>
+              :
+              ""
+          }
         />
       </Grid>
       <Grid className={"w-full"}>
