@@ -102,8 +102,23 @@ export const Validator = ({
             valueSize={"subBody"}
             className={"bg-surface-1 p-2 rounded"}
             col
-            label={<ValueFormatter value={kpi.label} type={"string"} format={"plain"} />}
-            value={<ValueFormatter value={kpi.value} type={kpi.type} format={kpi.format} />}
+            gap={1}
+            label={
+              <ValueFormatter
+                format={"plain"}
+                type={"string"}
+                typography={[{key: "size", value: "subBody"}]}
+                value={kpi.label}
+              />
+            }
+            value={
+              <ValueFormatter
+                format={kpi.format}
+                type={kpi.type}
+                typography={[{key: "className", value: "font-bold"}]}
+                value={kpi.value}
+              />
+            }
           />
         ))
       }

@@ -13,6 +13,7 @@ interface KeyValueRowProps {
   valueBold?: boolean;
   col?: boolean;
   valueSize?: Sizes;
+  gap?: string | number;
 }
 
 export const KeyValueRow = ({
@@ -26,7 +27,8 @@ export const KeyValueRow = ({
   color,
   col = false,
   valueBold,
-  valueSize
+  valueSize,
+  gap,
 }: KeyValueRowProps) => (
   <Paper
     surface={surface}
@@ -39,9 +41,9 @@ export const KeyValueRow = ({
     <div
       className={cls([
         col ? "flex-col flex" : "md:flex-row",
-
+        gap ? `gap-${gap}` : "",
         inline
-          ? "inline-flex w-max gap-1"
+          ? `inline-flex w-max gap-${gap ?? 1}`
           : "flex md:flex-grow justify-between w-full text-left",
       ])}
     >
