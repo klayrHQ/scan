@@ -42,15 +42,15 @@ const Page = () => {
       const status = searchParams?.get("status") ?? "eligible";
       const network = result.meta.data.find((app) => app.chainID === result.status.data.chainID);
       const validatorsResponse = await fetch(
-        `https://cached-${network}-service.liskscan.com/validators${
+        `https://cached-${network?.networkType || "testnet"}-service.liskscan.com/validators${
           status === "all" ? "" : `/${status}`
         }`
       );
       const generatorsResponse = await fetch(
-        `https://cached-${network}-service.liskscan.com/generators`
+        `https://cached-${network?.networkType || "testnet"}-service.liskscan.com/generators`
       );
       const statsResponse = await fetch(
-        `https://cached-${network}-service.liskscan.com/validators/stats`
+        `https://cached-${network?.networkType || "testnet"}-service.liskscan.com/validators/stats`
       );
       setValidators(await validatorsResponse.json());
       setGenerators(await generatorsResponse.json());
