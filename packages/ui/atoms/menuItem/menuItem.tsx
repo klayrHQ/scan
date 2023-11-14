@@ -39,6 +39,7 @@ export const MenuItem = ({
       link={link}
       href={link}
       color={"onTopbar" || color}
+
       {...props}
     >
       {label}

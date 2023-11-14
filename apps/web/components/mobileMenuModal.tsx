@@ -199,14 +199,14 @@ export const MobileMenuModal = ({
         menuItems={
           menuItems.map(item =>
             !item.items &&
-            <Link className={"text-onSurfaceHigh"} href={item.link} key={item._key} onClick={() => setOpen(false)}>
+            <Link className={"text-onSurfaceHigh"} href={item.link} key={item._key} onClick={() => setOpen(false)} prefetch={false}>
               <MenuItem label={item.label} link={item.link} />
             </Link>
           )
         }
         subMenu={
           submenu.map(item =>
-            <Link className={"text-onSurfaceLow"} href={item.link} key={item._key} onClick={() => setOpen(false)}>
+            <Link className={"text-onSurfaceLow"} href={item.link} key={item._key} onClick={() => setOpen(false)} prefetch={false}>
               <MenuItem label={item.label} link={item.link} />
             </Link>
           )

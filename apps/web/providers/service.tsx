@@ -59,7 +59,7 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const nextPage = async (queryKey: string) => {
-    console.log(queries)
+    // console.log(queries)
     const response = await getAllData(queries, undefined, id);
     setCache((prevState) => ({ ...prevState, ...response }));
     setLastUpdate(new Date().getTime());

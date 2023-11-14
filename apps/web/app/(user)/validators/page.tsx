@@ -2,6 +2,9 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Validators } from "../../../components/validators/validators";
+import {useService} from "../../../providers/service";
+import {getAllData} from "../../../lib/sanity.service";
+import {BlockchainAppsMetaResponse, NetworkStatusResponse} from "@liskscan/lisk-service-client/lib/types";
 
 const Page = () => {
   const searchParams = useSearchParams();
@@ -24,9 +27,22 @@ const Page = () => {
   });
   useEffect(() => {
     const updateValidators = async () => {
+      const result = (await getAllData([
+        {
+          key: "status",
+          call: "get.network.status",
+          serviceType: "lisk-service",
+        },
+        {
+          key: "meta",
+          call: "get.blockchain.apps.meta",
+          serviceType: "lisk-service",
+        }
+        ])) as {status: NetworkStatusResponse, meta:BlockchainAppsMetaResponse};
       const status = searchParams?.get("status") ?? "eligible";
+      const network = result.meta.data.find((app) => app.chainID === result.status.data.chainID);
       const validatorsResponse = await fetch(
-        `https://cached-testnet-service.liskscan.com/validators${
+        `https://cached-${network}-service.liskscan.com/validators${
           status === "all" ? "" : `/${status}`
         }`
       );

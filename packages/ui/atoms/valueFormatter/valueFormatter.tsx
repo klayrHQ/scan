@@ -161,7 +161,7 @@ export const ValueFormatter = ({
   return (
     <>
       {link?.href && (
-        <Link href={link.href}>
+        <Link href={link.href}  prefetch={false}>
           <InnerTooltip
             {...{
               icon,

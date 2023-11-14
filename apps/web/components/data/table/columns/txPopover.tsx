@@ -23,9 +23,7 @@ export const TxPopover = ({
   data?: any;
   index: number;
 } & ColumnProps) => {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
-  console.log(queryData?.["transaction-moduleCommand"]?.data?.[index], "query");
   const row =
     queryData?.transactions ?
       queryData?.transactions?.data?.[index] :
@@ -70,7 +68,7 @@ export const TxPopover = ({
           >
             Additional Info
           </Typography>
-          <Link href={`/transaction/${row?.id}`}>
+          <Link href={`/transaction/${row?.id}`}  prefetch={false}>
             <Typography
               className={"items-center flex flex-row space-x-2"}
               color={"onSurfaceHigh"}

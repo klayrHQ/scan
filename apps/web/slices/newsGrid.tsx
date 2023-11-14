@@ -75,7 +75,7 @@ export const NewsGrid = ({
 
 
           return (
-            <Link key={`newsItem-${index + 1}`} href={item?.url || ""}>
+            <Link key={`newsItem-${index + 1}`} href={item?.url || ""} prefetch={false}>
               <Grid className={"gap-2"} columns={1} flex gap={2} mobileColumns={2}>
                 <div className={"w-1/4 md:w-full aspect-video"}>
                   <img className={"object-cover max-w-full max-h-full rounded object-top"} src={item?.imgObj.url || ""}

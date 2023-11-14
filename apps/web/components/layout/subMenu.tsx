@@ -46,7 +46,7 @@ export const SubMenu = ({
                           ? "cursor-none bg-surface-1 opacity-80"
                           : "hover:bg-surface-3 transition ease-in-out duration-150 cursor-pointer ",
                       ].join(" ")}
-
+                      prefetch={false}
                       // activeClassName="group -m-3 p-3 flex items-start rounded-lg bg-surface-3 transition ease-in-out duration-150 "
                     >
                       <div>{iconsList[item.icon]}</div>

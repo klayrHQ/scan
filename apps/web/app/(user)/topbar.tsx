@@ -195,7 +195,7 @@ export const TopBarLayout = ({
           item.items ? (
             <SubMenu key={item._key} label={item.label} items={item.items} />
           ) : (
-            <Link href={item.link} key={item._key}>
+            <Link href={item.link} key={item._key} prefetch={false}>
               <MenuItem label={item.label} link={item.link} />
             </Link>
           )
@@ -232,7 +232,7 @@ export const TopBarLayout = ({
               src={"/images/logo.svg"}
               alt={"Liskscan logo"}
             />
-            <Link href={"/"}>
+            <Link href={"/"} prefetch={false}>
               <Typography tag={"span"} bold color={"onInfobar"}>
                 {settings.title}
               </Typography>

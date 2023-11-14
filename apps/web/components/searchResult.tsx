@@ -26,7 +26,7 @@ export const SearchResult = ({
     // menuCloseFunction && menuCloseFunction();
   };
   return (
-    <Link className={"w-full px-4 py-2 inline-block hover:bg-surface-2 rounded"} href={`/${type}/${data.value}`}>
+    <Link className={"w-full px-4 py-2 inline-block hover:bg-surface-2 rounded"} href={`/${type}/${data.value}`} prefetch={false}>
       {
         type === "account" ?
           <Grid className={"items-center"} flex columns={2} mobileColumns={2} gap={4} onClick={() => goToResult()}>

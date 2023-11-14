@@ -56,7 +56,7 @@ export const TransactionTabsSlice = ({
   return (
     <Container bgColor={"background"} section gap={2} className={"max-w-app"}>
       <Grid className={"hidden lg:flex"} flex gap={2} columns={2}>
-        <Link key={"all"} href={"/transactions"}>
+        <Link key={"all"} href={"/transactions"} prefetch={false}>
           <Typography
             size={"menu"}
             tag={"span"}
@@ -113,7 +113,7 @@ export const TransactionTabsSlice = ({
         {subCategories?.[currentCategory]?.map((label: string) => {
           const link = `/transactions/${currentCategory}:${label}`;
           return (
-            <Link key={label} href={link}>
+            <Link key={label} href={link} prefetch={false}>
               <Typography
                 tag={"span"}
                 size={"menu"}

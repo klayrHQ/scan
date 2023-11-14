@@ -7,7 +7,7 @@ import Link from "next/link";
 export const AvatarColumn = ({ params, values }: ColumnProps) => {
   return (
     // eslint-disable-next-line react/jsx-no-undef
-    <Link href={`/account/${values[0]?.value?.address}`} className={"flex flex-row space-x-2 items-center"}>
+    <Link href={`/account/${values[0]?.value?.address}`} className={"flex flex-row space-x-2 items-center"}  prefetch={false}>
       {values[0]?.value?.address && (
         <LiskAvatar
           size={20}

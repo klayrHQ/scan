@@ -9,7 +9,9 @@ import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
 import { parseProps } from "ui";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
-export const serviceURL = process.env.NEXT_PUBLIC_SERVICE_URL || "testnet-service.liskscan.com";
+
+export const serviceURL =
+  process.env.NEXT_PUBLIC_SERVICE_URL || "testnet-service.lisk.com";
 
 export type ServiceTypes =
   | "lisk-service"
@@ -50,44 +52,39 @@ export const client = new LiskService({
   // url: "betanet-service.lisk.com",
   disableTLS: false,
 });
-let timestamps: Record<number, number> = {}
+let timestamps: Record<number, number> = {};
 export const getTimestamp = async (height: number): Promise<number> => {
   if (timestamps[height]) {
-    return timestamps[height]
+    return timestamps[height];
   }
-  const response = await getData(
-    "lisk-service",
-    "get.blocks",
-    { height: height.toString(), }
-  )
+  const response = await getData("lisk-service", "get.blocks", {
+    height: height.toString(),
+  });
   // console.log(response)
   if (response.status === "success") {
     // console.log(response.data)
     if (response.data.length === 0) {
-      timestamps[height] = 1695731780
-      return 1695731780
+      timestamps[height] = 1695731780;
+      return 1695731780;
     }
-    timestamps[height] = response.data?.[0]?.timestamp || 1695731780
-    return response.data[0]?.timestamp || 1695731780
+    timestamps[height] = response.data?.[0]?.timestamp || 1695731780;
+    return response.data[0]?.timestamp || 1695731780;
   }
-  return 0
-}
+  return 0;
+};
 
 export const needsTimestampImport = (call: ServiceQueries["call"]) => {
   if (call === "get.pos.validators") {
-    return true
+    return true;
   }
-  return false
-}
+  return false;
+};
 
 export const getTimestampHeightKeys = (call: ServiceQueries["call"]) => {
   if (call === "get.pos.validators") {
-    return [
-      "lastGeneratedHeight",
-      "lastCommissionIncreaseHeight"
-    ]
+    return ["lastGeneratedHeight", "lastCommissionIncreaseHeight"];
   }
-}
+};
 
 export const getAllData = async (
   queries: ServiceQueries[],
@@ -114,40 +111,40 @@ export const getAllData = async (
         parseProps(query.params, id)
       );
       if (needsTimestampImport(query.call)) {
-        const keys = getTimestampHeightKeys(query.call)
+        const keys = getTimestampHeightKeys(query.call);
         if (keys) {
           for (const index in responses[query.key]?.data) {
             for (const key of keys) {
-              responses[query.key].data[index][key.replace("Height", "Timestamp")] = await getTimestamp(responses[query.key]?.data[index][key])
+              responses[query.key].data[index][
+                key.replace("Height", "Timestamp")
+              ] = await getTimestamp(responses[query.key]?.data[index][key]);
             }
           }
         }
       }
       if (query.calculations) {
         for (const calculation of query.calculations) {
-            const d = getIterableData(responses[query.key].data)
+          const d = getIterableData(responses[query.key].data);
 
-            // data array
-            responses[query.key].data = d?.map(
-              (row: any) => {
-                const keys = calculation.keys.map((k) => {
-                  if (responses[getDottedKeyType(k)]) {
-                    return getFromDottedKey(k, "row", row, responses);
-                  }
-                  return getFromDottedKey("row." + k, "row", row, { row });
-                });
-                const parsedCalculation = util.format(
-                  calculation.calculation,
-                  ...keys
-                );
-                try {
-                  const result = eval(parsedCalculation);
-                  return { ...row, [calculation.name]: result };
-                } catch (e) {
-                  return { ...row };
-                }
+          // data array
+          responses[query.key].data = d?.map((row: any) => {
+            const keys = calculation.keys.map((k) => {
+              if (responses[getDottedKeyType(k)]) {
+                return getFromDottedKey(k, "row", row, responses);
               }
+              return getFromDottedKey("row." + k, "row", row, { row });
+            });
+            const parsedCalculation = util.format(
+              calculation.calculation,
+              ...keys
             );
+            try {
+              const result = eval(parsedCalculation);
+              return { ...row, [calculation.name]: result };
+            } catch (e) {
+              return { ...row };
+            }
+          });
         }
       }
     }
@@ -155,7 +152,7 @@ export const getAllData = async (
       for (const subQuery of query.subQueries) {
         if (subQuery.type === "forEach") {
           if (responses[query.key].status === "success") {
-            const data = getIterableData(responses[query.key]?.data)
+            const data = getIterableData(responses[query.key]?.data);
             for (const index in data) {
               const childRequest = data[index];
               const foreignKey = getDotString(
@@ -172,11 +169,13 @@ export const getAllData = async (
                 );
                 if (response.status === "success" && response?.data) {
                   if (needsTimestampImport(subQuery.call)) {
-                    const keys = getTimestampHeightKeys(subQuery.call)
+                    const keys = getTimestampHeightKeys(subQuery.call);
                     if (keys) {
                       for (const index in response?.data) {
                         for (const key of keys) {
-                          response.data[index][key.replace("Height", "Timestamp")] = await getTimestamp(response.data[index][key])
+                          response.data[index][
+                            key.replace("Height", "Timestamp")
+                          ] = await getTimestamp(response.data[index][key]);
                         }
                       }
                     }
@@ -217,11 +216,15 @@ export const getAllData = async (
             ]?.data
           ) {
             if (needsTimestampImport(subQuery.call)) {
-              const keys = getTimestampHeightKeys(subQuery.call)
+              const keys = getTimestampHeightKeys(subQuery.call);
               if (keys) {
                 for (const index in responses[query.key].data) {
                   for (const key of keys) {
-                    responses[query.key].data[index][key.replace("Height", "Timestamp")] = await getTimestamp(responses[query.key].data[index][key])
+                    responses[query.key].data[index][
+                      key.replace("Height", "Timestamp")
+                    ] = await getTimestamp(
+                      responses[query.key].data[index][key]
+                    );
                   }
                 }
               }
@@ -254,30 +257,154 @@ export const getAllData = async (
 
 export const getIterableData = (data: any) => {
   if (!data) {
-    return []
+    return [];
   }
   if (data[0]) {
-    return data
+    return data;
   }
-  const keys = Object.keys(data)
+  const keys = Object.keys(data);
   for (const k of keys) {
     if (data[k][0]) {
-      return data[k]
+      return data[k];
     }
   }
-  return []
-}
+  return [];
+};
+const stats: {
+  pages: Record<string, Record<string, number>>;
+  requests: number;
+} = {
+  pages: {},
+  requests: 0,
+};
+
+const responseCache: Record<
+  string,
+  Record<string, any | { response: any; ts: number }>
+> = {
+  "get.blocks.assets": {},
+  "get.validator": {},
+};
+
+const saveStat = (call: string, params: any) => {
+  if (!stats.pages[call]) {
+    stats.pages[call] = {};
+  }
+  if (!stats.pages[call][JSON.stringify(params)]) {
+    stats.pages[call][JSON.stringify(params)] = 0;
+  }
+  stats.pages[call][JSON.stringify(params)]++;
+  stats.requests++;
+};
+
+export const doCache = async (
+  call: string,
+  key: string,
+  params: any,
+  duration = -1
+) => {
+  if (!responseCache[call]) {
+    responseCache[call] = {};
+  }
+  if (
+    !responseCache[call][key] ||
+    (duration > 0 && responseCache[call][key].ts < Date.now() - 1000 * duration)
+  ) {
+    responseCache[call][key] = {
+      response: await client.rpc(call as CallsRPC, params),
+      ts: Date.now(),
+    };
+    saveStat(call, key);
+  }
+  return responseCache[call][key].response;
+};
 
 export const getData = async (
   serviceType: ServiceTypes,
   call: CallsRPC | string,
   params?: any
-): Promise<RPCResponses<RPCCalls> & { data?: any, meta?: any }> => {
-  // todo fix any data
-  switch (serviceType) {
+): Promise<RPCResponses<RPCCalls> & { data?: any; meta?: any }> => {
+  switch (call) {
+    case "get.blocks.assets":
+      return await doCache(call, params.blockID, params, 60 * 60);
+    case "get.validator":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.blockchain.apps.meta":
+      return await doCache(call, "meta", params, 60 * 5);
+    case "get.pos.validators":
+      return await doCache(
+        call,
+        params.address || params.limit,
+        params,
+        60 * 5
+      );
+    case "get.transactions":
+      if (params.address || params.blockID || params.transactionID) {
+        return await doCache(
+          call,
+          params.address || params.blockID || params.transactionID,
+          params,
+          60 * 5
+        );
+      }
+      break;
+    case "get.pos.stakes":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.pos.stakers":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.token.balances":
+      return await doCache(call, params.address, params, 60);
+    case "get.network.status":
+      return await doCache(call, params.address, params, 10);
+    case "get.auth":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.network.peers":
+      return await doCache(call, "peers", params, 60 * 5);
+    case "get.token.balances.top":
+      return await doCache(call, "top", params, 60 * 5);
+    case "get.pos.rewards.claimable":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.pos.unlocks":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.events":
+      if (params.senderAddress || params.transactionID || params.blockID) {
+        return await doCache(
+          call,
+          params.senderAddress || params.transactionID || params.blockID,
+          params,
+          60
+        );
+      } else {
+        return await doCache(
+          call,
+          params.limit,
+          params,
+          10
+        );
+      }
+    case "get.blocks":
+      if (params.generatorAddress || params.blockID || params.height) {
+        return await doCache(
+          call,
+          params.generatorAddress || params.blockID || params.height,
+          params,
+          60
+        );
+      }
+      if (params.limit) {
+        return await doCache(call, params.limit, params, 10);
+      }
+      break;
     default:
-      return await client.rpc(call as CallsRPC, params);
+      saveStat(call, params);
+      if (stats.requests % 1000 === 0) {
+        console.log(stats);
+      }
   }
+  if (stats.requests % 100) {
+    console.log(`Requests done: ${stats.requests}`)
+  }
+  return await client.rpc(call as CallsRPC, params);
 };
 
 export const getNextData = async (
@@ -285,8 +412,11 @@ export const getNextData = async (
   call: CallsRPC | string,
   params?: any
 ): Promise<RPCResponses<RPCCalls> & { data?: any }> => {
-  const nextParams = {...params, offset: (params?.offset || 0) + (params?.limit || 10)}
-  return await getData(serviceType, call, nextParams)
+  const nextParams = {
+    ...params,
+    offset: (params?.offset || 0) + (params?.limit || 10),
+  };
+  return await getData(serviceType, call, nextParams);
 };
 
 export const keyFromData = (

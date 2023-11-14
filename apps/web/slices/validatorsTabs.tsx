@@ -45,7 +45,7 @@ export const ValidatorTabs = ({
   return (
     <Container bgColor={"background"} section gap={2} className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
-        <Link key={"all"} href={"/transactions"}>
+        <Link key={"all"} href={"/transactions"}  prefetch={false}>
           <Typography
             size={"menu"}
             tag={"span"}
@@ -110,7 +110,7 @@ export const ValidatorTabs = ({
         {subCategories?.[currentCategory]?.map((label: string) => {
           const link = `/validators/${currentCategory}:${label}`;
           return (
-            <Link key={label} href={link}>
+            <Link key={label} href={link} prefetch={false}>
               <Typography
                 tag={"span"}
                 size={"menu"}

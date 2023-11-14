@@ -51,7 +51,7 @@ export const StakesAccount = ({
         }
         return v.map(({ address, name, amount }) => {
           return (
-            <Link href={`/account/${address}`}>
+            <Link href={`/account/${address}`} prefetch={false}>
               <span
                 className={
                   "flex flex-col w-full justify-between space-y-2 bg-surface-1 p-2 rounded items-center"

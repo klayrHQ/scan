@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf .next && next build",
+    "build-test": "cp -r ./public .next/standalone/apps/web/public && cp -r .next/static .next/standalone/apps/web/.next/static",
     "start": "node .next/standalone/apps/web/server.js",
     "lint": "next lint",
     "sanity-dev": "sanity dev",

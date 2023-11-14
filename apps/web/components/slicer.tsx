@@ -43,7 +43,7 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
     }
   }, [queries])
 
-  useEffect(() => console.log("CACHE", uri, id, cache), [cache]);
+  // useEffect(() => console.log("CACHE", uri, id, cache), [cache]);
 
   return (
     <>

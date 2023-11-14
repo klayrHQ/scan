@@ -13,7 +13,7 @@ export interface FloatingMenuItemProps {
 export const FloatingMenuItem = ({ label, link, icon }: FloatingMenuItemProps) => {
 
   return (
-    <Link className={"flex flex-col items-center text-center py-3"} href={link}>
+    <Link className={"flex flex-col items-center text-center py-3"} href={link} prefetch={false}>
       <Icon color={"onTopbar"} icon={icon} size={"small"}/>
       <Typography color={"onTopbar"} tag={"span"} size={"subBody"}>
         {label}
