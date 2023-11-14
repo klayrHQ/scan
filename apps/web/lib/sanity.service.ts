@@ -401,7 +401,7 @@ export const getData = async (
         console.log(stats);
       }
   }
-  if (stats.requests % 100) {
+  if (stats.requests % 100 === 0) {
     console.log(`Requests done: ${stats.requests}`)
   }
   return await client.rpc(call as CallsRPC, params);
