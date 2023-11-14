@@ -47,10 +47,10 @@ const Page = () => {
         }`
       );
       const generatorsResponse = await fetch(
-        `https://cached-testnet-service.liskscan.com/generators`
+        `https://cached-${network}-service.liskscan.com/generators`
       );
       const statsResponse = await fetch(
-        `https://cached-testnet-service.liskscan.com/validators/stats`
+        `https://cached-${network}-service.liskscan.com/validators/stats`
       );
       setValidators(await validatorsResponse.json());
       setGenerators(await generatorsResponse.json());
