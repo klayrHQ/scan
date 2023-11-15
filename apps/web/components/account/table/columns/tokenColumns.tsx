@@ -1,5 +1,32 @@
 export const tokenColumns = [
   {
+    name: "chain-name",
+    valueComponent: "PlainColumn",
+    component: "DefaultHeadColumn",
+    headValues: [
+      {
+        type: "literal",
+        value: "Chain",
+        format: {
+          format: "plain",
+          type: "string"
+        },
+        name: "Chain",
+      }
+    ],
+    showOn: "always",
+    valueKeys: [
+      {
+        format: {
+          format: "plain",
+          type: "string"
+        },
+        name: "chain",
+        type: "key",
+        value: "tokens.chainName"
+      }
+    ]
+  },{
     name: "token-id",
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",

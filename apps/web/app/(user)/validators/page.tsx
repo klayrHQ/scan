@@ -54,7 +54,9 @@ const Page = () => {
       );
       setValidators(await validatorsResponse.json());
       setGenerators(await generatorsResponse.json());
-      setStats(await statsResponse.json());
+      const stats = await statsResponse.json()
+      console.log(stats)
+      setStats(stats);
     };
     updateValidators();
   }, []);

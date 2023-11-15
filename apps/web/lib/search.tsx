@@ -2,6 +2,7 @@ import {LiskService, NumberStringAndFromToNumber} from "@liskscan/lisk-service-c
 import { tableRowsType } from "ui/types";
 import React from "react";
 import { SearchResult } from "../components/searchResult";
+import {getData} from "./sanity.service";
 
 export const search = async (
   client: LiskService,
@@ -118,7 +119,7 @@ export const inputRecognizer = (value: string) => {
 };
 
 export const getBlockByHeight = async (client: LiskService, value: string) => {
-  const block = await client.rpc("get.blocks", {height: value as NumberStringAndFromToNumber})
+  const block = await getData("lisk-service", "get.blocks", {height: value as NumberStringAndFromToNumber})
   if (block.status === "success") {
     return block.data[0]
   }

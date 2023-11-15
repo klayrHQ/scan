@@ -13,7 +13,7 @@ import {validatorQueries} from "../../../components/validators/queries";
   "punished",
 ]*/
 
-const Page = async () => {
+const Page1 = async () => {
   const queryData = await getAllData(validatorQueries)
 
   const validators = {
@@ -41,4 +41,4 @@ return <div></div>
   // return <Validators fetchedValidators={validators} fetchedGenerators={generators} />
 }
 
-export default Page
+export default Page1

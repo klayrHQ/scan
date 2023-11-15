@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { ValueFormatter } from "../../../../packages/ui/atoms/valueFormatter/valueFormatter";
+import React from "react";
 import { getSlices } from "./[uri]/page";
 import { Slicer } from "../../components/slicer";
 import { draftMode } from "next/headers";
-import { draftsClient, sanityClient } from "../../lib/sanity.client";
-import { useSanity } from "../../providers/sanity";
+import { draftsClient, } from "../../lib/sanity.client";
 import { sanitySsrQuery } from "../../lib/sanity.groq";
 
 export const revalidate = 5;
@@ -13,7 +11,7 @@ export default async function Web() {
   const isDraftMode = draftMode().isEnabled;
   const client = isDraftMode ? draftsClient.fetch : sanitySsrQuery;
   const sections = await getSlices("home", client);
-
+  console.log(sections);
   return (
     <>
       {/*<div className={"w-max-app mx-auto w-app"}>*/}

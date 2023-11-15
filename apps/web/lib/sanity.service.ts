@@ -75,7 +75,7 @@ export const getTimestamp = async (height: number): Promise<number> => {
 
 export const needsTimestampImport = (call: ServiceQueries["call"]) => {
   if (call === "get.pos.validators") {
-    return true;
+    return false;
   }
   return false;
 };
@@ -383,6 +383,7 @@ export const getData = async (
         );
       }
     case "get.blocks":
+      console.log(params)
       if (params.generatorAddress || params.blockID || params.height) {
         return await doCache(
           call,

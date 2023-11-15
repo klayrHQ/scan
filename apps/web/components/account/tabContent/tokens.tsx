@@ -1,11 +1,13 @@
 import {TableSlice} from "../../../slices/table";
 import {tokenColumns} from "../table/columns/tokenColumns";
 
+
 export const Tokens = ({
   queryData
 }: {
   queryData: any
 }) => {
+
 
   return (
     <TableSlice

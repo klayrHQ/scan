@@ -16,8 +16,8 @@ export const AccountHeader = ({
   address: string
 }) => {
   const transactions = {
-    in: queryData["account-id-transactions"]?.data.filter((tx: { sender: { address: string; }; }) => tx.sender.address !== address).length,
-    out: queryData["account-id-transactions"]?.data.filter((tx: { sender: { address: string; }; }) => tx.sender.address === address).length,
+    in: queryData["account-id-transactions"]?.data?.filter((tx: { sender: { address: string; }; }) => tx.sender.address !== address).length,
+    out: queryData["account-id-transactions"]?.data?.filter((tx: { sender: { address: string; }; }) => tx.sender.address === address).length,
   }
 
   return (
@@ -50,15 +50,15 @@ export const AccountHeader = ({
         <KeyValueRow
           color={"onPrimary"}
           label={<ValueFormatter value={"Nonce"} type={"string"} format={"plain"} />}
-          value={queryData ? <ValueFormatter value={queryData["account-auth"]?.data.nonce} type={"number"} format={"shortAddress"} /> : ""}
+          value={queryData ? <ValueFormatter value={queryData["account-auth"]?.data?.nonce} type={"number"} format={"shortAddress"} /> : ""}
         />
         <KeyValueRow
           color={"onPrimary"}
           label={<ValueFormatter value={"Public Key"} type={"string"} format={"plain"} />}
           value={queryData ?
             <div className={"inline-flex gap-1 items-center"}>
-              <ValueFormatter value={queryData["account-auth"]?.meta.publicKey} type={"string"} format={"shortAddress"} />
-              <CopyButton value={queryData["account-auth"]?.meta.publicKey} />
+              <ValueFormatter value={queryData["account-auth"]?.meta?.publicKey} type={"string"} format={"shortAddress"} />
+              <CopyButton value={queryData["account-auth"]?.meta?.publicKey} />
             </div>
             : ""}
         />
@@ -70,13 +70,13 @@ export const AccountHeader = ({
               <div className={"flex"}>
                 <Icon color={"error"} icon={"arrowUp"} />
                 <ValueFormatter
-                  value={transactions.out}
+                  value={transactions?.out}
                   type={"number"}
                   format={"number"}
                 />
                 <Icon color={"success"} icon={"arrowDown"} />
                 <ValueFormatter
-                  value={transactions.in}
+                  value={transactions?.in}
                   type={"number"}
                   format={"number"}
                 />

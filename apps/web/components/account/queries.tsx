@@ -4,13 +4,13 @@ export const getAccountQueries = (id: string) => {
   const accountQueries: ServiceQueries[] = [
     {
       key: "network-status",
-      updateOn: "lastBlock",
+      updateOn: "never",
       call: "get.network.status",
       serviceType: "lisk-service",
       params: null,
     },
     {
-      updateOn: "lastTransactions",
+      updateOn: "never",
       key: "account-id-balances",
       params: [
         {
@@ -163,7 +163,7 @@ export const getAccountQueries = (id: string) => {
     {
       key: "account-unlocks",
       call: "get.pos.unlocks",
-      updateOn: "lastBlock",
+      updateOn: "never",
       serviceType: "lisk-service",
       params: [
         {
