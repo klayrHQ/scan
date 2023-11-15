@@ -31,7 +31,7 @@ export const SearchResult = ({
         type === "account" ?
           <Grid className={"items-center"} flex columns={2} mobileColumns={2} gap={4} onClick={() => goToResult()}>
             <Avatar address={data.value} size={24} />
-            <Grid flex gap={2}>
+            <Grid flex>
               <Typography color={"onPrimary"} tag={"span"}>{data.label}</Typography>
               {data.value !== data.label && <Typography color={"onSurfaceMedium"} size={"subBody"} tag={"span"}>{data.value}</Typography>}
             </Grid>
