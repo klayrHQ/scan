@@ -122,26 +122,26 @@ export default async function RootLayout({
             </FavouritesProvider>
           </ServiceProvider>
         </SanityStoreProvider>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function () { 
-              const updateTheme = () => {
-                switch (getCurrentTheme()) {
-                  case "dark":
-                    document.documentElement.classList.add("dark");
-                    document.documentElement.classList.remove("light");
-                    document.documentElement.setAttribute("color-theme", "dark");
-                    break;
-                  default:
-                    document.documentElement.classList.remove("dark");
-                    document.documentElement.classList.add("light");
-                    document.documentElement.setAttribute("color-theme", "light");
-                }
-              };
-              updateTheme() 
-            })()`,
-          }}
-        />
+        {/*<script*/}
+        {/*  dangerouslySetInnerHTML={{*/}
+        {/*    __html: `(function () { */}
+        {/*      const updateTheme = () => {*/}
+        {/*        switch (getCurrentTheme()) {*/}
+        {/*          case "dark":*/}
+        {/*            document.documentElement.classList.add("dark");*/}
+        {/*            document.documentElement.classList.remove("light");*/}
+        {/*            document.documentElement.setAttribute("color-theme", "dark");*/}
+        {/*            break;*/}
+        {/*          default:*/}
+        {/*            document.documentElement.classList.remove("dark");*/}
+        {/*            document.documentElement.classList.add("light");*/}
+        {/*            document.documentElement.setAttribute("color-theme", "light");*/}
+        {/*        }*/}
+        {/*      };*/}
+        {/*      updateTheme() */}
+        {/*    })()`,*/}
+        {/*  }}*/}
+        {/*/>*/}
       </body>
     </html>
   );

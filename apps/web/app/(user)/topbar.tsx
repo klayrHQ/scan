@@ -201,9 +201,10 @@ export const TopBarLayout = ({
           )
         )}
         menuItemsRight={[
-          <FavouritesModal />,
-          <SearchModal />,
+          <FavouritesModal key={"favs"}/>,
+          <SearchModal key={"search"} />,
           <MobileMenuModal
+            key={"mm"}
             menuItems={menuItems}
             connected={connected}
             lastUpdate={lastUpdate}
