@@ -51,6 +51,7 @@ export const makeTable = ({
             return {
               ...valueFormat,
               format: { ...valueFormat.format, link },
+              symbol: row.symbol,
               value: isMeta(valueFormat.value)
                 ? getFromDottedKey(
                     valueFormat.value.replace("_meta", "meta") || "",

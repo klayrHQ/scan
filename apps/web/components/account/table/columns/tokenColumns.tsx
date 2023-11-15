@@ -70,7 +70,7 @@ export const tokenColumns = [
         type: "key",
         value: "tokens.availableBalance",
         format: {
-          format: "currency",
+          format: "currencyNew",
           type: "beddows"
         },
         name: "available-balance",
@@ -100,7 +100,7 @@ export const tokenColumns = [
         type: "key",
         value: "tokens.lockedBalances.0.amount",
         format: {
-          format: "currency",
+          format: "currencyNew",
           type: "beddows"
         }
       }
@@ -126,7 +126,7 @@ export const tokenColumns = [
       {
         value: "rewards.data.0.reward",
         format: {
-          format: "currency",
+          format: "currencyNew",
           type: "beddows"
         },
         name: "claimable rewards",

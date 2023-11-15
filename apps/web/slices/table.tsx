@@ -34,7 +34,12 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
           call: "get.blockchain.apps.meta",
           serviceType: "lisk-service",
         },
-      ])) as { meta: BlockchainAppsMetaResponse };
+        {
+          key: "tokens",
+          call: "get.blockchain.apps.meta.tokens",
+          serviceType: "lisk-service",
+        },
+      ])) as { meta: BlockchainAppsMetaResponse, tokens: any };
       const chainsMeta = result.meta.data.filter(
         (app) =>
           app.chainName !== "lisk_mainchain" && app.networkType === "testnet"
@@ -60,6 +65,13 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
           });
         }
       }
+      queryData.tokens.data = queryData.tokens.data.map((token: any) => {
+        return {
+          ...token,
+          symbol: result.tokens.data.find((t: any) => t.tokenID === token.tokenID)?.symbol || token.symbol,
+        }
+      })
+
 
       const processedTable = processTable(table);
       const tableRows = makeTable({
