@@ -23,7 +23,7 @@ const layout = async ({ children, params }: any) => {
   ])) as { status: NetworkStatusResponse; meta: BlockchainAppsMetaResponse };
   // const status = searchParams?.get("status") ?? "eligible";
   const network = result.meta.data.find(
-    (app) => app.chainID === result.status.data.chainID
+    (app) => app?.chainID === result?.status?.data?.chainID
   );
   const generatorsResponse = await fetch(
     `https://cached-${
@@ -82,11 +82,12 @@ const layout = async ({ children, params }: any) => {
             selection={params.status || "eligible"}
             useLink
           />
-          <StakeCalculator />
+          <Grid className={"hidden md:grid"} columns={1} gap={1}>
+            <StakeCalculator />
+          </Grid>
         </Grid>
-        <Grid className={"hidden md:grid"} columns={1} gap={1}>
-          {children}
-        </Grid>
+
+        {children}
       </Grid>
     </Container>
   );

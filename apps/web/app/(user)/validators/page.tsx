@@ -8,7 +8,10 @@ import {
 import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import { StakeCalculator } from "../../../components/validators/stakeCalculator";
 import {ValidatorsTable} from "../../../components/validators/validatorsTable";
-
+import {redirect} from "next/navigation";
+const page = async () => {
+  redirect(`/validators/eligible`)
+}
 const layout = async ({ children, params }: any) => {
   const result = (await getAllData([
     {
@@ -106,4 +109,4 @@ const layout = async ({ children, params }: any) => {
   );
 };
 
-export default layout;
+export default page;
