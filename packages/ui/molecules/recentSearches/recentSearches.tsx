@@ -32,7 +32,7 @@ export const RecentSearches = ({
             >
               <Avatar className="mr-2" address={recentSearch.address} size={20}/>
               {
-                recentSearch.username ?
+                recentSearch.username && recentSearch.username !== recentSearch.address ?
                   <Typography tag={"span"}>{recentSearch.username}</Typography> :
                   <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />
               }
