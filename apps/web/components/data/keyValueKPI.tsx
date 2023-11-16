@@ -42,7 +42,7 @@ export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopba
       updateValue(`${certifiedHeight}`)
     }
     if (label === "status") {
-      const synced = !data.status.data.syncing ? "Synced" : "Syncing"
+      const synced = data?.status?.data?.syncing ? "Synced" : "Syncing"
       updateValue(`${synced}`)
     }
     if (getDottedKeyType(dottedKey) === "lastBlock" || getDottedKeyType(backupKey) === "lastBlock") {

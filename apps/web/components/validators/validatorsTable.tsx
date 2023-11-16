@@ -1,16 +1,16 @@
 "use client";
-import {cls, Grid, Typography,} from "ui";
-import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
-import {DefaultHeadColumn, DoubleRowColumn, GridColumn, ValidatorStatusColumn,} from "../data";
-import {StaticPlainColumn} from "../data/table/columns/staticPlain";
-import {ShowOnCell} from "../data/table/cell";
-import {ConsoleLogTester} from "../consoleLogTester";
-import {Input} from "ui/atoms/input/input";
-import {Select} from "ui/atoms/select/select";
-import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
-import {useSearchParams} from "next/navigation";
+import { cls} from "ui";
+import {
+  DefaultHeadColumn,
+  DoubleRowColumn,
+  GridColumn,
+  ValidatorStatusColumn,
+} from "../data";
+import { StaticPlainColumn } from "../data/table/columns/staticPlain";
+import { ShowOnCell } from "../data/table/cell";
+import { useSearchParams } from "next/navigation";
+import {useService} from "../../providers/service";
 import {useEffect, useState} from "react";
-import {convertBeddowsToLSK} from "../../lib/queries/lisk";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -31,81 +31,30 @@ const getShowClass = (showOn: ShowOnCell) => {
   }
 };
 
-
 export const ValidatorsTable = ({
   validators,
-  buttons,
-  setActiveTab,
-  activeTab,
+  page,
 }: {
   validators: any;
-  buttons: { label: string; state: string }[];
-  setActiveTab: any;
-  activeTab: string;
+  page: string;
 }) => {
-  const { setQueryParams } = useQueryParams<QueryParams>();
+  const { events } = useService()
   const searchParams = useSearchParams();
-
-  const [stakingRewardsAmount, setStakingRewardsAmount] = useState<string>(searchParams?.get("stakingAmount") || "1000");
-  const [stakingRewardsPeriod, setStakingRewardsPeriod] = useState<string>(searchParams?.get("stakingPeriod") || "month");
+  const stakingRewardsAmount = searchParams?.get("stakingAmount") || "1000";
+  const stakingRewardsPeriod = searchParams?.get("stakingPeriod") || "month"
+  const [validatorsState, setValidators] = useState<any[]>(validators);
 
   useEffect(() => {
-    // @ts-ignore
-    setQueryParams({ ["stakingPeriod"]: stakingRewardsPeriod });
-
-    // @ts-ignore
-    setQueryParams({ ["stakingAmount"]: stakingRewardsAmount });
-  }, [stakingRewardsPeriod, stakingRewardsAmount])
-
+    const getValidators = async () => {
+      const validators = await fetch(
+        `https://cached-testnet-service.liskscan.com/validators/${page}`
+      );
+      const validatorsData = await validators.json();
+      setValidators(validatorsData);
+    }
+    getValidators()
+  }, [events?.["update.generators"]]);
   return (
-    <Grid className={"max-w-app lg:w-full mx-auto min-h-50 mb-4 gap-4"} gap={4}>
-      <Grid flex columns={2} className={"justify-between items-end"}>
-        <FilterButtons
-          buttons={buttons}
-          // @ts-ignore
-          onChange={setActiveTab}
-          selection={activeTab}
-        />
-        <Grid className={"hidden md:grid"} columns={1} gap={1}>
-          <Typography className={"text-left"} tag={"span"} size={"label"}>Staking Calculator</Typography>
-          <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
-            <Typography className={"ml-2"} tag={"span"} size={"subBody"}>{"LSK"}</Typography>
-            <Input
-                className={"bg-transparent"}
-                numbersOnly
-                placeholder={"Staking amount"}
-                value={stakingRewardsAmount}
-                setValue={setStakingRewardsAmount}
-            />
-            <Select
-                className={"relative before:absolute before:content-[''] before:-left-[1px] before:w-[1px] before:h-3/4  before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto w-28"}
-                defaultValue={stakingRewardsPeriod}
-                innerClassName={"bg-surface-1"}
-                id={"staking-rewards"}
-                placeholder={"month"}
-                optionsList={[
-                  {
-                    value: "block",
-                    label: "Block",
-                  }, {
-                    value: "day",
-                    label: "Day",
-                  },
-                  {
-                    value: "month",
-                    label: "Month",
-                  },
-                  {
-                    value: "year",
-                    label: "Year",
-                  },
-                ]}
-                onChange={setStakingRewardsPeriod}
-            />
-          </Grid>
-        </Grid>
-
-      </Grid>
       <div
         className={[
           "max-w-app mx-auto w-full bg-background rounded",
@@ -346,7 +295,8 @@ export const ValidatorsTable = ({
                     },
                   ]}
                 />
-              </th><th
+              </th>
+              <th
                 className={cls([
                   "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
                   getShowClass("always"),
@@ -369,8 +319,7 @@ export const ValidatorsTable = ({
                           ],
                         },
                         tooltip: {
-                          value:
-                            `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
+                          value: `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
                         },
                         type: "string",
                         typography: [
@@ -389,501 +338,554 @@ export const ValidatorsTable = ({
             </tr>
           </thead>
           <tbody>
-            {validators?.sort((a: any, b: any) => a.rank - b.rank).map((validator: any) => {
-              const capacity = (validator.totalStake/ (validator.selfStake * 10) * 100);
-              const RB = parseInt(validator.rewards.blockReward, 10)
-              const RM = parseInt(validator.rewards.monthlyReward, 10)
-              const RY = parseInt(validator.rewards.yearlyReward, 10)
-              const RD = parseInt(validator.rewards.dailyReward, 10)
-              const C = validator.commission/100
-              const inputStake = (parseInt(stakingRewardsAmount) * 100000000)
-              const S = parseFloat(validator.totalStake)+ inputStake
+            {(validatorsState || validators)
+              ?.sort((a: any, b: any) => a.rank - b.rank)
+              .map((validator: any) => {
+                const capacity =
+                  (validator.totalStake / (validator.selfStake * 10)) * 100;
+                const RB = parseInt(validator.rewards.blockReward, 10);
+                const RM = parseInt(validator.rewards.monthlyReward, 10);
+                const RY = parseInt(validator.rewards.yearlyReward, 10);
+                const RD = parseInt(validator.rewards.dailyReward, 10);
+                const C = validator.commission / 100;
+                const inputStake = parseInt(stakingRewardsAmount) * 100000000;
+                const S = parseFloat(validator.totalStake) + inputStake;
 
-              const stakersRewardPerMonth = (RM:any, C:any, S:any) => RM * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerDay = (RD:any, C:any, S:any) => RD * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerYear = (RY:any, C:any, S:any) => RY * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerBlock = (RB:any, C:any, S:any) => RB * (1 - C / 100) * (inputStake / S);
-              const resultPerMonth = parseInt(stakersRewardPerMonth(RM, C, S).toString()).toString();
-              const resultPerDay = parseInt(stakersRewardPerDay(RD, C, S).toString()).toString();
-              // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
-              const resultPerBlock = parseInt(stakersRewardPerBlock(RB, C, S).toString()).toString();
-              const resultPerYear = parseInt(stakersRewardPerYear(RY, C, S).toString()).toString();
+                const stakersRewardPerMonth = (RM: any, C: any, S: any) =>
+                  RM * (1 - C / 100) * (inputStake / S);
+                const stakersRewardPerDay = (RD: any, C: any, S: any) =>
+                  RD * (1 - C / 100) * (inputStake / S);
+                const stakersRewardPerYear = (RY: any, C: any, S: any) =>
+                  RY * (1 - C / 100) * (inputStake / S);
+                const stakersRewardPerBlock = (RB: any, C: any, S: any) =>
+                  RB * (1 - C / 100) * (inputStake / S);
+                const resultPerMonth = parseInt(
+                  stakersRewardPerMonth(RM, C, S).toString()
+                ).toString();
+                const resultPerDay = parseInt(
+                  stakersRewardPerDay(RD, C, S).toString()
+                ).toString();
+                // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
+                const resultPerBlock = parseInt(
+                  stakersRewardPerBlock(RB, C, S).toString()
+                ).toString();
+                const resultPerYear = parseInt(
+                  stakersRewardPerYear(RY, C, S).toString()
+                ).toString();
 
-              const resultPerPeriod =
-                stakingRewardsPeriod === "block" ? resultPerBlock :
-                stakingRewardsPeriod === "day" ? resultPerDay :
-                  stakingRewardsPeriod === "month" ? resultPerMonth :
-                    stakingRewardsPeriod === "year" ? resultPerYear :
-                      resultPerYear
+                const resultPerPeriod =
+                  stakingRewardsPeriod === "block"
+                    ? resultPerBlock
+                    : stakingRewardsPeriod === "day"
+                    ? resultPerDay
+                    : stakingRewardsPeriod === "month"
+                    ? resultPerMonth
+                    : stakingRewardsPeriod === "year"
+                    ? resultPerYear
+                    : resultPerYear;
 
-              const APR = (parseFloat(resultPerYear) / inputStake) * 100;
-              return (
-
-
-              <tr>
-                <td
-                  className={cls([
-                    "border-b-1 p-2 pl-4 font-medium",
-                    getShowClass("always"),
-                  ])}
-                >
-                  <StaticPlainColumn
-                    values={{
-                      value: validator.rank,
-                      format: {
-                        format: "number",
-                        type: "number",
-                      },
-                      type: "literal",
-                    }}
-                  />
-
-                </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}><GridColumn params={{}} index={1} queryData={[]} values={[
-                  {
-                    format: {
-                      typography: [
-                        {
-                          value: "mr-2",
-                          key: "className"
-                        }
-                      ],
-                      format: "avatar",
-                      type: "string"
-                    },
-                    name: "avatar",
-                    type: "literal",
-                    value: validator.address
-                  },
-                  {
-                    format: {
-                      format: "plain",
-                      link: {
-                        keys: [
-                          "validators.address"
-                        ],
-                        href: `/account/${validator.address}`
-                      },
-                      type: "string"
-                    },
-                    name: "validatorName",
-                    type: "literal",
-                    value: validator.name
-                  }
-                ]}/> </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}>
-                  <ValidatorStatusColumn key={validator.nextAllocatedTime - (new Date().getTime() / 10000)} params={{}} index={1} queryData={[]} values={ [
-                    {
-                      name: "status",
-                      type: "literal",
-                      value: validator.status,
-                      format: {
-                        typography: [
+                const APR = (parseFloat(resultPerYear) / inputStake) * 100;
+                return (
+                  <tr key={validator.address}>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <StaticPlainColumn
+                        values={{
+                          value: validator.rank,
+                          format: {
+                            format: "number",
+                            type: "number",
+                          },
+                          type: "literal",
+                        }}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <GridColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
                           {
-                            key: "className"
-                          }
-                        ],
-                        format: "icon",
-                        icon: {
-                          conditions: [
-                            {
-                              iconProps: [
+                            format: {
+                              typography: [
                                 {
-                                  value: "text-success h-5 w-5",
-                                  key: "className"
-                                }
+                                  value: "mr-2",
+                                  key: "className",
+                                },
                               ],
-                              operator: "==",
-                              icon: "CheckCircleIconSolid",
-                              conditionValue: "active"
+                              format: "avatar",
+                              type: "string",
+                            },
+                            name: "avatar",
+                            type: "literal",
+                            value: validator.address,
+                          },
+                          {
+                            format: {
+                              format: "plain",
+                              link: {
+                                keys: ["validators.address"],
+                                href: `/account/${validator.address}`,
+                              },
+                              type: "string",
+                            },
+                            name: "validatorName",
+                            type: "literal",
+                            value: validator.name,
+                          },
+                        ]}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <ValidatorStatusColumn
+                        key={
+                          validator.nextAllocatedTime -
+                          new Date().getTime() / 10000
+                        }
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={
+                          [
+                            {
+                              name: "status",
+                              type: "literal",
+                              value: validator.status,
+                              format: {
+                                typography: [
+                                  {
+                                    key: "className",
+                                  },
+                                ],
+                                format: "icon",
+                                icon: {
+                                  conditions: [
+                                    {
+                                      iconProps: [
+                                        {
+                                          value: "text-success h-5 w-5",
+                                          key: "className",
+                                        },
+                                      ],
+                                      operator: "==",
+                                      icon: "CheckCircleIconSolid",
+                                      conditionValue: "active",
+                                    },
+                                    {
+                                      operator: "==",
+                                      icon: "MinusCircleIconOutline",
+                                      conditionValue: "standby",
+                                      iconProps: [
+                                        {
+                                          key: "className",
+                                          value: "text-info h-5 w-5",
+                                        },
+                                      ],
+                                    },
+                                    {
+                                      icon: "ChevronRightIconOutline",
+                                      conditionValue: "ineligible",
+                                      iconProps: [
+                                        {
+                                          value: "text-info h-4 w-4",
+                                          key: "className",
+                                        },
+                                      ],
+                                      operator: "==",
+                                    },
+                                  ],
+                                },
+                                type: "string",
+                              },
                             },
                             {
-                              operator: "==",
-                              icon: "MinusCircleIconOutline",
-                              conditionValue: "standby",
-                              iconProps: [
+                              value: validator.nextAllocatedTime,
+                              format: {
+                                typography: [
+                                  {
+                                    value: " w-full",
+                                    key: "className",
+                                  },
+                                  {
+                                    value: "body",
+                                    key: "size",
+                                  },
+                                ],
+                                format: "fromNow",
+                                type: "timestamp",
+                              },
+                              name: "nextAllocatedTime",
+                              type: "literal",
+                            },
+                            {
+                              format: {
+                                format: "plain",
+                                type: "string",
+                              },
+                              name: "StatusLabel",
+                              type: "literal",
+                              value: validator.status,
+                            },
+                            {
+                              value: validator.consecutiveMissedBlocks,
+                              format: {
+                                format: "number",
+                                type: "number",
+                              },
+                              name: "missedBlocks",
+                              type: "literal",
+                            },
+                          ] as any
+                        }
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <StaticPlainColumn
+                        values={{
+                          name: "generatedBlocks",
+                          type: "literal",
+                          value: validator.generatedBlocks,
+                          format: {
+                            typography: [
+                              {
+                                value: "text-right w-full font-bold",
+                                key: "className",
+                              },
+                            ],
+                            format: "number",
+                            type: "number",
+                          },
+                        }}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <DoubleRowColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
+                          {
+                            type: "literal",
+                            value: validator.validatorWeight,
+                            format: {
+                              tooltip: {
+                                placement: "auto",
+                                value:
+                                  "Validator Weight, maximum of 10x Self Stake ",
+                              },
+                              type: "beddows",
+                              typography: [
+                                {
+                                  value: "text-right w-full",
+                                  key: "className",
+                                },
+                              ],
+                              format: "currency",
+                            },
+                            name: "Total Rewards",
+                          },
+                          {
+                            name: "Stake Capacity",
+                            type: "literal",
+                            value: capacity,
+                            format: {
+                              format: "percentage",
+                              tooltip: {
+                                placement: "auto",
+                                value: " Stake Capacity",
+                              },
+                              type: "string",
+                              typography: [
                                 {
                                   key: "className",
-                                  value: "text-info h-5 w-5"
-                                }
-                              ]
-                            },
-                            {
-                              icon: "ChevronRightIconOutline",
-                              conditionValue: "ineligible",
-                              iconProps: [
+                                  value:
+                                    "text-right w-full text-onSurfaceMedium",
+                                },
                                 {
-                                  value: "text-info h-4 w-4",
-                                  key: "className"
-                                }
+                                  value: "subBody",
+                                  key: "size",
+                                },
                               ],
-                              operator: "=="
-                            }
-                          ]
-                        },
-                        type: "string"
-                      }
-                    },
-                    {
-                      value: validator.nextAllocatedTime,
-                      format: {
-                        typography: [
+                            },
+                          },
+                        ]}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <DoubleRowColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
                           {
-                            value: " w-full",
-                            key: "className"
+                            type: "literal",
+                            value: validator.totalStake,
+                            format: {
+                              tooltip: {
+                                placement: "auto",
+                                value: "Validator total received stake ",
+                              },
+                              type: "beddows",
+                              typography: [
+                                {
+                                  value: "text-right w-full",
+                                  key: "className",
+                                },
+                              ],
+                              format: "currency",
+                            },
+                            name: "Total received stake",
                           },
                           {
-                            value: "body",
-                            key: "size"
-                          }
-                        ],
-                        format: "fromNow",
-                        type: "timestamp"
-                      },
-                      name: "nextAllocatedTime",
-                      type: "literal"
-                    },
-                    {
-                      format: {
-                        format: "plain",
-                        type: "string"
-                      },
-                      name: "StatusLabel",
-                      type: "literal",
-                      value: validator.status
-                    },
-                    {
-                      value: validator.consecutiveMissedBlocks,
-                      format: {
-                        format: "number",
-                        type: "number"
-                      },
-                      name: "missedBlocks",
-                      type: "literal"
-                    }
-                  ] as any}
-                  />
-                </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}>
-                  <StaticPlainColumn values={{
-                    name: "generatedBlocks",
-                    type: "literal",
-                    value: validator.generatedBlocks,
-                    format: {
-                      typography: [
-                        {
-                          value: "text-right w-full font-bold",
-                          key: "className",
-                        }
-                      ],
-                      format: "number",
-                      type: "number"
-                    }
-                  }}/>
-                </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}>
-                  <DoubleRowColumn
-                      params={{}}
-                      index={1}
-                      queryData={[]}
-                      values={[
-                        {
-                          type: "literal",
-                          value: validator.validatorWeight,
-                          format: {
-                            tooltip: {
-                              placement: "auto",
-                              value: "Validator Weight, maximum of 10x Self Stake ",
+                            name: "total Self Stake",
+                            type: "literal",
+                            value: validator.selfStake,
+                            format: {
+                              format: "currency",
+                              tooltip: {
+                                placement: "auto",
+                                value: " Total Self Stake",
+                              },
+                              type: "beddows",
+                              typography: [
+                                {
+                                  key: "className",
+                                  value:
+                                    "text-right w-full text-onSurfaceMedium",
+                                },
+                                {
+                                  value: "subBody",
+                                  key: "size",
+                                },
+                              ],
                             },
-                            type: "beddows",
+                          },
+                        ]}
+                      />
+                    </td>
+                    {/*<td  className={cls([*/}
+                    {/*  "border-b-1 p-2 pl-4 font-medium",*/}
+                    {/*  getShowClass("always"),*/}
+                    {/*])}><StaticPlainColumn values={{*/}
+                    {/*  type: "literal",*/}
+                    {/*  value: validator.selfStake,*/}
+                    {/*  format: {*/}
+                    {/*    type: "beddows",*/}
+                    {/*    typography: [*/}
+                    {/*      {*/}
+                    {/*        value: "text-right w-full",*/}
+                    {/*        key: "className"*/}
+                    {/*      }*/}
+                    {/*    ],*/}
+                    {/*    format: "currency"*/}
+                    {/*  },*/}
+                    {/*  name: "ValidatorSelfStake",*/}
+                    {/*}}/> </td>*/}
+                    {/*<td  className={cls([*/}
+                    {/*  "border-b-1 p-2 pl-4 font-medium",*/}
+                    {/*  getShowClass("always"),*/}
+                    {/*])}><StaticPlainColumn values={{*/}
+                    {/*  type: "literal",*/}
+                    {/*  updateOn: "lastBlock",*/}
+                    {/*  value: validator.selfStake,*/}
+                    {/*  format: {*/}
+                    {/*    type: "beddows",*/}
+                    {/*    typography: [*/}
+                    {/*      {*/}
+                    {/*        value: "w-full text-right",*/}
+                    {/*        key: "className",*/}
+                    {/*      }*/}
+                    {/*    ],*/}
+                    {/*    format: "currency"*/}
+                    {/*  },*/}
+                    {/*  name: "Total Stake"*/}
+                    {/*}}/> </td>*/}
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <StaticPlainColumn
+                        values={{
+                          type: "literal",
+                          value: `${validator.commission}%`,
+                          format: {
+                            type: "number",
                             typography: [
                               {
-                                value: "text-right w-full",
+                                value: "w-full text-right",
                                 key: "className",
                               },
                             ],
-                            format: "currency",
-                          },
-                          name: "Total Rewards",
-                        },
-                        {
-                          name: "Stake Capacity",
-                          type: "literal",
-                          value: capacity,
-                          format: {
-                            format: "percentage",
+                            format: "commission",
                             tooltip: {
-                              placement: "auto",
-                              value: " Stake Capacity",
+                              placement: "top-start",
+                              value: "Set commission by validator",
                             },
-                            type: "string",
-                            typography: [
-                              {
-                                key: "className",
-                                value: "text-right w-full text-onSurfaceMedium",
+                          },
+                          name: "commission %",
+                        }}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <DoubleRowColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
+                          {
+                            type: "literal",
+                            value: validator.earnedRewards,
+                            format: {
+                              tooltip: {
+                                placement: "auto",
+                                value: "Total Rewards ",
                               },
-                              {
-                                value: "subBody",
-                                key: "size",
+                              type: "beddows",
+                              typography: [
+                                {
+                                  value: "text-right w-full",
+                                  key: "className",
+                                },
+                              ],
+                              format: "currency",
+                            },
+                            name: "Total Rewards",
+                          },
+                          {
+                            name: "DynamicBlockReward",
+                            type: "literal",
+                            value: validator.rewards.blockReward,
+                            format: {
+                              format: "fee",
+                              tooltip: {
+                                placement: "auto",
+                                value: "Dynamic Block Reward",
                               },
-                            ],
-                          },
-                        },
-                      ]}
-                  />
-                </td>
-                <td  className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}>
-                  <DoubleRowColumn
-                      params={{}}
-                      index={1}
-                      queryData={[]}
-                      values={[
-                        {
-                          type: "literal",
-                          value: validator.totalStake,
-                          format: {
-                            tooltip: {
-                              placement: "auto",
-                              value: "Validator total received stake ",
+                              type: "beddows",
+                              typography: [
+                                {
+                                  key: "className",
+                                  value:
+                                    "text-right w-full text-onSurfaceMedium",
+                                },
+                                {
+                                  value: "subBody",
+                                  key: "size",
+                                },
+                              ],
                             },
-                            type: "beddows",
-                            typography: [
-                              {
-                                value: "text-right w-full",
-                                key: "className",
+                          },
+                        ]}
+                      />
+                    </td>
+                    <td
+                      className={cls([
+                        "border-b-1 p-2 pl-4 font-medium",
+                        getShowClass("always"),
+                      ])}
+                    >
+                      <DoubleRowColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
+                          {
+                            type: "literal",
+                            value:
+                              parseFloat(resultPerPeriod) > 0
+                                ? resultPerPeriod
+                                : "-",
+                            format: {
+                              tooltip: {
+                                placement: "auto",
+                                value: `Staking Rewards per ${stakingRewardsAmount} LSK per ${stakingRewardsPeriod}`,
                               },
-                            ],
-                            format: "currency",
-                          },
-                          name: "Total received stake",
-                        },
-                        {
-                          name: "total Self Stake",
-                          type: "literal",
-                          value: validator.selfStake,
-                          format: {
-                            format: "currency",
-                            tooltip: {
-                              placement: "auto",
-                              value: " Total Self Stake",
+                              type:
+                                parseFloat(resultPerPeriod) > 0
+                                  ? "beddows"
+                                  : "string",
+                              typography: [
+                                {
+                                  value: "text-right w-full",
+                                  key: "className",
+                                },
+                              ],
+                              format:
+                                parseFloat(resultPerPeriod) > 0
+                                  ? "fee"
+                                  : "plain",
                             },
-                            type: "beddows",
-                            typography: [
-                              {
-                                key: "className",
-                                value: "text-right w-full text-onSurfaceMedium",
+                            name: "Total Rewards",
+                          },
+                          {
+                            name: "APR",
+                            type: "literal",
+                            value: APR,
+                            format: {
+                              format: "percentage",
+                              tooltip: {
+                                placement: "auto",
+                                value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK,`,
                               },
-                              {
-                                value: "subBody",
-                                key: "size",
-                              },
-                            ],
+                              type: "string",
+                              typography: [
+                                {
+                                  key: "className",
+                                  value:
+                                    "text-right w-full text-onSurfaceMedium",
+                                },
+                                {
+                                  value: "subBody",
+                                  key: "size",
+                                },
+                              ],
+                            },
                           },
-                        },
-                      ]}
-                  />
-                </td>
-                {/*<td  className={cls([*/}
-                {/*  "border-b-1 p-2 pl-4 font-medium",*/}
-                {/*  getShowClass("always"),*/}
-                {/*])}><StaticPlainColumn values={{*/}
-                {/*  type: "literal",*/}
-                {/*  value: validator.selfStake,*/}
-                {/*  format: {*/}
-                {/*    type: "beddows",*/}
-                {/*    typography: [*/}
-                {/*      {*/}
-                {/*        value: "text-right w-full",*/}
-                {/*        key: "className"*/}
-                {/*      }*/}
-                {/*    ],*/}
-                {/*    format: "currency"*/}
-                {/*  },*/}
-                {/*  name: "ValidatorSelfStake",*/}
-                {/*}}/> </td>*/}
-                {/*<td  className={cls([*/}
-                {/*  "border-b-1 p-2 pl-4 font-medium",*/}
-                {/*  getShowClass("always"),*/}
-                {/*])}><StaticPlainColumn values={{*/}
-                {/*  type: "literal",*/}
-                {/*  updateOn: "lastBlock",*/}
-                {/*  value: validator.selfStake,*/}
-                {/*  format: {*/}
-                {/*    type: "beddows",*/}
-                {/*    typography: [*/}
-                {/*      {*/}
-                {/*        value: "w-full text-right",*/}
-                {/*        key: "className",*/}
-                {/*      }*/}
-                {/*    ],*/}
-                {/*    format: "currency"*/}
-                {/*  },*/}
-                {/*  name: "Total Stake"*/}
-                {/*}}/> </td>*/}
-                <td className={cls([
-                  "border-b-1 p-2 pl-4 font-medium",
-                  getShowClass("always"),
-                ])}><StaticPlainColumn values={
-                  {
-                    type: "literal",
-                    value: `${validator.commission}%`,
-                    format: {
-                      type: "number",
-                      typography: [
-                        {
-                          value: "w-full text-right",
-                          key: "className"
-                        }
-                      ],
-                      format: "commission",
-                      tooltip: {
-                        placement: "top-start",
-                        value: "Set commission by validator"
-                      }
-                    },
-                    name: "commission %"
-                  }
-                }/> </td>
-                <td
-                  className={cls([
-                    "border-b-1 p-2 pl-4 font-medium",
-                    getShowClass("always"),
-                  ])}
-                >
-                  <DoubleRowColumn
-                    params={{}}
-                    index={1}
-                    queryData={[]}
-                    values={[
-                      {
-                        type: "literal",
-                        value: validator.earnedRewards,
-                        format: {
-                          tooltip: {
-                            placement: "auto",
-                            value: "Total Rewards ",
-                          },
-                          type: "beddows",
-                          typography: [
-                            {
-                              value: "text-right w-full",
-                              key: "className",
-                            },
-                          ],
-                          format: "currency",
-                        },
-                        name: "Total Rewards",
-                      },
-                      {
-                        name: "DynamicBlockReward",
-                        type: "literal",
-                        value: validator.rewards.blockReward,
-                        format: {
-                          format: "fee",
-                          tooltip: {
-                            placement: "auto",
-                            value: "Dynamic Block Reward",
-                          },
-                          type: "beddows",
-                          typography: [
-                            {
-                              key: "className",
-                              value: "text-right w-full text-onSurfaceMedium",
-                            },
-                            {
-                              value: "subBody",
-                              key: "size",
-                            },
-                          ],
-                        },
-                      },
-                    ]}
-                  />
-                </td> <td
-                  className={cls([
-                    "border-b-1 p-2 pl-4 font-medium",
-                    getShowClass("always"),
-                  ])}
-                >
-                  <DoubleRowColumn
-                    params={{}}
-                    index={1}
-                    queryData={[]}
-                    values={[
-                      {
-                        type: "literal",
-                        value: parseFloat(resultPerPeriod) > 0 ? resultPerPeriod : "-",
-                        format: {
-                          tooltip: {
-                            placement: "auto",
-                            value: `Staking Rewards per ${stakingRewardsAmount} LSK per ${stakingRewardsPeriod}`,
-                          },
-                          type: parseFloat(resultPerPeriod) > 0 ? "beddows" : "string",
-                          typography: [
-                            {
-                              value: "text-right w-full",
-                              key: "className",
-                            },
-                          ],
-                          format: parseFloat(resultPerPeriod) > 0 ? "fee" : "plain",
-                        },
-                        name: "Total Rewards",
-                      },
-                      {
-                        name: "APR",
-                        type: "literal",
-                        value: APR,
-                        format: {
-                          format: "percentage",
-                          tooltip: {
-                            placement: "auto",
-                            value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK,`,
-                          },
-                          type: "string",
-                          typography: [
-                            {
-                              key: "className",
-                              value: "text-right w-full text-onSurfaceMedium",
-                            },
-                            {
-                              value: "subBody",
-                              key: "size",
-                            },
-                          ],
-                        },
-                      },
-                    ]}
-                  />
-                </td>
-              </tr>
-            )})}
+                        ]}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
-      {/*<TableSlice*/}
-      {/*  id={"validatorsTable"}*/}
-      {/*  queryData={{validators: { data: validators, status: "success" } }}*/}
-      {/*  table={{*/}
-      {/*    key: "validators",*/}
-      {/*    columns: validatorColumns,*/}
-      {/*    sticky: true,*/}
-      {/*  }}*/}
-      {/*/>*/}
-    </Grid>
   );
 };

@@ -1,13 +1,12 @@
-import { ValidatorsHeader } from "../../../components/validators/validatorsHeader";
+import { ValidatorsHeader } from "../../../../components/validators/validatorsHeader";
 import { Container, Grid } from "ui";
-import { getAllData } from "../../../lib/sanity.service";
+import { getAllData } from "../../../../lib/sanity.service";
 import {
   BlockchainAppsMetaResponse,
   NetworkStatusResponse,
 } from "@liskscan/lisk-service-client/lib/types";
 import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
-import { StakeCalculator } from "../../../components/validators/stakeCalculator";
-import {ValidatorsTable} from "../../../components/validators/validatorsTable";
+import { StakeCalculator } from "../../../../components/validators/stakeCalculator";
 
 const layout = async ({ children, params }: any) => {
   const result = (await getAllData([
@@ -32,12 +31,6 @@ const layout = async ({ children, params }: any) => {
     }-service.liskscan.com/generators`
   );
   const generators = await generatorsResponse.json();
-  // const validatorsResponse = await fetch(
-  //   `https://cached-${network?.networkType || "testnet"}-service.liskscan.com/validators${
-  //     params.status === "eligible" ? "" : `/${params.status}`
-  //   }`
-  // );
-  // const validators = await validatorsResponse.json()
   const statsResponse = await fetch(
     `https://cached-${
       network?.networkType || "testnet"
@@ -51,13 +44,6 @@ const layout = async ({ children, params }: any) => {
     ineligible: number;
     eligible: number;
   };
-  const validators = await fetch(
-    `https://cached-testnet-service.liskscan.com/validators/eligible`,
-    {
-      next: { revalidate: 0 },
-    }
-  );
-  const validatorsJSON = await validators.json();
   return (
     <Container section gap={8}>
       <ValidatorsHeader generators={generators} stats={stats} />
@@ -99,7 +85,7 @@ const layout = async ({ children, params }: any) => {
           <StakeCalculator />
         </Grid>
         <Grid className={"hidden md:grid"} columns={1} gap={1}>
-          <ValidatorsTable page={"eligible"} validators={validatorsJSON} />
+          {children}
         </Grid>
       </Grid>
     </Container>

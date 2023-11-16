@@ -4,13 +4,15 @@ import {Button} from "../index";
 import {cls} from "../../assets/utils";
 import {Grid} from "../grid/grid";
 import {Select} from "../select/select";
+import { useRouter } from "next/navigation";
 
 export interface FilterButtonsProps {
   buttons: Array<{ label: string, state: string }>
   className?: string
-  onChange: (newState: string) => void
+  onChange?: (newState: string) => void
   resetFilters?: Function
-  selection: string
+  selection?: string
+  useLink?: boolean
 }
 
 export const FilterButtons = ({
@@ -19,10 +21,16 @@ export const FilterButtons = ({
   resetFilters,
   className,
   selection,
+  useLink,
 }: FilterButtonsProps) => {
-
+  const router = useRouter()
   const handleChange = (selectValue: string) => {
-    onChange(selectValue)
+    if (onChange) {
+      onChange(selectValue)
+    }
+    if (useLink) {
+      router.push(`/validators/${selectValue}`)
+    }
     resetFilters && resetFilters()
   }
 
@@ -35,7 +43,12 @@ export const FilterButtons = ({
             hover
             key={`button-${button.state}`}
             onClick={() => {
-              onChange(button.state)
+              if (useLink) {
+                router.push(`/validators/${button.state}`)
+              }
+              if (onChange) {
+                onChange(button.state)
+              }
               resetFilters && resetFilters()
             }}
             size={"small"}
