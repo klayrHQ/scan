@@ -22,7 +22,7 @@ const layout = async ({ children, params }: any) => {
     },
   ])) as { status: NetworkStatusResponse; meta: BlockchainAppsMetaResponse };
   // const status = searchParams?.get("status") ?? "eligible";
-  const network = result.meta.data.find(
+  const network = result?.meta?.data?.find(
     (app) => app?.chainID === result?.status?.data?.chainID
   );
   const generatorsResponse = await fetch(
