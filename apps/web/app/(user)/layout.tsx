@@ -19,6 +19,7 @@ import { SanityDocument } from "@sanity/types";
 import {FavouritesProvider} from "../../providers/favourites";
 import {RecentSearchesProvider} from "../../providers/recentSearches";
 import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
+import {ServiceSnackbar} from "../../components/serviceSnackbar";
 // import {SettingsProvider} from "../../providers/settings";
 // import {CountryFlag} from "../../slices/countryFlag";
 
@@ -95,7 +96,7 @@ export default async function RootLayout({
         <link rel={"shortcut icon"} href={"/images/logo-dark.svg"} />
         <link rel={"apple-touch-icon"} href={"/images/logo-dark.svg"} />
       </head>
-      <body className={"bg-background"}>
+      <body className={"bg-background flex flex-col min-h-screen"}>
         <SanityStoreProvider snapshot={snapshot}>
           <ServiceProvider>
             <FavouritesProvider>
@@ -116,6 +117,7 @@ export default async function RootLayout({
                   />
                   {children}
                 </div>
+                <ServiceSnackbar />
                 <Footer copyright={settings.copyright} lists={footer}/>
                 <FloatingMenuContainer menuItems={menuItems} />
               </RecentSearchesProvider>

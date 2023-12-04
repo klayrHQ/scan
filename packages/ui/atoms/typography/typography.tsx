@@ -129,7 +129,7 @@ const factory = () => {
           noMargin,
           className: [
             color ? `text-${color}` : "text-body",
-            bgColor ? `bg-${bgColor}` : "transparent",
+            bgColor ? `bg-${bgColor}` : "",
             underLine ? `underline underline-offset-${underLineSpacing}` : "",
             className,
           ],

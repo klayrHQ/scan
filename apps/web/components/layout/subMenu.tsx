@@ -32,8 +32,9 @@ export const SubMenu = ({
                   className={`relative grid grid-rows-3 grid-flow-col gap-6 bg-background px-5 py-6 sm:gap-8 sm:p-8`}
                 >
                   {items?.map((item) => {
+                    const Component = item.disabled ? "div" : Link
                     return (
-                    <Link
+                    <Component
                       href={item.link}
                       key={`sm-${item.link}`}
                       onClick={() => {
@@ -43,7 +44,7 @@ export const SubMenu = ({
                       className={[
                         "group -m-3 p-3 flex flex-row items-start rounded-lg relative",
                         item.disabled
-                          ? "cursor-none bg-surface-1 opacity-80"
+                          ? "cursor-default bg-surface-1 opacity-80"
                           : "hover:bg-surface-3 transition ease-in-out duration-150 cursor-pointer ",
                       ].join(" ")}
                       prefetch={false}
@@ -70,7 +71,7 @@ export const SubMenu = ({
                           {item?.subLabel}
                         </span>
                       </div>
-                    </Link>
+                    </Component>
                   )})}
                 </div>
               </div>

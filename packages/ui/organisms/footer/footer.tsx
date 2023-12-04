@@ -15,8 +15,8 @@ export const Footer: FC<FooterProps> = ({
   copyrightContent,
 }) => {
   return (
-    <div className={`w-full h-auto block text-onFooter text-left mt-8 ${className}`}>
-      <div className="relative top-0 bottom-0 w-full h-full bg-footer">
+    <div className={`w-full h-auto block text-onFooter text-left mt-auto ${className}`}>
+      <div className="relative top-0 bottom-0 w-full h-full bg-footer mt-8">
         <div className="container w-app max-w-app mx-auto px-6">
           <div className="sm:flex py-8">
             <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">

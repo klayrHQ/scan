@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, {ReactElement, useState} from "react";
 import { Dialog } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { Typography } from "../typography/typography";
 
 interface SnackbarProps {
-  message: string;
+  message: string | ReactElement;
   toggleState?: any;
 }
 
