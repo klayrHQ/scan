@@ -2,7 +2,7 @@ import { ValidatorsTable } from "../../../../components/validators/validatorsTab
 
 const Page = async ({params}: any) => {
   const validators = await fetch(
-    `https://cached-testnet-service.liskscan.com/validators/${params.status}`,
+    `https://cached-mainnet-service.liskscan.com/validators/${params.status}`,
     {
       next: { revalidate: 0 },
     }
