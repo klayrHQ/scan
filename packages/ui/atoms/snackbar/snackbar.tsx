@@ -29,7 +29,7 @@ export const Snackbar = ({ align = "top-right", message, toggleState, icon }: Sn
         align === "bottom-left" ? "bottom-4 md:left-4" : "",
       ].join(" ")}
     >
-      <Dialog.Overlay />
+      {/*<Dialog.Overlay />*/}
       <Dialog.Description>
         <div
           className="bg-background rounded shadow-xl
