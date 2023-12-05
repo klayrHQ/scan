@@ -27,13 +27,13 @@ const layout = async ({ children, params }: any) => {
   );
   const generatorsResponse = await fetch(
     `https://cached-${
-      network?.networkType || "testnet"
+      network?.networkType || "mainnet"
     }-service.liskscan.com/generators`
   );
   const generators = await generatorsResponse.json();
   const statsResponse = await fetch(
     `https://cached-${
-      network?.networkType || "testnet"
+      network?.networkType || "mainnet"
     }-service.liskscan.com/validators/stats`
   );
   const stats = (await statsResponse.json()) as {
