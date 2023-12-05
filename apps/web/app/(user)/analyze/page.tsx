@@ -1,7 +1,7 @@
 import {Container, Typography} from "ui";
 import {TitleBoxSlice} from "../../../slices/titleBox";
 
-export const Page = () => {
+const Page = async () => {
 
   return (
     <Container section gap={4}>
@@ -29,3 +29,5 @@ export const Page = () => {
     </Container>
   )
 }
+
+export default Page;
