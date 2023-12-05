@@ -44,12 +44,12 @@ jobs:
             NEXT_PUBLIC_SERVICE_URL=${{ env.NEXT_PUBLIC_SERVICE_URL }}
           push: true
           tags: rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend-mainnet:latest,rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend-mainnet:${{ env.RELEASE_VERSION }}
-      - name: Redeploy
-        uses: jawher/action-scw@v2.5.4
-        env:
-          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY_APP }}
-          SCW_SECRET_KEY: ${{ secrets.SCALEWAY_TOKEN_APP }}
-          SCW_ORGANIZATION_ID: ${{ secrets.SCW_ORGANIZATION_ID_APP }}
-          SCW_ZONE: nl-ams-1
-        with:
-          args: container container update 3e8bbaa2-7b56-42d6-b6c5-27ad4c09f751 region=nl-ams redeploy=true
+#      - name: Redeploy
+#        uses: jawher/action-scw@v2.5.4
+#        env:
+#          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY_APP }}
+#          SCW_SECRET_KEY: ${{ secrets.SCALEWAY_TOKEN_APP }}
+#          SCW_ORGANIZATION_ID: ${{ secrets.SCW_ORGANIZATION_ID_APP }}
+#          SCW_ZONE: nl-ams-1
+#        with:
+#          args: container container update 3e8bbaa2-7b56-42d6-b6c5-27ad4c09f751 region=nl-ams redeploy=true
