@@ -54,7 +54,7 @@ export const Validators = ({
   useEffect(() => {
     const getValidators = async () => {
       const validators = await fetch(
-        `https://cached-testnet-service.liskscan.com/validators${
+        `https://cached-mainnet-service.liskscan.com/validators${
           activeTab === "all" ? "" : `/${activeTab}`
         }`,
         {

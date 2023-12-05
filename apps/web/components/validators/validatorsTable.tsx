@@ -47,7 +47,7 @@ export const ValidatorsTable = ({
   useEffect(() => {
     const getValidators = async () => {
       const validators = await fetch(
-        `https://cached-testnet-service.liskscan.com/validators/${page}`
+        `https://cached-mainnet-service.liskscan.com/validators/${page}`
       );
       const validatorsData = await validators.json();
       setValidators(validatorsData);

@@ -37,7 +37,7 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         ])) as { meta: BlockchainAppsMetaResponse; tokens: any };
         const chainsMeta = result.meta.data.filter(
           (app) =>
-            app.chainName !== "lisk_mainchain" && app.networkType === "testnet"
+            app.chainName !== "lisk_mainchain" && app.networkType === "mainnet"
         );
         for (const chainMeta of chainsMeta) {
           if (!clients[chainMeta.chainName]) {
