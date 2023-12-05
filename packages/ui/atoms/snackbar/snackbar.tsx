@@ -5,22 +5,28 @@ import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { Typography } from "../typography/typography";
 
 interface SnackbarProps {
+  align?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   message: string | ReactElement;
+  icon?: ReactElement;
   toggleState?: any;
 }
 
-export const Snackbar = ({ message, toggleState }: SnackbarProps) => {
+export const Snackbar = ({ align = "top-right", message, toggleState, icon }: SnackbarProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Dialog
       open={isOpen}
       onClose={
-        toggleState !== null ? () => toggleState("") : () => setIsOpen(false)
+        () => toggleState ? toggleState("") : setIsOpen(false)
       }
       className={[
-        "fixed z-50 overflow-x-auto top-4 flex flex-tableRow justify-end max-w-max p-2 rounded",
-        "right-0 md:right-4 left-0 md:left-auto mx-auto md:mx-0",
+        "fixed z-50 overflow-x-auto flex flex-tableRow justify-end max-w-max p-2 rounded",
+        "right-0 left-0 md:left-auto mx-auto md:mx-0",
+        align === "top-right" ? "top-4 md:right-4" : "",
+        align === "top-left" ? "top-4 md:left-4" : "",
+        align === "bottom-right" ? "bottom-4 md:right-4" : "",
+        align === "bottom-left" ? "bottom-4 md:left-4" : "",
       ].join(" ")}
     >
       <Dialog.Overlay />
@@ -31,10 +37,13 @@ export const Snackbar = ({ message, toggleState }: SnackbarProps) => {
         >
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <InformationCircleIcon
-                className="h-5 w-5 text-onSurfacePrimaryHigh"
-                aria-hidden="true"
-              />
+              {
+                icon ? icon :
+                <InformationCircleIcon
+                  className="h-5 w-5 text-onSurfacePrimaryHigh"
+                  aria-hidden="true"
+                />
+              }
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
               <Typography

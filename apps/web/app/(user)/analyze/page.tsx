@@ -8,7 +8,7 @@ const Page = async () => {
       <TitleBoxSlice
         description={{
           type: "literal",
-          value: ""
+          value: "Coming soon"
         }}
         title={{
           format: {
@@ -25,7 +25,6 @@ const Page = async () => {
           value: "Account Analyzer",
         }}
       />
-      <Typography tag={"p"}>{"Coming Soon"}</Typography>
     </Container>
   )
 }

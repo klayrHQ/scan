@@ -10,15 +10,18 @@ export const ServiceSnackbar = () => {
   return (
     !connected ?
     <Snackbar
+      align={"bottom-left"}
+      icon={
+        <span
+          key={"status-icon"}
+          className={cls([
+            "bg-error",
+            "rounded-full w-4 h-4 flex aspect-square mr-2",
+          ])}
+        />
+      }
       message={
         <Grid flex columns={2} mobileColumns={2} gap={2}>
-          {/*<span
-            key={"status-icon"}
-            className={cls([
-              "bg-error",
-              "rounded-full w-4 h-4 flex aspect-square mr-2",
-            ])}
-          />*/}
           <Typography tag={"span"}>{"Waiting for service"}</Typography>
         </Grid>
       }
