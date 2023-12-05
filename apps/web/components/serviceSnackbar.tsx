@@ -8,7 +8,7 @@ export const ServiceSnackbar = () => {
   const {connected,} = useService()
 
   return (
-    connected ?
+    !connected ?
     <Snackbar
       message={
         <Grid flex columns={2} mobileColumns={2} gap={2}>
@@ -19,7 +19,7 @@ export const ServiceSnackbar = () => {
               "rounded-full w-4 h-4 flex aspect-square mr-2",
             ])}
           />*/}
-          <Typography tag={"span"}>{"Service currently not available"}</Typography>
+          <Typography tag={"span"}>{"Waiting for service"}</Typography>
         </Grid>
       }
     /> :
