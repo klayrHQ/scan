@@ -1,23 +1,31 @@
-name: frontend
+name: testnet
 
 on:
   push:
-    branches:
-      - 'development'
+    tags:
+      - v*
+env:
+  NEXT_PUBLIC_SERVICE_URL: testnet-service.liskscan.com
 
 jobs:
   docker:
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
+      #      - name: Exit if not on main branch
+      #        if: endsWith(github.event.base_ref, 'main') == false
+      #        run: exit -1
       - name: Checkout source code                    # Checksout the repository in the GitHub runner
         uses: 'actions/checkout@v2'
-        with:
-          ref: ${{ github.ref }}
-      - name: Automated Version Bump                  # This action step reads and updates the version number acc to commit message
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #        with:
+      #          ref: ${{ github.ref }}
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      #      - name: Automated Version Bump                  # This action step reads and updates the version number acc to commit message
+      #        id: version-bump
+      #        uses: 'phips28/gh-action-bump-version@master'
+      #        env:
+      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -32,8 +40,10 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}"
+          build-args: |
+            NEXT_PUBLIC_SERVICE_URL=${{ env.NEXT_PUBLIC_SERVICE_URL }}
           push: true
-          tags: rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend:latest,rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend:${{ steps.version-bump.outputs.newTag }}
+          tags: rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend-testnet:latest,rg.nl-ams.scw.cloud/liskscan-private-new/liskscan-frontend-testnet:${{ env.RELEASE_VERSION }}
       - name: Redeploy
         uses: jawher/action-scw@v2.5.4
         env:
@@ -42,4 +52,4 @@ jobs:
           SCW_ORGANIZATION_ID: ${{ secrets.SCW_ORGANIZATION_ID_APP }}
           SCW_ZONE: nl-ams-1
         with:
-          args: container container update 3e8bbaa2-7b56-42d6-b6c5-97ad7c09f751 region=nl-ams redeploy=true
+          args: container container update 3e8bbaa2-7b56-42d6-b6c5-27a3c09f751 region=nl-ams redeploy=true
