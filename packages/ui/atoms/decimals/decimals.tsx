@@ -5,18 +5,18 @@ import {Typography} from "../typography/typography";
 
 interface DecimalsProps {
   minMax: { min: number; max: number },
-  switchConvert: () => void
   parsedSettings?: any,
   setSetting: (handle: string, newState: any) => void
+  switchConvert: () => void
   exampleNumber?: string
   exampleDecimals?: string
 }
 
 export const  Decimals: FC<DecimalsProps> = ({
   minMax,
-  switchConvert,
   parsedSettings,
   setSetting,
+  switchConvert,
   exampleDecimals,
   exampleNumber,
 }) => {
@@ -49,7 +49,7 @@ export const  Decimals: FC<DecimalsProps> = ({
                     decimals: "text-onSurfacePrimaryMedium",
                   }}
                   number={exampleNumber || "1234"}
-                  decimals={exampleDecimals?.slice(0,parsedSettings?.decimals) || "1234".slice(0,parsedSettings?.decimals || 4)}
+                  decimals={exampleDecimals?.slice(0,parsedSettings?.decimals) || "12345678".slice(0,parsedSettings?.decimals)}
                 />
               </span>
             </div>
@@ -162,7 +162,6 @@ export const  Decimals: FC<DecimalsProps> = ({
                 {"Convert LSK"}
               </Typography>
               <div className="text-xs font-medium flex flex-row space-x-2">
-
                 <input
                   className={"mr-2 text-onSurfacePrimaryMedium"}
                   type={"checkbox"}

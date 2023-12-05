@@ -1,14 +1,11 @@
 import React, { FC } from "react"
-import { useHotkeys } from "react-hotkeys-hook"
-import { Paper } from "../../atoms/paper/paper";
-import {Icon} from "../../atoms/icon/icon";
-import {ThemeType} from "../../types";
-import {Typography} from "../../atoms/typography/typography";
-import {CurrencyContainer} from "../currencyContainer/currencyContainer";
-import {HotKeysContainer} from "../hotKeysContainer/hotKeysContainer";
-import {NetworkContainer} from "../networkContainer/networkContainer";
-import {SettingsMenu} from "liskscan/components/settings/settingsMenu";
-import {viewTypes} from "liskscan/providers/settings";
+import {useSettings, viewTypes} from "../../providers/settings";
+import {CurrencyContainer} from "./currencyContainer";
+import {HotKeysContainer} from "./hotKeysContainer";
+import {NetworkContainer} from "./networkContainer";
+import {SettingsMenu} from "./settingsMenu";
+import {Paper, Typography} from "ui";
+import {Icon} from "ui/atoms/icon/icon";
 
 interface settingsContainerProps {
   setOpen: (open: boolean) => void
@@ -18,13 +15,9 @@ interface settingsContainerProps {
   setView: (view: viewTypes) => void
 }
 
-export const SettingsContainer: FC<settingsContainerProps> = ({
-  setOpen,
-  view,
-  views,
-  parsedSettings,
-  setView,
-}) => {
+export const SettingsContainer = () => {
+  const {view, setView, setOpen, views,} = useSettings()
+
   let ViewComponent
 
   switch (view) {
@@ -63,7 +56,7 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
         }}
         className="flex flex-col md:flex-row  h-screen md:h-5/6"
       >
-        <SettingsMenu />
+        <SettingsMenu hiddenOnMobile />
         <Paper
           shadow={0}
           surface={1}
@@ -88,7 +81,7 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
               <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"x"} />
             </div>
           </div>
-          {/*<ViewComponent />*/}
+          <ViewComponent />
         </Paper>
       </div>
     </div>
