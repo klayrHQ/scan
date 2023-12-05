@@ -19,7 +19,7 @@ import { SanityDocument } from "@sanity/types";
 import {FavouritesProvider} from "../../providers/favourites";
 import {RecentSearchesProvider} from "../../providers/recentSearches";
 import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
-import {ServiceSnackbar} from "../../components/serviceSnackbar";
+// import {ServiceSnackbar} from "../../components/serviceSnackbar";
 import {SettingsProvider} from "../../providers/settings";
 import {CurrencyProvider} from "../../providers/currency/CurrencyProvider";
 // import {SettingsProvider} from "../../providers/settings";
@@ -121,7 +121,7 @@ export default async function RootLayout({
                       />
                       {children}
                     </div>
-                    <ServiceSnackbar/>
+                    {/*<ServiceSnackbar/>*/}
                     <Footer copyright={settings.copyright} lists={footer}/>
                     <FloatingMenuContainer menuItems={menuItems}/>
                   </CurrencyProvider>
