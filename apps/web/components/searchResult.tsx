@@ -17,19 +17,17 @@ export const SearchResult = ({
   setOpen: (state: boolean) => void;
   menuCloseFunction?: () => void;
 }) => {
-  const router = useRouter();
-
-  const goToResult = (address?: string, username?: string) => {
-    // router.push(`/${type}/${data.value}`);
+  const handleClick = () => {
     saveSearch(data.value, data.label);
-    // setOpen(false);
-    // menuCloseFunction && menuCloseFunction();
+    setOpen(false);
+    menuCloseFunction && menuCloseFunction();
   };
+
   return (
-    <Link className={"w-full px-4 py-2 inline-block hover:bg-surface-2 rounded"} href={`/${type}/${data.value}`} prefetch={false}>
+    <Link className={"w-full px-4 py-2 inline-block hover:bg-surface-2 rounded"} href={`/${type}/${data.value}`} onClick={() => handleClick()} prefetch={false}>
       {
         type === "account" ?
-          <Grid className={"items-center"} flex columns={2} mobileColumns={2} gap={4} onClick={() => goToResult()}>
+          <Grid className={"items-center"} flex columns={2} mobileColumns={2} gap={4}>
             <Avatar address={data.value} size={24} />
             <Grid flex>
               <Typography color={"onPrimary"} tag={"span"}>{data.label}</Typography>
