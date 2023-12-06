@@ -637,8 +637,7 @@ export const ValidatorsTable = ({
                               typography: [
                                 {
                                   key: "className",
-                                  value:
-                                    "text-right w-full text-onSurfaceMedium",
+                                  value: capacity > 100 ? "text-right w-full text-red opacity-80" : "text-right w-full text-onSurfaceMedium"
                                 },
                                 {
                                   value: "subBody",
