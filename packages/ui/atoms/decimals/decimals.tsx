@@ -2,8 +2,10 @@ import React, { FC } from "react"
 import { Button } from "../button/button";
 import { Currency } from "../currency/currency";
 import {Typography} from "../typography/typography";
+import {CurrencyType} from "../../types";
 
 interface DecimalsProps {
+  currencies: CurrencyType[]
   minMax: { min: number; max: number },
   parsedSettings?: any,
   setSetting: (handle: string, newState: any) => void
@@ -13,6 +15,7 @@ interface DecimalsProps {
 }
 
 export const  Decimals: FC<DecimalsProps> = ({
+  currencies,
   minMax,
   parsedSettings,
   setSetting,
@@ -48,8 +51,10 @@ export const  Decimals: FC<DecimalsProps> = ({
                     number: "text-onSurfacePrimaryMedium font-medium",
                     decimals: "text-onSurfacePrimaryMedium",
                   }}
-                  number={exampleNumber || "1234"}
+                  currencies={currencies}
                   decimals={exampleDecimals?.slice(0,parsedSettings?.decimals) || "12345678".slice(0,parsedSettings?.decimals)}
+                  number={exampleNumber || "1234"}
+                  parsedSettings={parsedSettings}
                 />
               </span>
             </div>

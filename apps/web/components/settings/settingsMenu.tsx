@@ -33,19 +33,6 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
       ].join(" ")}
       shadow={0}
     >
-      <div className="absolute w-full h-full inset-0 bg-transparent z-1" onClick={() => closeSettingsModal()}>
-      </div>
-      {/*<div className="w-full bg-background md:hidden flex flex-row justify-between mb-2 px-4 py-4 md:py-0 mx-auto">
-        <div onClick={() => closeSettingsModal()}>
-          <Icon className="w-5 h-5 text-onBackgroundHigh" icon={"arrowLeft"} />
-        </div>
-        <span className="text-onSurfaceHigh font-medium">Settings</span>
-        <div
-          onClick={() => closeSettingsModal()}
-        >
-          <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"x"} />
-        </div>
-      </div>*/}
       <div className="bg-surface-1 rounded md:py-4 mx-4 md:mx-0 relative z-9999 h-full md:h-auto">
         {views.map((currentView) => (
           <div
@@ -79,16 +66,18 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
               </Typography>
             </div>
             <div className="flex flex-row items-center ">
-              <span
+              <Typography
                 className={cls([
                   !disabledViews.includes(currentView) ?
                     "group-hover:text-onSurfacePrimaryHigh" :
                     "",
                   "text-onSurfaceLow",
                 ])}
+                size={"subBody"}
+                tag={"span"}
               >
                 {getCurrentSetting(currentView)}
-              </span>
+              </Typography>
               <Icon className="w-5 h-5 text-onSurfaceHigh ml-4" icon={"chevronRight"} />
             </div>
           </div>

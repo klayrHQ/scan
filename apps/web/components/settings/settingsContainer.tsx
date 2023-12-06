@@ -61,24 +61,29 @@ export const SettingsContainer = () => {
           shadow={0}
           surface={1}
           className={[
-            "md:mx-0 md:block bg-background w-full sm:w-4/5 overflow-y-auto overflow-clip max-h-screen md:p-8 relative z-9999",
+            "md:mx-0 md:block bg-background w-full h-full sm:w-4/5 overflow-y-auto overflow-clip max-h-screen md:p-8 relative z-9999",
           ].join(" ")}
         >
           <div className="w-full md:hidden flex flex-row justify-between text-onSurfaceHigh mb-2 px-4 py-4 mx-auto">
-            <div
-              onClick={() =>
-                setView("menu")
-              }
-            >
-              <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"arrowLeft"} />
-            </div>
-            <Typography tag={"span"} className="font-medium">
+            {
+              view === "menu" ?
+                <span className={"w-5"} />
+                :
+                <div
+                  onClick={() =>
+                    setView("menu")
+                  }
+                >
+                  <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"arrowLeft"} />
+                </div>
+            }
+            <Typography tag={"span"} className="font-medium capitalize">
               {view}
             </Typography>
             <div
               onClick={() => setOpen(false)}
             >
-              <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"x"} />
+              <Icon className="w-5 h-5 text-onSurfaceHigh cursor-pointer" icon={"x"} />
             </div>
           </div>
           <ViewComponent />

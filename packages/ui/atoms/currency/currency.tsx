@@ -1,5 +1,6 @@
 import React from "react"
 import {Typography} from "../typography/typography";
+import {CurrencyType} from "../../types";
 
 export interface CurrencyProps {
   sign?: boolean
@@ -15,7 +16,7 @@ export interface CurrencyProps {
   parsedSettings?: any
   number: string
   decimals?: string | undefined
-  currencies?: Array<{sign: string, symbol: string}>
+  currencies?: Array<CurrencyType>
 }
 
 export const Currency = ({
@@ -26,7 +27,17 @@ export const Currency = ({
   parsedSettings = {symbolEnabled: true},
   number,
   decimals,
-  currencies = [{sign:"Ⱡ", symbol: "LSK"}],
+  currencies = [{
+    id: 1214,
+    name: "Lisk",
+    sign: "Ⱡ",
+    symbol: "LSK",
+    default: {
+      sign: false,
+      symbol: true,
+      fractions: 4,
+    },
+  }],
 }: CurrencyProps) => {
 
   return (
