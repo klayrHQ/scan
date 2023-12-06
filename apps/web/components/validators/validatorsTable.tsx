@@ -243,6 +243,19 @@ export const ValidatorsTable = ({
                       type: "literal",
                       value: "Commission",
                       format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value:
+                              "Commission is the percentage of rewards a validator keeps",
+                        },
                         typography: [
                           {
                             value: "w-full text-right",
