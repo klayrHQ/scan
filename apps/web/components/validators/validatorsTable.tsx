@@ -78,7 +78,7 @@ export const ValidatorsTable = ({
             >
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -94,7 +94,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -110,7 +110,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -130,7 +130,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -156,7 +156,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -208,7 +208,7 @@ export const ValidatorsTable = ({
               {/*</th>*/}
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                 ])}
               >
                 <DefaultHeadColumn
@@ -233,7 +233,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -272,7 +272,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -312,7 +312,7 @@ export const ValidatorsTable = ({
               </th>
               <th
                 className={cls([
-                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+                  "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
                   getShowClass("always"),
                 ])}
               >
@@ -403,7 +403,7 @@ export const ValidatorsTable = ({
                   <tr className={"hover:bg-surface-1 hover:bg-opacity-50"} key={validator.address}>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -420,7 +420,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -462,7 +462,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -570,7 +570,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -594,7 +594,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -651,7 +651,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -745,7 +745,7 @@ export const ValidatorsTable = ({
                     {/*}}/> </td>*/}
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -773,7 +773,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >
@@ -830,7 +830,7 @@ export const ValidatorsTable = ({
                     </td>
                     <td
                       className={cls([
-                        "border-b-1 p-2 pl-4 font-medium",
+                        "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
                         getShowClass("always"),
                       ])}
                     >

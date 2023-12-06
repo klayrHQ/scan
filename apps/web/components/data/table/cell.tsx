@@ -63,7 +63,7 @@ export const Cell = ({
     return (
       <td
         className={cls([
-          "border-b-1 p-2 pl-4 font-medium",
+          "border-b-1 p-2 pl-4 font-medium whitespace-nowrap",
           className,
           getShowClass(showOn),
         ])}
@@ -75,7 +75,7 @@ export const Cell = ({
   return (
     <th
       className={cls([
-        "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium",
+        "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
         className,
         getShowClass(showOn),
       ])}
