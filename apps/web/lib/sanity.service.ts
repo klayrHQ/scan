@@ -311,6 +311,10 @@ export const doCache = async (
     (duration > 0 && responseCache[call][key].ts < Date.now() - 1000 * duration)
   ) {
     responseCache[call][key] = {
+      ts: Date.now(),
+      response: {},
+    };
+    responseCache[call][key] = {
       response: await client.rpc(call as CallsRPC, params),
       ts: Date.now(),
     };
@@ -330,6 +334,10 @@ export const getData = async (
     case "get.validator":
       return await doCache(call, params.address, params, 60 * 5);
     case "get.blockchain.apps.meta":
+      return await doCache(call, "meta", params, 60 * 5);
+      case "get.blockchain.apps.statistics":
+      return await doCache(call, "meta", params, 60 * 5);
+    case "get.blockchain.apps.meta.tokens":
       return await doCache(call, "meta", params, 60 * 5);
     case "get.pos.validators":
       return await doCache(
@@ -355,6 +363,8 @@ export const getData = async (
     case "get.token.balances":
       return await doCache(call, params.address, params, 60);
     case "get.network.status":
+      return await doCache(call, params.address, params, 60 * 5);
+    case "get.network.statistics":
       return await doCache(call, params.address, params, 10);
     case "get.auth":
       return await doCache(call, params.address, params, 60 * 5);
@@ -375,15 +385,10 @@ export const getData = async (
           60
         );
       } else {
-        return await doCache(
-          call,
-          params.limit,
-          params,
-          10
-        );
+        return await doCache(call, params.limit, params, 10);
       }
     case "get.blocks":
-      console.log(params)
+      console.log(params);
       if (params.generatorAddress || params.blockID || params.height) {
         return await doCache(
           call,
@@ -403,7 +408,7 @@ export const getData = async (
       }
   }
   if (stats.requests % 100 === 0) {
-    console.log(`Requests done: ${stats.requests}`)
+    console.log(`Requests done: ${stats.requests}`);
   }
   return await client.rpc(call as CallsRPC, params);
 };
