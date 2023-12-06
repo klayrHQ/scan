@@ -1,5 +1,5 @@
 "use client";
-import { cls} from "ui";
+import { cls } from "ui";
 import {
   DefaultHeadColumn,
   DoubleRowColumn,
@@ -9,8 +9,9 @@ import {
 import { StaticPlainColumn } from "../data/table/columns/staticPlain";
 import { ShowOnCell } from "../data/table/cell";
 import { useSearchParams } from "next/navigation";
-import {useService} from "../../providers/service";
-import {useEffect, useState} from "react";
+import { useService } from "../../providers/service";
+import {Suspense, useEffect, useState} from "react";
+import Spinner from "../spinner";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -38,10 +39,10 @@ export const ValidatorsTable = ({
   validators: any;
   page: string;
 }) => {
-  const { events } = useService()
+  const { events } = useService();
   const searchParams = useSearchParams();
   const stakingRewardsAmount = searchParams?.get("stakingAmount") || "1000";
-  const stakingRewardsPeriod = searchParams?.get("stakingPeriod") || "month"
+  const stakingRewardsPeriod = searchParams?.get("stakingPeriod") || "month";
   const [validatorsState, setValidators] = useState<any[]>(validators);
 
   useEffect(() => {
@@ -51,8 +52,8 @@ export const ValidatorsTable = ({
       );
       const validatorsData = await validators.json();
       setValidators(validatorsData);
-    }
-    getValidators()
+    };
+    getValidators();
   }, [events?.["update.generators"]]);
   return (
       <div
@@ -386,7 +387,7 @@ export const ValidatorsTable = ({
 
                 const APR = (parseFloat(resultPerYear) / inputStake) * 100;
                 return (
-                  <tr key={validator.address}>
+                  <tr className={"hover:bg-surface-1 hover:bg-opacity-50"} key={validator.address}>
                     <td
                       className={cls([
                         "border-b-1 p-2 pl-4 font-medium",

@@ -1,9 +1,10 @@
-import React from "react";
+import React, {Suspense} from "react";
 import { getSlices } from "./[uri]/page";
 import { Slicer } from "../../components/slicer";
 import { draftMode } from "next/headers";
-import { draftsClient, } from "../../lib/sanity.client";
+import { draftsClient } from "../../lib/sanity.client";
 import { sanitySsrQuery } from "../../lib/sanity.groq";
+import Spinner from "../../components/spinner";
 
 export const revalidate = 5;
 
@@ -13,7 +14,7 @@ export default async function Web() {
   const sections = await getSlices("home", client);
   console.log(sections);
   return (
-    <>
+    <Suspense fallback={<Spinner />}>
       {/*<div className={"w-max-app mx-auto w-app"}>*/}
       {/*<Table columns={table.columns} rows={tableRows?.rows} />*/}
       {/*<ValueFormatter*/}
@@ -44,6 +45,6 @@ export default async function Web() {
         queryData={sections.queryData}
         queries={sections.page.queries}
       />
-    </>
+    </Suspense>
   );
 }
