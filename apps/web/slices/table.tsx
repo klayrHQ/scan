@@ -8,9 +8,17 @@ import { ConsoleLogTester } from "../components/consoleLogTester";
 import { getAllData } from "../lib/sanity.service";
 import { BlockchainAppsMetaResponse } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
+import { Pagination } from "../components/data/table/pagination";
 
 const clients: Record<string, any> = {};
-export const TableSlice = ({ queryData, data, table, id, container }: any) => {
+export const TableSlice = ({
+  queryData,
+  data,
+  table,
+  id,
+  container,
+  queries,
+}: any) => {
   // const {lastBlock} = useService()
   const [tableState, updateTable] = useState<{
     table: any;
@@ -79,8 +87,7 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         key: table.key,
         cols: table.columns,
       });
-      // console.log(processedTable)
-      // console.log(queryData)
+
       // console.log("QDQDQ", tableRows, queryData.blocks?.data[0].height)
       // console.log(tableRows)
       updateTable({ rows: tableRows.rows, table: processedTable });
@@ -89,9 +96,7 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
       getData();
     }
   }, [queryData, table]);
-
   const [isStuck, stickyRef] = useIsStuck(28);
-
   return (
     <div
       className={[
@@ -120,6 +125,20 @@ export const TableSlice = ({ queryData, data, table, id, container }: any) => {
         stickyMobile={table.stickyMobile}
         stickyRef={stickyRef}
       />
+      {table?.pagination && (
+        <Pagination
+          href={""}
+          current={
+            queryData?.[table?.key]?.meta?.offset /
+            queryData?.[table?.key]?.meta?.count
+          }
+          total={queryData?.[table?.key]?.meta?.total}
+          pageLength={parseInt(
+            queries?.[table?.key]?.params?.find((p: {key: string, value: string}) => p.key === "limit")
+              ?.value || 20
+          )}
+        />
+      )}
     </div>
   );
 };

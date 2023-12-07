@@ -54,7 +54,7 @@ export const Price = () => {
       const data = JSON.parse(e.data)
       // console.log(data)
       if (data?.d?.p24h === undefined) {
-        console.log(data)
+        // console.log(data)
         return
       }
       if (data.d.id === 1214) {

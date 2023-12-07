@@ -7,6 +7,7 @@ import {
   ReadonlyURLSearchParams,
   usePathname,
   useRouter,
+  useSearchParams,
 } from "next/navigation";
 import useQueryParams, { QueryParams } from "../hooks/useQueryParams";
 
@@ -23,14 +24,39 @@ export interface SlicerProps {
 
 export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
   const path = usePathname();
+  const searchParams = useSearchParams();
   const [uri, id] = path?.split("/").slice(1) || [undefined, undefined];
   const { queryParams, setQueryParams } = useQueryParams<QueryParams>();
   const { setQueries, cache, setID, nextPage } = useService();
+  const page = searchParams?.get("page");
+
   useEffect(() => {
     if (setQueries) {
-      setQueries(queries);
+      if (page) {
+        setQueries(
+          queries.map((query: any) => ({
+            ...query,
+            params: [
+              ...query.params,
+              {
+                key: "offset",
+                value: (
+                  (parseInt(page) - 1) *
+                  parseInt(
+                    query.params.find(
+                      (p: { key: string; value: string }) => p.key === "limit"
+                    )?.value || "0"
+                  )
+                ).toString(),
+              },
+            ],
+          }))
+        );
+      } else {
+        setQueries(queries);
+      }
     }
-  }, [setQueries]);
+  }, [setQueries, page]);
   useEffect(() => {
     if (setID) {
       setID(id);
@@ -38,10 +64,10 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
   }, [setID, id]);
 
   useEffect(() => {
-    if(queries) {
-      nextPage("test")
+    if (queries) {
+      nextPage("test");
     }
-  }, [queries])
+  }, [queries]);
 
   // useEffect(() => console.log("CACHE", uri, id, cache), [cache]);
 

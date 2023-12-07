@@ -34,6 +34,11 @@ export default {
     //   ],
     // },
     {
+      name: "pagination",
+      type: "boolean",
+      title: "Pagination",
+    },
+    {
       name: "sticky",
       type: "boolean",
       title: "Sticky Table-head",
