@@ -135,7 +135,7 @@ export const tokenColumns = [
   },
   {
     name: "Account_Rewards_claimable",
-    showOn: "tabletDesktop",
+    showOn: "always",
     component: "DefaultHeadColumn",
     headValues: [
       {
@@ -161,7 +161,5 @@ export const tokenColumns = [
       }
     ],
     valueComponent: "PlainColumn",
-    showOn: "always",
-
   }
 ]
