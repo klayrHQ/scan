@@ -1,14 +1,15 @@
-import {Container, Typography} from "ui";
+import {Container} from "ui";
 import {TitleBoxSlice} from "../../../slices/titleBox";
+import {AccountAnalyzer} from "../../../components/accountAnalyzer";
+
 
 const Page = async () => {
-
   return (
     <Container section gap={4}>
       <TitleBoxSlice
         description={{
           type: "literal",
-          value: "Coming soon"
+          value: ""
         }}
         title={{
           format: {
@@ -25,6 +26,7 @@ const Page = async () => {
           value: "Account Analyzer",
         }}
       />
+      <AccountAnalyzer />
     </Container>
   )
 }

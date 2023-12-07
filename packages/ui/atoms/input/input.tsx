@@ -9,6 +9,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement>{
   className?: string
   placeholder?: string
   id?: string
+  name?: string
   size?: 'small' | 'medium' | 'large'
   width?: string
   onChange?: ChangeEventHandler<HTMLInputElement>
@@ -57,6 +58,7 @@ export const Input = ({
   className,
   placeholder,
   id,
+  name,
   size = "medium",
   width,
   fieldType = "text",
@@ -82,6 +84,8 @@ export const Input = ({
 
   return (
     <input
+      id={id}
+      name={name}
       type={fieldType}
       className={inputCVA({
         styleType,
