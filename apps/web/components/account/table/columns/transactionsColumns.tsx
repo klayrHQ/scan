@@ -240,7 +240,7 @@ export const transactionsColumns = [
         },
         name: "Balance",
         type: "key",
-        value: "transactions.params.amount"
+        value: "transactions.params.amount" || "transactions.params.rewards"
       }
     ],
     component: "DefaultHeadColumn",

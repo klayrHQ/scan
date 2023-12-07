@@ -250,7 +250,7 @@ const formatters = {
         ? parseInt(
             parseFloat(convertBeddowsToLSK(value)).toFixed(2)
           ).toLocaleString() + " LSK"
-        : "0 LSK"
+        : "-"
     }`,
   currencyNew: (value: any, symbol?: string) => {
     return `${
