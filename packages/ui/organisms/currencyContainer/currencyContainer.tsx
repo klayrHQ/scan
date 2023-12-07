@@ -1,9 +1,8 @@
 import React, {FC} from "react";
 import { CurrencyComponent } from "../../atoms/currencyComponent/currencyComponent";
 import { Decimals } from "../../atoms/decimals/decimals";
-import { Paper } from "../../atoms/paper/paper";
+import { Paper, Typography } from "../../atoms";
 import { CurrencyType, CurrencyCategory } from "../../types";
-import {Typography} from "../../atoms/typography/typography";
 
 interface CurrencyContainerProps {
   closeSettingsModal: () => void
@@ -35,7 +34,7 @@ export const CurrencyContainer: FC<CurrencyContainerProps> = ({
         <Typography tag={"span"}>{"Format the way Liskscan shows all currency values."}</Typography>
       </Paper>
       <div className="bg-surface-1 text-onSurfaceHigh w-full block rounded">
-        <Decimals minMax={minMax} switchConvert={switchConvert} setSetting={setSetting} parsedSettings={parsedSettings}/>
+        <Decimals currencies={[]} minMax={minMax} switchConvert={switchConvert} setSetting={setSetting} parsedSettings={parsedSettings}/>
       </div>
       <div className="bg-surface-0 text-onSurfaceHigh flex flex-col space-y-4 ">
         {/*<h1 className="font-bold text-xl text-onSurfaceHigh">*/}
