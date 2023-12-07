@@ -41,7 +41,7 @@ export const tokenColumns = [
         name: "Token ID",
       }
     ],
-    showOn: "always",
+    showOn: "tabletDesktop",
     valueKeys: [
       {
         format: {
@@ -53,6 +53,33 @@ export const tokenColumns = [
         value: "tokens.tokenID"
       }
     ]
+  },{
+    name: "token-name",
+    valueComponent: "PlainColumn",
+    component: "DefaultHeadColumn",
+    headValues: [
+      {
+        type: "literal",
+        value: "Token",
+        format: {
+          format: "plain",
+          type: "string"
+        },
+        name: "Token",
+      }
+    ],
+    showOn: "always",
+    valueKeys: [
+      {
+        format: {
+          format: "plain",
+          type: "string"
+        },
+        name: "token-id",
+        type: "key",
+        value: "tokens.symbol"
+      }
+    ]
   },
   {
     name: "available-balance",
@@ -62,7 +89,7 @@ export const tokenColumns = [
         name: "available balance",
         _key: "b45fbc0d1547",
         type: "literal",
-        value: "Available balance"
+        value: "Available"
       }
     ],
     valueKeys: [
@@ -93,7 +120,7 @@ export const tokenColumns = [
       }
     ],
     valueComponent: "PlainColumn",
-    showOn: "tabletDesktop",
+    showOn: "always",
     valueKeys: [
       {
         name: "locked balance",
@@ -133,6 +160,8 @@ export const tokenColumns = [
         type: "key"
       }
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
+    showOn: "always",
+
   }
 ]
