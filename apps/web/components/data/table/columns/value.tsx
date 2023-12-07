@@ -10,7 +10,6 @@ import {Divider} from "ui/atoms/divider/divider";
 import {convertBeddowsToLSK} from "../../../../lib/queries/lisk";
 
 export const ValueColumn = ({
-                                mobile,
                                 queryData,
                                 index,
     data,
