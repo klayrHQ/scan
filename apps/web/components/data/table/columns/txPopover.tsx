@@ -8,9 +8,7 @@ import { CheckCircleIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { ColumnProps } from "./index";
 import { Divider } from "ui/atoms/divider/divider";
 import { ErrorFilledIcon, EyeOpenIcon } from "@sanity/icons";
-import { EyeDropperIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import {ConsoleLogTester} from "../../../consoleLogTester";
 
 export const TxPopover = ({
   mobile,

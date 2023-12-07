@@ -72,9 +72,11 @@ type tabsTypes =
 
 export const Account = ({
   id,
+    validatorData,
   initialData,
 }: {
   id: string;
+  validatorData: any
   initialData: any
 }) => {
   const {cache, setQueries} = useService()
@@ -133,7 +135,7 @@ export const Account = ({
           activeTab === "stakes" &&
           <FilterButtons buttons={stakesTabButtons} onChange={handleSubChange} selection={activeSubTab} />
         }
-        <TabComponent queryData={queryData} tab={activeSubTab}/>
+        <TabComponent validatorData={validatorData} queryData={queryData} tab={activeSubTab}/>
       </Grid>
     </Container>
   )

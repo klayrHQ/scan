@@ -6,10 +6,9 @@ export const Transactions = ({
 }: {
   queryData: any
 }) => {
-
   return (
     <TableSlice
-      queryData={{transactions: queryData["account-id-transactions"]}}
+      queryData={{transactions: queryData["account-id-transactions"], events: queryData["account-events"]}}
       table={{
         key: "transactions",
         columns: transactionsColumns,

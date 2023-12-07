@@ -1,11 +1,12 @@
 import {Formats, Grid, KeyValueRow, ValueFormatter, ValueTypes} from "ui";
 
 export const Validator = ({
-  queryData
+  queryData,
+    validatorData
 }: {
   queryData: any
+  validatorData: any
 }) => {
-
   const kpis: {
     label: string,
     value: string | number | any,
@@ -50,7 +51,7 @@ export const Validator = ({
     },
     {
       label: "Last Commission Increase",
-      value: queryData["account-validator-id"]?.data[0]?.lastCommissionIncreaseTimestamp,
+      value: validatorData?.lastCommissionIncreaseTimestamp,
       type: "timestamp",
       format: "fromNow",
     },

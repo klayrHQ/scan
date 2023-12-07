@@ -13,6 +13,7 @@ import { StakesAccountColumn } from "./stakesAccount";
 import { LogoColumn } from "./logo";
 import { TxPopover } from "./txPopover";
 import { CountryFlagColumn } from "./countryFlagColumn";
+import {ValueColumn} from "./value";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -23,6 +24,7 @@ export interface ColumnProps {
 
 export const ColumnComponents = {
   PlainColumn: PlainColumn,
+  ValueColumn: ValueColumn,
   DoubleRowColumn: DoubleRowColumn,
   DefaultHeadColumn: DefaultHeadColumn,
   DateColumn: DateColumn,
@@ -46,6 +48,7 @@ export {
   PlainColumn,
   DateColumn,
   GridColumn,
+    ValueColumn,
   AvatarColumn,
   ValidatorStatusColumn,
   NrColumn,

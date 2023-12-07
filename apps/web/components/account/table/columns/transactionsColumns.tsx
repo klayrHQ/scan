@@ -231,7 +231,7 @@ export const transactionsColumns = [
     ]
   },
   {
-    name: "Amount",
+    name: "Value",
     valueKeys: [
       {
         format: {
@@ -240,7 +240,7 @@ export const transactionsColumns = [
         },
         name: "Balance",
         type: "key",
-        value: "transactions.params.amount" || "transactions.params.rewards"
+        value: "transactions.txType === 'claimRewards' ? transactions.params.rewards : transactions.params.amount",
       }
     ],
     component: "DefaultHeadColumn",
@@ -250,12 +250,12 @@ export const transactionsColumns = [
           format: "plain",
           type: "string"
         },
-        name: "Amount",
+        name: "Value",
         type: "literal",
-        value: "Amount"
+        value: "Value"
       }
     ],
-    valueComponent: "PlainColumn",
+    valueComponent: "ValueColumn",
     showOn: "always",
   },
   {
