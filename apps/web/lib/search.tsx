@@ -52,6 +52,7 @@ export const search = async (
           {
             value: (
               <SearchResult
+                setOpen={setOpen}
                 saveSearch={saveSearch}
                 menuCloseFunction={menuCloseFunction}
                 type={"block"}
@@ -77,6 +78,7 @@ export const search = async (
             {
               value: (
                 <SearchResult
+                  setOpen={setOpen}
                   saveSearch={saveSearch}
                   menuCloseFunction={menuCloseFunction}
                   type={"account"}
