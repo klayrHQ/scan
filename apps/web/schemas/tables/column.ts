@@ -1,6 +1,6 @@
 import { defineType } from "sanity";
 import { SanityValue } from "../layout/value";
-import { NrColumn, OrColumn } from "../../components/data";
+import {NrColumn, OrColumn, ValueColumn} from "../../components/data";
 import { LogoColumn } from "../../components/data/table/columns/logo";
 
 export default defineType({
@@ -68,6 +68,7 @@ export default defineType({
           },
           { title: "Index nr", value: "NrColumn" },
           { title: "Stakes", value: "StakesColumn" },
+          { title: "Value", value: "ValueColumn" },
           { title: "Stakes Account", value: "StakesAccountColumn" },
           { title: "Country Flag", value: "CountryFlagColumn"}
         ],
