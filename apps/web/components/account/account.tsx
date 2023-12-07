@@ -2,7 +2,7 @@
 import {useService} from "../../providers/service";
 import React, {useEffect, useState} from "react";
 import {getAccountQueries} from "./queries";
-import {Container, Grid} from "ui";
+import {Container, Grid, Typography} from "ui";
 import {AccountHeader} from "./accountHeader";
 import {FilterButtons} from "ui/atoms/filterButtons/filterButtons";
 import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";

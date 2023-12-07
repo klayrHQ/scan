@@ -4,6 +4,7 @@ import {compactString} from "../../assets/utils";
 import {Popover} from "@headlessui/react";
 import {ValueFormatter} from "../../atoms/valueFormatter/valueFormatter";
 import {Typography} from "../../atoms";
+import {Divider} from "../../atoms/divider/divider";
 
 interface RecentSearchesProps {
   onClick: (address?: string, username?: string) => void
@@ -18,8 +19,9 @@ export const RecentSearches = ({
 }: RecentSearchesProps) => {
 
   return (
-    <div className={`text-onBackgroundHigh p-2 font-medium mt-2 ${className ? className : ""}`}>
-      <p className="text-onSurfaceHigh">Recent Searches</p>
+    <div className={`text-onBackgroundHigh px-2 pb-2 font-medium mt-2 ${className ? className : ""}`}>
+        <Divider className={"opacity-10"} borderStyle={"solid"} />
+      <Typography size={"body"} bold tag={"span"} className="text-onSurfaceHigh ">Recent Searches</Typography>
       <div className="grid grid-cols-1 md:grid-rows-1 md:grid-cols-3 py-2 divider-1 gap-4">
         {recentSearches?.map((recentSearch, index) => {
           return (
@@ -33,7 +35,7 @@ export const RecentSearches = ({
               <Avatar className="mr-2" address={recentSearch.address} size={20}/>
               {
                 recentSearch.username && recentSearch.username !== recentSearch.address ?
-                  <Typography tag={"span"}>{recentSearch.username}</Typography> :
+                  <Typography size={"subBody"} tag={"span"}>{recentSearch.username}</Typography> :
                   <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />
               }
             </Popover.Button>
