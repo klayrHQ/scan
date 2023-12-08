@@ -153,7 +153,7 @@ export const tokenColumns = [
       {
         value: "rewards.data.0.reward",
         format: {
-          format: "currencyNew",
+          format: "fee",
           type: "beddows"
         },
         name: "claimable rewards",
