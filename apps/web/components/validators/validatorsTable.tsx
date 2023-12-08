@@ -370,8 +370,8 @@ export const ValidatorsTable = ({
                     {
                       value:
                         sortConfig.key === "validatorWeight"
-                          ? "Validator Weight"
-                          : "Capacity",
+                          ? "Validator Weight" : sortConfig.key === "capacity" ? "Capacity"
+                          : "Validator Weight",
                       format: {
                         typography: [
                           {
@@ -449,7 +449,7 @@ export const ValidatorsTable = ({
                   values={[
                     {
                       type: "literal",
-                      value: sortConfig.key === "totalStake" ? "Total Stake" : "Self Stake",
+                      value: sortConfig.key === "totalStake" ? "Total Stake" : sortConfig.key === "selfStake" ? "Self Stake":"Total Stake",
                       format: {
                         format: "plain",
                         type: "string",
