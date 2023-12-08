@@ -195,6 +195,7 @@ export const SanityValue = [
             { title: "Value", value: "ValueColumn" },
             { title: "fee", value: "fee" },
             { title: "number", value: "number" },
+            { title: "height", value: "height" },
             { title: "avatar", value: "avatar" },
             { title: "avatarAddress", value: "avatarAddress" },
             { title: "icon", value: "icon" },

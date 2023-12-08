@@ -12,6 +12,7 @@ export type SanityProps = { key: string; value: string }[];
 export type ValueTypes =
   | "string"
   | "number"
+  | "height"
   | "beddows"
   | "boolean"
   | "float"
@@ -65,6 +66,7 @@ export type Formats =
   | "avatarAddress"
   | "fee"
   | "number"
+  | "height"
   | "avatar"
   | "icon";
 
@@ -228,6 +230,7 @@ const operators = {
 const parsers = {
   string: (value?: string) => value?.toString(),
   number: (value?: string) => parseInt(value || "0", 10),
+  height: (value?: string) => parseInt(value || "0", 10),
   float: (value?: string) => parseFloat(value || "0"),
   beddows: (value?: string) => value, //BigInt(value || "0"),
   timestamp: (value?: string) => parseInt(value || "0") * 1000, //value ? new Date(value + 1000) : new Date(),
@@ -266,6 +269,7 @@ const formatters = {
       value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " LSK" : ""
     }`,
   number: (value: any) => value?.toLocaleString(),
+  height: (value: any) => value > 0 ? value.toLocaleString() : "Pending",
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => (
     <Grid
@@ -299,6 +303,9 @@ const formatters = {
   //       }),
 
   fromNow: (value: any) => {
+    if (!value) {
+      return "N/A";
+    }
     const date = dayjs(value);
 
     if (dayjs().diff(date, "hour") >= 1) {
