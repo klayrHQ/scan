@@ -1,5 +1,5 @@
 "use client";
-import { cls } from "ui";
+import {cls, Grid} from "ui";
 import {
   DefaultHeadColumn,
   DoubleRowColumn,
@@ -10,8 +10,9 @@ import { StaticPlainColumn } from "../data/table/columns/staticPlain";
 import { ShowOnCell } from "../data/table/cell";
 import { useSearchParams } from "next/navigation";
 import { useService } from "../../providers/service";
-import { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Spinner from "../spinner";
+import {Icon} from "ui/atoms/icon/icon";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -39,9 +40,9 @@ type Validator = {
   nextAllocatedTime: number;
   consecutiveMissedBlocks: number;
   generatedBlocks: number;
-  validatorWeight: number;
-  selfStake: number;
-  totalStake: number;
+  validatorWeight: string;
+  selfStake: string;
+  totalStake: string;
   commission: number;
   earnedRewards: number;
   rewards: {
@@ -66,6 +67,48 @@ export const ValidatorsTable = ({
   const stakingRewardsPeriod = searchParams?.get("stakingPeriod") || "month";
   const [validatorsState, setValidators] = useState<Validator[]>(validators);
 
+  const calculateReward = (validator: Validator) => {
+    const RB = parseInt(validator.rewards.blockReward, 10);
+    const RM = parseInt(validator.rewards.monthlyReward, 10);
+    const RY = parseInt(validator.rewards.yearlyReward, 10);
+    const RD = parseInt(validator.rewards.dailyReward, 10);
+    const C = validator.commission / 100;
+    const inputStake = parseInt(stakingRewardsAmount) * 100000000;
+    const S = parseFloat(validator.totalStake) + inputStake;
+    const capacity =
+        (parseFloat(validator.totalStake) / (parseFloat(validator.selfStake) * 10)) * 100;
+
+    const stakersRewardPerMonth = (RM: any, C: any, S: any) =>
+      RM * (1 - C / 100) * (inputStake / S);
+    const stakersRewardPerDay = (RD: any, C: any, S: any) =>
+      RD * (1 - C / 100) * (inputStake / S);
+    const stakersRewardPerYear = (RY: any, C: any, S: any) =>
+      RY * (1 - C / 100) * (inputStake / S);
+    const stakersRewardPerBlock = (RB: any, C: any, S: any) =>
+      RB * (1 - C / 100) * (inputStake / S);
+    const resultPerMonth = parseInt(
+      stakersRewardPerMonth(RM, C, S).toString()
+    ).toString();
+    const resultPerDay = parseInt(
+      stakersRewardPerDay(RD, C, S).toString()
+    ).toString();
+    // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
+    const resultPerBlock = parseInt(
+      stakersRewardPerBlock(RB, C, S).toString()
+    ).toString();
+    const resultPerYear = parseInt(
+      stakersRewardPerYear(RY, C, S).toString()
+    ).toString();
+    return {
+      resultPerMonth,
+      resultPerDay,
+      resultPerBlock,
+      resultPerYear,
+      inputStake,
+      capacity
+    };
+  };
+
   useEffect(() => {
     const getValidators = async () => {
       const validators = await fetch(
@@ -82,15 +125,29 @@ export const ValidatorsTable = ({
     key: string;
     direction: "asc" | "desc";
   }>({
-    key: "blockReward",
-    direction: "desc",
+    key: "",
+    direction: "asc",
   });
 
-  const parseIntKeys = ["validatorWeight", "totalStake", "earnedRewards"];
+  const getSortIcon = (key: string) => {
+    {
+      if (sortConfig.key === key) {
+        return <Icon
+          icon={sortConfig.direction === "asc" ? "arrowUp" : "chevronDown"}
+          color={"onSurfaceMedium"}
+          className={"h-[14px] w-[14px]"}
+        />;
+      } else {
+        return ("");
+      }
+    }
+  }
+  
+  const parseIntKeys = ["validatorWeight", "totalStake", "earnedRewards", "selfStake"];
 
   const sortValidators = (a: any, b: any) => {
-    let valueA = a[sortConfig.key];
-    let valueB = b[sortConfig.key];
+    let valueA = a[sortConfig.key ? sortConfig.key : "rank"];
+    let valueB = b[sortConfig.key ? sortConfig.key : "rank"];
 
     if (parseIntKeys.includes(sortConfig.key)) {
       valueA = parseInt(valueA, 10);
@@ -99,6 +156,15 @@ export const ValidatorsTable = ({
     if (sortConfig.key === "blockReward") {
       valueA = parseInt(a.rewards.blockReward, 10);
       valueB = parseInt(b.rewards.blockReward, 10);
+    }
+
+    if (sortConfig.key === "stakingRewards") {
+      valueA = calculateReward(a).resultPerMonth;
+      valueB = calculateReward(b).resultPerMonth;
+    }
+    if (sortConfig.key === "capacity") {
+      valueA = calculateReward(a).capacity;
+      valueB = calculateReward(b).capacity;
     }
     if (valueA < valueB) {
       return sortConfig.direction === "asc" ? -1 : 1;
@@ -131,108 +197,197 @@ export const ValidatorsTable = ({
             ])}
           >
             <th
+              onClick={() =>
+                setSortConfig({
+                  key: "rank",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer hover:bg-opacity-50",
                 getShowClass("always"),
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    type: "literal",
-                    value: "#",
-                    name: "rank",
-                  },
-                ]}
-              />
-            </th>
-            <th
-              className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
-                getShowClass("always"),
-              ])}
-            >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    type: "literal",
-                    value: "Validator",
-                    name: "ValidatorName",
-                  },
-                ]}
-              />
-            </th>
-            <th
-              className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
-                getShowClass("always"),
-              ])}
-            >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    value: "Status",
-                    format: {
-                      format: "plain",
-                      type: "string",
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("rank")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "#",
+                      name: "rank",
                     },
-                    name: "Status",
-                    type: "literal",
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
             </th>
             <th
+              onClick={() =>
+                setSortConfig({
+                  key: "name",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
                 getShowClass("always"),
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    type: "literal",
-                    value: "Total Blocks",
-                    format: {
-                      typography: [
-                        {
-                          value: "w-full text-right",
-                          key: "className",
-                        },
-                      ],
-                      format: "plain",
-                      type: "string",
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("name")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Validator",
+                      name: "ValidatorName",
                     },
-                    name: "Total Blocks",
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
             </th>
             <th
+              onClick={() =>
+                setSortConfig({
+                  key: "nextAllocatedTime",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
                 getShowClass("always"),
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    value: "Validator Weight",
-                    format: {
-                      typography: [
-                        {
-                          value: "w-full text-right",
-                          key: "className",
-                        },
-                      ],
-                      format: "plain",
-                      type: "string",
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("nextAllocatedTime")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      value: "Status",
+                      format: {
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Status",
+                      type: "literal",
                     },
-                    name: "Validator Weight",
-                    type: "literal",
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
+            </th>
+            <th
+              onClick={() =>
+                setSortConfig({
+                  key: "generatedBlocks",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
+              className={cls([
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
+                getShowClass("always"),
+              ])}
+            >
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("generatedBlocks")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Total Blocks",
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Total Blocks",
+                    },
+                  ]}
+                />
+              </Grid>
+            </th>
+            <th
+              onClick={() =>
+                setSortConfig({
+                  key:
+                    sortConfig.key === "validatorWeight" &&
+                    sortConfig.direction === "desc"
+                      ? "capacity"
+                      : sortConfig.key === "capacity" &&
+                        sortConfig.direction === "desc"
+                      ? "validatorWeight"
+                      : sortConfig.key === "validatorWeight" &&
+                        sortConfig.direction === "asc"
+                      ? "validatorWeight"
+                      : "capacity",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
+              className={cls([
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
+                getShowClass("always"),
+              ])}
+            >
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("validatorWeight")}
+                {getSortIcon("capacity")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      value:
+                        sortConfig.key === "validatorWeight"
+                          ? "Validator Weight"
+                          : "Capacity",
+                      format: {
+                        typography: [
+                          {
+                            value: "w-full text-right",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                        type: "string",
+                      },
+                      name: "Validator Weight",
+                      type: "literal",
+                    },
+                  ]}
+                />
+              </Grid>
             </th>
             {/*<th*/}
             {/*  className={cls([*/}
@@ -261,145 +416,229 @@ export const ValidatorsTable = ({
             {/*  />*/}
             {/*</th>*/}
             <th
+                onClick={() =>
+                    setSortConfig({
+                      key:
+                          sortConfig.key === "totalStake" &&
+                          sortConfig.direction === "desc"
+                              ? "selfStake"
+                              : sortConfig.key === "selfStake" &&
+                              sortConfig.direction === "desc"
+                                  ? "totalStake"
+                                  : sortConfig.key === "totalStake" &&
+                                  sortConfig.direction === "asc"
+                                      ? "totalStake"
+                                      : "selfStake",
+                      direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                    })
+                }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    type: "literal",
-                    value: "Total Stake",
-                    format: {
-                      format: "plain",
-                      type: "string",
-                      typography: [
-                        {
-                          value: "w-full text-right",
-                          key: "className",
-                        },
-                      ],
-                    },
-                    name: "SelfStake",
-                  },
-                ]}
-              />
-            </th>
-            <th
-              className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
-                getShowClass("always"),
-              ])}
-            >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    type: "literal",
-                    value: "Commission",
-                    format: {
-                      icon: {
-                        icon: "InformationCircleIconSolid",
-                        iconProps: [
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("totalStake")}
+                {getSortIcon("selfStake")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: sortConfig.key === "totalStake" ? "Total Stake" : "Self Stake",
+                      format: {
+                        format: "plain",
+                        type: "string",
+                        typography: [
                           {
-                            value: "h-4 w-4 text-onSurfaceHigh",
+                            value: "w-full text-right",
                             key: "className",
                           },
                         ],
                       },
-                      tooltip: {
-                        value:
-                          "Commission is the percentage of rewards a validator keeps",
-                      },
-                      typography: [
-                        {
-                          value: "w-full text-right",
-                          key: "className",
-                        },
-                      ],
-                      format: "plain",
-                      type: "string",
+                      name: "SelfStake",
                     },
-                    name: "commission",
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
             </th>
             <th
+              onClick={() =>
+                setSortConfig({
+                  key: "commission",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
                 getShowClass("always"),
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    name: "Rewards",
-                    type: "literal",
-                    value: "Rewards",
-                    format: {
-                      icon: {
-                        icon: "InformationCircleIconSolid",
-                        iconProps: [
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("commission")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      type: "literal",
+                      value: "Commission",
+                      format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value:
+                            "Commission is the percentage of rewards a validator keeps",
+                        },
+                        typography: [
                           {
-                            value: "h-4 w-4 text-onSurfaceHigh",
+                            value: "w-full text-right",
                             key: "className",
                           },
                         ],
+                        format: "plain",
+                        type: "string",
                       },
-                      tooltip: {
-                        value:
-                          "Total rewards earned by validator until now + single block reward earned by validator",
-                      },
-                      type: "string",
-                      typography: [
-                        {
-                          value: "w-full text-right flex items-center flex-row",
-                          key: "className",
-                        },
-                      ],
-                      format: "plain",
+                      name: "commission",
                     },
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
             </th>
             <th
+                onClick={() =>
+                    setSortConfig({
+                      key:
+                          sortConfig.key === "blockReward" &&
+                          sortConfig.direction === "desc"
+                              ? "earnedRewards"
+                              : sortConfig.key === "earnedRewards" &&
+                              sortConfig.direction === "desc"
+                                  ? "blockReward"
+                                  : sortConfig.key === "blockReward" &&
+                                  sortConfig.direction === "asc"
+                                      ? "blockReward"
+                                      : "earnedRewards",
+                      direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                    })
+                }
               className={cls([
-                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap",
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
                 getShowClass("always"),
               ])}
             >
-              <DefaultHeadColumn
-                values={[
-                  {
-                    name: "Rewards",
-                    type: "literal",
-                    value: "Staking Rewards",
-                    format: {
-                      icon: {
-                        icon: "InformationCircleIconSolid",
-                        iconProps: [
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("blockReward")}
+                {getSortIcon("earnedRewards")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      name: "Rewards",
+                      type: "literal",
+                      value: sortConfig.key === "earnedRewards" ? "Earned Rewards" : "Dynamic Reward",
+                      format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value:
+                            "Total rewards earned by validator until now + single block reward earned by validator",
+                        },
+                        type: "string",
+                        typography: [
                           {
-                            value: "h-4 w-4 text-onSurfaceHigh",
+                            value:
+                              "w-full text-right flex items-center flex-row",
                             key: "className",
                           },
                         ],
+                        format: "plain",
                       },
-                      tooltip: {
-                        value: `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
-                      },
-                      type: "string",
-                      typography: [
-                        {
-                          value: "w-full text-right flex items-center flex-row",
-                          key: "className",
-                        },
-                      ],
-                      format: "plain",
                     },
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </Grid>
+            </th>
+            <th
+              onClick={() =>
+                setSortConfig({
+                  key: "stakingRewards",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
+              className={cls([
+                "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
+                getShowClass("always"),
+              ])}
+            >
+              <Grid
+                className={"items-center"}
+                gap={2}
+                columns={2}
+                mobileColumns={2}
+                flex
+              >
+                {getSortIcon("stakingRewards")}
+                <DefaultHeadColumn
+                  values={[
+                    {
+                      name: "Rewards",
+                      type: "literal",
+                      value: "Staking Rewards",
+                      format: {
+                        icon: {
+                          icon: "InformationCircleIconSolid",
+                          iconProps: [
+                            {
+                              value: "h-4 w-4 text-onSurfaceHigh",
+                              key: "className",
+                            },
+                          ],
+                        },
+                        tooltip: {
+                          value: `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
+                        },
+                        type: "string",
+                        typography: [
+                          {
+                            value:
+                              "w-full text-right flex items-center flex-row",
+                            key: "className",
+                          },
+                        ],
+                        format: "plain",
+                      },
+                    },
+                  ]}
+                />
+              </Grid>
             </th>
           </tr>
         </thead>
@@ -408,38 +647,14 @@ export const ValidatorsTable = ({
             // ?.sort((a: any, b: any) => a.rank - b.rank)
             ?.sort(sortValidators)
             .map((validator: any) => {
-              const capacity =
-                (validator.totalStake / (validator.selfStake * 10)) * 100;
-              const RB = parseInt(validator.rewards.blockReward, 10);
-              const RM = parseInt(validator.rewards.monthlyReward, 10);
-              const RY = parseInt(validator.rewards.yearlyReward, 10);
-              const RD = parseInt(validator.rewards.dailyReward, 10);
-              const C = validator.commission / 100;
-              const inputStake = parseInt(stakingRewardsAmount) * 100000000;
-              const S = parseFloat(validator.totalStake) + inputStake;
-
-              const stakersRewardPerMonth = (RM: any, C: any, S: any) =>
-                RM * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerDay = (RD: any, C: any, S: any) =>
-                RD * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerYear = (RY: any, C: any, S: any) =>
-                RY * (1 - C / 100) * (inputStake / S);
-              const stakersRewardPerBlock = (RB: any, C: any, S: any) =>
-                RB * (1 - C / 100) * (inputStake / S);
-              const resultPerMonth = parseInt(
-                stakersRewardPerMonth(RM, C, S).toString()
-              ).toString();
-              const resultPerDay = parseInt(
-                stakersRewardPerDay(RD, C, S).toString()
-              ).toString();
-              // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
-              const resultPerBlock = parseInt(
-                stakersRewardPerBlock(RB, C, S).toString()
-              ).toString();
-              const resultPerYear = parseInt(
-                stakersRewardPerYear(RY, C, S).toString()
-              ).toString();
-
+              const {
+                resultPerMonth,
+                resultPerDay,
+                resultPerBlock,
+                capacity,
+                resultPerYear,
+                inputStake,
+              } = calculateReward(validator);
               const resultPerPeriod =
                 stakingRewardsPeriod === "block"
                   ? resultPerBlock
@@ -661,40 +876,70 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: validator.validatorWeight,
+                          value:
+                            sortConfig.key === "capacity"
+                              ? capacity
+                              : validator.validatorWeight,
                           format: {
                             tooltip: {
                               placement: "auto",
                               value:
-                                "Validator Weight, maximum of 10x Self Stake ",
+                                sortConfig.key === "capacity"
+                                  ? "Stake capacity"
+                                  : "Validator Weight, maximum of 10x Self Stake",
                             },
-                            type: "beddows",
+                            type:
+                              sortConfig.key === "capacity"
+                                ? "string"
+                                : "beddows",
                             typography: [
                               {
-                                value: "text-right w-full",
+                                value:
+                                  sortConfig.key === "capacity"
+                                    ? capacity > 100
+                                      ? "text-right w-full text-red opacity-80"
+                                      : "text-right w-full text-onSurfaceMedium"
+                                    : "text-right w-full",
                                 key: "className",
                               },
                             ],
-                            format: "currency",
+                            format:
+                              sortConfig.key === "capacity"
+                                ? "percentage"
+                                : "currency",
                           },
                           name: "Total Rewards",
                         },
                         {
                           name: "Stake Capacity",
                           type: "literal",
-                          value: capacity,
+                          value:
+                            sortConfig.key === "capacity"
+                              ? validator.validatorWeight
+                              : capacity,
                           format: {
-                            format: "percentage",
+                            format:
+                              sortConfig.key === "capacity"
+                                ? "currency"
+                                : "percentage",
                             tooltip: {
                               placement: "auto",
-                              value: " Stake Capacity",
+                              value:
+                                sortConfig.key === "capacity"
+                                  ? "Validator Weight, maximum of 10x Self Stake"
+                                  : "Stake capacity",
                             },
-                            type: "string",
+                            type:
+                              sortConfig.key === "capacity"
+                                ? "beddows"
+                                : "string",
                             typography: [
                               {
                                 key: "className",
                                 value:
-                                  capacity > 100
+                                  sortConfig.key === "capacity"
+                                    ? "text-right w-full"
+                                    : capacity > 100
                                     ? "text-right w-full text-red opacity-80"
                                     : "text-right w-full text-onSurfaceMedium",
                               },
@@ -721,11 +966,11 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: validator.totalStake,
+                          value: sortConfig.key === "selfStake" ?  validator.selfStake : validator.totalStake,
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: "Validator total received stake ",
+                              value: sortConfig.key === "selfStake" ? "Total Self Stake" : "Total Received Stake",
                             },
                             type: "beddows",
                             typography: [
@@ -741,12 +986,12 @@ export const ValidatorsTable = ({
                         {
                           name: "total Self Stake",
                           type: "literal",
-                          value: validator.selfStake,
+                          value: sortConfig.key === "selfStake" ? validator.totalStake : validator.selfStake,
                           format: {
                             format: "currency",
                             tooltip: {
                               placement: "auto",
-                              value: " Total Self Stake",
+                              value: sortConfig.key === "selfStake" ? "Total Received Stake" : "Total Self Stake",
                             },
                             type: "beddows",
                             typography: [
@@ -842,11 +1087,11 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: validator.earnedRewards,
+                          value: sortConfig.key === "blockReward" ? validator.rewards.blockReward : validator.earnedRewards,
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: "Total Rewards ",
+                              value: sortConfig.key === "blockReward" ?  "Dynamic Block Reward" : "Total Rewards",
                             },
                             type: "beddows",
                             typography: [
@@ -855,19 +1100,20 @@ export const ValidatorsTable = ({
                                 key: "className",
                               },
                             ],
-                            format: "currency",
+                            format: sortConfig.key === "blockReward" ? "fee" : "currency",
                           },
                           name: "Total Rewards",
                         },
                         {
                           name: "DynamicBlockReward",
                           type: "literal",
-                          value: validator.rewards.blockReward,
+                          value: sortConfig.key === "blockReward" ?  validator.earnedRewards : validator.rewards.blockReward,
                           format: {
-                            format: "fee",
+                            format: sortConfig.key === "blockReward" ?  "currency" : "fee",
                             tooltip: {
                               placement: "auto",
-                              value: "Dynamic Block Reward",
+                              value: sortConfig.key === "blockReward" ?  "Total Rewards" : "Dynamic Block Reward",
+
                             },
                             type: "beddows",
                             typography: [
