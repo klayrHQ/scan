@@ -133,7 +133,7 @@ export const ValidatorsTable = ({
     {
       if (sortConfig.key === key) {
         return <Icon
-          icon={sortConfig.direction === "asc" ? "arrowUp" : "chevronDown"}
+          icon={sortConfig.direction === "asc" ? "chevronUp" : "chevronDown"}
           color={"onSurfaceMedium"}
           className={"h-[14px] w-[14px]"}
         />;
