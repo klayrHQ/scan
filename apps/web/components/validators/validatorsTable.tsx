@@ -99,11 +99,15 @@ export const ValidatorsTable = ({
     const resultPerYear = parseInt(
       stakersRewardPerYear(RY, C, S).toString()
     ).toString();
+    const sortReward = parseInt(
+      stakersRewardPerYear(RY, C, S).toString()
+    );
     return {
       resultPerMonth,
       resultPerDay,
       resultPerBlock,
       resultPerYear,
+      sortReward,
       inputStake,
       capacity
     };
@@ -159,8 +163,8 @@ export const ValidatorsTable = ({
     }
 
     if (sortConfig.key === "stakingRewards") {
-      valueA = calculateReward(a).resultPerMonth;
-      valueB = calculateReward(b).resultPerMonth;
+      valueA = calculateReward(a).sortReward;
+      valueB = calculateReward(b).sortReward;
     }
     if (sortConfig.key === "capacity") {
       valueA = calculateReward(a).capacity;
@@ -667,6 +671,7 @@ export const ValidatorsTable = ({
                   : resultPerYear;
 
               const APR = (parseFloat(resultPerYear) / inputStake) * 100;
+
               return (
                 <tr
                   className={"hover:bg-surface-1 hover:bg-opacity-50"}
