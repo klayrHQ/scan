@@ -25,6 +25,19 @@ export const ValueColumn = ({
         queryData?.transactions ?
             queryData?.transactions?.data?.[index] :
             queryData?.["transaction-moduleCommand"]?.data?.[index];
+
+    const sumAmounts = (stakesArray:any) => {
+        return stakesArray.reduce((total, stake) => {
+            return total + Number(stake.amount || 0);
+        }, 0);
+    }
+    const totalAmount:string = (row?.params.stakes && Array.isArray(row.params.stakes))
+        ? (sumAmounts(row.params.stakes))
+        : "-";
+
+    const stakesSum = (totalAmount)
+
+    console.log(totalAmount, "totalAmount")
     function value(row:any) {
         if (row?.moduleCommand === "pos:changeCommission") {
             return <ValueFormatter value={`${row?.params.newCommission || 0}`} format={"commission"} />;
@@ -38,13 +51,16 @@ export const ValueColumn = ({
         if (row?.moduleCommand === "pos:claimRewards") {
             return <ValueFormatter value={row?.params.newCommission || "-"} />;
         }
+        if (row?.moduleCommand === "pos:stake") {
+            return <div className={"bg-surface-1 px-1 py-1 rounded items-center"}><ValueFormatter value={stakesSum || "-"} /></div>;
+        }
         if (row?.moduleCommand === "auth:registerMultisignature") {
             return <ValueFormatter value={` ${row?.params.numberOfSignatures || 0} keys`} />;
         }
         if (row?.moduleCommand === "token:transfer") {
             return <ValueFormatter value={`${parseFloat(convertBeddowsToLSK(row?.params.amount)).toFixed(2)} LSK`} {...row?.params?.format} />;
             }
-
+        console.log(row, "row")
         return "-";
     }
     return (
