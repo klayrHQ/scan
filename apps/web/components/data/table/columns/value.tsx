@@ -38,8 +38,9 @@ export const ValueColumn = ({
       : "-";
 
   const stakesSum = totalAmount;
+  console.log(row, "row");
 
-  console.log(totalAmount, "totalAmount");
+  const stakesSumNumber = parseFloat(totalAmount);
   function value(row: any) {
     if (row?.moduleCommand === "pos:changeCommission") {
       return (
@@ -65,7 +66,8 @@ export const ValueColumn = ({
     }
     if (row?.moduleCommand === "pos:stake") {
       return (
-        <div className={"bg-surface-1 px-1 py-1 rounded items-center"}>
+        <div className={stakesSumNumber > 0 ? "!text-success items-center" :
+            "!text-error items-center"}>
           {stakesSum !== "-" && (
             <ValueFormatter format={"currency"} value={stakesSum} />
           )}
@@ -90,7 +92,6 @@ export const ValueColumn = ({
         />
       );
     }
-    console.log(row, "row");
     return "-";
   }
   return (
