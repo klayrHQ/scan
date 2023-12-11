@@ -38,7 +38,6 @@ export const ValueColumn = ({
       : "-";
 
   const stakesSum = totalAmount;
-  console.log(row, "row");
 
   const stakesSumNumber = parseFloat(totalAmount);
   function value(row: any) {

@@ -47,7 +47,7 @@ export const StakesColumn = ({
                       value={
                         // @ts-ignore
                       queryData?.validators_dontTouch.data.find(
-                          (validator) =>
+                          (validator: any) =>
                             validator.address === value.validatorAddress
                         )?.name || value.validatorAddress
                       }
