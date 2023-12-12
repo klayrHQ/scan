@@ -14,6 +14,7 @@ export const Events = ({
         key: "events",
         columns: eventsColumns,
         sticky: true,
+        pagination: true,
       }}
     />
   )

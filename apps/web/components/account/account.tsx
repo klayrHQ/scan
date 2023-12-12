@@ -14,43 +14,6 @@ import {Tokens} from "./tabContent/tokens";
 import {Events} from "./tabContent/events";
 import {Blocks} from "./tabContent/blocks";
 
-const buttons = [
-  {
-    label: "Transactions",
-    state: "transactions"
-  },
-  {
-    label: "Validator",
-    state: "validator"
-  },
-  {
-    label: "Stakes",
-    state: "stakes"
-  },
-  {
-    label: "Tokens",
-    state: "tokens"
-  },
-  {
-    label: "Events",
-    state: "events"
-  },
-  {
-    label: "Blocks",
-    state: "blocks"
-  },
-]
-
-const stakesTabButtons = [
-  {
-    label: "Outgoing Stakes",
-    state: "stakes"
-  },
-  {
-    label: "Incoming Stakes",
-    state: "stakers"
-  }
-]
 
 const tabsComponents = {
   transactions: Transactions,
@@ -81,7 +44,6 @@ export const Account = ({
 }) => {
   const {cache, setQueries} = useService()
   const [queryData, setQueryData] = useState(initialData)
-
   /*const temp = {
     auth: cache["account-auth"],
     events: cache["account-events"],
@@ -126,6 +88,46 @@ export const Account = ({
 
   const TabComponent = tabsComponents[activeTab]
 
+  const buttons = [
+    {
+      label: "Transactions",
+      state: "transactions"
+    },
+    {
+      label: "Stakes",
+      state: "stakes"
+    },
+    {
+      label: "Tokens",
+      state: "tokens"
+    },
+    {
+      label: "Events",
+      state: "events"
+    },
+  ]
+if (queryData["account-validator-id"].data.length > 0) {
+  buttons.push({
+    label: "Validator",
+    state: "validator"
+  })
+}
+if (queryData["account-id-blocks"].data.length > 0) {
+  buttons.push({
+    label: "Blocks",
+    state: "blocks"
+  })
+}
+  const stakesTabButtons = [
+    {
+      label: "Outgoing Stakes",
+      state: "stakes"
+    },
+    {
+      label: "Incoming Stakes",
+      state: "stakers"
+    }
+  ]
   return (
     <Container section gap={8}>
       <AccountHeader address={id} queryData={queryData} />

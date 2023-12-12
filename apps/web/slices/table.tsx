@@ -9,6 +9,7 @@ import { getAllData } from "../lib/sanity.service";
 import { BlockchainAppsMetaResponse } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
 import { Pagination } from "../components/data/table/pagination";
+import {keys} from "@amcharts/amcharts5/.internal/core/util/Object";
 
 const clients: Record<string, any> = {};
 export const TableSlice = ({
@@ -87,7 +88,6 @@ export const TableSlice = ({
         key: table.key,
         cols: table.columns,
       });
-
       // console.log("QDQDQ", tableRows, queryData.blocks?.data[0].height)
       // console.log(tableRows)
       updateTable({ rows: tableRows.rows, table: processedTable });
@@ -134,7 +134,7 @@ export const TableSlice = ({
           }
           total={queryData?.[table?.key]?.meta?.total}
           pageLength={parseInt(
-            queries?.[table?.key]?.params?.find((p: {key: string, value: string}) => p.key === "limit")
+            queries?.find((q:{key:string}) => q?.key === table?.key) ?.params?.find((p: {key: string, value: string}) => p.key === "limit")
               ?.value || 20
           )}
         />

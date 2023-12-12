@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 
 import { Typography } from "ui";
+import {account} from "ui/assets/mockupData/accountData";
 /* create pagination with arrows and 5 page numbers */
 
 export const Pagination = ({
@@ -44,12 +45,13 @@ export const Pagination = ({
   const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
     (i) => startPage + i
   );
+  if (totalPages === 1) return null;
   return (
     <div className={"w-full mx-auto mt-2"}>
       <div className={"mx-auto w-44 whitespace-nowrap"}>
         {currentPage !== 1 && (
           <Link
-            href={`${params?.uri}?page=${currentPage - 1}`}
+              href={`${params?.uri}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${currentPage - 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`}
             className={"m-2"}
             prefetch={false}
           >
@@ -58,14 +60,14 @@ export const Pagination = ({
         )}
         {startPage > 1 && (
           <Typography tag={"span"} className={"m-2"}>
-            <Link href={`${params?.uri}?page=1`} prefetch={false}>1</Link>
+            <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=1${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>1</Link>
             <Typography tag={"span"} className={"ml-4"}>
               ...
             </Typography>
           </Typography>
         )}
         {pages.map((page) => (
-          <Link key={page} href={`${params?.uri}?page=${page}`} prefetch={false}>
+          <Link key={page} href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${page}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
             <Typography
               tag={"span"}
               className={page === currentPage ? "font-bold m-2" : "m-2"}
@@ -84,11 +86,11 @@ export const Pagination = ({
             ) : (
               ""
             )}
-            <Link href={`${params?.uri}?page=${totalPages}`} prefetch={false}>{totalPages}</Link>
+            <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${totalPages}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>{totalPages}</Link>
           </Typography>
         )}
         {currentPage !== totalPages && (
-          <Link href={`${params?.uri}?page=${currentPage + 1}`} prefetch={false}>
+          <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${currentPage + 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
             <Typography tag={"span"} className={"m-2"}>
               {">"}
             </Typography>

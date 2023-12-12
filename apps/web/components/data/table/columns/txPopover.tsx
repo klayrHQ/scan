@@ -115,10 +115,10 @@ export const TxPopover = ({
             }
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
-          <KeyValueRow
+          <KeyValueRow valueSize={"subBody"}
             col
             label={"Fee:"}
-            value={`${row?.fee} (min fee: ${row?.minFee})`}
+            value={<Grid columns={2} flex className={"whitespace-nowrap"}><ValueFormatter typography={[{key:"className", value:"font-subBody text-onSurfaceLow"}, {key:"size", value:"subBody"}]}  format={"fee"} value={row?.fee}/>  <Typography className={"whitespace-nowrap"} tag={"span"} size={"subBody"} color={"onSurfaceLow"}><Grid columns={2} flex>  (min fee: <ValueFormatter typography={[{key:"className", value:"font-subBody text-onSurfaceLow"}, {key:"size", value:"subBody"}]} format={"fee"} value={row?.minFee}/>)</Grid></Typography></Grid>}
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
           <KeyValueRow

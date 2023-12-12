@@ -133,7 +133,6 @@ export interface ValueFormat {
   copy?: boolean;
   _key?: string;
   symbol?: string;
-
 }
 
 export const ValueFormatter = ({
@@ -147,7 +146,7 @@ export const ValueFormatter = ({
   icon,
   link,
   copy,
-  symbol
+  symbol,
 }: ValueFormatterProps) => {
   const typographyProps = parseProps(typography);
   const parsedValue = parseValue(type, value);
@@ -170,7 +169,7 @@ export const ValueFormatter = ({
   return (
     <>
       {link?.href && (
-        <Link href={link.href}  prefetch={false}>
+        <Link href={link.href} prefetch={false}>
           <InnerTooltip
             {...{
               icon,
@@ -183,7 +182,7 @@ export const ValueFormatter = ({
               parsedTooltip,
               tooltip,
               copy,
-              symbol
+              symbol,
             }}
           />
         </Link>
@@ -201,7 +200,7 @@ export const ValueFormatter = ({
             parsedTooltip,
             tooltip,
             copy,
-            symbol
+            symbol,
           }}
         />
       )}
@@ -250,17 +249,20 @@ const formatters = {
   currency: (value: any) =>
     `${
       value
-        ? parseInt(
-            parseFloat(convertBeddowsToLSK(value)).toFixed(2)
-          ).toLocaleString() + " LSK"
+        ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2,
+          }) +
+          " LSK"
         : "-"
     }`,
   currencyNew: (value: any, symbol?: string) => {
     return `${
       value
-        ? parseInt(
-            parseFloat(convertBeddowsToLSK(value)).toFixed(2)
-          ).toLocaleString() + ` ${symbol}`
+        ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      }) + ` ${symbol}`
         : `0 ${symbol}`
     }`;
   },
@@ -269,7 +271,7 @@ const formatters = {
       value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " LSK" : ""
     }`,
   number: (value: any) => value?.toLocaleString(),
-  height: (value: any) => value > 0 ? value.toLocaleString() : "Pending",
+  height: (value: any) => (value > 0 ? value.toLocaleString() : "Pending"),
   avatar: (value: any) => <Avatar address={value} size={20} />,
   avatarAddress: (value: any) => (
     <Grid
@@ -357,7 +359,7 @@ const InnerTooltip = ({
   parsedTooltip,
   tooltip,
   copy,
-                        symbol,
+  symbol,
 }: InnerTooltipValueProps) => {
   return tooltip && parsedTooltip ? (
     <Tooltip

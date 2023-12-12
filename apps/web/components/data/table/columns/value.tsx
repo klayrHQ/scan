@@ -83,10 +83,8 @@ export const ValueColumn = ({
     }
     if (row?.moduleCommand === "token:transfer") {
       return (
-        <ValueFormatter
-          value={`${parseFloat(convertBeddowsToLSK(row?.params.amount)).toFixed(
-            2
-          )} LSK`}
+        <ValueFormatter  format={"currency"}
+          value={row?.params.amount}
           {...row?.params?.format}
         />
       );

@@ -33,24 +33,28 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
   useEffect(() => {
     if (setQueries) {
       if (page) {
+        console.log(queries, "in de queries")
         setQueries(
-          queries.map((query: any) => ({
-            ...query,
-            params: [
-              ...query.params,
-              {
-                key: "offset",
-                value: (
-                  (parseInt(page) - 1) *
-                  parseInt(
-                    query.params.find(
-                      (p: { key: string; value: string }) => p.key === "limit"
-                    )?.value || "0"
-                  )
-                ).toString(),
-              },
-            ],
-          }))
+          queries.map((query: any) => {
+            console.log(query, "in de params")
+            return({
+              ...query,
+              params: [
+                ...(query.params ? query.params : []),
+                {
+                  key: "offset",
+                  value: (
+                      (parseInt(page) - 1) *
+                      parseInt(
+                          query.params?.find(
+                              (p: { key: string; value: string }) => p.key === "limit"
+                          )?.value || "0"
+                      )
+                  ).toString(),
+                },
+              ],
+            })
+          })
         );
       } else {
         setQueries(queries);
