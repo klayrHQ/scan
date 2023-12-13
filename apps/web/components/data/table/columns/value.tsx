@@ -54,7 +54,7 @@ export const ValueColumn = ({
       return <ValueFormatter value={"-"} />;
     }
     if (row?.moduleCommand === "pos:claimRewards") {
-      return <ValueFormatter format={"currency"} value={row?.params.amount || "-"} />;
+      return row?.params?.amount ? <ValueFormatter format={"currency"} value={row?.params.amount} /> : <ValueFormatter value={"-"} />;
     }
     if (row?.moduleCommand === "pos:stake") {
       return (
