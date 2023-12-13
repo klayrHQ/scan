@@ -1,6 +1,6 @@
 import {ServiceQueries} from "../../lib/sanity.service";
 
-export const getAccountQueries = (id: string) => {
+export const getAccountQueries = (id: string, page = 1) => {
   const accountQueries: ServiceQueries[] = [
     {
       key: "network-status",
@@ -54,6 +54,10 @@ export const getAccountQueries = (id: string) => {
         {
           key: "address",
           value: id
+        },
+        {
+          key: "offset",
+          value: 25 * (page - 1) + ""
         }
       ],
       subQueries: []
@@ -100,7 +104,11 @@ export const getAccountQueries = (id: string) => {
         },
         {
           key: "limit",
-          value: "95"
+          value: "25"
+        },
+        {
+          key: "offset",
+          value: 25 * (page - 1) + ""
         }
       ],
     },
@@ -124,6 +132,14 @@ export const getAccountQueries = (id: string) => {
         {
           key: "generatorAddress",
           value: id
+        },
+        {
+          key: "offset",
+          value: 25 * (page - 1) + ""
+        },
+        {
+          key: "limit",
+          value: "25"
         }
       ],
       updateOn: "lastBlock",
@@ -135,7 +151,7 @@ export const getAccountQueries = (id: string) => {
           value: id
         }
       ],
-      updateOn: "lastBlock",
+      updateOn: "never",
       key: "account-rewards-claimable",
       call: "get.pos.rewards.claimable",
       serviceType: "lisk-service",

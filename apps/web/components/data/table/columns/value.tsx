@@ -1,13 +1,6 @@
 import { ColumnProps } from "./index";
-import { cls, Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
-import { EyeIcon } from "@heroicons/react/24/outline";
+import { Grid, ValueFormatter } from "ui";
 import React, { useState } from "react";
-import { Popover } from "ui/atoms/popover/popover";
-import { ErrorFilledIcon, EyeOpenIcon } from "@sanity/icons";
-import Link from "next/link";
-import { ArrowRightIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
-import { Divider } from "ui/atoms/divider/divider";
-import { convertBeddowsToLSK } from "../../../../lib/queries/lisk";
 
 export const ValueColumn = ({
   queryData,
@@ -61,7 +54,7 @@ export const ValueColumn = ({
       return <ValueFormatter value={"-"} />;
     }
     if (row?.moduleCommand === "pos:claimRewards") {
-      return <ValueFormatter value={row?.params.newCommission || "-"} />;
+      return <ValueFormatter format={"currency"} value={row?.params.amount || "-"} />;
     }
     if (row?.moduleCommand === "pos:stake") {
       return (

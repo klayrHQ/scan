@@ -11,7 +11,7 @@ import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
 
 export const serviceURL =
-  process.env.NEXT_PUBLIC_SERVICE_URL || "mainnet-service.lisk.com";
+  process.env.NEXT_PUBLIC_SERVICE_URL || "mainnet-service.liskscan.com";
 
 export type ServiceTypes =
   | "lisk-service"

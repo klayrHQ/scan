@@ -28,7 +28,7 @@ export const TableSlice = ({
   // console.log(props)
   useEffect(() => {
     const getData = async () => {
-      if (table.key === "tokens" && queryData.tokens.data.length === 1) {
+      if (table.key === "tokens" && queryData?.tokens?.data?.length === 1) {
         queryData.tokens.data.map((token: any, index: number) => {
           queryData.tokens.data[index] = { ...token, chainName: "lisk" };
         });
@@ -44,7 +44,7 @@ export const TableSlice = ({
             serviceType: "lisk-service",
           },
         ])) as { meta: BlockchainAppsMetaResponse; tokens: any };
-        const chainsMeta = result.meta.data.filter(
+        const chainsMeta = result?.meta?.data?.filter(
           (app) =>
             app.chainName !== "lisk_mainchain" && app.networkType === "mainnet"
         );
@@ -64,7 +64,7 @@ export const TableSlice = ({
           // const tokensResponse = await fetch(`${chainMeta.serviceURLs[0].http}/api/v3/token/balances?address=${queryData.tokens.meta.address}`)
           if (tokensResponse.status === "success") {
             // @ts-ignore
-            tokensResponse.data.forEach((token) => {
+            tokensResponse?.data?.forEach((token) => {
               queryData.tokens.data.push({
                 ...token,
                 chainName: chainMeta.chainName,
@@ -72,11 +72,11 @@ export const TableSlice = ({
             });
           }
         }
-        queryData.tokens.data = queryData.tokens.data.map((token: any) => {
+        queryData.tokens.data = queryData?.tokens?.data?.map((token: any) => {
           return {
             ...token,
             symbol:
-              result.tokens.data.find((t: any) => t.tokenID === token.tokenID)
+              result?.tokens?.data?.find((t: any) => t.tokenID === token.tokenID)
                 ?.symbol || token.symbol,
           };
         });

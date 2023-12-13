@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import {useParams, usePathname, useSearchParams} from "next/navigation";
 
 import { Typography } from "ui";
 import {account} from "ui/assets/mockupData/accountData";
@@ -18,8 +18,8 @@ export const Pagination = ({
   href: string;
 }) => {
   const params = useParams();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-
   const pageQuery = searchParams?.get("page");
   const currentPage = pageQuery ? parseInt(pageQuery) : current || 1;
   const totalPages = Math.ceil(total / pageLength || 20);
@@ -51,7 +51,8 @@ export const Pagination = ({
       <div className={"mx-auto w-44 whitespace-nowrap"}>
         {currentPage !== 1 && (
           <Link
-              href={`${params?.uri}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${currentPage - 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`}
+              href={`${params?.uri || pathname}?page=${currentPage - 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`}
+              // href={`${params?.uri || pathname}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${currentPage - 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`}
             className={"m-2"}
             prefetch={false}
           >
@@ -60,14 +61,14 @@ export const Pagination = ({
         )}
         {startPage > 1 && (
           <Typography tag={"span"} className={"m-2"}>
-            <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=1${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>1</Link>
+            <Link href={`${params?.uri  || pathname}?page=1${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>1</Link>
             <Typography tag={"span"} className={"ml-4"}>
               ...
             </Typography>
           </Typography>
         )}
         {pages.map((page) => (
-          <Link key={page} href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${page}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
+          <Link key={page} href={`${params?.uri || pathname}?page=${page}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
             <Typography
               tag={"span"}
               className={page === currentPage ? "font-bold m-2" : "m-2"}
@@ -86,11 +87,11 @@ export const Pagination = ({
             ) : (
               ""
             )}
-            <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${totalPages}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>{totalPages}</Link>
+            <Link href={`${params?.uri || pathname}?page=${totalPages}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>{totalPages}</Link>
           </Typography>
         )}
         {currentPage !== totalPages && (
-          <Link href={`${params?.uri || "account"}${params?.id ? `/${decodeURIComponent(params.id as string)}` : ""}?page=${currentPage + 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
+          <Link href={`${params?.uri || pathname}?page=${currentPage + 1}${searchParams?.get("tab") ? `&tab=${searchParams.get("tab")}` : ""}`} prefetch={false}>
             <Typography tag={"span"} className={"m-2"}>
               {">"}
             </Typography>

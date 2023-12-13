@@ -1,6 +1,4 @@
 import {Account} from "../../../../components/account/account";
-import {ConsoleLogTester} from "../../../../components/consoleLogTester";
-import {getAccountFromAPI} from "../../../../controllers/account";
 import {getAllData} from "../../../../lib/sanity.service";
 import {getAccountQueries} from "../../../../components/account/queries";
 

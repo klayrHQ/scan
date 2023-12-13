@@ -42,7 +42,10 @@ export const Account = ({
   validatorData: any
   initialData: any
 }) => {
-  const {cache, setQueries} = useService()
+
+  const { setQueryParams } = useQueryParams<QueryParams>();
+  const searchParams = useSearchParams();
+  const {cache, setQueries, client} = useService()
   const [queryData, setQueryData] = useState(initialData)
   /*const temp = {
     auth: cache["account-auth"],
@@ -58,28 +61,42 @@ export const Account = ({
   }*/
 
   useEffect(() => {
-    setQueries(getAccountQueries(id))
+    setQueries(getAccountQueries(id,parseInt(searchParams?.get("page") || "1")))
   }, [getAccountQueries])
 
   useEffect(() => {
-    if(cache) {
-      // @ts-ignore
-      setQueryData(cache)
+    async function getClaims() {
+      if(cache) {
+
+        const claims = cache["account-id-transactions"]?.data?.filter((tx: { moduleCommand: string }) => {
+          return tx.moduleCommand === "pos:claimRewards"
+        })
+        for (const claim of claims) {
+          const response = await client.rpc("get.events", {
+            transactionID: claim.id
+          });
+          if (response.status === "success") {
+            const events = response.data.filter((event) => event.name === "rewardsAssigned")
+            const index = cache["account-id-transactions"]?.data?.findIndex((tx: { id: string }) => tx.id === claim.id)
+            cache["account-id-transactions"].data[index] = {...cache["account-id-transactions"]?.data?.[index], params: { amount: events?.reduce((sum: bigint, event) => sum + BigInt(event.data?.amount || "0"), BigInt(0)).toString() } }
+          }
+        }
+        setQueryData(cache)
+      }
     }
-    console.log(queryData)
+    // @ts-ignore
+    getClaims()
   }, [cache])
 
-  const { setQueryParams } = useQueryParams<QueryParams>();
-  const searchParams = useSearchParams();
 
   const handleChange = (value: string) => {
     // @ts-ignore
-    setQueryParams({ ["tab"]: value });
+    setQueryParams({ tab: value, page: "1" });
   };
 
   const handleSubChange = (value: string) => {
     // @ts-ignore
-    setQueryParams({ ["subTab"]: value });
+    setQueryParams({ subTab: value });
   };
 
   // @ts-ignore
