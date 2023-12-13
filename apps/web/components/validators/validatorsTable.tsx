@@ -1096,7 +1096,7 @@ export const ValidatorsTable = ({
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: sortConfig.key === "blockReward" ?  "Dynamic Block Reward" : "Total Rewards",
+                              value: sortConfig.key === "blockReward" ?  "Dynamic Block Reward" : "Total rewards received",
                             },
                             type: "beddows",
                             typography: [
@@ -1181,7 +1181,7 @@ export const ValidatorsTable = ({
                             format: "percentage",
                             tooltip: {
                               placement: "auto",
-                              value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK,`,
+                              value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK`,
                             },
                             type: "string",
                             typography: [
