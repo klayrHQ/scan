@@ -101,7 +101,7 @@ export const ValidatorsTable = ({
     ).toString() : "0";
     const sortReward = validator.status === "active" ? parseInt(
       stakersRewardPerYear(RY, C, S).toString()
-    ) : "0";
+    ) : 0;
     return {
       resultPerMonth,
       resultPerDay,
