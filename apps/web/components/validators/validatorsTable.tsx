@@ -1,5 +1,5 @@
 "use client";
-import {cls, Grid} from "ui";
+import {cls, Grid, Typography} from "ui";
 import {
   DefaultHeadColumn,
   DoubleRowColumn,
@@ -1142,7 +1142,9 @@ export const ValidatorsTable = ({
                       getShowClass("always"),
                     ])}
                   >
-                    <DoubleRowColumn
+                    {validator.status === "active" ?
+
+                        <DoubleRowColumn
                       params={{}}
                       index={1}
                       queryData={[]}
@@ -1198,6 +1200,9 @@ export const ValidatorsTable = ({
                         },
                       ]}
                     />
+                        :
+                        <Typography align={"right"} tag={"span"} className={"ml-auto text-right w-full text-onSurfaceMedium"}>-</Typography>
+                    }
                   </td>
                 </tr>
               );

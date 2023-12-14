@@ -123,13 +123,13 @@ export const Account = ({
       state: "events"
     },
   ]
-if (queryData["account-validator-id"].data.length > 0) {
+if (queryData["account-validator-id"]?.data?.length > 0) {
   buttons.push({
     label: "Validator",
     state: "validator"
   })
 }
-if (queryData["account-id-blocks"].data.length > 0) {
+if (queryData["account-id-blocks"]?.data?.length > 0) {
   buttons.push({
     label: "Blocks",
     state: "blocks"
