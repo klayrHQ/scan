@@ -86,22 +86,22 @@ export const ValidatorsTable = ({
       RY * (1 - C / 100) * (inputStake / S);
     const stakersRewardPerBlock = (RB: any, C: any, S: any) =>
       RB * (1 - C / 100) * (inputStake / S);
-    const resultPerMonth = parseInt(
+    const resultPerMonth = validator.status === "active" ? parseInt(
       stakersRewardPerMonth(RM, C, S).toString()
-    ).toString();
-    const resultPerDay = parseInt(
+    ).toString() : "0";
+    const resultPerDay = validator.status === "active" ? parseInt(
       stakersRewardPerDay(RD, C, S).toString()
-    ).toString();
+    ).toString() : "0";
     // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
-    const resultPerBlock = parseInt(
+    const resultPerBlock = validator.status === "active" ? parseInt(
       stakersRewardPerBlock(RB, C, S).toString()
-    ).toString();
-    const resultPerYear = parseInt(
+    ).toString() : "0";
+    const resultPerYear = validator.status === "active" ? parseInt(
       stakersRewardPerYear(RY, C, S).toString()
-    ).toString();
-    const sortReward = parseInt(
+    ).toString() : "0";
+    const sortReward = validator.status === "active" ? parseInt(
       stakersRewardPerYear(RY, C, S).toString()
-    );
+    ) : "0";
     return {
       resultPerMonth,
       resultPerDay,
@@ -146,7 +146,7 @@ export const ValidatorsTable = ({
       }
     }
   }
-  
+
   const parseIntKeys = ["validatorWeight", "totalStake", "earnedRewards", "selfStake"];
 
   const sortValidators = (a: any, b: any) => {
