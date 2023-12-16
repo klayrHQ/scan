@@ -13,6 +13,7 @@ import { useService } from "../../providers/service";
 import React, { Suspense, useEffect, useState } from "react";
 import Spinner from "../spinner";
 import {Icon} from "ui/atoms/icon/icon";
+import {convertBeddowsToLSK, convertLSKToBeddows} from "../../lisk-client";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -66,13 +67,35 @@ export const ValidatorsTable = ({
   const stakingRewardsAmount = searchParams?.get("stakingAmount") || "1000";
   const stakingRewardsPeriod = searchParams?.get("stakingPeriod") || "month";
   const [validatorsState, setValidators] = useState<Validator[]>(validators);
-
+  const [totalActiveStake, setTotalActiveStake] = useState(BigInt(0));
   const calculateReward = (validator: Validator) => {
+    if (!totalActiveStake) {
+      return {
+        resultPerMonth: "0",
+        resultPerDay: "0",
+        resultPerBlock: "0",
+        resultPerYear: "0",
+        sortReward: 0,
+        inputStake: 0,
+        capacity: 0,
+        newBlockReward: "0",
+      };
+    }
+  // =($I$4/(C4+$I$4)*(((min(B4+$I$4; D4*10)/(SOM($B$4:$B$104)+$I$4))*90,9+0,1)*G4*2516
+    const newStake = BigInt(stakingRewardsAmount) * BigInt(1_0000_0000)
+    const newStakeFloat = parseFloat(newStake.toString(10))
+    const newTotalStake = totalActiveStake + BigInt(newStake)
+    const newTotalStakeFloat = parseFloat(newTotalStake.toString(10))
+    const newValidatorWeight = parseFloat(validator.validatorWeight) + newStakeFloat > parseFloat(validator.selfStake) * 10 ? parseFloat(validator.selfStake) * 10 : parseFloat(validator.validatorWeight) + newStakeFloat
+    const C = validator.commission / 100;
+    const newVoteShare =  parseFloat(newStake.toString(10))/(parseFloat(validator.totalStake) + newStakeFloat)
+    const share = (100 - C)/100
+    const rewardPerBlock = newValidatorWeight / newTotalStakeFloat * 90.9 + 0.1
+    const newBlockReward =  newVoteShare *  rewardPerBlock * share
     const RB = parseInt(validator.rewards.blockReward, 10);
     const RM = parseInt(validator.rewards.monthlyReward, 10);
     const RY = parseInt(validator.rewards.yearlyReward, 10);
     const RD = parseInt(validator.rewards.dailyReward, 10);
-    const C = validator.commission / 100;
     const inputStake = parseInt(stakingRewardsAmount) * 100000000;
     const S = parseFloat(validator.totalStake) + inputStake;
     const capacity =
@@ -99,9 +122,7 @@ export const ValidatorsTable = ({
     const resultPerYear = validator.status === "active" ? parseInt(
       stakersRewardPerYear(RY, C, S).toString()
     ).toString() : "0";
-    const sortReward = validator.status === "active" ? parseInt(
-      stakersRewardPerYear(RY, C, S).toString()
-    ) : 0;
+    const sortReward = validator.status === "active" ? newBlockReward : 0;
     return {
       resultPerMonth,
       resultPerDay,
@@ -109,7 +130,8 @@ export const ValidatorsTable = ({
       resultPerYear,
       sortReward,
       inputStake,
-      capacity
+      capacity,
+      newBlockReward: validator.status === "active" ? newBlockReward > 90.9 * .1 + .1 ? convertLSKToBeddows((90.9 * .1 + .1).toFixed(8)) : convertLSKToBeddows(newBlockReward.toFixed(8)) : "0",
     };
   };
 
@@ -119,10 +141,22 @@ export const ValidatorsTable = ({
         `https://cached-mainnet-service.liskscan.com/validators/${page}`
       );
       const validatorsData = await validators.json();
+
+      setTotalActiveStake(validatorsData?.filter((v: Validator) => v.rank <= 101)?.reduce((total: bigint, validator: Validator) => {
+        return total + BigInt(validator.validatorWeight);
+      }, BigInt(0)));
       setValidators(validatorsData);
     };
     getValidators();
   }, [events?.["update.generators"]]);
+
+  useEffect(() => {
+    if (!totalActiveStake || totalActiveStake === BigInt(0)) {
+      setTotalActiveStake(validators?.filter((v: Validator) => v.rank <= 101).reduce((total: bigint, validator: Validator) => {
+        return total + BigInt(validator.validatorWeight);
+      }, BigInt(0)));
+    }
+  }, [totalActiveStake]);
 
   /* create sort function for validators for all columns; rank, name, generator time, total blocks, validator weight, total stake, commission, rewards and staking rewards */
   const [sortConfig, setSortConfig] = useState<{
@@ -163,8 +197,8 @@ export const ValidatorsTable = ({
     }
 
     if (sortConfig.key === "stakingRewards") {
-      valueA = calculateReward(a).sortReward;
-      valueB = calculateReward(b).sortReward;
+      valueA = parseInt(calculateReward(a).newBlockReward, 10);
+      valueB = parseInt(calculateReward(b).newBlockReward, 10);
     }
     if (sortConfig.key === "capacity") {
       valueA = calculateReward(a).capacity;
@@ -658,19 +692,20 @@ export const ValidatorsTable = ({
                 capacity,
                 resultPerYear,
                 inputStake,
+                newBlockReward
               } = calculateReward(validator);
               const resultPerPeriod =
                 stakingRewardsPeriod === "block"
-                  ? resultPerBlock
+                  ? newBlockReward
                   : stakingRewardsPeriod === "day"
-                  ? resultPerDay
+                  ? (parseInt(newBlockReward) * 84).toString(10)
                   : stakingRewardsPeriod === "month"
-                  ? resultPerMonth
+                  ? (parseInt(newBlockReward) * 2516).toString(10)
                   : stakingRewardsPeriod === "year"
                   ? resultPerYear
-                  : resultPerYear;
+                  : (parseInt(newBlockReward) * 2516 * 12).toString(10);
 
-              const APR = (parseFloat(resultPerYear) / inputStake) * 100;
+              const APR = (parseInt(newBlockReward) * 2516 * 12 / inputStake) * 100;
 
               return (
                 <tr

@@ -48,6 +48,29 @@ export const convertBeddowsToLSK = (beddowsAmount: string | number): string => {
     .split(".")[1]
   return floating !== 0 ? `${int}.${floatingPointsSplit}` : int
 }
+
+const getDecimalPlaces = (amount: string): number => (amount.split('.')[1] || '').length;
+
+export const convertLSKToBeddows = (lskAmount?: string): string => {
+  if (typeof lskAmount !== 'string') {
+    throw new Error('Cannot convert non-string amount');
+  }
+  if (getDecimalPlaces(lskAmount) > LISK_MAX_DECIMAL_POINTS) {
+    throw new Error('LSK amount has too many decimal points');
+  }
+  const splitAmount = lskAmount.split('.');
+  const liskAmountInt = BigInt(splitAmount[0]);
+  const liskAmountFloatBigInt = BigInt(
+    (splitAmount[1] ?? '0').padEnd(LISK_MAX_DECIMAL_POINTS, '0'),
+  );
+  const beddowsAmountBigInt = liskAmountInt * BigInt(FIXED_POINT) + liskAmountFloatBigInt;
+  if (beddowsAmountBigInt > MAX_UINT64) {
+    throw new Error('LSK amount out of range');
+  }
+
+  return beddowsAmountBigInt.toString();
+};
+
 const GENERATOR = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
 
 const polymod = (uint5Array: number[]): number => {
