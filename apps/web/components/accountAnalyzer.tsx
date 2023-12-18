@@ -32,12 +32,13 @@ export const AccountAnalyzer = () => {
     if (lisk32 || legacy) {
       const getAccount = async () => {
         setNewFundOwner({} as AccountDataType)
-        const { data } = (await getData("lisk-service", "get.generators", {
+        const { data } = (await getData("lisk-service", "get.token.balances", {
           address: lisk32,
           limit: 1,
-        })) as { data?: AccountDataType[] }
-        if (data?.[0]?.token?.balance) {
-          setBalance(data?.[0]?.token?.balance)
+        }))
+        console.log(data)
+        if (data?.length > 0) {
+          setBalance(data?.[0]?.availableBalance)
           setAccountStatus("ok!")
         } else {
           if (legacy) {
