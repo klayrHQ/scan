@@ -70,14 +70,34 @@ export const Kpi = ({
             keys,
           };
         }
+
+        const conditions = value?.conditions
+
+        if(conditions) {
+          conditions[0].conditions.map((condition: { operator: string; conditionValue: string; value: any; }) => {
+            if (condition.operator === "==") {
+              const newV = v ===
+              condition.conditionValue ?
+                condition.value :
+                (v === undefined) && condition.conditionValue === "undefined" ?
+                  condition.value :
+                  v
+              v = newV
+            }
+          })
+        }
+
         return (
-          <ValueFormatter
-            key={value._key}
-            value={value.type === "key" || value.type === "calculated" ? v : value.value}
-            copy={copy === index}
-            {...value.format}
-            link={link}
-          />
+          <>
+            {/*<ConsoleLogTester data={v} />*/}
+            <ValueFormatter
+              key={value._key}
+              value={value.type === "key" || value.type === "calculated" ? v : value.value}
+              copy={copy === index}
+              {...value.format}
+              link={link}
+            />
+          </>
         );
       })}
     </Grid>
