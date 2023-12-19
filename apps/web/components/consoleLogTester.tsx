@@ -6,6 +6,7 @@ export const ConsoleLogTester = ({label,data,}: {label?: string; data: any}) => 
     label={"test"}
     onClick={(e) => {
       e.stopPropagation()
+      e.preventDefault()
       label ?
         console.log(label, data)
         :

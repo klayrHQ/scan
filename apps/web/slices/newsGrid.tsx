@@ -1,5 +1,5 @@
 "use client"
-import {Grid, Typography, ValueFormatter} from "ui";
+import {cls, Grid, Typography, ValueFormatter} from "ui";
 import {ConsoleLogTester} from "../components/consoleLogTester";
 import {sanityFetch} from "../components/sanity/fetch";
 import {useEffect, useState} from "react";
@@ -12,7 +12,7 @@ type NewsItemType = {
   _updatedAt: string
   title: string
   category: {
-    title: string
+    _ref: string
   }
   imgType: "url" | "upload"
   img?: {url: string, title: string, alt: string} | any
@@ -26,36 +26,45 @@ type NewsItemRefType = {
   _type: string
 }
 
-//Todo categories fetchen en aan items toevoegen
+type NewsCategoryType = {
+  _createdAt: string
+  _id: string
+  title: string
+}
+
 //Todo img upload verwerken + condition toevoegen voor imgType: url = imgObj gebruiken, upload = img gebruiken
-//Todo date verwerken naar "x uur/dagen/maanden geleden"
-//Todo tablet responsive maken
 export const NewsGrid = ({
   newsItems,
 }: {
   newsItems: NewsItemRefType[]
 }) => {
   const [allItems, setAllItems] = useState<NewsItemType[]>([])
+  const [categories, setCategories] = useState<NewsCategoryType[]>()
 
   useEffect(() => {
     const getFetchedItems = async () => {
       const fetchedItems = await sanityFetch(`*[_type == "news"]`)
-      console.log(fetchedItems)
+      //console.log(fetchedItems)
       setAllItems(fetchedItems)
+      const fetchedCategories = await sanityFetch(`*[_type == "newsCategories"]`)
+      //console.log(fetchedCategories)
+      setCategories(fetchedCategories)
     }
 
     if(newsItems) getFetchedItems()
   }, [newsItems])
-
 
   const parsedItems: Array<NewsItemType | undefined> = newsItems.map((newsItem) => {
     return allItems?.find((item: { _id: string; }) => newsItem._ref === item._id)
   })
 
   return (
-    <Grid
-      className={"gap-4 md:gap-8"}
-      columns={newsItems?.length || 4}
+    <div
+      className={cls([
+        "gap-4 md:gap-8 w-full",
+        `sm:grid-cols-${newsItems?.length || 4}`,
+        "flex flex-col sm:grid"
+      ])}
     >
       {
         parsedItems.map((item, index) => {
@@ -66,33 +75,36 @@ export const NewsGrid = ({
           if (dayjs().diff(date, "hour") >= 24) {
             dateString = date.format("DD MMM 'YY HH:mm");
           } else {
-            dateString = date.fromNow();
+            if(date.fromNow() !== "undefined ago") {
+              dateString = date.fromNow();
+            } else {
+              // Fallback: Calculate time difference manually
+              const hoursDiff = dayjs().diff(date, "hour");
+              dateString = `${hoursDiff} ${hoursDiff === 1 ? 'hour' : 'hours'} ago`;
+            }
           }
 
-
-
-
-
+          const category = categories?.filter(({_id,}) => _id === item?.category?._ref)[0]?.title
 
           return (
             <Link key={`newsItem-${index + 1}`} href={item?.url || ""} prefetch={false}>
-              <Grid className={"gap-2"} columns={1} flex gap={2} mobileColumns={2}>
-                <div className={"w-1/4 md:w-full aspect-video"}>
+              <div className={"gap-2 grid grid-cols-4 sm:flex sm:flex-col"}>
+                <div className={"sm:w-auto aspect-video h-full w-full max-w-full sm:h-auto overflow-hidden rounded"}>
                   <img className={"object-cover max-w-full max-h-full rounded object-top"} src={item?.imgObj.url || ""}
                        alt={item?.imgObj.alt} title={item?.imgObj.title} height={200} width={800}/>
                 </div>
-                <Grid className={"mx-2 py-2 md:py-1"} columns={1} flex gap={0}>
-                  {/* Category moet nog apart gefetcht worden vvv */}
-                  <Typography color={"primary"} tag={"span"}>{item?.category.title}</Typography>
-                  <Typography bold color={"onSurfacePrimary"} tag={"span"}>{item?.title}</Typography>
+                <Grid className={"col-span-3 sm:w-full mx-2 py-2 md:py-1"} columns={1} flex gap={0}>
+                  <Typography className={""} color={"onPrimary"} tag={"span"}>{category}</Typography>
+                  <Typography bold color={"primary"} tag={"span"}>{item?.title}</Typography>
                   <Typography size={"subBody"} bold color={"onSurfaceMedium"} tag={"span"}>{dateString}</Typography>
+                  {/*<ConsoleLogTester data={item?.category} />*/}
                   {/*<ValueFormatter  value={item ? new Date(item?._createdAt) : ""} type={"string"} format={"fromNow"} />*/}
                 </Grid>
-              </Grid>
+              </div>
             </Link>
           )
         })
       }
-    </Grid>
+    </div>
   )
 }
