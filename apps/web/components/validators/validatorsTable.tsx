@@ -710,7 +710,7 @@ export const ValidatorsTable = ({
               return (
                 <tr
                   className={"hover:bg-surface-1 hover:bg-opacity-50"}
-                  key={validator.address}
+                  key={validator?.address}
                 >
                   <td
                     className={cls([
@@ -720,7 +720,7 @@ export const ValidatorsTable = ({
                   >
                     <StaticPlainColumn
                       values={{
-                        value: validator.rank,
+                        value: validator?.rank,
                         format: {
                           format: "number",
                           type: "number",
@@ -753,20 +753,20 @@ export const ValidatorsTable = ({
                           },
                           name: "avatar",
                           type: "literal",
-                          value: validator.address,
+                          value: validator?.address,
                         },
                         {
                           format: {
                             format: "plain",
                             link: {
                               keys: ["validators.address"],
-                              href: `/account/${validator.address}`,
+                              href: `/account/${validator?.address}`,
                             },
                             type: "string",
                           },
                           name: "validatorName",
                           type: "literal",
-                          value: validator.name,
+                          value: validator?.name,
                         },
                       ]}
                     />
@@ -790,7 +790,7 @@ export const ValidatorsTable = ({
                           {
                             name: "status",
                             type: "literal",
-                            value: validator.status,
+                            value: validator?.status,
                             format: {
                               typography: [
                                 {
@@ -839,7 +839,7 @@ export const ValidatorsTable = ({
                             },
                           },
                           {
-                            value: validator.nextAllocatedTime,
+                            value: validator?.nextAllocatedTime,
                             format: {
                               typography: [
                                 {
@@ -864,10 +864,10 @@ export const ValidatorsTable = ({
                             },
                             name: "StatusLabel",
                             type: "literal",
-                            value: validator.status,
+                            value: validator?.status,
                           },
                           {
-                            value: validator.consecutiveMissedBlocks,
+                            value: validator?.consecutiveMissedBlocks,
                             format: {
                               format: "number",
                               type: "number",
@@ -889,7 +889,7 @@ export const ValidatorsTable = ({
                       values={{
                         name: "generatedBlocks",
                         type: "literal",
-                        value: validator.generatedBlocks,
+                        value: validator?.generatedBlocks,
                         format: {
                           typography: [
                             {
@@ -919,7 +919,7 @@ export const ValidatorsTable = ({
                           value:
                             sortConfig.key === "capacity"
                               ? capacity
-                              : validator.validatorWeight,
+                              : validator?.validatorWeight,
                           format: {
                             tooltip: {
                               placement: "auto",
@@ -955,7 +955,7 @@ export const ValidatorsTable = ({
                           type: "literal",
                           value:
                             sortConfig.key === "capacity"
-                              ? validator.validatorWeight
+                              ? validator?.validatorWeight
                               : capacity,
                           format: {
                             format:
@@ -1006,7 +1006,7 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: sortConfig.key === "selfStake" ?  validator.selfStake : validator.totalStake,
+                          value: sortConfig.key === "selfStake" ?  validator?.selfStake : validator?.totalStake,
                           format: {
                             tooltip: {
                               placement: "auto",
@@ -1026,7 +1026,7 @@ export const ValidatorsTable = ({
                         {
                           name: "total Self Stake",
                           type: "literal",
-                          value: sortConfig.key === "selfStake" ? validator.totalStake : validator.selfStake,
+                          value: sortConfig.key === "selfStake" ? validator?.totalStake : validator?.selfStake,
                           format: {
                             format: "currency",
                             tooltip: {
@@ -1095,7 +1095,7 @@ export const ValidatorsTable = ({
                     <StaticPlainColumn
                       values={{
                         type: "literal",
-                        value: `${validator.commission}%`,
+                        value: `${validator?.commission}%`,
                         format: {
                           type: "number",
                           typography: [
@@ -1127,7 +1127,7 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: sortConfig.key === "blockReward" ? validator.rewards.blockReward : validator.earnedRewards,
+                          value: sortConfig.key === "blockReward" ? validator?.rewards?.blockReward : validator?.earnedRewards,
                           format: {
                             tooltip: {
                               placement: "auto",
@@ -1147,7 +1147,7 @@ export const ValidatorsTable = ({
                         {
                           name: "DynamicBlockReward",
                           type: "literal",
-                          value: sortConfig.key === "blockReward" ?  validator.earnedRewards : validator.rewards.blockReward,
+                          value: sortConfig.key === "blockReward" ?  validator?.earnedRewards : validator?.rewards?.blockReward,
                           format: {
                             format: sortConfig.key === "blockReward" ?  "currency" : "fee",
                             tooltip: {
@@ -1177,7 +1177,7 @@ export const ValidatorsTable = ({
                       getShowClass("always"),
                     ])}
                   >
-                    {validator.status === "active" ?
+                    {validator?.status === "active" ?
 
                         <DoubleRowColumn
                       params={{}}

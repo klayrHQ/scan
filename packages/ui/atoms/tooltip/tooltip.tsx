@@ -23,7 +23,7 @@ export type TooltipPlacement =
 
 export interface TooltipProps {
   children: ReactElement<any, string | JSXElementConstructor<any>>;
-  label?: string;
+  label?: string | ReactElement;
   placement?: TooltipPlacement;
   offset?: [skidding: number, distance: number];
   theme?: string;

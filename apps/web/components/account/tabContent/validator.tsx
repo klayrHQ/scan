@@ -1,4 +1,4 @@
-import {Formats, Grid, KeyValueRow, ValueFormatter, ValueTypes} from "ui";
+import {Formats, Grid, KeyValueRow, Typography, ValueFormatter, ValueTypes} from "ui";
 
 export const Validator = ({
   queryData,
@@ -93,36 +93,55 @@ export const Validator = ({
     },
   ]
 
+  const punishments = queryData["account-validator-id"]?.data[0]?.punishmentPeriods
+
   return (
-    <Grid className={"mt-2"} columns={6} mobileColumns={1} gap={4}>
+    <Grid columns={1} flex gap={4}>
       {
-        kpis?.map(kpi => (
-          <KeyValueRow
-            key={`validator-kpi-${kpi.label.split(" ").join("-")}`}
-            valueBold
-            valueSize={"subBody"}
-            className={"bg-surface-1 p-2 rounded"}
-            col
-            gap={1}
-            label={
-              <ValueFormatter
-                format={"plain"}
-                type={"string"}
-                typography={[{key: "size", value: "subBody"}]}
-                value={kpi.label}
-              />
-            }
-            value={
-              <ValueFormatter
-                format={kpi.format}
-                type={kpi.type}
-                typography={[{key: "className", value: "font-bold"}]}
-                value={kpi.value}
-              />
-            }
-          />
-        ))
+        punishments &&
+          <Grid className={"rounded p-4 bg-surface-1 w-full md:w-[350px] gap-4"} columns={1} flex gap={4}>
+            <Typography className={"py-1 px-3 rounded-full w-max bg-copacabanaYellow"} tag={"span"}>{"Validator is being punished"}</Typography>
+            {/*<Typography tag={"span"}>{"Details:"}</Typography>*/}
+            <div className={"flex justify-between"}>
+              <Typography tag={"span"}>{"Start height:"}</Typography>
+              <Typography className={"font-bold"} tag={"span"}>{punishments[punishments.length - 1]?.start}</Typography>
+            </div>
+            <div className={"flex justify-between"}>
+              <Typography tag={"span"}>{"End height:"}</Typography>
+              <Typography className={"font-bold"} tag={"span"}>{punishments[punishments.length - 1]?.end}</Typography>
+            </div>
+          </Grid>
       }
+      <Grid className={"mt-2"} columns={6} mobileColumns={1} gap={4}>
+        {
+          kpis?.map(kpi => (
+            <KeyValueRow
+              key={`validator-kpi-${kpi.label.split(" ").join("-")}`}
+              valueBold
+              valueSize={"subBody"}
+              className={"bg-surface-1 p-2 rounded"}
+              col
+              gap={1}
+              label={
+                <ValueFormatter
+                  format={"plain"}
+                  type={"string"}
+                  typography={[{key: "size", value: "subBody"}]}
+                  value={kpi.label}
+                />
+              }
+              value={
+                <ValueFormatter
+                  format={kpi.format}
+                  type={kpi.type}
+                  typography={[{key: "className", value: "font-bold"}]}
+                  value={kpi.value}
+                />
+              }
+            />
+          ))
+        }
+      </Grid>
     </Grid>
   )
 }

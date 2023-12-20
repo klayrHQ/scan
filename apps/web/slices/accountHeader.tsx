@@ -69,6 +69,13 @@ export const AccountHeader = ({
       queryData,
       queryData
     ) || "Regular account";
+  const punishments =
+    getFromDottedKey(
+      "account-validator-id.data.0.punishmentPeriods",
+      "row",
+      queryData,
+      queryData
+    ) || undefined;
   return (
     <Grid
       justifyBetween={justifyBetween}
@@ -136,7 +143,15 @@ export const AccountHeader = ({
         </Grid>
       </Grid>
       <div className={"absolute top-0 right-0"}>
-        <Tooltip placement={"bottom-end"} label={`${status} validator`}>
+        <Tooltip
+          placement={"bottom-end"}
+          label={
+          status === "punished" ?
+            `punishment ends at block ${punishments[punishments.length - 1]?.end}`
+            :
+            `${status} validator`
+          }
+        >
           <Typography
             className={
               "uppercase bg-surface-2 shadow rounded px-3 py-1 text-onSurfaceHigh font-semibold"
@@ -144,6 +159,7 @@ export const AccountHeader = ({
             tag={"span"}
             size={"subBody"}
           >
+            {/*<ConsoleLogTester data={punishments} />*/}
             {status}
           </Typography>
         </Tooltip>
