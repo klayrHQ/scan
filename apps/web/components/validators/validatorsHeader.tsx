@@ -1,4 +1,5 @@
-import {Grid} from "ui";
+import {Suspense} from "react";
+import {Grid, KeyValueRow, Typography} from "ui";
 import {TitleBoxSlice} from "../../slices/titleBox";
 import {Generators} from "./generators";
 import {ValidatorKpis} from "./ValidatorKpis";
@@ -29,8 +30,12 @@ export const ValidatorsHeader = ({generators, stats}: any) => {
           value: "Validators"
         }}
       />
-      <ValidatorKpis stats={stats}/>
-      <Generators generators={generators}/>
+      <Suspense fallback={<div className={"bg-surface-1 p-4 rounded shadow-xl h-[213px]"}/>}>
+        <ValidatorKpis stats={stats}/>
+      </Suspense>
+      <Suspense fallback={<div className={"bg-surface-1 p-4 rounded shadow-xl h-[213px]"}/>}>
+        <Generators generators={generators}/>
+      </Suspense>
     </Grid>
   )
 }
