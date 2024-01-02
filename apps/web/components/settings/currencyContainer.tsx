@@ -8,7 +8,7 @@ import {useDecimals} from "../../providers/currency/CurrencyProvider";
 
 export const CurrencyContainer = () => {
   const {setSetting, parsedSettings,} = useSettings()
-  const {categories, switchConvert,} = useDecimals()
+  const {categories, switchConvert, currencies} = useDecimals()
 
   return (
     <div className=" flex flex-col space-y-4 align-bottom rounded text-left overflow-hidden transform transition-all w-app mx-auto sm:align-middle sm:max-w-app sm:w-full">
@@ -19,7 +19,7 @@ export const CurrencyContainer = () => {
         <Typography tag={"span"}>{"Format the way Liskscan shows all currency values."}</Typography>
       </Paper>
       <div className="bg-surface-1 text-onSurfaceHigh w-full block rounded">
-        <Decimals currencies={[]} minMax={{min: 0, max:8}} setSetting={setSetting} switchConvert={switchConvert} parsedSettings={parsedSettings}/>
+        <Decimals currencies={currencies} minMax={{min: 0, max:8}} setSetting={setSetting} switchConvert={switchConvert} parsedSettings={parsedSettings}/>
       </div>
       <div className="bg-surface-0 text-onSurfaceHigh flex flex-col space-y-4 ">
         {/*<h1 className="font-bold text-xl text-onSurfaceHigh">*/}

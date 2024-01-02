@@ -1,6 +1,7 @@
 import React from "react"
 import {Typography} from "../typography/typography";
 import {CurrencyType} from "../../types";
+import {cls} from "../../utils";
 
 export interface CurrencyProps {
   sign?: boolean
@@ -17,6 +18,7 @@ export interface CurrencyProps {
   number: string
   decimals?: string | undefined
   currencies?: Array<CurrencyType>
+  typography?: Record<string, any>
 }
 
 export const Currency = ({
@@ -24,7 +26,7 @@ export const Currency = ({
   symbol = false,
   sign = false,
   classes,
-  parsedSettings = {symbolEnabled: true},
+  parsedSettings,
   number,
   decimals,
   currencies = [{
@@ -38,69 +40,65 @@ export const Currency = ({
       fractions: 4,
     },
   }],
+  typography,
 }: CurrencyProps) => {
 
   return (
-    <span className={"whitespace-nowrap"}>
+    <Typography tag={"span"} className={cls(["whitespace-nowrap", typography?.className])} {...typography}>
       {(parsedSettings?.signEnabled || sign) && (
-        <Typography
-          tag={"span"}
+        <span
           className={[
             "mr-0.5",
-            classes?.sign ? classes?.sign : "text-onSurfaceLow font-medium",
+            classes?.sign ? classes?.sign : "",
           ].join(" ")}
         >
           {convert || parsedSettings?.convertCurrency
             ? parsedSettings?.selectedCurrency?.sign
             : parsedSettings?.signEnabled
-              ? currencies[0].sign
+              ? currencies[0]?.sign
               : ""}
-        </Typography>
+        </span>
       )}
       {number && (
-        <Typography
-          tag={"span"}
+        <span
           className={[
-            classes?.number ? classes?.number : "text-onSurfacePrimaryHigh font-medium",
+            classes?.number ? classes?.number : "",
           ].join(" ")}
         >
           {number}
-        </Typography>
+        </span>
       )}
       {decimals && (
-        <Typography
-          tag={"span"}
+        <span
           className={[
             classes?.separator ? classes?.separator : "text-onSurfacePrimaryMedium",
           ].join(" ")}
         >
           {parsedSettings?.decimalSeparatorDot ? "." : ","}
-        </Typography>
+        </span>
       )}
       {decimals && (
-        <Typography
-          tag={"span"}
+        <span
           className={[
-            classes?.decimals ? classes?.decimals : "text-onSurfacePrimaryMedium",
+            classes?.decimals ? classes?.decimals : "",
           ].join(" ")}
         >
           {decimals}
-        </Typography>
+        </span>
       )}
       {(parsedSettings?.symbolEnabled || symbol) && (
-        <Typography
-          tag={"span"}
+        <span
           className={[
             "ml-0.5",
-            classes?.symbol ? classes?.symbol : "text-onSurfaceLow font-medium",
+            classes?.symbol ? classes?.symbol : "",
           ].join(" ")}
         >
           {convert || parsedSettings?.convertCurrency
             ? parsedSettings?.selectedCurrency?.symbol
-            : currencies[0].symbol}
+            : currencies[0]?.symbol}
           {parsedSettings?.convertCurrency}
-        </Typography>
+        </span>
       )}
-    </span>
+    </Typography>
   )
 }

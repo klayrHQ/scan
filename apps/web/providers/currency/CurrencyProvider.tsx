@@ -11,6 +11,7 @@ import { MarketPriceDataType } from "@moosty/lisk-service-provider"
 import {useSettings} from "../settings";
 import {convertBeddowsToLSK} from "../../lib/queries/lisk";
 import {categories} from "./currencies";
+import axios from "axios";
 
 export interface CurrencyType {
   id: number
@@ -139,10 +140,10 @@ export const CurrencyProvider = ({ children }: {children: any}) => {
     }
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     const getNewPrices = async () => {
       const result = await axios(
-        `${process.env.NEXT_PUBLIC_EXPLORER_PRICE_API}/prices`,
+        `https://price-api.liskscan.com/prices`,
       )
       delete result.data.lastUpdate
       const parsedResults = Object.keys(result.data).map((code) => {
@@ -157,10 +158,9 @@ export const CurrencyProvider = ({ children }: {children: any}) => {
       })
       setPrice(parsedResults as MarketPriceDataType[])
     }
-    if (process.env.NEXT_PUBLIC_EXPLORER_PRICE_API) {
-      getNewPrices()
-    }
-  }, [])*/
+
+    getNewPrices()
+  }, [])
 
   useEffect(() => {
     if (

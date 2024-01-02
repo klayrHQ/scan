@@ -1,5 +1,4 @@
 import React, { FC } from "react"
-import { Button } from "../button/button";
 import { Currency } from "../currency/currency";
 import {Typography} from "../typography/typography";
 import {CurrencyType} from "../../types";

@@ -3,14 +3,16 @@ import {CurrencyType, SettingsItemType} from "ui/types";
 import {cls, Paper, Typography} from "ui";
 import {Icon} from "ui/atoms/icon/icon";
 import {useSettings, viewTypes} from "../../providers/settings";
+import {useDecimals} from "../../providers/currency/CurrencyProvider";
 
 export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
   const {setOpen, view, setView, views, parsedSettings,} = useSettings()
+  const {currencies,} = useDecimals()
 
   const getCurrentSetting = (currentView: viewTypes) => {
     if (currentView === "currency") {
       const selectedCurrency: CurrencyType = parsedSettings.selectedCurrency
-      return `${selectedCurrency.name} - ${selectedCurrency.sign} `
+      return `${selectedCurrency?.symbol || currencies[0]?.symbol} - ${selectedCurrency?.sign || currencies[0]?.sign}`
     } else if (currentView === "network") {
       /*return `${parsedSettings.networks.communityId}(${parsedSettings.networks.network})`*/
       return `Coming soon`

@@ -7,6 +7,7 @@ import { CopyButton } from "liskscan/components/data/copy";
 import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
 import { Avatar } from "../avatar/avatar";
 import { dayjs } from "../../utils/time";
+import {CurrencyClient} from "liskscan/components/currencyClient";
 
 export type SanityProps = { key: string; value: string }[];
 export type ValueTypes =
@@ -246,8 +247,11 @@ const formatters = {
     return value != 0 ? value / 100 + "%" : "0%";
   },
   percentage: (value: any) => parseFloat(value).toFixed(2) + "%",
-  currency: (value: any) =>
-    `${
+  currency: (value: any, typographyProps?: Record<string, any>) =>
+    value
+      ? <CurrencyClient beddows={value} typography={typographyProps} />
+      : "-",
+    /*`${
       value
         ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
             minimumFractionDigits: 0,
@@ -255,17 +259,19 @@ const formatters = {
           }) +
           " LSK"
         : "-"
-    }`,
-  currencyNew: (value: any, symbol?: string) => {
-    return `${
+    }`,*/
+  currencyNew: (value: any, typographyProps?: Record<string, any>) =>
+    value
+      ? <CurrencyClient beddows={value} typography={typographyProps} />
+      : "0",
+    /*`${
       value
         ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2,
       }) + ` ${symbol}`
         : `0 ${symbol}`
-    }`;
-  },
+    }`,*/
   fee: (value: any) =>
     `${
       value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " LSK" : ""
@@ -329,7 +335,7 @@ const InnerValue = ({
   copy,
   symbol,
 }: InnerValueProps) => {
-  const value = formatters[format](parsedValue, symbol);
+  const value = formatters[format](parsedValue, typographyProps);
   return (
     <Grid
       className={"flex flex-row items-center"}
