@@ -226,8 +226,8 @@ export const TopBarLayout = ({
               className={"mr-2"}
               width={24}
               height={24}
-              src={"/images/logo.svg"}
-              alt={"Liskscan logo"}
+              src={"/images/klayr-logo.svg"}
+              alt={"Klayr logo"}
             />
             <Link href={"/"} prefetch={false}>
               <Typography tag={"span"} bold color={"onInfobar"}>

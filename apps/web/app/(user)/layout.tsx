@@ -93,10 +93,10 @@ export default async function RootLayout({
     <html className={"dark"}>
       <LiskscanLogs />
       <head>
-        <title>Liskscan - Lisk blockchain explorer</title>
-        <link rel={"icon"} href={"/images/logo-dark.svg"} />
-        <link rel={"shortcut icon"} href={"/images/logo-dark.svg"} />
-        <link rel={"apple-touch-icon"} href={"/images/logo-dark.svg"} />
+        <title>Klayr Explorer - Klayr blockchain explorer</title>
+        <link rel={"icon"} href={"/images/klayr-logo.svg"} />
+        <link rel={"shortcut icon"} href={"/images/klayr-logo.svg"} />
+        <link rel={"apple-touch-icon"} href={"/images/klayr-logo.svg"} />
       </head>
       <body className={"bg-background flex flex-col min-h-screen"}>
         <SanityStoreProvider snapshot={snapshot}>

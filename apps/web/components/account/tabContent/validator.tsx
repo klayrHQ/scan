@@ -100,7 +100,7 @@ export const Validator = ({
       {
         punishments &&
           <Grid className={"rounded p-4 bg-surface-1 w-full md:w-[350px] gap-4"} columns={1} flex gap={4}>
-            <Typography className={"py-1 px-3 rounded-full w-max bg-copacabanaYellow"} tag={"span"}>{"Validator is being punished"}</Typography>
+            <Typography className={"py-1 px-3 rounded-full w-max bg-warning text-onWarning"} tag={"span"}>{"Validator is being punished"}</Typography>
             {/*<Typography tag={"span"}>{"Details:"}</Typography>*/}
             <div className={"flex justify-between"}>
               <Typography tag={"span"}>{"Start height:"}</Typography>

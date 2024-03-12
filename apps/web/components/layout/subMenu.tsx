@@ -53,7 +53,7 @@ export const SubMenu = ({
                       <div>{iconsList[item.icon]}</div>
                       <div className="ml-4 ">
                         {item.badge ? (
-                          <span className="absolute text-10 top-2 right-2 bg-secondary rounded text-onPrimaryHigh font-medium px-2 py-1">
+                          <span className="absolute text-10 top-2 right-2 bg-secondary rounded text-onSecondary font-medium px-2 py-1">
                             {item.badge}
                           </span>
                         ) : (

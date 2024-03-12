@@ -158,7 +158,7 @@ export const ValueFormatter = ({
   const parsedColor =
     color && color.conditions && color.conditions?.length > 0
       ? parseColor(color, parsedValue)
-      : color?.color || "onPrimary";
+      : color?.color || "onBackgroundMedium";
   const parsedIcon =
     icon && icon.conditions && icon.conditions?.length > 0 ? (
       parseIcon(icon, parsedValue)

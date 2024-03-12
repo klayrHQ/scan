@@ -51,7 +51,7 @@ export const Footer: FC<FooterProps> = ({
           </div>
         </div>
       </div>
-      <Container className="container mx-auto px-6">
+      <Container className="w-full px-6 bg-footer">
         <div className=" border-gray-300 flex flex-col items-center">
           <div className="sm:w-2/3 text-center py-4">
             {copyrightContent}

@@ -94,7 +94,7 @@ export const NewsGrid = ({
                        alt={item?.imgObj.alt} title={item?.imgObj.title} height={200} width={800}/>
                 </div>
                 <Grid className={"col-span-3 sm:w-full mx-2 py-2 md:py-1"} columns={1} flex gap={0}>
-                  <Typography className={""} color={"onPrimary"} tag={"span"}>{category}</Typography>
+                  <Typography className={""} color={"onBackgroundMedium"} tag={"span"}>{category}</Typography>
                   <Typography bold color={"primary"} tag={"span"}>{item?.title}</Typography>
                   <Typography size={"subBody"} bold color={"onSurfaceMedium"} tag={"span"}>{dateString}</Typography>
                   {/*<ConsoleLogTester data={item?.category} />*/}

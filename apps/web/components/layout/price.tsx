@@ -87,7 +87,7 @@ export const Price = () => {
   return (
     <div className="rounded font-medium text-xs md:text-sm flex flex-row">
       <div
-        className="flex flex-row items-center hover:text-onSecondary cursor-pointer rounded py-1 px-2 hover:bg-surfaceLight "
+        className="flex flex-row items-center hover:text-onPrimaryLow cursor-pointer rounded py-1 px-2 hover:bg-surfaceLight "
       >
         <Currency
           classes={{
