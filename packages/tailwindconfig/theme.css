@@ -24,8 +24,10 @@
     --rgb-voltDark: 184, 255, 1;
     --color-darkBlue: #050516;
     --rgb-darkBlue: 5, 5, 22;
-    --color-darkBlueAlt: #0D1421;
-    --rgb-darkBlueAlt: 13, 20, 33;
+    --color-bgBlue: #0D1421;
+    --rgb-bgBlue: 13, 20, 33;
+    --color-bgBlueAlt: #0c121d;
+    --rgb-bgBlueAlt: 12, 18, 29;
 
     /* Base colors */
     --color-black: #000;
@@ -80,7 +82,7 @@
   /*:root {*/
   color-scheme: dark;
 
-  --color-background: var(--color-darkBlueAlt);
+  --color-background: var(--color-bgBlue);
   --color-onBackgroundLow: var(--color-white);
   --color-onBackgroundMedium: var(--color-grayLight);
   --color-onBackgroundHigh: var(--color-gray);
@@ -92,7 +94,7 @@
 
     --color-menuButton: var(--color-surface-2);
     --color-onMenuButton: var(--color-onPrimary);
-    --color-infobar: var(--color-darkBlueAlt);
+    --color-infobar: var(--color-bgBlue);
   --color-onInfobar: var(--color-white);
   --color-footer: var(--color-darkBlue);
   --color-onFooter: var(--color-white);
@@ -105,11 +107,11 @@
   --color-table-odd-bg: var(--color-background);
   --color-table-odd-text: hsla(0, 0%, 100%, 0.8);
   --color-table-odd-border:hsla(0,0%,40%,1);
-  --color-table-odd-link: #9fb7f9;
+  --color-table-odd-link: var(--color-azule);
   --color-table-even-bg: var(--color-background);
   --color-table-even-text: var(--color-lisk-athens-white);
   --color-table-even-border: hsla(0,0%,40%,1);
-  --color-table-even-link: #9fb7f9;
+  --color-table-even-link: var(--color-azule);
 
   /*Dark colors*/
   --color-onSurfaceHigh: var(--color-grayLight);
@@ -121,8 +123,8 @@
   --color-onSurfacePrimaryLow: hsl(var(--theme-primary), 100%, 70%);
 
   --color-surface: hsl(var(--theme-primary), 100%, 99%, 0%);
-  --color-surface-1: hsl(var(--theme-primary), 70%, 15%);
-  --color-surface-2: hsl(var(--theme-primary), 70%, 25%);
+  --color-surface-1: var(--color-bgBlueAlt);
+  --color-surface-2: var(--color-bgBlueAlt);
   --color-surface-3: rgba(110,147,247,.3);
   --color-surface-4: hsl(var(--theme-primary), 100%, 90%);
   --color-surface-5: hsl(var(--theme-primary), 100%, 86%);
@@ -147,8 +149,8 @@
     --color-onTopbar: var(--color-white);
 
     --color-menuButton: var(--color-surface-2);
-    --color-onMenuButton: var(--color-onSurfacePrimaryHigh);
-    --color-infobar: var(--color-darkBlueAlt);
+    --color-onMenuButton: var(--color-onSurfacePrimaryMedium);
+    --color-infobar: var(--color-bgBlue);
     --color-onInfobar: var(--color-white);
     --color-footer: var(--color-darkBlue);
     --color-onFooter: var(--color-white);
@@ -159,11 +161,11 @@
     --color-table-odd-bg: var(--color-background);
     --color-table-odd-text: var(--color-lisk-athens-white);
     --color-table-odd-border:hsla(0,0%,40%,.4);
-    --color-table-odd-link: #9fb7f9;
+    --color-table-odd-link: var(--color-azule);
     --color-table-even-bg: var(--color-background);
     --color-table-even-text: var(--color-lisk-athens-white);
     --color-table-even-border: hsla(0,0%,40%,.4);
-    --color-table-even-link: #9fb7f9;
+    --color-table-even-link: var(--color-azule);
 
     /*Dark colors*/
     --color-onSurfaceHigh: var(--color-eerie);
@@ -175,8 +177,8 @@
     --color-onSurfacePrimaryLow: hsl(var(--theme-primary), 100%, 70%);
 
     --color-surface: hsl(var(--theme-primary), 100%, 99%, 0%);
-    --color-surface-1: hsl(var(--theme-primary), 100%, 98%);
-    --color-surface-2: hsl(var(--theme-primary), 100%, 96%);
+    --color-surface-1: var(--color-grayLight);
+    --color-surface-2: var(--color-grayLight);
     --color-surface-3: hsl(var(--theme-primary), 100%, 94%);
     --color-surface-4: hsl(var(--theme-primary), 100%, 90%);
     --color-surface-5: hsl(var(--theme-primary), 100%, 86%);

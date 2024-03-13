@@ -30,7 +30,7 @@ export const MenuItem = ({ label, link }: MenuItemProps) => {
       {label}
       {link === "#" && (
         <svg
-          className="text-onTopbar ml-2 h-5 w-5 group-hover:text-onMenuButton -mr-3"
+          className="text-onTopbar ml-2 h-5 w-5 group-hover:text-onMenuButton -mr-3 relative top-[1px]"
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"

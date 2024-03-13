@@ -31,7 +31,7 @@ export const FavouritesModal = ({
       setOpen={setOpen}
       containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={mobile ? "full" : "auto"}
-      className={!mobile ? "top-0 w-screen max-w-full lg:max-w-xl" : "max-w-full w-full shadow"}
+      className={!mobile ? "top-0 w-screen max-w-full lg:max-w-xl shadow" : "max-w-full w-full shadow"}
       placement={"right"}
       disabled={!favourites || favourites.length <= 0}
       button={
@@ -44,7 +44,7 @@ export const FavouritesModal = ({
               "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
             }
           >
-            <StarIcon key={"star_2"} className={"w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary"} />
+            <StarIcon key={"star_2"} className={"w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary group-hover:text-yellow"} />
             <Typography key={"span_2"} tag={"span"} color={"inherit"}>Favourites</Typography>
           </div>
         ) : (
