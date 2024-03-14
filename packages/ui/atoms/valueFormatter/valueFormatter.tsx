@@ -274,7 +274,7 @@ const formatters = {
     }`,*/
   fee: (value: any) =>
     `${
-      value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " LSK" : ""
+      value ? parseFloat(convertBeddowsToLSK(value)).toFixed(5) + " KLY" : ""
     }`,
   number: (value: any) => value?.toLocaleString(),
   height: (value: any) => (value > 0 ? value.toLocaleString() : "Pending"),

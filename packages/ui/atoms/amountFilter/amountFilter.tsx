@@ -90,7 +90,7 @@ export const AmountFilter: FC<AmountFilterProps> = ({
                   <Button
                     active={button === filters?.amountFilters?.from}
                     hover
-                    label={"> " + Number(button).toLocaleString("en-US") + " LSK"}
+                    label={"> " + Number(button).toLocaleString("en-US") + " KLY"}
                     onClick={() => setAmounts(button, undefined)}
                     type={"tertiary"}
                   />

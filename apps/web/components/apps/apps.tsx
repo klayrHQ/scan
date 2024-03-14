@@ -51,7 +51,7 @@ export const Apps = () => {
         <TitleBoxSlice
           description={{
             type: "literal",
-            value: "Overview of all the Apps in the Lisk network."
+            value: "Overview of all the Apps in the Klayr network."
           }}
           title={{
             format: {

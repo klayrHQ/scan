@@ -163,7 +163,7 @@ export const  Decimals: FC<DecimalsProps> = ({
             </div>
             <div className="flex flex-col space-y-2">
               <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
-                {"Convert LSK"}
+                {"Convert KLY"}
               </Typography>
               <div className="text-xs font-medium flex flex-row space-x-2">
                 <input

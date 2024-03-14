@@ -34,7 +34,7 @@ export const StakeCalculator = () => {
       </Typography>
       <Grid flex columns={2} className={"rounded bg-surface-1 items-center"}>
         <Typography className={"ml-2"} tag={"span"} size={"subBody"}>
-          {"LSK"}
+          {"KLY"}
         </Typography>
         <Input
           className={"bg-transparent"}

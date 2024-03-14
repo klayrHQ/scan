@@ -62,7 +62,7 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
         </Grid>
       ]}
       infoItemsRight={[
-        <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"MC:"} value={"141,141,816LSK"} valueBold />,
+        <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"MC:"} value={"141,141,816KLY"} valueBold />,
         <Tooltip
           label="Settings"
           placement={"bottom"}

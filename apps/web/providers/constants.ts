@@ -38,7 +38,7 @@ export const settings: SettingType[] = [
   },
   {
     handle: "convertCurrency",
-    label: "Convert LSK to fiat",
+    label: "Convert KLY to fiat",
     optionType: "boolean",
     value: false,
   },

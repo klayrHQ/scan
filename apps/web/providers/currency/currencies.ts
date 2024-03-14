@@ -11,9 +11,9 @@ export const categories: CurrencyCategory[] = [
     currencies: [
       {
         id: 1214,
-        name: "Lisk",
-        sign: "Ⱡ", // other options: Ŀ ȴ Ƚ ƚ ł Ł ŀ Ŀ ľ Ľ ļ Ļ ĺ Ĺ ⁁ ℄ ℒ ℓ
-        symbol: "LSK",
+        name: "Klayr",
+        sign: "K", // other options: Ŀ ȴ Ƚ ƚ ł Ł ŀ Ŀ ľ Ľ ļ Ļ ĺ Ĺ ⁁ ℄ ℒ ℓ
+        symbol: "KLY",
         default: {
           sign: false,
           symbol: true,
@@ -104,9 +104,9 @@ export const categories: CurrencyCategory[] = [
     currencies: [
       {
         id: 1214,
-        name: "Lisk",
-        sign: "Ⱡ", // other options: Ŀ ȴ Ƚ ƚ ł Ł ŀ Ŀ ľ Ľ ļ Ļ ĺ Ĺ ⁁ ℄ ℒ ℓ
-        symbol: "LSK",
+        name: "Klayr",
+        sign: "K", // other options: Ŀ ȴ Ƚ ƚ ł Ł ŀ Ŀ ľ Ľ ļ Ļ ĺ Ĺ ⁁ ℄ ℒ ℓ
+        symbol: "KLY",
         default: {
           sign: false,
           symbol: true,

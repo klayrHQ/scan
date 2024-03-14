@@ -47,8 +47,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -59,8 +59,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -71,8 +71,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -83,8 +83,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -95,8 +95,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -107,8 +107,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -119,8 +119,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",
@@ -131,8 +131,8 @@ export default {
           <div className={"flex gap-2 items-center"}>
             <img className={"h-8 w-8"} src={"https://cryptologos.cc/logos/lisk-lsk-logo.png?v=025"} />
             <div className={"flex flex-col"}>
-              <Typography tag={"span"} color={"primary"}>{"LSK"}</Typography>
-              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Lisk Main Token"}</Typography>
+              <Typography tag={"span"} color={"primary"}>{"KLY"}</Typography>
+              <Typography tag={"span"} size={"subBody"} color={"onSurfaceLow"}>{"Klayr Main Token"}</Typography>
             </div>
           </div>,
         amount: "100",

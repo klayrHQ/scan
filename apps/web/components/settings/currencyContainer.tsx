@@ -16,7 +16,7 @@ export const CurrencyContainer = () => {
         <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
           {"Select your preferable Currency!"}
         </Typography>
-        <Typography tag={"span"}>{"Format the way Liskscan shows all currency values."}</Typography>
+        <Typography tag={"span"}>{"Format the way the explorer shows all currency values."}</Typography>
       </Paper>
       <div className="bg-surface-1 text-onSurfaceHigh w-full block rounded">
         <Decimals currencies={currencies} minMax={{min: 0, max:8}} setSetting={setSetting} switchConvert={switchConvert} parsedSettings={parsedSettings}/>

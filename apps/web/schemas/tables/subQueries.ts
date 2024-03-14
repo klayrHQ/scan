@@ -30,7 +30,7 @@ export default defineType({
       title: "Service",
       options: {
         list: [
-          { title: "Lisk Service", value: "lisk-service" },
+          { title: "Klayr Service", value: "lisk-service" },
           { title: "Liskscan Usernames", value: "liskscan-usernames" },
           { title: "Liskscan Knowledge", value: "liskscan-knowledge" },
           { title: "Liskscan Votes", value: "liskscan-votes" },

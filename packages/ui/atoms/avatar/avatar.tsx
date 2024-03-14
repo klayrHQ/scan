@@ -1,5 +1,5 @@
 import React from "react"
-import { LiskAvatar } from "../liskAvatar/liskAvatar";
+import { KlayrAvatar } from "../klayrAvatar/klayrAvatar";
 
 interface AvatarProps {
   seed?: string
@@ -32,7 +32,7 @@ export const Avatar = ({
 
   return (
     <>
-      <LiskAvatar
+      <KlayrAvatar
         size={size || 0}
         collectible={collectible}
         address={address}

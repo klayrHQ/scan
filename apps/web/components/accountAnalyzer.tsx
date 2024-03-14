@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {AccountDataType} from "@moosty/lisk-connection-provider";
 import {getData} from "../lib/sanity.service";
 import axios from "axios";
-import {convertBeddowsToLSK} from "../lisk-client";
+import {convertBeddowsToKLY} from "../lisk-client";
 import Link from "next/link";
 import {Grid, KeyValueRow, Typography, ValueFormatter} from "ui";
 import {Input} from "ui/atoms/input/input";
@@ -65,7 +65,7 @@ export const AccountAnalyzer = () => {
               if (account) {
                 setAccountStatus(
                   <Typography tag={"p"} className={"text-right"}>
-                    <span>{`This account has reclaimed ${convertBeddowsToLSK(account.amount)} LSK`}</span><br />
+                    <span>{`This account has reclaimed ${convertBeddowsToKLY(account.amount)} KLY`}</span><br />
                     {"By "}<Link href={`/account/${account.address}`}>{account.address}</Link>
                   </Typography>,
                 )
@@ -119,7 +119,7 @@ export const AccountAnalyzer = () => {
         htmlFor="lisk-address"
         className="block text-base font-medium text-onSurfaceLight"
       >
-        <Typography tag={"span"}>{"Legacy address, Lisk32, Address or Public key"}</Typography>
+        <Typography tag={"span"}>{"Legacy address, Klayr32, Address or Public key"}</Typography>
       </label>
       <div className="mt-1">
         <Input
@@ -128,7 +128,7 @@ export const AccountAnalyzer = () => {
           name="lisk-address"
           id="lisk-address"
           className="shadow-sm w-full"
-          placeholder="Paste: Legacy address, Lisk32, Address or PublicKey here"
+          placeholder="Paste: Legacy address, Klayr32, Address or PublicKey here"
         />
       </div>
       {error && (
@@ -136,7 +136,7 @@ export const AccountAnalyzer = () => {
           <Typography tag={"span"}>
             {error}
             <br />
-            {"Input is not a valid Legacy address, Lisk32 address, Address or PublicKey"}
+            {"Input is not a valid Legacy address, Klayr32 address, Address or PublicKey"}
           </Typography>
         </div>
       )}

@@ -43,7 +43,7 @@ export const Tokens = ({
         <TitleBoxSlice
           description={{
             type: "literal",
-            value: "Overview of all the tokens in the Lisk network."
+            value: "Overview of all the tokens in the Klayr network."
           }}
           title={{
             format: {

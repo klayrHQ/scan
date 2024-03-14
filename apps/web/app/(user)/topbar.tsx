@@ -231,7 +231,7 @@ export const TopBarLayout = ({
             />
             <Link href={"/"} prefetch={false}>
               <Typography tag={"span"} bold color={"onInfobar"}>
-                {settings.title}
+                {"Klayr Explorer"}
               </Typography>
             </Link>
           </div>

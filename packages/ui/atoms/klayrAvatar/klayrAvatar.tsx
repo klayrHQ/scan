@@ -5,7 +5,7 @@ import {
   gradientSchemes,
 } from "../avatarGradient/avatarGradient"
 
-interface LiskAvatarProps {
+interface KlayrAvatarProps {
   address: string
   size: number
   uniqueSvgUrlHash?: any
@@ -14,14 +14,14 @@ interface LiskAvatarProps {
   collectible?: boolean
 }
 
-export const LiskAvatar = ({
+export const KlayrAvatar = ({
         address,
         size,
         uniqueSvgUrlHash = "liskScan",
         className,
         circle,
         collectible
-      }: LiskAvatarProps) => {
+      }: KlayrAvatarProps) => {
 
   const computeShapesAndGradients = (newSize: number): any => {
     const addressHashChunks = getHashChunks(address)

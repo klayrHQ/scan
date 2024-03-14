@@ -38,7 +38,7 @@ export const parameters = {
       order: [
         "Docs",
         [
-          "Liskscan",
+          "Klayr Explorer",
           "Atomic Design Methodology",
           "Atoms",
           "Molecules",

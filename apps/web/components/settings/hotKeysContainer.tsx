@@ -16,7 +16,7 @@ export const HotKeysContainer = () => {
         <HotKey hotKey={"/"} />
       </div>
 
-      <Typography tag={"span"}>{"Learn how to navigate the Lisk blockchain with your keys only."}</Typography>
+      <Typography tag={"span"}>{"Learn how to navigate the Klayr blockchain with your keys only."}</Typography>
     </Paper>
     <Paper
       surface={1}

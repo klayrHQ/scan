@@ -91,7 +91,7 @@ export default async function RootLayout({
   };
   return (
     <html className={"dark"}>
-      <LiskscanLogs />
+      {/*<LiskscanLogs />*/}
       <head>
         <title>Klayr Explorer - Klayr blockchain explorer</title>
         <link rel={"icon"} href={"/images/klayr-logo.svg"} />
@@ -122,7 +122,7 @@ export default async function RootLayout({
                       {children}
                     </div>
                     {/*<ServiceSnackbar/>*/}
-                    <Footer copyright={settings.copyright} lists={footer}/>
+                    <Footer copyright={"© 2024 Klayr"} lists={footer}/>
                     <FloatingMenuContainer menuItems={menuItems}/>
                   </CurrencyProvider>
                 </SettingsProvider>

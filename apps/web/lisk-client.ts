@@ -31,7 +31,7 @@ const reverse = (source: Buffer) => {
   return buffer
 }
 
-export const convertBeddowsToLSK = (beddowsAmount: string | number): string => {
+export const convertBeddowsToKLY = (beddowsAmount: string | number): string => {
   beddowsAmount =
     typeof beddowsAmount !== "string" ? beddowsAmount.toString() : beddowsAmount
   const beddowsAmountBigInt = BigInt(beddowsAmount)
@@ -56,7 +56,7 @@ export const convertLSKToBeddows = (lskAmount?: string): string => {
     throw new Error('Cannot convert non-string amount');
   }
   if (getDecimalPlaces(lskAmount) > LISK_MAX_DECIMAL_POINTS) {
-    throw new Error('LSK amount has too many decimal points');
+    throw new Error('KLY amount has too many decimal points');
   }
   const splitAmount = lskAmount.split('.');
   const liskAmountInt = BigInt(splitAmount[0]);
@@ -65,7 +65,7 @@ export const convertLSKToBeddows = (lskAmount?: string): string => {
   );
   const beddowsAmountBigInt = liskAmountInt * BigInt(FIXED_POINT) + liskAmountFloatBigInt;
   if (beddowsAmountBigInt > MAX_UINT64) {
-    throw new Error('LSK amount out of range');
+    throw new Error('KLY amount out of range');
   }
 
   return beddowsAmountBigInt.toString();
@@ -139,7 +139,7 @@ export const convertUIntArray = (
 export const convertUInt5ToBase32 = (uint5Array: number[]): string =>
   uint5Array.map((val: number) => LISK32_CHARSET[val]).join("")
 
-const addressToLisk32 = (address: Buffer): string => {
+const addressToKlayr32 = (address: Buffer): string => {
   const byteSequence = []
   for (const b of address) {
     byteSequence.push(b)
@@ -151,7 +151,7 @@ const addressToLisk32 = (address: Buffer): string => {
 export const verifyChecksum = (integerSequence: number[]): boolean =>
   polymod(integerSequence) === 1
 
-export const validateLisk32Address = (
+export const validateKlayr32Address = (
   address: string,
   prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): true | never => {
@@ -259,16 +259,16 @@ export const getFirstEightBytesReversed = (input: string | Buffer): Buffer => {
   return reverse(Buffer.from(input).slice(0, BUFFER_SIZE))
 }
 
-export const getLisk32AddressFromPublicKey = (
+export const getKlayr32AddressFromPublicKey = (
   publicKey: Buffer,
   prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
-): string => `${prefix}${addressToLisk32(getAddressFromPublicKey(publicKey))}`
+): string => `${prefix}${addressToKlayr32(getAddressFromPublicKey(publicKey))}`
 
-export const getAddressFromLisk32Address = (
+export const getAddressFromKlayr32Address = (
   base32Address: string,
   prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): Buffer => {
-  validateLisk32Address(base32Address, prefix)
+  validateKlayr32Address(base32Address, prefix)
   // Ignore lsk prefix and checksum
   const base32AddressNoPrefixNoChecksum = base32Address.substring(
     prefix.length,
@@ -284,7 +284,7 @@ export const getAddressFromLisk32Address = (
   return Buffer.from(integerSequence8)
 }
 
-export const getLisk32AddressFromAddress = (
+export const getKlayr32AddressFromAddress = (
   address: Buffer,
   prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
-): string => `${prefix}${addressToLisk32(address)}`
+): string => `${prefix}${addressToKlayr32(address)}`

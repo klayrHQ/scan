@@ -10,10 +10,10 @@ import {sliceDocumentNames} from "./schemas/slices";
 
 export const sanityDeskStructure = (S: any) =>
   S.list()
-    .title("Liskscan")
+    .title("Klayr Explorer")
     .items([
       S.listItem()
-        .title("Liskscan settings")
+        .title("Explorer settings")
         .icon(ControlsIcon)
         .child(
           S.list()

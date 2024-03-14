@@ -1,4 +1,4 @@
-# Liskscan explorer
+# Klayr explorer
 
 # packages
 ## ui (component library)

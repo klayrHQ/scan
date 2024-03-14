@@ -13,7 +13,7 @@ import { useService } from "../../providers/service";
 import React, { Suspense, useEffect, useState } from "react";
 import Spinner from "../spinner";
 import {Icon} from "ui/atoms/icon/icon";
-import {convertBeddowsToLSK, convertLSKToBeddows} from "../../lisk-client";
+import {convertBeddowsToKLY, convertLSKToBeddows} from "../../lisk-client";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -661,7 +661,7 @@ export const ValidatorsTable = ({
                           ],
                         },
                         tooltip: {
-                          value: `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} LSK for the validator + the APR (the yearly rate of return on staking)`,
+                          value: `Rewards you earn per ${stakingRewardsPeriod} by staking ${stakingRewardsAmount} KLY for the validator + the APR (the yearly rate of return on staking)`,
                         },
                         type: "string",
                         typography: [
@@ -1193,7 +1193,7 @@ export const ValidatorsTable = ({
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: `Staking Rewards per ${stakingRewardsAmount} LSK per ${stakingRewardsPeriod}`,
+                              value: `Staking Rewards per ${stakingRewardsAmount} KLY per ${stakingRewardsPeriod}`,
                             },
                             type:
                               parseFloat(resultPerPeriod) > 0
@@ -1218,7 +1218,7 @@ export const ValidatorsTable = ({
                             format: "percentage",
                             tooltip: {
                               placement: "auto",
-                              value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} LSK`,
+                              value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} KLY`,
                             },
                             type: "string",
                             typography: [

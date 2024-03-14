@@ -47,7 +47,7 @@ export const CurrencyComponent: FC<CurrencyComponentProps> = ({
           >
             {name}
           </Typography>
-          <Typography tag={"span"} className="text-onPrimaryMedium font-medium" size={"subBody"}>
+          <Typography tag={"span"} className="group-hover:text-onPrimaryMedium font-medium" size={"subBody"}>
             {symbol}{" - "}{sign}
           </Typography>
         </div>

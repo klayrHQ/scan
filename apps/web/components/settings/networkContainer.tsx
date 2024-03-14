@@ -22,7 +22,7 @@ export const NetworkContainer = () => {
         <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
           {"Select a Network!"}
         </Typography>
-        <Typography tag={"span"}>{"Select one of the Lisk networks or add your custom network."}</Typography>
+        <Typography tag={"span"}>{"Select one of the Klayr networks or add your custom network."}</Typography>
       </Paper>
       <Paper surface={1} className="p-4 flex flex-row space-x-2">
         <Status status={connected ? "connected" : "error"} />

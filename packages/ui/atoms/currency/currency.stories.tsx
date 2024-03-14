@@ -24,7 +24,7 @@ export default {
     currencies: [
       {
         sign: "Ⱡ",
-        symbol: "LSK",
+        symbol: "KLY",
       },
       {
         sign: "€",
