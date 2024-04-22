@@ -118,7 +118,7 @@ export const TopBarLayout = ({
             {kpis &&
               <>
                 {kpis?.map(({ key, label, backup, _key }, i) => (
-                  <div className={"hidden md:inline"} key={`desktop-${key}-${i}`}>
+                  <div className={"hidden 2xl:inline"} key={`desktop-${key}-${i}`}>
                     <KeyValueKPI
                       key={_key}
                       dottedKey={key}

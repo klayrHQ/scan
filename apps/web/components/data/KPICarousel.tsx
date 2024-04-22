@@ -24,7 +24,7 @@ export const KPICarousel = ({
 }) => {
 
   return (
-    <div className={"max-w-full w-full relative md:hidden overflow-x-hidden h-4 flex-grow"}>
+    <div className={"max-w-full w-full relative 2xl:hidden overflow-hidden h-4 flex-grow"}>
       {kpis?.map(({ key, label, backup, _key }, i) => (
         <div
           key={`mobile-${key}-${i}`}

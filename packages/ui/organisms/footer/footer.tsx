@@ -30,16 +30,16 @@ export const Footer: FC<FooterProps> = ({
                 <div className=" font-normal text-base mb-2 mt-4 uppercase ">
                   <b>Socials</b>
                 </div>
-                <div className="w-full justify-center flex flex-row space-x-3">
+                <div className="w-full justify-center flex flex-row space-x-3 mt-7">
                   <a
-                    href={"https://www.linkedin.com/company/moosty/"}
+                    href={"https://www.linkedin.com/company/klayr/"}
                     target={"_blank"}
                     rel={"noopener nofollow noreferrer"}
                   >
                     <LinkedinIcon className="cursor-pointer text-onFooter" />
                   </a>
                   <a
-                    href={"https://twitter.com/Liskscan"}
+                    href={"https://twitter.com/KlayrHQ"}
                     target={"_blank"}
                     rel={"noopener nofollow noreferrer"}
                   >

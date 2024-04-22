@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 import {Grid, Typography} from "../..";
 import {cls} from "../../utils";
 import {Icon} from "../icon/icon";
-import {useClickOutside} from "liskscan/hooks/clickOutside";
+import {useClickOutside} from "klayr-explorer/hooks/clickOutside";
 
 interface SelectProps
   // extends React.DetailedHTMLProps<

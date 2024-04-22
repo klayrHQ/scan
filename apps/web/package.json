@@ -1,5 +1,5 @@
 {
-  "name": "liskscan",
+  "name": "klayr-explorer",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -45,7 +45,7 @@
     "sanity": "^3",
     "sanity-image": "0.1.0-alpha.2",
     "socket.io-client": "^4.6.1",
-    "styled-components": "^5.2",
+    "styled-components": "^6.1.8",
     "tailwindconfig": "*",
     "ui": "*",
     "web3": "^1.10.0",

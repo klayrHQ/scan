@@ -47,7 +47,7 @@ export const ValidatorKpis = ({stats}: any) => {
             value={
               <Typography
                 className={"font-bold"}
-                color={"onPrimary"}
+                color={"onSurfaceHigh"}
                 tag={"span"}
                 size={"Heading5"}
               >

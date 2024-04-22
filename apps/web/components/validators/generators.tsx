@@ -29,11 +29,11 @@ export const Generators = ({generators}: {generators: {data?: any[]}}) => {
 
   return <div className={"flex-col flex gap-4 bg-surface-1 py-4 rounded shadow-xl"}>
     <Grid className={"w-app mx-auto"} flex>
-      <Typography className={"font-semibold"} color={"onPrimary"} tag={"span"}>
+      <Typography className={"font-semibold"} color={"onSurfaceHigh"} tag={"span"}>
         {"Next Generators"}
       </Typography>
     </Grid>
-    <Divider color={"surface-2"} width={"full"}/>
+    <Divider color={"background"} width={"full"}/>
     <Grid
       className={"w-app mx-auto"}
       columns={2}

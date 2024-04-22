@@ -1,13 +1,13 @@
 import React from "react";
 import { Grid, Tags, Tooltip, TooltipPlacement, Typography } from "../index";
-import { IconListTypes, iconsList } from "liskscan/components/iconList";
+import { IconListTypes, iconsList } from "klayr-explorer/components/iconList";
 import { cloneElement } from "react";
 import Link from "next/link";
-import { CopyButton } from "liskscan/components/data/copy";
-import { convertBeddowsToLSK } from "liskscan/lib/queries/lisk";
+import { CopyButton } from "klayr-explorer/components/data/copy";
+import { convertBeddowsToLSK } from "klayr-explorer/lib/queries/lisk";
 import { Avatar } from "../avatar/avatar";
 import { dayjs } from "../../utils/time";
-import {CurrencyClient} from "liskscan/components/currencyClient";
+import {CurrencyClient} from "klayr-explorer/components/currencyClient";
 
 export type SanityProps = { key: string; value: string }[];
 export type ValueTypes =

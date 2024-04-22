@@ -22,6 +22,8 @@ import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
 // import {ServiceSnackbar} from "../../components/serviceSnackbar";
 import {SettingsProvider} from "../../providers/settings";
 import {CurrencyProvider} from "../../providers/currency/CurrencyProvider";
+import {ConsoleLogTester} from "../../components/consoleLogTester";
+import {menuObj} from "../../components/layout/menuObj";
 // import {SettingsProvider} from "../../providers/settings";
 // import {CountryFlag} from "../../slices/countryFlag";
 
@@ -117,13 +119,13 @@ export default async function RootLayout({
                         apps={apps}
                         index={index}
                         status={status}
-                        menuItems={menuItems}
+                        menuItems={menuObj}
                       />
                       {children}
                     </div>
                     {/*<ServiceSnackbar/>*/}
                     <Footer copyright={"© 2024 Klayr"} lists={footer}/>
-                    <FloatingMenuContainer menuItems={menuItems}/>
+                    <FloatingMenuContainer menuItems={menuObj}/>
                   </CurrencyProvider>
                 </SettingsProvider>
               </RecentSearchesProvider>
