@@ -12,7 +12,7 @@ export const categories: CurrencyCategory[] = [
       {
         id: 1214,
         name: "Klayr",
-        sign: "K", // other options: Ŀ ȴ Ƚ ƚ ł Ł ŀ Ŀ ľ Ľ ļ Ļ ĺ Ĺ ⁁ ℄ ℒ ℓ
+        sign: "Ҝ",
         symbol: "KLY",
         default: {
           sign: false,
