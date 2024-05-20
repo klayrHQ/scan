@@ -54,7 +54,8 @@ export const Validators = ({
   useEffect(() => {
     const getValidators = async () => {
       const validators = await fetch(
-        `https://cached-mainnet-service.liskscan.com/validators${
+        // eslint-disable-next-line turbo/no-undeclared-env-vars
+        `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators${
           activeTab === "all" ? "" : `/${activeTab}`
         }`,
         {

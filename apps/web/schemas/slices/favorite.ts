@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export const favorite = defineType({
+export const favorite = {
   name: "favorite",
   type: "document",
   title: "Favorite",
@@ -11,4 +10,4 @@ export const favorite = defineType({
       title: "ID",
     },
   ]
-})
+}

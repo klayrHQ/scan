@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import {SanityValue} from "../layout/value";
 
-export const kpi = defineType({
+export const kpi = {
   name: "kpi",
   type: "document",
   title: "KPI",
@@ -63,4 +62,4 @@ export const kpi = defineType({
       title: "Gap",
     },
   ]
-})
+}

@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export const jsonItem = defineType({
+export const jsonItem = {
   name: "jsonItem",
   type: "document",
   title: "JsonItem",
@@ -68,4 +67,4 @@ export const jsonItem = defineType({
       ]
     },
   ]
-})
+}

@@ -1,8 +1,7 @@
 import React from "react";
 import { cva } from "class-variance-authority";
 import { cls } from "ui/utils";
-import Image from "next/image";
-import { ImageProps } from "next/dist/client/image";
+import Image, {ImageProps} from "next/image";
 
 interface ColectiImageProps extends ImageProps {
   type?:

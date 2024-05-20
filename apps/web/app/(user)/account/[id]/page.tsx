@@ -9,8 +9,13 @@ const Page = async (props: any) => {
     let validatorData = {}
     // @ts-ignore
     if (queryData["account-validator-id"]?.data?.length > 0) {
-// @ts-ignore
-        const validatorResponse = await fetch(`https://cached-mainnet-service.liskscan.com/validator/${queryData["account-validator-id"]?.data[0]?.address}`)
+      const validatorResponse = await fetch(`https://cached-${
+        // eslint-disable-next-line turbo/no-undeclared-env-vars
+        process.env.NEXT_PUBLIC_NETWORK
+      }-service.klayr.xyz/validator/${
+        // @ts-ignore
+        queryData["account-validator-id"]?.data[0]?.address
+      }`)
          validatorData = await validatorResponse.json()
 
     }

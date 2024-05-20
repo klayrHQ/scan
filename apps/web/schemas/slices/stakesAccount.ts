@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import {SanityValue} from "../layout/value";
 
-export const stakesAccount = defineType({
+export const stakesAccount = {
   name: "stakesAccount",
   type: "document",
   title: "Stakes Account",
@@ -54,4 +53,4 @@ export const stakesAccount = defineType({
       title: "Gap",
     },
   ]
-})
+}

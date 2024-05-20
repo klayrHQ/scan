@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import {SanityValue} from "../layout/value";
 
-export default defineType({
+export default {
   name: "titleBox",
   type: "document",
   title: "Title description",
@@ -29,4 +28,4 @@ export default defineType({
       title: "Tooltip info text",
     },
   ],
-});
+};

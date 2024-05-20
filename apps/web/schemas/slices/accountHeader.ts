@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import { SanityValue } from "../layout/value";
 
-export default defineType({
+export default {
   name: "accountHeader",
   type: "document",
   title: "Account Header",
@@ -18,4 +17,4 @@ export default defineType({
       fields: SanityValue,
     },
   ],
-});
+};

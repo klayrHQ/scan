@@ -1,9 +1,6 @@
-import { defineType } from "sanity";
 import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";
-import tabs from "./tabs";
-import { SanityValue } from "../layout/value";
 import { stakesAccount } from "./stakesAccount";
 import {divider} from "./divider";
 import {jsonItem} from "./jsonItem";
@@ -29,7 +26,7 @@ const sliceDocumentNames: {
   type: doc.name,
 }));
 
-export default defineType({
+export default {
   name: "tabs",
   type: "document",
   title: "Tabs",
@@ -71,4 +68,4 @@ export default defineType({
       title: "Outer container with shadow & padding",
     },
   ],
-});
+};

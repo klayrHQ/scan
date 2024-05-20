@@ -1,4 +1,3 @@
-import { defineType } from "sanity";
 
 export const LastBlockKPIS = [
   { title: "lastBlock.height", value: "lastBlock.height" },
@@ -84,7 +83,7 @@ export const StatusKPIS = [
   { title: "status.meta.lastUpdate", value: "status.meta.lastUpdate" },
 ]
 export const DefaultKPIS = [...AppKPIS, ...StatusKPIS, ...LastBlockKPIS];
-export default defineType({
+export default {
   name: "infobar",
   type: "object",
   title: "Infobar",
@@ -120,4 +119,4 @@ export default defineType({
       ],
     },
   ],
-});
+};

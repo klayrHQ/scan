@@ -18,6 +18,11 @@ module.exports = {
       },
       {
         protocol: "https",
+        hostname: "klayr.xyz",
+        pathname: "/",
+      },
+      {
+        protocol: "https",
         hostname: "cdn.sanity.io",
         pathname: "/",
       },

@@ -50,7 +50,7 @@ export const AccountHeader = ({
         <KeyValueRow
           color={"onPrimary"}
           label={<ValueFormatter value={"Nonce"} type={"string"} format={"plain"} />}
-          value={queryData ? <ValueFormatter value={queryData["account-auth"]?.data?.nonce} type={"number"} format={"shortAddress"} /> : ""}
+          value={queryData ? <ValueFormatter value={queryData["account-auth"]?.data?.nonce ?? 0} type={"number"} format={"number"} /> : ""}
         />
         <KeyValueRow
           color={"onPrimary"}

@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export default defineType({
+export default {
   name: "topNavigation",
   type: "document",
   title: "Topbar Navigation",
@@ -19,7 +18,7 @@ export default defineType({
               title: "Link",
               type: "url",
               name: "href",
-              validation: (Rule) =>
+              validation: (Rule: any) =>
                 Rule.uri({
                   allowRelative: true,
                 }),
@@ -42,4 +41,4 @@ export default defineType({
       ],
     },
   ],
-});
+};

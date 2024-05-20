@@ -1,6 +1,5 @@
-import {defineType} from "sanity";
 
-export default defineType({
+export default {
   name: "newsGrid",
   type: "document",
   title: "News Grid",
@@ -24,4 +23,4 @@ export default defineType({
       ]
     }
   ],
-});
+};

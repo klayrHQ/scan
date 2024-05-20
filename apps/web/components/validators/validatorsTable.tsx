@@ -138,7 +138,8 @@ export const ValidatorsTable = ({
   useEffect(() => {
     const getValidators = async () => {
       const validators = await fetch(
-        `https://cached-mainnet-service.liskscan.com/validators/${page}`
+        // eslint-disable-next-line turbo/no-undeclared-env-vars
+        `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators/${page}`
       );
       const validatorsData = await validators.json();
 

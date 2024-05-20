@@ -1,8 +1,7 @@
-import {defineType} from 'sanity'
 import {Methods} from "./methods";
 import {UpdateOn} from "../slices/table";
 
-export default defineType({
+export default {
   name: "query",
   type: "document",
   title: "Query",
@@ -114,4 +113,4 @@ export default defineType({
       },
     },
   ],
-});
+};

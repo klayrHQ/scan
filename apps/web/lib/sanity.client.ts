@@ -10,7 +10,7 @@ export const sanityClient = createClient({
   projectId,
   dataset,
   useCdn: false,
-  studioUrl: "https://betanet.liskscan.com/studio",
+  studioUrl: "https://klayr.xyz/studio",
   apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
   encodeSourceMapAtPath: () => true,
 });

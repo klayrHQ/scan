@@ -9,7 +9,8 @@
         "NEXT_PUBLIC_SANITY_DATASET",
         "NEXT_PUBLIC_SANITY_API_VERSION",
         "NEXT_PUBLIC_SANITY_API_READ_TOKEN",
-        "NEXT_PUBLIC_SERVICE_URL"
+        "NEXT_PUBLIC_SERVICE_URL",
+        "NEXT_PUBLIC_NETWORK"
       ]
     },
     "lint": {

@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export const chart = defineType({
+export const chart = {
   name: "chart",
   type: "document",
   title: "Chart",
@@ -59,7 +58,7 @@ export const chart = defineType({
       name: "valueKey2",
       type: "string",
       title: "Value Key 2",
-      hidden: ({ parent, value }) => !value && parent?.chartType !== "doubleColumns"
+      hidden: ({ parent, value }: any) => !value && parent?.chartType !== "doubleColumns"
     },
     {
       name: "chartDataKey",
@@ -109,4 +108,4 @@ export const chart = defineType({
       ],
     },*/
   ]
-})
+};

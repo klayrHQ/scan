@@ -1,8 +1,7 @@
-import { defineType } from "sanity";
 
-export default defineType({
+export default {
   name: "formats",
   type: "object",
   title: "Format",
   fields: [{ type: "string", name: "name", title: "Name" }],
-});
+};

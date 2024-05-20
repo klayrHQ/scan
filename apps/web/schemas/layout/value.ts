@@ -1,4 +1,3 @@
-import { UpdateOn } from "../slices/table";
 import { iconsListKeys } from "../../components/iconList";
 
 export const SanityValue = [

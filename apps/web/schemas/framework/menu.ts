@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import { iconsListKeys } from "../../components/iconList";
 
-export default defineType({
+export default {
   name: "menu",
   type: "object",
   title: "Menu",
@@ -58,4 +57,4 @@ export default defineType({
       ],
     },
   ],
-});
+};

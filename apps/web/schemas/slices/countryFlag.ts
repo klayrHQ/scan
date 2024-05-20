@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export const countryFlag = defineType({
+export const countryFlag = {
   name: "countryFlag",
   type: "document",
   title: "Country Flag",
@@ -16,4 +15,4 @@ export const countryFlag = defineType({
       title: "Key",
     },
   ]
-})
+}

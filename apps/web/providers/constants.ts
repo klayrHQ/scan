@@ -7,14 +7,14 @@ export const settings: SettingType[] = [
     optionType: "json",
     value: {
       default: true,
-      id: "lisk",
+      id: "klayr",
       endpoint: [
         {
-          host: "wss://mainnet-service.liskscan.com",
+          host: "wss://mainnet-service.klayr.xyz",
           type: "serviceRPC",
         },
         {
-          host: "https://mainnet-service.liskscan.com",
+          host: "https://mainnet-service.klayr.xyz",
           type: "serviceHTTP",
         },
       ],

@@ -1,4 +1,3 @@
-import { defineType } from "sanity";
 
 export type UpdateOnType =
   | "never"
@@ -20,7 +19,7 @@ export const UpdateOn: { title: string; value: UpdateOnType }[] = [
   { title: "Update fee estimates", value: "lastFees" },
   { title: "Update meta data", value: "lastMeta" },
 ];
-export default defineType({
+export default {
   name: "tableSlice",
   type: "document",
   title: "Table",
@@ -42,4 +41,4 @@ export default defineType({
       title: "Outer container with shadow & padding",
     },
   ],
-});
+};

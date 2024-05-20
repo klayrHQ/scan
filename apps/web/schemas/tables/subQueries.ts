@@ -1,7 +1,6 @@
-import { defineType } from "sanity";
 import {Methods} from "./methods";
 
-export default defineType({
+export default {
   name: "subQuery",
   type: "document",
   title: "Child Query",
@@ -110,4 +109,4 @@ export default defineType({
       ]
     }
   ],
-});
+};

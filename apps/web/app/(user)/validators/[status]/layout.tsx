@@ -9,32 +9,31 @@ import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import { StakeCalculator } from "../../../../components/validators/stakeCalculator";
 
 const layout = async ({ children, params }: any) => {
-  const result = (await getAllData([
-    {
-      key: "status",
-      call: "get.network.status",
-      serviceType: "lisk-service",
-    },
-    {
-      key: "meta",
-      call: "get.blockchain.apps.meta",
-      serviceType: "lisk-service",
-    },
-  ])) as { status: NetworkStatusResponse; meta: BlockchainAppsMetaResponse };
+  // const result = (await getAllData([
+  //   {
+  //     key: "status",
+  //     call: "get.network.status",
+  //     serviceType: "lisk-service",
+  //   },
+  //   {
+  //     key: "meta",
+  //     call: "get.blockchain.apps.meta",
+  //     serviceType: "lisk-service",
+  //   },
+  // ])) as { status: NetworkStatusResponse; meta: BlockchainAppsMetaResponse };
   // const status = searchParams?.get("status") ?? "eligible";
-  const network = result?.meta?.data?.find(
-    (app) => app?.chainID === result?.status?.data?.chainID
-  );
+  // eslint-disable-next-line turbo/no-undeclared-env-vars
+  const network = process.env.NEXT_PUBLIC_NETWORK;
   const generatorsResponse = await fetch(
     `https://cached-${
-      network?.networkType || "mainnet"
-    }-service.liskscan.com/generators`
+      network || "mainnet"
+    }-service.klayr.xyz/generators`
   );
   const generators = await generatorsResponse.json();
   const statsResponse = await fetch(
     `https://cached-${
-      network?.networkType || "mainnet"
-    }-service.liskscan.com/validators/stats`
+      network || "mainnet"
+    }-service.klayr.xyz/validators/stats`
   );
   const stats = (await statsResponse.json()) as {
     standby: number;

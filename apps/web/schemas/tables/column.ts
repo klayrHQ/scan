@@ -1,9 +1,7 @@
-import { defineType } from "sanity";
 import { SanityValue } from "../layout/value";
 import {NrColumn, OrColumn, ValueColumn} from "../../components/data";
-import { LogoColumn } from "../../components/data/table/columns/logo";
 
-export default defineType({
+export default {
   name: "column",
   type: "document",
   title: "Column",
@@ -81,4 +79,4 @@ export default defineType({
       of: [{ type: "object", fields: SanityValue }],
     },
   ],
-});
+};

@@ -58,6 +58,8 @@ export const NewsGrid = ({
     return allItems?.find((item: { _id: string; }) => newsItem._ref === item._id)
   })
 
+  return <></>
+
   return (
     <div
       className={cls([

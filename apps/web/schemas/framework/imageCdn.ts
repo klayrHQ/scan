@@ -1,7 +1,6 @@
 import {ImagesIcon} from "@sanity/icons";
-import {defineType} from "sanity";
 
-export default defineType({
+export default {
   name: "imageCdn",
   type: "document",
   title: "CDN Images",
@@ -21,4 +20,4 @@ export default defineType({
       },
     },
   ],
-});
+};

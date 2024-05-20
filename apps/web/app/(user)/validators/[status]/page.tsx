@@ -4,9 +4,10 @@ import {TableSkeleton} from "../../../../components/skeletons/tableSkeleton";
 
 const Page = async ({params}: any) => {
   const validators = await fetch(
-    `https://cached-mainnet-service.liskscan.com/validators/${params.status}`,
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators/${params.status}`,
     {
-      next: { revalidate: 0 },
+      // next: { revalidate: -1 },
     }
   );
   const validatorsJSON = await validators.json();

@@ -1,4 +1,3 @@
-import { defineType } from "sanity";
 import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";
@@ -34,7 +33,7 @@ const sliceDocumentNames: {
   type: doc.name,
 }));
 
-export default defineType({
+export default {
   name: "grid",
   type: "document",
   title: "Grid",
@@ -89,4 +88,4 @@ export default defineType({
       ],
     },
   ],
-});
+};

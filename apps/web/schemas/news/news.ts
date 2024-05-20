@@ -1,6 +1,5 @@
-import {defineType} from "sanity";
 
-export default defineType({
+export default {
   name: "news",
   type: "document",
   title: "News Item",
@@ -34,7 +33,7 @@ export default defineType({
       name: "img",
       type: "image",
       title: "Image",
-      hidden: ({ parent, value }) => !value && parent?.imgType !== "upload"
+      hidden: ({ parent, value }: any) => !value && parent?.imgType !== "upload"
     },
     {
       name: "imgObj",
@@ -57,7 +56,7 @@ export default defineType({
           title: "Image Alt",
         },
       ],
-      hidden: ({ parent, value }) => !value && parent?.imgType !== "url"
+      hidden: ({ parent, value }: any) => !value && parent?.imgType !== "url"
     },
     {
       name: "url",
@@ -65,4 +64,4 @@ export default defineType({
       title: "Link",
     }
   ],
-});
+};

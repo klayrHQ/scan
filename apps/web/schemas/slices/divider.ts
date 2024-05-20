@@ -1,6 +1,5 @@
-import { defineType } from "sanity";
 
-export const divider = defineType({
+export const divider = {
   name: "divider",
   type: "document",
   title: "Divider",
@@ -51,4 +50,4 @@ export const divider = defineType({
       title: "Margin top and bottom",
     },
   ]
-})
+}
