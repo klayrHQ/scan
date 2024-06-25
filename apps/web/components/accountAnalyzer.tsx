@@ -10,7 +10,7 @@ import {Grid, KeyValueRow, Typography, ValueFormatter} from "ui";
 import {Input} from "ui/atoms/input/input";
 
 export const AccountAnalyzer = () => {
-  const { publicKey, lisk32, address, legacy, setInput, error } =
+  const { publicKey, klayr32, address, legacy, setInput, error } =
     useAddressConverter()
   const [balance, setBalance] = useState<string>()
   const [accountStatus, setAccountStatus] = useState<any>("")
@@ -25,11 +25,11 @@ export const AccountAnalyzer = () => {
       "leg",
       legacy,
       "32",
-      lisk32,
+      klayr32,
       "error",
       error,
     )
-    if (lisk32 || legacy) {
+    if (klayr32 || legacy) {
       const getAccount = async () => {
         setNewFundOwner({} as AccountDataType)
         const { data } = (await getData("lisk-service", "get.token.balances", {

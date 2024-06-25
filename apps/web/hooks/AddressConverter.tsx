@@ -191,7 +191,7 @@ export const useAddressConverter = () => {
 
   return {
     setInput,
-    klayr32: klayr32,
+    klayr32,
     publicKey,
     address,
     legacy,
