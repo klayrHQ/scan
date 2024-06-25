@@ -30,7 +30,7 @@ export const TableSlice = ({
     const getData = async () => {
       if (table.key === "tokens" && queryData?.tokens?.data?.length === 1) {
         queryData.tokens.data.map((token: any, index: number) => {
-          queryData.tokens.data[index] = { ...token, chainName: "lisk" };
+          queryData.tokens.data[index] = { ...token, chainName: "klayr" };
         });
         const result = (await getAllData([
           {
@@ -46,7 +46,7 @@ export const TableSlice = ({
         ])) as { meta: BlockchainAppsMetaResponse; tokens: any };
         const chainsMeta = result?.meta?.data?.filter(
           (app) =>
-            app.chainName !== "lisk_mainchain" && app.networkType === "mainnet"
+            app.chainName !== "klayr_mainchain" && app.networkType === "mainnet"
         );
         for (const chainMeta of chainsMeta) {
           if (!clients[chainMeta.chainName]) {

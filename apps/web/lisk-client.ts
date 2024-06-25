@@ -15,7 +15,7 @@
 import { sha256 } from "js-sha256"
 
 const LISK32_ADDRESS_LENGTH = 41
-const DEFAULT_LISK32_ADDRESS_PREFIX = "lsk"
+const DEFAULT_LISK32_ADDRESS_PREFIX = "kly"
 const FIXED_POINT = 10 ** 8
 const LISK_MAX_DECIMAL_POINTS = 8
 const MAX_UINT64 = BigInt("18446744073709551615") // BigInt((2 ** 64) - 1) - 1

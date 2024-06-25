@@ -18,7 +18,7 @@ export const search = async (
   }
   const searchType = inputRecognizer(value);
   console.log(searchType);
-  if (searchType.type === "lisk32") {
+  if (searchType.type === "klayr32") {
     const account = await client.rpc("get.auth", { address: value });
     if (account.status === "success") {
       results.push({
@@ -100,9 +100,9 @@ export const search = async (
 };
 
 export const inputRecognizer = (value: string) => {
-  if (value.length === 41 && value.substring(0, 3).toLowerCase() === "lsk") {
+  if (value.length === 41 && value.substring(0, 3).toLowerCase() === "kly") {
     return {
-      type: "lisk32",
+      type: "klayr32",
       value,
     };
   }

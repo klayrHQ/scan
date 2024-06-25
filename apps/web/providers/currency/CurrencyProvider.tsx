@@ -105,7 +105,7 @@ export const CurrencyProvider = ({ children }: {children: any}) => {
   const convertCurrency = (beddows: string) => {
     const rate = getBeddowsRate(
       price.find(
-        (p) => p.code === `LSK_${parsedSettings?.selectedCurrency?.symbol}`,
+        (p) => p.code === `KLY_${parsedSettings?.selectedCurrency?.symbol}`,
       )?.rate,
     )
     const convertedBeddows = getConvertedBeddows(rate, beddows)
@@ -148,8 +148,8 @@ export const CurrencyProvider = ({ children }: {children: any}) => {
       delete result.data.lastUpdate
       const parsedResults = Object.keys(result.data).map((code) => {
         return {
-          code: `LSK_${code}`,
-          from: "LSK",
+          code: `KLY_${code}`,
+          from: "KLY",
           rate: result.data[code].price.toString(),
           to: code,
           updateTimestamp: 0,

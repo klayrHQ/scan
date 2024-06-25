@@ -60,7 +60,7 @@ export const SearchModal = ({
         {
           value: (
             <SearchResult
-              address={"lskk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
+              address={"klyk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
             />
           ),
         },
@@ -72,7 +72,7 @@ export const SearchModal = ({
         {
           value: (
             <SearchResult
-              address={"lskk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
+              address={"klyk84u2pk42jos35p6jmbxs8c8682nx793xdxy3p"}
             />
           ),
         },

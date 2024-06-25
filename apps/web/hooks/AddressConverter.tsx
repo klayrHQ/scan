@@ -20,7 +20,7 @@ export const useAddressConverter = () => {
   useEffect(() => {
     const isKlayr32 = () => {
       try {
-        return validateKlayr32Address(input, "lsk")
+        return validateKlayr32Address(input, "kly")
       } catch (e) {
         return false
       }
@@ -29,7 +29,7 @@ export const useAddressConverter = () => {
       try {
         return validateKlayr32Address(
           getKlayr32AddressFromAddress(Buffer.from(input, "hex")),
-          "lsk",
+          "kly",
         )
       } catch (e) {
         return false
@@ -41,7 +41,7 @@ export const useAddressConverter = () => {
           input.length === 64 &&
           validateKlayr32Address(
             getKlayr32AddressFromPublicKey(Buffer.from(input, "hex")),
-            "lsk",
+            "kly",
           )
         )
       } catch (e) {
@@ -61,7 +61,7 @@ export const useAddressConverter = () => {
     }
 
     const getType = () => {
-      if (isKlayr32()) return "lisk32"
+      if (isKlayr32()) return "klayr32"
       if (isAddress()) return "address"
       if (isLegacy()) return "legacy"
       if (isPublicKey()) return "publicKey"
@@ -69,9 +69,9 @@ export const useAddressConverter = () => {
     }
     const setAddressFromInput = (inputType: string) => {
       switch (inputType) {
-        case "lisk32":
+        case "klayr32":
           setAddress(
-            new Buffer(getAddressFromKlayr32Address(input, "lsk")).toString(
+            new Buffer(getAddressFromKlayr32Address(input, "kly")).toString(
               "hex",
             ),
           )
@@ -81,10 +81,10 @@ export const useAddressConverter = () => {
           break
         case "publicKey":
           const base32 = getKlayr32AddressFromPublicKey(
-            Buffer.from(input, "hex"),
+            Buffer.from(input, "hex"), 'kly'
           )
           setAddress(
-            new Buffer(getAddressFromKlayr32Address(base32, "lsk")).toString(
+            new Buffer(getAddressFromKlayr32Address(base32, "kly")).toString(
               "hex",
             ),
           )
@@ -98,7 +98,7 @@ export const useAddressConverter = () => {
     }
     const setPublicKeyFromInput = (inputType: string) => {
       switch (inputType) {
-        case "lisk32":
+        case "klayr32":
           setPublicKey("")
           break
         case "address":
@@ -116,14 +116,14 @@ export const useAddressConverter = () => {
     }
     const setKlayr32FromInput = (inputType: string) => {
       switch (inputType) {
-        case "lisk32":
+        case "klayr32":
           setKlayr32(input)
           break
         case "address":
-          setAddress(getKlayr32AddressFromAddress(Buffer.from(input, "hex")))
+          setAddress(getKlayr32AddressFromAddress(Buffer.from(input, "hex"), 'kly'))
           break
         case "publicKey":
-          setKlayr32(getKlayr32AddressFromPublicKey(Buffer.from(input, "hex")))
+          setKlayr32(getKlayr32AddressFromPublicKey(Buffer.from(input, "hex"), 'kly'))
           break
         case "legacy":
           setKlayr32("")
@@ -147,11 +147,11 @@ export const useAddressConverter = () => {
         return BigInt("0x" + hex.join(""))
       }
       switch (inputType) {
-        case "lisk32":
+        case "klayr32":
           setLegacy(
             `${bufToBn(
               getFirstEightBytesReversed(
-                getAddressFromKlayr32Address(input, "lsk"),
+                getAddressFromKlayr32Address(input, "kly"),
               ),
             ).toString()}L`,
           )
@@ -191,7 +191,7 @@ export const useAddressConverter = () => {
 
   return {
     setInput,
-    lisk32: klayr32,
+    klayr32: klayr32,
     publicKey,
     address,
     legacy,
