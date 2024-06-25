@@ -30,12 +30,12 @@ export const KeyValueKPI = ({label, dottedKey, data, backupKey, color = "onTopba
 
   useEffect(() => {
     if (label === "round") {
-      const round = lastBlock?.height ? Math.floor(lastBlock.height / 103) : 0
+      const round = lastBlock?.height ? Math.floor(lastBlock.height / 53) : 0
       updateValue(`${round}`)
     }
     if (label === "round progress") {
-      const progress = lastBlock?.height ? lastBlock.height % 103 : 0
-      updateValue(`${progress} / 103`)
+      const progress = lastBlock?.height ? lastBlock.height % 53 : 0
+      updateValue(`${progress} / 53`)
     }
     if (label === "certified height") {
       const certifiedHeight = lastBlock?.aggregateCommit?.height || 0

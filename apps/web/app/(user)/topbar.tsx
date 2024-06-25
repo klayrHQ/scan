@@ -154,7 +154,7 @@ export const TopBarLayout = ({
               "justify-end w-app md:w-auto space-x-2 md:space-x-4 items-center false flex sm:flex-row sm:gap-0 flex-row gap-0"
             }
           >
-            <Price />
+            {/*<Price />*/}
             {/*<Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
               <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
             </Tooltip>*/}
