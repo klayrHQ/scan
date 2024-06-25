@@ -33,7 +33,7 @@ export const AccountAnalyzer = () => {
       const getAccount = async () => {
         setNewFundOwner({} as AccountDataType)
         const { data } = (await getData("lisk-service", "get.token.balances", {
-          address: lisk32,
+          address: klayr32,
           limit: 1,
         }))
         console.log(data)
@@ -84,8 +84,8 @@ export const AccountAnalyzer = () => {
                   )) as { data?: AccountDataType[] }
                   if (accountData?.data?.[0]?.summary) {
                     if (
-                      lisk32 &&
-                      accountData.data[0]?.summary?.address !== lisk32
+                      klayr32 &&
+                      accountData.data[0]?.summary?.address !== klayr32
                     ) {
                       setAccountStatus("This account is collision attacked")
                     } else {
@@ -108,7 +108,7 @@ export const AccountAnalyzer = () => {
       }
       getAccount()
     }
-  }, [publicKey, address, legacy, lisk32, error])
+  }, [publicKey, address, legacy, klayr32, error])
 
   const onPast = (input: string) => {
     setInput(input)
@@ -147,21 +147,21 @@ export const AccountAnalyzer = () => {
               label={"Public Key"}
               value={
                 <Link
-                  href={`/account/${lisk32}`}
+                  href={`/account/${klayr32}`}
                 >
                   <Typography tag={"span"}>{publicKey}</Typography>
                 </Link>
               }
             />
           )}
-          {lisk32 && (
+          {klayr32 && (
             <KeyValueRow
               label={"Address"}
               value={
                 <Link
-                  href={`/account/${lisk32}`}
+                  href={`/account/${klayr32}`}
                 >
-                  <Typography tag={"span"}>{lisk32}</Typography>
+                  <Typography tag={"span"}>{klayr32}</Typography>
                 </Link>
               }
             />
@@ -171,7 +171,7 @@ export const AccountAnalyzer = () => {
               label={"Hex Address (Binary Address)"}
               value={
                 <Link
-                  href={`/account/${lisk32}`}
+                  href={`/account/${klayr32}`}
                 >
                   <Typography tag={"span"}>{address}</Typography>
                 </Link>
