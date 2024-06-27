@@ -29,16 +29,6 @@ export const menuObj = [
                 label: "Blocks"
             },
             {
-                _key: "cd62b9552d92",
-                badge: "COMING SOON!",
-                subLabel: "Browse all pending transactions",
-                _type: "item",
-                icon: "ClockIconSolid",
-                link: "/pending",
-                disabled: true,
-                label: "Pending transactions"
-            },
-            {
                 link: "/network",
                 label: "Network",
                 _key: "47d10cb6ecc7",
@@ -55,16 +45,6 @@ export const menuObj = [
                 label: "Events"
             },
             {
-                badge: "COMING SOON!",
-                subLabel: "Overview of all the schemas available",
-                _type: "item",
-                icon: "FingerPrintIconOutline",
-                link: "/schemas",
-                disabled: true,
-                label: "Schemas",
-                _key: "aa879f19cd0b"
-            },
-            {
                 icon: "AdjustmentsVerticalIconSolid",
                 link: "/chain-info",
                 label: "Chain info",
@@ -79,16 +59,6 @@ export const menuObj = [
                 link: "/analyze",
                 label: "Account analyzer",
                 _key: "c29e270c37f1"
-            },
-            {
-                label: "Collection overview",
-                _key: "b94768eadc56",
-                badge: "COMING SOON!",
-                subLabel: "All collections of collectibles available on Klayr explorer",
-                _type: "item",
-                icon: "PhotoIconSolid",
-                link: "/collections",
-                disabled: true
             },
             {
                 icon: "ChartBarIconSolid",
