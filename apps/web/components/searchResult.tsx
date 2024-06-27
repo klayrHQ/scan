@@ -32,7 +32,7 @@ export const SearchResult = ({
             <Grid className={"items-center"} flex columns={2} mobileColumns={2} gap={4}>
               <Avatar address={data.value} size={24} />
               <Grid className={"items-start"} flex>
-                <Typography color={"onPrimary"} tag={"span"}>{data.label}</Typography>
+                <Typography color={"onBackgroundMedium"} tag={"span"}>{data.label}</Typography>
                 {data.value !== data.label && <Typography color={"onSurfaceMedium"} size={"subBody"} tag={"span"}>{data.value}</Typography>}
               </Grid>
             </Grid>
