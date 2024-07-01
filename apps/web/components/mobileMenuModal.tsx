@@ -1,9 +1,8 @@
 "use client"
 import React, {useState} from "react";
 import {ModalFullHeight} from "ui/atoms/modalFullHeight/modalFullHeight";
-import {cls, Grid, InfoBar, KeyValueRow, Tooltip} from "ui";
+import {cls, Grid, InfoBar, Tooltip} from "ui";
 import {
-  Cog6ToothIcon as CogIcon,
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
@@ -20,6 +19,7 @@ import {InfoBarKPISType} from "../lib/queries/getInfoBarKPIS";
 import {IndexStatusResponse} from "@liskscan/lisk-service-client/lib/types";
 import {IconButton} from "ui/atoms/iconButton/iconButton";
 import {KPICarousel} from "./data/KPICarousel";
+import {SettingsModal} from "./settings/settingsModal";
 
 export const MobileMenuModal = ({
   menuItems,
@@ -159,16 +159,7 @@ export const MobileMenuModal = ({
               "justify-end w-app md:w-auto space-x-2 md:space-x-4 items-center false flex sm:flex-row sm:gap-0 flex-row gap-0"
             }
           >
-            <KeyValueRow
-              inline
-              color={"onTopbar"}
-              label={"MC:"}
-              value={"108,614,363 EUR"}
-              valueBold
-            />
-            <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
-              <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
-            </Tooltip>
+            <SettingsModal />
             <Tooltip
               label={themeMode === "dark" ? "Dark mode" : "Light mode"}
               placement={"bottom"}
