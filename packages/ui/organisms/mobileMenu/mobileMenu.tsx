@@ -28,7 +28,7 @@ export const MobileMenu = ({
       {infoBar}
       <div className={"lg:hidden w-app bg-background flex flex-tableRow justify-between mb-2 py-4 mx-auto"}>
         <span className="text-onSurfaceHigh font-medium">
-          {menuTitle || "Liskscan Menu"}
+          {menuTitle || "Menu"}
         </span>
         {closeButton}
       </div>

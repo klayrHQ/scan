@@ -1,12 +1,11 @@
 "use client";
 import { TopBarClient } from "../../components/layout/topbar";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Cog6ToothIcon as CogIcon,
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
-import { cls, Grid, InfoBar, KeyValueRow, Tooltip, Typography } from "ui";
+import { cls, Grid, InfoBar, Tooltip, Typography } from "ui";
 import { formatDistance } from "date-fns";
 import { useService } from "../../providers/service";
 import {
@@ -25,13 +24,11 @@ import { SubMenu } from "../../components/layout/subMenu";
 import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import { getCurrentTheme, switchThemeMode, updateTheme } from "./theme";
 import RefreshButton from "./refreshButton";
-import { useSanity } from "../../providers/sanity";
 import { FavouritesModal } from "../../components/favouritesModal";
 import { SearchModal } from "../../components/searchModal";
 import { MobileMenuModal } from "../../components/mobileMenuModal";
 import { KPICarousel } from "../../components/data/KPICarousel";
 import {SettingsModal} from "../../components/settings/settingsModal";
-import Price from "../../components/layout/price";
 
 export const TopBarLayout = ({
   status,
@@ -118,7 +115,7 @@ export const TopBarLayout = ({
             {kpis &&
               <>
                 {kpis?.map(({ key, label, backup, _key }, i) => (
-                  <div className={"hidden 2xl:inline"} key={`desktop-${key}-${i}`}>
+                  <div className={"hidden xl:inline"} key={`desktop-${key}-${i}`}>
                     <KeyValueKPI
                       key={_key}
                       dottedKey={key}
@@ -154,10 +151,6 @@ export const TopBarLayout = ({
               "justify-end w-app md:w-auto space-x-2 md:space-x-4 items-center false flex sm:flex-row sm:gap-0 flex-row gap-0"
             }
           >
-            {/*<Price />*/}
-            {/*<Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
-              <CogIcon className="mt-1 w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0 outline-0" />
-            </Tooltip>*/}
             <SettingsModal />
             <Tooltip
               label={themeMode === "dark" ? "Dark mode" : "Light mode"}
