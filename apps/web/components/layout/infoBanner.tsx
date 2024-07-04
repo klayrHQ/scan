@@ -8,7 +8,7 @@ interface InfoBannerProps {
 }
 
 export const InfoBanner = ({ children, }: InfoBannerProps) => {
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
 
   const handleShow = (show: boolean) => {
     setShow(show)
