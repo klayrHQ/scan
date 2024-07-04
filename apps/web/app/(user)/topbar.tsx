@@ -29,6 +29,7 @@ import { SearchModal } from "../../components/searchModal";
 import { MobileMenuModal } from "../../components/mobileMenuModal";
 import { KPICarousel } from "../../components/data/KPICarousel";
 import {SettingsModal} from "../../components/settings/settingsModal";
+import {InfoBanner} from "../../components/layout/infoBanner";
 
 export const TopBarLayout = ({
   status,
@@ -75,6 +76,12 @@ export const TopBarLayout = ({
   const currentKPI = kpis[currentIndex];
   return (
     <TopBarClient>
+      <InfoBanner>
+        <Typography className={"text-center"} color={"onInfobar"} size={"body"} tag={"span"}>
+          {"Staking rewards are now live, time to put your tokens to work. "}
+          <Link className={"text-onInfobar underline"} href={"#"}>{"Learn more"}</Link>
+        </Typography>
+      </InfoBanner>
       <InfoBar
         infoItemsLeft={[
           <Grid
