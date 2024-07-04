@@ -78,8 +78,8 @@ export const TopBarLayout = ({
     <TopBarClient>
       <InfoBanner>
         <Typography className={"text-center"} color={"onInfobar"} size={"body"} tag={"span"}>
-          {"Staking rewards are now live, time to put your tokens to work. "}
-          <Link className={"text-onInfobar underline"} href={"#"}>{"Learn more"}</Link>
+          {"🎉 Staking rewards are now live, time to put your tokens to work. "}
+          <Link className={"text-onInfobar underline"} target={"_blank"} href={"https://klayr.xyz/blog/how-to-stake-with-klayr/"}>{"Learn more"}</Link>
         </Typography>
       </InfoBanner>
       <InfoBar
