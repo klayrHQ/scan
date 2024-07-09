@@ -1,12 +1,9 @@
 import { ValidatorsHeader } from "../../../../components/validators/validatorsHeader";
 import { Container, Grid } from "ui";
-import { getAllData } from "../../../../lib/sanity.service";
-import {
-  BlockchainAppsMetaResponse,
-  NetworkStatusResponse,
-} from "@liskscan/lisk-service-client/lib/types";
 import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import { StakeCalculator } from "../../../../components/validators/stakeCalculator";
+
+export const revalidate = 3600 // revalidate at most every hour
 
 const layout = async ({ children, params }: any) => {
   // const result = (await getAllData([
@@ -27,13 +24,13 @@ const layout = async ({ children, params }: any) => {
   const generatorsResponse = await fetch(
     `https://cached-${
       network || "mainnet"
-    }-service.klayr.xyz/generators`
+    }-service.klayr.xyz/generators`, { next: { revalidate: 300 } }
   );
   const generators = await generatorsResponse.json();
   const statsResponse = await fetch(
     `https://cached-${
       network || "mainnet"
-    }-service.klayr.xyz/validators/stats`
+    }-service.klayr.xyz/validators/stats`, { next: { revalidate: 3600 } }
   );
   const stats = (await statsResponse.json()) as {
     standby: number;
