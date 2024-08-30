@@ -67,6 +67,14 @@ export const menuObj = [
                 _key: "7578b1be3fd8",
                 subLabel: "Overview of all tokens in the Klayr network ",
                 _type: "item"
+            },
+            {
+                icon: "TrophyIconSolid",
+                link: "/top",
+                label: "Top list",
+                _key: "7578b1be3fdb",
+                subLabel: "Overview of top 100 accounts in the Klayr network",
+                _type: "item"
             }
         ],
         _type: "item",
