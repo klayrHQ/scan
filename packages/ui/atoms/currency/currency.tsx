@@ -71,7 +71,7 @@ export const Currency = ({
       {decimals && (
         <span
           className={[
-            classes?.separator ? classes?.separator : "text-onSurfacePrimaryMedium",
+            classes?.separator ? classes?.separator : "",
           ].join(" ")}
         >
           {parsedSettings?.decimalSeparatorDot ? "." : ","}
