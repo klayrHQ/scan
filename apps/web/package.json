@@ -38,6 +38,7 @@
     "nanoid": "^4.0.2",
     "next": "^13.4.2",
     "next-sanity": "4.1.5",
+    "p-limit": "6.2.0",
     "react": "^18",
     "react-click-away-listener": "^2.2.3",
     "react-copy-to-clipboard": "^5.1.0",

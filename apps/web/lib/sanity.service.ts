@@ -9,6 +9,9 @@ import { getDotString, getDottedKeyType, getFromDottedKey } from "./dotString";
 import { parseProps } from "ui";
 import { UpdateOnType } from "../schemas/slices/table";
 import * as util from "util";
+import pLimit from "p-limit";
+
+const limit = pLimit(5);
 
 export const serviceURL =
   process.env.NEXT_PUBLIC_SERVICE_URL || "service.klayr.xyz";
@@ -103,155 +106,159 @@ export const getAllData = async (
   if (!queries) {
     return {};
   }
-  for (const query of queries) {
-    if (query.serviceType === "lisk-service") {
-      responses[query.key] = await getData(
-        query.serviceType,
-        query.call,
-        parseProps(query.params, id)
-      );
-      if (needsTimestampImport(query.call)) {
-        const keys = getTimestampHeightKeys(query.call);
-        if (keys) {
-          for (const index in responses[query.key]?.data) {
-            for (const key of keys) {
-              responses[query.key].data[index][
-                key.replace("Height", "Timestamp")
-              ] = await getTimestamp(responses[query.key]?.data[index][key]);
+  const mainQueryPromises = queries.map((query) => {
+    return limit(async () => {
+      if (query.serviceType === "lisk-service") {
+        responses[query.key] = await getData(
+          query.serviceType,
+          query.call,
+          parseProps(query.params, id)
+        );
+        if (needsTimestampImport(query.call)) {
+          const keys = getTimestampHeightKeys(query.call);
+          if (keys) {
+            for (const index in responses[query.key]?.data) {
+              for (const key of keys) {
+                responses[query.key].data[index][
+                  key.replace("Height", "Timestamp")
+                ] = await getTimestamp(responses[query.key]?.data[index][key]);
+              }
             }
           }
         }
-      }
-      if (query.calculations) {
-        for (const calculation of query.calculations) {
-          const d = getIterableData(responses[query.key].data);
+        if (query.calculations) {
+          for (const calculation of query.calculations) {
+            const d = getIterableData(responses[query.key].data);
 
-          // data array
-          responses[query.key].data = d?.map((row: any) => {
-            const keys = calculation.keys.map((k) => {
-              if (responses[getDottedKeyType(k)]) {
-                return getFromDottedKey(k, "row", row, responses);
+            // data array
+            responses[query.key].data = d?.map((row: any) => {
+              const keys = calculation.keys.map((k) => {
+                if (responses[getDottedKeyType(k)]) {
+                  return getFromDottedKey(k, "row", row, responses);
+                }
+                return getFromDottedKey("row." + k, "row", row, { row });
+              });
+              const parsedCalculation = util.format(
+                calculation.calculation,
+                ...keys
+              );
+              try {
+                const result = eval(parsedCalculation);
+                return { ...row, [calculation.name]: result };
+              } catch (e) {
+                return { ...row };
               }
-              return getFromDottedKey("row." + k, "row", row, { row });
             });
-            const parsedCalculation = util.format(
-              calculation.calculation,
-              ...keys
-            );
-            try {
-              const result = eval(parsedCalculation);
-              return { ...row, [calculation.name]: result };
-            } catch (e) {
-              return { ...row };
-            }
-          });
+          }
         }
       }
-    }
-    if (query.subQueries && query.subQueries.length > 0) {
-      for (const subQuery of query.subQueries) {
-        if (subQuery.type === "forEach") {
-          if (responses[query.key].status === "success") {
-            const data = getIterableData(responses[query.key]?.data);
-            for (const index in data) {
-              const childRequest = data[index];
-              const foreignKey = getDotString(
-                subQuery.foreignKey.split("."),
-                childRequest
-              );
-              if (!responses[`${foreignKey}_${subQuery.call}`]) {
-                const response = await getData(
-                  subQuery.serviceType,
-                  subQuery.call,
-                  {
-                    [subQuery.primaryKey]: foreignKey.toString(),
-                  }
+      if (query.subQueries && query.subQueries.length > 0) {
+        for (const subQuery of query.subQueries) {
+          if (subQuery.type === "forEach") {
+            if (responses[query.key].status === "success") {
+              const data = getIterableData(responses[query.key]?.data);
+              for (const index in data) {
+                const childRequest = data[index];
+                const foreignKey = getDotString(
+                  subQuery.foreignKey.split("."),
+                  childRequest
                 );
-                if (response.status === "success" && response?.data) {
-                  if (needsTimestampImport(subQuery.call)) {
-                    const keys = getTimestampHeightKeys(subQuery.call);
-                    if (keys) {
-                      for (const index in response?.data) {
-                        for (const key of keys) {
-                          response.data[index][
-                            key.replace("Height", "Timestamp")
-                          ] = await getTimestamp(response.data[index][key]);
+                if (!responses[`${foreignKey}_${subQuery.call}`]) {
+                  const response = await getData(
+                    subQuery.serviceType,
+                    subQuery.call,
+                    {
+                      [subQuery.primaryKey]: foreignKey.toString(),
+                    }
+                  );
+                  if (response.status === "success" && response?.data) {
+                    if (needsTimestampImport(subQuery.call)) {
+                      const keys = getTimestampHeightKeys(subQuery.call);
+                      if (keys) {
+                        for (const index in response?.data) {
+                          for (const key of keys) {
+                            response.data[index][
+                              key.replace("Height", "Timestamp")
+                            ] = await getTimestamp(response.data[index][key]);
+                          }
                         }
                       }
                     }
+                    responses[`${foreignKey}_${subQuery.call}`] = {
+                      ...response,
+                      data:
+                        response?.data && response.data.length > 0
+                          ? response.data[0]
+                          : response.data,
+                    };
                   }
-                  responses[`${foreignKey}_${subQuery.call}`] = {
-                    ...response,
-                    data:
-                      response?.data && response.data.length > 0
-                        ? response.data[0]
-                        : response.data,
-                  };
                 }
+                data[index][
+                  `${subQuery.call.replaceAll(
+                    ".",
+                    "_"
+                  )}_${subQuery.foreignKey.replaceAll(".", "_")}`
+                ] = responses[`${foreignKey}_${subQuery.call}`];
               }
-              data[index][
-                `${subQuery.call.replaceAll(
-                  ".",
-                  "_"
-                )}_${subQuery.foreignKey.replaceAll(".", "_")}`
-              ] = responses[`${foreignKey}_${subQuery.call}`];
             }
           }
-        }
-        if (
-          subQuery.type === "singleMatch" &&
-          !responses[`${subQuery.call}_${subQuery.primaryKey}`]
-        ) {
-          responses[
-            `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-          ] = await getData(
-            subQuery.serviceType,
-            subQuery.call,
-            parseProps(subQuery.params)
-          );
           if (
-            responses[query.key].status === "success" &&
+            subQuery.type === "singleMatch" &&
+            !responses[`${subQuery.call}_${subQuery.primaryKey}`]
+          ) {
             responses[
               `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-            ]?.data
-          ) {
-            if (needsTimestampImport(subQuery.call)) {
-              const keys = getTimestampHeightKeys(subQuery.call);
-              if (keys) {
-                for (const index in responses[query.key].data) {
-                  for (const key of keys) {
-                    responses[query.key].data[index][
-                      key.replace("Height", "Timestamp")
-                    ] = await getTimestamp(
-                      responses[query.key].data[index][key]
-                    );
+            ] = await getData(
+              subQuery.serviceType,
+              subQuery.call,
+              parseProps(subQuery.params)
+            );
+            if (
+              responses[query.key].status === "success" &&
+              responses[
+                `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
+              ]?.data
+            ) {
+              if (needsTimestampImport(subQuery.call)) {
+                const keys = getTimestampHeightKeys(subQuery.call);
+                if (keys) {
+                  for (const index in responses[query.key].data) {
+                    for (const key of keys) {
+                      responses[query.key].data[index][
+                        key.replace("Height", "Timestamp")
+                      ] = await getTimestamp(
+                        responses[query.key].data[index][key]
+                      );
+                    }
                   }
                 }
               }
-            }
-            for (const index in responses[query.key].data) {
-              try {
-                const childRequest = responses[query.key].data[index];
-                const found = responses[
-                  `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
-                ]?.data?.find(
-                  (d: any) =>
-                    d[subQuery.primaryKey] === childRequest[subQuery.foreignKey]
-                );
-                if (found) {
-                  responses[query.key].data[index][
-                    `${subQuery.call.replaceAll(".", "_")}_${
-                      subQuery.primaryKey
-                    }`
-                  ] = found;
-                }
-              } catch (e) {}
+              for (const index in responses[query.key].data) {
+                try {
+                  const childRequest = responses[query.key].data[index];
+                  const found = responses[
+                    `${subQuery.call.replaceAll(".", "_")}_${subQuery.primaryKey}`
+                  ]?.data?.find(
+                    (d: any) =>
+                      d[subQuery.primaryKey] ===
+                      childRequest[subQuery.foreignKey]
+                  );
+                  if (found) {
+                    responses[query.key].data[index][
+                      `${subQuery.call.replaceAll(".", "_")}_${
+                        subQuery.primaryKey
+                      }`
+                    ] = found;
+                  }
+                } catch (e) {}
+              }
             }
           }
         }
       }
-    }
-  }
+    });
+  });
+  await Promise.all(mainQueryPromises);
   return responses;
 };
 
@@ -335,7 +342,7 @@ export const getData = async (
       return await doCache(call, params.address, params, 60 * 5);
     case "get.blockchain.apps.meta":
       return await doCache(call, "meta", params, 60 * 5);
-      case "get.blockchain.apps.statistics":
+    case "get.blockchain.apps.statistics":
       return await doCache(call, "meta", params, 60 * 5);
     case "get.blockchain.apps.meta.tokens":
       return await doCache(call, "meta", params, 60 * 5);
