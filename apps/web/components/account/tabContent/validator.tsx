@@ -106,7 +106,7 @@ export const Validator = ({
 
   return (
     <Grid columns={1} flex gap={4}>
-      {punishments && (
+      {punishments && punishments.length > 0 && (
         <Grid
           className={"rounded p-4 bg-surface-1 w-full md:w-[350px] gap-4"}
           columns={1}
