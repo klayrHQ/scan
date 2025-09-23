@@ -30,7 +30,7 @@ type ServiceContextType = {
   nextPage(queryKey?: string): void;
 };
 const ServiceContext = createContext<ServiceContextType>(
-  {} as ServiceContextType,
+  {} as ServiceContextType
 );
 
 export const ServiceProvider = ({ children }: { children: ReactNode }) => {
@@ -76,12 +76,14 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     updateCache();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [event]);
 
   useEffect(() => {
     if (queries.length > 0) {
       updateQuery();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queries]);
 
   // Subscribe to events

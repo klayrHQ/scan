@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export const LastBlockKPIS = [
   { title: "lastBlock.height", value: "lastBlock.height" },
   { title: "lastBlock.id", value: "lastBlock.id" },

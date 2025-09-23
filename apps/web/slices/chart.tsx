@@ -69,7 +69,7 @@ export const ChartSlice = ({
               [labelKey || "labelKey"]: modifiedLabelKey,
               [valueKey || "valueKey"]: Number(value),
             };
-          },
+          }
         );
 
         setChartData(chartDataArray);
@@ -97,14 +97,14 @@ export const ChartSlice = ({
               .substring(0, 2);
 
             const lsk = Number(
-              Number(convertBeddowsToLSK(String(values[2][1]))).toFixed(2),
+              Number(convertBeddowsToLSK(String(values[2][1]))).toFixed(2)
             );
             return {
               [labelKey || values[0][0]]: day,
               [valueKey || values[1][0]]: values[1][1],
               [valueKey2 || values[2][0]]: lsk,
             };
-          },
+          }
         );
         console.log("sortedData", sortedData);
         setChartData(chartDataArray);
@@ -113,6 +113,7 @@ export const ChartSlice = ({
 
     //console.log("keyLabel", labelKey)
     console.log("chartData", chartData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData]);
 
   const getValueByNestedIndex = (data: any, keys: string[]): any => {

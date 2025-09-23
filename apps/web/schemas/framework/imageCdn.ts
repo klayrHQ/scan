@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { ImagesIcon } from "@sanity/icons";
 
 export default {

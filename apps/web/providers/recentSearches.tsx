@@ -10,12 +10,12 @@ export interface RecentSearchesContextProps {
   recentSearches: Array<recentSearchesDataType> | undefined;
   saveSearch: Function;
   setRecentSearches: (
-    recentSearches: recentSearchesDataType[] | undefined,
+    recentSearches: recentSearchesDataType[] | undefined
   ) => void;
 }
 
 export const RecentSearchesContext = createContext<RecentSearchesContextProps>(
-  {} as RecentSearchesContextProps,
+  {} as RecentSearchesContextProps
 );
 
 export const useSaveSearch = () => useContext(RecentSearchesContext);
@@ -28,7 +28,7 @@ export const RecentSearchesProvider = ({ children }: { children: any }) => {
     // @ts-ignore
     let recentSearchesStorage: [recentSearchesDataType] | undefined =
       typeof window !== "undefined"
-        ? JSON.parse(localStorage.getItem("lastSearches"))
+        ? JSON.parse(localStorage.getItem("lastSearches") || "[]")
         : undefined;
 
     setRecentSearches(recentSearchesStorage);
@@ -48,12 +48,12 @@ export const RecentSearchesProvider = ({ children }: { children: any }) => {
         recentSearches.findIndex((i) => i.address === lastSearch.address) !== -1
       ) {
         const newRecentSearches = recentSearches.filter(
-          (s) => s.address !== lastSearch.address,
+          (s) => s.address !== lastSearch.address
         );
         setRecentSearches([lastSearch, ...newRecentSearches]);
       } else if (recentSearches.length >= recentSearchLimit) {
         const newRecentSearches = recentSearches.filter(
-          (s, index) => index < recentSearchLimit - 1,
+          (s, index) => index < recentSearchLimit - 1
         );
         setRecentSearches([lastSearch, ...newRecentSearches]);
       } else {

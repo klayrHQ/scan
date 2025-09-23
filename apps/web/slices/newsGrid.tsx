@@ -5,6 +5,7 @@ import { sanityFetch } from "../components/sanity/fetch";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { dayjs } from "ui/utils/time";
+import Image from "next/image";
 
 type NewsItemType = {
   _id: string;
@@ -43,7 +44,7 @@ export const NewsGrid = ({ newsItems }: { newsItems: NewsItemRefType[] }) => {
       //console.log(fetchedItems)
       setAllItems(fetchedItems);
       const fetchedCategories = await sanityFetch(
-        `*[_type == "newsCategories"]`,
+        `*[_type == "newsCategories"]`
       );
       //console.log(fetchedCategories)
       setCategories(fetchedCategories);
@@ -55,9 +56,9 @@ export const NewsGrid = ({ newsItems }: { newsItems: NewsItemRefType[] }) => {
   const parsedItems: Array<NewsItemType | undefined> = newsItems.map(
     (newsItem) => {
       return allItems?.find(
-        (item: { _id: string }) => newsItem._ref === item._id,
+        (item: { _id: string }) => newsItem._ref === item._id
       );
-    },
+    }
   );
 
   return <></>;
@@ -87,7 +88,7 @@ export const NewsGrid = ({ newsItems }: { newsItems: NewsItemRefType[] }) => {
         }
 
         const category = categories?.filter(
-          ({ _id }) => _id === item?.category?._ref,
+          ({ _id }) => _id === item?.category?._ref
         )[0]?.title;
 
         return (
@@ -102,7 +103,7 @@ export const NewsGrid = ({ newsItems }: { newsItems: NewsItemRefType[] }) => {
                   "sm:w-auto aspect-video h-full w-full max-w-full sm:h-auto overflow-hidden rounded"
                 }
               >
-                <img
+                <Image
                   className={
                     "object-cover max-w-full max-h-full rounded object-top"
                   }

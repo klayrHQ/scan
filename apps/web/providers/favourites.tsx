@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { client } from "../lib/sanity.service";
+import { TokenBalancesResponse } from "@liskscan/lisk-service-client";
 
 export interface favouriteDataType {
   address: string;
@@ -25,7 +26,7 @@ export interface FavouritesContextProps {
 }
 
 export const FavouritesContext = createContext<FavouritesContextProps>(
-  {} as FavouritesContextProps,
+  {} as FavouritesContextProps
 );
 
 export const useSaveFavourites = () => useContext(FavouritesContext);
@@ -49,11 +50,14 @@ export const FavouritesProvider = ({ children }: { children: ReactNode }) => {
         setFavourites((prevFavourites) => {
           if (prevFavourites) {
             const favouriteIndex = prevFavourites?.findIndex(
-              (fav) => fav.address === address,
+              (fav) => fav.address === address
             );
             // @ts-ignore
             const totalBalance = result?.data[0]?.availableBalance
-              ? BigInt(result.data[0].availableBalance)
+              ? BigInt(
+                  (result.data as unknown as TokenBalancesResponse["data"][])[0]
+                    .availableBalance
+                )
               : undefined;
 
             if (favouriteIndex > -1 && totalBalance) {
@@ -74,6 +78,7 @@ export const FavouritesProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     updateFavourites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [client]);
 
   //add favourite to favourites array
@@ -84,13 +89,13 @@ export const FavouritesProvider = ({ children }: { children: ReactNode }) => {
       if (previousFavourites) {
         if (
           previousFavourites.findIndex(
-            (i) => i.address === favourite.address,
+            (i) => i.address === favourite.address
           ) !== -1
         ) {
           return [
             favourite,
             ...previousFavourites.filter(
-              (s) => s.address !== favourite.address,
+              (s) => s.address !== favourite.address
             ),
           ];
         }
@@ -108,7 +113,7 @@ export const FavouritesProvider = ({ children }: { children: ReactNode }) => {
 
   const unFavourite = (address: string) => {
     setFavourites((previousFavourites) =>
-      previousFavourites?.filter((f) => f.address !== address),
+      previousFavourites?.filter((f) => f.address !== address)
     );
   };
 

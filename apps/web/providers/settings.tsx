@@ -47,7 +47,7 @@ interface SettingsContextProps {
 }
 
 export const SettingsContext = createContext<SettingsContextProps>(
-  {} as SettingsContextProps,
+  {} as SettingsContextProps
 );
 
 export const useSettings = () => useContext(SettingsContext);
@@ -67,7 +67,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
     if (settingsState) {
       const newSettings = [...settingsState];
       const foundSetting = newSettings?.findIndex(
-        (setting) => setting.handle === handle,
+        (setting) => setting.handle === handle
       );
       if (foundSetting > -1) {
         newSettings[foundSetting].value = newState;
@@ -77,7 +77,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
         saveSettings([...newSettings]);
       } else {
         const newSetting = settings.find(
-          (setting) => setting.handle === handle,
+          (setting) => setting.handle === handle
         );
         if (newSetting) {
           newSetting.value = newState;
@@ -97,7 +97,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
     if (storedSettings) {
       const mixSettings = settings?.map((setting) => {
         const foundStoredSetting = parsedStoredSettings.find(
-          (s: SettingType) => s.handle === setting.handle,
+          (s: SettingType) => s.handle === setting.handle
         );
         if (foundStoredSetting?.handle === "networks") {
           return { ...setting };
@@ -121,7 +121,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
     store &&
     window.localStorage.setItem(
       "settings",
-      window.btoa(unescape(encodeURIComponent(JSON.stringify(store)))),
+      window.btoa(unescape(encodeURIComponent(JSON.stringify(store))))
     );
 
   const parseSettings = () => {
@@ -151,6 +151,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
           view,
           setView,
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [
           settings,
           getSetting,
@@ -162,7 +163,7 @@ export const SettingsProvider = ({ children }: { children: any }) => {
           views,
           view,
           setView,
-        ],
+        ]
       )}
     >
       {children}

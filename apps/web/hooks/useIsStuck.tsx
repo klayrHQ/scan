@@ -2,7 +2,7 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 
 export const useIsStuck = (
-  offset = 0,
+  offset = 0
 ): [boolean, MutableRefObject<HTMLDivElement | null>] => {
   const [isStuck, setIsStuck] = useState<boolean>(false);
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -10,7 +10,7 @@ export const useIsStuck = (
   const calcPixels = (
     twNumber: number,
     remSize: number = 16,
-    twNumberSize: number = 0.25,
+    twNumberSize: number = 0.25
   ) => {
     return twNumber * twNumberSize * remSize;
   };
@@ -31,6 +31,7 @@ export const useIsStuck = (
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [isStuck, stickyRef];

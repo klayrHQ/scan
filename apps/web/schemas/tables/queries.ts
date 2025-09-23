@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { Methods } from "./methods";
 import { UpdateOn } from "../slices/table";
 

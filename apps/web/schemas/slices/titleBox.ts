@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { SanityValue } from "../layout/value";
 
 export default {
