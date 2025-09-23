@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { cls, Grid, Typography, ValueFormatter } from "ui";
 import { ConsoleLogTester } from "../components/consoleLogTester";
@@ -5,7 +6,6 @@ import { sanityFetch } from "../components/sanity/fetch";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { dayjs } from "ui/utils/time";
-import Image from "next/image";
 
 type NewsItemType = {
   _id: string;
@@ -103,7 +103,7 @@ export const NewsGrid = ({ newsItems }: { newsItems: NewsItemRefType[] }) => {
                   "sm:w-auto aspect-video h-full w-full max-w-full sm:h-auto overflow-hidden rounded"
                 }
               >
-                <Image
+                <img
                   className={
                     "object-cover max-w-full max-h-full rounded object-top"
                   }
