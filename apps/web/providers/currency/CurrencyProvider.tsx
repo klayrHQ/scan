@@ -43,7 +43,7 @@ export interface CurrencyProviderProps {
   parseBeddows(
     beddows: string,
     convert?: boolean,
-    overRideDecimals?: number,
+    overRideDecimals?: number
   ): {
     number: string;
     decimals?: string;
@@ -56,7 +56,7 @@ export interface CurrencyProviderProps {
 }
 
 export const CurrencyContext = createContext<CurrencyProviderProps>(
-  {} as CurrencyProviderProps,
+  {} as CurrencyProviderProps
 );
 
 export const useDecimals = () => useContext(CurrencyContext);
@@ -64,7 +64,7 @@ export const useDecimals = () => useContext(CurrencyContext);
 export const CurrencyProvider = ({ children }: { children: any }) => {
   const { parsedSettings, setSetting } = useSettings();
   const [price, setPrice] = useState<MarketPriceDataType[]>(
-    [] as MarketPriceDataType[],
+    [] as MarketPriceDataType[]
   );
   const [storageLoaded, setStorageLoaded] = useState<boolean>(false);
 
@@ -77,11 +77,11 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
     } else {
       setSetting(
         "signEnabled",
-        parsedSettings?.selectedCurrency?.default?.sign,
+        parsedSettings?.selectedCurrency?.default?.sign
       );
       setSetting(
         "symbolEnabled",
-        parsedSettings?.selectedCurrency?.default?.symbol,
+        parsedSettings?.selectedCurrency?.default?.symbol
       );
       setSetting("convertCurrency", newState);
     }
@@ -98,7 +98,7 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
   const formatNumber = (number?: string) =>
     number?.replace(
       /(.)(?=(\d{3})+$)/g,
-      `$1${parsedSettings?.decimalSeparatorDot ? "," : "."}`,
+      `$1${parsedSettings?.decimalSeparatorDot ? "," : "."}`
     ) || "";
 
   const getConvertedBeddows = (rate: bigint, beddows: string) => {
@@ -108,8 +108,8 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
   const convertCurrency = (beddows: string) => {
     const rate = getBeddowsRate(
       price.find(
-        (p) => p.code === `KLY_${parsedSettings?.selectedCurrency?.symbol}`,
-      )?.rate,
+        (p) => p.code === `KLY_${parsedSettings?.selectedCurrency?.symbol}`
+      )?.rate
     );
     const convertedBeddows = getConvertedBeddows(rate, beddows);
     return convertBeddowsToLSK(convertedBeddows.toString().slice(0, 19));
@@ -118,12 +118,12 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
   const parseBeddows = (
     beddows: string,
     convert = true,
-    overRideDecimals?: number,
+    overRideDecimals?: number
   ) => {
     const roundedValue = parseFloat(
-      convert ? convertCurrency(beddows) : convertBeddowsToLSK(beddows),
+      convert ? convertCurrency(beddows) : convertBeddowsToLSK(beddows)
     ).toFixed(
-      parsedSettings?.decimals !== undefined ? parsedSettings.decimals : 4,
+      parsedSettings?.decimals !== undefined ? parsedSettings.decimals : 4
     );
     const split = parsedSettings?.trailingEnabled
       ? roundedValue.split(".")
@@ -134,7 +134,7 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
         !parsedSettings?.decimalSeparatorDot ? "de-DE" : "en-US",
         {
           maximumFractionDigits: 0,
-        },
+        }
       ),
       decimals:
         (overRideDecimals ?? parsedSettings?.decimals) > 0
@@ -171,19 +171,20 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
     ) {
       setSetting(
         "signEnabled",
-        parsedSettings?.selectedCurrency?.default?.sign,
+        parsedSettings?.selectedCurrency?.default?.sign
       );
       setSetting(
         "symbolEnabled",
-        parsedSettings?.selectedCurrency?.default?.symbol,
+        parsedSettings?.selectedCurrency?.default?.symbol
       );
       setSetting(
         "decimals",
-        parsedSettings?.selectedCurrency?.default?.fractions,
+        parsedSettings?.selectedCurrency?.default?.fractions
       );
     } else {
       setStorageLoaded(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [parsedSettings?.selectedCurrency]);
 
   return (
@@ -202,6 +203,7 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
           formatNumber,
           switchConvert,
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [
           categories,
           parsedSettings?.decimals,
@@ -212,7 +214,7 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
           formatNumber,
           switchConvert,
           categories,
-        ],
+        ]
       )}
     >
       {children}
