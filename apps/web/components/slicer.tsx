@@ -37,6 +37,11 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
         setQueries(
           queries.map((query: any) => {
             console.log(query, "in de params");
+
+            if (uri === "stakes" && query.key === "validators_dontTouch") {
+              return query;
+            }
+
             return {
               ...query,
               params: [
@@ -47,15 +52,14 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
                     (parseInt(page) - 1) *
                     parseInt(
                       query.params?.find(
-                        (p: { key: string; value: string }) =>
-                          p.key === "limit",
-                      )?.value || "0",
+                        (p: { key: string; value: string }) => p.key === "limit"
+                      )?.value || "0"
                     )
                   ).toString(),
                 },
               ],
             };
-          }),
+          })
         );
       } else {
         setQueries(queries);
