@@ -12,6 +12,7 @@ import { useSettings } from "../settings";
 import { convertBeddowsToLSK } from "../../lib/queries/lisk";
 import { categories } from "./currencies";
 import axios from "axios";
+import { getData } from "../../lib/sanity.service";
 
 export interface CurrencyType {
   id: number;
@@ -145,19 +146,13 @@ export const CurrencyProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     const getNewPrices = async () => {
-      const result = await axios(`https://price-api.liskscan.com/prices`);
-      delete result.data.lastUpdate;
-      const parsedResults = Object.keys(result.data).map((code) => {
-        return {
-          code: `KLY_${code}`,
-          from: "KLY",
-          rate: result.data[code].price.toString(),
-          to: code,
-          updateTimestamp: 0,
-          sources: ["coinmarketcap"],
-        };
-      });
-      setPrice(parsedResults as MarketPriceDataType[]);
+      const result = await getData("lisk-service", "get.market.prices");
+      if (result && result.data && result.data.length) {
+        const filteredResults = result.data.filter((t: { code: string }) =>
+          t.code.startsWith("KLY_")
+        );
+        setPrice(filteredResults as MarketPriceDataType[]);
+      }
     };
 
     getNewPrices();
