@@ -49,6 +49,7 @@ export const Validators = ({
     if (searchParams?.get("status") !== activeTab) {
       setActiveTab(searchParams?.get("status") || "eligible");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {

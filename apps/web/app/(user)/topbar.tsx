@@ -64,6 +64,7 @@ export const TopBarLayout = ({
 
   useEffect(() => {
     console.log("EVENTS", events);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events?.["new.block"]]);
 
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -9,5 +9,12 @@
   "exclude": [
     "node_modules"
   ],
-  "plugins": [{ "name": "next" }]
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  }
 }

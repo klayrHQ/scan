@@ -1,46 +1,58 @@
-"use client"
-import React, { useLayoutEffect } from 'react';
+"use client";
+import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import {FlexibleArrayType} from "../../../slices/chart";
-import {cls, Typography} from "ui";
-import {ColorSet} from "@amcharts/amcharts5";
+import { FlexibleArrayType } from "../../../slices/chart";
+import { cls, Typography } from "ui";
+import { ColorSet } from "@amcharts/amcharts5";
 
-let data = [{
-  country: "USA",
-  value: 2025
-}, {
-  country: "China",
-  value: 1882
-}, {
-  country: "Japan",
-  value: 1809
-}, {
-  country: "Germany",
-  value: 1322
-}, {
-  country: "UK",
-  value: 1122
-}, {
-  country: "France",
-  value: 1114
-}, {
-  country: "India",
-  value: 984
-}, {
-  country: "Spain",
-  value: 711
-}, {
-  country: "Netherlands",
-  value: 665
-}, {
-  country: "South Korea",
-  value: 443
-}, {
-  country: "Canada",
-  value: 441
-}];
+let data = [
+  {
+    country: "USA",
+    value: 2025,
+  },
+  {
+    country: "China",
+    value: 1882,
+  },
+  {
+    country: "Japan",
+    value: 1809,
+  },
+  {
+    country: "Germany",
+    value: 1322,
+  },
+  {
+    country: "UK",
+    value: 1122,
+  },
+  {
+    country: "France",
+    value: 1114,
+  },
+  {
+    country: "India",
+    value: 984,
+  },
+  {
+    country: "Spain",
+    value: 711,
+  },
+  {
+    country: "Netherlands",
+    value: 665,
+  },
+  {
+    country: "South Korea",
+    value: 443,
+  },
+  {
+    country: "Canada",
+    value: 441,
+  },
+];
 
 export const ColumnsChart = ({
   chartData,
@@ -60,12 +72,9 @@ export const ColumnsChart = ({
   valueKey: string;
 }) => {
   useLayoutEffect(() => {
-
     let root = am5.Root.new(`${id}ChartDiv`);
 
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
+    root.setThemes([am5themes_Animated.new(root)]);
 
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
@@ -73,7 +82,7 @@ export const ColumnsChart = ({
         panY: true,
         wheelX: "panX",
         wheelY: "zoomX",
-        pinchZoomX: true
+        pinchZoomX: true,
       })
     );
 
@@ -90,47 +99,57 @@ export const ColumnsChart = ({
     });
 
     xRenderer.grid.template.setAll({
-      location: 1
-    })
+      location: 1,
+    });
 
-    let xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-      maxDeviation: 0.3,
-      categoryField: labelKey,
-      renderer: xRenderer,
-      tooltip: am5.Tooltip.new(root, {})
-    }));
-
-    let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-      maxDeviation: 0.3,
-      renderer: am5xy.AxisRendererY.new(root, {
-        strokeOpacity: 0.1
+    let xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        maxDeviation: 0.3,
+        categoryField: labelKey,
+        renderer: xRenderer,
+        tooltip: am5.Tooltip.new(root, {}),
       })
-    }));
+    );
+
+    let yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        maxDeviation: 0.3,
+        renderer: am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 0.1,
+        }),
+      })
+    );
 
     // Create series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    let series = chart.series.push(am5xy.ColumnSeries.new(root, {
-      name: "Series 1",
-      xAxis: xAxis,
-      yAxis: yAxis,
-      valueYField: valueKey,
-      sequencedInterpolation: true,
-      categoryXField: labelKey,
-      tooltip: am5.Tooltip.new(root, {
-        labelText: "{valueY}"
+    let series = chart.series.push(
+      am5xy.ColumnSeries.new(root, {
+        name: "Series 1",
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: valueKey,
+        sequencedInterpolation: true,
+        categoryXField: labelKey,
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{valueY}",
+        }),
       })
-    }));
+    );
 
     xAxis.data.setAll(chartData);
     series.data.setAll(chartData);
 
-    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5, strokeOpacity: 0 });
-    series.columns.template.adapters.add("fill", function(fill, target) {
+    series.columns.template.setAll({
+      cornerRadiusTL: 5,
+      cornerRadiusTR: 5,
+      strokeOpacity: 0,
+    });
+    series.columns.template.adapters.add("fill", function (fill, target) {
       const colors = chart.get("colors") as ColorSet;
       return colors.getIndex(series.columns.indexOf(target));
     });
 
-    series.columns.template.adapters.add("stroke", function(stroke, target) {
+    series.columns.template.adapters.add("stroke", function (stroke, target) {
       const colors = chart.get("colors") as ColorSet;
       return colors.getIndex(series.columns.indexOf(target));
     });
@@ -147,12 +166,18 @@ export const ColumnsChart = ({
     return () => {
       root.dispose();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   return (
     <div className={cls(["flex gap-4 flex-col", className])}>
-      <Typography tag={"h2"} size={"Heading5"}>{title}</Typography>
-      <div id={`${id}ChartDiv`} style={{width: "100%", height: height || "250px",}}/>
+      <Typography tag={"h2"} size={"Heading5"}>
+        {title}
+      </Typography>
+      <div
+        id={`${id}ChartDiv`}
+        style={{ width: "100%", height: height || "250px" }}
+      />
     </div>
   );
-}
+};

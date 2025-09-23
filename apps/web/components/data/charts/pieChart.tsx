@@ -1,10 +1,10 @@
-"use client"
-import React, { useLayoutEffect } from 'react';
+"use client";
+import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import {FlexibleArrayType} from "../../../slices/chart";
-import {cls, Typography} from "ui";
+import { FlexibleArrayType } from "../../../slices/chart";
+import { cls, Typography } from "ui";
 
 export const PieChart = ({
   chartData,
@@ -24,15 +24,10 @@ export const PieChart = ({
   valueKey: string;
 }) => {
   useLayoutEffect(() => {
-
     let root = am5.Root.new(`${id}ChartDiv`);
-    let chart = root.container.children.push(
-      am5percent.PieChart.new(root, {})
-    );
+    let chart = root.container.children.push(am5percent.PieChart.new(root, {}));
 
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
+    root.setThemes([am5themes_Animated.new(root)]);
 
     let series = chart.series.push(
       am5percent.PieSeries.new(root, {
@@ -50,12 +45,18 @@ export const PieChart = ({
     return () => {
       root.dispose();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   return (
     <div className={cls(["flex gap-4 flex-col", className])}>
-      <Typography tag={"h2"} size={"Heading5"}>{title}</Typography>
-      <div id={`${id}ChartDiv`} style={{width: "100%", height: height || "250px",}}/>
+      <Typography tag={"h2"} size={"Heading5"}>
+        {title}
+      </Typography>
+      <div
+        id={`${id}ChartDiv`}
+        style={{ width: "100%", height: height || "250px" }}
+      />
     </div>
   );
-}
+};

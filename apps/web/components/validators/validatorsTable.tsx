@@ -1,5 +1,5 @@
 "use client";
-import {cls, Grid, Typography} from "ui";
+import { cls, Grid, Typography } from "ui";
 import {
   DefaultHeadColumn,
   DoubleRowColumn,
@@ -12,8 +12,8 @@ import { useSearchParams } from "next/navigation";
 import { useService } from "../../providers/service";
 import React, { Suspense, useEffect, useState } from "react";
 import Spinner from "../spinner";
-import {Icon} from "ui/atoms/icon/icon";
-import {convertBeddowsToKLY, convertLSKToBeddows} from "../../lisk-client";
+import { Icon } from "ui/atoms/icon/icon";
+import { convertBeddowsToKLY, convertLSKToBeddows } from "../../lisk-client";
 
 const getShowClass = (showOn: ShowOnCell) => {
   switch (showOn) {
@@ -81,17 +81,24 @@ export const ValidatorsTable = ({
         newBlockReward: "0",
       };
     }
-  // =($I$4/(C4+$I$4)*(((min(B4+$I$4; D4*10)/(SOM($B$4:$B$104)+$I$4))*90,9+0,1)*G4*2516
-    const newStake = BigInt(stakingRewardsAmount) * BigInt(1_0000_0000)
-    const newStakeFloat = parseFloat(newStake.toString(10))
-    const newTotalStake = totalActiveStake + BigInt(newStake)
-    const newTotalStakeFloat = parseFloat(newTotalStake.toString(10))
-    const newValidatorWeight = parseFloat(validator.validatorWeight) + newStakeFloat > parseFloat(validator.selfStake) * 10 ? parseFloat(validator.selfStake) * 10 : parseFloat(validator.validatorWeight) + newStakeFloat
+    // =($I$4/(C4+$I$4)*(((min(B4+$I$4; D4*10)/(SOM($B$4:$B$104)+$I$4))*90,9+0,1)*G4*2516
+    const newStake = BigInt(stakingRewardsAmount) * BigInt(1_0000_0000);
+    const newStakeFloat = parseFloat(newStake.toString(10));
+    const newTotalStake = totalActiveStake + BigInt(newStake);
+    const newTotalStakeFloat = parseFloat(newTotalStake.toString(10));
+    const newValidatorWeight =
+      parseFloat(validator.validatorWeight) + newStakeFloat >
+      parseFloat(validator.selfStake) * 10
+        ? parseFloat(validator.selfStake) * 10
+        : parseFloat(validator.validatorWeight) + newStakeFloat;
     const C = validator.commission / 100;
-    const newVoteShare =  parseFloat(newStake.toString(10))/(parseFloat(validator.totalStake) + newStakeFloat)
-    const share = (100 - C)/100
-    const rewardPerBlock = newValidatorWeight / newTotalStakeFloat * 90.9 + 0.1
-    const newBlockReward =  newVoteShare *  rewardPerBlock * share
+    const newVoteShare =
+      parseFloat(newStake.toString(10)) /
+      (parseFloat(validator.totalStake) + newStakeFloat);
+    const share = (100 - C) / 100;
+    const rewardPerBlock =
+      (newValidatorWeight / newTotalStakeFloat) * 90.9 + 0.1;
+    const newBlockReward = newVoteShare * rewardPerBlock * share;
     const RB = parseInt(validator.rewards.blockReward, 10);
     const RM = parseInt(validator.rewards.monthlyReward, 10);
     const RY = parseInt(validator.rewards.yearlyReward, 10);
@@ -99,7 +106,9 @@ export const ValidatorsTable = ({
     const inputStake = parseInt(stakingRewardsAmount) * 100000000;
     const S = parseFloat(validator.totalStake) + inputStake;
     const capacity =
-        (parseFloat(validator.totalStake) / (parseFloat(validator.selfStake) * 10)) * 100;
+      (parseFloat(validator.totalStake) /
+        (parseFloat(validator.selfStake) * 10)) *
+      100;
 
     const stakersRewardPerMonth = (RM: any, C: any, S: any) =>
       RM * (1 - C / 100) * (inputStake / S);
@@ -109,19 +118,23 @@ export const ValidatorsTable = ({
       RY * (1 - C / 100) * (inputStake / S);
     const stakersRewardPerBlock = (RB: any, C: any, S: any) =>
       RB * (1 - C / 100) * (inputStake / S);
-    const resultPerMonth = validator.status === "active" ? parseInt(
-      stakersRewardPerMonth(RM, C, S).toString()
-    ).toString() : "0";
-    const resultPerDay = validator.status === "active" ? parseInt(
-      stakersRewardPerDay(RD, C, S).toString()
-    ).toString() : "0";
+    const resultPerMonth =
+      validator.status === "active"
+        ? parseInt(stakersRewardPerMonth(RM, C, S).toString()).toString()
+        : "0";
+    const resultPerDay =
+      validator.status === "active"
+        ? parseInt(stakersRewardPerDay(RD, C, S).toString()).toString()
+        : "0";
     // const resultPerMonthLSK = convertBeddowsToLSK(resultPerMonth)
-    const resultPerBlock = validator.status === "active" ? parseInt(
-      stakersRewardPerBlock(RB, C, S).toString()
-    ).toString() : "0";
-    const resultPerYear = validator.status === "active" ? parseInt(
-      stakersRewardPerYear(RY, C, S).toString()
-    ).toString() : "0";
+    const resultPerBlock =
+      validator.status === "active"
+        ? parseInt(stakersRewardPerBlock(RB, C, S).toString()).toString()
+        : "0";
+    const resultPerYear =
+      validator.status === "active"
+        ? parseInt(stakersRewardPerYear(RY, C, S).toString()).toString()
+        : "0";
     const sortReward = validator.status === "active" ? newBlockReward : 0;
     return {
       resultPerMonth,
@@ -131,7 +144,12 @@ export const ValidatorsTable = ({
       sortReward,
       inputStake,
       capacity,
-      newBlockReward: validator.status === "active" ? newBlockReward > 90.9 * .1 + .1 ? convertLSKToBeddows((90.9 * .1 + .1).toFixed(8)) : convertLSKToBeddows(newBlockReward.toFixed(8)) : "0",
+      newBlockReward:
+        validator.status === "active"
+          ? newBlockReward > 90.9 * 0.1 + 0.1
+            ? convertLSKToBeddows((90.9 * 0.1 + 0.1).toFixed(8))
+            : convertLSKToBeddows(newBlockReward.toFixed(8))
+          : "0",
     };
   };
 
@@ -143,20 +161,30 @@ export const ValidatorsTable = ({
       );
       const validatorsData = await validators.json();
 
-      setTotalActiveStake(validatorsData?.filter((v: Validator) => v.rank <= 101)?.reduce((total: bigint, validator: Validator) => {
-        return total + BigInt(validator.validatorWeight);
-      }, BigInt(0)));
+      setTotalActiveStake(
+        validatorsData
+          ?.filter((v: Validator) => v.rank <= 101)
+          ?.reduce((total: bigint, validator: Validator) => {
+            return total + BigInt(validator.validatorWeight);
+          }, BigInt(0))
+      );
       setValidators(validatorsData);
     };
     getValidators();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events?.["update.generators"]]);
 
   useEffect(() => {
     if (!totalActiveStake || totalActiveStake === BigInt(0)) {
-      setTotalActiveStake(validators?.filter((v: Validator) => v.rank <= 101).reduce((total: bigint, validator: Validator) => {
-        return total + BigInt(validator.validatorWeight);
-      }, BigInt(0)));
+      setTotalActiveStake(
+        validators
+          ?.filter((v: Validator) => v.rank <= 101)
+          .reduce((total: bigint, validator: Validator) => {
+            return total + BigInt(validator.validatorWeight);
+          }, BigInt(0))
+      );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalActiveStake]);
 
   /* create sort function for validators for all columns; rank, name, generator time, total blocks, validator weight, total stake, commission, rewards and staking rewards */
@@ -171,18 +199,25 @@ export const ValidatorsTable = ({
   const getSortIcon = (key: string) => {
     {
       if (sortConfig.key === key) {
-        return <Icon
-          icon={sortConfig.direction === "asc" ? "chevronUp" : "chevronDown"}
-          color={"onSurfaceMedium"}
-          className={"h-[14px] w-[14px]"}
-        />;
+        return (
+          <Icon
+            icon={sortConfig.direction === "asc" ? "chevronUp" : "chevronDown"}
+            color={"onSurfaceMedium"}
+            className={"h-[14px] w-[14px]"}
+          />
+        );
       } else {
-        return ("");
+        return "";
       }
     }
-  }
+  };
 
-  const parseIntKeys = ["validatorWeight", "totalStake", "earnedRewards", "selfStake"];
+  const parseIntKeys = [
+    "validatorWeight",
+    "totalStake",
+    "earnedRewards",
+    "selfStake",
+  ];
 
   const sortValidators = (a: any, b: any) => {
     let valueA = a[sortConfig.key ? sortConfig.key : "rank"];
@@ -381,12 +416,12 @@ export const ValidatorsTable = ({
                     sortConfig.direction === "desc"
                       ? "capacity"
                       : sortConfig.key === "capacity" &&
-                        sortConfig.direction === "desc"
-                      ? "validatorWeight"
-                      : sortConfig.key === "validatorWeight" &&
-                        sortConfig.direction === "asc"
-                      ? "validatorWeight"
-                      : "capacity",
+                          sortConfig.direction === "desc"
+                        ? "validatorWeight"
+                        : sortConfig.key === "validatorWeight" &&
+                            sortConfig.direction === "asc"
+                          ? "validatorWeight"
+                          : "capacity",
                   direction: sortConfig.direction === "asc" ? "desc" : "asc",
                 })
               }
@@ -409,8 +444,10 @@ export const ValidatorsTable = ({
                     {
                       value:
                         sortConfig.key === "validatorWeight"
-                          ? "Validator Weight" : sortConfig.key === "capacity" ? "Capacity"
-                          : "Validator Weight",
+                          ? "Validator Weight"
+                          : sortConfig.key === "capacity"
+                            ? "Capacity"
+                            : "Validator Weight",
                       format: {
                         typography: [
                           {
@@ -455,22 +492,22 @@ export const ValidatorsTable = ({
             {/*  />*/}
             {/*</th>*/}
             <th
-                onClick={() =>
-                    setSortConfig({
-                      key:
-                          sortConfig.key === "totalStake" &&
+              onClick={() =>
+                setSortConfig({
+                  key:
+                    sortConfig.key === "totalStake" &&
+                    sortConfig.direction === "desc"
+                      ? "selfStake"
+                      : sortConfig.key === "selfStake" &&
                           sortConfig.direction === "desc"
-                              ? "selfStake"
-                              : sortConfig.key === "selfStake" &&
-                              sortConfig.direction === "desc"
-                                  ? "totalStake"
-                                  : sortConfig.key === "totalStake" &&
-                                  sortConfig.direction === "asc"
-                                      ? "totalStake"
-                                      : "selfStake",
-                      direction: sortConfig.direction === "asc" ? "desc" : "asc",
-                    })
-                }
+                        ? "totalStake"
+                        : sortConfig.key === "totalStake" &&
+                            sortConfig.direction === "asc"
+                          ? "totalStake"
+                          : "selfStake",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
                 "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
               ])}
@@ -488,7 +525,12 @@ export const ValidatorsTable = ({
                   values={[
                     {
                       type: "literal",
-                      value: sortConfig.key === "totalStake" ? "Total Stake" : sortConfig.key === "selfStake" ? "Self Stake":"Total Stake",
+                      value:
+                        sortConfig.key === "totalStake"
+                          ? "Total Stake"
+                          : sortConfig.key === "selfStake"
+                            ? "Self Stake"
+                            : "Total Stake",
                       format: {
                         format: "plain",
                         type: "string",
@@ -560,22 +602,22 @@ export const ValidatorsTable = ({
               </Grid>
             </th>
             <th
-                onClick={() =>
-                    setSortConfig({
-                      key:
-                          sortConfig.key === "blockReward" &&
+              onClick={() =>
+                setSortConfig({
+                  key:
+                    sortConfig.key === "blockReward" &&
+                    sortConfig.direction === "desc"
+                      ? "earnedRewards"
+                      : sortConfig.key === "earnedRewards" &&
                           sortConfig.direction === "desc"
-                              ? "earnedRewards"
-                              : sortConfig.key === "earnedRewards" &&
-                              sortConfig.direction === "desc"
-                                  ? "blockReward"
-                                  : sortConfig.key === "blockReward" &&
-                                  sortConfig.direction === "asc"
-                                      ? "blockReward"
-                                      : "earnedRewards",
-                      direction: sortConfig.direction === "asc" ? "desc" : "asc",
-                    })
-                }
+                        ? "blockReward"
+                        : sortConfig.key === "blockReward" &&
+                            sortConfig.direction === "asc"
+                          ? "blockReward"
+                          : "earnedRewards",
+                  direction: sortConfig.direction === "asc" ? "desc" : "asc",
+                })
+              }
               className={cls([
                 "border-b-1 p-4 first:rounded-tl first:rounded-bl last:rounded-tr last:rounded-br text-body font-medium whitespace-nowrap cursor-pointer",
                 getShowClass("always"),
@@ -595,7 +637,10 @@ export const ValidatorsTable = ({
                     {
                       name: "Rewards",
                       type: "literal",
-                      value: sortConfig.key === "earnedRewards" ? "Earned Rewards" : "Dynamic Reward",
+                      value:
+                        sortConfig.key === "earnedRewards"
+                          ? "Earned Rewards"
+                          : "Dynamic Reward",
                       format: {
                         icon: {
                           icon: "InformationCircleIconSolid",
@@ -693,20 +738,21 @@ export const ValidatorsTable = ({
                 capacity,
                 resultPerYear,
                 inputStake,
-                newBlockReward
+                newBlockReward,
               } = calculateReward(validator);
               const resultPerPeriod =
                 stakingRewardsPeriod === "block"
                   ? newBlockReward
                   : stakingRewardsPeriod === "day"
-                  ? (parseInt(newBlockReward) * 84).toString(10)
-                  : stakingRewardsPeriod === "month"
-                  ? (parseInt(newBlockReward) * 2516).toString(10)
-                  : stakingRewardsPeriod === "year"
-                  ? resultPerYear
-                  : (parseInt(newBlockReward) * 2516 * 12).toString(10);
+                    ? (parseInt(newBlockReward) * 84).toString(10)
+                    : stakingRewardsPeriod === "month"
+                      ? (parseInt(newBlockReward) * 2516).toString(10)
+                      : stakingRewardsPeriod === "year"
+                        ? resultPerYear
+                        : (parseInt(newBlockReward) * 2516 * 12).toString(10);
 
-              const APR = (parseInt(newBlockReward) * 2516 * 12 / inputStake) * 100;
+              const APR =
+                ((parseInt(newBlockReward) * 2516 * 12) / inputStake) * 100;
 
               return (
                 <tr
@@ -981,8 +1027,8 @@ export const ValidatorsTable = ({
                                   sortConfig.key === "capacity"
                                     ? "text-right w-full"
                                     : capacity > 100
-                                    ? "text-right w-full text-red opacity-80"
-                                    : "text-right w-full text-onSurfaceMedium",
+                                      ? "text-right w-full text-red opacity-80"
+                                      : "text-right w-full text-onSurfaceMedium",
                               },
                               {
                                 value: "subBody",
@@ -1007,11 +1053,17 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: sortConfig.key === "selfStake" ?  validator?.selfStake : validator?.totalStake,
+                          value:
+                            sortConfig.key === "selfStake"
+                              ? validator?.selfStake
+                              : validator?.totalStake,
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: sortConfig.key === "selfStake" ? "Total Self Stake" : "Total Received Stake",
+                              value:
+                                sortConfig.key === "selfStake"
+                                  ? "Total Self Stake"
+                                  : "Total Received Stake",
                             },
                             type: "beddows",
                             typography: [
@@ -1027,12 +1079,18 @@ export const ValidatorsTable = ({
                         {
                           name: "total Self Stake",
                           type: "literal",
-                          value: sortConfig.key === "selfStake" ? validator?.totalStake : validator?.selfStake,
+                          value:
+                            sortConfig.key === "selfStake"
+                              ? validator?.totalStake
+                              : validator?.selfStake,
                           format: {
                             format: "currency",
                             tooltip: {
                               placement: "auto",
-                              value: sortConfig.key === "selfStake" ? "Total Received Stake" : "Total Self Stake",
+                              value:
+                                sortConfig.key === "selfStake"
+                                  ? "Total Received Stake"
+                                  : "Total Self Stake",
                             },
                             type: "beddows",
                             typography: [
@@ -1128,11 +1186,17 @@ export const ValidatorsTable = ({
                       values={[
                         {
                           type: "literal",
-                          value: sortConfig.key === "blockReward" ? validator?.rewards?.blockReward : validator?.earnedRewards,
+                          value:
+                            sortConfig.key === "blockReward"
+                              ? validator?.rewards?.blockReward
+                              : validator?.earnedRewards,
                           format: {
                             tooltip: {
                               placement: "auto",
-                              value: sortConfig.key === "blockReward" ?  "Dynamic Block Reward" : "Total rewards received",
+                              value:
+                                sortConfig.key === "blockReward"
+                                  ? "Dynamic Block Reward"
+                                  : "Total rewards received",
                             },
                             type: "beddows",
                             typography: [
@@ -1141,20 +1205,31 @@ export const ValidatorsTable = ({
                                 key: "className",
                               },
                             ],
-                            format: sortConfig.key === "blockReward" ? "fee" : "currency",
+                            format:
+                              sortConfig.key === "blockReward"
+                                ? "fee"
+                                : "currency",
                           },
                           name: "Total Rewards",
                         },
                         {
                           name: "DynamicBlockReward",
                           type: "literal",
-                          value: sortConfig.key === "blockReward" ?  validator?.earnedRewards : validator?.rewards?.blockReward,
+                          value:
+                            sortConfig.key === "blockReward"
+                              ? validator?.earnedRewards
+                              : validator?.rewards?.blockReward,
                           format: {
-                            format: sortConfig.key === "blockReward" ?  "currency" : "fee",
+                            format:
+                              sortConfig.key === "blockReward"
+                                ? "currency"
+                                : "fee",
                             tooltip: {
                               placement: "auto",
-                              value: sortConfig.key === "blockReward" ?  "Total Rewards" : "Dynamic Block Reward",
-
+                              value:
+                                sortConfig.key === "blockReward"
+                                  ? "Total Rewards"
+                                  : "Dynamic Block Reward",
                             },
                             type: "beddows",
                             typography: [
@@ -1178,67 +1253,77 @@ export const ValidatorsTable = ({
                       getShowClass("always"),
                     ])}
                   >
-                    {validator?.status === "active" ?
-
-                        <DoubleRowColumn
-                      params={{}}
-                      index={1}
-                      queryData={[]}
-                      values={[
-                        {
-                          type: "literal",
-                          value:
-                            parseFloat(resultPerPeriod) > 0
-                              ? resultPerPeriod
-                              : "-",
-                          format: {
-                            tooltip: {
-                              placement: "auto",
-                              value: `Staking Rewards per ${stakingRewardsAmount} KLY per ${stakingRewardsPeriod}`,
-                            },
-                            type:
+                    {validator?.status === "active" ? (
+                      <DoubleRowColumn
+                        params={{}}
+                        index={1}
+                        queryData={[]}
+                        values={[
+                          {
+                            type: "literal",
+                            value:
                               parseFloat(resultPerPeriod) > 0
-                                ? "beddows"
-                                : "string",
-                            typography: [
-                              {
-                                value: "text-right w-full",
-                                key: "className",
+                                ? resultPerPeriod
+                                : "-",
+                            format: {
+                              tooltip: {
+                                placement: "auto",
+                                value: `Staking Rewards per ${stakingRewardsAmount} KLY per ${stakingRewardsPeriod}`,
                               },
-                            ],
-                            format:
-                              parseFloat(resultPerPeriod) > 0 ? "fee" : "plain",
-                          },
-                          name: "Total Rewards",
-                        },
-                        {
-                          name: "APR",
-                          type: "literal",
-                          value: APR,
-                          format: {
-                            format: "percentage",
-                            tooltip: {
-                              placement: "auto",
-                              value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} KLY`,
+                              type:
+                                parseFloat(resultPerPeriod) > 0
+                                  ? "beddows"
+                                  : "string",
+                              typography: [
+                                {
+                                  value: "text-right w-full",
+                                  key: "className",
+                                },
+                              ],
+                              format:
+                                parseFloat(resultPerPeriod) > 0
+                                  ? "fee"
+                                  : "plain",
                             },
-                            type: "string",
-                            typography: [
-                              {
-                                key: "className",
-                                value: "text-right w-full text-onSurfaceMedium",
-                              },
-                              {
-                                value: "subBody",
-                                key: "size",
-                              },
-                            ],
+                            name: "Total Rewards",
                           },
-                        },
-                      ]}
-                    />
-                        :
-                        <Typography align={"right"} tag={"span"} className={"ml-auto text-right w-full text-onSurfaceMedium"}>-</Typography>
-                    }
+                          {
+                            name: "APR",
+                            type: "literal",
+                            value: APR,
+                            format: {
+                              format: "percentage",
+                              tooltip: {
+                                placement: "auto",
+                                value: `APR is the yearly rate of return on staking ${stakingRewardsAmount} KLY`,
+                              },
+                              type: "string",
+                              typography: [
+                                {
+                                  key: "className",
+                                  value:
+                                    "text-right w-full text-onSurfaceMedium",
+                                },
+                                {
+                                  value: "subBody",
+                                  key: "size",
+                                },
+                              ],
+                            },
+                          },
+                        ]}
+                      />
+                    ) : (
+                      <Typography
+                        align={"right"}
+                        tag={"span"}
+                        className={
+                          "ml-auto text-right w-full text-onSurfaceMedium"
+                        }
+                      >
+                        -
+                      </Typography>
+                    )}
                   </td>
                 </tr>
               );

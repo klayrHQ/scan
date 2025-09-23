@@ -1,11 +1,11 @@
-"use client"
-import React, { useLayoutEffect } from 'react';
+"use client";
+import React, { useLayoutEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import {FlexibleArrayType} from "../../../slices/chart";
-import {cls, Typography} from "ui";
-import {ColorSet} from "@amcharts/amcharts5";
+import { FlexibleArrayType } from "../../../slices/chart";
+import { cls, Typography } from "ui";
+import { ColorSet } from "@amcharts/amcharts5";
 
 export const DonutChart = ({
   chartData,
@@ -19,28 +19,23 @@ export const DonutChart = ({
   chartData: FlexibleArrayType[];
   id: string;
   title?: string;
-  className?: string
+  className?: string;
   height?: string;
   labelKey: string;
   valueKey: string;
 }) => {
   useLayoutEffect(() => {
-
     let root = am5.Root.new(`${id}ChartDiv`, {
       tooltipContainerBounds: {
         top: 50,
         right: 100,
         bottom: 50,
-        left: 100
-      }
+        left: 100,
+      },
     });
-    let chart = root.container.children.push(
-      am5percent.PieChart.new(root, {})
-    );
+    let chart = root.container.children.push(am5percent.PieChart.new(root, {}));
 
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
+    root.setThemes([am5themes_Animated.new(root)]);
 
     let series = chart.series.push(
       am5percent.PieSeries.new(root, {
@@ -50,9 +45,8 @@ export const DonutChart = ({
         alignLabels: false,
         innerRadius: am5.percent(50),
         tooltip: am5.Tooltip.new(root, {
-          keepTargetHover: true
-        })
-
+          keepTargetHover: true,
+        }),
       })
     );
     series.data.setAll(chartData);
@@ -72,12 +66,18 @@ export const DonutChart = ({
     return () => {
       root.dispose();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   return (
     <div className={cls(["flex gap-4 flex-col", className])}>
-      <Typography tag={"h2"} size={"Heading5"}>{title}</Typography>
-      <div id={`${id}ChartDiv`} style={{width: "100%", height: height || "250px",}}/>
+      <Typography tag={"h2"} size={"Heading5"}>
+        {title}
+      </Typography>
+      <div
+        id={`${id}ChartDiv`}
+        style={{ width: "100%", height: height || "250px" }}
+      />
     </div>
   );
-}
+};

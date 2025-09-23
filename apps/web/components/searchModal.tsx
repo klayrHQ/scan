@@ -1,5 +1,5 @@
 "use client";
-import React, {ReactElement, ReactNode, useEffect, useState} from "react";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { SearchContainer } from "ui/organisms/searchContainer/searchContainer";
 import { Popover } from "ui/atoms/popover/popover";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useSaveSearch } from "../providers/recentSearches";
 import { cls } from "ui";
 import { search } from "../lib/search";
-import {useService} from "../providers/service";
+import { useService } from "../providers/service";
 
 export const SearchModal = ({
   menuCloseFunction,
@@ -17,7 +17,7 @@ export const SearchModal = ({
   menuCloseFunction?: () => void;
   mobile?: boolean;
 }) => {
-  const { client } = useService()
+  const { client } = useService();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState<string>();
@@ -27,23 +27,23 @@ export const SearchModal = ({
   const filtersList = [
     {
       label: "All",
-      value: "all"
+      value: "all",
     },
     {
       label: "Transactions",
-      value: "transactions"
+      value: "transactions",
     },
     {
       label: "Validators",
-      value: "validators"
+      value: "validators",
     },
     {
       label: "Stakes",
-      value: "stakes"
+      value: "stakes",
     },
     {
       label: "Blocks",
-      value: "blocks"
+      value: "blocks",
     },
   ];
 
@@ -89,9 +89,19 @@ export const SearchModal = ({
 
   useEffect(() => {
     const getResults = async () => {
-      setSearchResults(await search(client, saveSearch, setOpen, menuCloseFunction, searchValue, filter))
-    }
-    getResults()
+      setSearchResults(
+        await search(
+          client,
+          saveSearch,
+          setOpen,
+          menuCloseFunction,
+          searchValue,
+          filter
+        )
+      );
+    };
+    getResults();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue, filter]);
 
   return (
@@ -100,10 +110,7 @@ export const SearchModal = ({
       setOpen={setOpen}
       containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={"full"}
-      className={cls([
-        "top-0 w-screen max-w-full lg:max-w-xl",
-        "shadow",
-      ])}
+      className={cls(["top-0 w-screen max-w-full lg:max-w-xl", "shadow"])}
       placement={"right"}
       button={
         <div className="group bg-background text-onSurfacePrimaryLow rounded inline-flex items-center text-base font-medium focus:outline-none w-full relative cursor-pointer">

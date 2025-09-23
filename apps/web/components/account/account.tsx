@@ -1,19 +1,18 @@
-"use client"
-import {useService} from "../../providers/service";
-import React, {useEffect, useState} from "react";
-import {getAccountQueries} from "./queries";
-import {Container, Grid, Typography} from "ui";
-import {AccountHeader} from "./accountHeader";
-import {FilterButtons} from "ui/atoms/filterButtons/filterButtons";
-import useQueryParams, {QueryParams} from "../../hooks/useQueryParams";
-import {useSearchParams} from "next/navigation";
-import {Transactions} from "./tabContent/transactions";
-import {Validator} from "./tabContent/validator";
-import {Stakes} from "./tabContent/stakes";
-import {Tokens} from "./tabContent/tokens";
-import {Events} from "./tabContent/events";
-import {Blocks} from "./tabContent/blocks";
-
+"use client";
+import { useService } from "../../providers/service";
+import React, { useEffect, useState } from "react";
+import { getAccountQueries } from "./queries";
+import { Container, Grid, Typography } from "ui";
+import { AccountHeader } from "./accountHeader";
+import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
+import useQueryParams, { QueryParams } from "../../hooks/useQueryParams";
+import { useSearchParams } from "next/navigation";
+import { Transactions } from "./tabContent/transactions";
+import { Validator } from "./tabContent/validator";
+import { Stakes } from "./tabContent/stakes";
+import { Tokens } from "./tabContent/tokens";
+import { Events } from "./tabContent/events";
+import { Blocks } from "./tabContent/blocks";
 
 const tabsComponents = {
   transactions: Transactions,
@@ -22,7 +21,7 @@ const tabsComponents = {
   tokens: Tokens,
   events: Events,
   blocks: Blocks,
-}
+};
 
 type tabsTypes =
   | "transactions"
@@ -30,23 +29,21 @@ type tabsTypes =
   | "stakes"
   | "tokens"
   | "events"
-  | "blocks"
-
+  | "blocks";
 
 export const Account = ({
   id,
-    validatorData,
+  validatorData,
   initialData,
 }: {
   id: string;
-  validatorData: any
-  initialData: any
+  validatorData: any;
+  initialData: any;
 }) => {
-
   const { setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
-  const {cache, setQueries, client} = useService()
-  const [queryData, setQueryData] = useState(initialData)
+  const { cache, setQueries, client } = useService();
+  const [queryData, setQueryData] = useState(initialData);
   /*const temp = {
     auth: cache["account-auth"],
     events: cache["account-events"],
@@ -61,33 +58,52 @@ export const Account = ({
   }*/
 
   useEffect(() => {
-    setQueries(getAccountQueries(id,parseInt(searchParams?.get("page") || "1")))
-  }, [getAccountQueries])
+    setQueries(
+      getAccountQueries(id, parseInt(searchParams?.get("page") || "1"))
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getAccountQueries]);
 
   useEffect(() => {
     async function getClaims() {
-      if(cache) {
-
-        const claims = cache["account-id-transactions"]?.data?.filter((tx: { moduleCommand: string }) => {
-          return tx.moduleCommand === "pos:claimRewards"
-        })
+      if (cache) {
+        const claims = cache["account-id-transactions"]?.data?.filter(
+          (tx: { moduleCommand: string }) => {
+            return tx.moduleCommand === "pos:claimRewards";
+          }
+        );
         for (const claim of claims) {
           const response = await client.rpc("get.events", {
-            transactionID: claim.id
+            transactionID: claim.id,
           });
           if (response.status === "success") {
-            const events = response.data.filter((event) => event.name === "rewardsAssigned")
-            const index = cache["account-id-transactions"]?.data?.findIndex((tx: { id: string }) => tx.id === claim.id)
-            cache["account-id-transactions"].data[index] = {...cache["account-id-transactions"]?.data?.[index], params: { amount: events?.reduce((sum: bigint, event) => sum + BigInt(event.data?.amount || "0"), BigInt(0)).toString() } }
+            const events = response.data.filter(
+              (event) => event.name === "rewardsAssigned"
+            );
+            const index = cache["account-id-transactions"]?.data?.findIndex(
+              (tx: { id: string }) => tx.id === claim.id
+            );
+            cache["account-id-transactions"].data[index] = {
+              ...cache["account-id-transactions"]?.data?.[index],
+              params: {
+                amount: events
+                  ?.reduce(
+                    (sum: bigint, event) =>
+                      sum + BigInt(event.data?.amount || "0"),
+                    BigInt(0)
+                  )
+                  .toString(),
+              },
+            };
           }
         }
-        setQueryData(cache)
+        setQueryData(cache);
       }
     }
     // @ts-ignore
-    getClaims()
-  }, [cache])
-
+    getClaims();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cache]);
 
   const handleChange = (value: string) => {
     // @ts-ignore
@@ -103,59 +119,70 @@ export const Account = ({
   const activeTab: tabsTypes = searchParams?.get("tab") || "transactions";
   const activeSubTab = searchParams?.get("subTab") || "stakes";
 
-  const TabComponent = tabsComponents[activeTab]
+  const TabComponent = tabsComponents[activeTab];
 
   const buttons = [
     {
       label: "Transactions",
-      state: "transactions"
+      state: "transactions",
     },
     {
       label: "Stakes",
-      state: "stakes"
+      state: "stakes",
     },
     {
       label: "Tokens",
-      state: "tokens"
+      state: "tokens",
     },
     {
       label: "Events",
-      state: "events"
+      state: "events",
     },
-  ]
-if (queryData["account-validator-id"]?.data?.length > 0) {
-  buttons.push({
-    label: "Validator",
-    state: "validator"
-  })
-}
-if (queryData["account-id-blocks"]?.data?.length > 0) {
-  buttons.push({
-    label: "Blocks",
-    state: "blocks"
-  })
-}
+  ];
+  if (queryData["account-validator-id"]?.data?.length > 0) {
+    buttons.push({
+      label: "Validator",
+      state: "validator",
+    });
+  }
+  if (queryData["account-id-blocks"]?.data?.length > 0) {
+    buttons.push({
+      label: "Blocks",
+      state: "blocks",
+    });
+  }
   const stakesTabButtons = [
     {
       label: "Outgoing Stakes",
-      state: "stakes"
+      state: "stakes",
     },
     {
       label: "Incoming Stakes",
-      state: "stakers"
-    }
-  ]
+      state: "stakers",
+    },
+  ];
   return (
     <Container section gap={8}>
       <AccountHeader address={id} queryData={queryData} />
       <Grid className={"max-w-app mx-auto w-full shadow-xl p-4"} gap={2}>
-        <FilterButtons buttons={buttons} onChange={handleChange} selection={activeTab} />
-        {
-          activeTab === "stakes" &&
-          <FilterButtons buttons={stakesTabButtons} onChange={handleSubChange} selection={activeSubTab} />
-        }
-        <TabComponent validatorData={validatorData} queryData={queryData} tab={activeSubTab}/>
+        <FilterButtons
+          buttons={buttons}
+          onChange={handleChange}
+          selection={activeTab}
+        />
+        {activeTab === "stakes" && (
+          <FilterButtons
+            buttons={stakesTabButtons}
+            onChange={handleSubChange}
+            selection={activeSubTab}
+          />
+        )}
+        <TabComponent
+          validatorData={validatorData}
+          queryData={queryData}
+          tab={activeSubTab}
+        />
       </Grid>
     </Container>
-  )
-}
+  );
+};

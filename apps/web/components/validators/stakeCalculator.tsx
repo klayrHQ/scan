@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Grid, Typography } from "ui";
 import { Input } from "ui/atoms/input/input";
 import { Select } from "ui/atoms/select/select";
@@ -25,6 +25,7 @@ export const StakeCalculator = () => {
       stakingPeriod: stakingRewardsPeriod,
       stakingAmount: stakingRewardsAmount,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stakingRewardsPeriod, stakingRewardsAmount]);
 
   return (
