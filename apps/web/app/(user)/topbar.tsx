@@ -1,10 +1,7 @@
 "use client";
 import { TopBarClient } from "../../components/layout/topbar";
 import React, { useEffect, useState } from "react";
-import {
-  MoonIcon,
-  SunIcon,
-} from "@heroicons/react/24/solid";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { cls, Grid, InfoBar, Tooltip, Typography } from "ui";
 import { formatDistance } from "date-fns";
 import { useService } from "../../providers/service";
@@ -28,8 +25,8 @@ import { FavouritesModal } from "../../components/favouritesModal";
 import { SearchModal } from "../../components/searchModal";
 import { MobileMenuModal } from "../../components/mobileMenuModal";
 import { KPICarousel } from "../../components/data/KPICarousel";
-import {SettingsModal} from "../../components/settings/settingsModal";
-import {InfoBanner} from "../../components/layout/infoBanner";
+import { SettingsModal } from "../../components/settings/settingsModal";
+import { InfoBanner } from "../../components/layout/infoBanner";
 
 export const TopBarLayout = ({
   status,
@@ -65,7 +62,9 @@ export const TopBarLayout = ({
     );
   }, [apps, status?.data?.chainID]);
 
-  useEffect(() => console.log("EVENTS", events), [events?.["new.block"]]);
+  useEffect(() => {
+    console.log("EVENTS", events);
+  }, [events?.["new.block"]]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -77,9 +76,20 @@ export const TopBarLayout = ({
   return (
     <TopBarClient>
       <InfoBanner>
-        <Typography className={"text-center"} color={"onInfobar"} size={"body"} tag={"span"}>
+        <Typography
+          className={"text-center"}
+          color={"onInfobar"}
+          size={"body"}
+          tag={"span"}
+        >
           {"🎉 Staking rewards are now live, time to put your tokens to work. "}
-          <Link className={"text-onInfobar underline"} target={"_blank"} href={"https://klayr.xyz/blog/how-to-stake-with-klayr/"}>{"Learn more"}</Link>
+          <Link
+            className={"text-onInfobar underline"}
+            target={"_blank"}
+            href={"https://klayr.xyz/blog/how-to-stake-with-klayr/"}
+          >
+            {"Learn more"}
+          </Link>
         </Typography>
       </InfoBanner>
       <InfoBar
@@ -119,16 +129,21 @@ export const TopBarLayout = ({
                 ])}
               />
             </Tooltip>
-            {kpis &&
+            {kpis && (
               <>
                 {kpis?.map(({ key, label, backup, _key }, i) => (
-                  <div className={"hidden xl:inline"} key={`desktop-${key}-${i}`}>
+                  <div
+                    className={"hidden xl:inline"}
+                    key={`desktop-${key}-${i}`}
+                  >
                     <KeyValueKPI
                       key={_key}
                       dottedKey={key}
                       label={label}
                       backupKey={backup}
-                      lastBlock={events["new.block"] as BlocksResponse["data"][0]}
+                      lastBlock={
+                        events["new.block"] as BlocksResponse["data"][0]
+                      }
                       data={{
                         index,
                         status,
@@ -148,7 +163,7 @@ export const TopBarLayout = ({
                   handleNextClick={handleNextClick}
                 />
               </>
-            }
+            )}
           </Grid>,
         ]}
         infoItemsRight={[
@@ -197,7 +212,7 @@ export const TopBarLayout = ({
           )
         )}
         menuItemsRight={[
-          <FavouritesModal key={"favs"}/>,
+          <FavouritesModal key={"favs"} />,
           <SearchModal key={"search"} />,
           <MobileMenuModal
             key={"mm"}

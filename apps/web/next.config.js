@@ -28,11 +28,17 @@ module.exports = {
       },
     ],
   },
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  swcMinify: true, // ensure SWC minification is enabled
+  compiler: {
+    removeConsole: {
+      exclude: ["error", "warn"], // keep error & warn, remove log/debug/info
+    },
+  },
+  webpack: (config, { dev }) => {
     config.externals.push({
-      'utf-8-validate': 'commonjs utf-8-validate',
-      'bufferutil': 'commonjs bufferutil',
-    })
-    return config
+      "utf-8-validate": "commonjs utf-8-validate",
+      bufferutil: "commonjs bufferutil",
+    });
+    return config;
   },
 };

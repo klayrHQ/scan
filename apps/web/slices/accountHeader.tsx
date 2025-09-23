@@ -8,7 +8,7 @@ import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar } from "ui/atoms/avatar/avatar";
 import { CopyButton } from "../components/data/copy";
-import {ConsoleLogTester} from "../components/consoleLogTester";
+import { ConsoleLogTester } from "../components/consoleLogTester";
 
 export const AccountHeader = ({
   queryData,
@@ -52,7 +52,11 @@ export const AccountHeader = ({
       );
     }
   };
-  useEffect(() => console.log(uri, id, "props"), [uri, id]);
+
+  useEffect(() => {
+    console.log(uri, id, "props");
+  }, [uri, id]);
+
   const value =
     getFromDottedKey(values.value, "row", queryData, queryData) || "-";
   const rank =
@@ -127,8 +131,7 @@ export const AccountHeader = ({
                 bold
                 tag={"span"}
                 className={"capitalize font-semibold h-5"}
-              >
-              </Typography>
+              ></Typography>
             )}
             <Typography
               size={"subBody"}
@@ -146,10 +149,9 @@ export const AccountHeader = ({
         <Tooltip
           placement={"bottom-end"}
           label={
-          status === "punished" ?
-            `punishment ends at block ${punishments[punishments.length - 1]?.end}`
-            :
-            `${status} validator`
+            status === "punished"
+              ? `punishment ends at block ${punishments[punishments.length - 1]?.end}`
+              : `${status} validator`
           }
         >
           <Typography
