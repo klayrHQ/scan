@@ -1,40 +1,38 @@
-import React from "react"
+import React from "react";
 import {
   ArrowSmallUpIcon as ArrowSmUpIcon,
   ArrowDownIcon,
   ExclamationCircleIcon,
   DocumentDuplicateIcon as DuplicateIcon,
-} from "@heroicons/react/24/solid"
-import {
-  BlockDataType,
-} from "@moosty/lisk-service-provider"
+} from "@heroicons/react/24/solid";
+import { BlockDataType } from "@moosty/lisk-service-provider";
 // @ts-ignore
-import { CopyToClipboard } from "react-copy-to-clipboard"
-import copy from "copy-to-clipboard"
-import {CopyHotKey} from "../../atoms/copyHotKey/copyHotKey";
-import {Snackbar} from "../../atoms/snackbar/snackbar";
-import {Paper} from "../../atoms/paper/paper";
-import {KeyValueRow} from "../../molecules/keyValueRow/keyValueRow";
-import {IconButton} from "../../atoms/iconButton/iconButton";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import copy from "copy-to-clipboard";
+import { CopyHotKey } from "../../atoms/copyHotKey/copyHotKey";
+import { Snackbar } from "../../atoms/snackbar/snackbar";
+import { Paper } from "../../atoms/paper/paper";
+import { KeyValueRow } from "../../molecules/keyValueRow/keyValueRow";
+import { IconButton } from "../../atoms/iconButton/iconButton";
 
 interface AccountDetailsProps {
   accountDetails: {
-    username?: string
-    address: string
-    legacyAddress?: string
-    publicKey: string
-    hexAddress: string
-    isDelegate?: boolean
-    status?: string
-    isBanned?: boolean
-    nonce?: string
-    received?: number | null
-    sent?: number | null
-  }
-  compactString: Function
-  lastBlock?: BlockDataType | null
-  copyNoteText: any
-  setCopyNoteText: any
+    username?: string;
+    address: string;
+    legacyAddress?: string;
+    publicKey: string;
+    hexAddress: string;
+    isDelegate?: boolean;
+    status?: string;
+    isBanned?: boolean;
+    nonce?: string;
+    received?: number | null;
+    sent?: number | null;
+  };
+  compactString: Function;
+  lastBlock?: BlockDataType | null;
+  copyNoteText: any;
+  setCopyNoteText: any;
 }
 
 export const AccountDetailsOld = ({
@@ -44,7 +42,6 @@ export const AccountDetailsOld = ({
   copyNoteText,
   setCopyNoteText,
 }: AccountDetailsProps) => {
-
   return (
     <Paper
       className="lg:grid lg:mx-auto lg:grid-cols-2 lg:grid-flow-col lg:gap-x-10  max-w-app flex-grow text-onSurfaceHigh p-2 md:p-5 w-full mb-4"
@@ -53,18 +50,13 @@ export const AccountDetailsOld = ({
       <CopyHotKey
         message={"Username copied"}
         hotkey={"c+u"}
-        action={() =>
-          accountDetails.username && copy(accountDetails.username)
-        }
+        action={() => accountDetails.username && copy(accountDetails.username)}
         deps={[accountDetails]}
-
       />
       <CopyHotKey
         message={"Address copied"}
         hotkey={"c+a"}
-        action={() =>
-          accountDetails.address && copy(accountDetails.address)
-        }
+        action={() => accountDetails.address && copy(accountDetails.address)}
         deps={[accountDetails]}
       />
       <CopyHotKey
@@ -103,9 +95,7 @@ export const AccountDetailsOld = ({
           label="Address"
           value={
             <div>
-              <span className="hidden md:block">
-                {accountDetails.address}
-              </span>
+              <span className="hidden md:block">{accountDetails.address}</span>
               <span className="text-onSurfaceLight md:hidden block">
                 {compactString(accountDetails.address, 30)}
               </span>
@@ -147,9 +137,7 @@ export const AccountDetailsOld = ({
         label="Hex Address (Binary Address)"
         value={
           <div>
-            <span className="hidden md:block">
-              {accountDetails.hexAddress}
-            </span>
+            <span className="hidden md:block">{accountDetails.hexAddress}</span>
             <span className="block md:hidden">
               {compactString(accountDetails.hexAddress, 25)}
             </span>
@@ -157,9 +145,7 @@ export const AccountDetailsOld = ({
         }
         className={" whitespace-nowrap lg:col-start-2 "}
         icon={
-          <CopyToClipboard
-            text={accountDetails.hexAddress}
-          >
+          <CopyToClipboard text={accountDetails.hexAddress}>
             <IconButton
               onClick={() => setCopyNoteText("Hex address copied")}
               className=" focus:text-accentPrimary text-surfacePrimaryDark "
@@ -172,11 +158,7 @@ export const AccountDetailsOld = ({
       {accountDetails.isDelegate && (
         <KeyValueRow
           label="Status"
-          value={
-            accountDetails.status
-              ? accountDetails.status
-              : "no status"
-          }
+          value={accountDetails.status ? accountDetails.status : "no status"}
           className={"lg:col-start-1"}
           icon={" "}
         />
@@ -257,5 +239,5 @@ export const AccountDetailsOld = ({
         <Snackbar message={copyNoteText} toggleState={setCopyNoteText} />
       )}
     </Paper>
-  )
-}
+  );
+};

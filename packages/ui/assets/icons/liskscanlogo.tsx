@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 
 export const LiskScanIcon: FC<{ style?: object; className?: string }> = ({
   style,
@@ -44,4 +44,4 @@ export const LiskScanIcon: FC<{ style?: object; className?: string }> = ({
       </g>
     </g>
   </svg>
-)
+);

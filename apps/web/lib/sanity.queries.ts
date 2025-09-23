@@ -6,12 +6,12 @@ import {
 
 export interface GetQueriesProps {
   queries: ServiceQueries[];
-  id?: string
+  id?: string;
 }
 
 export const getQueries = async ({
   queries,
-  id
+  id,
 }: GetQueriesProps): Promise<
   Record<string, RPCResponses<any> | ErrorResponse>
 > => (await getAllData(queries, undefined, id)) as RPCResponses<any>;

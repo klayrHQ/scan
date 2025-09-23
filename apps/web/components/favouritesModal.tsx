@@ -1,29 +1,29 @@
-"use client"
-import React, {useState} from "react";
-import {StarIcon} from "@heroicons/react/24/solid";
-import {Tooltip, Typography} from "ui";
-import {FavouritesWindow} from "ui/organisms/favouritesWindow/favouritesWindow";
-import {Popover} from "ui/atoms/popover/popover";
-import {useSaveFavourites} from "../providers/favourites";
-import {useRouter} from "next/navigation";
+"use client";
+import React, { useState } from "react";
+import { StarIcon } from "@heroicons/react/24/solid";
+import { Tooltip, Typography } from "ui";
+import { FavouritesWindow } from "ui/organisms/favouritesWindow/favouritesWindow";
+import { Popover } from "ui/atoms/popover/popover";
+import { useSaveFavourites } from "../providers/favourites";
+import { useRouter } from "next/navigation";
 
 export const FavouritesModal = ({
   menuCloseFunction,
   mobile = false,
 }: {
-  menuCloseFunction?: () => void
-  mobile?: boolean
+  menuCloseFunction?: () => void;
+  mobile?: boolean;
 }) => {
   const router = useRouter();
 
-  const [open, setOpen] = useState(false)
-  const { favourites, unFavourite, updateFavourites } = useSaveFavourites()
+  const [open, setOpen] = useState(false);
+  const { favourites, unFavourite, updateFavourites } = useSaveFavourites();
 
   const goToAccount = (address: string) => {
-    setOpen(false)
-    router.push(`/account/${address}`)
-    menuCloseFunction && menuCloseFunction()
-  }
+    setOpen(false);
+    router.push(`/account/${address}`);
+    menuCloseFunction && menuCloseFunction();
+  };
 
   return (
     <Popover
@@ -31,37 +31,48 @@ export const FavouritesModal = ({
       setOpen={setOpen}
       containerClassName={!mobile ? "hidden md:block" : "md:hidden"}
       containerWidth={mobile ? "full" : "auto"}
-      className={!mobile ? "top-0 w-screen max-w-full lg:max-w-xl shadow" : "max-w-full w-full shadow"}
+      className={
+        !mobile
+          ? "top-0 w-screen max-w-full lg:max-w-xl shadow"
+          : "max-w-full w-full shadow"
+      }
       placement={"right"}
       disabled={!favourites || favourites.length <= 0}
       button={
         favourites && favourites.length > 0 ? (
           <div
             className={
-              !mobile ?
-              "group cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-onBackgroundMedium"
-              :
-              "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
+              !mobile
+                ? "group cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-onBackgroundMedium"
+                : "cursor-pointer w-full flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
             }
           >
-            <StarIcon key={"star_2"} className={"w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary group-hover:text-yellow"} />
-            <Typography key={"span_2"} tag={"span"} color={"inherit"}>Favourites</Typography>
+            <StarIcon
+              key={"star_2"}
+              className={
+                "w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary group-hover:text-yellow"
+              }
+            />
+            <Typography key={"span_2"} tag={"span"} color={"inherit"}>
+              Favourites
+            </Typography>
           </div>
         ) : (
-          <Tooltip
-            label="No favorites set"
-            placement={"bottom"}
-          >
+          <Tooltip label="No favorites set" placement={"bottom"}>
             <div
               className={
-              !mobile ?
-                "cursor-default hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-onBackgroundMedium"
-                :
-                "cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
+                !mobile
+                  ? "cursor-default hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center text-onTopbar hover:text-onBackgroundMedium"
+                  : "cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-2 lg:pl-2 pr-2 py-1 lg:py-2 items-center text-onSurfaceHigh gap-[0.15rem]"
               }
             >
-              <StarIcon key={"star_1"} className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary" />
-              <Typography key={"span_1"} tag={"span"}>Favourites</Typography>
+              <StarIcon
+                key={"star_1"}
+                className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-secondary"
+              />
+              <Typography key={"span_1"} tag={"span"}>
+                Favourites
+              </Typography>
             </div>
           </Tooltip>
         )
@@ -74,5 +85,5 @@ export const FavouritesModal = ({
         onClick={goToAccount}
       />
     </Popover>
-  )
-}
+  );
+};

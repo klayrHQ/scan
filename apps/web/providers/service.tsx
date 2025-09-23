@@ -1,8 +1,5 @@
 "use client";
-import {
-  EventsResponse,
-  LiskService,
-} from "@liskscan/lisk-service-client";
+import { EventsResponse, LiskService } from "@liskscan/lisk-service-client";
 import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
 import { TransactionsResponse } from "@liskscan/lisk-service-client/lib/types/api/transactions";
 import {
@@ -16,7 +13,7 @@ import {
   ErrorResponse,
   RPCResponses,
 } from "@liskscan/lisk-service-client/lib/types";
-import {client, getAllData, ServiceQueries} from "../lib/sanity.service";
+import { client, getAllData, ServiceQueries } from "../lib/sanity.service";
 import { UpdateOnType } from "../schemas/slices/table";
 
 type ServiceContextType = {
@@ -29,13 +26,12 @@ type ServiceContextType = {
   queries: ServiceQueries[];
   events: Record<string, EventsResponse | BlocksResponse["data"][0]>;
   setQueries(queries: ServiceQueries[]): void;
-  setID(id?: string): void
-  nextPage(queryKey?: string): void
+  setID(id?: string): void;
+  nextPage(queryKey?: string): void;
 };
 const ServiceContext = createContext<ServiceContextType>(
-  {} as ServiceContextType
+  {} as ServiceContextType,
 );
-
 
 export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   const [id, setID] = useState<string | undefined>();
@@ -71,20 +67,20 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
 
   const updateCache = async () => {
     if (event) {
-      const updateQueries = updateOnEvent(event[0])
+      const updateQueries = updateOnEvent(event[0]);
       const response = await getAllData(updateQueries, cache, id);
-      setCache((prevState) => ({...prevState, ...response}));
+      setCache((prevState) => ({ ...prevState, ...response }));
       setLastUpdate(new Date().getTime());
     }
   };
 
   useEffect(() => {
-    updateCache()
-  }, [event])
+    updateCache();
+  }, [event]);
 
   useEffect(() => {
     if (queries.length > 0) {
-      updateQuery()
+      updateQuery();
     }
   }, [queries]);
 
@@ -92,51 +88,50 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     client.subscribe("new.block", (block) => {
       setEvents((prevState) => ({ ...prevState, "new.block": block.data[0] }));
-      setEvent(["lastBlock", new Date().getTime()])
+      setEvent(["lastBlock", new Date().getTime()]);
     });
     client.subscribe("delete.block", (block) => {
       setEvents((prevState) => ({
         ...prevState,
         "delete.block": block.data[0],
       }));
-      setEvent(["lastBlock", new Date().getTime()])
+      setEvent(["lastBlock", new Date().getTime()]);
     });
     client.subscribe("new.transactions", (transactions) => {
       setEvents((prevState) => ({
         ...prevState,
         "new.transactions": transactions,
       }));
-      setEvent(["lastTransactions",new Date().getTime()]);
+      setEvent(["lastTransactions", new Date().getTime()]);
     });
     client.subscribe("delete.transactions", (transactions) => {
       setEvents((prevState) => ({
         ...prevState,
         "delete.transactions": transactions,
       }));
-      setEvent(["lastTransactions",new Date().getTime()]);
+      setEvent(["lastTransactions", new Date().getTime()]);
     });
     client.subscribe("update.round", (data) => {
       setEvents((prevState) => ({ ...prevState, "update.round": data }));
-      setEvent(["lastRound",new Date().getTime()]);
-
+      setEvent(["lastRound", new Date().getTime()]);
     });
     client.subscribe("update.generators", (data) => {
       setEvents((prevState) => ({
         ...prevState,
         "update.generators": data,
       }));
-      setEvent(["lastGenerators",new Date().getTime()]);
+      setEvent(["lastGenerators", new Date().getTime()]);
     });
     client.subscribe("update.fees_estimates", (data) => {
       setEvents((prevState) => ({
         ...prevState,
         "update.fees_estimates": data,
       }));
-      setEvent(["lastFees",new Date().getTime()]);
+      setEvent(["lastFees", new Date().getTime()]);
     });
     client.subscribe("update.metadata", (data) => {
       setEvents((prevState) => ({ ...prevState, "update.metadata": data }));
-      setEvent(["lastMeta",new Date().getTime()]);
+      setEvent(["lastMeta", new Date().getTime()]);
     });
   }, []);
 

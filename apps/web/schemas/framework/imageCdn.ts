@@ -1,4 +1,4 @@
-import {ImagesIcon} from "@sanity/icons";
+import { ImagesIcon } from "@sanity/icons";
 
 export default {
   name: "imageCdn",

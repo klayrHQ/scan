@@ -1,2 +1,1 @@
-
-export const KpiGrid = () => <></>
+export const KpiGrid = () => <></>;

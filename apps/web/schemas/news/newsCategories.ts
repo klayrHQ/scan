@@ -1,4 +1,3 @@
-
 export default {
   name: "newsCategories",
   type: "document",

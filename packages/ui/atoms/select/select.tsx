@@ -1,26 +1,31 @@
-"use client"
+"use client";
 
-import React, {cloneElement, FC, ReactElement, ReactNode, useState} from "react";
+import React, {
+  cloneElement,
+  FC,
+  ReactElement,
+  ReactNode,
+  useState,
+} from "react";
 import { cva } from "class-variance-authority";
 import { nanoid } from "nanoid";
-import {Grid, Typography} from "../..";
-import {cls} from "../../utils";
-import {Icon} from "../icon/icon";
-import {useClickOutside} from "klayr-explorer/hooks/clickOutside";
+import { Grid, Typography } from "../..";
+import { cls } from "../../utils";
+import { Icon } from "../icon/icon";
+import { useClickOutside } from "klayr-explorer/hooks/clickOutside";
 
-interface SelectProps
+interface SelectProps {
   // extends React.DetailedHTMLProps<
   //   React.SelectHTMLAttributes<HTMLSelectElement>,
   //   HTMLSelectElement
   // >
-{
   id: string;
   defaultValue?: string;
   className?: string;
   innerClassName?: string;
   placeholder: string | ReactNode;
   placeholderActive?: string | ReactNode;
-  optionsList: Array<{label?: string, value: string}>;
+  optionsList: Array<{ label?: string; value: string }>;
   onChange: (value: string) => void;
   transition?: boolean;
   type?: "base" | "assetSorting";
@@ -34,24 +39,19 @@ interface SelectProps
   zIndex?: string;
 }
 
-const options = cva(
-  [
-    "box-border flex flex-col border-none shadow-xl",
-  ],
-  {
-    variants: {
-      transition: {
-        true: "px-2 transition-all duration-300",
-        false: "p-2 max-h-72 overflow-y-auto",
-      },
-      textAlign: {
-        left: "text-left",
-        center: "text-center",
-        right: "text-right",
-      }
+const options = cva(["box-border flex flex-col border-none shadow-xl"], {
+  variants: {
+    transition: {
+      true: "px-2 transition-all duration-300",
+      false: "p-2 max-h-72 overflow-y-auto",
+    },
+    textAlign: {
+      left: "text-left",
+      center: "text-center",
+      right: "text-right",
     },
   },
-)
+});
 
 export const Select: FC<SelectProps> = ({
   id,
@@ -63,28 +63,30 @@ export const Select: FC<SelectProps> = ({
   optionsList = [],
   onChange,
   transition = false,
-  type= "base",
+  type = "base",
   width,
   listWidth,
   listOrigin,
-  textAlign= "left",
+  textAlign = "left",
   openButton,
   icon = true,
   rounded,
   zIndex,
 }) => {
-  const [currentValue, setCurrentValue] = useState<{ label?: string, value: string } | undefined>(optionsList.find(option => option.value === defaultValue));
+  const [currentValue, setCurrentValue] = useState<
+    { label?: string; value: string } | undefined
+  >(optionsList.find((option) => option.value === defaultValue));
   const [open, setOpen] = useState(false);
 
   const toggleOpen = () => {
-    setOpen(prev => !prev);
-  }
+    setOpen((prev) => !prev);
+  };
 
   const container = useClickOutside(() => {
-    setOpen(false)
-  })
+    setOpen(false);
+  });
 
-  const handleChange = (value: { label?: string, value: string }) => {
+  const handleChange = (value: { label?: string; value: string }) => {
     setCurrentValue(value);
     // call method, if it exists
     if (onChange) onChange(value.value);
@@ -92,12 +94,14 @@ export const Select: FC<SelectProps> = ({
     toggleOpen();
   };
 
-  const values = optionsList.map(value => (
+  const values = optionsList.map((value) => (
     <div
       className={cls([
         value.value === currentValue?.value ? "text-primary" : "",
         "w-full my-1 py-1 px-2 rounded-xs cursor-pointer outline-none",
-        type === "assetSorting" ? "hover:bg-surface-3 hover:text-surface-4" : "hover:bg-surface-1",
+        type === "assetSorting"
+          ? "hover:bg-surface-3 hover:text-surface-4"
+          : "hover:bg-surface-1",
       ])}
       key={`${value}: ${nanoid()}`}
       onClick={() => handleChange(value)}
@@ -111,12 +115,12 @@ export const Select: FC<SelectProps> = ({
         {value.label || value.value}
       </Typography>
     </div>
-  ))
+  ));
 
   return (
     <div
-      className={cls(
-      ["h-10 m-0 relative",
+      className={cls([
+        "h-10 m-0 relative",
         width ? `w-${width}` : "w-52",
         className,
       ])}
@@ -124,25 +128,30 @@ export const Select: FC<SelectProps> = ({
       // @ts-ignore
       ref={container}
     >
-      <div className={cls([
-        "absolute inset-0 h-max bg-background",
-        rounded ? `rounded-md` : "",
-        innerClassName,
-        zIndex ? `z-${zIndex}` : "z-30",
-      ])}>
-        {
-          openButton ?
+      <div
+        className={cls([
+          "absolute inset-0 h-max bg-background",
+          rounded ? `rounded-md` : "",
+          innerClassName,
+          zIndex ? `z-${zIndex}` : "z-30",
+        ])}
+      >
+        {openButton ? (
           cloneElement(openButton, {
             onClick: toggleOpen,
           })
-          :
+        ) : (
           <button
-            className={"w-full cursor-pointer px-4 py-2 bg-transparent border-none"}
+            className={
+              "w-full cursor-pointer px-4 py-2 bg-transparent border-none"
+            }
             onClick={toggleOpen}
             //style={{ transition: "0.3s ease", }}
           >
             <Grid
-              className={"justify-between items-center w-full max-h-10 border-surface-4"}
+              className={
+                "justify-between items-center w-full max-h-10 border-surface-4"
+              }
               columns={3}
               flex
               gap={2}
@@ -155,33 +164,41 @@ export const Select: FC<SelectProps> = ({
                 color={"current"}
                 tag={"span"}
               >
-                {
-                  typeof placeholder === "string" ?
-                    currentValue ? currentValue.label : placeholder :
-                    currentValue ? placeholderActive : placeholder
-                }
+                {typeof placeholder === "string"
+                  ? currentValue
+                    ? currentValue.label
+                    : placeholder
+                  : currentValue
+                    ? placeholderActive
+                    : placeholder}
               </Typography>
 
-              {
-                icon &&
+              {icon && (
                 <Icon
                   className={cls([
                     "text-current h-4 w-4",
-                    transition ? `transition-transform duration-200 ${open ? "rotate-180" : ""}` : "",
+                    transition
+                      ? `transition-transform duration-200 ${open ? "rotate-180" : ""}`
+                      : "",
                   ])}
                   icon={"chevronDown"}
                   size={"xs"}
                 />
-              }
+              )}
             </Grid>
           </button>
-        }
+        )}
 
         <div
           className={options({
             className: cls([
-              transition ? (open ? "max-h-72 overflow-y-hidden py-2" : "max-h-0 overflow-hidden py-0 border-none")
-                : (open ? "visible" : "hidden"),
+              transition
+                ? open
+                  ? "max-h-72 overflow-y-hidden py-2"
+                  : "max-h-0 overflow-hidden py-0 border-none"
+                : open
+                  ? "visible"
+                  : "hidden",
               listWidth ? `w-${listWidth}` : "w-full",
               listOrigin && `absolute ${listOrigin}-0 z-50 bg-background`,
             ]),
@@ -194,5 +211,4 @@ export const Select: FC<SelectProps> = ({
       </div>
     </div>
   );
-
 };

@@ -1,23 +1,23 @@
-import React, {ReactElement} from 'react';
-import {TableHeadColumn as HeadCol} from "../../atoms/tableHeadColumn/tableHeadColumn";
-import {TableHead} from "../../molecules/tableHead/tableHead";
-import {TableBody} from "../../molecules/tableBody/tableBody";
-import {tableHeadColsType, tableRowsType} from "../../types";
+import React, { ReactElement } from "react";
+import { TableHeadColumn as HeadCol } from "../../atoms/tableHeadColumn/tableHeadColumn";
+import { TableHead } from "../../molecules/tableHead/tableHead";
+import { TableBody } from "../../molecules/tableBody/tableBody";
+import { tableHeadColsType, tableRowsType } from "../../types";
 
 export interface TableProps {
-  fullWidth?: boolean
-  rounded?: boolean
-  className?: string
-  oddClassName?: string
-  evenClassName?: string
-  hoverClassName?: string
-  headClassName?: string
-  rows: tableRowsType
-  mobileRows?: tableRowsType
-  tabletRows?: tableRowsType
-  headCols?: tableHeadColsType
-  mobileHeadCols?: tableHeadColsType
-  tabletHeadCols?: tableHeadColsType
+  fullWidth?: boolean;
+  rounded?: boolean;
+  className?: string;
+  oddClassName?: string;
+  evenClassName?: string;
+  hoverClassName?: string;
+  headClassName?: string;
+  rows: tableRowsType;
+  mobileRows?: tableRowsType;
+  tabletRows?: tableRowsType;
+  headCols?: tableHeadColsType;
+  mobileHeadCols?: tableHeadColsType;
+  tabletHeadCols?: tableHeadColsType;
 }
 
 export const Table = ({
@@ -49,14 +49,14 @@ export const Table = ({
               ].join(" ")}
               {...props}
             >
-              {headCols &&
+              {headCols && (
                 <TableHead
                   cols={headCols}
                   mobileCols={mobileHeadCols}
                   tabletCols={tabletHeadCols}
                   headClassName={headClassName}
                 />
-              }
+              )}
               <TableBody
                 rows={rows}
                 mobileRows={mobileRows}

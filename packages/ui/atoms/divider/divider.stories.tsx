@@ -1,7 +1,7 @@
 import React from "react";
-import {ComponentStory, ComponentMeta} from "@storybook/react";
-import {Divider} from "./divider"
-import {Grid} from "../grid/grid";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Divider } from "./divider";
+import { Grid } from "../grid/grid";
 
 export default {
   title: "Atoms/Utils/Divider",
@@ -12,26 +12,25 @@ export default {
     },
   },
   argTypes: {
-    className: {control: "text"},
-    color: {control: "text"},
-    width: {control: "text"},
-    borderWidth: {control: "text"},
-    borderStyle: {control: "text"},
-    align: {control: "select", options: ["left", "center", "right"]},
-    marginY: {control: "text"},
-  }
+    className: { control: "text" },
+    color: { control: "text" },
+    width: { control: "text" },
+    borderWidth: { control: "text" },
+    borderStyle: { control: "text" },
+    align: { control: "select", options: ["left", "center", "right"] },
+    marginY: { control: "text" },
+  },
 } as any;
 
 const Template: ComponentStory<typeof Divider> = (args) => (
-    <div className={"w-1/2 mx-auto mt-10"}>
-      <Divider {...args} />
-    </div>
-)
-
+  <div className={"w-1/2 mx-auto mt-10"}>
+    <Divider {...args} />
+  </div>
+);
 
 export const Base: ComponentMeta<typeof Divider> = Template.bind({});
 Base.args = {
- borderWidth: "2",
+  borderWidth: "2",
 };
 
 export const Colors: ComponentStory<typeof Divider> = (args) => (
@@ -45,12 +44,12 @@ export const Colors: ComponentStory<typeof Divider> = (args) => (
     <Divider {...args} color="secondary" />
     <Divider {...args} color="tertiary" />
   </Grid>
-)
+);
 
 export const Alignments: ComponentStory<typeof Divider> = (args) => (
   <Grid flex columns={1} gap={4} className={"w-full mx-auto mt-10"}>
-    <Divider {...args} color="body" width={"1/2"} align={"center"}/>
-    <Divider {...args} color="body" width={"1/2"} align={"left"}/>
-    <Divider {...args} color="body" width={"1/2"} align={"right"}/>
+    <Divider {...args} color="body" width={"1/2"} align={"center"} />
+    <Divider {...args} color="body" width={"1/2"} align={"left"} />
+    <Divider {...args} color="body" width={"1/2"} align={"right"} />
   </Grid>
-)
+);

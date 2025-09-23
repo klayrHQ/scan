@@ -10,7 +10,7 @@ import type {
 export type QueryCacheKey = `${string}-${string}`;
 export function getQueryCacheKey(
   query: string,
-  params: QueryParams
+  params: QueryParams,
 ): QueryCacheKey {
   return `${query}-${JSON.stringify(params)}`;
 }
@@ -23,7 +23,7 @@ const deps = new Map<QueryCacheKey, number>();
 export const NoStoreContext = function defineListener<Snapshot>(
   initialSnapshot: Snapshot,
   query: string,
-  params: QueryParams
+  params: QueryParams,
 ) {
   const key = getQueryCacheKey(query, params);
 

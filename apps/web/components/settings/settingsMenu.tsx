@@ -1,30 +1,34 @@
-import React, {FC} from "react";
-import {CurrencyType, SettingsItemType} from "ui/types";
-import {cls, Paper, Typography} from "ui";
-import {Icon} from "ui/atoms/icon/icon";
-import {useSettings, viewTypes} from "../../providers/settings";
-import {useDecimals} from "../../providers/currency/CurrencyProvider";
+import React, { FC } from "react";
+import { CurrencyType, SettingsItemType } from "ui/types";
+import { cls, Paper, Typography } from "ui";
+import { Icon } from "ui/atoms/icon/icon";
+import { useSettings, viewTypes } from "../../providers/settings";
+import { useDecimals } from "../../providers/currency/CurrencyProvider";
 
-export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
-  const {setOpen, view, setView, views, parsedSettings,} = useSettings()
-  const {currencies,} = useDecimals()
+export const SettingsMenu = ({
+  hiddenOnMobile,
+}: {
+  hiddenOnMobile?: boolean;
+}) => {
+  const { setOpen, view, setView, views, parsedSettings } = useSettings();
+  const { currencies } = useDecimals();
 
   const getCurrentSetting = (currentView: viewTypes) => {
     if (currentView === "currency") {
-      const selectedCurrency: CurrencyType = parsedSettings.selectedCurrency
-      return `${selectedCurrency?.symbol || currencies[0]?.symbol} - ${selectedCurrency?.sign || currencies[0]?.sign}`
+      const selectedCurrency: CurrencyType = parsedSettings.selectedCurrency;
+      return `${selectedCurrency?.symbol || currencies[0]?.symbol} - ${selectedCurrency?.sign || currencies[0]?.sign}`;
     } else if (currentView === "network") {
       /*return `${parsedSettings.networks.communityId}(${parsedSettings.networks.network})`*/
-      return `Coming soon`
+      return `Coming soon`;
     } else if (currentView === "hotkeys") {
-      return `Coming soon`
+      return `Coming soon`;
     }
-    return ""
-  }
+    return "";
+  };
 
-  const closeSettingsModal = () => setOpen(false)
+  const closeSettingsModal = () => setOpen(false);
 
-  const disabledViews = ["hotkeys", "network"]
+  const disabledViews = ["hotkeys", "network"];
 
   return (
     <Paper
@@ -40,12 +44,12 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
           <div
             key={`sm-${currentView}`}
             onClick={() => {
-              !disabledViews.includes(currentView) && setView(currentView)
+              !disabledViews.includes(currentView) && setView(currentView);
             }}
             className={[
-              !disabledViews.includes(currentView) ?
-                "hover:bg-primaryLight hover:text-onPrimaryHigh transition ease-in-out hover:font-medium cursor-pointer" :
-                "cursor-not-allowed",
+              !disabledViews.includes(currentView)
+                ? "hover:bg-primaryLight hover:text-onPrimaryHigh transition ease-in-out hover:font-medium cursor-pointer"
+                : "cursor-not-allowed",
               "py-3 px-4 flex items-start rounded-lg group md:mx-2 md:my-2",
               "duration-150",
               "flex flex-row items-center justify-between font-base",
@@ -59,9 +63,9 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
                   currentView === view
                     ? "text-onSurfaceHigh text-base"
                     : "text-onSurfaceHigh",
-                  !disabledViews.includes(currentView) ?
-                    "group-hover:text-onPrimaryHigh" :
-                    "",
+                  !disabledViews.includes(currentView)
+                    ? "group-hover:text-onPrimaryHigh"
+                    : "",
                 ].join(" ")}
               >
                 {currentView}
@@ -70,9 +74,9 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
             <div className="flex flex-row items-center ">
               <Typography
                 className={cls([
-                  !disabledViews.includes(currentView) ?
-                    "group-hover:text-onSurfacePrimaryHigh" :
-                    "",
+                  !disabledViews.includes(currentView)
+                    ? "group-hover:text-onSurfacePrimaryHigh"
+                    : "",
                   "text-onSurfaceLow",
                 ])}
                 size={"subBody"}
@@ -80,11 +84,14 @@ export const SettingsMenu = ({hiddenOnMobile}: {hiddenOnMobile?: boolean}) => {
               >
                 {getCurrentSetting(currentView)}
               </Typography>
-              <Icon className="w-5 h-5 text-onSurfaceHigh ml-4" icon={"chevronRight"} />
+              <Icon
+                className="w-5 h-5 text-onSurfaceHigh ml-4"
+                icon={"chevronRight"}
+              />
             </div>
           </div>
         ))}
       </div>
     </Paper>
-  )
-}
+  );
+};

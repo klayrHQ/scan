@@ -12,18 +12,20 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
-    children: <div className="mx-auto mt-20 w-max text-onSurfaceHigh">Test</div>
-  }
+    children: (
+      <div className="mx-auto mt-20 w-max text-onSurfaceHigh">Test</div>
+    ),
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args}>{args.children}</Tooltip>;
+const Template: ComponentStory<typeof Tooltip> = (args) => (
+  <Tooltip {...args}>{args.children}</Tooltip>
+);
 
 export const PositionBottom: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -32,18 +34,22 @@ PositionBottom.args = {
   placement: "bottom",
 };
 
-export const PositionBottomLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
+export const PositionBottomLeft: ComponentMeta<typeof Tooltip> = Template.bind(
+  {},
+);
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionBottomLeft.args = {
   label: "test tooltip",
-  placement: "bottom-end"
+  placement: "bottom-end",
 };
 
-export const PositionBottomRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+export const PositionBottomRight: ComponentMeta<typeof Tooltip> = Template.bind(
+  {},
+);
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionBottomRight.args = {
   label: "test tooltip",
-  placement: "bottom-start"
+  placement: "bottom-start",
 };
 
 export const PositionTop: ComponentMeta<typeof Tooltip> = Template.bind({});
@@ -57,14 +63,16 @@ export const PositionTopLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionTopLeft.args = {
   label: "test tooltip",
-  placement: "top-end"
+  placement: "top-end",
 };
 
-export const PositionTopRight: ComponentMeta<typeof Tooltip> = Template.bind({});
+export const PositionTopRight: ComponentMeta<typeof Tooltip> = Template.bind(
+  {},
+);
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionTopRight.args = {
   label: "test tooltip",
-  placement: "top-start"
+  placement: "top-start",
 };
 
 export const PositionRight: ComponentMeta<typeof Tooltip> = Template.bind({});
@@ -78,6 +86,5 @@ export const PositionLeft: ComponentMeta<typeof Tooltip> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 PositionLeft.args = {
   label: "test tooltip",
-  placement: "left"
+  placement: "left",
 };
-

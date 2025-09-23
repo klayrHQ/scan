@@ -11,7 +11,7 @@ interface SanityStoreProviderProps {
 type SanityContextType = {
   query<R = any>(
     groqQuery: string,
-    params?: Record<string, unknown>
+    params?: Record<string, unknown>,
   ): Promise<R>;
   indexedDocuments: Map<string, SanityDocument>;
 };
@@ -26,7 +26,7 @@ export const SanityStoreProvider = ({
 
   const query = async <R = any,>(
     groqQuery: string,
-    params?: Record<string, unknown>
+    params?: Record<string, unknown>,
   ): Promise<R> => {
     const tree = parse(groqQuery);
 

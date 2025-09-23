@@ -12,9 +12,7 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -31,19 +29,20 @@ export default {
         filterName: "recipient",
         filterValue: "test",
       },
-    ]
-  }
+    ],
+  },
 } as any;
 
 const Template: ComponentStory<typeof ActiveFilters> = (args) => {
   return (
     <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
-      <ActiveFilters {...args} resetFilters={(filter) => console.log("reset " + filter)}/>
+      <ActiveFilters
+        {...args}
+        resetFilters={(filter) => console.log("reset " + filter)}
+      />
     </div>
-  )
-}
+  );
+};
 
 export const Primary: ComponentMeta<typeof ActiveFilters> = Template.bind({});
-Primary.args = {
-
-};
+Primary.args = {};

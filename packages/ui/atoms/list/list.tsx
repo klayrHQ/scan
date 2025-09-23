@@ -1,5 +1,5 @@
 import React from "react";
-import {Sizes, Tags, Typography} from "../typography/typography";
+import { Sizes, Tags, Typography } from "../typography/typography";
 import { cls } from "../..";
 import { FooterLink } from "../../molecules/footerLinks/footerLinks";
 

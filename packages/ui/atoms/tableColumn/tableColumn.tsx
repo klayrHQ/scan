@@ -1,10 +1,10 @@
-import React, {ReactNode} from 'react';
-import {Typography} from "../typography/typography";
+import React, { ReactNode } from "react";
+import { Typography } from "../typography/typography";
 
 export interface TableColProps {
-  className?: string
-  value?: string | any
-  colspan?: number
+  className?: string;
+  value?: string | any;
+  colspan?: number;
 }
 
 /**
@@ -29,14 +29,11 @@ export const TableColumn = ({
       colSpan={colspan}
       {...props}
     >
-      {
-        typeof value === "string" ?
-          <Typography tag={"span"}>
-            {value}
-          </Typography>
-          :
-          value
-      }
+      {typeof value === "string" ? (
+        <Typography tag={"span"}>{value}</Typography>
+      ) : (
+        value
+      )}
     </td>
   );
 };

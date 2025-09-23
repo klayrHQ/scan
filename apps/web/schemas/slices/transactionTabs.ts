@@ -1,7 +1,7 @@
 import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";
-import {SanityValue} from "../layout/value";
+import { SanityValue } from "../layout/value";
 
 const sliceDocumentNames: {
   type: string;

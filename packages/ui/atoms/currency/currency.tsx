@@ -1,24 +1,24 @@
-import React from "react"
-import {Typography} from "../typography/typography";
-import {CurrencyType} from "../../types";
-import {cls} from "../../utils";
+import React from "react";
+import { Typography } from "../typography/typography";
+import { CurrencyType } from "../../types";
+import { cls } from "../../utils";
 
 export interface CurrencyProps {
-  sign?: boolean
-  symbol?: boolean
-  convert?: boolean
+  sign?: boolean;
+  symbol?: boolean;
+  convert?: boolean;
   classes?: {
-    sign?: string
-    symbol?: string
-    number?: string
-    separator?: string
-    decimals?: string
-  }
-  parsedSettings?: any
-  number: string
-  decimals?: string | undefined
-  currencies?: Array<CurrencyType>
-  typography?: Record<string, any>
+    sign?: string;
+    symbol?: string;
+    number?: string;
+    separator?: string;
+    decimals?: string;
+  };
+  parsedSettings?: any;
+  number: string;
+  decimals?: string | undefined;
+  currencies?: Array<CurrencyType>;
+  typography?: Record<string, any>;
 }
 
 export const Currency = ({
@@ -29,28 +29,30 @@ export const Currency = ({
   parsedSettings,
   number,
   decimals,
-  currencies = [{
-    id: 1214,
-    name: "Lisk",
-    sign: "Ⱡ",
-    symbol: "LSK",
-    default: {
-      sign: false,
-      symbol: true,
-      fractions: 4,
+  currencies = [
+    {
+      id: 1214,
+      name: "Lisk",
+      sign: "Ⱡ",
+      symbol: "LSK",
+      default: {
+        sign: false,
+        symbol: true,
+        fractions: 4,
+      },
     },
-  }],
+  ],
   typography,
 }: CurrencyProps) => {
-
   return (
-    <Typography tag={"span"} className={cls(["whitespace-nowrap", typography?.className])} {...typography}>
+    <Typography
+      tag={"span"}
+      className={cls(["whitespace-nowrap", typography?.className])}
+      {...typography}
+    >
       {(parsedSettings?.signEnabled || sign) && (
         <span
-          className={[
-            "mr-0.5",
-            classes?.sign ? classes?.sign : "",
-          ].join(" ")}
+          className={["mr-0.5", classes?.sign ? classes?.sign : ""].join(" ")}
         >
           {convert || parsedSettings?.convertCurrency
             ? parsedSettings?.selectedCurrency?.sign
@@ -60,38 +62,29 @@ export const Currency = ({
         </span>
       )}
       {number && (
-        <span
-          className={[
-            classes?.number ? classes?.number : "",
-          ].join(" ")}
-        >
+        <span className={[classes?.number ? classes?.number : ""].join(" ")}>
           {number}
         </span>
       )}
       {decimals && (
         <span
-          className={[
-            classes?.separator ? classes?.separator : "",
-          ].join(" ")}
+          className={[classes?.separator ? classes?.separator : ""].join(" ")}
         >
           {parsedSettings?.decimalSeparatorDot ? "." : ","}
         </span>
       )}
       {decimals && (
         <span
-          className={[
-            classes?.decimals ? classes?.decimals : "",
-          ].join(" ")}
+          className={[classes?.decimals ? classes?.decimals : ""].join(" ")}
         >
           {decimals}
         </span>
       )}
       {(parsedSettings?.symbolEnabled || symbol) && (
         <span
-          className={[
-            "ml-0.5",
-            classes?.symbol ? classes?.symbol : "",
-          ].join(" ")}
+          className={["ml-0.5", classes?.symbol ? classes?.symbol : ""].join(
+            " ",
+          )}
         >
           {convert || parsedSettings?.convertCurrency
             ? parsedSettings?.selectedCurrency?.symbol
@@ -100,5 +93,5 @@ export const Currency = ({
         </span>
       )}
     </Typography>
-  )
-}
+  );
+};

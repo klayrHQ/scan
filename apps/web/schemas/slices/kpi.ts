@@ -1,4 +1,4 @@
-import {SanityValue} from "../layout/value";
+import { SanityValue } from "../layout/value";
 
 export const kpi = {
   name: "kpi",
@@ -18,9 +18,9 @@ export const kpi = {
         {
           type: "object",
           name: "value",
-          fields: SanityValue
-        }
-      ]
+          fields: SanityValue,
+        },
+      ],
     },
     {
       name: "copy",
@@ -28,8 +28,8 @@ export const kpi = {
       title: "Copy",
       description: "-1 is disabled",
       options: {
-        defaultValue: -1
-      }
+        defaultValue: -1,
+      },
     },
     {
       name: "className",
@@ -61,5 +61,5 @@ export const kpi = {
       type: "number",
       title: "Gap",
     },
-  ]
-}
+  ],
+};

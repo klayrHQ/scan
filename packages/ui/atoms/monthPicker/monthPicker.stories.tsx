@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { MonthPicker } from "./monthPicker";
 
@@ -12,28 +12,30 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
-    className: "w-10/12"
-  }
+    className: "w-10/12",
+  },
 } as any;
 
 const Template: ComponentStory<typeof MonthPicker> = (args) => {
-  const [fromValue, setFromValue] = useState<number>(0)
-  const [toValue, setToValue] = useState<number>(args.max || 24)
+  const [fromValue, setFromValue] = useState<number>(0);
+  const [toValue, setToValue] = useState<number>(args.max || 24);
 
   return (
     <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
-      <MonthPicker {...args} fromValue={fromValue} toValue={toValue} setFromValue={setFromValue} setToValue={setToValue}/>
+      <MonthPicker
+        {...args}
+        fromValue={fromValue}
+        toValue={toValue}
+        setFromValue={setFromValue}
+        setToValue={setToValue}
+      />
     </div>
-  )
-}
+  );
+};
 
 export const Primary: ComponentMeta<typeof MonthPicker> = Template.bind({});
-Primary.args = {
-
-};
+Primary.args = {};

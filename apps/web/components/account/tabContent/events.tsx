@@ -1,15 +1,10 @@
-import {TableSlice} from "../../../slices/table";
-import {eventsColumns} from "../table/columns/eventsColumns";
+import { TableSlice } from "../../../slices/table";
+import { eventsColumns } from "../table/columns/eventsColumns";
 
-export const Events = ({
-  queryData
-}: {
-  queryData: any
-}) => {
-
+export const Events = ({ queryData }: { queryData: any }) => {
   return (
     <TableSlice
-      queryData={{events: queryData["account-events"]}}
+      queryData={{ events: queryData["account-events"] }}
       table={{
         key: "events",
         columns: eventsColumns,
@@ -17,5 +12,5 @@ export const Events = ({
         pagination: true,
       }}
     />
-  )
-}
+  );
+};

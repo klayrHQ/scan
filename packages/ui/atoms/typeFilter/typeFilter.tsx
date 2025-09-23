@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState } from "react";
 
 export const TypeFilter: FC<{
-  className?: string,
-}> = ({className}) => {
-  const [txType, setTxType] = useState<string>()
+  className?: string;
+}> = ({ className }) => {
+  const [txType, setTxType] = useState<string>();
 
   return (
     <div className={`w-full ${className}`}>
@@ -22,5 +22,5 @@ export const TypeFilter: FC<{
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

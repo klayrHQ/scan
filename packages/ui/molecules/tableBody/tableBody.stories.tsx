@@ -2,7 +2,11 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { TableBody } from "./tableBody";
-import {mobileRows, rows, tabletRows} from "../../assets/mockupData/mockupData";
+import {
+  mobileRows,
+  rows,
+  tabletRows,
+} from "../../assets/mockupData/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -12,16 +16,14 @@ export default {
   argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof TableBody> = (args) => (
-    <TableBody {...args} />
+  <TableBody {...args} />
 );
 
 export const Primary: ComponentMeta<typeof TableBody> = Template.bind({});

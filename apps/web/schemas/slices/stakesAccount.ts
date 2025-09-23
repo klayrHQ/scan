@@ -1,4 +1,4 @@
-import {SanityValue} from "../layout/value";
+import { SanityValue } from "../layout/value";
 
 export const stakesAccount = {
   name: "stakesAccount",
@@ -18,9 +18,9 @@ export const stakesAccount = {
         {
           type: "object",
           name: "value",
-          fields: SanityValue
-        }
-      ]
+          fields: SanityValue,
+        },
+      ],
     },
     {
       name: "className",
@@ -52,5 +52,5 @@ export const stakesAccount = {
       type: "number",
       title: "Gap",
     },
-  ]
-}
+  ],
+};

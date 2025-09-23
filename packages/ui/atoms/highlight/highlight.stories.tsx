@@ -14,14 +14,14 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
-const Template: ComponentStory<typeof Highlight> = (args) => <Highlight {...args}>{args.children}</Highlight>;
+const Template: ComponentStory<typeof Highlight> = (args) => (
+  <Highlight {...args}>{args.children}</Highlight>
+);
 
 export const Primary: ComponentMeta<typeof Highlight> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

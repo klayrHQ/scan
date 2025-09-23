@@ -29,7 +29,7 @@ export const StakesColumn = ({
           {values[0].value.map(
             (
               value: { amount: string; validatorAddress: string },
-              index: number
+              index: number,
             ) => (
               <Link
                 href={`/account/${value.validatorAddress}`}
@@ -46,9 +46,9 @@ export const StakesColumn = ({
                     <ValueFormatter
                       value={
                         // @ts-ignore
-                      queryData?.validators_dontTouch.data.find(
+                        queryData?.validators_dontTouch.data.find(
                           (validator: any) =>
-                            validator.address === value.validatorAddress
+                            validator.address === value.validatorAddress,
                         )?.name || value.validatorAddress
                       }
                       {...values[1].format}
@@ -58,7 +58,7 @@ export const StakesColumn = ({
                   <ValueFormatter value={value.amount} {...values[0].format} />
                 </span>
               </Link>
-            )
+            ),
           )}
         </span>
       </Suspense>

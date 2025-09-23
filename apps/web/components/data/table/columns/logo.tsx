@@ -3,7 +3,7 @@ import { ColumnProps } from "./index";
 
 export const LogoColumn = ({ values }: ColumnProps) => {
   const logoValue = values.find(
-    (value) => value?.value?.png || value?.value?.svg
+    (value) => value?.value?.png || value?.value?.svg,
   );
   const imageSource = logoValue
     ? logoValue.value.svg || logoValue.value.png

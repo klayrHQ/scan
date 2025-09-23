@@ -9,7 +9,7 @@ import { getAllData } from "../lib/sanity.service";
 import { BlockchainAppsMetaResponse } from "@liskscan/lisk-service-client/lib/types";
 import { LiskService } from "@liskscan/lisk-service-client";
 import { Pagination } from "../components/data/table/pagination";
-import {keys} from "@amcharts/amcharts5/.internal/core/util/Object";
+import { keys } from "@amcharts/amcharts5/.internal/core/util/Object";
 
 const clients: Record<string, any> = {};
 export const TableSlice = ({
@@ -46,7 +46,8 @@ export const TableSlice = ({
         ])) as { meta: BlockchainAppsMetaResponse; tokens: any };
         const chainsMeta = result?.meta?.data?.filter(
           (app) =>
-            app.chainName !== "klayr_mainchain" && app.networkType === "mainnet"
+            app.chainName !== "klayr_mainchain" &&
+            app.networkType === "mainnet",
         );
         for (const chainMeta of chainsMeta) {
           if (!clients[chainMeta.chainName]) {
@@ -59,7 +60,7 @@ export const TableSlice = ({
             "get.token.balances",
             {
               address: queryData.tokens.meta.address,
-            }
+            },
           );
           // const tokensResponse = await fetch(`${chainMeta.serviceURLs[0].http}/api/v3/token/balances?address=${queryData.tokens.meta.address}`)
           if (tokensResponse.status === "success") {
@@ -76,8 +77,9 @@ export const TableSlice = ({
           return {
             ...token,
             symbol:
-              result?.tokens?.data?.find((t: any) => t.tokenID === token.tokenID)
-                ?.symbol || token.symbol,
+              result?.tokens?.data?.find(
+                (t: any) => t.tokenID === token.tokenID,
+              )?.symbol || token.symbol,
           };
         });
       }
@@ -134,8 +136,11 @@ export const TableSlice = ({
           }
           total={queryData?.[table?.key]?.meta?.total}
           pageLength={parseInt(
-            queries?.find((q:{key:string}) => q?.key === table?.key) ?.params?.find((p: {key: string, value: string}) => p.key === "limit")
-              ?.value || 20
+            queries
+              ?.find((q: { key: string }) => q?.key === table?.key)
+              ?.params?.find(
+                (p: { key: string; value: string }) => p.key === "limit",
+              )?.value || 20,
           )}
         />
       )}

@@ -2,7 +2,7 @@ import { RPCResponses } from "@liskscan/lisk-service-client/lib/types";
 import { getFromDottedKey } from "./dotString";
 import { ValueFormat } from "ui";
 import util from "util";
-import {getIterableData} from "./sanity.service";
+import { getIterableData } from "./sanity.service";
 
 export interface MakeTableProps {
   data: Record<string, RPCResponses<any>>;
@@ -22,7 +22,7 @@ export const makeTable = ({
   data,
 }: MakeTableProps): { rows: (string | number)[][] } => {
   if (data[key]?.status === "success") {
-    const parsedData = getIterableData(data[key]?.data)
+    const parsedData = getIterableData(data[key]?.data);
     const rows = parsedData?.map((row: any) =>
       cols.map((col) =>
         col.valueKeys.map((valueFormat) => {
@@ -39,7 +39,7 @@ export const makeTable = ({
             valueFormat.format?.link?.href
           ) {
             const keys = valueFormat.format.link.keys.map((k) =>
-              getFromDottedKey(k, isMeta(key) ? "meta" : key, row, data)
+              getFromDottedKey(k, isMeta(key) ? "meta" : key, row, data),
             );
 
             link = {
@@ -57,7 +57,7 @@ export const makeTable = ({
                     valueFormat.value.replace("_meta", "meta") || "",
                     "meta",
                     row,
-                    data
+                    data,
                   )
                 : getFromDottedKey(valueFormat.value || "", key, row, data),
             };
@@ -68,8 +68,8 @@ export const makeTable = ({
               format: { ...valueFormat.format, link },
             };
           }
-        })
-      )
+        }),
+      ),
     );
     return { rows };
   }

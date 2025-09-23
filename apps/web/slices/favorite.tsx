@@ -16,7 +16,7 @@ export const FavoriteSlice = ({ queryData }: SlicerProps) => {
       saveFavourite(
         id!,
         queryData["account-id-balances"].data[0].availableBalance,
-        queryData["account-auth"].meta?.name
+        queryData["account-auth"].meta?.name,
       );
     }
   };

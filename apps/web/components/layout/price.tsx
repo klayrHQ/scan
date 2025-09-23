@@ -1,13 +1,11 @@
-"use client"
-import React, {useEffect, useState} from "react"
-import {Currency} from "ui/atoms/currency/currency";
-
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { Currency } from "ui/atoms/currency/currency";
 
 export const Price = () => {
-  const [change, setChange] = useState(9999.9999)
-  const [mc, setMc] = useState("9999.9999")
-  const [price, setPrice] = useState(0)
+  const [change, setChange] = useState(9999.9999);
+  const [mc, setMc] = useState("9999.9999");
+  const [price, setPrice] = useState(0);
   // useEffect(() => {
   //   const getKPI = async () => {
   //     try {
@@ -23,15 +21,14 @@ export const Price = () => {
   useEffect(() => {
     const ws =
       typeof window !== "undefined"
-        ? new WebSocket("wss://push.coinmarketcap.com/ws?device=web&client_source=coin_detail_page")
+        ? new WebSocket(
+            "wss://push.coinmarketcap.com/ws?device=web&client_source=coin_detail_page",
+          )
         : {
-          onopen: () => {
-          },
-          onmessage: () => {
-          },
-          send(data: string | ArrayBufferLike | Blob | ArrayBufferView) {
-          },
-        }
+            onopen: () => {},
+            onmessage: () => {},
+            send(data: string | ArrayBufferLike | Blob | ArrayBufferView) {},
+          };
     ws.onopen = () => {
       // console.log("test")
       ws.send(
@@ -39,31 +36,31 @@ export const Price = () => {
           method: "RSUBSCRIPTION",
           params: [
             "main-site@crypto_price_15s@{}@detail",
-            "1214,1,1027,2010,1839"
-          ]
+            "1214,1,1027,2010,1839",
+          ],
           // id: "price",
           // data: {
           //   cryptoIds: [1214],
           //   index: "detail",
           // },
         }),
-      )
-    }
+      );
+    };
 
     ws.onmessage = (e) => {
-      const data = JSON.parse(e.data)
+      const data = JSON.parse(e.data);
       // console.log(data)
       if (data?.d?.p24h === undefined) {
         // console.log(data)
-        return
+        return;
       }
       if (data.d.id === 1214) {
-        setChange(data.d.p24h)
-        setMc((data.d.mc / data.d.p).toFixed(0))
-        setPrice(data.d.p)
+        setChange(data.d.p24h);
+        setMc((data.d.mc / data.d.p).toFixed(0));
+        setPrice(data.d.p);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   //
   // const cmc = io("wss://stream.coinmarketcap.com/price/latest", {transports:["websocket"]})
@@ -86,9 +83,7 @@ export const Price = () => {
   // })
   return (
     <div className="rounded font-medium text-xs md:text-sm flex flex-row">
-      <div
-        className="flex flex-row items-center hover:text-onPrimaryLow cursor-pointer rounded py-1 px-2 hover:bg-surfaceLight "
-      >
+      <div className="flex flex-row items-center hover:text-onPrimaryLow cursor-pointer rounded py-1 px-2 hover:bg-surfaceLight ">
         <Currency
           classes={{
             sign: "text-onInfoBar",
@@ -99,8 +94,9 @@ export const Price = () => {
           }}
           parsedSettings={{
             selectedCurrency: {
-              sign: "$"
-          }}}
+              sign: "$",
+            },
+          }}
           number={price.toFixed(4)}
           sign={true}
           symbol={true}
@@ -131,7 +127,7 @@ export const Price = () => {
               number: "text-onInfoBar font-bold",
               decimals: "text-onInfoBar font-bold",
             }}
-            number={BigInt((parseInt(mc || "0")).toFixed(0)).toString()}
+            number={BigInt(parseInt(mc || "0").toFixed(0)).toString()}
             sign={false}
             symbol={false}
             convert={false}
@@ -140,6 +136,6 @@ export const Price = () => {
         </div>
       )}
     </div>
-  )
-}
-export default Price
+  );
+};
+export default Price;

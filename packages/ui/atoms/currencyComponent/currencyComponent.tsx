@@ -1,13 +1,13 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 import { CurrencyType } from "../../types";
 import { Icon } from "../icon/icon";
-import {Typography} from "../typography/typography";
+import { Typography } from "../typography/typography";
 
 interface CurrencyComponentProps {
-  currency: CurrencyType
-  selected: boolean
-  onClick(): void
-  flags?: any
+  currency: CurrencyType;
+  selected: boolean;
+  onClick(): void;
+  flags?: any;
 }
 
 export const CurrencyComponent: FC<CurrencyComponentProps> = ({
@@ -16,7 +16,7 @@ export const CurrencyComponent: FC<CurrencyComponentProps> = ({
   onClick,
   flags,
 }) => {
-  const { name, symbol, sign, flag } = currency
+  const { name, symbol, sign, flag } = currency;
   return (
     <div
       onClick={() => onClick()}
@@ -47,12 +47,23 @@ export const CurrencyComponent: FC<CurrencyComponentProps> = ({
           >
             {name}
           </Typography>
-          <Typography tag={"span"} className="group-hover:text-onPrimaryMedium font-medium" size={"subBody"}>
-            {symbol}{" - "}{sign}
+          <Typography
+            tag={"span"}
+            className="group-hover:text-onPrimaryMedium font-medium"
+            size={"subBody"}
+          >
+            {symbol}
+            {" - "}
+            {sign}
           </Typography>
         </div>
       </div>
-      {selected && <Icon icon={"checkCircle"} className="w-7 h-7 bg-success text-onSuccess rounded p-1" />}
+      {selected && (
+        <Icon
+          icon={"checkCircle"}
+          className="w-7 h-7 bg-success text-onSuccess rounded p-1"
+        />
+      )}
     </div>
-  )
-}
+  );
+};

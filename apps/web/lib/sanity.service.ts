@@ -97,7 +97,7 @@ export const getAllData = async (
       data?: any[] | any;
     }
   > = {},
-  id?: string
+  id?: string,
 ): Promise<Record<string, RPCResponses<RPCCalls>>> => {
   const responses: Record<
     string,
@@ -112,7 +112,7 @@ export const getAllData = async (
         responses[query.key] = await getData(
           query.serviceType,
           query.call,
-          parseProps(query.params, id)
+          parseProps(query.params, id),
         );
         if (needsTimestampImport(query.call)) {
           const keys = getTimestampHeightKeys(query.call);
@@ -140,7 +140,7 @@ export const getAllData = async (
               });
               const parsedCalculation = util.format(
                 calculation.calculation,
-                ...keys
+                ...keys,
               );
               try {
                 const result = eval(parsedCalculation);
@@ -161,7 +161,7 @@ export const getAllData = async (
                 const childRequest = data[index];
                 const foreignKey = getDotString(
                   subQuery.foreignKey.split("."),
-                  childRequest
+                  childRequest,
                 );
                 if (!responses[`${foreignKey}_${subQuery.call}`]) {
                   const response = await getData(
@@ -169,7 +169,7 @@ export const getAllData = async (
                     subQuery.call,
                     {
                       [subQuery.primaryKey]: foreignKey.toString(),
-                    }
+                    },
                   );
                   if (response.status === "success" && response?.data) {
                     if (needsTimestampImport(subQuery.call)) {
@@ -196,7 +196,7 @@ export const getAllData = async (
                 data[index][
                   `${subQuery.call.replaceAll(
                     ".",
-                    "_"
+                    "_",
                   )}_${subQuery.foreignKey.replaceAll(".", "_")}`
                 ] = responses[`${foreignKey}_${subQuery.call}`];
               }
@@ -211,7 +211,7 @@ export const getAllData = async (
             ] = await getData(
               subQuery.serviceType,
               subQuery.call,
-              parseProps(subQuery.params)
+              parseProps(subQuery.params),
             );
             if (
               responses[query.key].status === "success" &&
@@ -227,7 +227,7 @@ export const getAllData = async (
                       responses[query.key].data[index][
                         key.replace("Height", "Timestamp")
                       ] = await getTimestamp(
-                        responses[query.key].data[index][key]
+                        responses[query.key].data[index][key],
                       );
                     }
                   }
@@ -241,7 +241,7 @@ export const getAllData = async (
                   ]?.data?.find(
                     (d: any) =>
                       d[subQuery.primaryKey] ===
-                      childRequest[subQuery.foreignKey]
+                      childRequest[subQuery.foreignKey],
                   );
                   if (found) {
                     responses[query.key].data[index][
@@ -308,7 +308,7 @@ export const doCache = async (
   call: string,
   key: string,
   params: any,
-  duration = -1
+  duration = -1,
 ) => {
   if (!responseCache[call]) {
     responseCache[call] = {};
@@ -333,7 +333,7 @@ export const doCache = async (
 export const getData = async (
   serviceType: ServiceTypes,
   call: CallsRPC | string,
-  params?: any
+  params?: any,
 ): Promise<RPCResponses<RPCCalls> & { data?: any; meta?: any }> => {
   switch (call) {
     case "get.blocks.assets":
@@ -351,7 +351,7 @@ export const getData = async (
         call,
         params.address || params.limit,
         params,
-        60 * 5
+        60 * 5,
       );
     case "get.transactions":
       if (params.address || params.blockID || params.transactionID) {
@@ -359,7 +359,7 @@ export const getData = async (
           call,
           params.address || params.blockID || params.transactionID,
           params,
-          60 * 5
+          60 * 5,
         );
       }
       break;
@@ -389,7 +389,7 @@ export const getData = async (
           call,
           params.senderAddress || params.transactionID || params.blockID,
           params,
-          60
+          60,
         );
       } else {
         return await doCache(call, params.limit, params, 10);
@@ -401,7 +401,7 @@ export const getData = async (
           call,
           params.generatorAddress || params.blockID || params.height,
           params,
-          60
+          60,
         );
       }
       if (params.limit) {
@@ -423,7 +423,7 @@ export const getData = async (
 export const getNextData = async (
   serviceType: ServiceTypes,
   call: CallsRPC | string,
-  params?: any
+  params?: any,
 ): Promise<RPCResponses<RPCCalls> & { data?: any }> => {
   const nextParams = {
     ...params,
@@ -434,7 +434,7 @@ export const getNextData = async (
 
 export const keyFromData = (
   findKey: string,
-  data: Record<string, CallTypesRPC[CallsRPC]["response"]>
+  data: Record<string, CallTypesRPC[CallsRPC]["response"]>,
 ) => {
   const [key] = findKey.split(".");
 };

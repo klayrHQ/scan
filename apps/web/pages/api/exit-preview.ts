@@ -2,7 +2,7 @@
 
 export default function GET(req: any, res: any) {
   res.clearPreviewData();
-  res.writeHead(307, { Location: "/", });
+  res.writeHead(307, { Location: "/" });
   res.end();
 }
 

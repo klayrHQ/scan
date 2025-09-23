@@ -9,7 +9,7 @@
 // import { StakeCalculator } from "../../../components/validators/stakeCalculator";
 // import {ValidatorsTable} from "../../../components/validators/validatorsTable";
 import { redirect } from "next/navigation";
-import {RedirectType} from "next/dist/client/components/redirect";
+import { RedirectType } from "next/dist/client/components/redirect";
 
 const page = async () => {
   redirect(`/validators/eligible`, RedirectType.push);

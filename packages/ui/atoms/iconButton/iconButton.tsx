@@ -2,14 +2,11 @@ import React, { FC, HTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { Icon } from "../icon/icon";
 import { iconVariants } from "../../types";
-import {cls} from "../../assets/utils";
+import { cls } from "../../assets/utils";
 
 export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
   className?: string;
-  type?:
-    | "primary"
-    | "outlined"
-    | "iconOnly"
+  type?: "primary" | "outlined" | "iconOnly";
   icon: iconVariants;
   backgroundColor?: string;
   color?: string;
@@ -26,16 +23,21 @@ export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const iconClass = cva(
-  ["aspect-square","flex", "align-middle", "items-center", "text-center", "cursor-pointer"],
+  [
+    "aspect-square",
+    "flex",
+    "align-middle",
+    "items-center",
+    "text-center",
+    "cursor-pointer",
+  ],
   {
     variants: {
       type: {
-        primary:
-          "text-onPrimary bg-primary justify-items-center",
+        primary: "text-onPrimary bg-primary justify-items-center",
         outlined:
           "text-buttonSecondaryText border-2 border-surface-4 text-surface-5 border-solid hover:text-primary hover:bg-opacity-30",
-        iconOnly: 
-          "text-buttonSecondaryText hover:bg-opacity-30",
+        iconOnly: "text-buttonSecondaryText hover:bg-opacity-30",
       },
       size: {
         xs: "h-iconXs w-iconXs",
@@ -88,7 +90,7 @@ const iconClass = cva(
 export const IconButton: FC<IconProps> = ({
   className,
   type = "primary",
-  size= "medium",
+  size = "medium",
   rounded = true,
   icon,
   number,
@@ -101,10 +103,7 @@ export const IconButton: FC<IconProps> = ({
       type,
       size,
       rounded,
-      className: cls([
-        className,
-        color && `text-${color}`,
-      ]),
+      className: cls([className, color && `text-${color}`]),
     })}
     {...props}
   >

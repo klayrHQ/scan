@@ -6,8 +6,8 @@ export const blocksColumns = [
       {
         value: "ID",
         name: "id",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     showOn: "always",
     valueKeys: [
@@ -17,17 +17,15 @@ export const blocksColumns = [
         format: {
           format: "shortAddress",
           link: {
-            keys: [
-              "blocks.id"
-            ],
-            href: "/block/%s"
+            keys: ["blocks.id"],
+            href: "/block/%s",
           },
-          type: "string"
+          type: "string",
         },
-        name: "id"
-      }
+        name: "id",
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     name: "height",
@@ -36,12 +34,12 @@ export const blocksColumns = [
       {
         format: {
           format: "number",
-          type: "number"
+          type: "number",
         },
         name: "height",
         type: "key",
-        value: "blocks.height"
-      }
+        value: "blocks.height",
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
@@ -49,7 +47,7 @@ export const blocksColumns = [
       {
         type: "literal",
         value: "Height",
-      }
+      },
     ],
   },
   {
@@ -59,18 +57,18 @@ export const blocksColumns = [
     headValues: [
       {
         type: "literal",
-        value: "Date"
-      }
+        value: "Date",
+      },
     ],
     valueKeys: [
       {
         format: {
           type: "timestamp",
-          format: "fromNow"
+          format: "fromNow",
         },
         type: "key",
-        value: "blocks.timestamp"
-      }
+        value: "blocks.timestamp",
+      },
     ],
     showOn: "always",
   },
@@ -80,21 +78,21 @@ export const blocksColumns = [
       {
         format: {
           format: "number",
-          type: "number"
+          type: "number",
         },
         type: "key",
-        value: "blocks.transactions"
-      }
+        value: "blocks.transactions",
+      },
     ],
     headValues: [
       {
         type: "literal",
-        value: "Transactions"
-      }
+        value: "Transactions",
+      },
     ],
     showOn: "always",
     valueComponent: "PlainColumn",
-    component: "DefaultHeadColumn"
+    component: "DefaultHeadColumn",
   },
   {
     name: "rewards",
@@ -103,7 +101,7 @@ export const blocksColumns = [
       {
         type: "literal",
         value: "Reward",
-      }
+      },
     ],
     valueComponent: "PlainColumn",
     showOn: "always",
@@ -111,11 +109,11 @@ export const blocksColumns = [
       {
         format: {
           format: "fee",
-          type: "string"
+          type: "string",
         },
         type: "key",
-        value: "blocks.reward"
-      }
-    ]
-  }
-]
+        value: "blocks.reward",
+      },
+    ],
+  },
+];

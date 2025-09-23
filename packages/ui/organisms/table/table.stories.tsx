@@ -4,7 +4,14 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Table } from "./table";
 import Column from "../../atoms/tableColumn/tableColumn.stories";
 import HeadColumn from "../../atoms/tableHeadColumn/tableHeadColumn.stories";
-import {headcols, mobileHeadcols, mobileRows, rows, tabletHeadcols, tabletRows} from "../../assets/mockupData/mockupData";
+import {
+  headcols,
+  mobileHeadcols,
+  mobileRows,
+  rows,
+  tabletHeadcols,
+  tabletRows,
+} from "../../assets/mockupData/mockupData";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -17,9 +24,7 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -32,21 +37,17 @@ export default {
     rows: rows,
     tabletRows: tabletRows,
     mobileRows: mobileRows,
-  }
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Table> = (args) => {
-  return (
-    <Table {...args}/>
-  )
+  return <Table {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof Table> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-
-};
+Primary.args = {};
 
 export const FullWidth: ComponentMeta<typeof Table> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -99,7 +100,7 @@ AlignRight.args = {
           value: "tableColumn 3",
           align: "right",
         },
-      ]
+      ],
     },
     {
       id: "1",
@@ -119,8 +120,8 @@ AlignRight.args = {
           value: "tableColumn 3",
           align: "right",
         },
-      ]
-    }
+      ],
+    },
   ],
 };
 
@@ -163,7 +164,7 @@ AlignCenter.args = {
           value: "tableColumn 3",
           align: "center",
         },
-      ]
+      ],
     },
     {
       id: "1",
@@ -183,7 +184,7 @@ AlignCenter.args = {
           value: "tableColumn 3",
           align: "center",
         },
-      ]
-    }
+      ],
+    },
   ],
 };

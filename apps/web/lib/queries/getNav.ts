@@ -4,7 +4,7 @@ export type menuItem = {
   label: string;
   link: string;
   _key: string;
-  subMenu?: any[]
+  subMenu?: any[];
 };
 
 export const getNav = async (): Promise<menuItem[]> =>

@@ -5,27 +5,20 @@ import { HotKey } from "./hotkey";
 export default {
   title: "Atoms/Hotkeys/HotKey",
   component: HotKey,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof HotKey> = (args) => {
-  return(
-      <HotKey {...args}/>
-  )
+  return <HotKey {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof HotKey> = Template.bind({});
 Primary.args = {
-  hotKey: "c"
+  hotKey: "c",
 };

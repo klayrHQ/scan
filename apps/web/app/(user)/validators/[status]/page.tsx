@@ -1,14 +1,14 @@
-import {Suspense} from "react";
+import { Suspense } from "react";
 import { ValidatorsTable } from "../../../../components/validators/validatorsTable";
-import {TableSkeleton} from "../../../../components/skeletons/tableSkeleton";
+import { TableSkeleton } from "../../../../components/skeletons/tableSkeleton";
 
-const Page = async ({params}: any) => {
+const Page = async ({ params }: any) => {
   const validators = await fetch(
     // eslint-disable-next-line turbo/no-undeclared-env-vars
     `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators/${params.status}`,
     {
       // next: { revalidate: -1 },
-    }
+    },
   );
   const validatorsJSON = await validators.json();
 
@@ -31,7 +31,7 @@ const Page = async ({params}: any) => {
         />
       }
     >
-      <ValidatorsTable page={params.status} validators={validatorsJSON}/>
+      <ValidatorsTable page={params.status} validators={validatorsJSON} />
     </Suspense>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import {Link} from "../link/link";
+import { Link } from "../link/link";
 
-export interface MenuItemProps  {
-  link: string
-  label: string
-  color?: string
-  className?: string
+export interface MenuItemProps {
+  link: string;
+  label: string;
+  color?: string;
+  className?: string;
 }
 
 export const MenuItem = ({
@@ -39,10 +39,9 @@ export const MenuItem = ({
       link={link}
       href={link}
       color={"onTopbar" || color}
-
       {...props}
     >
       {label}
     </Link>
-  )
-}
+  );
+};

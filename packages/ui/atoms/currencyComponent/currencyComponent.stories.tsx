@@ -5,27 +5,22 @@ import { CurrencyComponent } from "./currencyComponent";
 export default {
   title: "Atoms/Currency/CurrencyComponent",
   component: CurrencyComponent,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof CurrencyComponent> = (args) => {
-  return(
-    <CurrencyComponent {...args}/>
-  )
+  return <CurrencyComponent {...args} />;
 };
 
-export const Primary: ComponentMeta<typeof CurrencyComponent> = Template.bind({});
+export const Primary: ComponentMeta<typeof CurrencyComponent> = Template.bind(
+  {},
+);
 Primary.args = {
   currency: {
     id: 0,
@@ -40,5 +35,5 @@ Primary.args = {
     },
   },
   selected: true,
-  onClick: () => console.log("clicked")
+  onClick: () => console.log("clicked"),
 };

@@ -5,29 +5,22 @@ import { Decimals } from "./decimals";
 export default {
   title: "Atoms/Currency/Decimals",
   component: Decimals,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof Decimals> = (args) => {
-  return(
-    <Decimals {...args}/>
-  )
+  return <Decimals {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof Decimals> = Template.bind({});
 Primary.args = {
   minMax: { min: 1, max: 100000 },
   switchConvert: () => console.log("switchConvert"),
-  setSetting: (handle: string, newState: any) => console.log("handle")
+  setSetting: (handle: string, newState: any) => console.log("handle"),
 };

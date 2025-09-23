@@ -1,6 +1,6 @@
 import * as Solid from "@heroicons/react/24/solid";
 import * as Outline from "@heroicons/react/24/outline";
-import {ReactElement} from "react";
+import { ReactElement } from "react";
 
 const getIconsList = () => {
   const icons: Record<string, ReactElement> = {};

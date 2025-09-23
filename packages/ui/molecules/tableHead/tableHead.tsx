@@ -1,12 +1,12 @@
-import React from 'react';
-import {TableHeadColumn} from "../../atoms/tableHeadColumn/tableHeadColumn";
-import {tableHeadColsType} from "../../types";
+import React from "react";
+import { TableHeadColumn } from "../../atoms/tableHeadColumn/tableHeadColumn";
+import { tableHeadColsType } from "../../types";
 
 export interface TableHeadProps {
-  headClassName?: string
-  cols: tableHeadColsType
-  mobileCols?: tableHeadColsType
-  tabletCols?: tableHeadColsType
+  headClassName?: string;
+  cols: tableHeadColsType;
+  mobileCols?: tableHeadColsType;
+  tabletCols?: tableHeadColsType;
 }
 
 export const TableHead = ({
@@ -36,8 +36,7 @@ export const TableHead = ({
           />
         ))}
       </tr>
-      {
-        mobileCols &&
+      {mobileCols && (
         <tr
           className={[
             "relative border-surfaceDark p-4",
@@ -54,16 +53,15 @@ export const TableHead = ({
             />
           ))}
         </tr>
-      }
-      {
-        tabletCols &&
+      )}
+      {tabletCols && (
         <tr
-            className={[
-              "relative border-surfaceDark p-4",
-              "hidden md:table-row lg:hidden",
-              headClassName,
-            ].join(" ")}
-            {...props}
+          className={[
+            "relative border-surfaceDark p-4",
+            "hidden md:table-row lg:hidden",
+            headClassName,
+          ].join(" ")}
+          {...props}
         >
           {tabletCols.map((col, i) => (
             <TableHeadColumn
@@ -73,7 +71,7 @@ export const TableHead = ({
             />
           ))}
         </tr>
-      }
+      )}
     </thead>
   );
 };

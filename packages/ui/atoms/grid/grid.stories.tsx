@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import {Container, Grid, InformationCard, Typography} from "../..";
+import { Container, Grid, InformationCard, Typography } from "../..";
 
 export default {
   title: "Atoms/Layout/Grid",
@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 
 export const Base: ComponentMeta<typeof Grid> = Template.bind({});
 Base.args = {
-  children: "Content"
+  children: "Content",
 };
 
 export const Info: ComponentMeta<typeof Grid> = Template.bind({});
@@ -85,62 +85,82 @@ Carousel.args = {
     <InformationCard
       number={"01"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our documentation section"}
     />,
     <InformationCard
       number={"02"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our carousel section"}
     />,
     <InformationCard
       number={"03"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our test section"}
     />,
     <InformationCard
       number={"04"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our colecti section"}
     />,
     <InformationCard
       number={"05"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our website section"}
     />,
     <InformationCard
       number={"06"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our page section"}
     />,
     <InformationCard
       number={"07"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our card section"}
     />,
     <InformationCard
       number={"08"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our gallery section"}
     />,
     <InformationCard
       number={"09"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our marketplace section"}
     />,
     <InformationCard
       number={"10"}
       type={"dark"}
-      text={"Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."}
+      text={
+        "Cool Cats FC ('Football Club') is a collection of 3,000 NFTs created by Cool Cats, Animoca Brands, and OneFootball Labs. Earn rewards and NFT upgrades for holding the best teams as they advance through the world's largest football tournament."
+      }
       title={"Welcome to our account section"}
     />,
-  ]
+  ],
 };

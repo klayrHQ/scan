@@ -2,7 +2,10 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { TableRow } from "./tableRow";
-import {TableColumn as Col, TableColProps} from "../../atoms/tableColumn/tableColumn";
+import {
+  TableColumn as Col,
+  TableColProps,
+} from "../../atoms/tableColumn/tableColumn";
 import Column from "../../atoms/tableColumn/tableColumn.stories";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -13,23 +16,21 @@ export default {
   argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof TableRow> = (args) => {
-  const {cols} = args;
+  const { cols } = args;
   return (
     <TableRow>
-      {cols.map((col: JSX.IntrinsicAttributes & TableColProps) =>  (
+      {cols.map((col: JSX.IntrinsicAttributes & TableColProps) => (
         <Col {...col} />
       ))}
     </TableRow>
-  )
+  );
 };
 
 export const Primary: ComponentMeta<typeof TableRow> = Template.bind({});

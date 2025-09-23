@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 interface HighlightProps {
   primary?: boolean;
   className?: string;
   children: any;
-  size?: 'small' | 'medium' | 'large';
-  width?: string
+  size?: "small" | "medium" | "large";
+  width?: string;
 }
 
 /**
@@ -19,17 +19,17 @@ export const Highlight = ({
   children,
   ...props
 }: HighlightProps) => {
-  const mode = primary ? '' : 'storybook-label--secondary';
+  const mode = primary ? "" : "storybook-label--secondary";
   return (
     <div
       className={[
-        'rounded border-none p-2',
+        "rounded border-none p-2",
         className,
         size === "large" ? "text-lg" : size === "small" ? "text-sm p-1" : "",
         primary ? "bg-primary text-onPrimaryHigh" : "",
         width ? `w-${width}` : "w-max",
-        mode
-      ].join(' ')}
+        mode,
+      ].join(" ")}
       {...props}
     >
       {children}

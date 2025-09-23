@@ -83,7 +83,7 @@ export const ColumnsChart = ({
         wheelX: "panX",
         wheelY: "zoomX",
         pinchZoomX: true,
-      })
+      }),
     );
 
     // Create axes
@@ -108,7 +108,7 @@ export const ColumnsChart = ({
         categoryField: labelKey,
         renderer: xRenderer,
         tooltip: am5.Tooltip.new(root, {}),
-      })
+      }),
     );
 
     let yAxis = chart.yAxes.push(
@@ -117,7 +117,7 @@ export const ColumnsChart = ({
         renderer: am5xy.AxisRendererY.new(root, {
           strokeOpacity: 0.1,
         }),
-      })
+      }),
     );
 
     // Create series
@@ -133,7 +133,7 @@ export const ColumnsChart = ({
         tooltip: am5.Tooltip.new(root, {
           labelText: "{valueY}",
         }),
-      })
+      }),
     );
 
     xAxis.data.setAll(chartData);

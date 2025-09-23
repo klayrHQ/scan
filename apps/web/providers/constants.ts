@@ -1,4 +1,4 @@
-import {SettingType} from "./settings";
+import { SettingType } from "./settings";
 
 export const settings: SettingType[] = [
   {
@@ -77,7 +77,7 @@ export const settings: SettingType[] = [
     value: 1280,
     apply: true,
   },
-]
+];
 
 export const applySettings: any = {
   appWidth(newState: any) {
@@ -85,6 +85,6 @@ export const applySettings: any = {
       document.documentElement.style.setProperty(
         "--app-width",
         `${newState.value}px`,
-      )
+      );
   },
-}
+};

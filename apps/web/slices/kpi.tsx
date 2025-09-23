@@ -3,7 +3,7 @@ import { Grid } from "ui";
 import { ValueFormatter } from "../../../packages/ui/atoms/valueFormatter/valueFormatter";
 import { getFromDottedKey } from "../lib/dotString";
 import util from "util";
-import {ConsoleLogTester} from "../components/consoleLogTester";
+import { ConsoleLogTester } from "../components/consoleLogTester";
 
 export const Kpi = ({
   queryData,
@@ -44,12 +44,12 @@ export const Kpi = ({
         }
         if (value.type === "calculated") {
           const keys = value?.calculations[0]?.keys?.map((key: string) => {
-            return getFromDottedKey(key, "row", queryData, queryData)
-          })
+            return getFromDottedKey(key, "row", queryData, queryData);
+          });
 
           const parsedCalculation = util.format(
             value.calculations[0].calculation,
-            ...keys
+            ...keys,
           );
 
           v = Number(eval(parsedCalculation));
@@ -63,7 +63,7 @@ export const Kpi = ({
         }
         if (value.format?.link?.keys?.length > 0 && value.format?.link?.href) {
           const keys = value.format.link.keys.map((key: string) =>
-            getFromDottedKey(key, "row", queryData, queryData)
+            getFromDottedKey(key, "row", queryData, queryData),
           );
           link = {
             href: util.format(value.format.link.href, ...keys),
@@ -71,20 +71,27 @@ export const Kpi = ({
           };
         }
 
-        const conditions = value?.conditions
+        const conditions = value?.conditions;
 
-        if(conditions) {
-          conditions[0].conditions.map((condition: { operator: string; conditionValue: string; value: any; }) => {
-            if (condition.operator === "==") {
-              const newV = v ===
-              condition.conditionValue ?
-                condition.value :
-                (v === undefined) && condition.conditionValue === "undefined" ?
-                  condition.value :
-                  v
-              v = newV
-            }
-          })
+        if (conditions) {
+          conditions[0].conditions.map(
+            (condition: {
+              operator: string;
+              conditionValue: string;
+              value: any;
+            }) => {
+              if (condition.operator === "==") {
+                const newV =
+                  v === condition.conditionValue
+                    ? condition.value
+                    : v === undefined &&
+                        condition.conditionValue === "undefined"
+                      ? condition.value
+                      : v;
+                v = newV;
+              }
+            },
+          );
         }
 
         return (
@@ -92,7 +99,11 @@ export const Kpi = ({
             {/*<ConsoleLogTester data={v} />*/}
             <ValueFormatter
               key={value._key}
-              value={value.type === "key" || value.type === "calculated" ? v : value.value}
+              value={
+                value.type === "key" || value.type === "calculated"
+                  ? v
+                  : value.value
+              }
               copy={copy === index}
               {...value.format}
               link={link}

@@ -1,16 +1,26 @@
-"use client"
-import React, {useState} from "react";
-import {Modal} from "ui/atoms/modal/modal";
-import {Cog6ToothIcon as CogIcon} from "@heroicons/react/24/solid";
-import {Tooltip} from "ui";
-import {settings} from "../../providers/constants";
-import {useSettings} from "../../providers/settings";
-import {SettingsContainer} from "./settingsContainer";
+"use client";
+import React, { useState } from "react";
+import { Modal } from "ui/atoms/modal/modal";
+import { Cog6ToothIcon as CogIcon } from "@heroicons/react/24/solid";
+import { Tooltip } from "ui";
+import { settings } from "../../providers/constants";
+import { useSettings } from "../../providers/settings";
+import { SettingsContainer } from "./settingsContainer";
 
 export const SettingsModal = () => {
-  const {open, setOpen, view, setView, settings, getSetting, setSetting, settingsState, parsedSettings,} = useSettings()
+  const {
+    open,
+    setOpen,
+    view,
+    setView,
+    settings,
+    getSetting,
+    setSetting,
+    settingsState,
+    parsedSettings,
+  } = useSettings();
 
-  return(
+  return (
     <Modal
       button={
         <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
@@ -27,5 +37,5 @@ export const SettingsModal = () => {
     >
       <SettingsContainer />
     </Modal>
-  )
-}
+  );
+};

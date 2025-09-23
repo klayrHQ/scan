@@ -1,5 +1,5 @@
 import { SanityValue } from "../layout/value";
-import {NrColumn, OrColumn, ValueColumn} from "../../components/data";
+import { NrColumn, OrColumn, ValueColumn } from "../../components/data";
 
 export default {
   name: "column",
@@ -68,7 +68,7 @@ export default {
           { title: "Stakes", value: "StakesColumn" },
           { title: "Value", value: "ValueColumn" },
           { title: "Stakes Account", value: "StakesAccountColumn" },
-          { title: "Country Flag", value: "CountryFlagColumn"}
+          { title: "Country Flag", value: "CountryFlagColumn" },
         ],
       },
     },

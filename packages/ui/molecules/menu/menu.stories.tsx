@@ -9,19 +9,17 @@ export default {
   component: Menu,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    menu: {control: "object"},
+    menu: { control: "object" },
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args}/>;
+const Template: ComponentStory<typeof Menu> = (args) => <Menu {...args} />;
 
 export const Primary: ComponentMeta<typeof Menu> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -42,8 +40,7 @@ Primary.args = {
     {
       label: "menu item 4",
       link: "/",
-    }
+    },
   ],
-  className: "hover:bg-blue-700"
+  className: "hover:bg-blue-700",
 };
-

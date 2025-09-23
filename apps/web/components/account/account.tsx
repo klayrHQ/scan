@@ -59,7 +59,7 @@ export const Account = ({
 
   useEffect(() => {
     setQueries(
-      getAccountQueries(id, parseInt(searchParams?.get("page") || "1"))
+      getAccountQueries(id, parseInt(searchParams?.get("page") || "1")),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAccountQueries]);
@@ -70,7 +70,7 @@ export const Account = ({
         const claims = cache["account-id-transactions"]?.data?.filter(
           (tx: { moduleCommand: string }) => {
             return tx.moduleCommand === "pos:claimRewards";
-          }
+          },
         );
         for (const claim of claims) {
           const response = await client.rpc("get.events", {
@@ -78,10 +78,10 @@ export const Account = ({
           });
           if (response.status === "success") {
             const events = response.data.filter(
-              (event) => event.name === "rewardsAssigned"
+              (event) => event.name === "rewardsAssigned",
             );
             const index = cache["account-id-transactions"]?.data?.findIndex(
-              (tx: { id: string }) => tx.id === claim.id
+              (tx: { id: string }) => tx.id === claim.id,
             );
             cache["account-id-transactions"].data[index] = {
               ...cache["account-id-transactions"]?.data?.[index],
@@ -90,7 +90,7 @@ export const Account = ({
                   ?.reduce(
                     (sum: bigint, event) =>
                       sum + BigInt(event.data?.amount || "0"),
-                    BigInt(0)
+                    BigInt(0),
                   )
                   .toString(),
               },

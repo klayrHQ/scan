@@ -1,95 +1,94 @@
 export interface FormattedColumnType {
-  name: string
-  valueKeys: ValueKey[]
-  headValues: HeadValue[]
-  valueComponent: string
-  component: string
-  showOn: string
-  className?: string
+  name: string;
+  valueKeys: ValueKey[];
+  headValues: HeadValue[];
+  valueComponent: string;
+  component: string;
+  showOn: string;
+  className?: string;
 }
 
 export interface ValueKey {
-  format: Format
-  name: string
-  type: string
-  value: string
-  updateOn?: string
+  format: Format;
+  name: string;
+  type: string;
+  value: string;
+  updateOn?: string;
 }
 
 export interface Format {
-  format: string
-  type: string
-  typography?: Typography[]
-  link?: Link
-  icon?: Icon
-  tooltip?: Tooltip
+  format: string;
+  type: string;
+  typography?: Typography[];
+  link?: Link;
+  icon?: Icon;
+  tooltip?: Tooltip;
 }
 
 export interface Typography {
-  value?: string
-  key: string
+  value?: string;
+  key: string;
 }
 
 export interface Link {
-  keys: string[]
-  href: string
+  keys: string[];
+  href: string;
 }
 
 export interface Icon {
-  conditions: Condition[]
+  conditions: Condition[];
 }
 
 export interface Condition {
-  iconProps: IconProp[]
-  operator: string
-  icon: string
-  conditionValue: string
+  iconProps: IconProp[];
+  operator: string;
+  icon: string;
+  conditionValue: string;
 }
 
 export interface IconProp {
-  value: string
-  key: string
+  value: string;
+  key: string;
 }
 
 export interface Tooltip {
-  placement: string
-  value: string
+  placement: string;
+  value: string;
 }
 
 export interface HeadValue {
-  type: string
-  value: string
-  name: string
-  format?: Format2
+  type: string;
+  value: string;
+  name: string;
+  format?: Format2;
 }
 
 export interface Format2 {
-  icon?: Icon2
-  tooltip?: Tooltip2
-  type: string
-  typography?: Typography2[]
-  format: string
+  icon?: Icon2;
+  tooltip?: Tooltip2;
+  type: string;
+  typography?: Typography2[];
+  format: string;
 }
 
 export interface Icon2 {
-  icon: string
-  iconProps: IconProp2[]
+  icon: string;
+  iconProps: IconProp2[];
 }
 
 export interface IconProp2 {
-  value: string
-  key: string
+  value: string;
+  key: string;
 }
 
 export interface Tooltip2 {
-  value: string
+  value: string;
 }
 
 export interface Typography2 {
-  value: string
-  key: string
+  value: string;
+  key: string;
 }
-
 
 export const validatorColumns: FormattedColumnType[] = [
   {
@@ -98,23 +97,23 @@ export const validatorColumns: FormattedColumnType[] = [
       {
         format: {
           format: "number",
-          type: "number"
+          type: "number",
         },
         name: "rank",
         type: "key",
-        value: "validators.rank"
-      }
+        value: "validators.rank",
+      },
     ],
     headValues: [
       {
         type: "literal",
         value: "#",
         name: "rank",
-      }
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
-    showOn: "always"
+    showOn: "always",
   },
   {
     name: "validatorName",
@@ -123,7 +122,7 @@ export const validatorColumns: FormattedColumnType[] = [
         type: "literal",
         value: "Validator",
         name: "ValidatorName",
-      }
+      },
     ],
     valueKeys: [
       {
@@ -131,31 +130,29 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "mr-2",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "avatar",
-          type: "string"
+          type: "string",
         },
         name: "avatar",
         type: "key",
-        value: "validators.address"
+        value: "validators.address",
       },
       {
         format: {
           format: "plain",
           link: {
-            keys: [
-              "validators.address"
-            ],
-            href: "/account/%s"
+            keys: ["validators.address"],
+            href: "/account/%s",
           },
-          type: "string"
+          type: "string",
         },
         name: "validatorName",
         type: "key",
-        value: "validators.name"
-      }
+        value: "validators.name",
+      },
     ],
     valueComponent: "GridColumn",
     component: "DefaultHeadColumn",
@@ -170,11 +167,11 @@ export const validatorColumns: FormattedColumnType[] = [
         value: "Status",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Status",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     showOn: "always",
     valueKeys: [
@@ -185,8 +182,8 @@ export const validatorColumns: FormattedColumnType[] = [
         format: {
           typography: [
             {
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "icon",
           icon: {
@@ -195,12 +192,12 @@ export const validatorColumns: FormattedColumnType[] = [
                 iconProps: [
                   {
                     value: "text-success h-5 w-5",
-                    key: "className"
-                  }
+                    key: "className",
+                  },
                 ],
                 operator: "==",
                 icon: "CheckCircleIconSolid",
-                conditionValue: "active"
+                conditionValue: "active",
               },
               {
                 operator: "==",
@@ -209,9 +206,9 @@ export const validatorColumns: FormattedColumnType[] = [
                 iconProps: [
                   {
                     key: "className",
-                    value: "text-info h-5 w-5"
-                  }
-                ]
+                    value: "text-info h-5 w-5",
+                  },
+                ],
               },
               {
                 icon: "ChevronRightIconOutline",
@@ -219,15 +216,15 @@ export const validatorColumns: FormattedColumnType[] = [
                 iconProps: [
                   {
                     value: "text-info h-4 w-4",
-                    key: "className"
-                  }
+                    key: "className",
+                  },
                 ],
-                operator: "=="
-              }
-            ]
+                operator: "==",
+              },
+            ],
           },
-          type: "string"
-        }
+          type: "string",
+        },
       },
       {
         value: "validators.nextAllocatedTime",
@@ -235,38 +232,38 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: " w-full",
-              key: "className"
+              key: "className",
             },
             {
               value: "body",
-              key: "size"
-            }
+              key: "size",
+            },
           ],
           format: "fromNow",
-          type: "timestamp"
+          type: "timestamp",
         },
         name: "nextAllocatedTime",
-        type: "key"
+        type: "key",
       },
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "StatusLabel",
         type: "key",
-        value: "validators.status"
+        value: "validators.status",
       },
       {
         value: "validators.consecutiveMissedBlocks",
         format: {
           format: "number",
-          type: "number"
+          type: "number",
         },
         name: "missedBlocks",
-        type: "key"
-      }
-    ]
+        type: "key",
+      },
+    ],
   },
   {
     name: "generatedBlocks",
@@ -280,13 +277,13 @@ export const validatorColumns: FormattedColumnType[] = [
             {
               value: "w-full text-right",
               key: "className",
-            }
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "Total Blocks"
-      }
+        name: "Total Blocks",
+      },
     ],
     showOn: "always",
     valueKeys: [
@@ -299,12 +296,12 @@ export const validatorColumns: FormattedColumnType[] = [
             {
               value: "text-right w-full font-bold",
               key: "className",
-            }
+            },
           ],
           format: "number",
-          type: "number"
-        }
-      }
+          type: "number",
+        },
+      },
     ],
     valueComponent: "PlainColumn",
     className: "text-right bold",
@@ -320,15 +317,15 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Validator Weight",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     valueKeys: [
       {
@@ -339,16 +336,16 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "currency",
-          type: "beddows"
+          type: "beddows",
         },
         name: "ValidatorVoteweight",
-      }
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     name: "ValidatorSelfStake",
@@ -363,13 +360,13 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "text-right w-full",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
-          format: "currency"
+          format: "currency",
         },
         name: "ValidatorSelfStake",
-      }
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
@@ -378,18 +375,18 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "ValidatorSelfStake",
         type: "literal",
-        value: "Self Stake"
-      }
+        value: "Self Stake",
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     name: "TotalStake (desktop)",
@@ -403,12 +400,12 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
-          ]
+              key: "className",
+            },
+          ],
         },
         name: "TotalStake",
-      }
+      },
     ],
     showOn: "desktop",
     valueKeys: [
@@ -422,12 +419,12 @@ export const validatorColumns: FormattedColumnType[] = [
             {
               value: "w-full text-right",
               key: "className",
-            }
+            },
           ],
-          format: "currency"
+          format: "currency",
         },
-        name: "Total Stake"
-      }
+        name: "Total Stake",
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
@@ -444,17 +441,17 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "commission",
           tooltip: {
             placement: "top-start",
-            value: "Set commission by validator"
-          }
+            value: "Set commission by validator",
+          },
         },
-        name: "commission %"
-      }
+        name: "commission %",
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
@@ -465,14 +462,14 @@ export const validatorColumns: FormattedColumnType[] = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "commission",
-      }
+      },
     ],
     showOn: "always",
   },
@@ -491,23 +488,24 @@ export const validatorColumns: FormattedColumnType[] = [
             iconProps: [
               {
                 value: "h-4 w-4 text-onSurfaceHigh",
-                key: "className"
-              }
-            ]
+                key: "className",
+              },
+            ],
           },
           tooltip: {
-            value: "Total rewards earned by validator + Self stake rewards earned by validator"
+            value:
+              "Total rewards earned by validator + Self stake rewards earned by validator",
           },
           type: "string",
           typography: [
             {
               value: "w-full text-right flex items-center flex-row",
               key: "className",
-            }
+            },
           ],
-          format: "plain"
-        }
-      }
+          format: "plain",
+        },
+      },
     ],
     valueKeys: [
       {
@@ -516,16 +514,16 @@ export const validatorColumns: FormattedColumnType[] = [
         format: {
           tooltip: {
             placement: "auto",
-            value: "Total Rewards "
+            value: "Total Rewards ",
           },
           type: "beddows",
           typography: [
             {
               value: "text-right w-full",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
-          format: "currency"
+          format: "currency",
         },
         name: "Total Rewards",
       },
@@ -537,22 +535,22 @@ export const validatorColumns: FormattedColumnType[] = [
           format: "currency",
           tooltip: {
             placement: "auto",
-            value: "total Self Stake Rewards"
+            value: "total Self Stake Rewards",
           },
           type: "beddows",
           typography: [
             {
               key: "className",
-              value: "text-right w-full text-onSurfaceMedium"
+              value: "text-right w-full text-onSurfaceMedium",
             },
             {
               value: "subBody",
-              key: "size"
-            }
-          ]
-        }
-      }
+              key: "size",
+            },
+          ],
+        },
+      },
     ],
     showOn: "always",
-  }
-]
+  },
+];

@@ -1,14 +1,11 @@
 import React from "react";
-import {statusType} from "../../types";
+import { statusType } from "../../types";
 
 interface StatusProps {
-  status: statusType
+  status: statusType;
 }
 
-export const Status = ({
-  status = "error",
-}: StatusProps) => {
-
+export const Status = ({ status = "error" }: StatusProps) => {
   return (
     <span
       className={[
@@ -20,6 +17,6 @@ export const Status = ({
         "rounded-full w-4 h-4 flex aspect-square",
       ].join(" ")}
     />
-  )
-}
-export default Status
+  );
+};
+export default Status;

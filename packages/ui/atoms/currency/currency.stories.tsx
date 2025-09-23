@@ -15,9 +15,7 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -33,17 +31,19 @@ export default {
       {
         sign: "$",
         symbol: "USD",
-      }
+      },
     ],
     parsedSettings: {
       signEnabled: true,
       symbolEnabled: true,
-    }
-  }
+    },
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Currency> = (args) => <Currency {...args} />;
+const Template: ComponentStory<typeof Currency> = (args) => (
+  <Currency {...args} />
+);
 
 export const Primary: ComponentMeta<typeof Currency> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

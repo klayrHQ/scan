@@ -12,15 +12,15 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof FilterButtons> = (args) => <FilterButtons {...args} />;
+const Template: ComponentStory<typeof FilterButtons> = (args) => (
+  <FilterButtons {...args} />
+);
 
 export const Primary: ComponentMeta<typeof FilterButtons> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -37,7 +37,7 @@ Primary.args = {
     {
       label: "Example 2 Txs",
       state: "ex2",
-    }
+    },
   ],
 };
 
@@ -56,7 +56,7 @@ Active.args = {
     {
       label: "Example 2 Txs",
       state: "ex2",
-    }
+    },
   ],
   selection: "all",
 };
@@ -76,11 +76,12 @@ Secondary.args = {
     {
       label: "Example 2 Txs",
       state: "ex2",
-    }
+    },
   ],
 };
 
-export const SecondaryActive: ComponentMeta<typeof FilterButtons> = Template.bind({});
+export const SecondaryActive: ComponentMeta<typeof FilterButtons> =
+  Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 SecondaryActive.args = {
   buttons: [
@@ -95,7 +96,7 @@ SecondaryActive.args = {
     {
       label: "Example 2 Txs",
       state: "ex2",
-    }
+    },
   ],
   selection: "all",
 };

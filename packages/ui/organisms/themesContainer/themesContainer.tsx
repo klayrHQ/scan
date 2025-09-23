@@ -1,17 +1,17 @@
-import React, {FC} from "react";
-import { HslColorPicker } from "react-colorful"
+import React, { FC } from "react";
+import { HslColorPicker } from "react-colorful";
 import { Paper } from "../../atoms/paper/paper";
-import {Icon} from "../../atoms/icon/icon";
-import {ThemeType} from "../../types";
-import {Typography} from "../../atoms/typography/typography";
+import { Icon } from "../../atoms/icon/icon";
+import { ThemeType } from "../../types";
+import { Typography } from "../../atoms/typography/typography";
 
 interface ThemesContainerProps {
-  themes?: Array<ThemeType>
-  selectedTheme: ThemeType
-  updateProperty: (property: string, newValue: string | number) => void
-  switchTheme: (theme: ThemeType) => void
-  parsedSettings?: any
-  setSetting: (handle: string, newState: any) => void
+  themes?: Array<ThemeType>;
+  selectedTheme: ThemeType;
+  updateProperty: (property: string, newValue: string | number) => void;
+  switchTheme: (theme: ThemeType) => void;
+  parsedSettings?: any;
+  setSetting: (handle: string, newState: any) => void;
 }
 
 export const ThemesContainer: FC<ThemesContainerProps> = ({
@@ -29,13 +29,21 @@ export const ThemesContainer: FC<ThemesContainerProps> = ({
       }
     >
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4 w-full">
-        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+        <Typography
+          tag={"h2"}
+          size={"Heading4"}
+          className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}
+        >
           {"Style your Liskscan Theme!"}
         </Typography>
-        <Typography tag={"span"}>{"Choose your theme and primary color."}</Typography>
+        <Typography tag={"span"}>
+          {"Choose your theme and primary color."}
+        </Typography>
       </Paper>
       <Paper surface={1} className={"mb-4  p-4 flex flex-col space-y-2 w-full"}>
-        <Typography tag={"span"} className="font-bold ">{"Select Theme"}</Typography>
+        <Typography tag={"span"} className="font-bold ">
+          {"Select Theme"}
+        </Typography>
         <Paper
           surface={0}
           className="grid grid-cols-2  gap-2 md:grid-cols-4 md:grid-rows-2 grid-flow-row md:grid-flow-col"
@@ -60,7 +68,10 @@ export const ThemesContainer: FC<ThemesContainerProps> = ({
             >
               {theme.name}
               {selectedTheme.handle === theme.handle && (
-                <Icon className="w-7 h-7 bg-success text-onSuccess rounded p-1" icon={"checkCircle"} />
+                <Icon
+                  className="w-7 h-7 bg-success text-onSuccess rounded p-1"
+                  icon={"checkCircle"}
+                />
               )}
             </div>
           ))}
@@ -74,43 +85,82 @@ export const ThemesContainer: FC<ThemesContainerProps> = ({
         <div className={"p-4"}>
           <h2 className={"text-"}>Primary color</h2>
           <div className="md:flex flex-col hidden ">
-            <Typography tag={"span"} className="bg-primaryLight w-full p-2 rounded-t text-onPrimary">
+            <Typography
+              tag={"span"}
+              className="bg-primaryLight w-full p-2 rounded-t text-onPrimary"
+            >
               {"Primary Light"}
             </Typography>
-            <Typography tag={"span"} className="bg-primary w-full p-2 text-onPrimary ">
+            <Typography
+              tag={"span"}
+              className="bg-primary w-full p-2 text-onPrimary "
+            >
               {"Primary"}
             </Typography>
-            <Typography tag={"span"} className="bg-primaryDark w-full p-2 text-onPrimary">
+            <Typography
+              tag={"span"}
+              className="bg-primaryDark w-full p-2 text-onPrimary"
+            >
               {"Primary Dark"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface w-full p-2 text-onSurfaceLow"
+            >
               {"Surface"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-1 w-full p-2 text-onSurfaceHigh">
+            <Typography
+              tag={"span"}
+              className="bg-surface-1 w-full p-2 text-onSurfaceHigh"
+            >
               {"Surface 1"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-2 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-2 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 2"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-3 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-3 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 3"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-4 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-4 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 4"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-5 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-5 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 5"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-6 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-6 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 6"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-7 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-7 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 7"}
             </Typography>
-            <Typography tag={"span"} className="bg-surface-8 w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-surface-8 w-full p-2 text-onSurfaceLow"
+            >
               {"Surface 8"}
             </Typography>
-            <Typography tag={"span"} className="bg-background w-full p-2 text-onSurfaceLow">
+            <Typography
+              tag={"span"}
+              className="bg-background w-full p-2 text-onSurfaceLow"
+            >
               {"Background"}
             </Typography>
           </div>
@@ -144,10 +194,10 @@ export const ThemesContainer: FC<ThemesContainerProps> = ({
           type={"number"}
           value={parsedSettings?.appWidth}
           onChange={(e) => {
-            setSetting("appWidth", parseInt(e.target.value))
+            setSetting("appWidth", parseInt(e.target.value));
           }}
         />
       </div>
     </div>
-  )
-}
+  );
+};

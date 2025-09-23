@@ -1,4 +1,4 @@
-import {Methods} from "./methods";
+import { Methods } from "./methods";
 
 export default {
   name: "subQuery",
@@ -20,8 +20,8 @@ export default {
       type: "string",
       title: "Method",
       options: {
-        list: Methods
-      }
+        list: Methods,
+      },
     },
     {
       name: "serviceType",
@@ -45,10 +45,10 @@ export default {
       title: "Query Type",
       options: {
         list: [
-          {title: "For every row (forEach)", value: "forEach"},
-          {title: "Match by key (singleMatch)", value: "singleMatch"},
-        ]
-      }
+          { title: "For every row (forEach)", value: "forEach" },
+          { title: "Match by key (singleMatch)", value: "singleMatch" },
+        ],
+      },
     },
     {
       name: "params",
@@ -91,7 +91,7 @@ export default {
               name: "calculation",
               type: "string",
               title: "Calculation",
-              description: "eg. %d / %d * 100"
+              description: "eg. %d / %d * 100",
             },
             {
               name: "keys",
@@ -101,12 +101,12 @@ export default {
                 {
                   type: "string",
                   name: "key",
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

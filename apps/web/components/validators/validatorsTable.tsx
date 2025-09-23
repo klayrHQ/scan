@@ -157,7 +157,7 @@ export const ValidatorsTable = ({
     const getValidators = async () => {
       const validators = await fetch(
         // eslint-disable-next-line turbo/no-undeclared-env-vars
-        `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators/${page}`
+        `https://cached-${process.env.NEXT_PUBLIC_NETWORK}-service.klayr.xyz/validators/${page}`,
       );
       const validatorsData = await validators.json();
 
@@ -166,7 +166,7 @@ export const ValidatorsTable = ({
           ?.filter((v: Validator) => v.rank <= 101)
           ?.reduce((total: bigint, validator: Validator) => {
             return total + BigInt(validator.validatorWeight);
-          }, BigInt(0))
+          }, BigInt(0)),
       );
       setValidators(validatorsData);
     };
@@ -181,7 +181,7 @@ export const ValidatorsTable = ({
           ?.filter((v: Validator) => v.rank <= 101)
           .reduce((total: bigint, validator: Validator) => {
             return total + BigInt(validator.validatorWeight);
-          }, BigInt(0))
+          }, BigInt(0)),
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

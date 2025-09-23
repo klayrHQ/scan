@@ -13,14 +13,14 @@ export const setSanitySSRSnapshot = (snapshot: {
 
 export const sanitySsrQuery = async <R = any>(
   groqQuery: string,
-  params?: Record<string, unknown>
+  params?: Record<string, unknown>,
 ): Promise<R> => {
   if (documents.length === 0) {
     return new Promise((resolve) =>
       setTimeout(
         async () => resolve(await await sanitySsrQuery(groqQuery, params)),
-        40
-      )
+        40,
+      ),
     );
   }
   const tree = parse(groqQuery);

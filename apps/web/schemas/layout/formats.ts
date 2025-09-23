@@ -1,4 +1,3 @@
-
 export default {
   name: "formats",
   type: "object",

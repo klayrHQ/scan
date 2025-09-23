@@ -1,44 +1,44 @@
-import React, { FC } from "react"
-import {useSettings, viewTypes} from "../../providers/settings";
-import {CurrencyContainer} from "./currencyContainer";
-import {HotKeysContainer} from "./hotKeysContainer";
-import {NetworkContainer} from "./networkContainer";
-import {SettingsMenu} from "./settingsMenu";
-import {Paper, Typography} from "ui";
-import {Icon} from "ui/atoms/icon/icon";
+import React, { FC } from "react";
+import { useSettings, viewTypes } from "../../providers/settings";
+import { CurrencyContainer } from "./currencyContainer";
+import { HotKeysContainer } from "./hotKeysContainer";
+import { NetworkContainer } from "./networkContainer";
+import { SettingsMenu } from "./settingsMenu";
+import { Paper, Typography } from "ui";
+import { Icon } from "ui/atoms/icon/icon";
 
 interface settingsContainerProps {
-  setOpen: (open: boolean) => void
-  view: viewTypes
-  views: Array<viewTypes>
-  parsedSettings?: any
-  setView: (view: viewTypes) => void
+  setOpen: (open: boolean) => void;
+  view: viewTypes;
+  views: Array<viewTypes>;
+  parsedSettings?: any;
+  setView: (view: viewTypes) => void;
 }
 
 export const SettingsContainer = () => {
-  const {view, setView, setOpen, views,} = useSettings()
+  const { view, setView, setOpen, views } = useSettings();
 
-  let ViewComponent
+  let ViewComponent;
 
   switch (view) {
     case "currency":
-      ViewComponent = CurrencyContainer
+      ViewComponent = CurrencyContainer;
       break;
 
     case "hotkeys":
-      ViewComponent = HotKeysContainer
+      ViewComponent = HotKeysContainer;
       break;
 
     case "network":
-      ViewComponent = NetworkContainer
+      ViewComponent = NetworkContainer;
       break;
 
     case "menu":
-      ViewComponent = SettingsMenu
+      ViewComponent = SettingsMenu;
       break;
 
     default:
-      ViewComponent = CurrencyContainer
+      ViewComponent = CurrencyContainer;
   }
 
   return (
@@ -65,30 +65,29 @@ export const SettingsContainer = () => {
           ].join(" ")}
         >
           <div className="w-full md:hidden flex flex-row justify-between text-onSurfaceHigh mb-2 px-4 py-4 mx-auto">
-            {
-              view === "menu" ?
-                <span className={"w-5"} />
-                :
-                <div
-                  onClick={() =>
-                    setView("menu")
-                  }
-                >
-                  <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"arrowLeft"} />
-                </div>
-            }
+            {view === "menu" ? (
+              <span className={"w-5"} />
+            ) : (
+              <div onClick={() => setView("menu")}>
+                <Icon
+                  className="w-5 h-5 text-onSurfaceHigh"
+                  icon={"arrowLeft"}
+                />
+              </div>
+            )}
             <Typography tag={"span"} className="font-medium capitalize">
               {view}
             </Typography>
-            <div
-              onClick={() => setOpen(false)}
-            >
-              <Icon className="w-5 h-5 text-onSurfaceHigh cursor-pointer" icon={"x"} />
+            <div onClick={() => setOpen(false)}>
+              <Icon
+                className="w-5 h-5 text-onSurfaceHigh cursor-pointer"
+                icon={"x"}
+              />
             </div>
           </div>
           <ViewComponent />
         </Paper>
       </div>
     </div>
-  )
-}
+  );
+};

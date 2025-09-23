@@ -33,16 +33,14 @@ dayjs.updateLocale("en", {
       return `${Math.ceil(number / 5) * 5}s`;
     },
     m: (number: number) => {
-      const seconds = Math.ceil((number % 60) / 5) * 5
+      const seconds = Math.ceil((number % 60) / 5) * 5;
       if (seconds === 0 || seconds === 60) {
-        return `${Math.floor(number / 60)}m`
+        return `${Math.floor(number / 60)}m`;
       }
-      return `${Math.floor(number / 60)}m ${seconds}s`
+      return `${Math.floor(number / 60)}m ${seconds}s`;
     },
     mm: "%dm",
   },
 });
 
-export {
-  dayjs
-}
+export { dayjs };

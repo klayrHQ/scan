@@ -1,17 +1,17 @@
-import React, {FC} from "react";
-import { Paper} from "../../atoms/paper/paper";
-import { NetworkEndpoint } from "@moosty/lisk-service-provider"
-import { NetworkType, statusType} from "../../types";
+import React, { FC } from "react";
+import { Paper } from "../../atoms/paper/paper";
+import { NetworkEndpoint } from "@moosty/lisk-service-provider";
+import { NetworkType, statusType } from "../../types";
 import Status from "../../atoms/status/status";
-import {Typography} from "../../atoms/typography/typography";
+import { Typography } from "../../atoms/typography/typography";
 
 interface NetworkContainerProps {
-  parsedSettings?: any
-  setSetting: (handle: string, newState: any) => void
-  serviceClient?: any
-  status: statusType
-  networks: Array<NetworkType>
-  emptyCustomNetwork: NetworkType
+  parsedSettings?: any;
+  setSetting: (handle: string, newState: any) => void;
+  serviceClient?: any;
+  status: statusType;
+  networks: Array<NetworkType>;
+  emptyCustomNetwork: NetworkType;
 }
 
 export const NetworkContainer: FC<NetworkContainerProps> = ({
@@ -22,20 +22,25 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
   networks,
   emptyCustomNetwork,
 }) => {
-
   const changeNetwork = (newNetwork?: NetworkType) => {
-    serviceClient?.connection?.disconnect()
-    serviceClient?.connection?.off()
-    setSetting("network", newNetwork)
-  }
+    serviceClient?.connection?.disconnect();
+    serviceClient?.connection?.off();
+    setSetting("network", newNetwork);
+  };
 
   return (
     <div className="flex flex-col space-y-4">
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+        <Typography
+          tag={"h2"}
+          size={"Heading4"}
+          className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}
+        >
           {"Select a Network!"}
         </Typography>
-        <Typography tag={"span"}>{"Select one of the Lisk networks or add your custom network."}</Typography>
+        <Typography tag={"span"}>
+          {"Select one of the Lisk networks or add your custom network."}
+        </Typography>
       </Paper>
       <Paper surface={1} className="p-4 flex flex-row space-x-2">
         <Status status={status} />
@@ -44,7 +49,9 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
         </Typography>
       </Paper>
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <Typography tag={"span"} className="font-medium">{"Network(COMING SOON)"}</Typography>
+        <Typography tag={"span"} className="font-medium">
+          {"Network(COMING SOON)"}
+        </Typography>
         <select
           value={parsedSettings?.networks?.id}
           className="w-full rounded text-onSurfaceMedium border-none text-base bg-surface-3 p-4 focus:outline-primary"
@@ -58,7 +65,9 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
         >
           {networks.map((network) => (
             <option key={network.id} value={network.id}>
-              <Typography tag={"span"}>{`${network.communityId}(${network.network})`}</Typography>
+              <Typography
+                tag={"span"}
+              >{`${network.communityId}(${network.network})`}</Typography>
             </option>
           ))}
         </select>
@@ -106,5 +115,5 @@ export const NetworkContainer: FC<NetworkContainerProps> = ({
         </Paper>
       )}
     </div>
-  )
-}
+  );
+};

@@ -1,23 +1,23 @@
-"use client"
-import { FC } from "react"
-import {useSettings} from "../providers/settings";
-import {useDecimals} from "../providers/currency/CurrencyProvider";
-import {Currency} from "ui/atoms/currency/currency";
+"use client";
+import { FC } from "react";
+import { useSettings } from "../providers/settings";
+import { useDecimals } from "../providers/currency/CurrencyProvider";
+import { Currency } from "ui/atoms/currency/currency";
 
 interface CurrencyProps {
-  beddows: string
-  sign?: boolean
-  symbol?: boolean
-  convert?: boolean
-  forceDecimals?: number
+  beddows: string;
+  sign?: boolean;
+  symbol?: boolean;
+  convert?: boolean;
+  forceDecimals?: number;
   classes?: {
-    sign?: string
-    symbol?: string
-    number?: string
-    separator?: string
-    decimals?: string
-  }
-  typography?: Record<string, any>
+    sign?: string;
+    symbol?: string;
+    number?: string;
+    separator?: string;
+    decimals?: string;
+  };
+  typography?: Record<string, any>;
 }
 
 export const CurrencyClient: FC<CurrencyProps> = ({
@@ -29,13 +29,13 @@ export const CurrencyClient: FC<CurrencyProps> = ({
   classes,
   typography,
 }) => {
-  const { parseBeddows, currencies } = useDecimals()
-  const { parsedSettings } = useSettings()
+  const { parseBeddows, currencies } = useDecimals();
+  const { parsedSettings } = useSettings();
   const { number, decimals } = parseBeddows(
     beddows,
     convert || parsedSettings?.convertCurrency,
     forceDecimals,
-  )
+  );
 
   return (
     <Currency
@@ -49,5 +49,5 @@ export const CurrencyClient: FC<CurrencyProps> = ({
       symbol={symbol}
       typography={typography}
     />
-  )
-}
+  );
+};

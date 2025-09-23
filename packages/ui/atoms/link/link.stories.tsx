@@ -10,23 +10,22 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     color: { control: "text" },
-    fullWidth: { control: "boolean", defaultValue: false }
+    fullWidth: { control: "boolean", defaultValue: false },
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Link> = (args) => <Link {...args}>{args.children}</Link>;
+const Template: ComponentStory<typeof Link> = (args) => (
+  <Link {...args}>{args.children}</Link>
+);
 
 export const Primary: ComponentMeta<typeof Link> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  children: "Link"
+  children: "Link",
 };
-

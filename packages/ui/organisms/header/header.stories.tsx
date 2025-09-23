@@ -1,25 +1,29 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Header } from "./header";
-import {compactString} from "../../assets/utils";
-import {TopBarMockup} from "../topBar/topBar.stories";
-import {Logo} from "../../molecules/logo/logo";
-import {LiskScanIcon} from "../../assets/icons";
-import {ads, favourites, menuItems} from "../../assets/mockupData/mockupData";
-import {Popover} from "../../atoms/popover/popover";
-import {Cog6ToothIcon as CogIcon, MagnifyingGlassIcon, StarIcon} from "@heroicons/react/24/solid";
-import {Tooltip} from "../../atoms/tooltip/tooltip";
-import {FavouritesWindow} from "../favouritesWindow/favouritesWindow";
-import {SearchContainer} from "../searchContainer/searchContainer";
-import {MobileMenu} from "../mobileMenu/mobileMenu";
-import {Link} from "../../atoms/link/link";
+import { compactString } from "../../assets/utils";
+import { TopBarMockup } from "../topBar/topBar.stories";
+import { Logo } from "../../molecules/logo/logo";
+import { LiskScanIcon } from "../../assets/icons";
+import { ads, favourites, menuItems } from "../../assets/mockupData/mockupData";
+import { Popover } from "../../atoms/popover/popover";
+import {
+  Cog6ToothIcon as CogIcon,
+  MagnifyingGlassIcon,
+  StarIcon,
+} from "@heroicons/react/24/solid";
+import { Tooltip } from "../../atoms/tooltip/tooltip";
+import { FavouritesWindow } from "../favouritesWindow/favouritesWindow";
+import { SearchContainer } from "../searchContainer/searchContainer";
+import { MobileMenu } from "../mobileMenu/mobileMenu";
+import { Link } from "../../atoms/link/link";
 import Status from "../../atoms/status/status";
-import {Button} from "../../atoms";
-import {Typography} from "../../atoms/typography/typography";
-import {KeyValueRow} from "../../molecules/keyValueRow/keyValueRow";
-import {MobileMenuMockup} from "../mobileMenu/mobileMenu.stories";
-import {Grid} from "../../atoms/grid/grid";
+import { Button } from "../../atoms";
+import { Typography } from "../../atoms/typography/typography";
+import { KeyValueRow } from "../../molecules/keyValueRow/keyValueRow";
+import { MobileMenuMockup } from "../mobileMenu/mobileMenu.stories";
+import { Grid } from "../../atoms/grid/grid";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -30,9 +34,7 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
@@ -42,35 +44,56 @@ const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Primary: ComponentMeta<typeof Header> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-
-};
+Primary.args = {};
 
 export const HeaderMockup: ComponentStory<typeof Header> = () => {
-  const [openSearch, setOpenSearch] = useState(false)
-  const [openFavourites, setOpenFavourites] = useState(false)
-  const [searchValue, setSearchValue] = useState<string>()
+  const [openSearch, setOpenSearch] = useState(false);
+  const [openFavourites, setOpenFavourites] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>();
 
   return (
     <Header
       infoItemsLeft={[
         <Status status={"connected"} />,
         <Grid className={"gap-2"} flex columns={2} mobileColumns={1}>
-          <KeyValueRow inline color={"onTopbar"} label={"chain:"} value={"Lisk"} valueBold/>
-          <KeyValueRow inline color={"onTopbar"} label={"Network:"} value={"mainnet"} valueBold/>
-          <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"Block height:"} value={"21,473,821"} valueBold/>
-        </Grid>
+          <KeyValueRow
+            inline
+            color={"onTopbar"}
+            label={"chain:"}
+            value={"Lisk"}
+            valueBold
+          />
+          <KeyValueRow
+            inline
+            color={"onTopbar"}
+            label={"Network:"}
+            value={"mainnet"}
+            valueBold
+          />
+          <KeyValueRow
+            className={"hidden md:flex"}
+            inline
+            color={"onTopbar"}
+            label={"Block height:"}
+            value={"21,473,821"}
+            valueBold
+          />
+        </Grid>,
       ]}
       infoItemsRight={[
-        <KeyValueRow className={"hidden md:flex"} inline color={"onTopbar"} label={"MC:"} value={"141,141,816KLY"} valueBold />,
-        <Tooltip
-          label="Settings"
-          placement={"bottom"}
-          offset={[0,10]}
-        >
+        <KeyValueRow
+          className={"hidden md:flex"}
+          inline
+          color={"onTopbar"}
+          label={"MC:"}
+          value={"141,141,816KLY"}
+          valueBold
+        />,
+        <Tooltip label="Settings" placement={"bottom"} offset={[0, 10]}>
           <CogIcon
             onClick={() => console.log("themes")}
-            className="w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0"/>
+            className="w-5 h-5 text-onTopbar transition-transform hover:rotate-90 hover:text-onSurfacePrimaryLow cursor-pointer flex-shrink-0 rounded-full border-0"
+          />
         </Tooltip>,
       ]}
       logo={
@@ -79,7 +102,9 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
           href={"#"}
           title={"Liskscan"}
           color={"onTopbar"}
-          image={<LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar"/>}
+          image={
+            <LiskScanIcon className="cursor-pointer mr-2 fill-current text-onTopbar" />
+          }
         />
       }
       menuItems={menuItems}
@@ -96,18 +121,19 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
                 className={`cursor-pointer w-full hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
               >
                 <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-                <Typography tag={"span"} color={"onTopbar"}>Favourites</Typography>
+                <Typography tag={"span"} color={"onTopbar"}>
+                  Favourites
+                </Typography>
               </div>
             ) : (
-              <Tooltip
-                label="No favorites set"
-                placement={"bottom"}
-              >
+              <Tooltip label="No favorites set" placement={"bottom"}>
                 <div
                   className={`cursor-default hover:bg-topbar cursor-pointer hover:bg-menuButton flex flex-row font-medium rounded pl-3 lg:pl-2 pr-3 py-1 lg:py-2 items-center`}
                 >
                   <StarIcon className="w-4 lg:w-5 h-4 lg:h-5 mr-1 text-onSurfaceHigh lg:text-onTopbar" />
-                  <Typography tag={"span"} color={"onTopbar"}>Favourites</Typography>
+                  <Typography tag={"span"} color={"onTopbar"}>
+                    Favourites
+                  </Typography>
                 </div>
               </Tooltip>
             )
@@ -155,8 +181,7 @@ export const HeaderMockup: ComponentStory<typeof Header> = () => {
           />
         </Popover>,
         <MobileMenuMockup />,
-      ]
-    }
+      ]}
     />
-  )
+  );
 };

@@ -1,8 +1,8 @@
-import {Tokens} from "../../../components/tokens/tokens";
-import {getAllData} from "../../../lib/sanity.service";
+import { Tokens } from "../../../components/tokens/tokens";
+import { getAllData } from "../../../lib/sanity.service";
 import {
   BlockchainAppsMetaResponse,
-  NetworkStatusResponse
+  NetworkStatusResponse,
 } from "@liskscan/lisk-service-client/lib/types";
 
 const Page = async () => {
@@ -24,9 +24,7 @@ const Page = async () => {
     apps: BlockchainAppsMetaResponse;
   };
 
-  return (
-    <Tokens apps={apps} status={status} />
-  )
-}
+  return <Tokens apps={apps} status={status} />;
+};
 
-export default Page
+export default Page;

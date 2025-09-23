@@ -25,26 +25,27 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
     iconColor: "primary",
-  }
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof FavouriteButton> = (args) => <FavouriteButton {...args} />;
+const Template: ComponentStory<typeof FavouriteButton> = (args) => (
+  <FavouriteButton {...args} />
+);
 
-export const NotFavourited: ComponentMeta<typeof FavouriteButton> = Template.bind({});
+export const NotFavourited: ComponentMeta<typeof FavouriteButton> =
+  Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-NotFavourited.args = {
+NotFavourited.args = {};
 
-};
-
-export const Favourited: ComponentMeta<typeof FavouriteButton> = Template.bind({});
+export const Favourited: ComponentMeta<typeof FavouriteButton> = Template.bind(
+  {},
+);
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Favourited.args = {
   favourited: true,

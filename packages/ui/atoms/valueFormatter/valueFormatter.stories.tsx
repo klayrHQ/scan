@@ -12,13 +12,10 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof ValueFormatter> = (args) => {
@@ -26,8 +23,8 @@ const Template: ComponentStory<typeof ValueFormatter> = (args) => {
     <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
       <ValueFormatter {...args} />
     </div>
-  )
-}
+  );
+};
 
 export const Currency: ComponentMeta<typeof ValueFormatter> = Template.bind({});
 Currency.args = {

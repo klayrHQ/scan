@@ -1,21 +1,21 @@
-import React, {FC, ReactNode} from "react"
+import React, { FC, ReactNode } from "react";
 import { Search } from "../search/search";
 import { AdSection } from "../../molecules/adSection/adSection";
 import { RecentSearches } from "../../molecules/recentSearches/recentSearches";
-import {cls} from "../../assets/utils";
-import {tableRowsType} from "../../types";
+import { cls } from "../../assets/utils";
+import { tableRowsType } from "../../types";
 
 export interface SearchContainerProps {
-  className?: string
-  recentSearches?: Array<{address: string, username?: string}>
-  searching?: boolean
-  searchFunction: (address?: string, username?: string) => void
-  searchValue?: string
-  setSearchValue: (value: string) => void
-  searchResults?: tableRowsType
-  ads?: Array<{ content: any, className: string }>
-  setFilters?: (value: string) => void
-  filtersList?: Array<any>
+  className?: string;
+  recentSearches?: Array<{ address: string; username?: string }>;
+  searching?: boolean;
+  searchFunction: (address?: string, username?: string) => void;
+  searchValue?: string;
+  setSearchValue: (value: string) => void;
+  searchResults?: tableRowsType;
+  ads?: Array<{ content: any; className: string }>;
+  setFilters?: (value: string) => void;
+  filtersList?: Array<any>;
 }
 
 export const SearchContainer: FC<SearchContainerProps> = ({
@@ -30,12 +30,13 @@ export const SearchContainer: FC<SearchContainerProps> = ({
   setFilters,
   filtersList,
 }) => {
-
   return (
-    <div className={cls([
-      "rounded shadow-1 flex flex-col divider divide-y-2 bg-background w-full",
-      className,
-    ])}>
+    <div
+      className={cls([
+        "rounded shadow-1 flex flex-col divider divide-y-2 bg-background w-full",
+        className,
+      ])}
+    >
       <Search
         searching={searching}
         searchFunction={searchFunction}
@@ -45,15 +46,15 @@ export const SearchContainer: FC<SearchContainerProps> = ({
         setFilters={setFilters}
         filtersList={filtersList}
       />
-      {recentSearches &&
+      {recentSearches && (
         <div className="px-2">
           <RecentSearches
             recentSearches={recentSearches}
             onClick={searchFunction}
           />
         </div>
-      }
+      )}
       {ads && <AdSection ads={ads} />}
     </div>
-  )
-}
+  );
+};

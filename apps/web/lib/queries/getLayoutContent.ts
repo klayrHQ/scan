@@ -7,7 +7,7 @@ export const getLayoutContent = async (fetch: any) => {
   //   `*[_type == "menu" || _type == "settings" || _type == "footer" || _type == "infobar"]`
   // );
   const response = await fetch(
-    `*[_type == "menu" || _type == "settings" || _type == "footer" || _type == "infobar"]`
+    `*[_type == "menu" || _type == "settings" || _type == "footer" || _type == "infobar"]`,
   );
   const result: Record<string, any> = {};
   response.map((res: any) => (result[res._type] = res));

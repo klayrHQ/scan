@@ -4,9 +4,15 @@ import {
   CogIcon,
   UlistIcon,
   ThListIcon,
-  InfoOutlineIcon, DesktopIcon, EqualIcon, MasterDetailIcon, MenuIcon, DashboardIcon, TagIcon
+  InfoOutlineIcon,
+  DesktopIcon,
+  EqualIcon,
+  MasterDetailIcon,
+  MenuIcon,
+  DashboardIcon,
+  TagIcon,
 } from "@sanity/icons";
-import {sliceDocumentNames} from "./schemas/slices";
+import { sliceDocumentNames } from "./schemas/slices";
 
 export const sanityDeskStructure = (S: any) =>
   S.list()
@@ -34,7 +40,9 @@ export const sanityDeskStructure = (S: any) =>
               S.listItem()
                 .title("Info bar")
                 .icon(InfoOutlineIcon)
-                .child(S.document().schemaType("infobar").documentId("infobar")),
+                .child(
+                  S.document().schemaType("infobar").documentId("infobar"),
+                ),
               S.listItem()
                 .title("Main Menu")
                 .icon(MenuIcon)
@@ -96,27 +104,27 @@ export const sanityDeskStructure = (S: any) =>
         .title("Data Tables")
         .icon(ThListIcon)
         .child(S.documentTypeList("tables").title("All Tables")),
-              // S.listItem()
-              //   .title("Functional Pages")
-              //   .icon(RobotIcon)
-              //   .child(
-              //     S.list()
-              //       .title("Functional Pages")
-              //       .items([
-              //         ...functionalPageNames.map((name) => {
-              //           const icon = functionalPageIcons.find(
-              //             (iconName) => iconName.name === name,
-              //           );
-              //           return S.listItem()
-              //             .title(icon?.title || name)
-              //             .icon(icon?.icon ? icon.icon : DocumentTextIcon)
-              //             .child(
-              //               S.document().schemaType(name).documentId(name),
-              //             );
-              //         }),
-              //       ]),
-              //   ),
-              // S.divider(),
+      // S.listItem()
+      //   .title("Functional Pages")
+      //   .icon(RobotIcon)
+      //   .child(
+      //     S.list()
+      //       .title("Functional Pages")
+      //       .items([
+      //         ...functionalPageNames.map((name) => {
+      //           const icon = functionalPageIcons.find(
+      //             (iconName) => iconName.name === name,
+      //           );
+      //           return S.listItem()
+      //             .title(icon?.title || name)
+      //             .icon(icon?.icon ? icon.icon : DocumentTextIcon)
+      //             .child(
+      //               S.document().schemaType(name).documentId(name),
+      //             );
+      //         }),
+      //       ]),
+      //   ),
+      // S.divider(),
       //         S.listItem()
       //           .title("Content")
       //           .icon(EqualIcon)
@@ -152,7 +160,9 @@ export const sanityDeskStructure = (S: any) =>
               S.listItem()
                 .title("Categories")
                 .icon(TagIcon)
-                .child(S.documentTypeList("newsCategories").title("All Categories")),
+                .child(
+                  S.documentTypeList("newsCategories").title("All Categories"),
+                ),
             ]),
         ),
     ]);

@@ -1,32 +1,27 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CurrencyContainer } from "./currencyContainer";
-import {CurrencyType} from "../../types";
+import { CurrencyType } from "../../types";
 
 export default {
   title: "Organisms/Settings/CurrencyContainer",
   component: CurrencyContainer,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof CurrencyContainer> = (args) => {
-  return(
-    <CurrencyContainer {...args}/>
-  )
+  return <CurrencyContainer {...args} />;
 };
 
-export const Primary: ComponentMeta<typeof CurrencyContainer> = Template.bind({});
+export const Primary: ComponentMeta<typeof CurrencyContainer> = Template.bind(
+  {},
+);
 Primary.args = {
   categories: [
     {

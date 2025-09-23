@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next"
-import {CurrencyCategory} from "./CurrencyProvider";
+import { NextApiRequest, NextApiResponse } from "next";
+import { CurrencyCategory } from "./CurrencyProvider";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.json(categories)
+  res.json(categories);
 }
 
 export const categories: CurrencyCategory[] = [
@@ -347,4 +347,4 @@ export const categories: CurrencyCategory[] = [
       },
     ],
   },
-]
+];

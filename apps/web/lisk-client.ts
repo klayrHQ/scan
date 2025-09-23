@@ -64,7 +64,7 @@ export const convertLSKToBeddows = (lskAmount?: string): string => {
   const splitAmount = lskAmount.split(".");
   const liskAmountInt = BigInt(splitAmount[0]);
   const liskAmountFloatBigInt = BigInt(
-    (splitAmount[1] ?? "0").padEnd(LISK_MAX_DECIMAL_POINTS, "0")
+    (splitAmount[1] ?? "0").padEnd(LISK_MAX_DECIMAL_POINTS, "0"),
   );
   const beddowsAmountBigInt =
     liskAmountInt * BigInt(FIXED_POINT) + liskAmountFloatBigInt;
@@ -111,7 +111,7 @@ export const createChecksum = (uint5Array: number[]): number[] => {
 export const convertUIntArray = (
   uintArray: number[],
   fromBits: number,
-  toBits: number
+  toBits: number,
 ): number[] => {
   // eslint-disable-next-line no-bitwise
   const maxValue = (1 << toBits) - 1;
@@ -157,11 +157,11 @@ export const verifyChecksum = (integerSequence: number[]): boolean =>
 
 export const validateKlayr32Address = (
   address: string,
-  prefix = DEFAULT_LISK32_ADDRESS_PREFIX
+  prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): true | never => {
   if (address.length !== LISK32_ADDRESS_LENGTH) {
     throw new Error(
-      "Address length does not match requirements. Expected 41 characters."
+      "Address length does not match requirements. Expected 41 characters.",
     );
   }
 
@@ -169,7 +169,7 @@ export const validateKlayr32Address = (
 
   if (addressPrefix !== prefix) {
     throw new Error(
-      `Invalid address prefix. Actual prefix: ${addressPrefix}, Expected prefix: ${prefix}`
+      `Invalid address prefix. Actual prefix: ${addressPrefix}, Expected prefix: ${prefix}`,
     );
   }
 
@@ -177,12 +177,12 @@ export const validateKlayr32Address = (
 
   if (!addressSubstringArray.every((char) => LISK32_CHARSET.includes(char))) {
     throw new Error(
-      "Invalid character found in address. Only allow characters: 'abcdefghjkmnopqrstuvwxyz23456789'."
+      "Invalid character found in address. Only allow characters: 'abcdefghjkmnopqrstuvwxyz23456789'.",
     );
   }
 
   const integerSequence = addressSubstringArray.map((char) =>
-    LISK32_CHARSET.indexOf(char)
+    LISK32_CHARSET.indexOf(char),
   );
 
   if (!verifyChecksum(integerSequence)) {
@@ -210,7 +210,7 @@ export const hexToBuffer = (hex: string, argumentName = "Argument"): Buffer => {
   }
   if (matchedHex.length % 2 !== 0) {
     throw new TypeError(
-      `${argumentName} must have a valid length of hex string.`
+      `${argumentName} must have a valid length of hex string.`,
     );
   }
 
@@ -225,7 +225,7 @@ export const hash = (data: Buffer | string, format?: string): Buffer => {
   if (typeof data === "string" && typeof format === "string") {
     if (!["utf8", "hex"].includes(format)) {
       throw new Error(
-        "Unsupported string format. Currently only `hex` and `utf8` are supported."
+        "Unsupported string format. Currently only `hex` and `utf8` are supported.",
       );
     }
     const encoded =
@@ -237,7 +237,7 @@ export const hash = (data: Buffer | string, format?: string): Buffer => {
   throw new Error(
     `Unsupported data:${data} and format:${
       format ?? "undefined"
-    }. Currently only Buffers or hex and utf8 strings are supported.`
+    }. Currently only Buffers or hex and utf8 strings are supported.`,
   );
 };
 
@@ -261,29 +261,29 @@ export const getFirstEightBytesReversed = (input: string | Buffer): Buffer => {
   }
 
   return reverse(
-    Buffer.from(input as unknown as Uint8Array).slice(0, BUFFER_SIZE)
+    Buffer.from(input as unknown as Uint8Array).slice(0, BUFFER_SIZE),
   );
 };
 
 export const getKlayr32AddressFromPublicKey = (
   publicKey: Buffer,
-  prefix = DEFAULT_LISK32_ADDRESS_PREFIX
+  prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): string => `${prefix}${addressToKlayr32(getAddressFromPublicKey(publicKey))}`;
 
 export const getAddressFromKlayr32Address = (
   base32Address: string,
-  prefix = DEFAULT_LISK32_ADDRESS_PREFIX
+  prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): Buffer => {
   validateKlayr32Address(base32Address, prefix);
   // Ignore lsk prefix and checksum
   const base32AddressNoPrefixNoChecksum = base32Address.substring(
     prefix.length,
-    base32Address.length - 6
+    base32Address.length - 6,
   );
 
   const addressArray = base32AddressNoPrefixNoChecksum.split("");
   const integerSequence = addressArray.map((char) =>
-    LISK32_CHARSET.indexOf(char)
+    LISK32_CHARSET.indexOf(char),
   );
   const integerSequence8 = convertUIntArray(integerSequence, 5, 8);
 
@@ -292,5 +292,5 @@ export const getAddressFromKlayr32Address = (
 
 export const getKlayr32AddressFromAddress = (
   address: Buffer,
-  prefix = DEFAULT_LISK32_ADDRESS_PREFIX
+  prefix = DEFAULT_LISK32_ADDRESS_PREFIX,
 ): string => `${prefix}${addressToKlayr32(address)}`;

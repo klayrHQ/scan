@@ -7,7 +7,7 @@ import { CopyButton } from "klayr-explorer/components/data/copy";
 import { convertBeddowsToLSK } from "klayr-explorer/lib/queries/lisk";
 import { Avatar } from "../avatar/avatar";
 import { dayjs } from "../../utils/time";
-import {CurrencyClient} from "klayr-explorer/components/currencyClient";
+import { CurrencyClient } from "klayr-explorer/components/currencyClient";
 
 export type SanityProps = { key: string; value: string }[];
 export type ValueTypes =
@@ -248,10 +248,12 @@ const formatters = {
   },
   percentage: (value: any) => parseFloat(value).toFixed(2) + "%",
   currency: (value: any, typographyProps?: Record<string, any>) =>
-    value
-      ? <CurrencyClient beddows={value} typography={typographyProps} />
-      : "-",
-    /*`${
+    value ? (
+      <CurrencyClient beddows={value} typography={typographyProps} />
+    ) : (
+      "-"
+    ),
+  /*`${
       value
         ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
             minimumFractionDigits: 0,
@@ -261,10 +263,12 @@ const formatters = {
         : "-"
     }`,*/
   currencyNew: (value: any, typographyProps?: Record<string, any>) =>
-    value
-      ? <CurrencyClient beddows={value} typography={typographyProps} />
-      : "0",
-    /*`${
+    value ? (
+      <CurrencyClient beddows={value} typography={typographyProps} />
+    ) : (
+      "0"
+    ),
+  /*`${
       value
         ? parseFloat(convertBeddowsToLSK(value)).toLocaleString(undefined, {
         minimumFractionDigits: 0,
@@ -462,7 +466,7 @@ export const parseProps = (props?: SanityProps, id?: string) =>
         (obj: Record<string, any>, item) => (
           (obj[item.key] = item.value === "id" ? id : item.value), obj
         ),
-        {}
+        {},
       )
     : {};
 // const parseProps = (props?: SanityProps): Record<string, any> => {

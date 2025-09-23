@@ -12,9 +12,7 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -31,8 +29,8 @@ export default {
         filterName: "recipient",
         filterValue: "test",
       },
-    ]
-  }
+    ],
+  },
 } as any;
 
 const Template: ComponentStory<typeof TypeFilter> = (args) => {
@@ -40,10 +38,8 @@ const Template: ComponentStory<typeof TypeFilter> = (args) => {
     <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
       <TypeFilter {...args} />
     </div>
-  )
-}
+  );
+};
 
 export const Primary: ComponentMeta<typeof TypeFilter> = Template.bind({});
-Primary.args = {
-
-};
+Primary.args = {};

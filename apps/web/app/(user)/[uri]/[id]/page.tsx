@@ -209,7 +209,7 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
             if (section.columns[column]._type === "tableSlice") {
               const rows = getTableRows(
                 queryResponses,
-                section.columns[column].table
+                section.columns[column].table,
               );
               section.columns[column].data = { rows };
             }
@@ -221,7 +221,7 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
                 ) {
                   const rows = getTableRows(
                     queryResponses,
-                    section.columns[column].columns[subColumn].table
+                    section.columns[column].columns[subColumn].table,
                   );
                   section.columns[column].columns[subColumn].data = { rows };
                 }
@@ -230,7 +230,7 @@ const getSlices = async (uri: string, id: string, fetch: any) => {
           }
         }
         return section;
-      })
+      }),
     ),
     queryData: queryResponses,
     page,
@@ -270,7 +270,7 @@ export default async function Web({ params }: any) {
   const sections = await getSlices(
     params.uri,
     decodeURIComponent(params.id),
-    client
+    client,
   );
   return (
     <Slicer

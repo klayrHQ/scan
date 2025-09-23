@@ -6,21 +6,18 @@ import { CopyHotKey } from "./copyHotKey";
 export default {
   title: "Atoms/Hotkeys/CopyHotKey",
   component: CopyHotKey,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
-const Template: ComponentStory<typeof CopyHotKey> = (args) => <CopyHotKey {...args} />;
+const Template: ComponentStory<typeof CopyHotKey> = (args) => (
+  <CopyHotKey {...args} />
+);
 
 export const Primary: ComponentMeta<typeof CopyHotKey> = Template.bind({});
 Primary.args = {

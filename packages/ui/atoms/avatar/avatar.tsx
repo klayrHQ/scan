@@ -1,27 +1,27 @@
-import React from "react"
+import React from "react";
 import { KlayrAvatar } from "../klayrAvatar/klayrAvatar";
 
 interface AvatarProps {
-  seed?: string
-  address: string
-  className?: string
-  size?: number
-  username?: boolean
-  circle?: boolean
-  collectible?: boolean
-  standard?: boolean
+  seed?: string;
+  address: string;
+  className?: string;
+  size?: number;
+  username?: boolean;
+  circle?: boolean;
+  collectible?: boolean;
+  standard?: boolean;
 }
 
 export const Avatar = ({
-        seed,
-        standard,
-        address,
-        className,
-        size,
-        username,
-        collectible,
-        circle,
-      }: AvatarProps) => {
+  seed,
+  standard,
+  address,
+  className,
+  size,
+  username,
+  collectible,
+  circle,
+}: AvatarProps) => {
   /*const { getAvatar, avatars } = useAvatars()
   const [currentAvatar, setCurrentAvatar] = useState<NftsDataType>()
 
@@ -64,5 +64,5 @@ export const Avatar = ({
         />
       )}*/}
     </>
-  )
-}
+  );
+};

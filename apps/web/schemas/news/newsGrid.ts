@@ -1,4 +1,3 @@
-
 export default {
   name: "newsGrid",
   type: "document",
@@ -18,9 +17,9 @@ export default {
           name: "news",
           type: "reference",
           title: "News Item",
-          to: [{type: "news"}]
+          to: [{ type: "news" }],
         },
-      ]
-    }
+      ],
+    },
   ],
 };

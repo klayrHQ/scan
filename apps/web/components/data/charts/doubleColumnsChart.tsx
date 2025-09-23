@@ -28,20 +28,20 @@ export const DoubleColumnsChart = ({
       am5xy.XYChart.new(root, {
         panY: true,
         layout: root.verticalLayout,
-      })
+      }),
     );
 
     // Create Y-axes
     let yAxis1 = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
-      })
+      }),
     );
 
     let yAxis2 = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
-      })
+      }),
     );
 
     // Create X-Axis
@@ -49,7 +49,7 @@ export const DoubleColumnsChart = ({
       am5xy.CategoryAxis.new(root, {
         renderer: am5xy.AxisRendererX.new(root, {}),
         categoryField: Object.keys(chartData[0])[0].toString(),
-      })
+      }),
     );
     xAxis.data.setAll(chartData);
 
@@ -61,7 +61,7 @@ export const DoubleColumnsChart = ({
         yAxis: yAxis1,
         valueYField: Object.keys(chartData[0])[1].toString(),
         categoryXField: Object.keys(chartData[0])[0].toString(),
-      })
+      }),
     );
     series1.data.setAll(chartData);
 
@@ -72,7 +72,7 @@ export const DoubleColumnsChart = ({
         yAxis: yAxis2,
         valueYField: Object.keys(chartData[0])[2].toString(),
         categoryXField: Object.keys(chartData[0])[0].toString(),
-      })
+      }),
     );
     series2.data.setAll(chartData);
 

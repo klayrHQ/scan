@@ -1,6 +1,9 @@
 export const Methods = [
   { value: "get.auth", title: `get.auth (Klayr Service)` },
-  { value: "get.blockchain.apps", title: `get.blockchain.apps (Klayr Service)` },
+  {
+    value: "get.blockchain.apps",
+    title: `get.blockchain.apps (Klayr Service)`,
+  },
   {
     value: "get.blockchain.apps.statistics",
     title: `get.blockchain.apps.statistics (Klayr Service)`,
@@ -67,7 +70,10 @@ export const Methods = [
     value: "get.token.balances.top",
     title: `get.token.balances.top (Klayr Service)`,
   },
-  { value: "get.token.constants", title: `get.token.constants (Klayr Service)` },
+  {
+    value: "get.token.constants",
+    title: `get.token.constants (Klayr Service)`,
+  },
   { value: "get.token.summary", title: `get.token.summary (Klayr Service)` },
   { value: "get.transactions", title: `get.transactions (Klayr Service)` },
   {

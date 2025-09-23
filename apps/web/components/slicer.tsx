@@ -47,14 +47,15 @@ export const Slicer = ({ slices, queryData, queries }: SlicerProps) => {
                     (parseInt(page) - 1) *
                     parseInt(
                       query.params?.find(
-                        (p: { key: string; value: string }) => p.key === "limit"
-                      )?.value || "0"
+                        (p: { key: string; value: string }) =>
+                          p.key === "limit",
+                      )?.value || "0",
                     )
                   ).toString(),
                 },
               ],
             };
-          })
+          }),
         );
       } else {
         setQueries(queries);

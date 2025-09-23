@@ -29,7 +29,7 @@ export const processTable = (result: any) => {
         showOn: column.showOn,
         className: column.className,
       };
-    }
+    },
   );
   return { ...result, columns, keys };
 };

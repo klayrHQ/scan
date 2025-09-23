@@ -1,4 +1,3 @@
-
 export default {
   name: "slices",
   type: "document",
@@ -15,7 +14,6 @@ export default {
       title: "Slug",
       options: {
         source: "name",
-
       },
     },
     {

@@ -6,13 +6,13 @@ import { makeTable } from "../../../lib/sanity.table";
 import { getQueries } from "../../../lib/sanity.queries";
 import { draftMode } from "next/headers";
 import { sanitySsrQuery } from "../../../lib/sanity.groq";
-import {client} from "../../../lib/sanity.service";
+import { client } from "../../../lib/sanity.service";
 
 export const revalidate = 10;
 
 export const getSlices = async (
   uri: string,
-  fetch: (query: string) => Promise<any>
+  fetch: (query: string) => Promise<any>,
 ) => {
   if (!fetch) {
     notFound();
@@ -111,7 +111,7 @@ export const getSlices = async (
             if (section.columns[column]._type === "tableSlice") {
               const rows = getTableRows(
                 queryResponses,
-                section.columns[column].table
+                section.columns[column].table,
               );
               section.columns[column].data = { rows };
             }
@@ -123,7 +123,7 @@ export const getSlices = async (
                 ) {
                   const rows = getTableRows(
                     queryResponses,
-                    section.columns[column].columns[subColumn].table
+                    section.columns[column].columns[subColumn].table,
                   );
                   section.columns[column].columns[subColumn].data = { rows };
                 }
@@ -132,7 +132,7 @@ export const getSlices = async (
           }
         }
         return section;
-      })
+      }),
     ),
     queryData: queryResponses,
     page,
@@ -148,16 +148,15 @@ const getTableRows = (queryResponses: Record<string, any>, table: any) => {
   return tableRows.rows;
 };
 export async function generateStaticParams() {
+  const list: { uri: string }[] = [
+    { uri: "stakes" },
+    { uri: "validators" },
+    { uri: "transactions" },
+    { uri: "blocks" },
+    { uri: "events" },
+  ];
 
-  const list: {uri: string}[] = [
-    {uri: "stakes"},
-    {uri: "validators"},
-    {uri: "transactions"},
-    {uri: "blocks"},
-    {uri: "events"},
-  ]
-
-  return list
+  return list;
 }
 export default async function Web({ params }: any) {
   const isDraftMode = draftMode().isEnabled;

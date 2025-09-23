@@ -47,7 +47,7 @@ export const DonutChart = ({
         tooltip: am5.Tooltip.new(root, {
           keepTargetHover: true,
         }),
-      })
+      }),
     );
     series.data.setAll(chartData);
 

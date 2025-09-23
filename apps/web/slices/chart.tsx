@@ -1,11 +1,11 @@
-"use client"
-import {PieChart} from "../components/data/charts/pieChart";
-import {DonutChart} from "../components/data/charts/donutChart";
-import {ColumnsChart} from "../components/data/charts/columnsChart";
-import {useEffect, useState} from "react";
-import {DoubleColumnsChart} from "../components/data/charts/doubleColumnsChart";
-import {convertBeddowsToLSK} from "../lib/queries/lisk";
-import {LineChart} from "../components/data/charts/lineChart";
+"use client";
+import { PieChart } from "../components/data/charts/pieChart";
+import { DonutChart } from "../components/data/charts/donutChart";
+import { ColumnsChart } from "../components/data/charts/columnsChart";
+import { useEffect, useState } from "react";
+import { DoubleColumnsChart } from "../components/data/charts/doubleColumnsChart";
+import { convertBeddowsToLSK } from "../lib/queries/lisk";
+import { LineChart } from "../components/data/charts/lineChart";
 
 export type FlexibleArrayType = {
   [key: string]: number | string;
@@ -17,7 +17,7 @@ const chartList = {
   columns: ColumnsChart,
   doubleColumns: DoubleColumnsChart,
   line: LineChart,
-}
+};
 
 export const ChartSlice = ({
   id,
@@ -42,7 +42,9 @@ export const ChartSlice = ({
   className?: string;
   height?: string;
 }) => {
-  const [chartData, setChartData] = useState<{ [key: string]: string | number }[] | undefined>()
+  const [chartData, setChartData] = useState<
+    { [key: string]: string | number }[] | undefined
+  >();
 
   useEffect(() => {
     const chartDataKeyArray = chartDataKey.split(".");
@@ -52,54 +54,65 @@ export const ChartSlice = ({
 
     if (chartType !== "doubleColumns") {
       if (extractedData) {
-        const chartDataArray = Object.entries(extractedData).map(([key, value]) => {
-          let modifiedLabelKey = key.replace(/^[^:]+:/, "").replace(/([A-Z])/g, " $1");
-          // Start the string with a capital letter
-          modifiedLabelKey = modifiedLabelKey.charAt(0).toUpperCase() + modifiedLabelKey.slice(1);
-          modifiedLabelKey = modifiedLabelKey.replace(/_/g, "-");
+        const chartDataArray = Object.entries(extractedData).map(
+          ([key, value]) => {
+            let modifiedLabelKey = key
+              .replace(/^[^:]+:/, "")
+              .replace(/([A-Z])/g, " $1");
+            // Start the string with a capital letter
+            modifiedLabelKey =
+              modifiedLabelKey.charAt(0).toUpperCase() +
+              modifiedLabelKey.slice(1);
+            modifiedLabelKey = modifiedLabelKey.replace(/_/g, "-");
 
-          return {
-            [labelKey || "labelKey"]: modifiedLabelKey,
-            [valueKey || "valueKey"]: Number(value),
-          }
-        });
+            return {
+              [labelKey || "labelKey"]: modifiedLabelKey,
+              [valueKey || "valueKey"]: Number(value),
+            };
+          },
+        );
 
-        setChartData(chartDataArray)
+        setChartData(chartDataArray);
       }
     } else {
       if (extractedData) {
-        const sortedData = extractedData
-          .sort((a: any, b: any) => {
-            console.log("a", a)
-            if (a.date && b.date) {
-              const dateA = new Date(a.date);
-              const dateB = new Date(b.date);
-              console.log("dateA", dateA)
-              console.log("dateB", dateB)
-              return dateA.getTime() - dateB.getTime();
-            }
-            return 0;
-          });
-
-        const chartDataArray = sortedData.map((item: { [x: string]: string; }) => {
-          const values = Object.entries(item)
-          const date = new Date(values[0][1]);
-          const day = date.toLocaleDateString("en-US", { weekday: "short" }).substring(0, 2);
-
-          const lsk = Number(Number(convertBeddowsToLSK(String(values[2][1]))).toFixed(2))
-          return {
-            [labelKey || values[0][0]]: day,
-            [valueKey || values[1][0]]: values[1][1],
-            [valueKey2|| values[2][0]]: lsk,
-          };
+        const sortedData = extractedData.sort((a: any, b: any) => {
+          console.log("a", a);
+          if (a.date && b.date) {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            console.log("dateA", dateA);
+            console.log("dateB", dateB);
+            return dateA.getTime() - dateB.getTime();
+          }
+          return 0;
         });
-        console.log("sortedData", sortedData)
-        setChartData(chartDataArray)
+
+        const chartDataArray = sortedData.map(
+          (item: { [x: string]: string }) => {
+            const values = Object.entries(item);
+            const date = new Date(values[0][1]);
+            const day = date
+              .toLocaleDateString("en-US", { weekday: "short" })
+              .substring(0, 2);
+
+            const lsk = Number(
+              Number(convertBeddowsToLSK(String(values[2][1]))).toFixed(2),
+            );
+            return {
+              [labelKey || values[0][0]]: day,
+              [valueKey || values[1][0]]: values[1][1],
+              [valueKey2 || values[2][0]]: lsk,
+            };
+          },
+        );
+        console.log("sortedData", sortedData);
+        setChartData(chartDataArray);
       }
     }
 
     //console.log("keyLabel", labelKey)
-    console.log("chartData", chartData)
+    console.log("chartData", chartData);
   }, [queryData]);
 
   const getValueByNestedIndex = (data: any, keys: string[]): any => {
@@ -116,9 +129,10 @@ export const ChartSlice = ({
   };
 
   if (chartData) {
-      if(chartType) {
-        const Component = chartList[chartType]
-        return <Component
+    if (chartType) {
+      const Component = chartList[chartType];
+      return (
+        <Component
           chartData={chartData}
           className={className}
           height={height}
@@ -127,10 +141,11 @@ export const ChartSlice = ({
           title={chartTitle}
           valueKey={valueKey || "valueKey"}
         />
-      }
+      );
+    }
 
-      return <div />
+    return <div />;
   }
 
-  return <div />
-}
+  return <div />;
+};

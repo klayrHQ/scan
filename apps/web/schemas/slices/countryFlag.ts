@@ -1,4 +1,3 @@
-
 export const countryFlag = {
   name: "countryFlag",
   type: "document",
@@ -14,5 +13,5 @@ export const countryFlag = {
       type: "string",
       title: "Key",
     },
-  ]
-}
+  ],
+};

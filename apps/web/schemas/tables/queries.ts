@@ -1,5 +1,5 @@
-import {Methods} from "./methods";
-import {UpdateOn} from "../slices/table";
+import { Methods } from "./methods";
+import { UpdateOn } from "../slices/table";
 
 export default {
   name: "query",
@@ -16,8 +16,8 @@ export default {
       type: "string",
       title: "Method",
       options: {
-        list: [...Methods]
-      }
+        list: [...Methods],
+      },
     },
     {
       name: "serviceType",
@@ -25,14 +25,14 @@ export default {
       title: "Service",
       options: {
         list: [
-          { title: "Klayr Service", value: "lisk-service"},
-          { title: "Liskscan Usernames", value: "liskscan-usernames"},
-          { title: "Liskscan Knowledge", value: "liskscan-knowledge"},
-          { title: "Liskscan Votes", value: "liskscan-votes"},
-          { title: "Liskscan Avatars", value: "liskscan-avatars"},
-          { title: "Liskscan Favorites", value: "liskscan-favorites"},
-          { title: "Liskscan Stats", value: "liskscan-stats"},
-        ]
+          { title: "Klayr Service", value: "lisk-service" },
+          { title: "Liskscan Usernames", value: "liskscan-usernames" },
+          { title: "Liskscan Knowledge", value: "liskscan-knowledge" },
+          { title: "Liskscan Votes", value: "liskscan-votes" },
+          { title: "Liskscan Avatars", value: "liskscan-avatars" },
+          { title: "Liskscan Favorites", value: "liskscan-favorites" },
+          { title: "Liskscan Stats", value: "liskscan-stats" },
+        ],
       },
     },
     {
@@ -87,7 +87,7 @@ export default {
               name: "calculation",
               type: "string",
               title: "Calculation",
-              description: "eg. %d / %d * 100"
+              description: "eg. %d / %d * 100",
             },
             {
               name: "keys",
@@ -97,12 +97,12 @@ export default {
                 {
                   type: "string",
                   name: "key",
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       name: "updateOn",

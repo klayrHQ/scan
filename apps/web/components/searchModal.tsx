@@ -96,8 +96,8 @@ export const SearchModal = ({
           setOpen,
           menuCloseFunction,
           searchValue,
-          filter
-        )
+          filter,
+        ),
       );
     };
     getResults();

@@ -9,7 +9,7 @@ function onPublicAccessOnly() {
 if (!projectId || !dataset) {
   throw new Error(
     `Missing projectId or dataset. Check your sanity.json or .env`,
-  )
+  );
 }
 
 export const usePreview = definePreview({

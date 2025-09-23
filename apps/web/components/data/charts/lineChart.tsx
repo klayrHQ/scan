@@ -34,7 +34,7 @@ export const LineChart = ({
         panX: false,
         panY: false,
         pinchZoomX: false,
-      })
+      }),
     );
 
     // Add cursor
@@ -82,13 +82,13 @@ export const LineChart = ({
         renderer: am5xy.AxisRendererX.new(root, {
           stroke: am5.color("#335ed4"),
         }),
-      })
+      }),
     );
 
     let yAxis = chart.yAxes.push(
       am5xy.ValueAxis.new(root, {
         renderer: am5xy.AxisRendererY.new(root, {}),
-      })
+      }),
     );
 
     // Add series
@@ -103,7 +103,7 @@ export const LineChart = ({
         tooltip: am5.Tooltip.new(root, {
           labelText: `${labelKey}: {valueY}\n${valueKey}: {date.formatDate("dd-MM-YYYY")}`,
         }),
-      })
+      }),
     );
 
     series.fills.template.setAll({

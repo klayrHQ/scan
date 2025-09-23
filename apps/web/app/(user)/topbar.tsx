@@ -58,7 +58,7 @@ export const TopBarLayout = ({
 
   useEffect(() => {
     updateAppState(
-      apps?.data?.find(({ chainID }) => chainID === status?.data?.chainID)
+      apps?.data?.find(({ chainID }) => chainID === status?.data?.chainID),
     );
   }, [apps, status?.data?.chainID]);
 
@@ -115,7 +115,7 @@ export const TopBarLayout = ({
                             {
                               addSuffix: true,
                               includeSeconds: true,
-                            }
+                            },
                           )}`
                         : ""
                     }`
@@ -210,7 +210,7 @@ export const TopBarLayout = ({
             <Link href={item.link} key={item._key} prefetch={false}>
               <MenuItem label={item.label} link={item.link} />
             </Link>
-          )
+          ),
         )}
         menuItemsRight={[
           <FavouritesModal key={"favs"} />,

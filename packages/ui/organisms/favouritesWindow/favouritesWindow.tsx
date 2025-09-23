@@ -1,11 +1,11 @@
-import React, {ReactNode} from "react"
+import React, { ReactNode } from "react";
 
-import {Favourites} from "../favourites/favourites";
+import { Favourites } from "../favourites/favourites";
 
 export interface FavouritesWindowProps {
-  onClick: (address: string) => void
-  favourites?: Array<{username?: string, address: string, balance: string}>
-  unFavourite: (address: string) => void
+  onClick: (address: string) => void;
+  favourites?: Array<{ username?: string; address: string; balance: string }>;
+  unFavourite: (address: string) => void;
 }
 
 export const FavouritesWindow = ({
@@ -13,7 +13,6 @@ export const FavouritesWindow = ({
   favourites,
   unFavourite,
 }: FavouritesWindowProps) => {
-
   return (
     <div className="rounded shadow-1 overflow-hidden flex flex-col divider divide-y-2 bg-background w-full">
       <div className="px-6 mt-2 py-4 flex">
@@ -27,5 +26,5 @@ export const FavouritesWindow = ({
         xOnClick={unFavourite}
       />
     </div>
-  )
-}
+  );
+};

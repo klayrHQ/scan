@@ -1,8 +1,14 @@
 "use client";
-import React, {cloneElement, FC, Fragment, ReactElement, ReactNode} from "react";
+import React, {
+  cloneElement,
+  FC,
+  Fragment,
+  ReactElement,
+  ReactNode,
+} from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import {cls} from "../../assets/utils";
-import {cva} from "class-variance-authority";
+import { cls } from "../../assets/utils";
+import { cva } from "class-variance-authority";
 
 interface ModalFullHeightProps {
   width?: string;
@@ -10,27 +16,24 @@ interface ModalFullHeightProps {
   children?: ReactNode;
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  closeButton?: ReactElement
-  hideBackdrop?: boolean
-  animation?: "fade" | "fromRight" | "fromLeft" | "fromTop" | "fromBottom"
-  containerClassname?: string
+  closeButton?: ReactElement;
+  hideBackdrop?: boolean;
+  animation?: "fade" | "fromRight" | "fromLeft" | "fromTop" | "fromBottom";
+  containerClassname?: string;
 }
 
-const animations = cva(
-  [],
-  {
-    variants: {
-      animation: {
-        fade: "opacity-0",
-        fromRight: "translate-x-full",
-        fromLeft: "-translate-x-full",
-        fromBottom: "translate-y-full",
-        fromTop: "-translate-y-full",
-        undefined: "hidden",
-      },
+const animations = cva([], {
+  variants: {
+    animation: {
+      fade: "opacity-0",
+      fromRight: "translate-x-full",
+      fromLeft: "-translate-x-full",
+      fromBottom: "translate-y-full",
+      fromTop: "-translate-y-full",
+      undefined: "hidden",
     },
   },
-)
+});
 
 export const ModalFullHeight: FC<ModalFullHeightProps> = ({
   children,
@@ -40,10 +43,9 @@ export const ModalFullHeight: FC<ModalFullHeightProps> = ({
   setIsOpen,
   closeButton,
   hideBackdrop,
-  animation= "fade",
+  animation = "fade",
   containerClassname,
 }) => {
-
   return (
     <div className={containerClassname}>
       <div className="inset-0 flex items-center justify-center">
@@ -70,8 +72,7 @@ export const ModalFullHeight: FC<ModalFullHeightProps> = ({
               setIsOpen(false);
             }}
           >
-            {
-              !hideBackdrop &&
+            {!hideBackdrop && (
               <Transition.Child
                 as={Fragment}
                 enter="ease-in duration-300"
@@ -86,18 +87,18 @@ export const ModalFullHeight: FC<ModalFullHeightProps> = ({
                   onClick={() => setIsOpen(false)}
                 />
               </Transition.Child>
-            }
+            )}
             <Transition.Child
               as={Fragment}
               enter={`ease-in ${animation === "fade" ? "duration-100" : "duration-300"}`}
               enterFrom={animations({
-                animation
+                animation,
               })}
               enterTo=""
               leave={`ease-in ${animation === "fade" ? "duration-100" : "duration-300"}`}
               leaveFrom=""
               leaveTo={animations({
-                animation
+                animation,
               })}
             >
               <Dialog.Panel
@@ -113,16 +114,14 @@ export const ModalFullHeight: FC<ModalFullHeightProps> = ({
                 ].join(" ")}
               >
                 {children}
-                {
-                  closeButton &&
-                    cloneElement(closeButton, {
-                      className: cls([
-                        closeButton.props.className,
-                        "absolute top-3 right-0 z-50"
-                      ]),
-                      onClick: () => setIsOpen(false),
-                    })
-                }
+                {closeButton &&
+                  cloneElement(closeButton, {
+                    className: cls([
+                      closeButton.props.className,
+                      "absolute top-3 right-0 z-50",
+                    ]),
+                    onClick: () => setIsOpen(false),
+                  })}
               </Dialog.Panel>
             </Transition.Child>
           </Dialog>

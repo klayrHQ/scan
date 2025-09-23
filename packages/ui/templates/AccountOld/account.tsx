@@ -1,9 +1,9 @@
 import React from "react";
-import {Table} from "../../organisms/table/table";
-import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
-import {AccountDetailsOld} from "../../organisms/accountDetailsOld/accountDetailsOld";
-import {Footer} from "../../organisms/footer/footer";
-import {Container} from "../../atoms/container/container";
+import { Table } from "../../organisms/table/table";
+import { AccountHeader } from "../../organisms/accountHeader/accountHeader";
+import { AccountDetailsOld } from "../../organisms/accountDetailsOld/accountDetailsOld";
+import { Footer } from "../../organisms/footer/footer";
+import { Container } from "../../atoms/container/container";
 import {
   footerData,
   headcols,
@@ -13,23 +13,23 @@ import {
   tabletHeadcols,
   tabletRows,
 } from "../../assets/mockupData/mockupData";
-import {Grid} from "../../atoms/grid/grid";
-import {HeaderMockup} from "../../organisms/header/header.stories";
+import { Grid } from "../../atoms/grid/grid";
+import { HeaderMockup } from "../../organisms/header/header.stories";
 
 interface AccountProps {
-  account: any,
-  menu: {label: string, link: string}[],
-  favourites: any,
-  saveFavourite: (address: string, balance: string, username?: string) => void
-  unFavourite: (address: string) => void
-  getAddressFromLisk32Address: any
-  compactString: Function
-  clean: Function
-  setInput: Function
-  legacy: any
-  copyNoteText: string
-  setCopyNoteText: Function
-  transactionsCount: {in: number, out: number}
+  account: any;
+  menu: { label: string; link: string }[];
+  favourites: any;
+  saveFavourite: (address: string, balance: string, username?: string) => void;
+  unFavourite: (address: string) => void;
+  getAddressFromLisk32Address: any;
+  compactString: Function;
+  clean: Function;
+  setInput: Function;
+  legacy: any;
+  copyNoteText: string;
+  setCopyNoteText: Function;
+  transactionsCount: { in: number; out: number };
 }
 
 export const AccountOld = ({
@@ -41,7 +41,6 @@ export const AccountOld = ({
   copyNoteText,
   setCopyNoteText,
 }: AccountProps) => {
-
   return (
     <Container className={"bg-background"}>
       {/* @ts-ignore*/}
@@ -85,20 +84,18 @@ export const AccountOld = ({
           <p className="text-base text-onBackgroundLow font-bold mb-2">
             &copy;{new Date().getFullYear()} by{" "}
             <a
-            className={"text-secondary"}
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://moosty.com"
+              className={"text-secondary"}
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://moosty.com"
             >
-            MOOSTY
+              MOOSTY
             </a>
             <span className={"text-onBackgroundMedium mx-2"}>I|I</span>
-            <span className={"text-onBackgroundLow"}>
-            -
-            </span>
+            <span className={"text-onBackgroundLow"}>-</span>
           </p>
         }
       />
     </Container>
-  )
-}
+  );
+};

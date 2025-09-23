@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import {cls, Typography, Paper, Sizes} from "../..";
+import { cls, Typography, Paper, Sizes } from "../..";
 
 interface KeyValueRowProps {
   label?: ReactNode | string;
@@ -47,8 +47,7 @@ export const KeyValueRow = ({
           : "flex md:flex-grow justify-between w-full text-left",
       ])}
     >
-      {
-        typeof label === "string" ?
+      {typeof label === "string" ? (
         <Typography
           tag={"span"}
           className={cls(["capitalize"])}
@@ -57,11 +56,10 @@ export const KeyValueRow = ({
         >
           {label}
         </Typography>
-          :
-          label
-      }
-      {
-        typeof value === "string" ?
+      ) : (
+        label
+      )}
+      {typeof value === "string" ? (
         <Typography
           tag={"span"}
           className={cls([
@@ -74,9 +72,9 @@ export const KeyValueRow = ({
         >
           {value}
         </Typography>
-          :
-          value
-      }
+      ) : (
+        value
+      )}
     </div>
     {icon && <div className="hidden md:block w-8">{icon}</div>}
   </Paper>

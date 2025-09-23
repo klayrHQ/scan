@@ -3,7 +3,7 @@ import { Container, Grid } from "ui";
 import { FilterButtons } from "ui/atoms/filterButtons/filterButtons";
 import { StakeCalculator } from "../../../../components/validators/stakeCalculator";
 
-export const revalidate = 3600 // revalidate at most every hour
+export const revalidate = 3600; // revalidate at most every hour
 
 const layout = async ({ children, params }: any) => {
   // const result = (await getAllData([
@@ -22,15 +22,13 @@ const layout = async ({ children, params }: any) => {
   // eslint-disable-next-line turbo/no-undeclared-env-vars
   const network = process.env.NEXT_PUBLIC_NETWORK;
   const generatorsResponse = await fetch(
-    `https://cached-${
-      network || "mainnet"
-    }-service.klayr.xyz/generators`, { next: { revalidate: 300 } }
+    `https://cached-${network || "mainnet"}-service.klayr.xyz/generators`,
+    { next: { revalidate: 300 } },
   );
   const generators = await generatorsResponse.json();
   const statsResponse = await fetch(
-    `https://cached-${
-      network || "mainnet"
-    }-service.klayr.xyz/validators/stats`, { next: { revalidate: 3600 } }
+    `https://cached-${network || "mainnet"}-service.klayr.xyz/validators/stats`,
+    { next: { revalidate: 3600 } },
   );
   const stats = (await statsResponse.json()) as {
     standby: number;

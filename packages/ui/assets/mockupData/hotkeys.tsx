@@ -4,7 +4,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowUpIcon,
-} from "@heroicons/react/24/solid"
+} from "@heroicons/react/24/solid";
 
 export const hotKeysCombos = [
   {
@@ -159,10 +159,10 @@ export const hotKeysCombos = [
     ],
   },
 ] as {
-  category: string
+  category: string;
   keys: {
-    id: number
-    label: string
-    keys: string[]
-  }[]
-}[]
+    id: number;
+    label: string;
+    keys: string[];
+  }[];
+}[];

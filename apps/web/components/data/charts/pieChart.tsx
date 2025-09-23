@@ -35,7 +35,7 @@ export const PieChart = ({
         categoryField: labelKey,
         valueField: valueKey,
         alignLabels: false,
-      })
+      }),
     );
     series.data.setAll(chartData);
 

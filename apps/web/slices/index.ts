@@ -11,8 +11,8 @@ import { DividerSlice } from "./divider";
 import { ValidatorTabs } from "./validatorsTabs";
 import { JsonItemSlice } from "./jsonItem";
 import { ChartSlice } from "./chart";
-import {NewsGrid} from "./newsGrid";
-import {CountryFlag} from "./countryFlag";
+import { NewsGrid } from "./newsGrid";
+import { CountryFlag } from "./countryFlag";
 
 export const Slices = {
   titleBox: TitleBoxSlice,

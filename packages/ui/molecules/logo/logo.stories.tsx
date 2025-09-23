@@ -10,13 +10,11 @@ export default {
   argTypes: {
     color: { control: "text" },
     className: { control: "text" },
-    fullWidth: { control: "boolean", defaultValue: false }
+    fullWidth: { control: "boolean", defaultValue: false },
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;

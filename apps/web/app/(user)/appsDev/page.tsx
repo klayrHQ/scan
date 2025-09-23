@@ -1,10 +1,7 @@
-import {Apps} from "../../../components/apps/apps";
+import { Apps } from "../../../components/apps/apps";
 
 const Page = async () => {
+  return <Apps />;
+};
 
-  return (
-    <Apps />
-  )
-}
-
-export default Page
+export default Page;

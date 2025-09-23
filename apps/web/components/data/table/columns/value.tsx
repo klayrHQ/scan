@@ -54,12 +54,21 @@ export const ValueColumn = ({
       return <ValueFormatter value={"-"} />;
     }
     if (row?.moduleCommand === "pos:claimRewards") {
-      return row?.params?.amount ? <ValueFormatter format={"currency"} value={row?.params.amount} /> : <ValueFormatter value={"-"} />;
+      return row?.params?.amount ? (
+        <ValueFormatter format={"currency"} value={row?.params.amount} />
+      ) : (
+        <ValueFormatter value={"-"} />
+      );
     }
     if (row?.moduleCommand === "pos:stake") {
       return (
-        <div className={stakesSumNumber > 0 ? "!text-success items-center" :
-            "!text-error items-center"}>
+        <div
+          className={
+            stakesSumNumber > 0
+              ? "!text-success items-center"
+              : "!text-error items-center"
+          }
+        >
           {stakesSum !== "-" && (
             <ValueFormatter format={"currency"} value={stakesSum} />
           )}
@@ -76,7 +85,8 @@ export const ValueColumn = ({
     }
     if (row?.moduleCommand === "token:transfer") {
       return (
-        <ValueFormatter  format={"currency"}
+        <ValueFormatter
+          format={"currency"}
           value={row?.params.amount}
           {...row?.params?.format}
         />

@@ -12,14 +12,10 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -29,7 +25,7 @@ export const Primary: ComponentMeta<typeof Avatar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   address: "lsk00000000111111222222",
-  username: true
+  username: true,
 };
 
 export const NoUsername: ComponentMeta<typeof Avatar> = Template.bind({});

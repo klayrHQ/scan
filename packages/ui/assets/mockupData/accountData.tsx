@@ -8,7 +8,7 @@ export const accountDetails = {
   nonce: "adsfg",
   sent: 12,
   received: 12,
-}
+};
 
 export const accountHeader = {
   address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
@@ -21,7 +21,7 @@ export const accountHeader = {
   rank: 2010,
   status: "non-eligible",
   description: "test",
-}
+};
 
 export const account = {
   address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
@@ -39,4 +39,4 @@ export const account = {
   sentVotes: "12",
   rank: 2010,
   description: "test",
-}
+};

@@ -1,15 +1,15 @@
-import React from "react"
+import React from "react";
 import { Avatar } from "../../atoms/avatar/avatar";
-import {compactString} from "../../assets/utils";
-import {Popover} from "@headlessui/react";
-import {ValueFormatter} from "../../atoms/valueFormatter/valueFormatter";
-import {Typography} from "../../atoms";
-import {Divider} from "../../atoms/divider/divider";
+import { compactString } from "../../assets/utils";
+import { Popover } from "@headlessui/react";
+import { ValueFormatter } from "../../atoms/valueFormatter/valueFormatter";
+import { Typography } from "../../atoms";
+import { Divider } from "../../atoms/divider/divider";
 
 interface RecentSearchesProps {
-  onClick: (address?: string, username?: string) => void
-  className?: string
-  recentSearches?: Array<{address: string, username?: string}>
+  onClick: (address?: string, username?: string) => void;
+  className?: string;
+  recentSearches?: Array<{ address: string; username?: string }>;
 }
 
 export const RecentSearches = ({
@@ -17,31 +17,53 @@ export const RecentSearches = ({
   className,
   recentSearches,
 }: RecentSearchesProps) => {
-
   return (
-    <div className={`text-onBackgroundHigh px-2 pb-2 font-medium mt-2 ${className ? className : ""}`}>
-        <Divider className={"opacity-10"} borderStyle={"solid"} />
-      <Typography size={"body"} bold tag={"span"} className="text-onSurfaceHigh ">Recent Searches</Typography>
+    <div
+      className={`text-onBackgroundHigh px-2 pb-2 font-medium mt-2 ${className ? className : ""}`}
+    >
+      <Divider className={"opacity-10"} borderStyle={"solid"} />
+      <Typography
+        size={"body"}
+        bold
+        tag={"span"}
+        className="text-onSurfaceHigh "
+      >
+        Recent Searches
+      </Typography>
       <div className="grid grid-cols-1 md:grid-rows-1 md:grid-cols-3 py-2 divider-1 gap-4">
         {recentSearches?.map((recentSearch, index) => {
           return (
-            recentSearch &&
-            <Popover.Button
-              as={"span"}
-              className="cursor-pointer text-onSurfaceHigh flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-2 rounded transition capitalize items-center"
-              key={`last-search-${index}`}
-              onClick={() => onClick(recentSearch.address, recentSearch.username)}
-            >
-              <Avatar className="mr-2" address={recentSearch.address} size={20}/>
-              {
-                recentSearch.username && recentSearch.username !== recentSearch.address ?
-                  <Typography size={"subBody"} tag={"span"}>{recentSearch.username}</Typography> :
-                  <ValueFormatter value={recentSearch.address} type={"string"} format={"shortAddress"} />
-              }
-            </Popover.Button>
-          )
+            recentSearch && (
+              <Popover.Button
+                as={"span"}
+                className="cursor-pointer text-onSurfaceHigh flex flex-row hover:bg-surface-2 bg-surface-1 px-2 py-2 rounded transition capitalize items-center"
+                key={`last-search-${index}`}
+                onClick={() =>
+                  onClick(recentSearch.address, recentSearch.username)
+                }
+              >
+                <Avatar
+                  className="mr-2"
+                  address={recentSearch.address}
+                  size={20}
+                />
+                {recentSearch.username &&
+                recentSearch.username !== recentSearch.address ? (
+                  <Typography size={"subBody"} tag={"span"}>
+                    {recentSearch.username}
+                  </Typography>
+                ) : (
+                  <ValueFormatter
+                    value={recentSearch.address}
+                    type={"string"}
+                    format={"shortAddress"}
+                  />
+                )}
+              </Popover.Button>
+            )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};

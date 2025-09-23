@@ -1,15 +1,12 @@
-import React, { FC } from "react"
-import {Typography} from "../typography/typography";
+import React, { FC } from "react";
+import { Typography } from "../typography/typography";
 
 interface HotKeyProps {
-  hotKey: string | any
-  isMacOs?: boolean
+  hotKey: string | any;
+  isMacOs?: boolean;
 }
 
-export const HotKey: FC<HotKeyProps> = ({
-  hotKey,
-  isMacOs,
-}) => {
+export const HotKey: FC<HotKeyProps> = ({ hotKey, isMacOs }) => {
   return (
     <div
       className={[
@@ -19,7 +16,9 @@ export const HotKey: FC<HotKeyProps> = ({
         "bg-gray-600 px-3 py-1 font-bold",
       ].join(" ")}
     >
-      <Typography tag={"span"}>{hotKey === "ctrl" ? (isMacOs ? "cmd" : "ctrl") : hotKey}</Typography>
+      <Typography tag={"span"}>
+        {hotKey === "ctrl" ? (isMacOs ? "cmd" : "ctrl") : hotKey}
+      </Typography>
     </div>
-  )
-}
+  );
+};

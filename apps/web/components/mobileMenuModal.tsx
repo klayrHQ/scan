@@ -1,25 +1,22 @@
-"use client"
-import React, {useState} from "react";
-import {ModalFullHeight} from "ui/atoms/modalFullHeight/modalFullHeight";
-import {cls, Grid, InfoBar, Tooltip} from "ui";
-import {
-  MoonIcon,
-  SunIcon,
-} from "@heroicons/react/24/solid";
-import {MobileMenu} from "ui/organisms/mobileMenu/mobileMenu";
-import {FavouritesModal} from "./favouritesModal";
-import {SearchModal} from "./searchModal";
-import {MenuItem} from "./layout/menuItem";
+"use client";
+import React, { useState } from "react";
+import { ModalFullHeight } from "ui/atoms/modalFullHeight/modalFullHeight";
+import { cls, Grid, InfoBar, Tooltip } from "ui";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import { MobileMenu } from "ui/organisms/mobileMenu/mobileMenu";
+import { FavouritesModal } from "./favouritesModal";
+import { SearchModal } from "./searchModal";
+import { MenuItem } from "./layout/menuItem";
 import Link from "next/link";
-import {formatDistance} from "date-fns";
-import {KeyValueKPI} from "./data/keyValueKPI";
-import {BlocksResponse} from "@liskscan/lisk-service-client/lib/types/api/blocks";
-import {switchThemeMode} from "../app/(user)/theme";
-import {InfoBarKPISType} from "../lib/queries/getInfoBarKPIS";
-import {IndexStatusResponse} from "@liskscan/lisk-service-client/lib/types";
-import {IconButton} from "ui/atoms/iconButton/iconButton";
-import {KPICarousel} from "./data/KPICarousel";
-import {SettingsModal} from "./settings/settingsModal";
+import { formatDistance } from "date-fns";
+import { KeyValueKPI } from "./data/keyValueKPI";
+import { BlocksResponse } from "@liskscan/lisk-service-client/lib/types/api/blocks";
+import { switchThemeMode } from "../app/(user)/theme";
+import { InfoBarKPISType } from "../lib/queries/getInfoBarKPIS";
+import { IndexStatusResponse } from "@liskscan/lisk-service-client/lib/types";
+import { IconButton } from "ui/atoms/iconButton/iconButton";
+import { KPICarousel } from "./data/KPICarousel";
+import { SettingsModal } from "./settings/settingsModal";
 
 export const MobileMenuModal = ({
   menuItems,
@@ -35,28 +32,28 @@ export const MobileMenuModal = ({
   currentKPI,
   handleNextClick,
 }: {
-  menuItems: Array<any>
-  connected: number | undefined
-  lastUpdate: number | undefined
-  kpis: InfoBarKPISType[]
-  index: IndexStatusResponse
-  appState: any
-  events: any
-  status: any
-  themeMode: string
-  updateThemeMode: (themeMode: "dark" | "light") => void
-  currentKPI: InfoBarKPISType
-  handleNextClick: () => void
+  menuItems: Array<any>;
+  connected: number | undefined;
+  lastUpdate: number | undefined;
+  kpis: InfoBarKPISType[];
+  index: IndexStatusResponse;
+  appState: any;
+  events: any;
+  status: any;
+  themeMode: string;
+  updateThemeMode: (themeMode: "dark" | "light") => void;
+  currentKPI: InfoBarKPISType;
+  handleNextClick: () => void;
 }) => {
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
 
   const extractSubmenu = (items: Array<any>) => {
-    let tempSubMenu: any[] = []
+    let tempSubMenu: any[] = [];
     items.map((item) => {
       if (item.items) {
         item.items.map((subItem: any) => {
           tempSubMenu.push(subItem);
-        })
+        });
       }
     });
 
@@ -98,17 +95,17 @@ export const MobileMenuModal = ({
               label={
                 connected
                   ? `Connection established in ${connected}ms${
-                    lastUpdate
-                      ? `, last update was: ${formatDistance(
-                        new Date(lastUpdate),
-                        new Date(),
-                        {
-                          addSuffix: true,
-                          includeSeconds: true,
-                        }
-                      )}`
-                      : ""
-                  }`
+                      lastUpdate
+                        ? `, last update was: ${formatDistance(
+                            new Date(lastUpdate),
+                            new Date(),
+                            {
+                              addSuffix: true,
+                              includeSeconds: true,
+                            },
+                          )}`
+                        : ""
+                    }`
                   : "Connecting to service"
               }
             >
@@ -120,7 +117,7 @@ export const MobileMenuModal = ({
                 ])}
               />
             </Tooltip>
-            {kpis &&
+            {kpis && (
               <>
                 {kpis?.map(({ key, label, backup, _key }) => (
                   <div className={"hidden md:inline"} key={key}>
@@ -129,7 +126,9 @@ export const MobileMenuModal = ({
                       dottedKey={key}
                       label={label}
                       backupKey={backup}
-                      lastBlock={events["new.block"] as BlocksResponse["data"][0]}
+                      lastBlock={
+                        events["new.block"] as BlocksResponse["data"][0]
+                      }
                       data={{
                         index,
                         status,
@@ -139,17 +138,17 @@ export const MobileMenuModal = ({
                     />
                   </div>
                 ))}
-                  <KPICarousel
-                    kpis={kpis}
-                    index={index}
-                    appState={appState}
-                    events={events}
-                    status={status}
-                    currentKPI={currentKPI}
-                    handleNextClick={handleNextClick}
-                  />
+                <KPICarousel
+                  kpis={kpis}
+                  index={index}
+                  appState={appState}
+                  events={events}
+                  status={status}
+                  currentKPI={currentKPI}
+                  handleNextClick={handleNextClick}
+                />
               </>
-            }
+            )}
           </Grid>,
         ]}
         infoItemsRight={[
@@ -187,28 +186,44 @@ export const MobileMenuModal = ({
         ]}
       />
       <MobileMenu
-        menuItems={
-          menuItems.map(item =>
-            !item.items &&
-            <Link className={"text-onSurfaceHigh"} href={item.link} key={item._key} onClick={() => setOpen(false)} prefetch={false}>
-              <MenuItem label={item.label} link={item.link} />
-            </Link>
-          )
-        }
-        subMenu={
-          submenu.map(item =>
-            <Link className={"text-onSurfaceLow"} href={item.link} key={item._key} onClick={() => setOpen(false)} prefetch={false}>
-              <MenuItem label={item.label} link={item.link} />
-            </Link>
-          )
-        }
+        menuItems={menuItems.map(
+          (item) =>
+            !item.items && (
+              <Link
+                className={"text-onSurfaceHigh"}
+                href={item.link}
+                key={item._key}
+                onClick={() => setOpen(false)}
+                prefetch={false}
+              >
+                <MenuItem label={item.label} link={item.link} />
+              </Link>
+            ),
+        )}
+        subMenu={submenu.map((item) => (
+          <Link
+            className={"text-onSurfaceLow"}
+            href={item.link}
+            key={item._key}
+            onClick={() => setOpen(false)}
+            prefetch={false}
+          >
+            <MenuItem label={item.label} link={item.link} />
+          </Link>
+        ))}
         menuItemsTop={[
           <div className="w-app mx-auto flex justify-end mb-3">
-            <SearchModal menuCloseFunction={() => setOpen(false)} mobile={true} />
+            <SearchModal
+              menuCloseFunction={() => setOpen(false)}
+              mobile={true}
+            />
           </div>,
           <div className="w-app mx-auto flex justify-end mb-3">
-            <FavouritesModal menuCloseFunction={() => setOpen(false)} mobile={true} />
-          </div>
+            <FavouritesModal
+              menuCloseFunction={() => setOpen(false)}
+              mobile={true}
+            />
+          </div>,
         ]}
         closeButton={
           <IconButton
@@ -224,5 +239,5 @@ export const MobileMenuModal = ({
         }
       />
     </ModalFullHeight>
-  )
-}
+  );
+};

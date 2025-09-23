@@ -1,20 +1,20 @@
-"use client"
-import {useAddressConverter} from "../hooks/AddressConverter";
-import {useEffect, useState} from "react";
-import {AccountDataType} from "@moosty/lisk-connection-provider";
-import {getData} from "../lib/sanity.service";
+"use client";
+import { useAddressConverter } from "../hooks/AddressConverter";
+import { useEffect, useState } from "react";
+import { AccountDataType } from "@moosty/lisk-connection-provider";
+import { getData } from "../lib/sanity.service";
 import axios from "axios";
-import {convertBeddowsToKLY} from "../lisk-client";
+import { convertBeddowsToKLY } from "../lisk-client";
 import Link from "next/link";
-import {Grid, KeyValueRow, Typography, ValueFormatter} from "ui";
-import {Input} from "ui/atoms/input/input";
+import { Grid, KeyValueRow, Typography, ValueFormatter } from "ui";
+import { Input } from "ui/atoms/input/input";
 
 export const AccountAnalyzer = () => {
   const { publicKey, klayr32, address, legacy, setInput, error } =
-    useAddressConverter()
-  const [balance, setBalance] = useState<string>()
-  const [accountStatus, setAccountStatus] = useState<any>("")
-  const [newFundOwner, setNewFundOwner] = useState<AccountDataType>()
+    useAddressConverter();
+  const [balance, setBalance] = useState<string>();
+  const [accountStatus, setAccountStatus] = useState<any>("");
+  const [newFundOwner, setNewFundOwner] = useState<AccountDataType>();
 
   useEffect(() => {
     console.log(
@@ -28,52 +28,69 @@ export const AccountAnalyzer = () => {
       klayr32,
       "error",
       error,
-    )
+    );
     if (klayr32 || legacy) {
       const getAccount = async () => {
-        setNewFundOwner({} as AccountDataType)
-        const { data } = (await getData("lisk-service", "get.token.balances", {
+        setNewFundOwner({} as AccountDataType);
+        const { data } = await getData("lisk-service", "get.token.balances", {
           address: klayr32,
           limit: 1,
-        }))
-        console.log(data)
+        });
+        console.log(data);
         if (data?.length > 0) {
-          setBalance(data?.[0]?.availableBalance)
-          setAccountStatus("ok!")
+          setBalance(data?.[0]?.availableBalance);
+          setAccountStatus("ok!");
         } else {
           if (legacy) {
             const getLegacyAccount = async () => {
               const { data } = await axios(
                 `https://legacy-explorer.lisk.com/api/getAccount?address=${legacy}`,
-              )
+              );
               if (publicKey && data.publicKey && data.publicKey !== publicKey) {
-                setAccountStatus("This account is collision attacked")
+                setAccountStatus("This account is collision attacked");
                 const getNewFundOwner = async () => {
                   const accountData = (await getData(
                     "lisk-service",
                     "get.generators",
                     { publicKey: data?.publicKey },
-                  )) as { data?: AccountDataType[] }
+                  )) as { data?: AccountDataType[] };
                   if (accountData?.data?.[0]?.summary) {
-                    setNewFundOwner(accountData.data[0])
+                    setNewFundOwner(accountData.data[0]);
                   }
-                }
-                getNewFundOwner()
+                };
+                getNewFundOwner();
               }
-              const accountResponse = await fetch(`https://api.liskscan.com/reclaimed/legacy`)
-              const account = (await accountResponse.json()).find((account: any) => account.legacyAddress === legacy)
+              const accountResponse = await fetch(
+                `https://api.liskscan.com/reclaimed/legacy`,
+              );
+              const account = (await accountResponse.json()).find(
+                (account: any) => account.legacyAddress === legacy,
+              );
               if (account) {
                 setAccountStatus(
                   <Typography tag={"p"} className={"text-right"}>
-                    <span>{`This account has reclaimed ${convertBeddowsToKLY(account.amount)} KLY`}</span><br />
-                    {"By "}<Link href={`/account/${account.address}`}>{account.address}</Link>
+                    <span>{`This account has reclaimed ${convertBeddowsToKLY(account.amount)} KLY`}</span>
+                    <br />
+                    {"By "}
+                    <Link href={`/account/${account.address}`}>
+                      {account.address}
+                    </Link>
                   </Typography>,
-                )
+                );
               }
               if (!account && parseInt(data.balance) > 0 && !data.publicKey) {
                 setAccountStatus(
-                  <><Typography tag={"span"}>{" This account can reclaim "}</Typography><ValueFormatter value={data?.balance} type={"beddows"} format={"currency"} /></>
-                )
+                  <>
+                    <Typography tag={"span"}>
+                      {" This account can reclaim "}
+                    </Typography>
+                    <ValueFormatter
+                      value={data?.balance}
+                      type={"beddows"}
+                      format={"currency"}
+                    />
+                  </>,
+                );
               }
               if (data.publicKey && !publicKey) {
                 const getNewFundOwner = async () => {
@@ -81,45 +98,56 @@ export const AccountAnalyzer = () => {
                     "lisk-service",
                     "get.generators",
                     { publicKey: data?.publicKey },
-                  )) as { data?: AccountDataType[] }
+                  )) as { data?: AccountDataType[] };
                   if (accountData?.data?.[0]?.summary) {
                     if (
                       klayr32 &&
                       accountData.data[0]?.summary?.address !== klayr32
                     ) {
-                      setAccountStatus("This account is collision attacked")
+                      setAccountStatus("This account is collision attacked");
                     } else {
-                      setAccountStatus(<Typography tag={"p"}><b>{"unknown"}</b>{" - please enter your public key or new address"}</Typography>)
+                      setAccountStatus(
+                        <Typography tag={"p"}>
+                          <b>{"unknown"}</b>
+                          {" - please enter your public key or new address"}
+                        </Typography>,
+                      );
                     }
-                    setNewFundOwner(accountData.data[0])
+                    setNewFundOwner(accountData.data[0]);
                   }
-                }
-                getNewFundOwner()
+                };
+                getNewFundOwner();
               }
               if (!data.success) {
-                setAccountStatus("Account not found")
+                setAccountStatus("Account not found");
               }
-            }
-            getLegacyAccount()
+            };
+            getLegacyAccount();
           }
-          setBalance("")
-          setAccountStatus("Account not found")
+          setBalance("");
+          setAccountStatus("Account not found");
         }
-      }
-      getAccount()
+      };
+      getAccount();
     }
-  }, [publicKey, address, legacy, klayr32, error])
+  }, [publicKey, address, legacy, klayr32, error]);
 
   const onPast = (input: string) => {
-    setInput(input)
-  }
+    setInput(input);
+  };
   return (
-    <Grid className={"w-full max-w-app mx-auto bg-surface-2 rounded p-8"} flex gap={4}>
+    <Grid
+      className={"w-full max-w-app mx-auto bg-surface-2 rounded p-8"}
+      flex
+      gap={4}
+    >
       <label
         htmlFor="lisk-address"
         className="block text-base font-medium text-onSurfaceLight"
       >
-        <Typography tag={"span"}>{"Legacy address, Klayr32, Address or Public key"}</Typography>
+        <Typography tag={"span"}>
+          {"Legacy address, Klayr32, Address or Public key"}
+        </Typography>
       </label>
       <div className="mt-1">
         <Input
@@ -136,7 +164,9 @@ export const AccountAnalyzer = () => {
           <Typography tag={"span"}>
             {error}
             <br />
-            {"Input is not a valid Legacy address, Klayr32 address, Address or PublicKey"}
+            {
+              "Input is not a valid Legacy address, Klayr32 address, Address or PublicKey"
+            }
           </Typography>
         </div>
       )}
@@ -146,9 +176,7 @@ export const AccountAnalyzer = () => {
             <KeyValueRow
               label={"Public Key"}
               value={
-                <Link
-                  href={`/account/${klayr32}`}
-                >
+                <Link href={`/account/${klayr32}`}>
                   <Typography tag={"span"}>{publicKey}</Typography>
                 </Link>
               }
@@ -158,9 +186,7 @@ export const AccountAnalyzer = () => {
             <KeyValueRow
               label={"Address"}
               value={
-                <Link
-                  href={`/account/${klayr32}`}
-                >
+                <Link href={`/account/${klayr32}`}>
                   <Typography tag={"span"}>{klayr32}</Typography>
                 </Link>
               }
@@ -170,9 +196,7 @@ export const AccountAnalyzer = () => {
             <KeyValueRow
               label={"Hex Address (Binary Address)"}
               value={
-                <Link
-                  href={`/account/${klayr32}`}
-                >
+                <Link href={`/account/${klayr32}`}>
                   <Typography tag={"span"}>{address}</Typography>
                 </Link>
               }
@@ -202,17 +226,23 @@ export const AccountAnalyzer = () => {
           {balance && (
             <KeyValueRow
               label={"Account Balance"}
-              value={<ValueFormatter value={balance} type={"beddows"} format={"currency"} />}
+              value={
+                <ValueFormatter
+                  value={balance}
+                  type={"beddows"}
+                  format={"currency"}
+                />
+              }
             />
           )}
           {newFundOwner?.summary?.address && (
             <KeyValueRow
               label={"Tokens are owned by"}
               value={
-                <Link
-                  href={`/account/${newFundOwner?.summary?.address}`}
-                >
-                  <Typography tag={"span"}>{newFundOwner?.summary?.address}</Typography>
+                <Link href={`/account/${newFundOwner?.summary?.address}`}>
+                  <Typography tag={"span"}>
+                    {newFundOwner?.summary?.address}
+                  </Typography>
                 </Link>
               }
             />
@@ -222,5 +252,5 @@ export const AccountAnalyzer = () => {
         </div>
       )}
     </Grid>
-  )
-}
+  );
+};

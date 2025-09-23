@@ -1,16 +1,14 @@
 import React from "react";
-import { NetworkEndpoint, useLiskService } from "@moosty/lisk-service-provider"
+import { NetworkEndpoint, useLiskService } from "@moosty/lisk-service-provider";
 
 interface ConnectedProps {
   parsedSettings: {
-    networks: any
-  }
+    networks: any;
+  };
 }
 
-export const Connected = ({
-  parsedSettings
-}: ConnectedProps) => {
-  const { serviceClient } = useLiskService()
+export const Connected = ({ parsedSettings }: ConnectedProps) => {
+  const { serviceClient } = useLiskService();
 
   return (
     <span
@@ -21,12 +19,12 @@ export const Connected = ({
         serviceClient?.isConnected()
           ? "bg-success"
           : parsedSettings?.networks?.endpoint
-            .find((e: NetworkEndpoint) => e.type === "serviceRPC")
-            ?.host?.includes(serviceClient?.connection?.io?.opts?.hostname)
+                .find((e: NetworkEndpoint) => e.type === "serviceRPC")
+                ?.host?.includes(serviceClient?.connection?.io?.opts?.hostname)
             ? "bg-warning"
             : "bg-error",
         "rounded-full w-4 h-4 flex ",
       ].join(" ")}
     />
-  )
-}
+  );
+};

@@ -1,27 +1,31 @@
 import React from "react";
-import {Avatar} from "../../atoms/avatar/avatar";
-import {compactString, calculateTotalBalance, calculateVotes} from "../../assets/utils";
-import { AccountDataType} from "@moosty/lisk-service-provider";
-import {Typography} from "../../atoms/typography/typography";
-import {FavouriteButton} from "../../atoms/favouriteButton/favouriteButton";
-import {BalanceBlock} from "../../atoms/balanceBlock/balanceBlock";
+import { Avatar } from "../../atoms/avatar/avatar";
+import {
+  compactString,
+  calculateTotalBalance,
+  calculateVotes,
+} from "../../assets/utils";
+import { AccountDataType } from "@moosty/lisk-service-provider";
+import { Typography } from "../../atoms/typography/typography";
+import { FavouriteButton } from "../../atoms/favouriteButton/favouriteButton";
+import { BalanceBlock } from "../../atoms/balanceBlock/balanceBlock";
 
 interface AccountHeaderProps {
   account: {
-    address: string
-    owner: string
-    username: string
-    balance: string
-    totalBalance: string
-    unlocking: string
-    sentVotes: string
-    rank: number
-    status: string
-    description: string
-  }
-  favourites: {address: string, balance: string, username?: string}[] | null
-  saveFavourite: (address: string, balance: string, username?: string) => void
-  unFavourite: (address: string) => void
+    address: string;
+    owner: string;
+    username: string;
+    balance: string;
+    totalBalance: string;
+    unlocking: string;
+    sentVotes: string;
+    rank: number;
+    status: string;
+    description: string;
+  };
+  favourites: { address: string; balance: string; username?: string }[] | null;
+  saveFavourite: (address: string, balance: string, username?: string) => void;
+  unFavourite: (address: string) => void;
 }
 
 export const AccountHeader = ({
@@ -30,7 +34,6 @@ export const AccountHeader = ({
   saveFavourite,
   unFavourite,
 }: AccountHeaderProps) => {
-
   return (
     <div
       className={
@@ -38,7 +41,9 @@ export const AccountHeader = ({
       }
     >
       <div
-        className={"flex flex-tableRow text-onBackgroundHigh items-center sm:block"}
+        className={
+          "flex flex-tableRow text-onBackgroundHigh items-center sm:block"
+        }
       >
         <div className={"flex flex-tableRow items-center"}>
           <Avatar
@@ -50,16 +55,16 @@ export const AccountHeader = ({
             {account.username || account.owner ? (
               <Typography tag={"span"} className={"flex flex-col"}>
                 <span className="flex-row text-base md:text-xl text-onBackgroundHigh font-medium capitalize">
-                  {account.rank && (
-                    <span className="">{account.rank}. </span>
-                  )}
-                  {account.username ||
-                    account.owner}
+                  {account.rank && <span className="">{account.rank}. </span>}
+                  {account.username || account.owner}
                 </span>
               </Typography>
             ) : (
               <>
-                <Typography tag={"span"} className="text-base font-medium block text-onBackground ">
+                <Typography
+                  tag={"span"}
+                  className="text-base font-medium block text-onBackground "
+                >
                   {compactString(account.address, 30)}
                 </Typography>
               </>
@@ -67,7 +72,10 @@ export const AccountHeader = ({
 
             <div className={"flex flex-tableRow space-x-2"}>
               {account.username ? (
-                <Typography tag={"span"} className="flex flex-row space-x-2 items-center">
+                <Typography
+                  tag={"span"}
+                  className="flex flex-row space-x-2 items-center"
+                >
                   <span
                     className={
                       "text-sm rounded -ml-0.5 px-2 py-1 mx-auto bg-surface-4 text-onSurfaceHigh font-medium"
@@ -85,11 +93,21 @@ export const AccountHeader = ({
                     </span>
                   )}
                   <FavouriteButton
-                    favourited={favourites?.findIndex(i => i.address === account.address) !== -1}
+                    favourited={
+                      favourites?.findIndex(
+                        (i) => i.address === account.address,
+                      ) !== -1
+                    }
                     unFavourite={() => unFavourite(account.address)}
-                    saveFavourite={() => saveFavourite(account.address, account.totalBalance, account.username)}
+                    saveFavourite={() =>
+                      saveFavourite(
+                        account.address,
+                        account.totalBalance,
+                        account.username,
+                      )
+                    }
                   />
-               </Typography>
+                </Typography>
               ) : (
                 <span className="flex flex-row space-x-2 items-center">
                   <span
@@ -109,9 +127,19 @@ export const AccountHeader = ({
                     </span>
                   )}
                   <FavouriteButton
-                    favourited={favourites?.findIndex(i => i.address === account.address) !== -1}
+                    favourited={
+                      favourites?.findIndex(
+                        (i) => i.address === account.address,
+                      ) !== -1
+                    }
                     unFavourite={() => unFavourite(account.address)}
-                    saveFavourite={() => saveFavourite(account.address, account.totalBalance, account.username)}
+                    saveFavourite={() =>
+                      saveFavourite(
+                        account.address,
+                        account.totalBalance,
+                        account.username,
+                      )
+                    }
                   />
                 </span>
               )}
@@ -158,5 +186,5 @@ export const AccountHeader = ({
         />
       )}
     </div>
-  )
-}
+  );
+};

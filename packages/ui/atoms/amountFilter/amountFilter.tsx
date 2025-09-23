@@ -1,28 +1,32 @@
-import React, {FC} from "react"
+import React, { FC } from "react";
 import { MultiRangeSlider } from "../multiRangeSlider/multiRangeSlider";
-import {Button} from "../button/button";
-import {SwitchButtons} from "../switchButtons/switchButtons";
-import {Typography} from "../typography/typography";
-import {Grid} from "../grid/grid";
-import {cls} from "../../assets/utils";
-import {Input} from "../input/input";
-import {FiltersType} from "../../types";
+import { Button } from "../button/button";
+import { SwitchButtons } from "../switchButtons/switchButtons";
+import { Typography } from "../typography/typography";
+import { Grid } from "../grid/grid";
+import { cls } from "../../assets/utils";
+import { Input } from "../input/input";
+import { FiltersType } from "../../types";
 
 interface AmountFilterProps {
-  title?: string,
-  className?: string,
-  buttons: number[],
-  filters: FiltersType | undefined,
-  setFilters: React.Dispatch<React.SetStateAction<FiltersType | undefined>>,
-  filterModes: {amountFilter?:"buttons" | "slider" | "range"} | undefined,
-  setFilterModes: React.Dispatch<React.SetStateAction<{amountFilter?: "buttons" | "slider" | "range"} | undefined>>,
-  fromValue: number,
-  setFromValue: (value: number) => void,
-  toValue: number,
-  setToValue: (value: number) => void,
-  max?: number,
-  validInput: boolean,
-  setValidInput: (valid: boolean) => void
+  title?: string;
+  className?: string;
+  buttons: number[];
+  filters: FiltersType | undefined;
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType | undefined>>;
+  filterModes: { amountFilter?: "buttons" | "slider" | "range" } | undefined;
+  setFilterModes: React.Dispatch<
+    React.SetStateAction<
+      { amountFilter?: "buttons" | "slider" | "range" } | undefined
+    >
+  >;
+  fromValue: number;
+  setFromValue: (value: number) => void;
+  toValue: number;
+  setToValue: (value: number) => void;
+  max?: number;
+  validInput: boolean;
+  setValidInput: (valid: boolean) => void;
 }
 
 export const AmountFilter: FC<AmountFilterProps> = ({
@@ -41,48 +45,49 @@ export const AmountFilter: FC<AmountFilterProps> = ({
   validInput,
   setValidInput,
 }) => {
-
   const setAmounts = (from?: number, to?: number) => {
-    from && setFromValue(from)
-    to && setToValue(to)
-  }
+    from && setFromValue(from);
+    to && setToValue(to);
+  };
 
   return (
-    <Grid
-      flex
-      className={cls(["gap-4", className])}
-    >
-      <Typography color={"onSurfaceHigh"} tag={"h3"} size={"Heading5"}>{title || "Amount"}</Typography>
+    <Grid flex className={cls(["gap-4", className])}>
+      <Typography color={"onSurfaceHigh"} tag={"h3"} size={"Heading5"}>
+        {title || "Amount"}
+      </Typography>
       <SwitchButtons
         activeButton={filterModes?.amountFilter}
         buttons={[
           {
             label: "Buttons",
-            onClick: () => setFilterModes(previousModes => ({
-              ...previousModes,
-              amountFilter: "buttons"
-            })),
+            onClick: () =>
+              setFilterModes((previousModes) => ({
+                ...previousModes,
+                amountFilter: "buttons",
+              })),
           },
           {
             label: "Slider",
-            onClick: () => setFilterModes(previousModes => ({
-              ...previousModes,
-              amountFilter: "slider"
-            })),
+            onClick: () =>
+              setFilterModes((previousModes) => ({
+                ...previousModes,
+                amountFilter: "slider",
+              })),
             className: "hidden md:inline",
           },
           {
             label: "Range",
-            onClick: () => setFilterModes(previousModes => ({
-              ...previousModes,
-              amountFilter: "range"
-            })),
+            onClick: () =>
+              setFilterModes((previousModes) => ({
+                ...previousModes,
+                amountFilter: "range",
+              })),
           },
         ]}
         size={"small"}
       />
       <div>
-        { filterModes?.amountFilter === "buttons" &&
+        {filterModes?.amountFilter === "buttons" && (
           <div className="grid grid-cols-2 lg:flex flex-wrap justify-left gap-5 ">
             {buttons.map((button) => {
               return (
@@ -90,16 +95,18 @@ export const AmountFilter: FC<AmountFilterProps> = ({
                   <Button
                     active={button === filters?.amountFilters?.from}
                     hover
-                    label={"> " + Number(button).toLocaleString("en-US") + " KLY"}
+                    label={
+                      "> " + Number(button).toLocaleString("en-US") + " KLY"
+                    }
                     onClick={() => setAmounts(button, undefined)}
                     type={"tertiary"}
                   />
                 </div>
-              )
+              );
             })}
           </div>
-        }
-        { filterModes?.amountFilter === "slider" &&
+        )}
+        {filterModes?.amountFilter === "slider" && (
           <div className={`hidden md:block`}>
             <div className="flex gap-4 w-full">
               <MultiRangeSlider
@@ -114,10 +121,14 @@ export const AmountFilter: FC<AmountFilterProps> = ({
                 steps={1000}
               />
             </div>
-            <div className="text-center mt-3">{fromValue.toLocaleString("en-US") + " - " + toValue.toLocaleString("en-US")}</div>
+            <div className="text-center mt-3">
+              {fromValue.toLocaleString("en-US") +
+                " - " +
+                toValue.toLocaleString("en-US")}
+            </div>
           </div>
-        }
-        { filterModes?.amountFilter === "range" &&
+        )}
+        {filterModes?.amountFilter === "range" && (
           <div className="flex justify-left gap-5">
             <div>
               <p>From amount:</p>
@@ -129,33 +140,47 @@ export const AmountFilter: FC<AmountFilterProps> = ({
                 styleType={"tertiary"}
                 onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
-                  if (filters?.amountFilters && filters?.amountFilters?.to && parseFloat(e.target.value) > filters?.amountFilters?.to) {
-                    setFilters(previousFilters => ({
-                      ...previousFilters,
-                      amountFilters: {from: 0, to: previousFilters?.amountFilters?.to}
-                    }))
-                    setValidInput(true)
-                  }
-                }}
-                onChange={
-                  (e) => {
-                    const re = /^[0-9\b\d+\.?\d*^$]+$/;
-                    let textValue = e.target.value
-                    filters?.amountFilters?.to && parseFloat(e.target.value) > filters?.amountFilters?.to ?
-                      setValidInput(false) :
-                      setValidInput(true)
-
-                    setFilters(previousFilters => ({
+                  if (
+                    filters?.amountFilters &&
+                    filters?.amountFilters?.to &&
+                    parseFloat(e.target.value) > filters?.amountFilters?.to
+                  ) {
+                    setFilters((previousFilters) => ({
                       ...previousFilters,
                       amountFilters: {
-                        from: re.test(textValue) ? parseFloat(textValue) : textValue === "0" ? 0 : null,
-                        to: previousFilters?.amountFilters?.to
-                      }
-                    }))
+                        from: 0,
+                        to: previousFilters?.amountFilters?.to,
+                      },
+                    }));
+                    setValidInput(true);
                   }
-                }
+                }}
+                onChange={(e) => {
+                  const re = /^[0-9\b\d+\.?\d*^$]+$/;
+                  let textValue = e.target.value;
+                  filters?.amountFilters?.to &&
+                  parseFloat(e.target.value) > filters?.amountFilters?.to
+                    ? setValidInput(false)
+                    : setValidInput(true);
+
+                  setFilters((previousFilters) => ({
+                    ...previousFilters,
+                    amountFilters: {
+                      from: re.test(textValue)
+                        ? parseFloat(textValue)
+                        : textValue === "0"
+                          ? 0
+                          : null,
+                      to: previousFilters?.amountFilters?.to,
+                    },
+                  }));
+                }}
                 value={
-                  filters?.amountFilters?.from ? filters?.amountFilters?.from : filters?.amountFilters?.from === 0 ? 0 : " "
+                  filters?.amountFilters?.from
+                    ? filters?.amountFilters?.from
+                    : filters?.amountFilters?.from === 0
+                      ? 0
+                      : " "
                 }
               />
             </div>
@@ -169,37 +194,52 @@ export const AmountFilter: FC<AmountFilterProps> = ({
                 styleType={"tertiary"}
                 onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
-                  if (filters?.amountFilters?.from && parseFloat(e.target.value) < filters?.amountFilters?.from) {
-                    setFilters(previousFilters => ({
-                      ...previousFilters,
-                      amountFilters: {from: previousFilters?.amountFilters?.from, to: 0}
-                    }))
-                    setValidInput(true)
-                  }
-                }}
-                onChange={
-                  (e) => {
-                    const re = /^[0-9\b\d+\.?\d*^$]+$/;
-                    let textValue = e.target.value
-                    filters?.amountFilters?.from && parseFloat(e.target.value) < filters?.amountFilters?.from ?
-                      setValidInput(false) :
-                      setValidInput(true)
-
-                    setFilters(previousFilters => ({
+                  if (
+                    filters?.amountFilters?.from &&
+                    parseFloat(e.target.value) < filters?.amountFilters?.from
+                  ) {
+                    setFilters((previousFilters) => ({
                       ...previousFilters,
                       amountFilters: {
                         from: previousFilters?.amountFilters?.from,
-                        to: re.test(textValue) ? parseFloat(textValue) : textValue === "0" ? 0 : null
-                      }
-                    }))
+                        to: 0,
+                      },
+                    }));
+                    setValidInput(true);
                   }
+                }}
+                onChange={(e) => {
+                  const re = /^[0-9\b\d+\.?\d*^$]+$/;
+                  let textValue = e.target.value;
+                  filters?.amountFilters?.from &&
+                  parseFloat(e.target.value) < filters?.amountFilters?.from
+                    ? setValidInput(false)
+                    : setValidInput(true);
+
+                  setFilters((previousFilters) => ({
+                    ...previousFilters,
+                    amountFilters: {
+                      from: previousFilters?.amountFilters?.from,
+                      to: re.test(textValue)
+                        ? parseFloat(textValue)
+                        : textValue === "0"
+                          ? 0
+                          : null,
+                    },
+                  }));
+                }}
+                value={
+                  filters?.amountFilters?.to
+                    ? filters?.amountFilters?.to
+                    : filters?.amountFilters?.to === 0
+                      ? 0
+                      : " "
                 }
-                value={filters?.amountFilters?.to ? filters?.amountFilters?.to : filters?.amountFilters?.to === 0 ? 0 : " "}
               />
             </div>
           </div>
-        }
+        )}
       </div>
     </Grid>
-  )
-}
+  );
+};

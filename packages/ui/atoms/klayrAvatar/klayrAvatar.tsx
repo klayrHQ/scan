@@ -1,35 +1,31 @@
-import React, { FC, useEffect } from "react"
-import { sha256 } from "js-sha256"
-import {
-  Gradients,
-  gradientSchemes,
-} from "../avatarGradient/avatarGradient"
+import React, { FC, useEffect } from "react";
+import { sha256 } from "js-sha256";
+import { Gradients, gradientSchemes } from "../avatarGradient/avatarGradient";
 
 interface KlayrAvatarProps {
-  address: string
-  size: number
-  uniqueSvgUrlHash?: any
-  className?: string
-  circle?: boolean
-  collectible?: boolean
+  address: string;
+  size: number;
+  uniqueSvgUrlHash?: any;
+  className?: string;
+  circle?: boolean;
+  collectible?: boolean;
 }
 
 export const KlayrAvatar = ({
-        address,
-        size,
-        uniqueSvgUrlHash = "liskScan",
-        className,
-        circle,
-        collectible
-      }: KlayrAvatarProps) => {
-
+  address,
+  size,
+  uniqueSvgUrlHash = "liskScan",
+  className,
+  circle,
+  collectible,
+}: KlayrAvatarProps) => {
   const computeShapesAndGradients = (newSize: number): any => {
-    const addressHashChunks = getHashChunks(address)
+    const addressHashChunks = getHashChunks(address);
     const gradientScheme =
       gradientSchemes[
         // @ts-ignore
-      addressHashChunks[0].substr(1, 2) % gradientSchemes.length
-        ]
+        addressHashChunks[0].substr(1, 2) % gradientSchemes.length
+      ];
 
     const gradientsSchemesUrlsHashed = {
       // @ts-ignore
@@ -40,7 +36,7 @@ export const KlayrAvatar = ({
       secondary: pickTwo(addressHashChunks[2], gradientScheme.secondary).map(
         replaceUrlByHashOnScheme.bind(null, uniqueSvgUrlHash),
       ),
-    }
+    };
 
     const shapes = [
       getBackgroundCircle(newSize, gradientsSchemesUrlsHashed.primary[0]),
@@ -65,12 +61,12 @@ export const KlayrAvatar = ({
         gradientsSchemesUrlsHashed.secondary[1],
         0.18,
       ),
-    ]
+    ];
 
-    return [shapes, gradientsSchemesUrlsHashed]
-  }
+    return [shapes, gradientsSchemesUrlsHashed];
+  };
 
-  const [shapes, gradientsSchemesUrlsHashed] = computeShapesAndGradients(size)
+  const [shapes, gradientsSchemesUrlsHashed] = computeShapesAndGradients(size);
 
   return (
     <>
@@ -80,13 +76,13 @@ export const KlayrAvatar = ({
             height: collectible ? "100%" : size,
             width: collectible ? "100%" : size,
           }}
-          className={`${!circle ? 'rounded' : "rounded-full"} inline-block transform ease-in-out duration-500  ${className} `}
+          className={`${!circle ? "rounded" : "rounded-full"} inline-block transform ease-in-out duration-500  ${className} `}
         >
           <svg
             viewBox={`0 0 ${size} ${size}`}
             height={"100%"}
             width={"100%"}
-            className={`${!circle ? 'rounded' : "rounded-full"}`}
+            className={`${!circle ? "rounded" : "rounded-full"}`}
           >
             <Gradients scheme={gradientsSchemesUrlsHashed} />
             {shapes.map((shape: any, i: any) => (
@@ -96,10 +92,10 @@ export const KlayrAvatar = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-const round = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100
+const round = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100;
 
 /*
  * Index Visual
@@ -132,9 +128,9 @@ const round = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100
  * the first option has 4/10 chance and each of other two has 3/10 chance.
  */
 
-const Rect = (props: any) => <rect {...props} />
-const Circle = (props: any) => <circle {...props} />
-const Polygon = (props: any) => <polygon {...props} />
+const Rect = (props: any) => <rect {...props} />;
+const Circle = (props: any) => <circle {...props} />;
+const Polygon = (props: any) => <polygon {...props} />;
 
 const computeTriangle = (props: any) => ({
   points: [
@@ -153,7 +149,7 @@ const computeTriangle = (props: any) => ({
   ]
     .map(({ x, y }) => `${x},${y}`)
     .join(" "),
-})
+});
 
 const computePentagon = (props: any) => ({
   points: [
@@ -180,18 +176,18 @@ const computePentagon = (props: any) => ({
   ]
     .map(({ x, y }) => `${x},${y}`)
     .join(" "),
-})
+});
 
 const getShape = (chunk: any, size: number, gradient: any, sizeScale = 1) => {
-  const shapeNames = ["circle", "triangle", "square"]
+  const shapeNames = ["circle", "triangle", "square"];
 
   const sizes = [1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1].map((x) =>
     round(x * size * sizeScale),
-  )
+  );
 
   const coordinates = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(
     (x) => x * (size / 40),
-  )
+  );
 
   const shapes = {
     circle: {
@@ -236,13 +232,13 @@ const getShape = (chunk: any, size: number, gradient: any, sizeScale = 1) => {
         size: sizes[chunk[3]],
       }),
     },
-  }
+  };
 
   return {
     component:
-    // @ts-ignore
+      // @ts-ignore
 
-    shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].component,
+      shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].component,
     props: {
       // @ts-ignore
       ...shapes[shapeNames[chunk.substr(0, 2) % shapeNames.length]].props,
@@ -251,41 +247,41 @@ const getShape = (chunk: any, size: number, gradient: any, sizeScale = 1) => {
         size / 2
       })`,
     },
-  }
-}
+  };
+};
 
 const getBackgroundCircle = (size: number, gradient: any) => ({
   component: Rect,
   props: {
-    x: 0 ,
-    y: 0 ,
+    x: 0,
+    y: 0,
     height: size,
     width: size,
     fill: gradient.url,
   },
-})
+});
 
 const pickTwo = (chunk: any, options: any) => [
   options[chunk.substr(0, 2) % options.length],
   options[
-  (chunk.substr(0, 2) - 0 + 1 + (chunk.substr(2, 2) % (options.length - 1))) %
-  options.length
-    ],
-]
+    (chunk.substr(0, 2) - 0 + 1 + (chunk.substr(2, 2) % (options.length - 1))) %
+      options.length
+  ],
+];
 
 const getHashChunks = (address: string) => {
   return BigInt(`0x${sha256(address || "0")}`)
     .toString()
     .substr(2)
-    .match(/\d{5}/g)
-}
+    .match(/\d{5}/g);
+};
 
 // @ts-ignore
 function replaceUrlByHashOnScheme(uniqueSvgUrlHash, gradientScheme) {
-  const id = `${gradientScheme.id}-${uniqueSvgUrlHash}`
+  const id = `${gradientScheme.id}-${uniqueSvgUrlHash}`;
   return {
     ...gradientScheme,
     id,
     url: `url(#${id})`,
-  }
+  };
 }

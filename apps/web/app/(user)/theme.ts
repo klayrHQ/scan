@@ -1,4 +1,3 @@
-
 export const updateTheme = () => {
   switch (getCurrentTheme()) {
     case "dark":
@@ -28,10 +27,10 @@ export const getCurrentTheme = (): "dark" | "light" => {
 
 export const switchThemeMode = () => {
   if (getCurrentTheme() === "dark") {
-    setThemeMode("light")
-    return
+    setThemeMode("light");
+    return;
   }
-  setThemeMode("dark")
+  setThemeMode("dark");
 };
 
 export const setThemeMode = (mode: "light" | "dark") => {

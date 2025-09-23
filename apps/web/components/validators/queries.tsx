@@ -1,4 +1,4 @@
-import {ServiceQueries} from "../../lib/sanity.service";
+import { ServiceQueries } from "../../lib/sanity.service";
 
 export const validatorQueries: ServiceQueries[] = [
   {
@@ -27,8 +27,8 @@ export const validatorQueries: ServiceQueries[] = [
       // },
       {
         key: "limit",
-        value: "10000"
-      }
+        value: "10000",
+      },
     ],
     updateOn: "never",
   },
@@ -127,4 +127,4 @@ export const validatorQueries: ServiceQueries[] = [
   //   ],
   //   updateOn: "lastGenerators"
   // }
-]
+];

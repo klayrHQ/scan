@@ -1,19 +1,19 @@
-import React, { FC } from "react"
+import React, { FC } from "react";
 import { Currency } from "../currency/currency";
-import {Typography} from "../typography/typography";
-import {CurrencyType} from "../../types";
+import { Typography } from "../typography/typography";
+import { CurrencyType } from "../../types";
 
 interface DecimalsProps {
-  currencies: CurrencyType[]
-  minMax: { min: number; max: number },
-  parsedSettings?: any,
-  setSetting: (handle: string, newState: any) => void
-  switchConvert: () => void
-  exampleNumber?: string
-  exampleDecimals?: string
+  currencies: CurrencyType[];
+  minMax: { min: number; max: number };
+  parsedSettings?: any;
+  setSetting: (handle: string, newState: any) => void;
+  switchConvert: () => void;
+  exampleNumber?: string;
+  exampleDecimals?: string;
 }
 
-export const  Decimals: FC<DecimalsProps> = ({
+export const Decimals: FC<DecimalsProps> = ({
   currencies,
   minMax,
   parsedSettings,
@@ -24,11 +24,11 @@ export const  Decimals: FC<DecimalsProps> = ({
 }) => {
   return (
     <div
-      className={["items-center bg-surface-1 shadow-1 px-8 py-4", "rounded"].join(
-        " ",
-      )}
+      className={[
+        "items-center bg-surface-1 shadow-1 px-8 py-4",
+        "rounded",
+      ].join(" ")}
     >
-
       <div
         className={[
           "flex w-full flex-row justify-between",
@@ -38,7 +38,10 @@ export const  Decimals: FC<DecimalsProps> = ({
         <div className="flex flex-col w-full ">
           <div className="flex flex-row items-center justify-between">
             <div className="font-bold mt-1 rounded py-2 mb-4">
-              <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
+              <Typography
+                tag={"span"}
+                className="font-medium text-onSurfaceMedium"
+              >
                 {"Example: "}
               </Typography>
               <span className="text-xl">
@@ -51,7 +54,10 @@ export const  Decimals: FC<DecimalsProps> = ({
                     decimals: "text-onSurfacePrimaryMedium",
                   }}
                   currencies={currencies}
-                  decimals={exampleDecimals?.slice(0,parsedSettings?.decimals) || "12345678".slice(0,parsedSettings?.decimals)}
+                  decimals={
+                    exampleDecimals?.slice(0, parsedSettings?.decimals) ||
+                    "12345678".slice(0, parsedSettings?.decimals)
+                  }
                   number={exampleNumber || "1234"}
                   parsedSettings={parsedSettings}
                 />
@@ -60,7 +66,10 @@ export const  Decimals: FC<DecimalsProps> = ({
           </div>
           <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row text-left md:align-center md:items-center  justify-between ">
             <div className="flex flex-col space-y-2">
-              <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
+              <Typography
+                tag={"span"}
+                className="font-medium text-onSurfaceMedium"
+              >
                 {"Mantissa size"}
               </Typography>
               <div className="text-xs items-center text-onInfoVariant font-medium flex flex-row space-x-2">
@@ -75,7 +84,10 @@ export const  Decimals: FC<DecimalsProps> = ({
                 >
                   {"-"}
                 </button>
-                <Typography tag={"span"} className="text-center text-onSurfaceHigh">
+                <Typography
+                  tag={"span"}
+                  className="text-center text-onSurfaceHigh"
+                >
                   {parsedSettings?.decimals}
                 </Typography>
                 <button
@@ -92,7 +104,10 @@ export const  Decimals: FC<DecimalsProps> = ({
               </div>
             </div>
             <div className="flex flex-col space-y-2">
-              <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
+              <Typography
+                tag={"span"}
+                className="font-medium text-onSurfaceMedium"
+              >
                 {"Formatting"}
               </Typography>
               <div className={"space-x-4 mt-1 text-onSurfaceHigh"}>
@@ -162,7 +177,10 @@ export const  Decimals: FC<DecimalsProps> = ({
               </div>
             </div>
             <div className="flex flex-col space-y-2">
-              <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
+              <Typography
+                tag={"span"}
+                className="font-medium text-onSurfaceMedium"
+              >
                 {"Convert KLY"}
               </Typography>
               <div className="text-xs font-medium flex flex-row space-x-2">
@@ -176,7 +194,10 @@ export const  Decimals: FC<DecimalsProps> = ({
               </div>
             </div>
             <div className="flex flex-col space-y-2">
-              <Typography tag={"span"} className="font-medium text-onSurfaceMedium">
+              <Typography
+                tag={"span"}
+                className="font-medium text-onSurfaceMedium"
+              >
                 {"Trailing zeros"}
               </Typography>
               <div className="text-xs font-medium flex flex-row space-x-2 text-onSurfaceHigh">
@@ -198,5 +219,5 @@ export const  Decimals: FC<DecimalsProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

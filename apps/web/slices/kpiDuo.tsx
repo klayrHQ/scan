@@ -1,2 +1,1 @@
-
-export const KpiDuo = () => <></>
+export const KpiDuo = () => <></>;

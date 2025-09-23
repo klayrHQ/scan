@@ -1,13 +1,19 @@
-"use client"
-import {MutableRefObject, useEffect, useRef, useState} from "react"
+"use client";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 
-export const useIsStuck = (offset = 0): [boolean, MutableRefObject<HTMLDivElement | null>] => {
+export const useIsStuck = (
+  offset = 0,
+): [boolean, MutableRefObject<HTMLDivElement | null>] => {
   const [isStuck, setIsStuck] = useState<boolean>(false);
   const stickyRef = useRef<HTMLDivElement>(null);
 
-  const calcPixels = (twNumber: number, remSize: number = 16, twNumberSize: number = 0.25) => {
-    return (twNumber * twNumberSize) * remSize;
-  }
+  const calcPixels = (
+    twNumber: number,
+    remSize: number = 16,
+    twNumberSize: number = 0.25,
+  ) => {
+    return twNumber * twNumberSize * remSize;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,13 +25,13 @@ export const useIsStuck = (offset = 0): [boolean, MutableRefObject<HTMLDivElemen
     };
 
     // Attach the event listener when the component mounts
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     // Clean up the event listener when the component unmounts
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  return [isStuck, stickyRef]
-}
+  return [isStuck, stickyRef];
+};

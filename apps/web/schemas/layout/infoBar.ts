@@ -1,4 +1,3 @@
-
 export const LastBlockKPIS = [
   { title: "lastBlock.height", value: "lastBlock.height" },
   { title: "lastBlock.id", value: "lastBlock.id" },
@@ -66,22 +65,46 @@ export const AppKPIS = [
 ];
 export const StatusKPIS = [
   { title: "status.data.chainID", value: "status.data.chainID" },
-  { title: "status.data.finalizedHeight", value: "status.data.finalizedHeight" },
-  { title: "status.data.genesis.bftBatchSize", value: "status.data.genesis.bftBatchSize" },
-  { title: "status.data.genesis.blockTime", value: "status.data.genesis.blockTime" },
-  { title: "status.data.genesis.chainID", value: "status.data.genesis.chainID" },
-  { title: "status.data.genesis.maxTransactionsSize", value: "status.data.genesis.maxTransactionsSize" },
+  {
+    title: "status.data.finalizedHeight",
+    value: "status.data.finalizedHeight",
+  },
+  {
+    title: "status.data.genesis.bftBatchSize",
+    value: "status.data.genesis.bftBatchSize",
+  },
+  {
+    title: "status.data.genesis.blockTime",
+    value: "status.data.genesis.blockTime",
+  },
+  {
+    title: "status.data.genesis.chainID",
+    value: "status.data.genesis.chainID",
+  },
+  {
+    title: "status.data.genesis.maxTransactionsSize",
+    value: "status.data.genesis.maxTransactionsSize",
+  },
   { title: "status.data.height", value: "status.data.height" },
   { title: "status.data.lastBlockID", value: "status.data.lastBlockID" },
   { title: "status.data.network.port", value: "status.data.network.port" },
-  { title: "status.data.network.version", value: "status.data.network.version" },
+  {
+    title: "status.data.network.version",
+    value: "status.data.network.version",
+  },
   { title: "status.data.syncing", value: "status.data.syncing" },
-  { title: "status.data.unconfirmedTransactions", value: "status.data.unconfirmedTransactions" },
+  {
+    title: "status.data.unconfirmedTransactions",
+    value: "status.data.unconfirmedTransactions",
+  },
   { title: "status.data.version", value: "status.data.version" },
-  { title: "status.meta.lastBlockHeight", value: "status.meta.lastBlockHeight" },
+  {
+    title: "status.meta.lastBlockHeight",
+    value: "status.meta.lastBlockHeight",
+  },
   { title: "status.meta.lastBlockID", value: "status.meta.lastBlockID" },
   { title: "status.meta.lastUpdate", value: "status.meta.lastUpdate" },
-]
+];
 export const DefaultKPIS = [...AppKPIS, ...StatusKPIS, ...LastBlockKPIS];
 export default {
   name: "infobar",

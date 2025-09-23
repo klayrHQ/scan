@@ -58,13 +58,12 @@ import {
   HomeIcon,
   UsersIcon,
   ArchiveBoxIcon,
-  FunnelIcon as FunnelIconSolid
+  FunnelIcon as FunnelIconSolid,
 } from "@heroicons/react/24/solid";
 import {
   FunnelIcon,
-  StarIcon as StarIconOpen
+  StarIcon as StarIconOpen,
 } from "@heroicons/react/24/outline";
-
 
 export const iconList = {
   menu: Bars3Icon,

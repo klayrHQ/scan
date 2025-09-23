@@ -1,9 +1,13 @@
-import {ValueFormatter} from "ui";
+import { ValueFormatter } from "ui";
 
-export const DefaultHeadColumn = ({
-  values,
-}: {values: any[]}) => {
+export const DefaultHeadColumn = ({ values }: { values: any[] }) => {
   return (
-    <>{values[0].value ? <ValueFormatter value={values[0].value} {...values[0].format} /> : <></>}</>
+    <>
+      {values[0].value ? (
+        <ValueFormatter value={values[0].value} {...values[0].format} />
+      ) : (
+        <></>
+      )}
+    </>
   );
 };

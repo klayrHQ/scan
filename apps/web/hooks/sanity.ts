@@ -12,61 +12,61 @@ export type { ClientQueryParams };
 export function useListeningQuery<Snapshot>(
   initialSnapshot: Snapshot,
   query: string,
-  queryParams?: ClientQueryParams
+  queryParams?: ClientQueryParams,
 ): Snapshot;
 /** @public */
 export function useListeningQuery<Snapshot, QueryParams = ClientQueryParams>(
   initialSnapshot: Snapshot,
   query: string,
-  queryParams: QueryParams
+  queryParams: QueryParams,
 ): Snapshot;
 /** @public */
 export function useListeningQuery<Snapshot, QueryParams extends undefined>(
   initialSnapshot: Snapshot,
   query: string,
-  queryParams?: QueryParams | Record<string, never>
-): Snapshot;
-/** @public */
-export function useListeningQuery<
-  Snapshot,
-  QueryParams = ClientQueryParams | undefined
->(
-  initialSnapshot: Snapshot,
-  query: string,
-  queryParams: QueryParams,
-  selector: undefined,
-  isEqual: (a: Snapshot, b: Snapshot) => boolean
+  queryParams?: QueryParams | Record<string, never>,
 ): Snapshot;
 /** @public */
 export function useListeningQuery<
   Snapshot,
   QueryParams = ClientQueryParams | undefined,
-  Selection = Snapshot
+>(
+  initialSnapshot: Snapshot,
+  query: string,
+  queryParams: QueryParams,
+  selector: undefined,
+  isEqual: (a: Snapshot, b: Snapshot) => boolean,
+): Snapshot;
+/** @public */
+export function useListeningQuery<
+  Snapshot,
+  QueryParams = ClientQueryParams | undefined,
+  Selection = Snapshot,
 >(
   initialSnapshot: Snapshot,
   query: string,
   queryParams: QueryParams,
   selector: (snapshot: Snapshot) => Selection,
-  isEqual?: (a: Selection, b: Selection) => boolean
+  isEqual?: (a: Selection, b: Selection) => boolean,
 ): Selection;
 /** @public */
 export function useListeningQuery<
   Snapshot,
   QueryParams extends ClientQueryParams,
-  Selection = Snapshot
+  Selection = Snapshot,
 >(
   initialSnapshot: Snapshot,
   query: string,
   queryParams: QueryParams = {} as QueryParams,
   selector: (snapshot: Snapshot) => Selection = (snapshot) =>
     snapshot as unknown as Selection,
-  isEqual: (a: Selection, b: Selection) => boolean = isFastEqual
+  isEqual: (a: Selection, b: Selection) => boolean = isFastEqual,
 ): Selection {
   const defineStore = useContext(defineListenerContext);
   const params = useParams(queryParams);
   const store = useMemo(
     () => defineStore<Snapshot>(initialSnapshot, query, params),
-    [defineStore, initialSnapshot, params, query]
+    [defineStore, initialSnapshot, params, query],
   );
   const [serverSnapshot] = useState(() => initialSnapshot);
 
@@ -75,7 +75,7 @@ export function useListeningQuery<
     store.getSnapshot,
     () => serverSnapshot,
     selector,
-    isEqual
+    isEqual,
   );
 }
 
@@ -131,11 +131,11 @@ function TestComponent() {
  * @internal
  */
 function useParams(
-  params?: undefined | null | ClientQueryParams
+  params?: undefined | null | ClientQueryParams,
 ): ClientQueryParams {
   const stringifiedParams = useMemo(
     () => JSON.stringify(params || {}),
-    [params]
+    [params],
   );
   return useMemo(() => JSON.parse(stringifiedParams), [stringifiedParams]);
 }

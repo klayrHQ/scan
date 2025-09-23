@@ -52,7 +52,7 @@ export const Generators = ({
               format={"avatarAddress"}
               link={{ href: `/account/${generator?.address}` }}
             />
-          )
+          ),
         )}
       </Grid>
     </div>

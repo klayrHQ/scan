@@ -1,9 +1,9 @@
-import React, {ReactNode} from "react";
-import {Table} from "../../organisms/table/table";
-import {AccountHeader} from "../../organisms/accountHeader/accountHeader";
-import {AccountDetailsOld} from "../../organisms/accountDetailsOld/accountDetailsOld";
-import {Footer} from "../../organisms/footer/footer";
-import {Container} from "../../atoms/container/container";
+import React, { ReactNode } from "react";
+import { Table } from "../../organisms/table/table";
+import { AccountHeader } from "../../organisms/accountHeader/accountHeader";
+import { AccountDetailsOld } from "../../organisms/accountDetailsOld/accountDetailsOld";
+import { Footer } from "../../organisms/footer/footer";
+import { Container } from "../../atoms/container/container";
 import {
   footerData,
   headcols,
@@ -13,32 +13,36 @@ import {
   tabletHeadcols,
   tabletRows,
 } from "../../assets/mockupData/mockupData";
-import {Grid} from "../../atoms/grid/grid";
-import {HeaderMockup} from "../../organisms/header/header.stories";
-import {AccountDetails} from "../../organisms/accountDetails/accountDetails";
-import {tableHeadColsType, tableRowsType} from "../../types";
+import { Grid } from "../../atoms/grid/grid";
+import { HeaderMockup } from "../../organisms/header/header.stories";
+import { AccountDetails } from "../../organisms/accountDetails/accountDetails";
+import { tableHeadColsType, tableRowsType } from "../../types";
 
 interface AccountProps {
-  account: any,
-  menu: {label: string, link: string}[],
-  favourites: any,
-  saveFavourite: (address: string, balance: string, username?: string) => void
-  unFavourite: (address: string) => void
-  getAddressFromLisk32Address: any
-  compactString: Function
-  clean: Function
-  setInput: Function
-  legacy: any
-  copyNoteText: string
-  setCopyNoteText: Function
-  transactionsCount: {in: number, out: number}
-  assetsData?: Array<{name: string | ReactNode, amount: string, total: string}>
-  totalAssets?: string
-  showAllAssets?: boolean
-  setShowAllAssets?: (show: boolean) => void
-  sortOptions?: Array<string>
-  sortFunction?: () => void
-  searchFunction?: () => void
+  account: any;
+  menu: { label: string; link: string }[];
+  favourites: any;
+  saveFavourite: (address: string, balance: string, username?: string) => void;
+  unFavourite: (address: string) => void;
+  getAddressFromLisk32Address: any;
+  compactString: Function;
+  clean: Function;
+  setInput: Function;
+  legacy: any;
+  copyNoteText: string;
+  setCopyNoteText: Function;
+  transactionsCount: { in: number; out: number };
+  assetsData?: Array<{
+    name: string | ReactNode;
+    amount: string;
+    total: string;
+  }>;
+  totalAssets?: string;
+  showAllAssets?: boolean;
+  setShowAllAssets?: (show: boolean) => void;
+  sortOptions?: Array<string>;
+  sortFunction?: () => void;
+  searchFunction?: () => void;
 }
 
 export const Account = ({
@@ -57,7 +61,6 @@ export const Account = ({
   sortFunction,
   searchFunction,
 }: AccountProps) => {
-
   return (
     <Container className={"bg-background"}>
       {/* @ts-ignore*/}
@@ -101,20 +104,18 @@ export const Account = ({
           <p className="text-base text-onBackgroundLow font-bold mb-2">
             &copy;{new Date().getFullYear()} by{" "}
             <a
-            className={"text-secondary"}
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://moosty.com"
+              className={"text-secondary"}
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://moosty.com"
             >
-            MOOSTY
+              MOOSTY
             </a>
             <span className={"text-onBackgroundMedium mx-2"}>I|I</span>
-            <span className={"text-onBackgroundLow"}>
-            -
-            </span>
+            <span className={"text-onBackgroundLow"}>-</span>
           </p>
         }
       />
     </Container>
-  )
-}
+  );
+};

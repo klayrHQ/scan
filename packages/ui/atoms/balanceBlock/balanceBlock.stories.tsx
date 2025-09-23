@@ -12,21 +12,17 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof BalanceBlock> = (args) => <BalanceBlock {...args} />;
+const Template: ComponentStory<typeof BalanceBlock> = (args) => (
+  <BalanceBlock {...args} />
+);
 
 export const Primary: ComponentMeta<typeof BalanceBlock> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-
-};
+Primary.args = {};

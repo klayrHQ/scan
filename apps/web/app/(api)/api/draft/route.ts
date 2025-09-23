@@ -1,12 +1,12 @@
-import { draftMode } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { draftMode } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
 export function GET(req: NextRequest) {
   if (draftMode().isEnabled) {
-    draftMode().disable()
+    draftMode().disable();
   } else {
-    draftMode().enable()
+    draftMode().enable();
   }
-  const url = new URL(req.nextUrl)
-  return NextResponse.redirect(new URL('/', url.origin))
+  const url = new URL(req.nextUrl);
+  return NextResponse.redirect(new URL("/", url.origin));
 }

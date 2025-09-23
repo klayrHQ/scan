@@ -1,4 +1,4 @@
-import {sliceDocumentNames} from "../slices";
+import { sliceDocumentNames } from "../slices";
 
 export default {
   name: "pages",
@@ -17,7 +17,7 @@ export default {
       description: "eg. /blocks",
       options: {
         unique: true,
-      }
+      },
     },
     {
       name: "slug",
@@ -45,9 +45,7 @@ export default {
       of: [
         {
           type: "reference",
-          to: [
-            ...sliceDocumentNames.map(name => ({type: name,})),
-          ],
+          to: [...sliceDocumentNames.map((name) => ({ type: name }))],
         },
       ],
     },

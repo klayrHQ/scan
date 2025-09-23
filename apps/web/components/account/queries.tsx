@@ -1,4 +1,4 @@
-import {ServiceQueries} from "../../lib/sanity.service";
+import { ServiceQueries } from "../../lib/sanity.service";
 
 export const getAccountQueries = (id: string, page = 1) => {
   const accountQueries: ServiceQueries[] = [
@@ -15,12 +15,12 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
       call: "get.token.balances",
       serviceType: "lisk-service",
-      subQueries: []
+      subQueries: [],
     },
     {
       call: "get.transactions",
@@ -29,19 +29,14 @@ export const getAccountQueries = (id: string, page = 1) => {
           name: "txType",
           _key: "19b4fb2c7f86",
           calculation: `"%s".split(":").join(" ")`,
-          keys: [
-            "moduleCommand"
-          ],
+          keys: ["moduleCommand"],
         },
         {
           _key: "5c9a08198b7d",
           calculation: "%d - %d",
-          keys: [
-            "network-status.data.height",
-            "block.height"
-          ],
-          name: "confirmations"
-        }
+          keys: ["network-status.data.height", "block.height"],
+          name: "confirmations",
+        },
       ],
       updateOn: "lastTransactions",
       key: "account-id-transactions",
@@ -49,18 +44,18 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "limit",
-          value: "25"
+          value: "25",
         },
         {
           key: "address",
-          value: id
+          value: id,
         },
         {
           key: "offset",
-          value: 25 * (page - 1) + ""
-        }
+          value: 25 * (page - 1) + "",
+        },
       ],
-      subQueries: []
+      subQueries: [],
     },
     {
       key: "account-auth",
@@ -69,8 +64,8 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
       updateOn: "lastTransactions",
     },
@@ -83,33 +78,29 @@ export const getAccountQueries = (id: string, page = 1) => {
         {
           _key: "95a2197a7342",
           calculation: `"%s".split(/(?=[A-Z])/).join(" ")`,
-          keys: [
-            "name"
-          ],
-          name: "event"
+          keys: ["name"],
+          name: "event",
         },
         {
           calculation: `"%s".split(/(?=[A-Z])/).join(" ")`,
-          keys: [
-            "module"
-          ],
+          keys: ["module"],
           name: "moduleParsed",
-          _key: "fe9bf558f1f3"
+          _key: "fe9bf558f1f3",
         },
       ],
       params: [
         {
           key: "senderAddress",
-          value: id
+          value: id,
         },
         {
           key: "limit",
-          value: "25"
+          value: "25",
         },
         {
           key: "offset",
-          value: 25 * (page - 1) + ""
-        }
+          value: 25 * (page - 1) + "",
+        },
       ],
     },
     {
@@ -117,8 +108,8 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
       updateOn: "lastBlock",
       serviceType: "lisk-service",
@@ -131,16 +122,16 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "generatorAddress",
-          value: id
+          value: id,
         },
         {
           key: "offset",
-          value: 25 * (page - 1) + ""
+          value: 25 * (page - 1) + "",
         },
         {
           key: "limit",
-          value: "25"
-        }
+          value: "25",
+        },
       ],
       updateOn: "lastBlock",
     },
@@ -148,8 +139,8 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
       updateOn: "never",
       key: "account-rewards-claimable",
@@ -160,8 +151,8 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
       call: "get.pos.stakes",
       serviceType: "lisk-service",
@@ -171,10 +162,10 @@ export const getAccountQueries = (id: string, page = 1) => {
           foreignKey: "address",
           primaryKey: "address",
           call: "get.pos.validators",
-          serviceType: "lisk-service"
-        }
+          serviceType: "lisk-service",
+        },
       ],
-      key: "account-stakes-sent"
+      key: "account-stakes-sent",
     },
     {
       key: "account-unlocks",
@@ -184,8 +175,8 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
-        }
+          value: id,
+        },
       ],
     },
     {
@@ -195,15 +186,15 @@ export const getAccountQueries = (id: string, page = 1) => {
       params: [
         {
           key: "address",
-          value: id
+          value: id,
         },
         {
           key: "limit",
-          value: "100"
-        }
+          value: "100",
+        },
       ],
-    }
-  ]
+    },
+  ];
 
-  return accountQueries
-}
+  return accountQueries;
+};

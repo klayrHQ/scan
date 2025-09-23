@@ -1,15 +1,15 @@
-import React, { useState } from "react"
-import { Dialog } from "@headlessui/react"
-import { InformationCircleIcon } from "@heroicons/react/24/solid"
-import { useHotkeys } from "react-hotkeys-hook"
-import {Typography} from "../typography/typography";
+import React, { useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { useHotkeys } from "react-hotkeys-hook";
+import { Typography } from "../typography/typography";
 
 interface CopyHotKeyProps {
-  message: string
-  hotkey: string
-  action(): void
-  deps?: any[]
-  isBrowser?: any
+  message: string;
+  hotkey: string;
+  action(): void;
+  deps?: any[];
+  isBrowser?: any;
 }
 
 export const CopyHotKey = ({
@@ -19,17 +19,18 @@ export const CopyHotKey = ({
   deps,
   isBrowser,
 }: CopyHotKeyProps) => {
-  const storedTheme = (isBrowser && window.localStorage.getItem("theme")) || "dark"
-  const [copied, setCopied] = useState<boolean>(false)
+  const storedTheme =
+    (isBrowser && window.localStorage.getItem("theme")) || "dark";
+  const [copied, setCopied] = useState<boolean>(false);
   useHotkeys(
     hotkey,
     () => {
-      action()
-      setCopied(true)
-      setTimeout(() => setCopied(false), 5000)
+      action();
+      setCopied(true);
+      setTimeout(() => setCopied(false), 5000);
     },
     deps,
-  )
+  );
 
   return (
     <Dialog
@@ -51,11 +52,16 @@ export const CopyHotKey = ({
               />
             </div>
             <div className="ml-2  md:flex md:justify-between">
-              <Typography tag={"p"} className="text-base font-medium text-onSurfaceHigh">{message}</Typography>
+              <Typography
+                tag={"p"}
+                className="text-base font-medium text-onSurfaceHigh"
+              >
+                {message}
+              </Typography>
             </div>
           </div>
         </div>
       </Dialog.Description>
     </Dialog>
-  )
-}
+  );
+};

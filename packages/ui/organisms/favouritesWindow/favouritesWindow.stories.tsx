@@ -12,17 +12,19 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof FavouritesWindow> = (args) => <FavouritesWindow {...args} />;
+const Template: ComponentStory<typeof FavouritesWindow> = (args) => (
+  <FavouritesWindow {...args} />
+);
 
-export const Primary: ComponentMeta<typeof FavouritesWindow> = Template.bind({});
+export const Primary: ComponentMeta<typeof FavouritesWindow> = Template.bind(
+  {},
+);
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   favourites: [
@@ -37,6 +39,5 @@ Primary.args = {
     {
       address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
     },
-  ]
-
+  ],
 };

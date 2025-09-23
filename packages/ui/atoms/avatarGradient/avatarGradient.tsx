@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const gradSpecs = [
   {
@@ -1117,19 +1117,19 @@ const gradSpecs = [
       },
     ],
   },
-]
+];
 
 const addUrl = (spec: any) => ({
   ...spec,
   url: `url(#${spec.id})`,
-})
+});
 
 export const gradientSchemes = gradSpecs.map((spec) => ({
   primary: spec.primary.map(addUrl),
   secondary: spec.secondary.map(addUrl),
-}))
+}));
 
-export const Gradients = ({ scheme }: {scheme: any}) => (
+export const Gradients = ({ scheme }: { scheme: any }) => (
   <defs>
     {[...scheme.primary, ...scheme.secondary].map((spec) => (
       <linearGradient
@@ -1147,4 +1147,4 @@ export const Gradients = ({ scheme }: {scheme: any}) => (
       </linearGradient>
     ))}
   </defs>
-)
+);

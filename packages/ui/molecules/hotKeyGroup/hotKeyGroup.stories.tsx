@@ -5,24 +5,17 @@ import { HotKeyGroup } from "./hotKeyGroup";
 export default {
   title: "Molecules/Hotkeys/HotKeyGroup",
   component: HotKeyGroup,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof HotKeyGroup> = (args) => {
-  return(
-    <HotKeyGroup {...args}/>
-  )
+  return <HotKeyGroup {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof HotKeyGroup> = Template.bind({});

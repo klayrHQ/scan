@@ -3,8 +3,8 @@ export const transactionsColumns = [
     name: "tx modal",
     headValues: [
       {
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     valueKeys: [
       {
@@ -19,45 +19,45 @@ export const transactionsColumns = [
                 iconProps: [
                   {
                     value: "w-3 h-3 text-sucess",
-                    key: "className"
-                  }
+                    key: "className",
+                  },
                 ],
-                operator: "=="
-              }
-            ]
+                operator: "==",
+              },
+            ],
           },
-          type: "string"
+          type: "string",
         },
         name: "success icon",
-        type: "key"
+        type: "key",
       },
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "status",
         type: "key",
-        value: "transactions.executionStatus"
+        value: "transactions.executionStatus",
       },
       {
         format: {
           type: "string",
-          format: "plain"
+          format: "plain",
         },
         name: "Data",
         type: "key",
-        value: "transactions.params.data"
+        value: "transactions.params.data",
       },
       {
         type: "key",
         value: "transactions.confirmations",
         format: {
           format: "number",
-          type: "number"
+          type: "number",
         },
-        name: "confirmations"
-      }
+        name: "confirmations",
+      },
     ],
     valueComponent: "TxPopoverColumn",
     component: "DefaultHeadColumn",
@@ -74,10 +74,10 @@ export const transactionsColumns = [
         format: {
           format: "plain",
           tag: "span",
-          type: "string"
+          type: "string",
         },
         name: "Transaction ID",
-      }
+      },
     ],
     showOn: "tabletDesktop",
     valueKeys: [
@@ -85,22 +85,20 @@ export const transactionsColumns = [
         format: {
           format: "shortAddress",
           link: {
-            keys: [
-              "transactions.id"
-            ],
-            href: "/transaction/%s"
+            keys: ["transactions.id"],
+            href: "/transaction/%s",
           },
           tag: "span",
           type: "string",
           color: {
-            color: "onSurfaceLinkMedium"
-          }
+            color: "onSurfaceLinkMedium",
+          },
         },
         name: "id",
         type: "key",
-        value: "transactions.id"
-      }
-    ]
+        value: "transactions.id",
+      },
+    ],
   },
   {
     name: "type",
@@ -111,10 +109,10 @@ export const transactionsColumns = [
         value: "Type",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "type"
-      }
+        name: "type",
+      },
     ],
     showOn: "always",
     className: "w-10",
@@ -124,16 +122,17 @@ export const transactionsColumns = [
         format: {
           typography: [
             {
-              value: "capitalize w-full text-center border-1 rounded px-2 py-1 border-solid ring-tableHeaderBorder bg-surface-1",
-              key: "className"
-            }
+              value:
+                "capitalize w-full text-center border-1 rounded px-2 py-1 border-solid ring-tableHeaderBorder bg-surface-1",
+              key: "className",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Type",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
     valueComponent: "PlainColumn",
   },
@@ -144,11 +143,11 @@ export const transactionsColumns = [
       {
         format: {
           format: "fromNow",
-          type: "timestamp"
+          type: "timestamp",
         },
         type: "key",
-        value: "transactions.block.timestamp"
-      }
+        value: "transactions.block.timestamp",
+      },
     ],
     valueComponent: "PlainColumn",
     headValues: [
@@ -157,12 +156,12 @@ export const transactionsColumns = [
         value: "Date",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "date",
-      }
+      },
     ],
-    component: "DefaultHeadColumn"
+    component: "DefaultHeadColumn",
   },
   {
     name: "account-page-tx-sender",
@@ -174,15 +173,13 @@ export const transactionsColumns = [
           type: "string",
           format: "shortAddress",
           link: {
-            keys: [
-              "transactions.sender.address"
-            ],
-            href: "/account/%s"
-          }
+            keys: ["transactions.sender.address"],
+            href: "/account/%s",
+          },
         },
         name: "account-page-tx-sender",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
     showOn: "always",
     component: "DefaultHeadColumn",
@@ -193,10 +190,10 @@ export const transactionsColumns = [
         value: "From",
         format: {
           format: "plain",
-          type: "string"
-        }
-      }
-    ]
+          type: "string",
+        },
+      },
+    ],
   },
   {
     name: "account-page-tx-recipient",
@@ -206,14 +203,12 @@ export const transactionsColumns = [
         value: "transactions.meta.recipient",
         format: {
           link: {
-            keys: [
-              "transactions.meta.recipient.address"
-            ],
-            href: "/account/%s"
-          }
+            keys: ["transactions.meta.recipient.address"],
+            href: "/account/%s",
+          },
         },
-        name: "account-page-tx-recipient"
-      }
+        name: "account-page-tx-recipient",
+      },
     ],
     showOn: "always",
     valueComponent: "AvatarColumn",
@@ -222,13 +217,13 @@ export const transactionsColumns = [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "To",
         type: "literal",
-        value: "To"
-      }
-    ]
+        value: "To",
+      },
+    ],
   },
   {
     name: "Value",
@@ -236,24 +231,25 @@ export const transactionsColumns = [
       {
         format: {
           format: "currency",
-          type: "beddows"
+          type: "beddows",
         },
         name: "Balance",
         type: "key",
-        value: "transactions.txType === 'claimRewards' ? transactions.params.rewards : transactions.params.amount",
-      }
+        value:
+          "transactions.txType === 'claimRewards' ? transactions.params.rewards : transactions.params.amount",
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Value",
         type: "literal",
-        value: "Value"
-      }
+        value: "Value",
+      },
     ],
     valueComponent: "ValueColumn",
     showOn: "always",
@@ -266,10 +262,10 @@ export const transactionsColumns = [
         value: "transactions.fee",
         format: {
           format: "fee",
-          type: "beddows"
+          type: "beddows",
         },
         name: "fee",
-      }
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
@@ -278,12 +274,12 @@ export const transactionsColumns = [
         value: "Fee",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "account-page-tx-fee"
-      }
+        name: "account-page-tx-fee",
+      },
     ],
     showOn: "always",
     valueComponent: "PlainColumn",
-  }
-]
+  },
+];

@@ -13,7 +13,7 @@ import { StakesAccountColumn } from "./stakesAccount";
 import { LogoColumn } from "./logo";
 import { TxPopover } from "./txPopover";
 import { CountryFlagColumn } from "./countryFlagColumn";
-import {ValueColumn} from "./value";
+import { ValueColumn } from "./value";
 
 export interface ColumnProps {
   params: Record<string, any>;
@@ -48,7 +48,7 @@ export {
   PlainColumn,
   DateColumn,
   GridColumn,
-    ValueColumn,
+  ValueColumn,
   AvatarColumn,
   ValidatorStatusColumn,
   NrColumn,

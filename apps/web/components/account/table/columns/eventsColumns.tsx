@@ -4,8 +4,8 @@ export const eventsColumns = [
     headValues: [
       {
         type: "literal",
-        value: "Date"
-      }
+        value: "Date",
+      },
     ],
     valueKeys: [
       {
@@ -13,10 +13,10 @@ export const eventsColumns = [
         value: "events.block.timestamp",
         format: {
           format: "date",
-          type: "timestamp"
+          type: "timestamp",
         },
-        name: "date"
-      }
+        name: "date",
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
@@ -29,8 +29,8 @@ export const eventsColumns = [
       {
         name: "height",
         type: "literal",
-        value: "Height"
-      }
+        value: "Height",
+      },
     ],
     showOn: "always",
     valueKeys: [
@@ -40,11 +40,11 @@ export const eventsColumns = [
         value: "events.block.height",
         format: {
           format: "number",
-          type: "number"
-        }
-      }
+          type: "number",
+        },
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     name: "Module",
@@ -54,8 +54,8 @@ export const eventsColumns = [
       {
         name: "module",
         type: "literal",
-        value: "Module"
-      }
+        value: "Module",
+      },
     ],
     valueKeys: [
       {
@@ -67,14 +67,14 @@ export const eventsColumns = [
           typography: [
             {
               value: "capitalize",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
-          format: "plain"
-        }
-      }
+          format: "plain",
+        },
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     name: "event",
@@ -89,21 +89,21 @@ export const eventsColumns = [
             {
               value: "capitalize",
               key: "className",
-            }
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "event",
-      }
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
       {
         name: "event",
         type: "literal",
-        value: "Event"
-      }
+        value: "Event",
+      },
     ],
   },
   {
@@ -112,8 +112,8 @@ export const eventsColumns = [
       {
         name: "amount",
         type: "literal",
-        value: "Amount"
-      }
+        value: "Amount",
+      },
     ],
     valueKeys: [
       {
@@ -122,8 +122,8 @@ export const eventsColumns = [
         value: "events.data.amount",
         format: {
           format: "fee",
-          type: "beddows"
-        }
+          type: "beddows",
+        },
       },
       {
         name: "burntAmount",
@@ -133,13 +133,13 @@ export const eventsColumns = [
           format: "fee",
           type: "beddows",
           color: {
-            color: "red"
-          }
-        }
-      }
+            color: "red",
+          },
+        },
+      },
     ],
     valueComponent: "DoubleRowColumn",
     component: "DefaultHeadColumn",
-    showOn: "always"
-  }
-]
+    showOn: "always",
+  },
+];

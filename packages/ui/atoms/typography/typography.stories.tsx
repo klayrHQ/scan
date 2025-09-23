@@ -63,7 +63,9 @@ Button.args = {
   className: "pointer",
 };
 
-export const ParagraphSmall: ComponentMeta<typeof Typography> = Template.bind({});
+export const ParagraphSmall: ComponentMeta<typeof Typography> = Template.bind(
+  {},
+);
 ParagraphSmall.args = {
   children: "Colecti is de beste van allemaal",
   tag: "span",
@@ -73,7 +75,9 @@ ParagraphSmall.args = {
   className: "pointer",
 };
 
-export const ParagraphLarge: ComponentMeta<typeof Typography> = Template.bind({});
+export const ParagraphLarge: ComponentMeta<typeof Typography> = Template.bind(
+  {},
+);
 ParagraphLarge.args = {
   children: "colecti",
   tag: "span",
@@ -88,7 +92,8 @@ Link.args = {
   align: "center",
   link: true,
   onClick: () => {
-    console.log("yeah")}
+    console.log("yeah");
+  },
 };
 export const Playground: ComponentMeta<typeof Typography> = Template.bind({});
 Playground.args = {
@@ -105,6 +110,5 @@ Playground.args = {
   bgColor: "sand",
   underLine: true,
   underLineSpacing: 1,
-  className: "hover:bg-primaryAlt"
+  className: "hover:bg-primaryAlt",
 };
-

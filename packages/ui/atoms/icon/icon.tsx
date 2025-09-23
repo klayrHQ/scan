@@ -3,13 +3,10 @@ import { cva } from "class-variance-authority";
 import { iconVariants } from "../../types";
 import { Typography } from "../typography/typography";
 import { iconList } from "./iconList";
-import {cls} from "../../utils";
+import { cls } from "../../utils";
 
 interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {
-  type?:
-    | "primary"
-    | "outlined"
-    | "iconOnly";
+  type?: "primary" | "outlined" | "iconOnly";
   icon: iconVariants;
   backgroundColor?: string;
   align?: "left" | "center" | "right" | "none";
@@ -23,13 +20,7 @@ interface IconProps extends HTMLAttributes<HTMLOrSVGElement> {
 }
 
 const iconClass = cva(
-  [
-    "flex",
-    "align-middle",
-    "items-center",
-    "text-center",
-    "cursor-pointer",
-  ],
+  ["flex", "align-middle", "items-center", "text-center", "cursor-pointer"],
   {
     variants: {
       icon: {
@@ -189,7 +180,17 @@ const factory = () => {
       size,
       align,
       className: className,
-      icon: icon as "chevronLeft2" | "chevronDownSvg" | "menuSvg" | "account2" | "tooltipArrow" | "logoCreators" | "logoMarketplace" | "logoSketch" | "logoStandard" | "arrowRight",
+      icon: icon as
+        | "chevronLeft2"
+        | "chevronDownSvg"
+        | "menuSvg"
+        | "account2"
+        | "tooltipArrow"
+        | "logoCreators"
+        | "logoMarketplace"
+        | "logoSketch"
+        | "logoStandard"
+        | "arrowRight",
     });
     const Component = iconList[icon];
     return (
@@ -204,7 +205,10 @@ const factory = () => {
           </Typography>
         )}
         {!number && icon && (
-          <Component className={cls([heroIconClasses, color && `text-${color}`])} {...props} />
+          <Component
+            className={cls([heroIconClasses, color && `text-${color}`])}
+            {...props}
+          />
         )}
       </>
     );

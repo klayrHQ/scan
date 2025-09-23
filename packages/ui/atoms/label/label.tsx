@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface LabelProps {
   primary?: boolean;
@@ -6,7 +6,7 @@ interface LabelProps {
   label: string;
   name: string;
   children: any;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }
 
 /**
@@ -21,16 +21,16 @@ export const Label = ({
   children,
   ...props
 }: LabelProps) => {
-  const mode = primary ? '' : 'storybook-label--secondary';
+  const mode = primary ? "" : "storybook-label--secondary";
   return (
     <label
       className={[
-        'rounded border-none',
+        "rounded border-none",
         className,
         size === "large" ? "text-lg" : size === "small" ? "text-sm" : "",
         primary ? "text-primary" : "",
-        mode
-      ].join(' ')}
+        mode,
+      ].join(" ")}
       htmlFor={name}
       {...props}
     >

@@ -1,20 +1,20 @@
 import React, { FC } from "react";
-import {cls} from "../../assets/utils";
+import { cls } from "../../assets/utils";
 import "./sliderStyles.css";
 
 interface MultiRangeSliderProps {
-  min: number
-  max: number
-  className?: string
-  trackClassName?: string
-  trackColor?: string
-  fillClassName?: string
-  fillColor?: string
-  fromValue: number
-  setFromValue: (value: number) => void
-  toValue: number
-  setToValue: (value: number) => void
-  steps?: number
+  min: number;
+  max: number;
+  className?: string;
+  trackClassName?: string;
+  trackColor?: string;
+  fillClassName?: string;
+  fillColor?: string;
+  fromValue: number;
+  setFromValue: (value: number) => void;
+  toValue: number;
+  setToValue: (value: number) => void;
+  steps?: number;
 }
 
 export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
@@ -22,16 +22,15 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   max,
   className,
   trackClassName,
-  trackColor= "surface-2",
+  trackColor = "surface-2",
   fillClassName,
-  fillColor= "primary",
+  fillColor = "primary",
   setFromValue,
   setToValue,
   fromValue,
   toValue,
-  steps
+  steps,
 }) => {
-
   return (
     <div className={cls(["relative", className])}>
       <input
@@ -41,10 +40,10 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         max={max}
         step={steps || 1}
         onChange={({ target }) => {
-          parseInt(target.value) < (max) &&
-          setFromValue(parseInt(target.value))
-          parseInt(target.value) >= toValue && toValue < max &&
-          setToValue(parseInt(target.value) + (steps ? steps : 1))
+          parseInt(target.value) < max && setFromValue(parseInt(target.value));
+          parseInt(target.value) >= toValue &&
+            toValue < max &&
+            setToValue(parseInt(target.value) + (steps ? steps : 1));
         }}
         value={fromValue}
       />
@@ -55,10 +54,10 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         max={max}
         step={steps || 1}
         onChange={({ target }) => {
-          parseInt(target.value) > (min) &&
-          setToValue(parseInt(target.value))
-          parseInt(target.value) <= fromValue && fromValue > min &&
-          setFromValue(parseInt(target.value) - (steps ? steps : 1))
+          parseInt(target.value) > min && setToValue(parseInt(target.value));
+          parseInt(target.value) <= fromValue &&
+            fromValue > min &&
+            setFromValue(parseInt(target.value) - (steps ? steps : 1));
         }}
         value={toValue}
       />
@@ -81,11 +80,9 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
             fillColor && `bg-${fillColor}`,
           ])}
         >
-          <div className="w-full h-full bg-primary opacity-30">
-
-          </div>
+          <div className="w-full h-full bg-primary opacity-30"></div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

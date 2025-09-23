@@ -6,11 +6,11 @@ import transactionTabs from "./transactionTabs";
 import { stakesAccount } from "./stakesAccount";
 import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
-import {divider} from "./divider";
-import {jsonItem} from "./jsonItem";
-import {chart} from "./chart";
+import { divider } from "./divider";
+import { jsonItem } from "./jsonItem";
+import { chart } from "./chart";
 import newsGrid from "../news/newsGrid";
-import {countryFlag} from "./countryFlag";
+import { countryFlag } from "./countryFlag";
 
 const sliceDocumentNames: {
   type: string;

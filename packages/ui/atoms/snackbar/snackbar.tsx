@@ -1,5 +1,5 @@
 "use client";
-import React, {ReactElement, useState} from "react";
+import React, { ReactElement, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { Typography } from "../typography/typography";
@@ -11,15 +11,18 @@ interface SnackbarProps {
   toggleState?: any;
 }
 
-export const Snackbar = ({ align = "top-right", message, toggleState, icon }: SnackbarProps) => {
+export const Snackbar = ({
+  align = "top-right",
+  message,
+  toggleState,
+  icon,
+}: SnackbarProps) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
     <Dialog
       open={isOpen}
-      onClose={
-        () => toggleState ? toggleState("") : setIsOpen(false)
-      }
+      onClose={() => (toggleState ? toggleState("") : setIsOpen(false))}
       className={[
         "fixed z-50 overflow-x-auto flex flex-tableRow justify-end max-w-max p-2 rounded",
         "right-0 left-0 md:left-auto mx-auto md:mx-0",
@@ -37,13 +40,14 @@ export const Snackbar = ({ align = "top-right", message, toggleState, icon }: Sn
         >
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              {
-                icon ? icon :
+              {icon ? (
+                icon
+              ) : (
                 <InformationCircleIcon
                   className="h-5 w-5 text-onSurfacePrimaryHigh"
                   aria-hidden="true"
                 />
-              }
+              )}
             </div>
             <div className="ml-3 flex-1 md:flex md:justify-between">
               <Typography

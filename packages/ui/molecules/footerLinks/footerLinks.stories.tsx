@@ -2,20 +2,17 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { FooterLinks } from "./footerLinks";
-import {compactString} from "../../assets/utils";
+import { compactString } from "../../assets/utils";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "molecules/FooterLinks",
   component: FooterLinks,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -71,15 +68,15 @@ export default {
           },
         ],
       },
-    ]
-  }
+    ],
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof FooterLinks> = (args) => <FooterLinks {...args} />;
+const Template: ComponentStory<typeof FooterLinks> = (args) => (
+  <FooterLinks {...args} />
+);
 
 export const Primary: ComponentMeta<typeof FooterLinks> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-
-};
+Primary.args = {};

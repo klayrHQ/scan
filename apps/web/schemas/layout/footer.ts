@@ -1,4 +1,3 @@
-
 export default {
   name: "footer",
   type: "object",
@@ -13,7 +12,7 @@ export default {
           type: "object",
           name: "inline",
           fields: [
-            { type: "string", name: "title", title: "Title", },
+            { type: "string", name: "title", title: "Title" },
             {
               type: "array",
               name: "items",
@@ -22,7 +21,7 @@ export default {
                   type: "object",
                   name: "inline",
                   fields: [
-                    { type: "string", name: "label", title: "Label", },
+                    { type: "string", name: "label", title: "Label" },
                     {
                       title: "Link",
                       type: "url",

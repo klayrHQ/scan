@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 
 export const useClickOutside = (handler: () => void) => {
   const domNode = useRef();

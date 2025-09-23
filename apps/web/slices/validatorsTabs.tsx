@@ -39,13 +39,13 @@ export const ValidatorTabs = ({
           subCategories[split[0]] = [split[1]];
         }
         return split[0];
-      })
+      }),
     ),
   ] as string[];
   return (
     <Container bgColor={"background"} section gap={2} className={"max-w-app"}>
       <Grid flex gap={2} columns={2}>
-        <Link key={"all"} href={"/transactions"}  prefetch={false}>
+        <Link key={"all"} href={"/transactions"} prefetch={false}>
           <Typography
             size={"menu"}
             tag={"span"}

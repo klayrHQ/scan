@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ActiveFilter } from "./activeFilter";
-import {FiltersType} from "../../types";
+import { FiltersType } from "../../types";
 
 export default {
   title: "Atoms/Filters/ActiveFilter",
@@ -13,27 +13,23 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
     filterName: "test",
     filterValue: "123",
-    reset: console.log("reset")
-  }
+    reset: console.log("reset"),
+  },
 } as any;
 
 const Template: ComponentStory<typeof ActiveFilter> = (args) => {
   return (
     <div className={"h-[100vh] w-[100vw] flex justify-center items-center p-8"}>
-      <ActiveFilter{...args}/>
+      <ActiveFilter {...args} />
     </div>
-  )
-}
+  );
+};
 
 export const Primary: ComponentMeta<typeof ActiveFilter> = Template.bind({});
-Primary.args = {
-
-};
+Primary.args = {};

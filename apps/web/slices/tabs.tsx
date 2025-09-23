@@ -22,7 +22,7 @@ export const TabsSlice = ({
 
   const activeTab =
     staticTabs.find(
-      (tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey
+      (tab: any) => searchParams?.get(tab.handle.current) === tab.queryKey,
     ) || staticTabs[0];
 
   const className = [
@@ -46,13 +46,13 @@ export const TabsSlice = ({
         {staticTabs?.map(
           (
             { label, queryKey, content, handle: { current }, _key }: any,
-            index: number
+            index: number,
           ) => {
             const link = !queryKey
               ? `/${uri}`
               : id
-              ? `/${uri}/${id}?${current}=${queryKey}`
-              : `/${uri}?${current}=${queryKey}`;
+                ? `/${uri}/${id}?${current}=${queryKey}`
+                : `/${uri}?${current}=${queryKey}`;
             return (
               // <Link key={_key} href={link}>
               <Typography
@@ -78,19 +78,19 @@ export const TabsSlice = ({
                         ]
                       : ["", "text-onSurfaceHigh hover:bg-surface-1"]
                     : index === 0
-                    ? [
-                        "bg-menuButton",
-                        "text-onMenuButton",
-                        "hover:text-onMenuButton",
-                      ]
-                    : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
+                      ? [
+                          "bg-menuButton",
+                          "text-onMenuButton",
+                          "hover:text-onMenuButton",
+                        ]
+                      : ["", "text-onSurfaceHigh hover:bg-surface-1"]),
                 ])}
               >
                 {label}
               </Typography>
               // </Link>
             );
-          }
+          },
         )}
       </Grid>
       {activeTab.content && (

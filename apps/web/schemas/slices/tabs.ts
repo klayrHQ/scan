@@ -2,11 +2,11 @@ import table from "./table";
 import titleBox from "./titleBox";
 import { kpi } from "./kpi";
 import { stakesAccount } from "./stakesAccount";
-import {divider} from "./divider";
-import {jsonItem} from "./jsonItem";
-import {chart} from "./chart";
+import { divider } from "./divider";
+import { jsonItem } from "./jsonItem";
+import { chart } from "./chart";
 import newsGrid from "../news/newsGrid";
-import {countryFlag} from "./countryFlag";
+import { countryFlag } from "./countryFlag";
 
 const sliceDocumentNames: {
   type: string;

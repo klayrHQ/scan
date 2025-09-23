@@ -1,4 +1,3 @@
-
 export const favorite = {
   name: "favorite",
   type: "document",
@@ -9,5 +8,5 @@ export const favorite = {
       type: "string",
       title: "ID",
     },
-  ]
-}
+  ],
+};

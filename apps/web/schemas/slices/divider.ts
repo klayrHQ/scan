@@ -1,4 +1,3 @@
-
 export const divider = {
   name: "divider",
   type: "document",
@@ -36,10 +35,10 @@ export const divider = {
       initialValue: "center",
       options: {
         list: [
-          {title: "None", value: ""},
-          {title: "Left", value: "start"},
-          {title: "Center", value: "center"},
-          {title: "Right", value: "end"},
+          { title: "None", value: "" },
+          { title: "Left", value: "start" },
+          { title: "Center", value: "center" },
+          { title: "Right", value: "end" },
         ],
         layout: "radio",
       },
@@ -49,5 +48,5 @@ export const divider = {
       type: "string",
       title: "Margin top and bottom",
     },
-  ]
-}
+  ],
+};

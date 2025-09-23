@@ -1,15 +1,15 @@
-import React, {ReactNode,} from "react"
+import React, { ReactNode } from "react";
 // import { Logo } from "../../molecules/logo/logo";
-import {Grid} from "../..";
+import { Grid } from "../..";
 // import {LiskScanIcon} from "../../assets/icons";
 
 interface MobileMenuProps {
-  menuItems: Array<ReactNode>
-  subMenu?: Array<ReactNode>
-  menuItemsTop?: Array<ReactNode>
-  menuTitle?: string
-  infoBar?: ReactNode
-  closeButton?: ReactNode
+  menuItems: Array<ReactNode>;
+  subMenu?: Array<ReactNode>;
+  menuItemsTop?: Array<ReactNode>;
+  menuTitle?: string;
+  infoBar?: ReactNode;
+  closeButton?: ReactNode;
 }
 
 export const MobileMenu = ({
@@ -26,7 +26,11 @@ export const MobileMenu = ({
       id="mobile-menu"
     >
       {infoBar}
-      <div className={"lg:hidden w-app bg-background flex flex-tableRow justify-between mb-2 py-4 mx-auto"}>
+      <div
+        className={
+          "lg:hidden w-app bg-background flex flex-tableRow justify-between mb-2 py-4 mx-auto"
+        }
+      >
         <span className="text-onSurfaceHigh font-medium">
           {menuTitle || "Menu"}
         </span>
@@ -46,5 +50,5 @@ export const MobileMenu = ({
         {subMenu}
       </Grid>
     </div>
-  )
-}
+  );
+};

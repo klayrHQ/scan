@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React, { Suspense } from "react";
 import { getSlices } from "./[uri]/page";
 import { Slicer } from "../../components/slicer";
 import { draftMode } from "next/headers";

@@ -1,15 +1,15 @@
-import React from 'react';
-import {Link} from "../../atoms/link/link";
-import {Typography} from "../../atoms/typography/typography";
+import React from "react";
+import { Link } from "../../atoms/link/link";
+import { Typography } from "../../atoms/typography/typography";
 
 interface LogoProps {
-  className?: string
-  color?: string
-  image?: any
-  title?: string
-  link: string
-  href: string
-  size?: 'small' | 'medium' | 'large';
+  className?: string;
+  color?: string;
+  image?: any;
+  title?: string;
+  link: string;
+  href: string;
+  size?: "small" | "medium" | "large";
 }
 
 /**
@@ -34,15 +34,11 @@ export const Logo = ({
         className={[
           "cursor-pointer items-center float-left",
           " text-lg md:text-2xl items-center flex font-bold",
-          size === "small" ? "text-sm" : size === "large" ? "text-xl" : ""
+          size === "small" ? "text-sm" : size === "large" ? "text-xl" : "",
         ].join(" ")}
       >
         {image}
-        <Typography
-          tag={"span"}
-          bold={true}
-          color={color}
-        >
+        <Typography tag={"span"} bold={true} color={color}>
           {title}
         </Typography>
       </Link>

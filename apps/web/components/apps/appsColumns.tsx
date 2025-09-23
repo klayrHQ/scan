@@ -9,8 +9,8 @@ export const columns = [
         name: "Logo",
         _key: "1fb9ee9d78a2",
         type: "key",
-        value: "blockchain-apps.logo"
-      }
+        value: "blockchain-apps.logo",
+      },
     ],
     valueComponent: "LogoColumn",
     headValues: [
@@ -22,26 +22,26 @@ export const columns = [
         format: {
           type: "string",
           format: "plain",
-          tag: "span"
-        }
-      }
+          tag: "span",
+        },
+      },
     ],
     name: "Blockchain-apps-logo",
     _id: "e9b39e32-240c-4301-a704-5c251a830661",
-    _updatedAt: "2024-01-04T15:04:30Z"
+    _updatedAt: "2024-01-04T15:04:30Z",
   },
   {
     valueKeys: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Name",
         _key: "1e95aa6f7dfc",
         type: "key",
-        value: "blockchain-apps.chainName"
-      }
+        value: "blockchain-apps.chainName",
+      },
     ],
     valueComponent: "PlainColumn",
     _createdAt: "2023-06-07T09:14:23Z",
@@ -56,14 +56,14 @@ export const columns = [
         value: "Name",
         format: {
           type: "string",
-          format: "plain"
+          format: "plain",
         },
         name: "Name",
-        _key: "b7abb0e3ba34"
-      }
+        _key: "b7abb0e3ba34",
+      },
     ],
     _rev: "46xKmhW6eYvW6TyYv8bkWQ",
-    _type: "column"
+    _type: "column",
   },
   {
     _id: "4766b24e-a2fd-409f-908d-5cfb06f21207",
@@ -77,10 +77,10 @@ export const columns = [
         value: "blockchain-apps.chainID",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "Chain Id key"
-      }
+        name: "Chain Id key",
+      },
     ],
     component: "DefaultHeadColumn",
     headValues: [
@@ -88,13 +88,13 @@ export const columns = [
         _key: "554103f2ad2b",
         type: "literal",
         value: "Chain Id",
-        name: "Chain Id"
-      }
+        name: "Chain Id",
+      },
     ],
     _createdAt: "2023-06-13T06:14:37Z",
     showOn: "always",
     _rev: "XqAi32IHlx6w0gbR9is6Rp",
-    _type: "column"
+    _type: "column",
   },
   {
     headValues: [
@@ -102,8 +102,8 @@ export const columns = [
         value: "Status",
         name: "Status",
         _key: "82c4839030bf",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     showOn: "always",
     name: "blakchain-apps-status",
@@ -115,17 +115,17 @@ export const columns = [
         value: "blockchain-apps.status",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "status"
-      }
+        name: "status",
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
     _rev: "46xKmhW6eYvW6TyYv8btOm",
     _type: "column",
     _updatedAt: "2024-01-04T15:05:56Z",
-    _createdAt: "2023-06-07T09:16:27Z"
+    _createdAt: "2023-06-07T09:16:27Z",
   },
   {
     component: "DefaultHeadColumn",
@@ -134,8 +134,8 @@ export const columns = [
         name: "Address",
         _key: "1c1e531a57d9",
         type: "literal",
-        value: "Created by"
-      }
+        value: "Created by",
+      },
     ],
     _createdAt: "2023-06-07T09:18:55Z",
     showOn: "always",
@@ -149,14 +149,14 @@ export const columns = [
       {
         format: {
           format: "avatarAddress",
-          type: "object"
+          type: "object",
         },
         name: "address",
         _key: "770b3568ef48",
         type: "key",
-        value: "blockchain-apps.get_pos_validators_address.0.address"
-      }
-    ]
+        value: "blockchain-apps.get_pos_validators_address.0.address",
+      },
+    ],
   },
   {
     _rev: "2EYbWfHFAYZXyVqHZeNfR8",
@@ -175,23 +175,23 @@ export const columns = [
         value: "Escrow Balance",
         format: {
           format: "plain",
-          type: "string"
-        }
-      }
+          type: "string",
+        },
+      },
     ],
     valueKeys: [
       {
         format: {
           format: "currency",
-          type: "beddows"
+          type: "beddows",
         },
         name: "escrow amount key",
         _key: "3b770a8cd0b9",
         type: "key",
-        value: "blockchain-apps.escrow.0.amount"
-      }
+        value: "blockchain-apps.escrow.0.amount",
+      },
     ],
-    valueComponent: "PlainColumn"
+    valueComponent: "PlainColumn",
   },
   {
     _createdAt: "2023-06-13T06:07:26Z",
@@ -204,8 +204,8 @@ export const columns = [
         name: "Last certificate height",
         _key: "c96cd7c7506e",
         type: "literal",
-        value: "Last Certificate Height"
-      }
+        value: "Last Certificate Height",
+      },
     ],
     _rev: "RtlO6C2s96M1bJtYJKyGy8",
     name: "Apps-Last-certificateHeight",
@@ -213,16 +213,16 @@ export const columns = [
       {
         format: {
           format: "plain",
-          type: "number"
+          type: "number",
         },
         name: "last certificate height",
         _key: "57e96942b93e",
         type: "key",
-        value: "blockchain-apps.lastCertificateHeight"
-      }
+        value: "blockchain-apps.lastCertificateHeight",
+      },
     ],
     valueComponent: "PlainColumn",
-    component: "DefaultHeadColumn"
+    component: "DefaultHeadColumn",
   },
   {
     valueKeys: [
@@ -231,19 +231,19 @@ export const columns = [
         value: "blockchain-apps.lastUpdated",
         format: {
           type: "timestamp",
-          format: "fromNow"
+          format: "fromNow",
         },
         name: "last updated key",
-        _key: "fb3cdb8577c5"
-      }
+        _key: "fb3cdb8577c5",
+      },
     ],
     headValues: [
       {
         name: "Last updated Label",
         _key: "2ad035b0945d",
         type: "literal",
-        value: "Last Updated"
-      }
+        value: "Last Updated",
+      },
     ],
     _createdAt: "2023-06-13T06:09:05Z",
     showOn: "always",
@@ -253,6 +253,6 @@ export const columns = [
     _rev: "AOW6EEZlN7nd2TAwNHJLTr",
     _type: "column",
     name: "Apps-Last-updated",
-    valueComponent: "PlainColumn"
-  }
-]
+    valueComponent: "PlainColumn",
+  },
+];

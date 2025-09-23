@@ -1,4 +1,3 @@
-
 export const chart = {
   name: "chart",
   type: "document",
@@ -36,11 +35,11 @@ export const chart = {
       initialValue: "donut",
       options: {
         list: [
-          {title: "Donut Chart", value: "donut"},
-          {title: "Pie Chart", value: "pie"},
-          {title: "Columns Chart", value: "columns"},
-          {title: "Double Columns Chart", value: "doubleColumns"},
-          {title: "Line Chart", value: "line"}
+          { title: "Donut Chart", value: "donut" },
+          { title: "Pie Chart", value: "pie" },
+          { title: "Columns Chart", value: "columns" },
+          { title: "Double Columns Chart", value: "doubleColumns" },
+          { title: "Line Chart", value: "line" },
         ],
       },
     },
@@ -58,13 +57,15 @@ export const chart = {
       name: "valueKey2",
       type: "string",
       title: "Value Key 2",
-      hidden: ({ parent, value }: any) => !value && parent?.chartType !== "doubleColumns"
+      hidden: ({ parent, value }: any) =>
+        !value && parent?.chartType !== "doubleColumns",
     },
     {
       name: "chartDataKey",
       type: "string",
       title: "Chart Data Query",
-      description: "What query should be generating the data to populate the chart",
+      description:
+        "What query should be generating the data to populate the chart",
     },
     /*{
       name: "chartData",
@@ -107,5 +108,5 @@ export const chart = {
         },
       ],
     },*/
-  ]
+  ],
 };

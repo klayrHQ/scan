@@ -1,4 +1,4 @@
-import {Divider, DividerProps} from "ui/atoms/divider/divider";
+import { Divider, DividerProps } from "ui/atoms/divider/divider";
 
 export const DividerSlice = ({
   className,
@@ -19,5 +19,5 @@ export const DividerSlice = ({
       align={align}
       marginY={marginY}
     />
-  )
-}
+  );
+};

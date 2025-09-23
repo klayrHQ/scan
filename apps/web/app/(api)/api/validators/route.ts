@@ -37,5 +37,5 @@ export async function GET(request: NextRequest) {
   //   cacheData()
   // }
   // const queryData = await getAllData(validatorQueries)
-  return NextResponse.json(  {});
+  return NextResponse.json({});
 }

@@ -1,24 +1,21 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SettingsMenu } from "./settingsMenu";
-import {ThemesContainer} from "../../organisms/themesContainer/themesContainer";
-import {ThemeType} from "../../types";
+import { ThemesContainer } from "../../organisms/themesContainer/themesContainer";
+import { ThemeType } from "../../types";
 
 export default {
   title: "Molecules/SettingsMenu",
   component: SettingsMenu,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
     closeSettingsModal: () => console.log("close modal"),
-    settingsModalState: {open: true, view: "theme", mobileOpen: false},
+    settingsModalState: { open: true, view: "theme", mobileOpen: false },
     themes: [
       {
         bg: {
@@ -30,7 +27,7 @@ export default {
         primary: 123,
         secondary: 456,
         type: "test",
-      }
+      },
     ],
     selectedTheme: {
       bg: {
@@ -43,14 +40,12 @@ export default {
       secondary: 456,
       type: "test",
     },
-    changeSettingsView: (view: string) => console.log(view)
-  }
+    changeSettingsView: (view: string) => console.log(view),
+  },
 } as any;
 
 const Template: ComponentStory<typeof SettingsMenu> = (args) => {
-  return(
-    <SettingsMenu {...args} />
-  )
+  return <SettingsMenu {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof SettingsMenu> = Template.bind({});
@@ -60,5 +55,5 @@ Primary.args = {
       link: "#",
       label: "Theme",
     },
-  ]
+  ],
 };

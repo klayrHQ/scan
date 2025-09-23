@@ -12,7 +12,7 @@ export default {
       name: "key",
       type: "string",
       title: "Iteration table",
-      description: "What query should be generating the rows"
+      description: "What query should be generating the rows",
     },
     {
       name: "slug",

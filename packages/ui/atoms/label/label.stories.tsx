@@ -9,18 +9,18 @@ export default {
   component: Label,
   argTypes: {
     className: { control: "text" },
-    fullWidth: { control: "boolean", defaultValue: false }
+    fullWidth: { control: "boolean", defaultValue: false },
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
-const Template: ComponentStory<typeof Label> = (args) => <Label {...args}>{args.children}</Label>;
+const Template: ComponentStory<typeof Label> = (args) => (
+  <Label {...args}>{args.children}</Label>
+);
 
 export const Primary: ComponentMeta<typeof Label> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

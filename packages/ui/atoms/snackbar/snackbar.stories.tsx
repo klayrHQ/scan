@@ -8,25 +8,22 @@ export default {
   title: "Atoms/Snackbar",
   component: Snackbar,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Snackbar> = (args) => <Snackbar {...args} />;
+const Template: ComponentStory<typeof Snackbar> = (args) => (
+  <Snackbar {...args} />
+);
 
 export const Primary: ComponentMeta<typeof Snackbar> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  message: "Snackbar Notification"
+  message: "Snackbar Notification",
 };

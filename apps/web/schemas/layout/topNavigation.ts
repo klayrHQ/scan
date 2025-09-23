@@ -1,4 +1,3 @@
-
 export default {
   name: "topNavigation",
   type: "document",
@@ -13,7 +12,7 @@ export default {
           type: "object",
           name: "inline",
           fields: [
-            { type: "string", name: "label", },
+            { type: "string", name: "label" },
             {
               title: "Link",
               type: "url",
@@ -29,9 +28,9 @@ export default {
               title: "Item type",
               options: {
                 list: [
-                  { title: "Default", value: "default", },
-                  { title: "Button Primary", value: "primary", },
-                  { title: "Button Secondary", value: "secondary", },
+                  { title: "Default", value: "default" },
+                  { title: "Button Primary", value: "primary" },
+                  { title: "Button Secondary", value: "secondary" },
                 ],
                 layout: "radio",
               },

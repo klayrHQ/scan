@@ -1,6 +1,6 @@
 import { Grid, KeyValueRow, Typography } from "ui";
 
-export const ValidatorKpis = ({stats}: any) => {
+export const ValidatorKpis = ({ stats }: any) => {
   const validatorKpis = [
     {
       total:

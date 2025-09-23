@@ -1,18 +1,23 @@
-import React, {FC} from "react";
-import { Paper} from "../../atoms/paper/paper";
-import { CurrencyType, SettingsItemType } from "../../types"
-import {Icon} from "../../atoms/icon/icon";
-import {ThemeType} from "../../types";
-import {Typography} from "../../atoms/typography/typography";
+import React, { FC } from "react";
+import { Paper } from "../../atoms/paper/paper";
+import { CurrencyType, SettingsItemType } from "../../types";
+import { Icon } from "../../atoms/icon/icon";
+import { ThemeType } from "../../types";
+import { Typography } from "../../atoms/typography/typography";
 
 interface SettingsMenuProps {
-  settingsModalState: {open: boolean, view: string, mobileOpen: boolean, args?: any}
-  parsedSettings?: any
-  closeSettingsModal: () => void
-  views: Array<any>
-  changeSettingsView: (view: string) => void
-  themes: Array<ThemeType>
-  selectedTheme: ThemeType
+  settingsModalState: {
+    open: boolean;
+    view: string;
+    mobileOpen: boolean;
+    args?: any;
+  };
+  parsedSettings?: any;
+  closeSettingsModal: () => void;
+  views: Array<any>;
+  changeSettingsView: (view: string) => void;
+  themes: Array<ThemeType>;
+  selectedTheme: ThemeType;
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = ({
@@ -24,21 +29,20 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
   selectedTheme,
   themes,
 }) => {
-
   const getCurrentSetting = (item: SettingsItemType) => {
     if (item.link === "themes") {
       return (
         themes.find((t) => t.handle === selectedTheme.handle)?.name ||
         selectedTheme.handle
-      )
+      );
     } else if (item.link === "currencies") {
-      const selectedCurrency: CurrencyType = parsedSettings.selectedCurrency
-      return `${selectedCurrency.name} - ${selectedCurrency.sign} `
+      const selectedCurrency: CurrencyType = parsedSettings.selectedCurrency;
+      return `${selectedCurrency.name} - ${selectedCurrency.sign} `;
     } else if (item.link === "networks") {
-      return `${parsedSettings.networks.communityId}(${parsedSettings.networks.network})`
+      return `${parsedSettings.networks.communityId}(${parsedSettings.networks.network})`;
     }
-    return ""
-  }
+    return "";
+  };
   return (
     <Paper
       surface={0}
@@ -48,8 +52,10 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
       ].join(" ")}
       shadow={0}
     >
-      <div className="absolute w-full h-full inset-0 bg-transparent z-1" onClick={() => closeSettingsModal()}>
-      </div>
+      <div
+        className="absolute w-full h-full inset-0 bg-transparent z-1"
+        onClick={() => closeSettingsModal()}
+      ></div>
       <div className="w-full bg-background md:hidden flex flex-row justify-between mb-2 px-4 py-4 md:py-0 mx-auto">
         <div onClick={() => closeSettingsModal()}>
           <Icon className="w-5 h-5 text-onBackgroundHigh" icon={"arrowLeft"} />
@@ -57,8 +63,8 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
         <span className="text-onSurfaceHigh font-medium">Settings</span>
         <div
           onClick={() => {
-            settingsModalState?.args?.onClick()
-            closeSettingsModal()
+            settingsModalState?.args?.onClick();
+            closeSettingsModal();
           }}
         >
           <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"x"} />
@@ -69,7 +75,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
           <div
             key={`sm-${item.link}`}
             onClick={() => {
-              changeSettingsView(item.link)
+              changeSettingsView(item.link);
             }}
             className={[
               item.hideOnMobile && "hidden md:flex",
@@ -98,11 +104,14 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
               <span className="text-onSurfaceLow hover:text-onSurfacePrimaryHigh">
                 {getCurrentSetting(item)}
               </span>
-              <Icon className="w-5 h-5 text-onSurfaceHigh ml-4" icon={"chevronRight"} />
+              <Icon
+                className="w-5 h-5 text-onSurfaceHigh ml-4"
+                icon={"chevronRight"}
+              />
             </div>
           </div>
         ))}
       </div>
     </Paper>
-  )
-}
+  );
+};

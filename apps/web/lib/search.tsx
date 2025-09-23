@@ -1,8 +1,11 @@
-import {LiskService, NumberStringAndFromToNumber} from "@liskscan/lisk-service-client";
+import {
+  LiskService,
+  NumberStringAndFromToNumber,
+} from "@liskscan/lisk-service-client";
 import { tableRowsType } from "ui/types";
 import React from "react";
 import { SearchResult } from "../components/searchResult";
-import {getData} from "./sanity.service";
+import { getData } from "./sanity.service";
 
 export const search = async (
   client: LiskService,
@@ -10,7 +13,7 @@ export const search = async (
   setOpen: (state: boolean) => void,
   menuCloseFunction?: () => void,
   value?: string,
-  filter?: string
+  filter?: string,
 ): Promise<any[]> => {
   const results: tableRowsType = [];
   if (value === undefined) {
@@ -44,7 +47,7 @@ export const search = async (
     }
   }
   if (searchType.type === "blockHeight") {
-    const block = await getBlockByHeight(client, value)
+    const block = await getBlockByHeight(client, value);
     if (block) {
       results.push({
         id: results.length.toString(),
@@ -65,11 +68,14 @@ export const search = async (
             className: "py-2 px-4 text-left",
           },
         ],
-      })
+      });
     }
   }
   if (searchType.type === "unknown") {
-    const validators = await client.rpc("get.pos.validators", { search: value, limit: 5 });
+    const validators = await client.rpc("get.pos.validators", {
+      search: value,
+      limit: 5,
+    });
     if (validators.status === "success") {
       for (const validator of validators.data) {
         results.push({
@@ -95,7 +101,7 @@ export const search = async (
       }
     }
   }
-    // await client.rpc("get.transactions", {search: value})
+  // await client.rpc("get.transactions", {search: value})
   return results;
 };
 
@@ -109,8 +115,8 @@ export const inputRecognizer = (value: string) => {
   if (!isNaN(parseInt(value))) {
     return {
       type: "blockHeight",
-      value: value
-    }
+      value: value,
+    };
   }
   return {
     type: "unknown",
@@ -119,9 +125,11 @@ export const inputRecognizer = (value: string) => {
 };
 
 export const getBlockByHeight = async (client: LiskService, value: string) => {
-  const block = await getData("lisk-service", "get.blocks", {height: value as NumberStringAndFromToNumber})
+  const block = await getData("lisk-service", "get.blocks", {
+    height: value as NumberStringAndFromToNumber,
+  });
   if (block.status === "success") {
-    return block.data[0]
+    return block.data[0];
   }
-  return undefined
+  return undefined;
 };

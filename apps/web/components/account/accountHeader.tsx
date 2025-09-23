@@ -1,24 +1,28 @@
-import {Grid, KeyValueRow, ValueFormatter} from "ui";
-import {CopyButton} from "../data/copy";
-import {TableSlice} from "../../slices/table";
-import {tokenColumns} from "./table/columns/tokenColumns";
+import { Grid, KeyValueRow, ValueFormatter } from "ui";
+import { CopyButton } from "../data/copy";
+import { TableSlice } from "../../slices/table";
+import { tokenColumns } from "./table/columns/tokenColumns";
 import React from "react";
-import {AccountHeader as AccountHeaderSlice} from "../../slices/accountHeader";
-import {Tokens} from "./tabContent/tokens";
-import {Icon} from "ui/atoms/icon/icon";
-import {ConsoleLogTester} from "../consoleLogTester";
+import { AccountHeader as AccountHeaderSlice } from "../../slices/accountHeader";
+import { Tokens } from "./tabContent/tokens";
+import { Icon } from "ui/atoms/icon/icon";
+import { ConsoleLogTester } from "../consoleLogTester";
 
 export const AccountHeader = ({
   queryData,
   address,
 }: {
-  queryData: any
-  address: string
+  queryData: any;
+  address: string;
 }) => {
   const transactions = {
-    in: queryData["account-id-transactions"]?.data?.filter((tx: { sender: { address: string; }; }) => tx.sender.address !== address).length,
-    out: queryData["account-id-transactions"]?.data?.filter((tx: { sender: { address: string; }; }) => tx.sender.address === address).length,
-  }
+    in: queryData["account-id-transactions"]?.data?.filter(
+      (tx: { sender: { address: string } }) => tx.sender.address !== address,
+    ).length,
+    out: queryData["account-id-transactions"]?.data?.filter(
+      (tx: { sender: { address: string } }) => tx.sender.address === address,
+    ).length,
+  };
 
   return (
     <Grid
@@ -38,7 +42,7 @@ export const AccountHeader = ({
         <AccountHeaderSlice
           slices={[]}
           name={"accountHeader"}
-          values={{value: "account-auth.meta", name: "value", type: "key"}}
+          values={{ value: "account-auth.meta", name: "value", type: "key" }}
           justifyBetween
           gap={8}
           cols={2}
@@ -49,24 +53,58 @@ export const AccountHeader = ({
         />
         <KeyValueRow
           color={"onPrimary"}
-          label={<ValueFormatter value={"Nonce"} type={"string"} format={"plain"} />}
-          value={queryData ? <ValueFormatter value={queryData["account-auth"]?.data?.nonce ?? 0} type={"number"} format={"number"} /> : ""}
-        />
-        <KeyValueRow
-          color={"onPrimary"}
-          label={<ValueFormatter value={"Public Key"} type={"string"} format={"plain"} />}
-          value={queryData ?
-            <div className={"inline-flex gap-1 items-center"}>
-              <ValueFormatter value={queryData["account-auth"]?.meta?.publicKey} type={"string"} format={"shortAddress"} />
-              <CopyButton value={queryData["account-auth"]?.meta?.publicKey} />
-            </div>
-            : ""}
-        />
-        <KeyValueRow
-          color={"onPrimary"}
-          label={<ValueFormatter value={"Transactions"} type={"string"} format={"plain"} />}
+          label={
+            <ValueFormatter value={"Nonce"} type={"string"} format={"plain"} />
+          }
           value={
-            queryData ?
+            queryData ? (
+              <ValueFormatter
+                value={queryData["account-auth"]?.data?.nonce ?? 0}
+                type={"number"}
+                format={"number"}
+              />
+            ) : (
+              ""
+            )
+          }
+        />
+        <KeyValueRow
+          color={"onPrimary"}
+          label={
+            <ValueFormatter
+              value={"Public Key"}
+              type={"string"}
+              format={"plain"}
+            />
+          }
+          value={
+            queryData ? (
+              <div className={"inline-flex gap-1 items-center"}>
+                <ValueFormatter
+                  value={queryData["account-auth"]?.meta?.publicKey}
+                  type={"string"}
+                  format={"shortAddress"}
+                />
+                <CopyButton
+                  value={queryData["account-auth"]?.meta?.publicKey}
+                />
+              </div>
+            ) : (
+              ""
+            )
+          }
+        />
+        <KeyValueRow
+          color={"onPrimary"}
+          label={
+            <ValueFormatter
+              value={"Transactions"}
+              type={"string"}
+              format={"plain"}
+            />
+          }
+          value={
+            queryData ? (
               <div className={"flex"}>
                 <Icon color={"error"} icon={"arrowUp"} />
                 <ValueFormatter
@@ -81,8 +119,9 @@ export const AccountHeader = ({
                   format={"number"}
                 />
               </div>
-              :
+            ) : (
               ""
+            )
           }
         />
       </Grid>
@@ -90,5 +129,5 @@ export const AccountHeader = ({
         <Tokens queryData={queryData} />
       </Grid>
     </Grid>
-  )
-}
+  );
+};

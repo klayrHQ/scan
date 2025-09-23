@@ -38,7 +38,7 @@ export const Validators = ({
   const { setQueryParams } = useQueryParams<QueryParams>();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>(
-    searchParams?.get("status") || "eligible"
+    searchParams?.get("status") || "eligible",
   );
   const handleChange = (value: string) => {
     // @ts-ignore
@@ -61,7 +61,7 @@ export const Validators = ({
         }`,
         {
           next: { revalidate: 0 },
-        }
+        },
       );
       const validatorsJSON = await validators.json();
       setValidators(validatorsJSON);

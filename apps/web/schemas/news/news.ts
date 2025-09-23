@@ -1,4 +1,3 @@
-
 export default {
   name: "news",
   type: "document",
@@ -13,7 +12,7 @@ export default {
       name: "category",
       title: "Category",
       type: "reference",
-      to: [{type: "newsCategories"}],
+      to: [{ type: "newsCategories" }],
     },
     {
       name: "imgType",
@@ -22,18 +21,19 @@ export default {
       initialValue: "url",
       options: {
         list: [
-          {title: "url", value: "url"},
-          {title: "upload", value: "upload"},
+          { title: "url", value: "url" },
+          { title: "upload", value: "upload" },
         ],
         layout: "radio",
         direction: "horizontal",
-      }
+      },
     },
     {
       name: "img",
       type: "image",
       title: "Image",
-      hidden: ({ parent, value }: any) => !value && parent?.imgType !== "upload"
+      hidden: ({ parent, value }: any) =>
+        !value && parent?.imgType !== "upload",
     },
     {
       name: "imgObj",
@@ -56,12 +56,12 @@ export default {
           title: "Image Alt",
         },
       ],
-      hidden: ({ parent, value }: any) => !value && parent?.imgType !== "url"
+      hidden: ({ parent, value }: any) => !value && parent?.imgType !== "url",
     },
     {
       name: "url",
       type: "string",
       title: "Link",
-    }
+    },
   ],
 };

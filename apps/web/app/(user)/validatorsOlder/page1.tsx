@@ -1,7 +1,10 @@
-import {getGeneratorsFromAPI, getValidatorsFromAPI} from "../../../controllers/validators";
-import {Validators} from "../../../components/validators/validators";
-import {getAllData} from "../../../lib/sanity.service";
-import {validatorQueries} from "../../../components/validators/queries";
+import {
+  getGeneratorsFromAPI,
+  getValidatorsFromAPI,
+} from "../../../controllers/validators";
+import { Validators } from "../../../components/validators/validators";
+import { getAllData } from "../../../lib/sanity.service";
+import { validatorQueries } from "../../../components/validators/queries";
 // export const dynamic = "force-dynamic";
 //export const revalidate = 0;
 /*const statuses = [
@@ -14,7 +17,7 @@ import {validatorQueries} from "../../../components/validators/queries";
 ]*/
 
 const Page1 = async () => {
-  const queryData = await getAllData(validatorQueries)
+  const queryData = await getAllData(validatorQueries);
 
   const validators = {
     all: queryData["validators"],
@@ -23,9 +26,9 @@ const Page1 = async () => {
     ineligible: queryData["validators-ineligible"],
     banned: queryData["validators-banned"],
     punished: queryData["validators-punished"],
-  }
+  };
 
-  const generators = queryData["generators"]
+  const generators = queryData["generators"];
 
   /*const validators = {
     all: await getValidatorsFromAPI({limit: 100, offset: 0, sort: "rank:asc"}),
@@ -37,8 +40,8 @@ const Page1 = async () => {
   }*/
 
   //const generators = await getGeneratorsFromAPI({limit: 6})
-return <div></div>
+  return <div></div>;
   // return <Validators fetchedValidators={validators} fetchedGenerators={generators} />
-}
+};
 
-export default Page1
+export default Page1;

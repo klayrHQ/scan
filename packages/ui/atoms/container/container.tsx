@@ -1,5 +1,5 @@
-import React, {FC} from "react";
-import {cva} from "class-variance-authority";
+import React, { FC } from "react";
+import { cva } from "class-variance-authority";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   bgColor?: string;
@@ -9,7 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   shadow?: boolean;
   fullWidth?: boolean;
   colorVariant?: "light" | "dark" | "sand";
-  section?: boolean,
+  section?: boolean;
 }
 
 const container = cva(["flex", "flex-col", "box-border"], {

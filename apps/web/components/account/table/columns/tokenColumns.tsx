@@ -9,24 +9,25 @@ export const tokenColumns = [
         value: "Chain",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Chain",
-      }
+      },
     ],
     showOn: "always",
     valueKeys: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "chain",
         type: "key",
-        value: "tokens.chainName"
-      }
-    ]
-  },{
+        value: "tokens.chainName",
+      },
+    ],
+  },
+  {
     name: "token-id",
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
@@ -36,24 +37,25 @@ export const tokenColumns = [
         value: "Token ID",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Token ID",
-      }
+      },
     ],
     showOn: "tabletDesktop",
     valueKeys: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "token-id",
         type: "key",
-        value: "tokens.tokenID"
-      }
-    ]
-  },{
+        value: "tokens.tokenID",
+      },
+    ],
+  },
+  {
     name: "token-name",
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
@@ -63,23 +65,23 @@ export const tokenColumns = [
         value: "Token",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Token",
-      }
+      },
     ],
     showOn: "always",
     valueKeys: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "token-id",
         type: "key",
-        value: "tokens.symbol"
-      }
-    ]
+        value: "tokens.symbol",
+      },
+    ],
   },
   {
     name: "available-balance",
@@ -89,8 +91,8 @@ export const tokenColumns = [
         name: "available balance",
         _key: "b45fbc0d1547",
         type: "literal",
-        value: "Available"
-      }
+        value: "Available",
+      },
     ],
     valueKeys: [
       {
@@ -98,10 +100,10 @@ export const tokenColumns = [
         value: "tokens.availableBalance",
         format: {
           format: "currencyNew",
-          type: "beddows"
+          type: "beddows",
         },
         name: "available-balance",
-      }
+      },
     ],
     valueComponent: "PlainColumn",
   },
@@ -112,12 +114,12 @@ export const tokenColumns = [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "Locked",
         type: "literal",
-        value: "Locked"
-      }
+        value: "Locked",
+      },
     ],
     valueComponent: "PlainColumn",
     showOn: "always",
@@ -128,10 +130,10 @@ export const tokenColumns = [
         value: "tokens.lockedBalances.0.amount",
         format: {
           format: "currencyNew",
-          type: "beddows"
-        }
-      }
-    ]
+          type: "beddows",
+        },
+      },
+    ],
   },
   {
     name: "Account_Rewards_claimable",
@@ -145,21 +147,21 @@ export const tokenColumns = [
         value: "Claimable Rewards",
         format: {
           type: "string",
-          format: "plain"
-        }
-      }
+          format: "plain",
+        },
+      },
     ],
     valueKeys: [
       {
         value: "rewards.data.0.reward",
         format: {
           format: "fee",
-          type: "beddows"
+          type: "beddows",
         },
         name: "claimable rewards",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
     valueComponent: "PlainColumn",
-  }
-]
+  },
+];

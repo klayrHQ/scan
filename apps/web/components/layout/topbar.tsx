@@ -1,25 +1,23 @@
-"use client"
-import React, {ReactNode, useEffect, useRef, useState} from "react";
-import {cls} from "ui/utils";
+"use client";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { cls } from "ui/utils";
 
 interface TopBarClientProps {
-  children: ReactNode | ReactNode[]
+  children: ReactNode | ReactNode[];
 }
 
-export const TopBarClient = ({
-                         children,
-                       }: TopBarClientProps) => {
+export const TopBarClient = ({ children }: TopBarClientProps) => {
   const [isStuck, setIsStuck] = useState(false);
   const stickyRef = useRef(null);
 
   useEffect(() => {
-    const cachedRef = stickyRef.current
+    const cachedRef = stickyRef.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsStuck(entry.intersectionRatio < 1);
       },
-      {threshold: [1],},
+      { threshold: [1] },
     );
 
     if (cachedRef) {
@@ -37,11 +35,11 @@ export const TopBarClient = ({
     <div
       className={cls([
         "z-50 w-full mb-8 sticky tablet:static -top-0",
-        " transition-all duration-200"
+        " transition-all duration-200",
       ])}
       ref={stickyRef}
     >
       {children}
     </div>
-  )
-}
+  );
+};

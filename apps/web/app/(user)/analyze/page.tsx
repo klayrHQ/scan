@@ -1,7 +1,6 @@
-import {Container} from "ui";
-import {TitleBoxSlice} from "../../../slices/titleBox";
-import {AccountAnalyzer} from "../../../components/accountAnalyzer";
-
+import { Container } from "ui";
+import { TitleBoxSlice } from "../../../slices/titleBox";
+import { AccountAnalyzer } from "../../../components/accountAnalyzer";
 
 const Page = async () => {
   return (
@@ -9,7 +8,7 @@ const Page = async () => {
       <TitleBoxSlice
         description={{
           type: "literal",
-          value: ""
+          value: "",
         }}
         title={{
           format: {
@@ -17,10 +16,10 @@ const Page = async () => {
             typography: [
               {
                 value: "Heading3",
-                key: "size"
-              }
+                key: "size",
+              },
             ],
-            tag: "h2"
+            tag: "h2",
           },
           type: "literal",
           value: "Account Analyzer",
@@ -28,7 +27,7 @@ const Page = async () => {
       />
       <AccountAnalyzer />
     </Container>
-  )
-}
+  );
+};
 
 export default Page;

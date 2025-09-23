@@ -8,13 +8,10 @@ export default {
   title: "atoms/List",
   component: List,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
@@ -39,5 +36,5 @@ Primary.args = {
     {
       label: "test 4",
     },
-  ]
+  ],
 };

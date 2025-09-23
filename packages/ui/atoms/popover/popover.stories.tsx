@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Button } from "../..";
-import {Popover} from "./popover";
+import { Popover } from "./popover";
 
 const children = (
   <div className="text-left">

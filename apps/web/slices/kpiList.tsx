@@ -1,2 +1,1 @@
-
-export const KpiList = () => <></>
+export const KpiList = () => <></>;

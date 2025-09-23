@@ -1,28 +1,34 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 import Status from "ui/atoms/status/status";
-import {NetworkType} from "ui/types";
-import {emptyCustomNetwork, networks} from "ui/assets/mockupData/networks";
-import {Paper, Typography} from "ui";
-import {useSettings} from "../../providers/settings";
-import {useService} from "../../providers/service";
+import { NetworkType } from "ui/types";
+import { emptyCustomNetwork, networks } from "ui/assets/mockupData/networks";
+import { Paper, Typography } from "ui";
+import { useSettings } from "../../providers/settings";
+import { useService } from "../../providers/service";
 
 export const NetworkContainer = () => {
-  const {connected,} = useService()
-  const {setSetting, parsedSettings} = useSettings()
+  const { connected } = useService();
+  const { setSetting, parsedSettings } = useSettings();
 
   const changeNetwork = (newNetwork?: NetworkType) => {
     /*serviceClient?.connection?.disconnect()
     serviceClient?.connection?.off()*/
-    setSetting("network", newNetwork)
-  }
+    setSetting("network", newNetwork);
+  };
 
   return (
     <div className="flex flex-col space-y-4">
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <Typography tag={"h2"} size={"Heading4"} className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}>
+        <Typography
+          tag={"h2"}
+          size={"Heading4"}
+          className={"text-onSurfaceHigh text-lg md:text-4xl font-bold"}
+        >
           {"Select a Network!"}
         </Typography>
-        <Typography tag={"span"}>{"Select one of the Klayr networks or add your custom network."}</Typography>
+        <Typography tag={"span"}>
+          {"Select one of the Klayr networks or add your custom network."}
+        </Typography>
       </Paper>
       <Paper surface={1} className="p-4 flex flex-row space-x-2">
         <Status status={connected ? "connected" : "error"} />
@@ -31,7 +37,9 @@ export const NetworkContainer = () => {
         </Typography>
       </Paper>
       <Paper surface={1} className="px-4 flex flex-col space-y-2 py-4">
-        <Typography tag={"span"} className="font-medium">{"Network(COMING SOON)"}</Typography>
+        <Typography tag={"span"} className="font-medium">
+          {"Network(COMING SOON)"}
+        </Typography>
         <select
           value={parsedSettings?.networks?.id}
           className="w-full rounded text-onSurfaceMedium border-none text-base bg-surface-3 p-4 focus:outline-primary"
@@ -45,7 +53,9 @@ export const NetworkContainer = () => {
         >
           {networks.map((network) => (
             <option key={network.id} value={network.id}>
-              <Typography tag={"span"}>{`${network.communityId}(${network.network})`}</Typography>
+              <Typography
+                tag={"span"}
+              >{`${network.communityId}(${network.network})`}</Typography>
             </option>
           ))}
         </select>
@@ -93,5 +103,5 @@ export const NetworkContainer = () => {
         </Paper>
       )}
     </div>
-  )
-}
+  );
+};

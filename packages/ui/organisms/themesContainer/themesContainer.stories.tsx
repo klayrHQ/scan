@@ -1,18 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ThemesContainer } from "./themesContainer";
-import {ThemeType} from "../../types";
+import { ThemeType } from "../../types";
 
 export default {
   title: "Organisms/Settings/ThemesContainer",
   component: ThemesContainer,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -27,7 +24,7 @@ export default {
         primary: 123,
         secondary: 456,
         type: "test",
-      }
+      },
     ],
     selectedTheme: {
       bg: {
@@ -41,18 +38,15 @@ export default {
       type: "test",
     },
     setSetting: (handle: string, newState: string) => console.log(handle),
-    updateProperty: (property: string, newValue: string | number) => console.log(property),
+    updateProperty: (property: string, newValue: string | number) =>
+      console.log(property),
     switchTheme: (theme: ThemeType) => console.log(theme),
-  }
+  },
 } as any;
 
 const Template: ComponentStory<typeof ThemesContainer> = (args) => {
-  return(
-    <ThemesContainer {...args} />
-  )
+  return <ThemesContainer {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof ThemesContainer> = Template.bind({});
-Primary.args = {
-
-};
+Primary.args = {};

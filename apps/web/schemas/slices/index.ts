@@ -8,9 +8,9 @@ import { stakesAccount } from "./stakesAccount";
 import { favorite } from "./favorite";
 import accountHeader from "./accountHeader";
 import { divider } from "./divider";
-import {jsonItem} from "./jsonItem";
-import {chart} from "./chart";
-import {countryFlag} from "./countryFlag";
+import { jsonItem } from "./jsonItem";
+import { chart } from "./chart";
+import { countryFlag } from "./countryFlag";
 
 export const slices = [
   favorite,

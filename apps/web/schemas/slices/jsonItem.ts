@@ -1,4 +1,3 @@
-
 export const jsonItem = {
   name: "jsonItem",
   type: "document",
@@ -64,7 +63,7 @@ export const jsonItem = {
           type: "string",
           title: "Boolean Classname",
         },
-      ]
+      ],
     },
-  ]
-}
+  ],
+};

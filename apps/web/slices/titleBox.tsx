@@ -36,7 +36,12 @@ export const TitleBoxSlice = ({
           )}
         </Grid>
         {description && description.value && (
-          <Typography className={"mx-auto lg:mx-0"} tag={"p"} size={"body"} color={"onBackground"}>
+          <Typography
+            className={"mx-auto lg:mx-0"}
+            tag={"p"}
+            size={"body"}
+            color={"onBackground"}
+          >
             {description.value}
           </Typography>
         )}

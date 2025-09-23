@@ -22,16 +22,17 @@ export const TxPopover = ({
   index: number;
 } & ColumnProps) => {
   const [open, setOpen] = useState(false);
-  const row =
-    queryData?.transactions ?
-      queryData?.transactions?.data?.[index] :
-      queryData?.["transaction-moduleCommand"]?.data?.[index];
+  const row = queryData?.transactions
+    ? queryData?.transactions?.data?.[index]
+    : queryData?.["transaction-moduleCommand"]?.data?.[index];
   return (
     <Popover
       open={open}
       setOpen={setOpen}
       containerWidth={mobile ? "full" : "lg:max-w-md"}
-      className={cls(["top-0 w-screen max-w-[84vw] md:max-w-[50vw] lg:max-w-md shadow-xl"])}
+      className={cls([
+        "top-0 w-screen max-w-[84vw] md:max-w-[50vw] lg:max-w-md shadow-xl",
+      ])}
       placement={"center"}
       button={
         <div className="rounded flex items-center text-base font-medium focus:outline-none p-1 relative cursor-pointer">
@@ -66,7 +67,7 @@ export const TxPopover = ({
           >
             Additional Info
           </Typography>
-          <Link href={`/transaction/${row?.id}`}  prefetch={false}>
+          <Link href={`/transaction/${row?.id}`} prefetch={false}>
             <Typography
               className={"items-center flex flex-row space-x-2"}
               color={"onSurfaceHigh"}
@@ -115,10 +116,48 @@ export const TxPopover = ({
             }
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
-          <KeyValueRow valueSize={"subBody"}
+          <KeyValueRow
+            valueSize={"subBody"}
             col
             label={"Fee:"}
-            value={<Grid columns={2} flex className={"whitespace-nowrap"}><ValueFormatter typography={[{key:"className", value:"font-subBody text-onSurfaceLow"}, {key:"size", value:"subBody"}]}  format={"fee"} value={row?.fee}/>  <Typography className={"whitespace-nowrap"} tag={"span"} size={"subBody"} color={"onSurfaceLow"}><Grid columns={2} flex>  (min fee: <ValueFormatter typography={[{key:"className", value:"font-subBody text-onSurfaceLow"}, {key:"size", value:"subBody"}]} format={"fee"} value={row?.minFee}/>)</Grid></Typography></Grid>}
+            value={
+              <Grid columns={2} flex className={"whitespace-nowrap"}>
+                <ValueFormatter
+                  typography={[
+                    {
+                      key: "className",
+                      value: "font-subBody text-onSurfaceLow",
+                    },
+                    { key: "size", value: "subBody" },
+                  ]}
+                  format={"fee"}
+                  value={row?.fee}
+                />{" "}
+                <Typography
+                  className={"whitespace-nowrap"}
+                  tag={"span"}
+                  size={"subBody"}
+                  color={"onSurfaceLow"}
+                >
+                  <Grid columns={2} flex>
+                    {" "}
+                    (min fee:{" "}
+                    <ValueFormatter
+                      typography={[
+                        {
+                          key: "className",
+                          value: "font-subBody text-onSurfaceLow",
+                        },
+                        { key: "size", value: "subBody" },
+                      ]}
+                      format={"fee"}
+                      value={row?.minFee}
+                    />
+                    )
+                  </Grid>
+                </Typography>
+              </Grid>
+            }
           />
           <Divider color={"surface-1"} align={"center"} width={"full"} />
           <KeyValueRow

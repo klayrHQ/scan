@@ -1,6 +1,6 @@
 import React from "react";
-import {ComponentStory, ComponentMeta} from "@storybook/react";
-import {Grid, Container, Typography, ImageCol} from "../..";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Grid, Container, Typography, ImageCol } from "../..";
 
 export default {
   title: "Atoms/Layout/Container",
@@ -34,12 +34,12 @@ export default {
         "secondary",
         "secondaryAlt",
       ],
-      control: {type: "select"},
+      control: { type: "select" },
     },
     type: {
       options: ["section", "card", "page", "nftCard", undefined],
-      control: {type: "select"},
-    }
+      control: { type: "select" },
+    },
   },
   parameters: {
     status: {
@@ -125,30 +125,36 @@ ContentBlock.args = {
   shadow: true,
   children: (
     <>
-      <ImageCol className="absolute top-0 left-0" type={"informationCardImage"}/>
-      <div
-        className={[
-          "w-full relative flex flex-col mt-20",
-        ].join(" ")}
-      >
+      <ImageCol
+        className="absolute top-0 left-0"
+        type={"informationCardImage"}
+      />
+      <div className={["w-full relative flex flex-col mt-20"].join(" ")}>
         <Typography className="leading-6 mb-10" tag={"h4"} color={"inherit"}>
           CATEGORY TITLE
         </Typography>
-        <Typography className={" mb-10 leading-24"}
-                    tag={"h4"} color={"inherit"}
+        <Typography
+          className={" mb-10 leading-24"}
+          tag={"h4"}
+          color={"inherit"}
         >
           TITLE
         </Typography>
         <div className={"h-collectionCard"}></div>
-        <Typography className="w-7/12 opacity-60 leading-12 mb-20 " tag={"span"} color={"inherit"}>
-          Text
-          TextTextTextText
-
-        </Typography>
-        <Typography bold className=" leading-6 underline cursor-pointer"
-                    tag={"h4"} color={"inherit"}
+        <Typography
+          className="w-7/12 opacity-60 leading-12 mb-20 "
+          tag={"span"}
+          color={"inherit"}
         >
-          {'Read more'}
+          Text TextTextTextText
+        </Typography>
+        <Typography
+          bold
+          className=" leading-6 underline cursor-pointer"
+          tag={"h4"}
+          color={"inherit"}
+        >
+          {"Read more"}
         </Typography>
       </div>
     </>

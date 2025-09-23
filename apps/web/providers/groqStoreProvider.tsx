@@ -31,7 +31,7 @@ export interface GroqStoreProviderProps extends Config {
  * @alpha
  */
 export const GroqStoreProvider = memo(function GroqStoreProvider(
-  props: GroqStoreProviderProps
+  props: GroqStoreProviderProps,
 ) {
   const {
     children,
@@ -49,7 +49,7 @@ export const GroqStoreProvider = memo(function GroqStoreProvider(
       overlayDrafts: true,
       // Spread in the rest
       ...config,
-    })
+    }),
   );
 
   // Make sure any async errors bubble up to the nearest error boundary
@@ -62,7 +62,7 @@ export const GroqStoreProvider = memo(function GroqStoreProvider(
     return function defineListener<Snapshot>(
       initialSnapshot: Snapshot,
       query: string,
-      params: QueryParams
+      params: QueryParams,
     ) {
       const key = getQueryCacheKey(query, params);
 

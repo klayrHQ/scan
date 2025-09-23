@@ -11,14 +11,14 @@ export default {
   },
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
 } as any;
 
-const Template: ComponentStory<typeof FloatingMenu> = (args) => <FloatingMenu {...args} />;
+const Template: ComponentStory<typeof FloatingMenu> = (args) => (
+  <FloatingMenu {...args} />
+);
 
 export const Primary: ComponentMeta<typeof FloatingMenu> = Template.bind({});
 Primary.args = {

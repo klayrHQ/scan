@@ -2,20 +2,17 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Footer } from "./footer";
-import {compactString} from "../../assets/utils";
+import { compactString } from "../../assets/utils";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "organisms/Footer",
   component: Footer,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
   args: {
@@ -71,8 +68,8 @@ export default {
           },
         ],
       },
-    ]
-  }
+    ],
+  },
 } as any;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -81,7 +78,7 @@ const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 export const Primary: ComponentMeta<typeof Footer> = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  copyrightContent:
+  copyrightContent: (
     <p className="text-base text-onBackgroundLow font-bold mb-2">
       &copy;{new Date().getFullYear()} by{" "}
       <a
@@ -93,8 +90,7 @@ Primary.args = {
         MOOSTY
       </a>
       <span className={"text-onBackgroundMedium mx-2"}>I|I</span>
-      <span className={"text-onBackgroundLow"}>
-        -
-      </span>
-    </p>,
+      <span className={"text-onBackgroundLow"}>-</span>
+    </p>
+  ),
 };

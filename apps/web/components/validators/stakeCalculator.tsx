@@ -14,10 +14,10 @@ export const StakeCalculator = () => {
   const searchParams = useSearchParams();
 
   const [stakingRewardsAmount, setStakingRewardsAmount] = useState<string>(
-    searchParams?.get("stakingAmount") || "1000"
+    searchParams?.get("stakingAmount") || "1000",
   );
   const [stakingRewardsPeriod, setStakingRewardsPeriod] = useState<string>(
-    searchParams?.get("stakingPeriod") || "month"
+    searchParams?.get("stakingPeriod") || "month",
   );
 
   useEffect(() => {

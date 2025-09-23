@@ -1,6 +1,6 @@
 import React from "react";
 import { iconVariants } from "../../types";
-import { Grid} from "../grid/grid";
+import { Grid } from "../grid/grid";
 import { IconButton } from "./iconButton";
 
 export default {
@@ -22,5 +22,3 @@ export default {
     },
   },
 } as any;
-
-

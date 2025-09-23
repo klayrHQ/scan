@@ -5,24 +5,17 @@ import { HotKeyCombo } from "./hotKeyCombo";
 export default {
   title: "Atoms/Hotkeys/HotKeyCombo",
   component: HotKeyCombo,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {
     status: {
-      type: [
-        "building",
-      ],
+      type: ["building"],
     },
   },
-  args: {
-
-  }
+  args: {},
 } as any;
 
 const Template: ComponentStory<typeof HotKeyCombo> = (args) => {
-  return(
-    <HotKeyCombo {...args}/>
-  )
+  return <HotKeyCombo {...args} />;
 };
 
 export const Primary: ComponentMeta<typeof HotKeyCombo> = Template.bind({});

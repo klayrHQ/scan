@@ -1,8 +1,7 @@
 import React from "react";
-import {ComponentStory, ComponentMeta} from "@storybook/react";
-import {Select} from "../..";
-import {countries} from "../../assets";
-
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Select } from "../..";
+import { countries } from "../../assets";
 
 export default {
   title: "Atoms/Inputs/Select",
@@ -11,24 +10,22 @@ export default {
     status: {
       type: ["todo"],
     },
-    layout: 'centered'
+    layout: "centered",
   },
 } as any;
 
-const Template: ComponentStory<typeof Select> = (args) => (
-  <Select {...args} />
-);
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
 
 export const Base: ComponentMeta<typeof Select> = Template.bind({});
 Base.args = {
-  id: 'keuzemenu',
+  id: "keuzemenu",
   placeholder: "Select Country",
   optionsList: countries,
 };
 
 export const Transition: ComponentMeta<typeof Select> = Template.bind({});
 Transition.args = {
-  id: 'keuzemenu',
+  id: "keuzemenu",
   placeholder: "Select Country",
   optionsList: countries,
   transition: true,
@@ -36,9 +33,14 @@ Transition.args = {
 
 export const AssetSorting: ComponentMeta<typeof Select> = Template.bind({});
 AssetSorting.args = {
-  id: 'keuzemenu',
+  id: "keuzemenu",
   placeholder: "Sort by",
-  optionsList: ["Price high - low", "Price low - high", "Rarity score", "Most popular"],
+  optionsList: [
+    "Price high - low",
+    "Price low - high",
+    "Rarity score",
+    "Most popular",
+  ],
   transition: true,
   type: "assetSorting",
   width: "64",

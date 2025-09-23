@@ -7,13 +7,13 @@ export const stakesColumns = [
       {
         format: {
           format: "shortAddress",
-          type: "string"
+          type: "string",
         },
         name: "sent stakes",
         _key: "a19c9b12a34a",
         type: "key",
-        value: "stakes"
-      }
+        value: "stakes",
+      },
     ],
     valueComponent: "AvatarColumn",
     headValues: [
@@ -21,11 +21,11 @@ export const stakesColumns = [
         value: "Validator",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "sent stakes",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
   },
   {
@@ -35,8 +35,8 @@ export const stakesColumns = [
       {
         name: "Rank label",
         type: "literal",
-        value: "Rank"
-      }
+        value: "Rank",
+      },
     ],
     showOn: "always",
     valueKeys: [
@@ -44,13 +44,13 @@ export const stakesColumns = [
         value: "stakes.get_pos_validators_address.data.rank",
         format: {
           format: "plain",
-          type: "number"
+          type: "number",
         },
         name: "rankKey",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
-    component: "DefaultHeadColumn"
+    component: "DefaultHeadColumn",
   },
   {
     name: "Account-outgoing-stakes-validatorWeight",
@@ -63,12 +63,12 @@ export const stakesColumns = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
-          ]
+              key: "className",
+            },
+          ],
         },
-        name: "validator weight"
-      }
+        name: "validator weight",
+      },
     ],
     valueKeys: [
       {
@@ -80,12 +80,12 @@ export const stakesColumns = [
             {
               value: "w-full text-right",
               key: "className",
-            }
+            },
           ],
           format: "currency",
-          type: "beddows"
-        }
-      }
+          type: "beddows",
+        },
+      },
     ],
     component: "DefaultHeadColumn",
     showOn: "always",
@@ -100,15 +100,15 @@ export const stakesColumns = [
           typography: [
             {
               value: "text-right w-full",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "commission",
-          type: "number"
+          type: "number",
         },
         name: "commission",
         type: "key",
-        value: "stakes.get_pos_validators_address.data.commission"
+        value: "stakes.get_pos_validators_address.data.commission",
       },
     ],
     headValues: [
@@ -119,14 +119,14 @@ export const stakesColumns = [
             {
               value: "text-right w-full",
               key: "className",
-            }
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "commission",
-        type: "literal"
-      }
+        type: "literal",
+      },
     ],
     showOn: "always",
   },
@@ -140,14 +140,14 @@ export const stakesColumns = [
           typography: [
             {
               key: "className",
-              value: "w-full text-right"
-            }
+              value: "w-full text-right",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
-        name: "Stake Amount"
-      }
+        name: "Stake Amount",
+      },
     ],
     showOn: "always",
     component: "DefaultHeadColumn",
@@ -157,20 +157,20 @@ export const stakesColumns = [
           typography: [
             {
               value: "w-full text-right",
-              key: "className"
-            }
+              key: "className",
+            },
           ],
           format: "currency",
-          type: "beddows"
+          type: "beddows",
         },
         name: "sent amounts",
         type: "key",
-        value: "stakes.amount"
-      }
+        value: "stakes.amount",
+      },
     ],
-    valueComponent: "PlainColumn"
-  }
-]
+    valueComponent: "PlainColumn",
+  },
+];
 
 export const stakersColumns = [
   {
@@ -179,8 +179,8 @@ export const stakersColumns = [
       {
         name: "incoming staker",
         type: "literal",
-        value: "Account"
-      }
+        value: "Account",
+      },
     ],
     valueKeys: [
       {
@@ -189,13 +189,13 @@ export const stakersColumns = [
         value: "stakers",
         format: {
           format: "shortAddress",
-          type: "string"
-        }
-      }
+          type: "string",
+        },
+      },
     ],
     component: "DefaultHeadColumn",
     showOn: "always",
-    valueComponent: "AvatarColumn"
+    valueComponent: "AvatarColumn",
   },
   {
     name: "Account-incoming-stakes-amount",
@@ -203,8 +203,8 @@ export const stakersColumns = [
       {
         name: "Stakes amount",
         type: "literal",
-        value: "Stakes Amount"
-      }
+        value: "Stakes Amount",
+      },
     ],
     component: "DefaultHeadColumn",
     showOn: "always",
@@ -214,11 +214,11 @@ export const stakersColumns = [
         value: "stakers.amount",
         format: {
           format: "currency",
-          type: "beddows"
+          type: "beddows",
         },
-        name: "stakes amount"
-      }
+        name: "stakes amount",
+      },
     ],
-    valueComponent: "PlainColumn"
-  }
-]
+    valueComponent: "PlainColumn",
+  },
+];

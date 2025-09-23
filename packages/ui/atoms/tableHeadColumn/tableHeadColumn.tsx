@@ -1,11 +1,11 @@
-import React from 'react';
-import {Typography} from "../typography/typography";
+import React from "react";
+import { Typography } from "../typography/typography";
 
 export interface TableHeadColProps {
-  value?: string | any
-  className?: string
-  onClick?(col: string): any
-  sort?: string
+  value?: string | any;
+  className?: string;
+  onClick?(col: string): any;
+  sort?: string;
 }
 
 export const TableHeadColumn = ({
@@ -26,7 +26,7 @@ export const TableHeadColumn = ({
       ].join(" ")}
     >
       <Typography tag={"span"}>
-        {sort ? sort.toLowerCase() === "asc" ? "^" : "v" : ""} {value}
+        {sort ? (sort.toLowerCase() === "asc" ? "^" : "v") : ""} {value}
       </Typography>
     </th>
   );

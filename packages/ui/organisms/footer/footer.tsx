@@ -1,12 +1,15 @@
-import React, {FC, ReactNode} from "react"
+import React, { FC, ReactNode } from "react";
 import { FooterLinks } from "../../molecules/footerLinks/footerLinks";
-import { LinkedinIcon, TwitterIcon } from "../../assets/icons"
-import {Container} from "../../atoms/container/container";
+import { LinkedinIcon, TwitterIcon } from "../../assets/icons";
+import { Container } from "../../atoms/container/container";
 
 export interface FooterProps {
-  className?: string
-  footerContent?: Array<{title: string, items: { label: string, href: string, _key: string }[]}>
-  copyrightContent?: string | ReactNode
+  className?: string;
+  footerContent?: Array<{
+    title: string;
+    items: { label: string; href: string; _key: string }[];
+  }>;
+  copyrightContent?: string | ReactNode;
 }
 
 export const Footer: FC<FooterProps> = ({
@@ -15,7 +18,9 @@ export const Footer: FC<FooterProps> = ({
   copyrightContent,
 }) => {
   return (
-    <div className={`w-full h-auto block text-onFooter text-left mt-auto ${className}`}>
+    <div
+      className={`w-full h-auto block text-onFooter text-left mt-auto ${className}`}
+    >
       <div className="relative top-0 bottom-0 w-full h-full bg-footer mt-8">
         <div className="container w-app max-w-app mx-auto px-6">
           <div className="sm:flex py-8">
@@ -53,11 +58,9 @@ export const Footer: FC<FooterProps> = ({
       </div>
       <Container className="w-full px-6 bg-footer">
         <div className=" border-gray-300 flex flex-col items-center">
-          <div className="sm:w-2/3 text-center py-4">
-            {copyrightContent}
-          </div>
+          <div className="sm:w-2/3 text-center py-4">{copyrightContent}</div>
         </div>
       </Container>
     </div>
-  )
-}
+  );
+};

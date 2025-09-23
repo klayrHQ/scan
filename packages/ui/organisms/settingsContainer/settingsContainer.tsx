@@ -1,21 +1,21 @@
-import React, { FC } from "react"
-import { useHotkeys } from "react-hotkeys-hook"
+import React, { FC } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { Paper } from "../../atoms/paper/paper";
-import {Icon} from "../../atoms/icon/icon";
-import {ThemeType} from "../../types";
-import {Typography} from "../../atoms/typography/typography";
-import {CurrencyContainer} from "../currencyContainer/currencyContainer";
-import {HotKeysContainer} from "../hotKeysContainer/hotKeysContainer";
-import {NetworkContainer} from "../networkContainer/networkContainer";
-import {SettingsMenu} from "liskscan/components/settings/settingsMenu";
-import {viewTypes} from "liskscan/providers/settings";
+import { Icon } from "../../atoms/icon/icon";
+import { ThemeType } from "../../types";
+import { Typography } from "../../atoms/typography/typography";
+import { CurrencyContainer } from "../currencyContainer/currencyContainer";
+import { HotKeysContainer } from "../hotKeysContainer/hotKeysContainer";
+import { NetworkContainer } from "../networkContainer/networkContainer";
+import { SettingsMenu } from "liskscan/components/settings/settingsMenu";
+import { viewTypes } from "liskscan/providers/settings";
 
 interface settingsContainerProps {
-  setOpen: (open: boolean) => void
-  view: viewTypes
-  views: Array<viewTypes>
-  parsedSettings?: any
-  setView: (view: viewTypes) => void
+  setOpen: (open: boolean) => void;
+  view: viewTypes;
+  views: Array<viewTypes>;
+  parsedSettings?: any;
+  setView: (view: viewTypes) => void;
 }
 
 export const SettingsContainer: FC<settingsContainerProps> = ({
@@ -25,27 +25,27 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
   parsedSettings,
   setView,
 }) => {
-  let ViewComponent
+  let ViewComponent;
 
   switch (view) {
     case "currency":
-      ViewComponent = CurrencyContainer
+      ViewComponent = CurrencyContainer;
       break;
 
     case "hotkeys":
-      ViewComponent = HotKeysContainer
+      ViewComponent = HotKeysContainer;
       break;
 
     case "network":
-      ViewComponent = NetworkContainer
+      ViewComponent = NetworkContainer;
       break;
 
     case "menu":
-      ViewComponent = SettingsMenu
+      ViewComponent = SettingsMenu;
       break;
 
     default:
-      ViewComponent = CurrencyContainer
+      ViewComponent = CurrencyContainer;
   }
 
   return (
@@ -72,19 +72,13 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
           ].join(" ")}
         >
           <div className="w-full md:hidden flex flex-row justify-between text-onSurfaceHigh mb-2 px-4 py-4 mx-auto">
-            <div
-              onClick={() =>
-                setView("menu")
-              }
-            >
+            <div onClick={() => setView("menu")}>
               <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"arrowLeft"} />
             </div>
             <Typography tag={"span"} className="font-medium">
               {view}
             </Typography>
-            <div
-              onClick={() => setOpen(false)}
-            >
+            <div onClick={() => setOpen(false)}>
               <Icon className="w-5 h-5 text-onSurfaceHigh" icon={"x"} />
             </div>
           </div>
@@ -92,5 +86,5 @@ export const SettingsContainer: FC<settingsContainerProps> = ({
         </Paper>
       </div>
     </div>
-  )
-}
+  );
+};

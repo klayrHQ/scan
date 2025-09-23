@@ -1,6 +1,6 @@
-import React from 'react';
-import {Label} from "../../atoms/label/label";
-import {Input} from "../../atoms/input/input";
+import React from "react";
+import { Label } from "../../atoms/label/label";
+import { Input } from "../../atoms/input/input";
 
 interface FormFieldProps {
   className?: string;
@@ -9,7 +9,7 @@ interface FormFieldProps {
   label: string;
   name: string;
   children: any;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   onChange?: () => void;
 }
@@ -30,19 +30,15 @@ export const FormField = ({
   ...props
 }: FormFieldProps) => {
   return (
-    <div className={[
+    <div
+      className={[
         className,
         fullWidth ? "w-full" : "",
         size === "large" ? "text-lg" : size === "small" ? "text-sm" : "",
-      ].join(' ')}
+      ].join(" ")}
       {...props}
     >
-      <Label
-        label={label}
-        name={name}
-        size={size}
-        className={labelClassName}
-      >
+      <Label label={label} name={name} size={size} className={labelClassName}>
         <Input
           placeholder={label}
           name={name}

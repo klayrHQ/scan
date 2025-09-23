@@ -48,7 +48,7 @@ export const AccountHeader = ({
       saveFavourite(
         id!,
         queryData["account-id-balances"].data[0].availableBalance,
-        queryData["account-auth"].meta?.name
+        queryData["account-auth"].meta?.name,
       );
     }
   };
@@ -64,21 +64,21 @@ export const AccountHeader = ({
       "account-validator-id.data.0.rank",
       "row",
       queryData,
-      queryData
+      queryData,
     ) || "-";
   const status =
     getFromDottedKey(
       "account-validator-id.data.0.status",
       "row",
       queryData,
-      queryData
+      queryData,
     ) || "Regular account";
   const punishments =
     getFromDottedKey(
       "account-validator-id.data.0.punishmentPeriods",
       "row",
       queryData,
-      queryData
+      queryData,
     ) || undefined;
   return (
     <Grid

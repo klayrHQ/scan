@@ -1,20 +1,20 @@
-import React, {FC} from "react"
+import React, { FC } from "react";
 import { Table } from "../table/table";
-import { Link} from "../../atoms/link/link";
-import {tableRowsType} from "../../types";
-import {Select} from "../../atoms/select/select";
-import {Icon} from "../../atoms/icon/icon";
-import {Grid} from "../../atoms";
-import {cls} from "../../assets/utils";
+import { Link } from "../../atoms/link/link";
+import { tableRowsType } from "../../types";
+import { Select } from "../../atoms/select/select";
+import { Icon } from "../../atoms/icon/icon";
+import { Grid } from "../../atoms";
+import { cls } from "../../assets/utils";
 
 interface SearchProps {
-  searchFunction: (address?: string) => void
-  searchResults?: tableRowsType
-  searchValue?: string
-  setSearchValue: (value: string) => void
-  searching?: boolean
-  setFilters?: (value: string) => void
-  filtersList?: Array<{label?: string, value: string}>
+  searchFunction: (address?: string) => void;
+  searchResults?: tableRowsType;
+  searchValue?: string;
+  setSearchValue: (value: string) => void;
+  searching?: boolean;
+  setFilters?: (value: string) => void;
+  filtersList?: Array<{ label?: string; value: string }>;
 }
 
 export const Search: FC<SearchProps> = ({
@@ -26,7 +26,6 @@ export const Search: FC<SearchProps> = ({
   setFilters,
   filtersList,
 }) => {
-
   return (
     <div className="text-onSurfacePrimaryLow flex-1 flex lg:justify-end flex-col divider divide-y-2">
       <div className=" w-full ">
@@ -70,7 +69,7 @@ export const Search: FC<SearchProps> = ({
             }
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                searchFunction
+                searchFunction;
               }
             }}
             autoComplete="off"
@@ -88,40 +87,41 @@ export const Search: FC<SearchProps> = ({
               !searching && "hidden",
             ].join(" ")}
           />
-          {
-            setFilters &&
-              <div className={cls([
+          {setFilters && (
+            <div
+              className={cls([
                 "w-16 lg:w-48 relative before:absolute before:content-['']",
                 "before:-left-[1px] before:w-[1px] before:h-3/4 ",
                 "before:bg-surface-3 before:top-0 before:bottom-0 before:my-auto",
-              ])}>
-                <Select
-                  id={"search_filter"}
-                  className={"hidden lg:block"}
-                  placeholder={"Filter"}
-                  onChange={setFilters}
-                  optionsList={filtersList || []}
-                  transition
-                  width={"full"}
-                />
-                <Select
-                  id={"search_filter_mobile"}
-                  icon={false}
-                  className={"lg:hidden"}
-                  placeholder={<Icon icon={"filter"} />}
-                  placeholderActive={<Icon icon={"filterSolid"} />}
-                  onChange={setFilters}
-                  optionsList={filtersList || []}
-                  listWidth={"48"}
-                  listOrigin={"right"}
-                  transition
-                  width={"w-full"}
-                />
-              </div>
-          }
+              ])}
+            >
+              <Select
+                id={"search_filter"}
+                className={"hidden lg:block"}
+                placeholder={"Filter"}
+                onChange={setFilters}
+                optionsList={filtersList || []}
+                transition
+                width={"full"}
+              />
+              <Select
+                id={"search_filter_mobile"}
+                icon={false}
+                className={"lg:hidden"}
+                placeholder={<Icon icon={"filter"} />}
+                placeholderActive={<Icon icon={"filterSolid"} />}
+                onChange={setFilters}
+                optionsList={filtersList || []}
+                listWidth={"48"}
+                listOrigin={"right"}
+                transition
+                width={"w-full"}
+              />
+            </div>
+          )}
         </Grid>
       </div>
-      {searchValue && searchValue?.length > 2 && searchResults &&
+      {searchValue && searchValue?.length > 2 && searchResults && (
         <div className="w-full">
           <div className=" w-full md:w-auto z-40">
             <Table
@@ -134,7 +134,7 @@ export const Search: FC<SearchProps> = ({
             />
           </div>
         </div>
-      }
+      )}
     </div>
-  )
-}
+  );
+};

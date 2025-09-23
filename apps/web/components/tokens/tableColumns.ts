@@ -5,7 +5,7 @@ export const tokenColumns = [
         type: "key",
         value: "tokens.logo",
         name: "logo",
-      }
+      },
     ],
     showOn: "always",
     name: "token logo",
@@ -15,8 +15,8 @@ export const tokenColumns = [
       {
         name: "logo",
         type: "literal",
-        value: "Logo"
-      }
+        value: "Logo",
+      },
     ],
   },
   {
@@ -27,18 +27,18 @@ export const tokenColumns = [
         type: "literal",
         value: "Chain Name",
         name: "ChainName",
-      }
+      },
     ],
     valueKeys: [
       {
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "get.tokens.chainName",
         type: "key",
-        value: "tokens.chainName"
-      }
+        value: "tokens.chainName",
+      },
     ],
     component: "DefaultHeadColumn",
     showOn: "always",
@@ -49,23 +49,23 @@ export const tokenColumns = [
       {
         name: "Token Name",
         type: "literal",
-        value: "Token Name"
-      }
+        value: "Token Name",
+      },
     ],
     valueKeys: [
       {
         value: "tokens.tokenName",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "get.tokens.data.tokenName",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
     component: "DefaultHeadColumn",
     valueComponent: "PlainColumn",
-    showOn: "always"
+    showOn: "always",
   },
   {
     name: "token description",
@@ -73,8 +73,8 @@ export const tokenColumns = [
       {
         name: "description",
         type: "literal",
-        value: "description"
-      }
+        value: "description",
+      },
     ],
     valueKeys: [
       {
@@ -82,20 +82,20 @@ export const tokenColumns = [
           typography: [
             {
               value: "subBody",
-              key: "size"
-            }
+              key: "size",
+            },
           ],
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "description",
         type: "key",
-        value: "tokens.description"
-      }
+        value: "tokens.description",
+      },
     ],
     valueComponent: "PlainColumn",
     component: "DefaultHeadColumn",
-    showOn: "always"
+    showOn: "always",
   },
   {
     name: "tokens.networktype",
@@ -104,11 +104,11 @@ export const tokenColumns = [
         value: "tokens.networkType",
         format: {
           format: "plain",
-          type: "string"
+          type: "string",
         },
         name: "network key",
-        type: "key"
-      }
+        type: "key",
+      },
     ],
     valueComponent: "PlainColumn",
     headValues: [
@@ -116,9 +116,9 @@ export const tokenColumns = [
         type: "literal",
         value: "Network",
         name: "Network",
-      }
+      },
     ],
     showOn: "always",
-    component: "DefaultHeadColumn"
-  }
-]
+    component: "DefaultHeadColumn",
+  },
+];

@@ -1,9 +1,15 @@
-"use client"
-import React, {cloneElement, FC, ReactElement, ReactNode, useState} from "react";
-import {Dialog, Transition} from "@headlessui/react";
-import {Fragment} from "react";
-import {cva} from "class-variance-authority";
-import {cls} from "../../assets/utils";
+"use client";
+import React, {
+  cloneElement,
+  FC,
+  ReactElement,
+  ReactNode,
+  useState,
+} from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { cva } from "class-variance-authority";
+import { cls } from "../../assets/utils";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   padding?: string;
@@ -13,14 +19,11 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   type?: "base" | "primary" | "transparent";
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  width?: string
+  width?: string;
 }
 
 const modalCVA = cva(
-  [
-    "transform overflow-hidden",
-    "text-left align-middle transition-all"
-  ],
+  ["transform overflow-hidden", "text-left align-middle transition-all"],
   {
     variants: {
       type: {
@@ -32,10 +35,10 @@ const modalCVA = cva(
   },
 );
 
-export const Modal:FC<Props> = ({
+export const Modal: FC<Props> = ({
   children,
   button,
-  type= "base",
+  type = "base",
   className,
   padding,
   closeButton,
@@ -43,16 +46,12 @@ export const Modal:FC<Props> = ({
   setIsOpen,
   width,
 }) => {
-
   return (
     <>
       <div className="flex items-center justify-center">
         {button ? (
           cloneElement(button, {
-            className: cls([
-              button.props.className,
-              "cursor-pointer",
-            ]),
+            className: cls([button.props.className, "cursor-pointer"]),
             onClick: () => setIsOpen(!isOpen),
           })
         ) : (
@@ -67,9 +66,12 @@ export const Modal:FC<Props> = ({
         )}
       </div>
       <Transition appear as={Fragment} show={isOpen}>
-        <Dialog as="div" className="relative z-50" onClose={() => {
-          setIsOpen(false)
-        }}
+        <Dialog
+          as="div"
+          className="relative z-50"
+          onClose={() => {
+            setIsOpen(false);
+          }}
         >
           <Transition.Child
             enter="ease-in duration-300"
@@ -113,18 +115,17 @@ export const Modal:FC<Props> = ({
                     type,
                   })}
                 >
-                  {
-                    closeButton &&
-                      <div
-                        className={
-                          "absolute right-3 top-3 text-white cursor-pointer"
-                        }
-                      >
-                        {cloneElement(closeButton, {
-                          onClick: () => setIsOpen(false),
-                        })}
-                      </div>
-                  }
+                  {closeButton && (
+                    <div
+                      className={
+                        "absolute right-3 top-3 text-white cursor-pointer"
+                      }
+                    >
+                      {cloneElement(closeButton, {
+                        onClick: () => setIsOpen(false),
+                      })}
+                    </div>
+                  )}
                   {children}
                 </Dialog.Panel>
               </Transition.Child>

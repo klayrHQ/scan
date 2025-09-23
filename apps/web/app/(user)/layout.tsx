@@ -16,14 +16,14 @@ import { draftsClient, sanityClient } from "../../lib/sanity.client";
 import { SanityStoreProvider } from "../../providers/sanity";
 import { sanitySsrQuery, setSanitySSRSnapshot } from "../../lib/sanity.groq";
 import { SanityDocument } from "@sanity/types";
-import {FavouritesProvider} from "../../providers/favourites";
-import {RecentSearchesProvider} from "../../providers/recentSearches";
-import {FloatingMenuContainer} from "../../components/floatingMenuContainer";
+import { FavouritesProvider } from "../../providers/favourites";
+import { RecentSearchesProvider } from "../../providers/recentSearches";
+import { FloatingMenuContainer } from "../../components/floatingMenuContainer";
 // import {ServiceSnackbar} from "../../components/serviceSnackbar";
-import {SettingsProvider} from "../../providers/settings";
-import {CurrencyProvider} from "../../providers/currency/CurrencyProvider";
-import {ConsoleLogTester} from "../../components/consoleLogTester";
-import {menuObj} from "../../components/layout/menuObj";
+import { SettingsProvider } from "../../providers/settings";
+import { CurrencyProvider } from "../../providers/currency/CurrencyProvider";
+import { ConsoleLogTester } from "../../components/consoleLogTester";
+import { menuObj } from "../../components/layout/menuObj";
 // import {SettingsProvider} from "../../providers/settings";
 // import {CountryFlag} from "../../slices/countryFlag";
 
@@ -33,7 +33,7 @@ const getSanitySnapshot = async (): Promise<{
 }> => {
   const snapshotResponse = await fetch(
     "https://s0i2hzjh.api.sanity.io/v2021-10-21/data/query/production?query=*",
-    { next: { tags: ["revalidate"] } }
+    { next: { tags: ["revalidate"] } },
   );
   console.log("Sanity snapshot taken");
   return snapshotResponse.json();
@@ -55,13 +55,12 @@ export default async function RootLayout({
   // const infoBar = await getInfoBarKPIS()
   // console.log("load speed (content): ", new Date().getTime() - startSanity, "ms")
   const startSanity = new Date().getTime();
-  const { menuItems, settings, footer, infoBar } = await getLayoutContent(
-    client
-  );
+  const { menuItems, settings, footer, infoBar } =
+    await getLayoutContent(client);
   console.log(
     "load speed (content): ",
     new Date().getTime() - startSanity,
-    "ms"
+    "ms",
   );
   const start = new Date().getTime();
   const result = await getAllData([
@@ -84,7 +83,7 @@ export default async function RootLayout({
   console.log(
     "load speed (apps, status, index): ",
     new Date().getTime() - start,
-    "ms"
+    "ms",
   );
   const { status, apps, index } = result as {
     status: NetworkStatusResponse;
@@ -124,8 +123,8 @@ export default async function RootLayout({
                       {children}
                     </div>
                     {/*<ServiceSnackbar/>*/}
-                    <Footer copyright={"© 2024 Klayr"} lists={footer}/>
-                    <FloatingMenuContainer menuItems={menuObj}/>
+                    <Footer copyright={"© 2024 Klayr"} lists={footer} />
+                    <FloatingMenuContainer menuItems={menuObj} />
                   </CurrencyProvider>
                 </SettingsProvider>
               </RecentSearchesProvider>

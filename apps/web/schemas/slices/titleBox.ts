@@ -1,4 +1,4 @@
-import {SanityValue} from "../layout/value";
+import { SanityValue } from "../layout/value";
 
 export default {
   name: "titleBox",
@@ -14,13 +14,13 @@ export default {
       name: "title",
       type: "object",
       title: "Title",
-      fields: SanityValue
+      fields: SanityValue,
     },
     {
       name: "description",
       type: "object",
       title: "Description",
-      fields: SanityValue
+      fields: SanityValue,
     },
     {
       name: "info",

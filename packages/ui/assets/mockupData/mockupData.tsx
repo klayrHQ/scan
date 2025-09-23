@@ -1,21 +1,21 @@
-import {tableRowsType} from "../../types";
-import {compactString} from "../utils";
-import {Avatar} from "../../atoms/avatar/avatar";
-import {Currency} from "../../atoms/currency/currency";
+import { tableRowsType } from "../../types";
+import { compactString } from "../utils";
+import { Avatar } from "../../atoms/avatar/avatar";
+import { Currency } from "../../atoms/currency/currency";
 import React from "react";
-import {Typography} from "../../atoms/typography/typography";
+import { Typography } from "../../atoms/typography/typography";
 import Status from "../../atoms/status/status";
 
 export interface transactionType {
-  id: string,
-  status: string,
-  date: string,
-  transactionType: string,
-  sender: string,
-  recipient: string,
-  amount: number,
-  fee: number,
-  description?: string,
+  id: string;
+  status: string;
+  date: string;
+  transactionType: string;
+  sender: string;
+  recipient: string;
+  amount: number;
+  fee: number;
+  description?: string;
 }
 
 export const transactions: Array<transactionType> = [
@@ -62,15 +62,19 @@ export const transactions: Array<transactionType> = [
     fee: 0.0014,
     description: "Moosty payout",
   },
-]
+];
 
-export const rows:tableRowsType = transactions.map((tsx, index) => {
+export const rows: tableRowsType = transactions.map((tsx, index) => {
   return {
     id: index.toString(),
     cols: [
       {
         // @ts-ignore
-        value: <span className={"inline-flex"}><Status status={tsx.status} /></span>,
+        value: (
+          <span className={"inline-flex"}>
+            <Status status={tsx.status} />
+          </span>
+        ),
         className: "text-center",
       },
       {
@@ -83,127 +87,174 @@ export const rows:tableRowsType = transactions.map((tsx, index) => {
         value: tsx.transactionType,
       },
       {
-        value:
+        value: (
           <span className={"flex gap-2"}>
-            <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
+            <Avatar
+              address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}
+              size={25}
+            />
             {compactString(tsx.sender, 20, "middle")}
-          </span>,
+          </span>
+        ),
       },
       {
-        value:
+        value: (
           <span className={"flex gap-2"}>
-            <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
+            <Avatar
+              address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}
+              size={25}
+            />
             {compactString(tsx.recipient, 20, "middle")}
-          </span>,
+          </span>
+        ),
       },
       {
         value: tsx.description,
         className: "text-center",
       },
       {
-        value: <Currency number={tsx.amount.toString()} symbol={true}/>,
+        value: <Currency number={tsx.amount.toString()} symbol={true} />,
         className: "text-right",
       },
       {
-        value: <Currency number={tsx.fee.toString()} symbol={true}/>,
+        value: <Currency number={tsx.fee.toString()} symbol={true} />,
         className: "text-right",
       },
-    ]
-  }
-})
+    ],
+  };
+});
 
-export const tabletRows:tableRowsType = transactions.map((tsx, index) => {
+export const tabletRows: tableRowsType = transactions.map((tsx, index) => {
   return {
     id: index.toString(),
     cols: [
       {
         // @ts-ignore
-        value: <span className={"inline-flex"}><Status status={tsx.status} /></span>,
+        value: (
+          <span className={"inline-flex"}>
+            <Status status={tsx.status} />
+          </span>
+        ),
         className: "text-center",
       },
       {
-        value:
+        value: (
           <span className={"flex flex-col"}>
-            <Typography tag={"span"} color={"primary"}>{compactString(tsx.id, 16, "middle")}</Typography>
+            <Typography tag={"span"} color={"primary"}>
+              {compactString(tsx.id, 16, "middle")}
+            </Typography>
             <span>{tsx.date}</span>
-            <Typography tag={"span"} size={"subBody"}>{tsx.transactionType}</Typography>
-          </span>,
+            <Typography tag={"span"} size={"subBody"}>
+              {tsx.transactionType}
+            </Typography>
+          </span>
+        ),
       },
       {
-        value:
+        value: (
           <>
             <span className={"flex gap-2"}>
-              <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
+              <Avatar
+                address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}
+                size={25}
+              />
               {compactString(tsx.sender, 16, "middle")}
               <span className={"ml-auto"}>{"->"}</span>
             </span>
             <span className={"flex gap-2"}>
-              <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
+              <Avatar
+                address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}
+                size={25}
+              />
               {compactString(tsx.recipient, 16, "middle")}
               <span className={"ml-auto"}>{"<-"}</span>
             </span>
             <Typography tag={"span"} size={"subBody"}>
               {tsx.description}
             </Typography>
-          </>,
+          </>
+        ),
       },
       {
-        value:
+        value: (
           <span>
-            <Currency number={tsx.amount.toString()} symbol={true}/>
+            <Currency number={tsx.amount.toString()} symbol={true} />
             <br />
-            <Typography tag={"span"} size={"subBody"} className={"inline-flex gap-2"}>
-              <Currency number={tsx.fee.toString()} symbol={true}/>
+            <Typography
+              tag={"span"}
+              size={"subBody"}
+              className={"inline-flex gap-2"}
+            >
+              <Currency number={tsx.fee.toString()} symbol={true} />
               {"Fee"}
             </Typography>
-          </span>,
+          </span>
+        ),
         className: "text-right",
       },
-    ]
-  }
-})
+    ],
+  };
+});
 
-export const mobileRows:tableRowsType = transactions.map((tsx, index) => {
+export const mobileRows: tableRowsType = transactions.map((tsx, index) => {
   return {
     id: index.toString(),
     cols: [
       {
-        value:
+        value: (
           <span className={"flex flex-col"}>
-            <Typography className={"inline-flex gap-2 items-center"} tag={"span"} color={"primary"}>
+            <Typography
+              className={"inline-flex gap-2 items-center"}
+              tag={"span"}
+              color={"primary"}
+            >
               {/* @ts-ignore */}
               <Status status={tsx.status} />
               {compactString(tsx.id, 16, "middle")}
             </Typography>
             <span>{tsx.date}</span>
-            <Typography tag={"span"} size={"subBody"}>{tsx.transactionType}</Typography>
-          </span>,
+            <Typography tag={"span"} size={"subBody"}>
+              {tsx.transactionType}
+            </Typography>
+          </span>
+        ),
       },
       {
-        value:
+        value: (
           <span className={"flex flex-col"}>
             <span className={"flex gap-2"}>
-              <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={25}/>
+              <Avatar
+                address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}
+                size={25}
+              />
               {compactString(tsx.sender, 10, "middle")}
               <span className={"ml-auto"}>{"->"}</span>
             </span>
             <span className={"flex gap-2"}>
-              <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={25}/>
+              <Avatar
+                address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}
+                size={25}
+              />
               {compactString(tsx.recipient, 10, "middle")}
               <span className={"ml-auto"}>{"<-"}</span>
             </span>
             <span className={"inline-flex flex-col text-right"}>
-              <Currency number={tsx.amount.toString()} symbol={true}/>
-              <Typography tag={"span"} size={"subBody"} className={"inline-flex gap-2 justify-end"}>
-                <Currency number={tsx.fee.toString()} symbol={true}/>
-                  {"Fee"}
+              <Currency number={tsx.amount.toString()} symbol={true} />
+              <Typography
+                tag={"span"}
+                size={"subBody"}
+                className={"inline-flex gap-2 justify-end"}
+              >
+                <Currency number={tsx.fee.toString()} symbol={true} />
+                {"Fee"}
               </Typography>
             </span>
-          </span>,
+          </span>
+        ),
       },
-    ]
-  }
-})
+    ],
+  };
+});
 
 export const headcols = [
   {
@@ -235,7 +286,7 @@ export const headcols = [
     value: "Fee",
     className: "text-right",
   },
-]
+];
 
 export const tabletHeadcols = [
   {
@@ -251,7 +302,7 @@ export const tabletHeadcols = [
     value: "Amount",
     className: "text-right",
   },
-]
+];
 
 export const mobileHeadcols = [
   {
@@ -260,7 +311,7 @@ export const mobileHeadcols = [
   {
     value: "From - To",
   },
-]
+];
 
 export const footerData = [
   {
@@ -314,27 +365,33 @@ export const footerData = [
       },
     ],
   },
-]
+];
 
 export const favourites = [
   {
     address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
     username: "test",
     balance: "12344545",
-    avatar: <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={20} />
+    avatar: (
+      <Avatar address={"lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"} size={20} />
+    ),
   },
   {
     address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
     username: "moosty",
     balance: "12344545",
-    avatar: <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={20} />
+    avatar: (
+      <Avatar address={"lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"} size={20} />
+    ),
   },
   {
     address: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
     balance: "12344545",
-    avatar: <Avatar address={"lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"} size={20} />
+    avatar: (
+      <Avatar address={"lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"} size={20} />
+    ),
   },
-]
+];
 
 export const menuItems = [
   <span>{"transactions"}</span>,
@@ -342,7 +399,7 @@ export const menuItems = [
   <span>{"blocks"}</span>,
   <span>{"graphs"}</span>,
   <span>{"test"}</span>,
-]
+];
 
 export const search = {
   setSearch: (searchInput: string) => console.log(searchInput),
@@ -350,64 +407,74 @@ export const search = {
   results: {
     results: [
       {
-        cols: [{value: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke"}],
+        cols: [{ value: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke" }],
         type: "account",
         id: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
         username: "test",
       },
       {
-        cols: [{value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294"}],
+        cols: [{ value: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294" }],
         type: "account",
         id: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
         username: "moosty",
       },
       {
-        cols: [{value: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g"}],
+        cols: [{ value: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g" }],
         type: "account",
         id: "lskrvsrdo7m64mh92vvekcv55hk4de93ud4otum8g",
       },
     ],
-    quickResult: {
-
-    }
-  }
-}
+    quickResult: {},
+  },
+};
 
 export const ads = [
   {
     className: "bg-primary",
-    content: <a href="#"><img className="block" src="https://picsum.photos/seed/a/150/100"/></a>,
+    content: (
+      <a href="#">
+        <img className="block" src="https://picsum.photos/seed/a/150/100" />
+      </a>
+    ),
   },
   {
     className: "bg-primary",
-    content: <a href="#"><img className="block" src="https://picsum.photos/seed/b/150/100"/></a>,
+    content: (
+      <a href="#">
+        <img className="block" src="https://picsum.photos/seed/b/150/100" />
+      </a>
+    ),
   },
   {
     className: "bg-primary",
-      content: <a href="#"><img className="block" src="https://picsum.photos/seed/c/150/100"/></a>,
+    content: (
+      <a href="#">
+        <img className="block" src="https://picsum.photos/seed/c/150/100" />
+      </a>
+    ),
   },
-]
+];
 
 export const saveSearch = {
   saveSearch: () => console.log("saved search"),
   recentSearches: [
     {
       address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-      username: "test"
+      username: "test",
     },
     {
       address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-      username: "moosty"
+      username: "moosty",
     },
   ],
   recentSearchesStorage: [
     {
       address: "lskg9uk7z5jo4zt6jagxkuc8z7kqzf7cpgbecunke",
-      username: "test"
+      username: "test",
     },
     {
       address: "lsk33wnaw79jvxmsp8dzm22ymvuuvrjanf6jcu294",
-      username: "moosty"
+      username: "moosty",
     },
-  ]
-}
+  ],
+};

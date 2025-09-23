@@ -1,4 +1,4 @@
-import {NetworkType} from "../../types";
+import { NetworkType } from "../../types";
 
 export const emptyCustomNetwork: NetworkType = {
   id: "custom",
@@ -14,7 +14,7 @@ export const emptyCustomNetwork: NetworkType = {
   ],
   network: "network",
   communityId: "custom",
-}
+};
 
 export const networks: NetworkType[] = [
   {
@@ -35,4 +35,4 @@ export const networks: NetworkType[] = [
   },
   // @ts-ignore
   emptyCustomNetwork,
-]
+];

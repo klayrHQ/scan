@@ -1,9 +1,9 @@
-import React, {FC, ReactNode} from "react"
-import {Grid} from "../../atoms/grid/grid";
+import React, { FC, ReactNode } from "react";
+import { Grid } from "../../atoms/grid/grid";
 
 interface InfoBarProps {
-  infoItemsLeft?: Array<ReactNode>
-  infoItemsRight?: Array<ReactNode>
+  infoItemsLeft?: Array<ReactNode>;
+  infoItemsRight?: Array<ReactNode>;
 }
 
 export const InfoBar: FC<InfoBarProps> = ({
@@ -38,6 +38,5 @@ export const InfoBar: FC<InfoBarProps> = ({
         </Grid>
       </Grid>
     </div>
-  )
-}
-
+  );
+};
