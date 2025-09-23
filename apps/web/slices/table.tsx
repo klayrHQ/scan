@@ -44,11 +44,16 @@ export const TableSlice = ({
             serviceType: "lisk-service",
           },
         ])) as { meta: BlockchainAppsMetaResponse; tokens: any };
-        const chainsMeta = result?.meta?.data?.filter(
-          (app) =>
-            app.chainName !== "klayr_mainchain" &&
-            app.networkType === "mainnet",
-        );
+
+        const chainsMeta =
+          result && Object.keys(result.meta).length > 0
+            ? result?.meta?.data?.filter(
+                (app) =>
+                  app.chainName !== "klayr_mainchain" &&
+                  app.networkType === "mainnet"
+              )
+            : [];
+
         for (const chainMeta of chainsMeta) {
           if (!clients[chainMeta.chainName]) {
             clients[chainMeta.chainName] = new LiskService({
@@ -60,7 +65,7 @@ export const TableSlice = ({
             "get.token.balances",
             {
               address: queryData.tokens.meta.address,
-            },
+            }
           );
           // const tokensResponse = await fetch(`${chainMeta.serviceURLs[0].http}/api/v3/token/balances?address=${queryData.tokens.meta.address}`)
           if (tokensResponse.status === "success") {
@@ -78,7 +83,7 @@ export const TableSlice = ({
             ...token,
             symbol:
               result?.tokens?.data?.find(
-                (t: any) => t.tokenID === token.tokenID,
+                (t: any) => t.tokenID === token.tokenID
               )?.symbol || token.symbol,
           };
         });
@@ -139,8 +144,8 @@ export const TableSlice = ({
             queries
               ?.find((q: { key: string }) => q?.key === table?.key)
               ?.params?.find(
-                (p: { key: string; value: string }) => p.key === "limit",
-              )?.value || 20,
+                (p: { key: string; value: string }) => p.key === "limit"
+              )?.value || 20
           )}
         />
       )}
