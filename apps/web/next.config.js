@@ -29,11 +29,14 @@ module.exports = {
     ],
   },
   swcMinify: true, // ensure SWC minification is enabled
-  compiler: {
-    removeConsole: {
-      exclude: ["error", "warn"], // keep error & warn, remove log/debug/info
-    },
-  },
+  compiler:
+    process.env.NODE_ENV === "production"
+      ? {
+          removeConsole: {
+            exclude: ["error", "warn"], // keep error & warn, remove log/debug/info
+          },
+        }
+      : undefined,
   webpack: (config, { dev }) => {
     config.externals.push({
       "utf-8-validate": "commonjs utf-8-validate",
