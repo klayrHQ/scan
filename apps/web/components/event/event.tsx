@@ -136,35 +136,37 @@ export const Event = ({ event }: { event: EventType }) => {
             }
             valueSize={"body"}
           />
-          {event?.topics[0].length >= 64 && (
-            <KeyValueRow
-              col
-              color={"onSurfaceHigh"}
-              label={
-                <Typography
-                  className={"font-semibold"}
-                  color={"onSurfaceHigh"}
-                  tag={"span"}
-                >
-                  {"Transaction ID"}
-                </Typography>
-              }
-              value={
-                <ValueFormatter
-                  copy
-                  link={{ href: `/transaction/${event?.topics[0]}` }}
-                  format={"plain"}
-                  type={"string"}
-                  typography={[
-                    { key: "color", value: "primary" },
-                    { key: "link", value: "true" },
-                  ]}
-                  value={event?.topics[0]}
-                />
-              }
-              valueSize={"body"}
-            />
-          )}
+          {event &&
+            event.topics.length > 0 &&
+            event?.topics[0].length >= 64 && (
+              <KeyValueRow
+                col
+                color={"onSurfaceHigh"}
+                label={
+                  <Typography
+                    className={"font-semibold"}
+                    color={"onSurfaceHigh"}
+                    tag={"span"}
+                  >
+                    {"Transaction ID"}
+                  </Typography>
+                }
+                value={
+                  <ValueFormatter
+                    copy
+                    link={{ href: `/transaction/${event?.topics[0]}` }}
+                    format={"plain"}
+                    type={"string"}
+                    typography={[
+                      { key: "color", value: "primary" },
+                      { key: "link", value: "true" },
+                    ]}
+                    value={event?.topics[0]}
+                  />
+                }
+                valueSize={"body"}
+              />
+            )}
           <KeyValueRow
             col
             color={"onSurfaceHigh"}

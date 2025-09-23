@@ -2,16 +2,26 @@ import { getData } from "../../../../../lib/sanity.service";
 import { Event, EventType } from "../../../../../components/event/event";
 import { ConsoleLogTester } from "../../../../../components/consoleLogTester";
 
+const emptyEvent = {
+  data: {},
+  block: { id: "", height: 0, timestamp: 0 },
+  id: "",
+  index: 0,
+  module: "",
+  name: "",
+  topics: [],
+};
+
 const Page = async (props: any) => {
   const queryData = await getData("lisk-service", "get.events", {
     blockID: props.params.blockID,
   });
 
   const eventData: EventType[] = queryData?.data?.filter(
-    (event: { id: string }) => event.id === props.params.eventID,
+    (event: { id: string }) => event.id === props.params.eventID
   );
 
-  let event: EventType = eventData[0];
+  let event: EventType = eventData.length > 0 ? eventData[0] : emptyEvent;
 
   if (event?.data.address) {
     const account = await getData("lisk-service", "get.validator", {
@@ -52,7 +62,7 @@ const Page = async (props: any) => {
     const token = await getData(
       "lisk-service",
       "get.blockchain.apps.meta.tokens",
-      { tokenID: event.data.tokenID },
+      { tokenID: event.data.tokenID }
     );
     event.data.tokenName = token?.data ? token?.data[0]?.tokenName : undefined;
   }
