@@ -110,6 +110,10 @@ export const getAccountQueries = (id: string, page = 1) => {
           key: "address",
           value: id,
         },
+        {
+          key: "includeStatusValue",
+          value: true,
+        },
       ],
       updateOn: "lastBlock",
       serviceType: "lisk-service",

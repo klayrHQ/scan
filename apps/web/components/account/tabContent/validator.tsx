@@ -89,13 +89,17 @@ export const Validator = ({
     },
     {
       label: "Max Height Generated",
-      value: queryData["account-validator-id"]?.data[0]?.maxHeightGenerated,
+      value:
+        queryData["account-validator-id"]?.data[0]?.statusValue
+          ?.maxHeightGenerated,
       type: "number",
       format: "number",
     },
     {
       label: "Max Height Prevoted",
-      value: queryData["account-validator-id"]?.data[0]?.maxHeightPrevoted,
+      value:
+        queryData["account-validator-id"]?.data[0]?.statusValue
+          ?.maxHeightPrevoted,
       type: "number",
       format: "number",
     },
